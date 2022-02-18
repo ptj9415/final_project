@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="Header">Header
-<a href="home.do">홈으로</a>
-<a href="admin.do">관리자홈으로</a>
-</div>
+<h1>admin page</h1>
 </body>
 </html>
