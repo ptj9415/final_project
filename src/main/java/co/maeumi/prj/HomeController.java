@@ -12,7 +12,8 @@ import co.maeumi.prj.service.MemberService;
 public class HomeController {
 	@Autowired
 	private MemberService memberDao;
-
+	
+	
 	@RequestMapping(value = "/homes.do", method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("member", memberDao.memberSelectList());
@@ -27,5 +28,9 @@ public class HomeController {
 	@RequestMapping("/admin.do")
 	public String adminhome(Model model) {
 		return "admin/admin";
+	}
+	@RequestMapping("/test.do")
+	public String test(Model model) {
+		return "test/test";
 	}
 }
