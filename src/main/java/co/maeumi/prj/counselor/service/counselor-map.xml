@@ -12,6 +12,6 @@
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
 		UPDATE COUNSELOR SET
 		C_PICTURE=#{c_picture}, C_PICTUREPATH=#{c_picturepath}
-		WHERE email=#{c_email}
+		WHERE C_EMAIL=#{c_email}
 	</update>
 </mapper>

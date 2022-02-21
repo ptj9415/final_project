@@ -36,6 +36,7 @@ public class HomeController {
 	public String home1(Model model) {
 		return "home/home";
 	}
+
 	@RequestMapping("/admin.do")
 	public String adminhome(Model model) {
 		return "admin/admin";

@@ -66,11 +66,14 @@ public class CounselorController {
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String SAVE_PATH = "src/main/webapp/img/counselorpicture";
+		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
+		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
 
+		
+		
 		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
 		System.out.println(originalFileName);
 		String saveFile = uuid + originalFileName;
@@ -78,7 +81,7 @@ public class CounselorController {
 		System.out.println(msaveFile);
 		vo.setC_picture(originalFileName);
 		vo.setC_picturepath(saveFile);
-
+		vo.setC_email("3244509@naver.com");
 		try {
 			mf.transferTo(new File(msaveFile));
 		} catch (IllegalStateException e) {
