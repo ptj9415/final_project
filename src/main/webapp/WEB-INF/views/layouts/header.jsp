@@ -111,9 +111,8 @@ nav ul ul ul {
 <body>
 
 	<nav class="navbar top" id="top-nav">
-		<span class="top-nav-login"><a href="#">login</a></span> 
-		<span class="top-nav-admin">
-		<a href="admin.do">⚙</a></span>
+		<span class="top-nav-login"><a href="#">login</a></span>
+
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -126,7 +125,7 @@ nav ul ul ul {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-
+			<span class="top-nav-admin"> <a href="counselormypage.do">aaaaa⚙</a></span>
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
@@ -149,9 +148,9 @@ nav ul ul ul {
 							<li><a href="#">심리 테라피</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">마이페이지</a></li>
-					 <li class="nav-item"><a href="#" class="nav-link"></a></li> 
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-	        <!--   <li class="nav-item"><a href="#" class="nav-link">Contact</a></li> -->
+					<li class="nav-item"><a href="#" class="nav-link"></a></li>
+					<!--   <li class="nav-item"><a href="#" class="nav-link">Contact</a></li> -->
 				</ul>
 			</div>
 		</div>
