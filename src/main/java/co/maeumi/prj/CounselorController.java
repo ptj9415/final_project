@@ -63,7 +63,7 @@ public class CounselorController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/memberPictures.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		String SAVE_PATH = "src/main/webapp/img/counselorpicture";
