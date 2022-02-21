@@ -202,13 +202,13 @@
 		</div>
 		<div class="maincontainer">
 			<div class="headshotdiv">
-				<img alt="headshot" src="${counselor.c_picturepath }"
-					onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';"
-					style="height: 150px"> <br>
+				<img src="img/counselorpicture/${counselor.c_picturepath }" id="preImage"   name="preImage" style="height: 150px"> <br>
+					<!-- onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';" -->
+					
 				<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
 				<form method="post" enctype="multipart/form-data" id="form">
-					<input multiple="multiple" type='file' id="filename" name="filename" style="margin-bottom: 20px;" required="required">
-					<br>
+					<input multiple="multiple" type="file" id="filename" name="filename" accept="image/*"
+						onchange="setThumbnail(event);" /> <br>
 					<div class="row form-group">
 						<div class="col-md-12">
 							<input type="hidden" value="${counselor.c_email}" name="id">
@@ -217,6 +217,7 @@
 						</div>
 					</div>
 				</form>
+				
 			</div>
 
 		</div>
@@ -245,7 +246,6 @@
 			<button type="button" class="modify1" id="modify1" name="modify1">수정</button>
 			<br> <br>
 		</div>
-	</div>
 	</div>
 	<div class="container">
 		<div class="titlebar">
@@ -548,43 +548,65 @@
 			}
 		});
 		<!-- 미리보기 이미지 화면 -->
-		<script type="text/javascript">
-		        $(function() {
-		            $("#filename").on('change', function(){
-		                readURL(this);
-		            });
-		        });
-		        function readURL(input) {
-		            if (input.files && input.files[0]) {
-		               var reader = new FileReader();
-		               reader.onload = function (e) {
-		                  $('#preImage').attr('src', e.target.result);
-		               }
-		               reader.readAsDataURL(input.files[0]);
-		            }
-		        }
-		    
+		 function setThumbnail(event) {
+	            var reader = new FileReader();
+	            reader.onload = function (event) {
+	                var preimg = $('#preImage');
+	                preimg.attr('src', event.target.result);
+	            };
+	            reader.readAsDataURL(event.target.files[0]);
+	        }
+		 
+		 
+		 function picture(){
+			   var url = "counselorPicture.do";
+			   var formData = new FormData($("#form")[0]);
+			   $.ajax({
+			      url : url,
+			      type : "post",
+			      enctype: 'multipart/form-data',
+			      data : formData,
+			      cache : false,
+			      contentType : false,
+			      processData : false,
+			      success : function(data){
+			         alert("사진등록되었습니다.");
+			      },error: function(){
+			         console.log("실패");
+			      }
+			   });
+			   
+			}
 
+/*
 		<!-- 파일 업로드 아작스. -->
-		function picture(){
-		   var url = "counselorPicture.do";
-		   var formData = new FormData($("#form")[0]);
-		   $.ajax({
-		      url : url,
-		      type : "post",
-		      enctype: 'multipart/form-data',
-		      data : formData,
-		      cache : false,
-		      contentType : false,
-		      processData : false,
-		      success : function(data){
-		         alert("사진등록되었습니다.");
-		      },error: function(){
-		         console.log("실패");
-		      }
-		   });
-		   
-		}
+		function picture() {
+			
+			const imageInput = $('#filename')[0];
+			console.log("ImageInput : ", imageInput.files);
+			
+			if(imageInput.files.length === 0) {
+				alert("첨부할 이미지를 선택해주세요.");
+				return;
+			}
+			
+			const formData = new FormData();
+			formData.append("Image", imageInput.files[0]);
+			$.ajax({
+				url : 'counselorPicture.do', 
+				type : 'post',
+				processData : false,
+				contentType : false,
+				data : formData,
+				success : function(data) {
+					alert("사진이 등록되었습니다.");
+				},
+				error : function() {
+					alert("오류입니다. 관리자에게 문의하세요.");
+				}
+				
+			});
+		}*/
 	</script>
 </body>
 </html>
