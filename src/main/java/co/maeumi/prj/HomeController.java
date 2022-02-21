@@ -5,15 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import co.maeumi.prj.service.MemberService;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private MemberService memberDao;
-	
-	
+
 	@RequestMapping(value = "/homes.do", method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("member", memberDao.memberSelectList());
@@ -24,13 +22,14 @@ public class HomeController {
 	public String home1(Model model) {
 		return "home/home";
 	}
-
 	@RequestMapping("/admin.do")
 	public String adminhome(Model model) {
 		return "admin/admin";
 	}
-	@RequestMapping("/test.do")
-	public String test(Model model) {
-		return "test/test";
+	
+
+	@RequestMapping("/admin.do")
+	public String adminhome1(Model model) {
+		return "admin/admin1";
 	}
 }

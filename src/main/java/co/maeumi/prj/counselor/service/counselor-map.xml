@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.counselor.service.CounselorMapper">
+	<select id="counselorSelectList" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM COUNSELOR
+	</select>
+	
+	<select id="counselorSelect" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM COUNSELOR WHERE C_EMAIL=#{c_email}
+	</select>
+	<update id="counselorPictureUpdate"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		UPDATE COUNSELOR SET
+		C_PICTURE=#{c_picture}, C_PICTUREPATH=#{c_picturepath}
+		WHERE email=#{c_email}
+	</update>
+</mapper>
