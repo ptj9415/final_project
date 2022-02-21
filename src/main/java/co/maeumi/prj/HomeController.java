@@ -57,4 +57,8 @@ public class HomeController {
 		return "user/todayStory";
 	}
 	
+	@RequestMapping("/adminbootstrap.do")
+	public String adminbootstrap(){
+		return "admin/admin";
+	}
 }

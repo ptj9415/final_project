@@ -125,7 +125,8 @@ nav ul ul ul {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			<span class="top-nav-admin"> <a href="counselormypage.do">aaaaa⚙</a></span>
+			<span class="top-nav-admin"> <a href="counselormypage.do">상담사 마이페이지⚙</a></span>
+			<span class="top-nav-admin"> <a href="adminbootstrap.do">⚙어드민 부트스트랩 포함한 메인페이지</a></span>
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
