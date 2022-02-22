@@ -112,7 +112,10 @@ nav ul ul ul {
 
 	<nav class="navbar top" id="top-nav">
 		<span class="top-nav-login"><a href="#">login</a></span>
-
+		<span class="top-nav-admin"> 
+			<a href="counselormypage.do">counselor 👨‍⚕️</a></span>
+			<span class="top-nav-admin"> 
+			<a href="adminbootstrap.do">admin ⚙</a></span>
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
