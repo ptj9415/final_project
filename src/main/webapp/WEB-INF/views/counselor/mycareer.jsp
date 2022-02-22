@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-asfasfsdafsadfsdafsdafsadf
+상담사 마이페이지 - 상담 경력 수정
 </body>
 </html>

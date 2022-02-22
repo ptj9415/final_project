@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-상담사 마이페이지 - 내 상담시간 수정
+그룹상담 관리
 </body>
 </html>

@@ -57,7 +57,7 @@
 </style>
 </head>
 <body>
-	<h3>내 정보 수정</h3>
+	<h3>상담사 마이페이지 - 내 정보 수정</h3>
 	<div class="container">
 		<div class="titlebar">
 			<span>내 정보
