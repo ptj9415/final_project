@@ -14,7 +14,7 @@
 
 span.top-nav-login {
 	float: right;
-	padding-left: 1400px;
+	padding-left: 1250px;
 	color: darkgray;
 }
 
@@ -112,6 +112,10 @@ nav ul ul ul {
 
 	<nav class="navbar top" id="top-nav">
 		<span class="top-nav-login"><a href="#">login</a></span>
+		<span class="top-nav-admin"> 
+			<a href="counselormypage.do">counselor 👨‍⚕️</a></span>
+			<span class="top-nav-admin"> 
+			<a href="adminbootstrap.do">admin ⚙</a></span>
 
 	</nav>
 	<nav
@@ -125,7 +129,7 @@ nav ul ul ul {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			<span class="top-nav-admin"> <a href="counselormypage.do">aaaaa⚙</a></span>
+			
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>

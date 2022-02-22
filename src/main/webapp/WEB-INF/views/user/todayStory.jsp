@@ -54,6 +54,7 @@ table {
 						<span>${todaySelect.sc_subject}</span>
 						<br>
 						<br>
+						
 				<button class="btn-write" id="btn-write"> 글 등록  →</button>		
 				
 							

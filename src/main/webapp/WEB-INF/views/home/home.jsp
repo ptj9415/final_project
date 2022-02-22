@@ -12,20 +12,18 @@
 .tab-wrap {
 	transition: 0.3s box-shadow ease;
 	border-radius: 1px;
-	max-width: 100%;
+	max-width: 90%;
 	display: flex;
 	flex-wrap: wrap;
 	position: relative;
 	list-style: none;
 	background-color: #fff;
 	margin: 40px 0;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	margin-right:auto;
+	margin-left:auto;
+	/* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
 }
 
-/* .tab-wrap:hover {
-	box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px
-		rgba(0, 0, 0, 0.19);
-} */
 .tab {
 	display: none;
 }
@@ -106,7 +104,6 @@
 }
 
 .tab+label {
-	/* box-shadow: 0 -1px 0 #eee inset; */
 	border-radius: 6px 6px 0 0;
 	cursor: pointer;
 	display: block;
@@ -128,11 +125,6 @@
 	padding: 20px;
 }
 
-/* .tab+label:hover {
-	background-color: #f9f9f9;
-	box-shadow: 0 1px 0 #f4f4f4 inset;
-}
- */
 .tab__content {
 	padding: 10px 25px;
 	background-color: transparent;
@@ -145,17 +137,12 @@
 	border-radius: 6px;
 }
 
-/* boring stuff
-  body {
-    font-family: "Helvetica", sans-serif;
-    color: #777;
-    padding: 30px 0;
-    font-weight: 300;
-  } */
+
 .container-tab {
 	margin: 0 auto;
 	display: block;
 	max-width: 100%;
+	max-height:1000px;
 }
 
 .container-tab>*:not(.tab-wrap) {
@@ -164,7 +151,7 @@
 
 .counsel-title {
 	margin: 0;
-	margin-top: 200px;
+	margin-top: 50px;
 	color: #444;
 	text-align: center;
 	font-weight: 400;
@@ -188,6 +175,10 @@
 	margin-bottom: 20px;
 }
 /*상담 end*/
+.hide-space{
+	padding:100px;
+}
+
 </style>
 </head>
 <body>
@@ -196,10 +187,6 @@
 
 
 	<!-- 베너 start -->
-
-
-
-
 	<section class="home-slider js-fullheight owl-carousel bg-white">
 		<div class="slider-item js-fullheight">
 			<div class="overlay"></div>
@@ -266,6 +253,27 @@
 	<!-- 베너 end -->
 
 	<!-- 상담 tab -->
+	<div class="container">
+	<h1 class="hide-space"></h1>
+	</div>
+	<div class="container">
+			<div class="row justify-content-start mb-5 pb-2">
+				<div class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+					<span class="subheading subheading-with-line"><small class="pr-2 bg-light">M A E U M I</small></span>
+					<h2 class="mb-4">나에게 꼭 맞는 상담찾기</h2>
+				</div>
+				<div class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+					<div class="pl-md-4 border-line">
+						<p>Far far away, behind the word mountains, far from the
+							countries Vokalia and Consonantia, there live the blind texts.
+							Separated they live in. A small river named Duden flows by their
+							place and supplies it with the necessary regelialia. It is a
+							paradisematic country, in which roasted parts of sentences fly
+							into your mouth.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	<h1 class="counsel-title"></h1>
 	<h2 class="counsel-small-title"></h2>
 
@@ -292,8 +300,8 @@
 							<div class="row justify-content-center mb-5 pb-3">
 								<div class="col-md-7 heading-section ftco-animate">
 									<span class="subheading subheading-with-line"><small
-										class="pr-2 bg-light">Testimony</small></span>
-									<h2 class="mb-4">Our satisfied customer says</h2>
+										class="pr-2 bg-light">MAEUMI</small></span>
+									<h2 class="mb-4">마으미 회원들이 가장 많이 찾는 상담사들을 만나보세요</h2>
 									<p>Far far away, behind the word mountains, far from the
 										countries Vokalia and Consonantia, there live the blind texts.
 										Separated they live in</p>
@@ -316,38 +324,18 @@
 														mountains, far from the countries Vokalia and Consonantia,
 														there live the blind texts.</p>
 													<div class="pl-5">
-														<p class="name">Garreth Smith</p>
+														<p class="name">상담사명</p>
 														<span class="position">CEO Founder of Commercial
 															Building</span>
 													</div>
 												</div>
 											</div>
 										</div>
+									
 										<div class="item">
 											<div class="testimony-wrap p-4 pb-5">
 												<div class="user-img mb-5"
-													style="background-image: url(resources/user/images/kuromi.jpg)">
-													<span
-														class="quote d-flex align-items-center justify-content-center">
-														<i class="icon-quote-left"></i>
-													</span>
-												</div>
-												<div class="text">
-													<p class="mb-5 pl-4 line">Far far away, behind the word
-														mountains, far from the countries Vokalia and Consonantia,
-														there live the blind texts.</p>
-													<div class="pl-5">
-														<p class="name">Garreth Smith</p>
-														<span class="position">CEO Founder of Interior
-															Design</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="testimony-wrap p-4 pb-5">
-												<div class="user-img mb-5"
-													style="background-image: url(resources/userimages/mymelody.jpg)">
+													style="background-image: url(resources/user/images/mymelody.jpg)">
 													<span
 														class="quote d-flex align-items-center justify-content-center">
 														<i class="icon-quote-left"></i>
@@ -384,26 +372,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="item">
-											<div class="testimony-wrap p-4 pb-5">
-												<div class="user-img mb-5"
-													style="background-image: url(resources/user/images/kitty.jpg)">
-													<span
-														class="quote d-flex align-items-center justify-content-center">
-														<i class="icon-quote-left"></i>
-													</span>
-												</div>
-												<div class="text">
-													<p class="mb-5 pl-4 line">Far far away, behind the word
-														mountains, far from the countries Vokalia and Consonantia,
-														there live the blind texts.</p>
-													<div class="pl-5">
-														<p class="name">Garreth Smith</p>
-														<span class="position">System Analyst</span>
-													</div>
-												</div>
-											</div>
-										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -414,18 +383,13 @@
 
 			<div class="tab__content">
 
-				
-					<!-- <section class="hero-wrap hero-wrap-2"
-						style="background-image: url('images/bg_1.jpg');"
-						data-stellar-background-ratio="0.5"></section> -->
-
 					<section class="ftco-section">
 						<div class="container">
 							<div class="row justify-content-center mb-5 pb-3">
 								<div class="col-md-7 heading-section ftco-animate">
 									<span class="subheading subheading-with-line"><small
-										class="pr-2 bg-white">Expert Team</small></span>
-									<h2 class="mb-4">Our Architect Team</h2>
+										class="pr-2 bg-white">MEUMI</small></span>
+									<h2 class="mb-4">마음맞는 사람들과 함께, 그룹상담</h2>
 									<p>Far far away, behind the word mountains, far from the
 										countries Vokalia and Consonantia, there live the blind texts.
 										Separated they live in</p>
@@ -435,22 +399,16 @@
 								<div class="col-md-6 col-lg-3 ftco-animate">
 									<div class="staff">
 										<div class="img"
-											style="background-image: url(images/team-1.jpg);"></div>
+											style="background-image: url(resources/user/images/sea.png);"></div>
 										<div class="text px-4 pt-4">
 											<h3>John Wilson</h3>
 											<span class="position mb-2">Co-Founder / CEO</span>
 											<div class="faded">
 												<p>I am an ambitious workaholic, but apart from that,
 													pretty simple person.</p>
+												<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+
 												<ul class="ftco-social d-flex">
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-twitter"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-facebook"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-google-plus"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-instagram"></span></a></li>
 												</ul>
 											</div>
 										</div>
@@ -461,22 +419,16 @@
 								<div class="col-md-6 col-lg-3 ftco-animate">
 									<div class="staff">
 										<div class="img"
-											style="background-image: url(images/team-4.jpg);"></div>
+											style="background-image: url(resources/user/images/sea.png);"></div>
 										<div class="text px-4 pt-4">
 											<h3>David Smith</h3>
 											<span class="position mb-2">Achitect</span>
 											<div class="faded">
 												<p>I am an ambitious workaholic, but apart from that,
-													pretty simple person.</p>
+													pretty simple person.</p>											
+											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+													
 												<ul class="ftco-social d-flex">
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-twitter"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-facebook"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-google-plus"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-instagram"></span></a></li>
 												</ul>
 											</div>
 										</div>
@@ -485,22 +437,16 @@
 								<div class="col-md-6 col-lg-3 ftco-animate">
 									<div class="staff">
 										<div class="img"
-											style="background-image: url(images/staff-1.jpg);"></div>
+											style="background-image: url(resources/user/images/picture.png);"></div>
 										<div class="text px-4 pt-4">
-											<h3>John Wilson</h3>
-											<span class="position mb-2">Co-Founder / CEO</span>
+											<h3>그림 테라피</h3>
+											<span class="position mb-2">그림으로 알아보는 나의 스트레스 상태</span>
 											<div class="faded">
-												<p>I am an ambitious workaholic, but apart from that,
-													pretty simple person.</p>
+												<p>전문의 상담사 이소정</p>
+												<P style="font-size:12px">인원 2-6명</P>
+												<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+												
 												<ul class="ftco-social d-flex">
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-twitter"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-facebook"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-google-plus"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-instagram"></span></a></li>
 												</ul>
 											</div>
 										</div>
@@ -512,19 +458,15 @@
 										<div class="img"
 											style="background-image: url(resources/user/images/sea.png);"></div>
 										<div class="text px-4 pt-4">
-											<h3></h3>
-											<span class="position mb-2">마인드 컨트롤 테라피</span>
+											<h3>마인드 컨트롤 테라피</h3>
+											<span class="position mb-2">휘몰아치는 감정을 잠재울 마인드컨트롤 그룹테라피</span>
 											<div class="faded">
 												<p>전문의 상담사 정아람</p>
+												<P style="font-size:12px">인원 2-4명</P>
+												
+												<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
 												<ul class="ftco-social d-flex">
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-twitter"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-facebook"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-google-plus"></span></a></li>
-													<li class="ftco-animate"><a href="#"><span
-															class="icon-instagram"></span></a></li>
+													
 												</ul>
 											</div>
 										</div>
@@ -541,6 +483,82 @@
 
 	</div>
 	<!-- 상담 tab end -->
+	
+	
+	<!-- 마이페이지 start -->
+		
+		<section class="ftco-services">
+			<div class="container">
+				<div class="row justify-content-start mb-5 pb-5">
+        
+        
+        </div>
+				<div class="row">
+         
+        
+          
+        </div>
+        <div class="row justify-content-start mt-5 py-5">
+          <div class="col-md-4 heading-section ftco-animate">
+            <h2 class="mb-4">**님의 마음기록</h2>
+            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+            
+          </div>
+          <div class="col-md-8 ftco-animate">
+          	<div class="row d-flex">
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">**님의 MBTI</h3>
+		                <p>INFP</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">**님의 최근 상담내역</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">**님의 최근 찜 상담사</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          		<div class="col-md-6 d-flex align-items-stretch">
+          			<div class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+		              <div class="icon d-flex justify-content-center align-items-center">
+		            		<span class="flaticon-layers"></span>
+		              </div>
+		              <div class="media-body p-2 mt-3">
+		                <h3 class="heading">Renovation</h3>
+		                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		              </div>
+		            </div>
+          		</div>
+          	</div>
+          </div>
+        </div>
+			</div>
+		</section>
+	<!-- 마이페이지 end -->
+	
+	
 
 	<!--  심리검사 -->
 
@@ -578,7 +596,8 @@
 						</div>
 						<a href="resources/user/images/mbtiTest.jpeg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span class="icon-expand"></span>
+								<span>→</span>
+							
 						</a>
 					</div>
 				</div>
@@ -592,7 +611,7 @@
 						</div>
 						<a href="resources/user/images/personality.jpg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span class="icon-expand"></span>
+								<span>→</span>
 						</a>
 					</div>
 				</div>
@@ -606,7 +625,7 @@
 						</div>
 						<a href="resources/user/images/selfEsteem.jpg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span class="icon-expand"></span>
+								<span>→</span>
 						</a>
 					</div>
 				</div>
