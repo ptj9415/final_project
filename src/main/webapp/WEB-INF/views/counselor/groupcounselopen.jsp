@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-asfasfsdafsadfsdafsdafsadf
+그룹상담 개설
 </body>
 </html>

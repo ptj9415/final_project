@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-asfasfsdafsadfsdafsdafsadf
+개인상담 신청내역
 </body>
 </html>
