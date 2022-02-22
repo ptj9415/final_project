@@ -22,15 +22,15 @@ public class TodayReplyServiceImpl implements TodayReplyService {
 	}
 
 	@Override
-	public String todayReplyInsert(TodayReplyVO vo) {
+	public int todayReplyInsert(TodayReplyVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.todayReplyInsert(vo);
 	}
 
 	@Override
-	public String todayReplyDelete(TodayReplyVO vo) {
+	public int todayReplyDelete(TodayReplyVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.todayReplyDelete(vo);
 	}
 
 }

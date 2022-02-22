@@ -2,14 +2,18 @@ package co.maeumi.prj;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import co.maeumi.prj.service.MemberService;
 import co.maeumi.prj.today.service.TodayService;
 import co.maeumi.prj.today.service.TodayVO;
@@ -56,9 +60,22 @@ public class HomeController {
 		return "user/todayStory";
 	}
 	
+	//오늘의 한마디 댓글 삭제
+	@RequestMapping("/todayReplyDelete.do")
+	@ResponseBody
+	public String todayReplyDelete(TodayReplyVO vo,HttpServletRequest request ) {
+	
+		vo.setSr_no(request.getParameter("sr_no"));
+		todayReplyDao.todayReplyDelete(vo);
+		
+		return "OK";
+	}
+	
 	
 	@RequestMapping("/adminbootstrap.do")
 	public String adminbootstrap(){
 		return "admin/admin";
 	}	
+	
+	//오늘의 한마디 관리  admin
 }

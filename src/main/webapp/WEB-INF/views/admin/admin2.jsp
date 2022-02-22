@@ -8,5 +8,7 @@
 </head>
 <body>
 <h1>admin page</h1>
+
+<button onclick="todayStoryAdmin.do"> 한마디 관리</button>
 </body>
 </html>

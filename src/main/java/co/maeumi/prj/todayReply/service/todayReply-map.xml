@@ -10,4 +10,10 @@
 	
 	
 	
+	<delete id="todayReplyDelete" parameterType="co.maeumi.prj.todayReply.service.TodayReplyVO">
+		delete from sc_reply
+		where sr_no = #{sr_no}
+	</delete>
+	
+	
 </mapper>

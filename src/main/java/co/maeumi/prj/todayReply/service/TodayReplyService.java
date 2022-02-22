@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface TodayReplyService {
 	List<TodayReplyVO> readTodayReply(String sr_no);
-	String todayReplyInsert(TodayReplyVO vo);
-	String todayReplyDelete(TodayReplyVO vo);
+	int todayReplyInsert(TodayReplyVO vo);
+	int todayReplyDelete(TodayReplyVO vo);
 	
 }
