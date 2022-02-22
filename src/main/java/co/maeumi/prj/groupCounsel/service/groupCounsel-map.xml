@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.groupCounsel.service.groupCounselMapper">
+	<insert id="insertGroupCounsel" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+		INSERT INTO GROUP_COUNSEL(
+			gc_no,
+			c_email,
+			gc_date,
+			gc_startdate,
+			gc_finaldate,
+			gc_title,
+			gc_type,
+			gc_min_person,
+			gc_max_person,
+			gc_price,
+			gc_time,
+			gc_sumnail,
+			gc_kakao,
+			gc_infos
+			)
+		values(
+			(SELECT NVL(MAX(GC_NO),0)+1 FROM GROUP_COUNSEL N),
+			'지금은 세션값 들어감',
+			#{gc_date},
+			#{gc_startdate},
+			#{gc_finaldate},
+			#{gc_title},
+			#{gc_type},
+			#{gc_min_person},
+			#{gc_max_person},
+			#{gc_price},
+			#{gc_time},
+			#{gc_sumnail},
+			#{gc_kakao},
+			#{gc_infos}
+		    )
+	</insert>
+</mapper>
