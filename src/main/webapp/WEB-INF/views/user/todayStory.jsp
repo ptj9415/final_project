@@ -13,23 +13,24 @@ table {
 }
 
 /* 버튼 스타일*/
-#btn-write{
+#btn-write {
 	border: none;
 	border-radius: 30px;
-	background-color : white;
+	background-color: white;
 	width: 120px;
 	height: 50px;
 	font-size: 15px;
-	font-weight:bold;
-}
-#btn-write:hover{
-	background-color : lightgray;
-	transition: all ease 2s 0s;
-	  opacity: 0.7;
+	font-weight: bold;
 }
 
-.btn-delete{
- float:right;
+#btn-write:hover {
+	background-color: lightgray;
+	transition: all ease 2s 0s;
+	opacity: 0.7;
+}
+
+.btn-delete {
+	float: right;
 }
 </style>
 </head>
@@ -45,24 +46,21 @@ table {
 				<div class="col-md-9 ftco-animate text-center">
 					<h1 class="mb-2 bread">오늘의 한마디</h1>
 					<p class="breadcrumbs">
-					
-						<span class="mr-2">오늘의 주제 : ${todaySelect.sc_title}
-						<i class="ion-ios-arrow-forward"></i>
-						</span> 
+
+						<span class="mr-2">오늘의 주제 : ${todaySelect.sc_title} <i
+							class="ion-ios-arrow-forward"></i>
+						</span> <br> <br> <span>${todaySelect.sc_subject}</span> <br>
 						<br>
-						<br>
-						<span>${todaySelect.sc_subject}</span>
-						<br>
-						<br>
-				<button class="btn-write" id="btn-write"> 글 등록  →</button>		
-				
-							
+
+						<button class="btn-write" id="btn-write">글 등록 →</button>
+
+
 					</p>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- 댓글 start -->
 
 	<section class="ftco-services">
@@ -71,29 +69,55 @@ table {
 
 				<div class="col-md-8 ftco-animate">
 					<div class="row d-flex">
-		<c:forEach items="${todayReplyList}" var="todayReplyList">					
-						<div class="col-md-6 d-flex align-items-stretch">
-							<div
-								class="media block-6 services services-2 d-block bg-light p-4 mb-4">
-								<div class="btn-delete" id="btn-delete">
-									<span>❌</span>
-								</div>
-								<div class="media-body p-2 mt-3">
-									<h3 class="heading">${todayReplyList.sr_writer}</h3>
-									<p>${todayReplyList.sr_subject}</p>
-									
+						<c:forEach items="${todayReplyList}" var="todayReplyList">
+							<div class="col-md-6 d-flex align-items-stretch">
+								<div
+									class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+									<div class="btn-delete" id="btn-delete">
+										<span id="delete"
+											onclick="replyDelete('${todayReplyList.sr_no}')">❌</span>
+									</div>
+									<div class="media-body p-2 mt-3">
+										<h3 class="heading">${todayReplyList.sr_writer}</h3>
+										<p>${todayReplyList.sr_subject}</p>
+
+									</div>
 								</div>
 							</div>
-						</div>												
-		</c:forEach>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-		<input type="hidden" id="sc_no" name="sc_no" value="${todaySelect.sc_no}" />
+	<input type="hidden" id="sc_no" name="sc_no"
+		value="${todaySelect.sc_no}" />
 
 
 	<!-- 댓글 end -->
 </body>
+
+<script>
+	function replyDelete(sr_no) {
+		console.log(sr_no);
+		$.ajax({
+			url : 'todayReplyDelete.do',
+			data : {
+				sr_no : sr_no
+			},
+			dataType : 'text',
+			success : function(responseText) {
+				
+				console.log(responseText);
+				
+				alert("댓글이 삭제되었습니다.");
+				location.reload(); 
+
+			},
+			error : function() {
+				alert('댓글 삭제 실패.');
+			}
+		})
+	}
+</script>
 </html>
