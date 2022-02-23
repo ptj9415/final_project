@@ -14,8 +14,8 @@
 		  <link rel="stylesheet" href="subHomeFile/plugins/fullcalendar/main.css">
 		  <!-- Theme style -->
 		  <link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
-		    <!-- Select2 -->
-  <link rel="stylesheet" href="subHomeFile/plugins/select2/css/select2.min.css">
+		  <!-- Select2 -->
+ 		  <link rel="stylesheet" href="subHomeFile/plugins/select2/css/select2.min.css">
 		</head>
 	<body class="hold-transition sidebar-mini">
 <div class="wrapper">
