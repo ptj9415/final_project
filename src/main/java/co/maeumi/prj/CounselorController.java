@@ -47,7 +47,7 @@ public class CounselorController {
 	// 상담 관리 - 그룹상담 관리 화면
 	@RequestMapping("/groupcounselmanage.do")
 	public String groupcounselmanage(Model model) {
-		return "counselor/groupcounselmanage.do";
+		return "counselor/groupcounselmanage";
 	}
 
 	// 상담사 마이페이지
