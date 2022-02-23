@@ -74,4 +74,10 @@ public class HomeController {
 	public String adminbootstrap() {
 		return "admin/admin";
 	}
+	
+	@RequestMapping("/adminTodayStory.do")
+	public String adminTodayStory(Model model) {
+		return "admin/adminTodayStory";
+		
+	}
 }

@@ -72,7 +72,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="../tables/simple.html"
+						<li class="nav-item"><a href="adminTodayStory.do"
 							class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 								<p>오늘의 한마디 관리</p>
 						</a></li>
