@@ -57,9 +57,9 @@ public class CounselorController {
 		String c_email = "3244509@naver.com";
 		session.setAttribute("email", c_email);
 		session.setAttribute("name", "상담사");
-//		vo.setC_email(c_email);
+		vo.setC_email(c_email);
 
-		//model.addAttribute("counselor", counselorDao.counselorSelect(vo));
+		model.addAttribute("counselor", counselorDao.counselorSelect(vo));
 		return "counselor/counselormypage";
 	}
 
