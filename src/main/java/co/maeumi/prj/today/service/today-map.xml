@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.today.service.TodayMapper">
 
+	<select id="TodayStorySelectList" resultType="co.maeumi.prj.today.service.TodayVO">
+		select * from short_comment
+		order by sc_no desc
+		
+	</select>
+
+
 	<select id="TodaySelect" resultType="co.maeumi.prj.today.service.TodayVO">
 		SELECT * FROM
 		(SELECT * FROM short_comment order by dbms_random.value)
 		where rownum ='1'
 	</select>
+
 
 
 

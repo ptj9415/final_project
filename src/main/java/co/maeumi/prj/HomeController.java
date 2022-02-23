@@ -33,8 +33,6 @@ public class HomeController {
 		model.addAttribute("member", memberDao.memberSelectList());
 		return "home";
 	}
-	
-	
 
 	@RequestMapping("/home.do")
 	public String home1(Model model) {
@@ -76,10 +74,17 @@ public class HomeController {
 	public String adminbootstrap() {
 		return "admin/admin";
 	}
-	
+
+	// 오늘의 한마디 admin
+
 	@RequestMapping("/adminTodayStory.do")
-	public String adminTodayStory(Model model) {
-		return "admin/adminTodayStory";
+	public String adminTodayStoryList(Model model, TodayVO vo) {
+		List<TodayVO> list = todayDao.TodayStorySelectList();
+		System.out.println(list.size());
+		model.addAttribute("adminTodayStoryList", list);
 		
+		return "admin/adminTodayStory";
 	}
+
+	// 오늘의 한마디 글 등
 }
