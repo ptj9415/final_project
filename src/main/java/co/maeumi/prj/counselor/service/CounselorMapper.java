@@ -9,4 +9,7 @@ public interface CounselorMapper {
 	int counselorPictureUpdate(CounselorVO cvo);
 	boolean counselorEmailCheck(CounselorVO cvo); // 상담사 이메일 중복체크.
 	int counselorInsert(CounselorVO cvo);
+	List<CounselorVO> counselorCareerList(CounselorVO cvo);
+	int counselorCareerDelete(CounselorVO cvo);
+	int counselorCareerInsert(CounselorVO cvo);
 }

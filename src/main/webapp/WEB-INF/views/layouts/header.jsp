@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,17 +114,18 @@ nav ul ul ul {
 	<nav class="navbar top" id="top-nav">
 
 		<c:if test="${user == null }">
-			<span class="top-nav-login"><a href="loginForm.do">Maeumi. 로그인</a></span>
+			<span class="top-nav-login"><a href="loginForm.do">Maeumi.
+					로그인</a></span>
 		</c:if>
 		<c:if test="${user !=null }">
 			<span class="top-nav-logout"><a href="logout.do">로그아웃</a></span>
 		</c:if>
-
+		<c:if test="${user == null }">
 		<span class="top-nav-login"><a href="#">login</a></span>
-		<span class="top-nav-admin"> 
-			<a href="counselormypage.do">counselor 👨‍⚕️</a></span>
-			<span class="top-nav-admin"> 
-			<a href="adminbootstrap.do">admin ⚙</a></span>
+		</c:if>
+		<span class="top-nav-admin"> <a href="counselormypage.do">counselor
+				👨‍⚕️</a></span> <span class="top-nav-admin"> <a
+			href="adminbootstrap.do">admin ⚙</a></span>
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -137,8 +138,9 @@ nav ul ul ul {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			<span class="top-nav-admin"> <a href="counselormypage.do">상담사 마이페이지⚙</a></span>
-			<span class="top-nav-admin"> <a href="adminbootstrap.do">⚙어드민 부트스트랩 포함한 메인페이지</a></span>
+			<span class="top-nav-admin"> <a href="counselormypage.do">상담사
+					마이페이지⚙</a></span> <span class="top-nav-admin"> <a
+				href="adminbootstrap.do">⚙어드민 부트스트랩 포함한 메인페이지</a></span>
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>

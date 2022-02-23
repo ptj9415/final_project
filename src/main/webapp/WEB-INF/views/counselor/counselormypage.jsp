@@ -134,7 +134,8 @@ th {
 	<div class="maindiv" id="maindiv1">
 		<div class="headshotdiv">
 			<img src="img/counselorpicture/${counselor.c_picturepath }"
-				class="preImage" id="preImage" name="preImage" style="height: 120px"> <br>
+				class="preImage" id="preImage" name="preImage" style="height: 120px">
+			<br>
 			<!-- onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';" -->
 
 			<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
@@ -302,19 +303,13 @@ th {
 				<tr>
 					<th>구분</th>
 					<th>경력사항</th>
-				</tr>
-				<tr>
-					<td>현재</td>
-					<td>위너스아이엠 EAP 상담사</td>
-				</tr>
-				<tr>
-					<td>이전</td>
-					<td>대구광역시 청소년 상담복지센터 상담사</td>
-				</tr>
-				<tr>
-					<td>이전</td>
-					<td>헬로스마일 상담복지센터 상담사</td>
-				</tr>
+				 </tr>
+				<c:forEach items="${career }" var="career">
+					<tr>
+						<td>${career.cc_status }</td>
+						<td>${career.cc_subject }</td>
+					</tr>
+				</c:forEach>
 			</table>
 			<br>
 			<button type="button" class="modify" id="modify3"

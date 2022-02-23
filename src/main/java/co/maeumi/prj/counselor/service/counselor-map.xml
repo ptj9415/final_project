@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.maeumi.prj.counselor.service.CounselorMapper">
+<mapper
+	namespace="co.maeumi.prj.counselor.service.CounselorMapper">
 
-	<select id="counselorSelectList" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+	<select id="counselorSelectList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM COUNSELOR
 	</select>
-	
-	<select id="counselorSelect" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+
+	<select id="counselorSelect"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM COUNSELOR WHERE C_EMAIL=#{c_email}
 	</select>
-	
-	<select id="counselorLogin" resultType="co.maeumi.prj.counselor.service.CounselorVO">
-		select * from counselor 
-		where c_email = #{c_email} 
-		and   c_password = #{c_password} 
+
+	<select id="counselorLogin"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		select * from counselor
+		where c_email = #{c_email}
+		and
+		c_password = #{c_password}
 	</select>
-	
+
 	<select id="counselorEmailCheck" resultType="boolean">
-		SELECT CASE WHEN (COUNT(*) = 1) THEN 'TRUE' ELSE 'FALSE' END
+		SELECT CASE WHEN
+		(COUNT(*) = 1) THEN 'TRUE' ELSE 'FALSE' END
 		FROM COUNSELOR
-		WHERE C_EMAIL = #{c_email}
+		WHERE C_EMAIL
+		= #{c_email}
 	</select>
-	
-	<insert id="counselorInsert" parameterType="co.maeumi.prj.counselor.service.CounselorVO">
-		INSERT INTO 
-		COUNSELOR( C_EMAIL, C_NAME, C_GENDER, C_PHONE, C_PASSWORD, C_ADDRESS, C_BIRTHDATE, C_GRADE )
-		VALUES(#{c_email}, #{c_name}, #{c_gender}, #{c_phone},  #{c_password}, #{c_address},#{c_birthdate}, #{c_grade} )
+
+	<insert id="counselorInsert"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		INSERT INTO
+		COUNSELOR( C_EMAIL, C_NAME, C_GENDER,
+		C_PHONE, C_PASSWORD, C_ADDRESS,
+		C_BIRTHDATE, C_GRADE )
+		VALUES(#{c_email}, #{c_name}, #{c_gender},
+		#{c_phone}, #{c_password},
+		#{c_address},#{c_birthdate}, #{c_grade} )
 	</insert>
-	
-	
-	
+
 	<update id="counselorPictureUpdate"
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
 		UPDATE COUNSELOR SET
-		C_PICTURE=#{c_picture}, C_PICTUREPATH=#{c_picturepath}
+		C_PICTURE=#{c_picture},
+		C_PICTUREPATH=#{c_picturepath}
 		WHERE C_EMAIL=#{c_email}
 	</update>
+
+	<select id="counselorCareerList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM cs_career
+		where c_email=#{c_email}
+	</select>
+
+	<delete id="counselorCareerDelete"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		DELETE FROM cs_career
+		WHERE c_email=#{c_email}
+	</delete>
+
+	<insert id="counselorCareerInsert"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		<selectKey keyProperty="cc_no" resultType="String" order="BEFORE">
+			SELECT
+			MAX(CC_NO)+1 FROM CS_CAREER
+		</selectKey>
+		INSERT INTO CS_CAREER VALUES(#{cc_no}, #{c_email}, #{cc_status},
+		#{cc_subject})
+	</insert>
 </mapper>

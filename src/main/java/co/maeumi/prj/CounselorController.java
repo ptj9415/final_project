@@ -1,8 +1,9 @@
 package co.maeumi.prj;
 
 import java.io.File;
-
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,14 +54,15 @@ public class CounselorController {
 
 	// 상담사 마이페이지
 	@RequestMapping("/counselormypage.do")
-	public String adminhome(Model model, CounselorVO vo, HttpSession session) {
+	public String adminhome(Model model, CounselorVO cvo, HttpSession session) {
 //			String c_email = (String)session.getAttribute("email");
 		String c_email = "3244509@naver.com";
 		session.setAttribute("email", c_email);
 		session.setAttribute("name", "상담사");
-		vo.setC_email(c_email);
-
-		model.addAttribute("counselor", counselorDao.counselorSelect(vo));
+		cvo.setC_email(c_email);
+		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
+		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
+		model.addAttribute("career", list);
 		return "counselor/counselormypage";
 	}
 
@@ -101,8 +104,34 @@ public class CounselorController {
 
 	// 상담사 마이페이지 - 상담 경력 수정 화면
 	@RequestMapping("/mycareer.do")
-	public String mycareer(Model model) {
+	public String mycareer(Model model, CounselorVO cvo) {
+		String c_email = "3244509@naver.com";
+		cvo.setC_email(c_email);
+		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
+		model.addAttribute("career", list);
+		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 		return "counselor/mycareer";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/careerupdate.do")
+	public String careerupdate(Model model, HttpServletRequest request, @RequestParam Map<String, String> list) {
+		CounselorVO cvo = new CounselorVO();
+		String c_email = "3244509@naver.com";
+		cvo.setC_email(c_email);
+		 
+		counselorDao.counselorCareerDelete(cvo);
+		
+		for(int i = 0; i < list.size(); i++) {
+			String cc_status = list.get("cc_status");
+			String cc_subject = list.get("cc_subject");
+			
+			cvo.setCc_status(cc_status);
+			cvo.setCc_subject(cc_subject);
+			counselorDao.counselorCareerList(cvo);
+		}
+		
+		return "OK";
 	}
 
 	// 상담사 마이페이지 - 자격사항 수정 화면
