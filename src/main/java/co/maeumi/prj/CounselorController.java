@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,5 +92,71 @@ public class CounselorController {
 		}
 		counselorDao.counselorPictureUpdate(vo);
 		return "img/" + saveFile;
+	}
+	
+	@RequestMapping("/cEmailCheck.do")
+	public String cEmailCheck(Model model) {
+		return "counselor/cEmailCheck";
+	}
+	
+	@RequestMapping("/counselorJoinForm.do")
+	public String counselorJoinForm(Model model, HttpServletRequest request) {
+		
+		System.out.println(request.getParameter("inputEmail"));
+		model.addAttribute("c_email",request.getParameter("inputEmail"));
+		return "counselor/counselorJoinForm";
+	}
+	
+	@PostMapping("/counselorJoin.do")
+	public String counselorJoin(HttpServletRequest request, Model model, CounselorVO cvo) {
+		
+		System.out.println("이메일:  " + request.getParameter("email"));
+		System.out.println("이름:   " + request.getParameter("name"));
+		System.out.println("생년월일:   " +request.getParameter("birthdate"));
+		System.out.println("성별:   " +request.getParameter("gender"));
+		System.out.println("비밀번호:   " +request.getParameter("password"));
+		System.out.println("연락처:   " +request.getParameter("phone"));
+		System.out.println("주소:   " +request.getParameter("address"));
+		
+		cvo.setC_email(request.getParameter("email"));
+		cvo.setC_name(request.getParameter("name"));
+		cvo.setC_birthdate(request.getParameter("birthdate"));
+		cvo.setC_gender(request.getParameter("gender"));
+		cvo.setC_phone(request.getParameter("phone"));
+		cvo.setC_address(request.getParameter("address"));
+		cvo.setC_password(request.getParameter("password"));
+		cvo.setC_grade("승인대기");
+		
+		counselorDao.counselorInsert(cvo);
+		model.addAttribute("counselor", request.getParameter("name") + " 님 반갑습니다. ");
+		return "counselor/cWelcomeJoin";
+		
+	}
+	
+	@RequestMapping("/cLoginForm.do")
+	public String cLoginForm(HttpServletRequest request, Model model) {
+		return "counselor/cLoginForm";
+	}
+	
+	
+	@PostMapping("/cLogin.do")
+	public String cLogin(HttpServletRequest request, Model model, HttpSession session, CounselorVO cvo) {
+		
+		cvo.setC_email(request.getParameter("email"));
+		cvo.setC_password(request.getParameter("password"));
+		cvo = counselorDao.counselorLogin(cvo);
+		String message = null;
+		
+		if(cvo != null) {
+			session.setAttribute("user", request.getParameter("email"));
+			System.out.println("세션에 담았던 거." + session.getAttribute("user"));
+		} else {
+			message = "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해주세요.";
+			System.out.println(message);
+		}
+		model.addAttribute("messaage", message);
+		return "home/home";
+		
+		
 	}
 }

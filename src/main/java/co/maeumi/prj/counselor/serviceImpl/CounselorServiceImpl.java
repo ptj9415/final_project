@@ -21,16 +21,34 @@ public class CounselorServiceImpl implements CounselorService {
 	}
 
 	@Override
-	public CounselorVO counselorSelect(CounselorVO vo) {
+	public CounselorVO counselorSelect(CounselorVO cvo) {
 		// TODO Auto-generated method stub
-		return map.counselorSelect(vo);
+		return map.counselorSelect(cvo);
 	}
 
 	@Override
-	public int counselorPictureUpdate(CounselorVO vo) {
+	public int counselorPictureUpdate(CounselorVO cvo) {
 		// TODO Auto-generated method stub
-		return map.counselorPictureUpdate(vo);
+		return map.counselorPictureUpdate(cvo);
 	
+	}
+
+	@Override
+	public boolean counselorEmailCheck(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorEmailCheck(cvo);
+	}
+
+	@Override
+	public int counselorInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorInsert(cvo);
+	}
+
+	@Override
+	public CounselorVO counselorLogin(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorLogin(cvo);
 	}
 	
 }

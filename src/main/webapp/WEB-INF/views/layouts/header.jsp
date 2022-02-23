@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,8 +112,15 @@ nav ul ul ul {
 <body>
 
 	<nav class="navbar top" id="top-nav">
-		<span class="top-nav-login"><a href="#">login</a></span>
-
+		<c:if test="${user == null }">
+			<span class="top-nav-login"><a href="loginForm.do">Maeumi. 로그인</a></span>
+		</c:if>
+		<c:if test="${user !=null }">
+			<span class="top-nav-logout"><a href="logout.do">로그아웃</a></span>
+		</c:if>
+		<c:if test="${user == null }">
+			<span class="top-nav-join"><a href="cEmailCheck.do">상담사 회원가입</a></span>
+		</c:if>
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
