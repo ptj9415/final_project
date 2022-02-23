@@ -1,0 +1,353 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        .joinForm {
+            width: 550px;
+            padding: 50px 0px;
+        }
+
+        input {
+            border-style: none;
+            height: 25px;
+            width: 60%;
+            border: 0 solid black;
+            background: transparent;
+        }
+		input:focus {
+			outline: none;
+			border: 1px solid #FFE6E6;
+		}
+
+        input:hover {
+            background-color: #FFF0F5;
+        }
+
+        button {
+            height: 30px;
+            width: 30%;
+            background-color: white;
+            border: 1px solid #FFDCE1;
+            border-radius: 50px;
+            margin-bottom: 5px;
+        }
+
+        .inputForm {
+            margin-bottom: 25px;
+        }
+
+        hr {
+            color: tomato;
+        }
+
+        .nonBtn {
+            width: 90%;
+        }
+
+        .joinbtn {
+            width: 40%;
+        }
+
+        button:hover {
+            background-color: #FFD2D2;
+            border-color: white;
+
+        }
+
+        #gender {
+            background-color: white;
+            border: 1px solid #FFDCE1;
+        }
+
+        #gender:hover {
+            background-color: #FFD2D2;
+            border-color: white;
+        }
+
+        option {
+            text-align: center;
+        }
+
+        .address_Input_1 {
+            float: left;
+            margin-left: 15px;
+            border-bottom: 1px solid #FFDCE1;
+        }
+
+        .address_Input_2,
+        .address_Input_3 {
+            margin-right: 15px;
+            margin-bottom: 5px;
+            width: 90%;
+            border-bottom: 1px solid #FFDCE1;
+        }
+
+        #addrWrap>input {
+            border-bottom: 1px solid #FFDCE1;
+            margin-bottom: 5px;
+        }
+       #pwGuide1 {
+       	font-size: 15px;
+       }
+    </style>
+    <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        // 회원가입 버튼 & 양식 체크.
+        function formCheck() {
+        	
+        	// 이름 체크
+        	if($("#name").val() == "") {
+        		alert("상담사분의 성함을 기입하세요.");
+        		$("#name").focus();
+        		return false;
+        	} else if( $("#name").val().length < 2){
+        		alert("올바르지 않은 이름 형식입니다.");
+        		$("#name").focus();
+        		return false;
+        	}
+        	// 생년월일
+        	var birthReg = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+			var inputBirth = $("#birthdate").val();
+        	
+        	if($("#birthdate").val() == "" ){
+        		alert("생년월일을 입력해주세요.");
+        		$("#birthdate").focus();
+        		return false;
+        	} else if( !birthReg.test(inputBirth)) {
+        		alert('생년월일은 다음 예와 같이 입력해주세요. ex) "1992-08-03" ');
+        		$("#birthdate").focus();
+        		return false;
+        	}
+        	
+        	// 성별 체크
+        	if($("#gender").val() == "") {
+        		alert("성별선택을 해주세요.");
+        		$("#gender").focus();
+        		return false;
+        	} 
+        	
+            // 비밀번호 정규식 체크하는 부분. 
+            var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&^])[A-Za-z\d$@$!%*#?&^]{8,14}$/;
+            var inputPwd = $("#password").val();
+            if (!check.test(inputPwd)) {
+                alert("비밀번호가 조건식을 만족하지 않습니다. 영문, 숫자, 특수문자가 포함된 8~14자리를 입력하세요.");
+                $("#password").focus();
+                return false;
+            }
+
+            if ($("#password").val() != $("#passwordChk").val()) {
+                alert("비밀번호가 일치하지 않습니다.");
+                $("#password").val("");
+                $("#passwordChk").val("");
+                $("#password").focus();
+                return false;
+            }
+            
+         	//주소 체크해야 함.   도로명주소 + 상세주소의 값을 button
+        	var sendAddress = "";
+         	var road = $("#roadAddress").val();
+         	var detail = $("#detailAddress").val();
+         	sendAddress = road + detail;
+         	
+         	console.log("sendAddress의 값: " + sendAddress);
+         	
+         	if(sendAddress == ""){
+        		alert("주소입력을 해주세요");
+        		return false;
+        	} else {
+        		sendAddress = road + " / " + detail;
+        		$("#address").val(sendAddress);
+        	}
+         	
+         	
+        	// 휴대폰 인증 여부 체크
+        	if($("#phoneChkBtn").val() != "YES"){
+        		alert("휴대폰 인증을 완료해주세요.");
+        		return false;
+        	}
+
+            $("#frm").submit();
+        }
+        
+        
+        
+        // coolsms 사용하기 위한 스크립트문. 
+        var code2 = ""; // 인증번호값 대입해서 비교용.
+        function sendPhoneChk() {
+
+            var inputPhoneChk = $("#phone").val();
+            var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+            if (inputPhoneChk == "" || !regPhone.test(inputPhoneChk)) {
+                alert("올바르지 않은 연락처입니다. 다시 입력해주세요.");
+                $("#phone").focus();
+                return false;
+            }
+            alert("인증번호 발송이 완료되었습니다. 휴대폰에서 인증번호 확인을 해주세요.");
+            $.ajax({
+                type: "GET",
+                url: "ajaxPhoneChk.do?inputPhoneChk=" + inputPhoneChk,
+                success: function (data) {
+                    console.log("data: " + data); // 콘솔창에서 결과값 확인용. 
+
+                    if (data == "error") {
+                        alert("인증 오류입니다. 다시 입력해주세요");
+                    } else {
+                        $("#phoneChk").attr("disabled", false);
+                        $("#phoneChk").focus();
+                        code2 = data;
+                    }
+                }
+            }); //ajax
+        };
+
+        // 휴대폰 인증번호 대조. 
+        function chkPhoneBtn() {
+            if ($("#phoneChk").val() == code2) {
+            	$("#phoneChkBtn").val("YES");  // formCheck()에서 체크하기 위함.
+                alert("휴대폰 인증이 완료되었습니다. 회원가입 버튼을 눌러주세요.");
+            } else {
+                alert("인증번호가 일치하지 않습니다. 다시 확인해주시기 바랍니다.");
+                $("#phoneChk").val("");
+                $("#phoneChk").focus();
+            }
+        };
+        
+       
+    </script>
+
+</head>
+
+<body>
+    <!-- 회원가입 하는 양식 만들기-->
+    <div class="mainForm" align="center">
+        <div class="joinForm">
+            <h1>Maeumi.</h1>
+            <br>
+            <hr color="tomato">
+            <h4>본인확인이 완료되었습니다.<br> 모든 항목에 기입해주셔야 합니다.</h4>
+            <br>
+            <form id="frm" action="counselorJoin.do" method="post">
+                <div class="inputForm">
+                    <input type="text" id="email" name="email" value="${c_email }" readonly class="nonBtn"
+                        style="text-align: left; width: 60%;">
+                    <input type="text" placeholder="이름" id="name" name="name" style="width: 30%;" required="required"><hr color="tomato">
+                </div>
+                <div class="inputForm">
+                    <input type="text" placeholder="생년월일을 입력하세요 ex) 1992-08-03 " maxlength="10" id="birthdate" name="birthdate"
+                        style="width: 60%;" required="required">
+                    <select id="gender" name="gender" style="height: 30px; border-radius: 50px; width: 30%;" required="required">
+                        <option value="">성별 선택</option>
+                        <option value="남자" style="text-align: center;">남자</option>
+                        <option value="여자">여자</option>
+                        <option value="기타">기타</option>
+                    </select>
+                    <hr color="tomato">
+                </div>
+                <div class="inputForm">
+                    <input type="password" placeholder="비밀번호    (비밀번호는 영문, 숫자, 특수문자가 포함된 8~14자리)" 
+                    	id="password" name="password" class="nonBtn" required="required">
+                    <hr color="tomato">
+                </div>
+                <div class="inputForm">
+                    <input type="password" placeholder="비밀번호 확인" id="passwordChk" class="nonBtn" required="required">
+                    <hr color="tomato">
+                </div>
+                <div class="inputForm" id="addrWrap">
+                    <input type="text" id="postcode" placeholder="우편번호" required="required" readonly="readonly">
+                    <button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br>
+                    <input type="text" id="roadAddress" placeholder="도로명주소" style="width: 45%;" required="required" readonly="readonly">
+                    <input type="text" id="jibunAddress" placeholder="지번주소" style="width: 45%;" readonly="readonly">
+                    <span id="guide" style="color:#999;display:none; font-size: 15px;"></span>
+                    <input type="text" id="detailAddress" placeholder="상세주소" style="width: 45%;">
+                    <input type="text" id="extraAddress" placeholder="참고항목" style="width: 40%; margin-right: 25px;">
+                    <input type="hidden" id="address" name="address">
+                    <hr color="tomato">
+                </div>
+                <div class="inputForm">
+                    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." id="phone" name="phone" required="required">
+                    <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
+                    <hr color="tomato">
+                </div>
+                <div class="inputForm">
+                    <input type="text" placeholder="인증번호 입력" id="phoneChk" disabled="disabled" required="required">
+                    <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
+                    <hr color="tomato">
+                </div>
+            </form>
+            <button class='joinbtn' onclick="formCheck()" type="button">Maeumi.&nbsp;가입!</button>
+
+
+
+        </div>
+    </div>
+
+    <!--카카오 주소 연동 스크립트 부분-->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        
+        function execDaumPostcode() {
+        	
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data
+                            .buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("roadAddress").value = roadAddr;
+                    document.getElementById("jibunAddress").value = data.jibunAddress;
+
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if (roadAddr !== '') {
+                        document.getElementById("extraAddress").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if (data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+
+                    } else if (data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+                }
+            }).open();
+        }
+    </script>
+</body>
+
+</html>

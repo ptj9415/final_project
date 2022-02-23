@@ -33,6 +33,8 @@ public class HomeController {
 		model.addAttribute("member", memberDao.memberSelectList());
 		return "home";
 	}
+	
+	
 
 	@RequestMapping("/home.do")
 	public String home1(Model model) {

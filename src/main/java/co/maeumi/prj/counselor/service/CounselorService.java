@@ -4,6 +4,9 @@ import java.util.List;
 
 public interface CounselorService {
 	List<CounselorVO> counselorSelectList();
-	CounselorVO counselorSelect(CounselorVO vo);
-	int counselorPictureUpdate(CounselorVO vo);
+	CounselorVO counselorLogin(CounselorVO cvo);
+	CounselorVO counselorSelect(CounselorVO cvo);
+	int counselorPictureUpdate(CounselorVO cvo);
+	boolean counselorEmailCheck(CounselorVO cvo); // 상담사 이메일 중복체크.
+	int counselorInsert(CounselorVO cvo);
 }

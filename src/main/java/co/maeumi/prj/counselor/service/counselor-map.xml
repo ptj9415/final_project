@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.counselor.service.CounselorMapper">
+
 	<select id="counselorSelectList" resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM COUNSELOR
 	</select>
@@ -8,6 +9,27 @@
 	<select id="counselorSelect" resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM COUNSELOR WHERE C_EMAIL=#{c_email}
 	</select>
+	
+	<select id="counselorLogin" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		select * from counselor 
+		where c_email = #{c_email} 
+		and   c_password = #{c_password} 
+	</select>
+	
+	<select id="counselorEmailCheck" resultType="boolean">
+		SELECT CASE WHEN (COUNT(*) = 1) THEN 'TRUE' ELSE 'FALSE' END
+		FROM COUNSELOR
+		WHERE C_EMAIL = #{c_email}
+	</select>
+	
+	<insert id="counselorInsert" parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		INSERT INTO 
+		COUNSELOR( C_EMAIL, C_NAME, C_GENDER, C_PHONE, C_PASSWORD, C_ADDRESS, C_BIRTHDATE, C_GRADE )
+		VALUES(#{c_email}, #{c_name}, #{c_gender}, #{c_phone},  #{c_password}, #{c_address},#{c_birthdate}, #{c_grade} )
+	</insert>
+	
+	
+	
 	<update id="counselorPictureUpdate"
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
 		UPDATE COUNSELOR SET

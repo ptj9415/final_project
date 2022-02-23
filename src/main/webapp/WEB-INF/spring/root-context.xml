@@ -4,5 +4,26 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<!-- gmail 설정. 네이버나 다음도 있지만 그건 일단 나중에.  -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />   
+		<property name="port" value="587" />
+		<property name="username" value="yd23fp" /> <!-- 관리자 이메일 아이디. 여러 개 등록가능한 지는 모르겠음.  -->
+		<property name="password" value="yedam123!" />
+		<!-- 보안연결 TLS과 관련된 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>		
+		</property>
+	</bean>
+	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<bean id="naverLoginBO" class="co.maeumi.prj.service.NaverLoginBO" />
 </beans>

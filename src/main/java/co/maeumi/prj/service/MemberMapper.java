@@ -4,4 +4,9 @@ import java.util.List;
 
 public interface MemberMapper {
 	List<MemberVO> memberSelectList();
+	MemberVO memberLogin(MemberVO mvo); 
+	MemberVO memberSelect(MemberVO mvo);
+	boolean memberNicknameCheck(MemberVO mvo); // 닉네임 중복체크
+	boolean memberEmailCheck(MemberVO mvo); // 이메일 중복체크
+	int memberInsert(MemberVO mvo);
 }
