@@ -112,15 +112,19 @@ nav ul ul ul {
 <body>
 
 	<nav class="navbar top" id="top-nav">
+
 		<c:if test="${user == null }">
 			<span class="top-nav-login"><a href="loginForm.do">Maeumi. 로그인</a></span>
 		</c:if>
 		<c:if test="${user !=null }">
 			<span class="top-nav-logout"><a href="logout.do">로그아웃</a></span>
 		</c:if>
-		<c:if test="${user == null }">
-			<span class="top-nav-join"><a href="cEmailCheck.do">상담사 회원가입</a></span>
-		</c:if>
+
+		<span class="top-nav-login"><a href="#">login</a></span>
+		<span class="top-nav-admin"> 
+			<a href="counselormypage.do">counselor 👨‍⚕️</a></span>
+			<span class="top-nav-admin"> 
+			<a href="adminbootstrap.do">admin ⚙</a></span>
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"

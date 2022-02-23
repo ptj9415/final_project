@@ -2,14 +2,16 @@ package co.maeumi.prj;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import co.maeumi.prj.service.MemberService;
 import co.maeumi.prj.today.service.TodayService;
 import co.maeumi.prj.today.service.TodayVO;
@@ -20,7 +22,7 @@ import co.maeumi.prj.todayReply.service.TodayReplyVO;
 public class HomeController {
 	@Autowired
 	private MemberService memberDao;
-	
+
 	@Autowired
 	private TodayService todayDao;
 	@Autowired
@@ -43,24 +45,35 @@ public class HomeController {
 	public String adminhome(Model model) {
 		return "admin/admin";
 	}
-	
+
 	@RequestMapping("/todayStory.do")
-	public String todayStory(Model model, TodayVO vo, HttpSession session )throws Exception {
-		//session.setAttribute("sc_no", sc_no);
-		
-		//오늘의 한마디 주제
+	public String todayStory(Model model, TodayVO vo, HttpSession session) throws Exception {
+		// session.setAttribute("sc_no", sc_no);
+
+		// 오늘의 한마디 주제
 		vo = todayDao.TodaySelect(vo);
 		todayDao.TodaySelect(vo);
 		model.addAttribute("todaySelect", vo);
-		
-		//오늘의 한마디 주제에 따른 댓글
+
+		// 오늘의 한마디 주제에 따른 댓글
 		List<TodayReplyVO> todayReplyList = todayReplyDao.readTodayReply(vo.getSc_no());
-		model.addAttribute("todayReplyList",todayReplyList);
+		model.addAttribute("todayReplyList", todayReplyList);
 		return "user/todayStory";
 	}
-	
+
+	// 오늘의 한마디 댓글 삭제
+	@RequestMapping("/todayReplyDelete.do")
+	@ResponseBody
+	public String todayReplyDelete(TodayReplyVO vo, HttpServletRequest request) {
+
+		vo.setSr_no(request.getParameter("sr_no"));
+		todayReplyDao.todayReplyDelete(vo);
+
+		return "OK";
+	}
+
 	@RequestMapping("/adminbootstrap.do")
-	public String adminbootstrap(){
+	public String adminbootstrap() {
 		return "admin/admin";
 	}
 }

@@ -26,43 +26,44 @@ public class CounselorController {
 	@Autowired
 	private CounselorService counselorDao;
 
-
-
-	@RequestMapping("/counselormypage.do")
-	public String adminhome(Model model, CounselorVO vo, HttpSession session) {
-//		String c_email = (String)session.getAttribute("email");
-		String c_email = "3244509@naver.com";
-		vo.setC_email(c_email);		
-
-		model.addAttribute("counselor", counselorDao.counselorSelect(vo));
-		return "counselor/counselormypage";
-	}
-
-	@RequestMapping("/counselorinfo.do")
-	public String counselorinfo(Model model) {
-		return "counselor/counselorinfo";
-	}
-
-	@RequestMapping("/mycareer.do")
-	public String mycareer(Model model) {
-		return "counselor/mycareer";
-	}
-
-	@RequestMapping("/mycertification.do")
-	public String mycertification(Model model) {
-		return "counselor/mycertification";
-	}
-
-	@RequestMapping("/mycounseltime.do")
-	public String mycounseltime(Model model) {
-		return "counselor/mycounseltime";
-	}
-
-	@RequestMapping("/myintro.do")
-	public String myintro(Model model) {
+	// 상담 관리 - 개인상담 신청내역 화면
+	@RequestMapping("/personalcounsel.do")
+	public String personalcounsel(Model model) {
 		return "counselor/myintro";
 	}
 
+	// 상담 관리 - 개인상담 관리 화면
+	@RequestMapping("/personalcounselmanage.do")
+	public String personalcounselmanage(Model model) {
+		return "counselor/personalcounselmanage";
+	}
+
+	// 상담 관리 - 그룹상담 개설 화면
+	@RequestMapping("/groupcounselopen.do")
+	public String groupcounselopen(Model model) {
+		return "counselor/groupcounselopen";
+	}
+
+	// 상담 관리 - 그룹상담 관리 화면
+	@RequestMapping("/groupcounselmanage.do")
+	public String groupcounselmanage(Model model) {
+		return "counselor/groupcounselmanage.do";
+	}
+
+	// 상담사 마이페이지
+	@RequestMapping("/counselormypage.do")
+	public String adminhome(Model model, CounselorVO vo, HttpSession session) {
+//			String c_email = (String)session.getAttribute("email");
+		String c_email = "3244509@naver.com";
+		session.setAttribute("email", c_email);
+		session.setAttribute("name", "상담사");
+//		vo.setC_email(c_email);
+
+		//model.addAttribute("counselor", counselorDao.counselorSelect(vo));
+		return "counselor/counselormypage";
+	}
+
+	// 상담사 마이페이지 - 프로필 사진 변경
 	@ResponseBody
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
@@ -73,8 +74,6 @@ public class CounselorController {
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
 
-		
-		
 		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
 		System.out.println(originalFileName);
 		String saveFile = uuid + originalFileName;
@@ -93,70 +92,34 @@ public class CounselorController {
 		counselorDao.counselorPictureUpdate(vo);
 		return "img/" + saveFile;
 	}
-	
-	@RequestMapping("/cEmailCheck.do")
-	public String cEmailCheck(Model model) {
-		return "counselor/cEmailCheck";
+
+	// 상담사 마이페이지 - 내 정보 수정 / 상담사 등급 변경 신청 화면
+	@RequestMapping("/counselorinfo.do")
+	public String counselorinfo(Model model) {
+		return "counselor/counselorinfo";
 	}
-	
-	@RequestMapping("/counselorJoinForm.do")
-	public String counselorJoinForm(Model model, HttpServletRequest request) {
-		
-		System.out.println(request.getParameter("inputEmail"));
-		model.addAttribute("c_email",request.getParameter("inputEmail"));
-		return "counselor/counselorJoinForm";
+
+	// 상담사 마이페이지 - 상담 경력 수정 화면
+	@RequestMapping("/mycareer.do")
+	public String mycareer(Model model) {
+		return "counselor/mycareer";
 	}
-	
-	@PostMapping("/counselorJoin.do")
-	public String counselorJoin(HttpServletRequest request, Model model, CounselorVO cvo) {
-		
-		System.out.println("이메일:  " + request.getParameter("email"));
-		System.out.println("이름:   " + request.getParameter("name"));
-		System.out.println("생년월일:   " +request.getParameter("birthdate"));
-		System.out.println("성별:   " +request.getParameter("gender"));
-		System.out.println("비밀번호:   " +request.getParameter("password"));
-		System.out.println("연락처:   " +request.getParameter("phone"));
-		System.out.println("주소:   " +request.getParameter("address"));
-		
-		cvo.setC_email(request.getParameter("email"));
-		cvo.setC_name(request.getParameter("name"));
-		cvo.setC_birthdate(request.getParameter("birthdate"));
-		cvo.setC_gender(request.getParameter("gender"));
-		cvo.setC_phone(request.getParameter("phone"));
-		cvo.setC_address(request.getParameter("address"));
-		cvo.setC_password(request.getParameter("password"));
-		cvo.setC_grade("승인대기");
-		
-		counselorDao.counselorInsert(cvo);
-		model.addAttribute("counselor", request.getParameter("name") + " 님 반갑습니다. ");
-		return "counselor/cWelcomeJoin";
-		
+
+	// 상담사 마이페이지 - 자격사항 수정 화면
+	@RequestMapping("/mycertification.do")
+	public String mycertification(Model model) {
+		return "counselor/mycertification";
 	}
-	
-	@RequestMapping("/cLoginForm.do")
-	public String cLoginForm(HttpServletRequest request, Model model) {
-		return "counselor/cLoginForm";
+
+	// 상담사 마이페이지 - 내 상담시간 수정 화면
+	@RequestMapping("/mycounseltime.do")
+	public String mycounseltime(Model model) {
+		return "counselor/mycounseltime";
 	}
-	
-	
-	@PostMapping("/cLogin.do")
-	public String cLogin(HttpServletRequest request, Model model, HttpSession session, CounselorVO cvo) {
-		
-		cvo.setC_email(request.getParameter("email"));
-		cvo.setC_password(request.getParameter("password"));
-		cvo = counselorDao.counselorLogin(cvo);
-		String message = null;
-		
-		if(cvo != null) {
-			session.setAttribute("user", request.getParameter("email"));
-			System.out.println("세션에 담았던 거." + session.getAttribute("user"));
-		} else {
-			message = "로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해주세요.";
-			System.out.println(message);
-		}
-		model.addAttribute("messaage", message);
-		return "home/home";
-		
-		
+
+	// 상담사 마이페이지 - 상담사 소개 수정 화면
+	@RequestMapping("/myintro.do")
+	public String myintro(Model model) {
+		return "counselor/myintro";
 	}
 }
