@@ -23,4 +23,12 @@ public class TodayServiceImpl implements TodayService {
 		return map.TodaySelect(vo);
 	}
 
+
+
+	@Override
+	public List<TodayVO> TodayStorySelectList() {
+		// TODO Auto-generated method stub
+		return map.TodayStorySelectList();
+	}
+
 }
