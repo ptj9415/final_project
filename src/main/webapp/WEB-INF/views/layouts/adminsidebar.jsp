@@ -44,6 +44,14 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리</p>
 						</a></li>
+						<li class="nav-item"><a href="groupcounselmanagedd.do"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>그룹상담 관리-신청자목록(임시)</p>
+						</a></li>
+						<li class="nav-item"><a href="groupcounselmanageddd.do"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>그룹상담 관리-그룹상담 상세 조회(임시)</p>
+						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="counselormypage.do" class="nav-link"> <i
 						class="nav-icon fas fa-tree"></i>

@@ -122,4 +122,13 @@ public class CounselorController {
 	public String myintro(Model model) {
 		return "counselor/myintro";
 	}
+	
+	@RequestMapping("/groupcounselmanagedd.do")
+	public String groupcounselmanagedd() {
+		return "counselor/groupcounselmanagedd";
+	}
+	@RequestMapping("/groupcounselmanageddd.do")
+	public String groupcounselmanageddd() {
+		return "counselor/groupcounselmanageddd";
+	}
 }
