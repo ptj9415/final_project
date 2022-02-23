@@ -1,7 +1,9 @@
 package co.maeumi.prj;
 
 import java.io.File;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -9,13 +11,13 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.json.JSONArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -115,21 +117,20 @@ public class CounselorController {
 	
 	@ResponseBody
 	@RequestMapping("/careerupdate.do")
-	public String careerupdate(Model model, HttpServletRequest request, @RequestParam Map<String, String> list) {
+	public String careerupdate(Model model, HttpServletRequest request, @RequestBody List<Map<String, Object>> list) throws Exception {
+		
+		System.out.println(list);
+		
+		
 		CounselorVO cvo = new CounselorVO();
 		String c_email = "3244509@naver.com";
-		cvo.setC_email(c_email);
-		 
-		counselorDao.counselorCareerDelete(cvo);
+//		cvo.setC_email(c_email);
+//		System.out.println(list);
+//		counselorDao.counselorCareerDelete(cvo);
+//			cvo.setCc_status(cc_status);
+//			cvo.setCc_subject(cc_subject);
+//			counselorDao.counselorCareerList(cvo);
 		
-		for(int i = 0; i < list.size(); i++) {
-			String cc_status = list.get("cc_status");
-			String cc_subject = list.get("cc_subject");
-			
-			cvo.setCc_status(cc_status);
-			cvo.setCc_subject(cc_subject);
-			counselorDao.counselorCareerList(cvo);
-		}
 		
 		return "OK";
 	}

@@ -80,14 +80,14 @@ th {
 					</tr>
 					<c:forEach items="${career }" var="career">
 						<tr>
-							<td><select id="status" name="cc_status">
+							<td><select id="cc_status" name="cc_status" class="cc_status">
 									<option value="선택">선택</option>
 									<option value="현재"
 										<c:if test="${career.cc_status eq '현재' }">selected</c:if>>현재</option>
 									<option value="과거"
 										<c:if test="${career.cc_status eq '과거' }">selected</c:if>>과거</option>
 							</select></td>
-							<td><input type="text" id="subject" name="cc_subject"
+							<td><input type="text" id="subject" name="cc_subject" class="cc_subject"
 								value="${career.cc_subject }"></td>
 							<td>
 								<button type="button" class="deletetr" id="deletetr"
@@ -99,7 +99,7 @@ th {
 			</form>
 			<input type="hidden" id="c_email" name="c_email"
 				value="${counselor.c_email }"> <br>
-			<button type="submit" id="saveformbtn">수정</button>
+			<button type="button" id="saveformbtn">수정</button>
 			<br> <br>
 		</div>
 	</div>
@@ -126,11 +126,54 @@ th {
 			var tr = $(e.target).parent().parent().remove();
 		}
 
+				
 		$("#saveformbtn").click(function() {
-			saveform.action = "careerupdate.do";
-			saveform.submit();
+			
+			var cc_status = [];
+			var cc_subject = [];
+			$('.cc_status').each(function() {
+				var status = $(this).val();
+				cc_status.push(status);
+			});
+			
+			$('.cc_subject').each(function() {
+				var subject = $(this).val();
+				cc_subject.push(subject);
+			});
+			
+			console.log(cc_subject);
+			console.log(cc_status);
+			var list = new Array();
+			
+			for(var i = 0; i < cc_subject.length; i++) {
+				var obj = new Object();
+				obj.cc_subject = cc_subject[i];
+				obj.cc_status = cc_status[i];
+				list.push(obj);
+			}
+			
+			var datalist = JSON.stringify(list);
+			console.log(list);
+			console.log(datalist);
+			
+			jQuery.ajaxSettings.traditional = true;
+			$.ajax({
+				url: "careerupdate.do",
+				dataType: "json",
+				data: datalist, 
+				success: function() {
+					alert("수정이 완료되었습니다.");
+					location.reload();
+				},
+				error: function() {
+					alert("오류");
+				}
+			});		
+			
 		});
-
+		
+	
+		
 
 			// 			$.ajax({
 			// 				url : 'careerupdate.do',
