@@ -9,7 +9,7 @@
 <script type="text/javascript"
   src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
   charset="utf-8"></script>
-=======
+
 <style>
 
 /*상담 start*/
@@ -641,21 +641,22 @@
 						</a>
 					</div>
 				</div>
+				
 				<div class="col-md-6 col-lg-3 ftco-animate">
 					<div class="project">
-						<img src="resources/user/images/wuwool.png" class="img-fluid"
+						<img src="resources/user/images/wowool.png" class="img-fluid"
 							alt="Colorlib Template">
 						<div class="text">
 							<span>⏱ 소요시간 약 25분</span>
 							<h3>우울증 검사</h3>
 						</div>
-						<a href="resources/user/images/wuwool.png"
+						<a href="resources/user/images/wowool.png"
 							class="icon image-popup d-flex justify-content-center align-items-center">
 							<span>→</span>
-
 						</a>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</section>

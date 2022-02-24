@@ -53,6 +53,7 @@ public class LoginController {
 
 		if (mvo != null) {
 			session.setAttribute("user"	, request.getParameter("email"));
+			session.setAttribute("nickname", mvo.getM_nickname());
 			System.out.println("로그인하면서 내가 담은 세션값 이름 : " + session.getAttribute("user"));
 		} else {
 			cvo.setC_email(request.getParameter("email"));
