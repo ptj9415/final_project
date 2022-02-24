@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +12,9 @@
         <section class="content">
         <div class="container-fluid">
           <br>
-          <br>
-          <h1 class="text-left display-5">&nbsp;그룹 상담 관리</h1><br><br><br> 
-            <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2>
-            <br>
-            <form action="enhanced-results.html">
+          <h1 class="text-left display-5">&nbsp;그룹 상담 관리</h1><br>
+            <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2><br>
+            <form action="groupsearchmanage.do">
                 <div class="row">
                     <div class="col-md-12 offset-md-0">
                       <div class="card"> <!-- 하얀색 바 표시 시작-->
@@ -24,41 +23,41 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>모집일 : </label><br>
-                                    <input type="date" style="width: 350px; height:40px;" placeholder="Type your keywords here">
+                                    <input type="date" name="gc_startdate" style="width: 350px; height:40px;" placeholder="Type your keywords here">
                                     ~
-                                    <input type="date" style="width: 350px; height:40px;" placeholder="Type your keywords here">
+                                    <input type="date" name="gc_finaldate" style="width: 350px; height:40px;" placeholder="Type your keywords here">
                                 </div>
                             </div>
 
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>상담일 : </label><br>
-                                    <input type="date" style="width: 400px; height:40px;"  placeholder="Type your keywords here">
+                                    <input type="date" name="gc_date" style="width: 400px; height:40px;"  placeholder="Type your keywords here">
                                 </div>
                             </div>
 
                              <div class="col-6">        
                                 <div class="form-group">
                                     <label>상담방식 : </label>
-                                    <select class="select2" multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option>카카오톡</option>
-                                        <option>줌</option>
+                                    <select class="select2" name="gc_type" multiple="multiple" data-placeholder="전체" style="width: 100%;">
+                                        <option value="카톡">카카오톡</option>
+                                        <option value="줌">줌</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>상태 : </label>
-                                    <select class="select2"  multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option>모집중</option>
-                                        <option>상담 완료</option>
+                                    <select class="select2" name="gc_status" multiple="multiple" data-placeholder="전체" style="width: 100%;">
+                                        <option value="0">모집중</option>
+                                        <option value="1">상담 완료</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>상담명 : </label>
-                                    <input type="text" class="form-control" placeholder="Type your keywords here">
+                                    <input type="text" name="gc_title" class="form-control" placeholder="Type your keywords here">
                                 </div>
                             </div>
                                 <button type="button" class="btn btn-lg btn-default">초기화</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -101,7 +100,6 @@
                       <th>상담일</th>
                       <th>상담명</th>
                       <th>상담방식</th>
-                      <th>신청방식</th>
                       <th>신청/모집인원</th>
                       <th>신청자 관리</th>
                       <th>상태</th>
@@ -109,41 +107,47 @@
                     </tr>
                   </thead>
                   <tbody>
+                   <c:forEach items="${groupCounsel}" var="group">
                     <tr>
-                      <td>ffff</td>
-                      <td>fff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
+                      <td>${group.gc_startdate}~${group.gc_finaldate}</td>
+                      <td>${group.gc_date}</td>
+                      <td>${group.gc_title}</td>
+                      <td>${group.gc_type }</td>
+                      <td>${group.gc_person}/${group.gc_max_person }</td>
+                      <td><button>조회</button></td>
+                      <c:if test="${group.gc_status eq 0 }">
+                      <td>진행 중</td>
+                      </c:if>
+                      <c:if test="${group.gc_status eq 1 }">
+                      <td>상담 완료</td>
+                      </c:if>
+                      <td><button>조회</button></td>
                     </tr>
-                    <tr>
-                      <td>ffff</td>
-                      <td>fff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
-                    </tr>
-                    <tr>
-                      <td>ffff</td>
-                      <td>fff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
-                      <td>ffff</td>
-                      <td><button>버튼</button></td>
-                    </tr>
+                    </c:forEach>
                   </tbody>
                 </table>
+                <br>
+                <!-- 페이지 네이션 -->
+		        <nav aria-label="...">
+				  <ul class="pagination">
+				    <li class="page-item">
+				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+				    </li>
+				    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+						<c:if test="${status.count ne page.nowPage}">
+				    		<li class="page-item"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}</a></li>
+				   		</c:if>
+				   		<c:if test="${status.count eq page.nowPage}">
+							<li class="page-item active"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+				   		</c:if>
+				    </c:forEach>
+				    <li class="page-item">
+				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.next }">Next</a>
+				    </li>
+				  </ul>
+				</nav>
+				<!-- 페이지 네이션 끝 -->
+				
               </div>
               <!-- /.card-body -->
             </div>

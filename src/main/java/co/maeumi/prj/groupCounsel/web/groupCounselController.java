@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,11 +25,14 @@ import com.google.gson.JsonObject;
 
 import co.maeumi.prj.groupCounsel.service.GroupCounslerService;
 import co.maeumi.prj.groupCounsel.service.group_CounselVO;
+import co.maeumi.prj.pagination.Pagination;
 
 @Controller
 public class groupCounselController {
 	@Autowired
 	private GroupCounslerService groupCounselDao;
+	
+	Pagination page;
 	
 	//이미지 보여주기 밑 이미지 업로드 아작스.
 	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
@@ -113,6 +118,86 @@ public class groupCounselController {
 		}
 		groupCounselDao.insertGroupCounsel(vo);
 		return "counselor/counselormypage";
+	}
+	
+	// 상담 관리 - 그룹상담 관리 화면
+	@RequestMapping("/groupcounselmanage.do")
+	public String groupcounselmanage(Model model, HttpServletRequest request ) {
+
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage==null) {
+			page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 2); //전체 수, start, end
+		}else {
+			page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 2); //전체 수, start, end
+		}
+		List<group_CounselVO> list =  groupCounselDao.pageSelectList(page);
+		
+		for (int i = 0; i < list.size(); i++) {
+	         String date = list.get(i).getGc_date();
+	         date = date.substring(0, 10);
+	         list.get(i).setGc_date(date);
+	         String date2 = list.get(i).getGc_startdate();
+	         date = date.substring(0, 10);
+	         list.get(i).setGc_date(date2);
+	         String date3 = list.get(i).getGc_finaldate();
+	         date = date.substring(0, 10);
+	         list.get(i).setGc_date(date3);
+	         
+	      }
+		request.setAttribute("groupCounsel", list);
+		
+		request.setAttribute("page", page);
+		
+		
+		return "counselor/groupcounselmanage";	
+	}
+	@RequestMapping("/groupsearchmanage.do")
+	public String groupsearchmanage(@RequestParam("gc_date") String gc_date,@RequestParam("gc_startdate") String gc_startdate,
+			@RequestParam("gc_finaldate") String gc_finaldate, @RequestParam("gc_title") String gc_title,
+			Model model, HttpServletRequest request ) {//@RequestParam("gc_type") String gc_type, @RequestParam("gc_status") String gc_status,
+		if (gc_date == null && gc_startdate == null && gc_finaldate == null && gc_title == null) { //&& gc_type==null && gc_status == null
+			String nowPage = request.getParameter("nowPage");
+			if (nowPage==null) {
+				page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 2); //전체 수, start, end
+			}else {
+				page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 2); //전체 수, start, end
+			}
+			page.setGc_finaldate(gc_finaldate);
+			page.setGc_startdate(gc_startdate);
+			page.setGc_title(gc_title);
+			page.setGc_date(gc_date);
+			//page.setGc_type(gc_type);
+			//page.setGc_status(gc_status);
+			
+			request.setAttribute("groupCounsel", groupCounselDao.pageSelectList(page));
+			request.setAttribute("page", page);
+				
+		} else {
+			String nowPage = request.getParameter("nowPage");
+			page.setGc_title(gc_title);
+			page.setGc_finaldate(gc_finaldate);
+			page.setGc_startdate(gc_startdate);
+			page.setGc_date(gc_date);
+			//page.setGc_type(gc_type);
+			//page.setGc_status(gc_status);
+			if (nowPage==null) {
+				page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), 1, 2); //전체 수, start, end
+			}else {
+				page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); //전체 수, start, end
+			}
+			System.out.println(groupCounselDao.searchcountGroupCounsel(page));
+			page.setGc_title(gc_title);
+			page.setGc_finaldate(gc_finaldate);
+			page.setGc_startdate(gc_startdate);
+			page.setGc_date(gc_date);
+			//page.setGc_type(gc_type);
+			//page.setGc_status(gc_status);
+			
+			request.setAttribute("groupCounsel", groupCounselDao.searchpageSelectList(page));
+			request.setAttribute("page", page);
+		}
+			
+		return "counselor/groupcounselmanage";	
 	}
 	
 }

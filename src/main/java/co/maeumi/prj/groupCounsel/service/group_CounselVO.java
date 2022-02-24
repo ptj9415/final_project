@@ -23,5 +23,5 @@ public class group_CounselVO {
 	private String gc_result; 	  //그룹 상담 결과
 	private String gc_person; 	  //현재 인원
 	private String gc_infos;      //그룹 상담 개설 내용 (에디터 들어감).
-	
+	private String gc_status;      //그룹 상담 진행인지 아닌지
 }
