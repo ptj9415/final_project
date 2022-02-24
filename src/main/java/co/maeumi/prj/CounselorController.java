@@ -35,23 +35,11 @@ public class CounselorController {
 	public String personalcounsel(Model model) {
 		return "counselor/myintro";
 	}
-
-	// 상담 관리 - 개인상담 관리 화면
-	@RequestMapping("/personalcounselmanage.do")
-	public String personalcounselmanage(Model model) {
-		return "counselor/personalcounselmanage";
-	}
-
+	
 	// 상담 관리 - 그룹상담 개설 화면
 	@RequestMapping("/groupcounselopen.do")
 	public String groupcounselopen(Model model) {
 		return "counselor/groupcounselopen";
-	}
-
-	// 상담 관리 - 그룹상담 관리 화면
-	@RequestMapping("/groupcounselmanage.do")
-	public String groupcounselmanage(Model model) {
-		return "counselor/groupcounselmanage";
 	}
 
 	// 상담사 마이페이지
