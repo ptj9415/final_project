@@ -149,4 +149,26 @@ public class CounselorController {
 	public String groupcounselmanageddd() {
 		return "counselor/groupcounselmanageddd";
 	}
+	
+	@RequestMapping("/cTermsCheck.do")
+	public String cTermsCheck(Model model) {
+		return "user/cTermsCheck";
+	}
+	@RequestMapping("/cEmailCheck.do")
+	public String cEmailCheck(Model model) {
+		return "user/cEmailCheck";
+	}
+	@RequestMapping("/counselorJoinForm.do")
+		public String counselorJoinForm(Model model, HttpServletRequest request) {
+			model.addAttribute("c_email", request.getParameter("inputEmail"));
+			return "user/counselorJoinForm";
+	}
+	
+	
 }
+	
+	
+	
+	
+	
+

@@ -2,10 +2,12 @@ package co.maeumi.prj;
 
 import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +37,12 @@ public class MemberController {
 		return "user/emailCheck";
 	}
 	
+	// 일반회원 약관동의 화면 
+	@RequestMapping("/termsCheck.do")
+	public String termsCheck(Model model, HttpServletRequest request) {
+		return "user/termsCheck";
+	}
+	
 	// 이메일 중복체크
 	@PostMapping("/ajaxEmailCheck.do")
 	@ResponseBody
@@ -62,8 +70,8 @@ public class MemberController {
 				System.out.println("인증번호" + checkNum); // 콘솔창에 인증번호 나오는지 확인. 
 				
 				
-//				// 이메일 보내기. ( 변수를 선언해서 이메일 전송에 필요로 한 데이터를 할당한다.) 
-//				String setFrom = "gnjqtpf1@gmail.com";  // root-context.xml에 작성한 자신의 이메일 계정. 아이디랑 메일주소 모두 입력!
+//				// 이메일 보내기. 주석 삭제하면 실제 이메일 날라감. ( 변수를 선언해서 이메일 전송에 필요로 한 데이터를 할당한다.) 
+//				String setFrom = "yd23fp@gmail.com";  // root-context.xml에 작성한 자신의 이메일 계정. 아이디랑 메일주소 모두 입력!
 //				String toMail = inputEmail;					// 수신받을 이메일. view로부터 받은 이메일 주소인 변수 email을 사용
 //				String title = "회원가입 인증 이메일 입니다.";  // 자신이 보낼 이메일 제목
 //				String content = 						// 자신이 보낼 이메일 내용
