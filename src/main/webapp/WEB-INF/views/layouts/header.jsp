@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,25 +106,31 @@ nav ul ul ul {
 	left: 100%;
 	top: 0;
 }
+span.top-nav-admin {
+	margin-right: 10px;
+}
 /* drop down menu end*/
+
+
 </style>
-<!-- <div class="Header">Header</div> -->
+
 <body>
 
 	<nav class="navbar top" id="top-nav">
 
-		<c:if test="${user == null }">
-			<span class="top-nav-login"><a href="loginForm.do">Maeumi. 로그인</a></span>
+		<c:if test="${email ==null }">
+			<span class="top-nav-admin"><a href="loginForm.do">login</a></span>
 		</c:if>
-		<c:if test="${user !=null }">
-			<span class="top-nav-logout"><a href="logout.do">로그아웃</a></span>
+		<c:if test="${email !=null }">
+			<span class="top-nav-admin"><a href="logout.do">logout</a></span>
 		</c:if>
-
-		<span class="top-nav-login"><a href="#">login</a></span>
-		<span class="top-nav-admin"> 
-			<a href="counselormypage.do">counselor 👨‍⚕️</a></span>
-			<span class="top-nav-admin"> 
-			<a href="adminbootstrap.do">admin ⚙</a></span>
+		<c:if test="${email ==null }">
+			<span class="top-nav-admin"><a href="cTermsCheck.do" id="modalOpen">상담사 회원가입</a></span>
+		</c:if>
+		
+		<span class="top-nav-admin"><a href="counselormypage.do">counselor 👨‍⚕️</a></span>
+		<span class="top-nav-admin"><a href="adminbootstrap.do">admin ⚙</a></span>
+		
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"

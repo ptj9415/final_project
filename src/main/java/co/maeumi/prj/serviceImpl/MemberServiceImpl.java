@@ -49,5 +49,11 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return map.memberSelect(mvo);
 	}
+
+	@Override
+	public MemberVO kakaoSelect(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.kakaoSelect(mvo);
+	}
 	
 }

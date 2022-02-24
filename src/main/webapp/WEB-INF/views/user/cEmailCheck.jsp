@@ -39,9 +39,9 @@ input {
 }
 
 #nextBtn {
-	width: 50%;
+	float:right;
+	width: 30%;
 	height: 40px;
-	margin-left: 25%;
 }
 .correct {   <!--correct, incorrect 모두 인증번호 일치여부에 따라 경고색깔을 달리 표시하기 위함 --> 
 	color: green;
@@ -74,12 +74,14 @@ $(document).ready(function() {
 		
 // 인증번호 이메일 중복체크 & 인증메일 전송
 $("#emailSendBtn").click(function (){
+	
 	var inputEmail = $("#inputEmail").val();  // 이메일 입력한 값. 
 	if(inputEmail == "") {
 		alert("이메일 주소를 입력해주세요.");
 		$("#inputEmail").focus();
 		return;
 	}
+	setTimeout('location.reload()',10000);    //테스트용 10초뒤 페이지 새로고침. 화면설계서엔 5분으로 되어있음.
 	$.ajax({
 		url: "ajaxEmailCheck.do",
 		type: "POST",
@@ -147,8 +149,8 @@ $("#nextBtn").click(function(){
                 <hr>
             </div>
             <div class="comment">
-                <h4>상담사님의 본인확인을 진행해주세요.</h4><br>
-                <h5>Maeumi. 의 다양한 서비스 이용을 위해 본인확인이 필요합니다.</h5>
+                <h4>상담사님의 본인확인을 진행해주세요.</h4>
+                <h6>Maeumi. 의 다양한 서비스 이용을 위해 본인확인이 필요합니다.</h6>
             </div>
             <div class="emailCheck" style="border: 1px solid gray;">
             	<form id="frm" action="counselorJoinForm.do" method="POST">
@@ -158,10 +160,10 @@ $("#nextBtn").click(function(){
                 <input type="text" placeholder="'인증하기'를 눌러주세요." id="checkNum" class="checkNum" readonly="readonly">
                 <div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span> <!-- 인증번호의 일치여부를 알려주는 경고글 역할. -->
-			<br><br>
+			<br>
                 <h5 style="margin-left: 10px">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </h5>
             </div>
-            <br><br>
+            <br>
             <button type="button" id="nextBtn" name="nextBtn">다음</button>
         </div>
         <div>
