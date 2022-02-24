@@ -21,6 +21,7 @@
 
 
 
+
 <!-- modal -->
 
 
@@ -68,51 +69,6 @@ th#th-management {
 }
 
 /*paging*/
-.pagination {
-	margin-left: 750px;
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	border: 0.5px #9c836a;
-}
-
-.pageNum {
-	width: 40px;
-	height: 30px;
-	text-align: center;
-	color: #9c836a;
-	cursor: pointer;
-	line-height: 30px;
-}
-
-span.pageNum.first.clickable {
-	padding: 10px;
-}
-
-span.pageNum.back.clickable {
-	padding: 10px;
-}
-
-span.pageNum.clickable.active {
-	padding: 10px;
-}
-
-span.pageNum.clickable {
-	padding: 10px;
-}
-
-span.pageNum.next.clickable {
-	padding: 10px;
-}
-
-span.pageNum.last.clickable {
-	padding: 10px;
-}
-
-.pageNum:hover {
-	background-color: #7c6c5c;
-}
 
 /*paging end*/
 </style>
@@ -131,7 +87,7 @@ span.pageNum.last.clickable {
 			<h1 class="text-left display-5">오늘의 한마디 관리</h1>
 			<br>
 			<h2 class="text-left display-5">검색</h2>
-			<form action="enhanced-results.html">
+			<form>
 				<div class="row">
 					<div class="col-md-12 offset-md-0">
 						<div class="card">
@@ -216,17 +172,17 @@ span.pageNum.last.clickable {
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form>
+						<form id="frm" method="post">
 							<div class="card-body">
 								<div class="form-group">
 									<label for="exampleInputEmail1">주제</label> <input type="text"
-										class="form-control" id="subject-height"
-										placeholder="주제를 입력하세요..">
+										style="height: 100px" class="form-control" id="sc_title"
+										name="sc_title" placeholder="주제를 입력하세요..">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">글귀</label> <input
-										type="text" class="form-control" id="subject-height"
-										placeholder="글귀를 입력하세요..">
+										type="text" style="height: 100px" class="form-control"
+										id="sc_title" name="sc_subject" placeholder="글귀를 입력하세요..">
 								</div>
 
 								<!--  <div class="form-check">
@@ -245,7 +201,8 @@ span.pageNum.last.clickable {
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">등록</button>
+					<button type="button" class="btn btn-primary" id="submit"
+						name="submit">등록</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -290,9 +247,17 @@ span.pageNum.last.clickable {
 											<td>${adminTodayStoryList.sc_title }</td>
 											<td>${adminTodayStoryList.sc_subject }</td>
 											<td><span class="tag tag-success">-</span></td>
-											<td><span type="button" class="btn btn-default"
-												id="submit-btn">수정&nbsp;</span> <span type="button"
-												class="btn btn-default" id="submit-btn">삭제&nbsp;</span></td>
+											<td>
+												<!-- <span type="button" class="btn btn-default"
+												id="submit-btn">수정&nbsp;</span>  --> 
+												<!-- <span type="button"
+												class="btn btn-default" id="submit-btn" data-toggle="modal"
+												data-target="#updatemodal-lg">수정&nbsp;</span>  -->
+												<span type="button"
+												class="btn btn-default" id="submit-btn" data-toggle="modal"
+												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정&nbsp;</span> 
+												<span type="button" class="btn btn-default" id="submit-btn"
+												onclick="deleteFnc('${adminTodayStoryList.sc_no}')">삭제</span>
 										</tr>
 
 									</c:forEach>
@@ -300,6 +265,65 @@ span.pageNum.last.clickable {
 
 								</tbody>
 							</table>
+
+
+							<!-- 수정 modal start -->
+							<div class="modal fade" id="updatemodal-lg" style="display:none">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Today Story</h4>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<!-- general form elements -->
+											<div class="card card-primary">
+												<div class="card-header">
+													<h3 class="card-title">오늘의 한마디 수정</h3>
+												</div>
+												<!-- /.card-header -->
+												<!-- form start -->
+												<form id="updateFrm" method="post">
+													<div class="card-body">
+														<div class="form-group">
+															<label for="exampleInputEmail1">주제</label>
+															<textarea type="text" style="height: 100px"
+																class="form-control" id="sc_title" name="sc_title"> ${adminTodayStorySelect.sc_title }
+														</textarea>
+														</div>
+														<div class="form-group">
+															<label for="exampleInputPassword1">글귀</label>
+															<textarea type="text" style="height: 100px"
+																class="form-control" id="sc_subject" name="sc_subject">${adminTodayStorySelect.sc_subject }
+																</textarea>
+														</div>
+
+													</div>
+
+												</form>
+											</div>
+											<!-- /.card -->
+										</div>
+										<div class="modal-footer justify-content-between">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal" onclick="">닫기</button>
+											<button type="button" class="btn btn-primary"
+												id="updateSubmit" name="updateSubmit">등록</button>
+										</div>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!-- /.modal -->
+							<!-- modal contents end -->
+							<!-- form end -->
+							<!-- 수정 modal end -->
+
+
 							<!-- paging -->
 							<div class="btnContent">
 								<div class="pagination" id="pagination">페이지 영역</div>
@@ -335,17 +359,109 @@ span.pageNum.last.clickable {
 	<script src="subHomeFile/plugins/select2/js/select2.full.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="subHomeFile/dist/js/adminlte.min.js"></script>
-	 <script src ="https://code.jquery.com/jquery-1.11.2.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
 
 	<script>
 		//paging 처리
 
-		
-		
-		
+		//modal
 		$(function() {
 			$('.select2').select2()
 		});
+
+		//폼 제출
+		$(function() {
+			$("#submit").click(function() {
+				frm.action = "adminTodayStoryRegister.do";
+				frm.submit();
+
+			});
+
+		});
+
+		//삭제
+		function deleteFnc(sc_no) {
+			if (confirm("정말 삭제하시겠습니까?") == true) {
+
+				$.ajax({
+					url : 'adminTodayStoryDelete.do',
+
+					data : {
+						sc_no : sc_no
+					},
+					dataType : "text",
+					success : function(responseText) {
+						console.log(responseText);
+						alert("삭제가 완료되었습니다.");
+						location.href = "adminTodayStory.do";
+					},
+					error : function() {
+						alert("error! 관리자에게 문의하세요");
+						location.href = "adminTodayStory.do";
+					}
+
+				});
+
+			} else {
+				return;
+			}
+
+		}
+		
+		//수정 
+		$(function(){
+			$("#updateSubmit").click(function(){
+				updateFrm.action="adminTodayStoryUpdate.do";
+				updateFrm.submit();
+			});
+		});
+		
+		//수정테스트
+		function updateFnc(sc_no) {
+			console.log('수정버튼');
+			
+			
+			let textarea = document.querySelectorAll('#sc_title')[2];
+			let title = event.target.closest('tr').childNodes[3].innerHTML;
+			textarea.value = title;
+			
+			let textarea2 = document.querySelectorAll('#sc_subject')[0];
+			
+			let subject = event.target.closest('tr').childNodes[5].innerHTML;
+			textarea2.value = subject;
+			
+			console.log(title);
+			console.log(subject);
+			
+			
+			console.log(sc_no);
+			
+			
+			$.ajax({
+				url : 'adminTodayStoryUpdateModal.do',
+
+				data : {
+					sc_no : sc_no
+				},
+				dataType : "text",
+				success : function(responseText) {
+					console.log(responseText);
+				/* 	$('#updatemodal-lg').attr('data-target','#updatemodal-lg'); */
+					 $("#updatemodal-lg").attr("class", "modal fade show");
+					$("#updatemodal-lg").attr("style", "display:block");
+					
+					/* alert('test중');  */
+					//모달을 띄워줘
+					
+				},
+				error : function() {
+					alert("error! 관리자에게 문의하세요");
+					location.href = "adminTodayStory.do";
+				}
+
+			});
+			
+		}
 	</script>
 </body>
 </html>

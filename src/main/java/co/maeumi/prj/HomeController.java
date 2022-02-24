@@ -44,6 +44,7 @@ public class HomeController {
 		return "admin/admin";
 	}
 
+	//오늘의 한마디 user
 	@RequestMapping("/todayStory.do")
 	public String todayStory(Model model, TodayVO vo, HttpSession session) throws Exception {
 		// session.setAttribute("sc_no", sc_no);
@@ -59,7 +60,7 @@ public class HomeController {
 		return "user/todayStory";
 	}
 
-	// 오늘의 한마디 댓글 삭제
+	// 오늘의 한마디 user 댓글 삭제
 	@RequestMapping("/todayReplyDelete.do")
 	@ResponseBody
 	public String todayReplyDelete(TodayReplyVO vo, HttpServletRequest request) {
@@ -75,16 +76,46 @@ public class HomeController {
 		return "admin/admin";
 	}
 
-	// 오늘의 한마디 admin
+	// 오늘의 한마디 admin 
 
 	@RequestMapping("/adminTodayStory.do")
 	public String adminTodayStoryList(Model model, TodayVO vo) {
 		List<TodayVO> list = todayDao.TodayStorySelectList();
-		System.out.println(list.size());
 		model.addAttribute("adminTodayStoryList", list);
-		
 		return "admin/adminTodayStory";
 	}
 
-	// 오늘의 한마디 글 등
+	// 오늘의 한마디 admin 글 등록
+	@RequestMapping("/adminTodayStoryRegister.do")
+	public String adminTodayStoryRegister(Model model, TodayVO vo) {
+		model.addAttribute("adminTodayInsertForm",todayDao.TodayInsert(vo));
+		
+		return "redirect:adminTodayStory.do";
+	}
+	
+	
+	
+	
+	
+	// 오늘의 한마디 admin 글 삭제
+	@RequestMapping("/adminTodayStoryDelete.do")
+	@ResponseBody
+	public String adminTodayStoryDelete(TodayVO vo, Model model, HttpServletRequest request) {
+		vo.setSc_no(request.getParameter("sc_no"));
+		todayDao.TodayDelete(vo);
+		return "ok";
+	}
+	
+	//오늘의 한마디 admin update modal
+		@RequestMapping("/adminTodayStoryUpdateModal.do")
+		@ResponseBody
+		public String adminTodayStoryUpdateModal(TodayVO vo, Model model, HttpServletRequest request) {
+			model.addAttribute("adminTodayStorySelect",todayDao.AdminTodaySelect(vo));
+			System.out.println(vo);
+			System.out.println(todayDao.AdminTodaySelect(vo));
+			return "ok";
+		}
+	
+	
+	
 }
