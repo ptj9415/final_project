@@ -3,16 +3,20 @@ package co.maeumi.prj;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.json.JSONArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,35 +35,24 @@ public class CounselorController {
 	public String personalcounsel(Model model) {
 		return "counselor/myintro";
 	}
-
-	// 상담 관리 - 개인상담 관리 화면
-	@RequestMapping("/personalcounselmanage.do")
-	public String personalcounselmanage(Model model) {
-		return "counselor/personalcounselmanage";
-	}
-
+	
 	// 상담 관리 - 그룹상담 개설 화면
 	@RequestMapping("/groupcounselopen.do")
 	public String groupcounselopen(Model model) {
 		return "counselor/groupcounselopen";
 	}
 
-	// 상담 관리 - 그룹상담 관리 화면
-	@RequestMapping("/groupcounselmanage.do")
-	public String groupcounselmanage(Model model) {
-		return "counselor/groupcounselmanage";
-	}
-
 	// 상담사 마이페이지
 	@RequestMapping("/counselormypage.do")
-	public String adminhome(Model model, CounselorVO vo, HttpSession session) {
+	public String adminhome(Model model, CounselorVO cvo, HttpSession session) {
 //			String c_email = (String)session.getAttribute("email");
 		String c_email = "3244509@naver.com";
 		session.setAttribute("email", c_email);
 		session.setAttribute("name", "상담사");
-		vo.setC_email(c_email);
-
-		model.addAttribute("counselor", counselorDao.counselorSelect(vo));
+		cvo.setC_email(c_email);
+		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
+		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
+		model.addAttribute("career", list);
 		return "counselor/counselormypage";
 	}
 
@@ -101,8 +94,33 @@ public class CounselorController {
 
 	// 상담사 마이페이지 - 상담 경력 수정 화면
 	@RequestMapping("/mycareer.do")
-	public String mycareer(Model model) {
+	public String mycareer(Model model, CounselorVO cvo) {
+		String c_email = "3244509@naver.com";
+		cvo.setC_email(c_email);
+		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
+		model.addAttribute("career", list);
+		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 		return "counselor/mycareer";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/careerupdate.do")
+	public String careerupdate(Model model, HttpServletRequest request, @RequestBody List<Map<String, Object>> list) throws Exception {
+		
+		System.out.println(list);
+		
+		
+		CounselorVO cvo = new CounselorVO();
+		String c_email = "3244509@naver.com";
+//		cvo.setC_email(c_email);
+//		System.out.println(list);
+//		counselorDao.counselorCareerDelete(cvo);
+//			cvo.setCc_status(cc_status);
+//			cvo.setCc_subject(cc_subject);
+//			counselorDao.counselorCareerList(cvo);
+		
+		
+		return "OK";
 	}
 
 	// 상담사 마이페이지 - 자격사항 수정 화면

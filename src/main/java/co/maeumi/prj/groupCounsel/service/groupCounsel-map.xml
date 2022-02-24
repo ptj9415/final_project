@@ -16,7 +16,8 @@
 			gc_time,
 			gc_sumnail,
 			gc_kakao,
-			gc_infos
+			gc_infos,
+			gc_status
 			)
 		values(
 			(SELECT NVL(MAX(GC_NO),0)+1 FROM GROUP_COUNSEL N),
@@ -32,7 +33,62 @@
 			#{gc_time},
 			#{gc_sumnail},
 			#{gc_kakao},
-			#{gc_infos}
+			#{gc_infos},
+			0
 		    )
 	</insert>
+	
+	<select id="groupSelectList" resultType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+			SELECT *
+			FROM GROUP_COUNSEL
+	</select>
+	
+	<select id="countGroupCounsel" resultType="int">
+			SELECT COUNT(*)
+			FROM GROUP_COUNSEL
+	</select>
+	
+		<select id="pageSelectList" resultType="co.maeumi.prj.groupCounsel.service.group_CounselVO"
+		parameterType="co.maeumi.prj.pagination.Pagination">
+				SELECT * 
+				FROM (
+				      SELECT ROWNUM RN, A.* 
+				      FROM (SELECT * FROM group_counsel 
+				      ORDER BY gc_no DESC
+				      
+				   ) A
+				)
+				WHERE RN BETWEEN #{start} AND #{end}
+		</select>
+		
+		<select id="searchpageSelectList" resultType="co.maeumi.prj.groupCounsel.service.group_CounselVO"
+		parameterType="co.maeumi.prj.pagination.Pagination">
+				SELECT * 
+				FROM (
+				      SELECT ROWNUM RN, A.* 
+				      FROM (SELECT * FROM group_counsel 
+				      ORDER BY gc_no DESC 
+				   ) A
+				)
+				<where>
+					RN BETWEEN #{start} AND #{end}
+					<if test="gc_title != null">and gc_title like '%'||#{gc_title}||'%'</if>
+					<if test="gc_startdate != null">and gc_startdate like '%'||#{gc_startdate}||'%'</if>
+					<if test="gc_finaldate != null">and gc_finaldate like '%'||#{gc_finaldate}||'%'</if>
+			        <if test="gc_type != null">and gc_type like '%'||#{gc_type}||'%'</if>
+					<if test="gc_status != null">and gc_status like '%'||#{gc_status}||'%'</if>
+				</where>
+		</select>
+		
+		<select id="searchcountGroupCounsel" parameterType="co.maeumi.prj.pagination.Pagination" resultType="int">
+					select count(*)
+					from group_counsel
+				<where>
+					<if test="gc_title != null">gc_title like '%'||#{gc_title}||'%'</if>
+					<if test="gc_startdate != null">and gc_startdate like '%'||#{gc_startdate}||'%'</if>
+					<if test="gc_finaldate != null">and gc_finaldate like '%'||#{gc_finaldate}||'%'</if>
+					<if test="gc_status != null">and gc_status like '%'||#{gc_status}||'%'</if>
+			        <if test="gc_type != null">gc_type like '%'||#{gc_type}||'%'</if>
+				</where>
+		</select>
 </mapper>

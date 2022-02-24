@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,184 +9,154 @@
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- Main content -->
-    <section class="content">
+        <section class="content">
         <div class="container-fluid">
-          <h1 class="text-left display-5"> 그룹 상담 관리</h1><br>
-            <h2 class="text-left display-5">검색</h2>
-            <form action="enhanced-results.html">
+          <br>
+          <h1 class="text-left display-5">&nbsp;그룹 상담 관리</h1><br>
+            <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2><br>
+            <form action="groupsearchmanage.do">
                 <div class="row">
                     <div class="col-md-12 offset-md-0">
                       <div class="card"> <!-- 하얀색 바 표시 시작-->
                         <div class="card-header">  
                           <div class="row">
-                              <!-- 옵션-->
-                             <!-- <div class="col-6">        
-                                <div class="form-group">
-                                    <label>Result Type:</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
-                                        <option>Text only</option>
-                                        <option>Images</option>
-                                        <option>Video</option>
-                                    </select>
-                                </div>
-                            </div> -->
-                             <!-- 옵션-->
-                            <!-- <div class="col-3">
-                                <div class="form-group">
-                                    <label>Sort Order:</label>
-                                    <select class="select2" style="width: 100%;">
-                                        <option selected>ASC</option>
-                                        <option>DESC</option>
-                                    </select>
-                                </div>
-                            </div> -->
-                              <!-- 옵션-->
-                            <!-- <div class="col-3">
-                                <div class="form-group">
-                                    <label>Order By:</label>
-                                    <select class="select2" style="width: 100%;">
-                                        <option selected>Title</option>
-                                        <option>Date</option>
-                                    </select>
-                                </div>
-                            </div> -->
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>모집일</label><br>
-                                    <input type="date" class="form form-control-lg" placeholder="Type your keywords here">
+                                    <label>모집일 : </label><br>
+                                    <input type="date" name="gc_startdate" style="width: 350px; height:40px;" placeholder="Type your keywords here">
                                     ~
-                                    <input type="date" class="form form-control-lg" placeholder="Type your keywords here">
+                                    <input type="date" name="gc_finaldate" style="width: 350px; height:40px;" placeholder="Type your keywords here">
                                 </div>
                             </div>
 
                             <div class="col-6">        
                                 <div class="form-group">
-                                    <label>상담일</label><br>
-                                    <input type="date" class="form form-control-lg" placeholder="Type your keywords here">
+                                    <label>상담일 : </label><br>
+                                    <input type="date" name="gc_date" style="width: 400px; height:40px;"  placeholder="Type your keywords here">
                                 </div>
                             </div>
 
                              <div class="col-6">        
                                 <div class="form-group">
-                                    <label>상담방식</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option>카카오톡</option>
-                                        <option>줌</option>
+                                    <label>상담방식 : </label>
+                                    <select class="select2" name="gc_type" multiple="multiple" data-placeholder="전체" style="width: 100%;">
+                                        <option value="카톡">카카오톡</option>
+                                        <option value="줌">줌</option>
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-6">        
                                 <div class="form-group">
-                                    <label>상태</label>
-                                    <select class="select2"  multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option>이 것은</option>
-                                        <option>뭘까요?</option>
-                                        <option>???</option>
+                                    <label>상태 : </label>
+                                    <select class="select2" name="gc_status" multiple="multiple" data-placeholder="전체" style="width: 100%;">
+                                        <option value="0">모집중</option>
+                                        <option value="1">상담 완료</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>상담명</label>
-                                    <input type="text" class="form-control form-control-lg" placeholder="Type your keywords here">
+                                    <label>상담명 : </label>
+                                    <input type="text" name="gc_title" class="form-control" placeholder="Type your keywords here">
                                 </div>
                             </div>
                                 <button type="button" class="btn btn-lg btn-default">초기화</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button type="submit" class="btn btn-lg btn-default">검색&nbsp;<i class="fa fa-search"></i></button>
-                        </div>
-                        <!-- 검색-->
-                        <!-- <div class="form-group">
-                            <div class="input-group input-group-lg">
-                                <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-lg btn-default">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div> -->
-                        </div>
+                           </div>
+                         </div>
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
+          </div>
     </section>
-    
-    
+    <br>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>상담이력</h1>
-            </div>
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>신청자목록</h1>
           </div>
-        </div><!-- /.container-fluid -->
-      </section>
-      
-      <!-- Main content -->
-      <section class="content"> <!-- 메인 컨텐츠-->
-        <div class="container-fluid"> <!-- 메인 밑 메인 컨텐츠-->
-          <div class="row">
-            <div class="col-12">
-              <div class="card"> <!-- 하얀색 바 표시 시작-->
-                <div class="card-header">
-                  <h3 class="card-title">Responsive Hover Table</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Reason</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>183</td>
-                        <td>John Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-success">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>219</td>
-                        <td>Alexander Pierce</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-warning">Pending</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>657</td>
-                        <td>Bob Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-primary">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>175</td>
-                        <td>Mike Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-danger">Denied</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.card-body -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    
+    <!-- Main content -->
+    <section class="content"> <!-- 메인 컨텐츠-->
+      <div class="container-fluid"> <!-- 메인 밑 메인 컨텐츠-->
+        <div class="row">
+          <div class="col-12">
+            <div class="card"> <!-- 하얀색 바 표시 시작-->
+              <div class="card-header">
+                <h3 class="card-title"></h3>
               </div>
-              <!-- /.card -->
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>모집일</th>
+                      <th>상담일</th>
+                      <th>상담명</th>
+                      <th>상담방식</th>
+                      <th>신청/모집인원</th>
+                      <th>신청자 관리</th>
+                      <th>상태</th>
+                      <th>관리</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <c:forEach items="${groupCounsel}" var="group">
+                    <tr>
+                      <td>${group.gc_startdate}~${group.gc_finaldate}</td>
+                      <td>${group.gc_date}</td>
+                      <td>${group.gc_title}</td>
+                      <td>${group.gc_type }</td>
+                      <td>${group.gc_person}/${group.gc_max_person }</td>
+                      <td><button>조회</button></td>
+                      <c:if test="${group.gc_status eq 0 }">
+                      <td>진행 중</td>
+                      </c:if>
+                      <c:if test="${group.gc_status eq 1 }">
+                      <td>상담 완료</td>
+                      </c:if>
+                      <td><button>조회</button></td>
+                    </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+                <br>
+                <!-- 페이지 네이션 -->
+		        <nav aria-label="...">
+				  <ul class="pagination">
+				    <li class="page-item">
+				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+				    </li>
+				    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+						<c:if test="${status.count ne page.nowPage}">
+				    		<li class="page-item"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}</a></li>
+				   		</c:if>
+				   		<c:if test="${status.count eq page.nowPage}">
+							<li class="page-item active"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+				   		</c:if>
+				    </c:forEach>
+				    <li class="page-item">
+				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.next }">Next</a>
+				    </li>
+				  </ul>
+				</nav>
+				<!-- 페이지 네이션 끝 -->
+				
+              </div>
+              <!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </section>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
       <!-- jQuery -->
 <script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
       <script>

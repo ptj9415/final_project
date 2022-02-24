@@ -15,5 +15,13 @@
 		where sr_no = #{sr_no}
 	</delete>
 	
+	<insert id="todayReplyInsert" parameterType="co.maeumi.prj.todayReply.service.TodayReplyVO">
+		<selectKey keyProperty="sr_no" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(TO_NUMBER(sr_no)), 0) + 1 FROM sc_reply
+		</selectKey>
+		INSERT INTO sc_reply
+		VALUES (#{sr_no}, #{sc_subject}, #{sc_no}, #{sr_writer})
+	</insert>
+	
 	
 </mapper>

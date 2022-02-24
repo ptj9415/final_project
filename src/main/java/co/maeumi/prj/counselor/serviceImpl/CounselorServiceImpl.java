@@ -50,5 +50,23 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return map.counselorLogin(cvo);
 	}
+
+	@Override
+	public List<CounselorVO> counselorCareerList(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCareerList(cvo);
+	}
+
+	@Override
+	public int counselorCareerDelete(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCareerDelete(cvo);
+	}
+
+	@Override
+	public int counselorCareerInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCareerInsert(cvo);
+	}
 	
 }
