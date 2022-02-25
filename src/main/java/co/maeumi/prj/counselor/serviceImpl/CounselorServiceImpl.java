@@ -68,5 +68,59 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return map.counselorCareerInsert(cvo);
 	}
+
+	@Override
+	public List<CounselorVO> counselorCertificationList(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCertificationList(cvo);
+	}
+
+	@Override
+	public int counselorCertificationDelete(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCertificationDelete(cvo);
+	}
+
+	@Override
+	public int counselorCertificationInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCertificationInsert(cvo);
+	}
+
+	@Override
+	public List<CounselorVO> counselorinfoList(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorinfoList(cvo);
+	}
+
+	@Override
+	public int counselorinfoDelete(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorinfoDelete(cvo);
+	}
+
+	@Override
+	public int counselorinfoInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorinfoInsert(cvo);
+	}
+
+	@Override
+	public List<CounselorVO> counselortimeList(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselortimeList(cvo);
+	}
+
+	@Override
+	public int counselortimeDelete(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselortimeDelete(cvo);
+	}
+
+	@Override
+	public int counselortimeInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselortimeInsert(cvo);
+	}
 	
 }

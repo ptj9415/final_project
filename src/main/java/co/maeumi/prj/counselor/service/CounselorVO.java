@@ -19,4 +19,15 @@ public class CounselorVO {
 	private String cc_no;
 	private String cc_status;
 	private String cc_subject;
+	private String ccf_no;
+	private String ccf_name;
+	private String ccf_issueby;
+	private String ccf_date;
+	private String ci_no;
+	private String ci_title;
+	private String ci_subject;
+	private String cd_no;
+	private String cd_day;
+	private String cd_time;
+	
 }
