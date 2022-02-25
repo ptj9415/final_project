@@ -55,10 +55,6 @@
                                         <option value="0">모집 중</option>
                                         <option value="1">상담 완료</option>
                                     </select>
-                                     <select class="select2" multiple="multiple" name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
-                                        <option value="0">모집 중</option>
-                                        <option value="1">상담 완료</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">

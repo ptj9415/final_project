@@ -290,16 +290,6 @@ public class CounselorController {
 
 			return "OK";
 		}
-
-	@RequestMapping("/groupcounselmanagedd.do")
-	public String groupcounselmanagedd() {
-		return "counselor/groupcounselmanagedd";
-	}
-
-	@RequestMapping("/groupcounselmanageddd.do")
-	public String groupcounselmanageddd() {
-		return "counselor/groupcounselmanageddd";
-	}
 	
 	@RequestMapping("/cTermsCheck.do")
 	public String cTermsCheck(Model model) {
