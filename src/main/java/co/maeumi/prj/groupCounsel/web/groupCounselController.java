@@ -10,8 +10,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,19 +121,19 @@ public class groupCounselController {
 		groupCounselDao.insertGroupCounsel(vo);
 		return "counselor/counselormypage";
 	}
-	
-	// 상담 관리 - 그룹상담 관리 화면
 	@RequestMapping("/groupcounselmanage.do")
-	public String groupcounselmanage(Model model, HttpServletRequest request ) {
-
+	public String groupcounselmanage(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage==null) {
 			page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 2); //전체 수, start, end
 		}else {
 			page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 2); //전체 수, start, end
 		}
+		
+		// 리스트 타입 담아주기
 		List<group_CounselVO> list =  groupCounselDao.pageSelectList(page);
 		
+		// date타입 짤라서 연월일로 보여주기
 		for (int i = 0; i < list.size(); i++) {
 	         String date = list.get(i).getGc_date();
 	         date = date.substring(0, 10);
@@ -143,59 +145,85 @@ public class groupCounselController {
 	         date = date.substring(0, 10);
 	         list.get(i).setGc_date(date3);
 	         
-	      }
+	    }
 		request.setAttribute("groupCounsel", list);
-		
 		request.setAttribute("page", page);
-		
-		
-		return "counselor/groupcounselmanage";	
+		return "counselor/groupcounselmanage";
 	}
+	
+	// 상담 관리 - 그룹상담 관리 화면 다중 검색 및 페이징.
+	// 페이징을 하기 위해선 pagination 이라는 VO 클래스에 담아야 하기 때문에 따로 requestparam 으로 불러와줘서 담아줘야 함. 
+	// 페이징을 하려면 pagination이라는 클래스 안에 검색 조건을 걸어줄 변수들을 생성하고 넣어줘야함.
 	@RequestMapping("/groupsearchmanage.do")
-	public String groupsearchmanage(@RequestParam("gc_date") String gc_date,@RequestParam("gc_startdate") String gc_startdate,
-			@RequestParam("gc_finaldate") String gc_finaldate, @RequestParam("gc_title") String gc_title,
-			Model model, HttpServletRequest request ) {//@RequestParam("gc_type") String gc_type, @RequestParam("gc_status") String gc_status,
-		if (gc_date == null && gc_startdate == null && gc_finaldate == null && gc_title == null) { //&& gc_type==null && gc_status == null
+	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
+			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, @Param("gc_type") String gc_type, @Param("gc_status") String gc_status,
+			Model model, HttpServletRequest request,HttpSession session ) {
+			session = request.getSession();
 			String nowPage = request.getParameter("nowPage");
-			if (nowPage==null) {
-				page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 2); //전체 수, start, end
-			}else {
-				page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 2); //전체 수, start, end
-			}
-			page.setGc_finaldate(gc_finaldate);
-			page.setGc_startdate(gc_startdate);
-			page.setGc_title(gc_title);
-			page.setGc_date(gc_date);
-			//page.setGc_type(gc_type);
-			//page.setGc_status(gc_status);
+			//검색 기능에서 가지고 있는 세션값 지워주기
+			System.out.println(nowPage);
+			System.out.println(gc_type);
+			System.out.println(gc_status);
+			//get 방식으로 가져오기 때문에 nowPage는 jsp 페이지에서 가져온다.
+			//세션값 넣어주기.
 			
-			request.setAttribute("groupCounsel", groupCounselDao.pageSelectList(page));
-			request.setAttribute("page", page);
-				
-		} else {
-			String nowPage = request.getParameter("nowPage");
-			page.setGc_title(gc_title);
-			page.setGc_finaldate(gc_finaldate);
-			page.setGc_startdate(gc_startdate);
-			page.setGc_date(gc_date);
-			//page.setGc_type(gc_type);
-			//page.setGc_status(gc_status);
+			if (gc_title != null && gc_startdate != null && gc_finaldate != null && gc_date != null) {				
+			session.setAttribute("gc_title", gc_title);
+			session.setAttribute("gc_date", gc_date);
+			session.setAttribute("gc_startdate", gc_startdate);
+			session.setAttribute("gc_finaldate", gc_finaldate);
+			session.setAttribute("gc_type", gc_type);
+			session.setAttribute("gc_status", gc_status);			
+			}else {
+				if ((String)session.getAttribute("gc_title") == null && (String)session.getAttribute("gc_date") ==null &&
+					(String)session.getAttribute("gc_startdate") == null && (String)session.getAttribute("gc_finaldate") == null) {
+					session.setAttribute("gc_title", gc_title);
+					session.setAttribute("gc_date", gc_date);
+					session.setAttribute("gc_startdate", gc_startdate);
+					session.setAttribute("gc_finaldate", gc_finaldate);
+					session.setAttribute("gc_type", gc_type);
+					session.setAttribute("gc_status", gc_status);	
+				}
+			}
+			
+			//pagination 객체에 담아줄 setter 선언
+			page.setGc_title((String)session.getAttribute("gc_title"));
+			page.setGc_date((String)session.getAttribute("gc_date"));
+			page.setGc_startdate((String)session.getAttribute("gc_startdate"));
+			page.setGc_finaldate((String)session.getAttribute("gc_finaldate"));
+			page.setGc_type((String)session.getAttribute("gc_type"));
+			page.setGc_status((String)session.getAttribute("gc_type"));
+			
 			if (nowPage==null) {
 				page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), 1, 2); //전체 수, start, end
 			}else {
 				page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); //전체 수, start, end
 			}
-			System.out.println(groupCounselDao.searchcountGroupCounsel(page));
-			page.setGc_title(gc_title);
-			page.setGc_finaldate(gc_finaldate);
-			page.setGc_startdate(gc_startdate);
-			page.setGc_date(gc_date);
-			//page.setGc_type(gc_type);
-			//page.setGc_status(gc_status);
 			
-			request.setAttribute("groupCounsel", groupCounselDao.searchpageSelectList(page));
+			page.setGc_title((String)session.getAttribute("gc_title"));
+			page.setGc_date((String)session.getAttribute("gc_date"));
+			page.setGc_startdate((String)session.getAttribute("gc_startdate"));
+			page.setGc_finaldate((String)session.getAttribute("gc_finaldate"));
+			page.setGc_type((String)session.getAttribute("gc_type"));
+			page.setGc_status((String)session.getAttribute("gc_type"));
+			
+			List<group_CounselVO> list =  groupCounselDao.searchpageSelectList(page);
+			
+			for (int i = 0; i < list.size(); i++) {
+		         String date = list.get(i).getGc_date();
+		         date = date.substring(0, 10);
+		         list.get(i).setGc_date(date);
+		         String date2 = list.get(i).getGc_startdate();
+		         date = date.substring(0, 10);
+		         list.get(i).setGc_date(date2);
+		         String date3 = list.get(i).getGc_finaldate();
+		         date = date.substring(0, 10);
+		         list.get(i).setGc_date(date3);
+		         
+		    }
+			
+			request.setAttribute("groupCounsel", list);
 			request.setAttribute("page", page);
-		}
 			
 		return "counselor/groupcounselmanage";	
 	}

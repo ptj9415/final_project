@@ -16,6 +16,7 @@
             <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2><br>
             <form action="groupsearchmanage.do">
                 <div class="row">
+                <!-- 검색 기능 시작. -->
                     <div class="col-md-12 offset-md-0">
                       <div class="card"> <!-- 하얀색 바 표시 시작-->
                         <div class="card-header">  
@@ -39,7 +40,7 @@
                              <div class="col-6">        
                                 <div class="form-group">
                                     <label>상담방식 : </label>
-                                    <select class="select2" name="gc_type" multiple="multiple" data-placeholder="전체" style="width: 100%;">
+                                    <select name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
                                         <option value="카톡">카카오톡</option>
                                         <option value="줌">줌</option>
                                     </select>
@@ -48,10 +49,14 @@
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>상태 : </label>
-                                    <select class="select2" name="gc_status" multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option value="0">모집중</option>
+                                    <select name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
+                                        <option value="0">모집 중</option>
                                         <option value="1">상담 완료</option>
                                     </select>
+                                     <!-- <select class="select2" name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
+                                        <option value="0">모집 중</option>
+                                        <option value="1">상담 완료</option>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-12">
@@ -128,6 +133,7 @@
                 </table>
                 <br>
                 <!-- 페이지 네이션 -->
+                <c:if test="${gc_type == null and gc_date == null and gc_startdate == null and gc_finaldate == null and gc_title == null and gc_status == null}">
 		        <nav aria-label="...">
 				  <ul class="pagination">
 				    <li class="page-item">
@@ -142,12 +148,33 @@
 				   		</c:if>
 				    </c:forEach>
 				    <li class="page-item">
-				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.next }">Next</a>
+				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.next}">Next</a>
 				    </li>
 				  </ul>
 				</nav>
+				</c:if>
+				<c:if test="${gc_type != null or gc_date != null or gc_startdate != null or gc_finaldate != null or gc_title != null or gc_status != null}">
+		        <nav aria-label="...">
+				  <ul class="pagination">
+				    <li class="page-item">
+				      <a class="page-link" href="groupsearchmanage.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+				    </li>
+				    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+						<c:if test="${status.count ne page.nowPage}">
+				    		<li class="page-item"><a class="page-link" href="groupsearchmanage.do?nowPage=${status.count}">${status.count}</a></li>
+				   		</c:if>
+				   		<c:if test="${status.count eq page.nowPage}">
+							<li class="page-item active"><a class="page-link" href="groupsearchmanage.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+				   		</c:if>
+				    </c:forEach>
+				    <li class="page-item">
+				      <a class="page-link" href="groupsearchmanage.do?nowPage=${page.next}">Next</a>
+				    </li>
+				  </ul>
+				</nav>
+				</c:if>
 				<!-- 페이지 네이션 끝 -->
-				
+				<!-- 검색 및 페이징 끝. -->		
               </div>
               <!-- /.card-body -->
             </div>
