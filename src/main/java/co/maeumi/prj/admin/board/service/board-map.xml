@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.admin.board.service.boardMapper">
+
+	<select id="boardSelectList" resultType="co.maeumi.prj.admin.board.service.boardVO">
+		SELECT B.*, C.*
+		FROM BOARD B, COUNSELOR C
+		WHERE B.B_EMAIL = C.C_EMAIL
+		ORDER BY B.B_NO DESC
+	</select>
+
+	<select id="boardSelect" resultType="co.maeumi.prj.admin.board.service.boardVO">
+		SELECT B.*, C.C_NAME
+		FROM BOARD B, COUNSELOR C
+		WHERE B.B_EMAIL = C.C_EMAIL
+		AND B_NO = #{b_no}
+	</select>
+
+	<delete id="boardDelete" parameterType="co.maeumi.prj.admin.board.service.boardVO">
+		DELETE FROM BOARD WHERE B_NO = #{b_no}
+	</delete>
+	
+	<!-- 검색 -->
+	<select id="boardSearch" resultType="co.maeumi.prj.admin.board.service.boardVO">
+		SELECT * FROM BOARD
+		<!--  맨 앞에 있는 연산자를(AND 또는 OR) 제거 -->
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="b_email != ''"> AND B_EMAIL LIKE '%' || #{b_email} || '%' </if>
+			<if test="b_title != ''"> AND B_TITLE LIKE '%' || #{b_title} || '%' </if>
+			<if test="b_subject != 'null'"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%'</if>
+			<if test="b_wdate != 'null'"> AND TO_CHAR(B_WDATE,'YY-MM-DD') like '%' || #{b_wdate} || '%'</if>
+		</trim>	
+		ORDER BY B_NO DESC
+	</select>
+	
+   <!-- 조회수 -->
+   <update id="updateCount" parameterType="String">
+      UPDATE BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}
+   </update>
+</mapper>
