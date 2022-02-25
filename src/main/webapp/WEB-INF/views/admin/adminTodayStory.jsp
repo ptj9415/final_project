@@ -35,6 +35,21 @@
 <link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
 <!-- modal end -->
 <style>
+.card-title {
+	padding-top: 20px;
+	font-weight: bold;
+}
+
+.card {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table {
+	font-size: 14px;
+}
+
 #subject-height {
 	height: 100px;
 }
@@ -68,6 +83,13 @@ th#th-management {
 	width: 200px;
 }
 
+.row mb-2 {
+	float: right;
+}
+
+/*삭제버튼*/
+
+/*삭제버튼 end*/
 /*paging*/
 
 /*paging end*/
@@ -82,7 +104,7 @@ th#th-management {
 	<!-- Content Wrapper. Contains page content -->
 	<!-- 어드민 부트스트랩 적용한 곳에 들어 있음 이부분은 제거해야됨-->
 	<!-- Main content -->
-	<section class="content">
+	<!-- <section class="content">
 		<div class="container-fluid">
 			<h1 class="text-left display-5">오늘의 한마디 관리</h1>
 			<br>
@@ -91,7 +113,7 @@ th#th-management {
 				<div class="row">
 					<div class="col-md-12 offset-md-0">
 						<div class="card">
-							<!-- 하얀색 바 표시 시작-->
+							하얀색 바 표시 시작
 							<div class="card-header">
 								<div class="row">
 
@@ -130,30 +152,26 @@ th#th-management {
 			</form>
 		</div>
 	</section>
-
+ -->
 
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<!-- <section class="content-header">
 		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1>오늘의 한마디 주제</h1>
-				</div>
-			</div>
+			<div class="row mb-2"></div>
 		</div>
-		<!-- /.container-fluid -->
-		<span type="button" class="btn btn-lg btn-default" id="submit-btn">다중등록(excel)&nbsp;</span>
-		<span type="button" class="btn btn-default" id="submit-btn"
-			data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
-		<!--  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
+		/.container-fluid
+				<span type="button" class="btn btn-lg btn-default" id="submit-btn">다중등록(excel)&nbsp;</span>
+
+
+
+		 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
                   Launch Large Modal
-                </button> -->
-	</section>
+                </button>
+	</section> -->
 
 	<!-- modal contents start -->
 
 	<!-- /.modal -->
-
 	<div class="modal fade" id="modal-lg">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -161,7 +179,7 @@ th#th-management {
 					<h4 class="modal-title">Today Story</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true" >&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -223,15 +241,24 @@ th#th-management {
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
+						<div class="col-sm-6">
+							<!-- <h1>오늘의 한마디 주제</h1> -->
+							<span type="button" class="btn btn-default" id="submit-btn"
+								style="float: right" data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
+							<span type="button" class="btn btn-default" id="submit-btn"
+								style="float: right" data-toggle="modal" data-target="#modal-lg">다중등록&nbsp;</span>
+						</div>
 						<!-- 하얀색 바 표시 시작-->
 						<div class="card-header">
 							<h3 class="card-title">오늘의 한마디 주제 관리</h3>
+
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0">
-							<table class="table table-hover text-nowrap">
+							<table class="table table-hover text-nowrap"
+								style="font-size: 12px">
 								<thead>
-									<tr>
+									<tr style="background-color: #b0c4de3b">
 										<th id="th-no">NO</th>
 										<th id="th-title">주제</th>
 										<th id="th-subject">글귀</th>
@@ -249,15 +276,16 @@ th#th-management {
 											<td><span class="tag tag-success">-</span></td>
 											<td>
 												<!-- <span type="button" class="btn btn-default"
-												id="submit-btn">수정&nbsp;</span>  --> 
-												<!-- <span type="button"
+												id="submit-btn">수정&nbsp;</span>  --> <!-- <span type="button"
 												class="btn btn-default" id="submit-btn" data-toggle="modal"
-												data-target="#updatemodal-lg">수정&nbsp;</span>  -->
-												<span type="button"
+												data-target="#updatemodal-lg">수정&nbsp;</span>  --> <span
+												type="button" style="font-size: 12px"
 												class="btn btn-default" id="submit-btn" data-toggle="modal"
-												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정&nbsp;</span> 
-												<span type="button" class="btn btn-default" id="submit-btn"
+												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정&nbsp;</span>
+												<span type="button" style="font-size: 12px"
+												class="btn btn-default" id="submit-btn"
 												onclick="deleteFnc('${adminTodayStoryList.sc_no}')">삭제</span>
+											</td>
 										</tr>
 
 									</c:forEach>
@@ -268,12 +296,12 @@ th#th-management {
 
 
 							<!-- 수정 modal start -->
-							<div class="modal fade" id="updatemodal-lg" style="display:none">
+							<div class="modal fade" id="updatemodal-lg" style="display: none">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">Today Story</h4>
-											<button type="button" class="close" data-dismiss="modal"
+											<button type="button" class="close" data-dismiss="modal"  id="area-hidden"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
@@ -298,7 +326,10 @@ th#th-management {
 															<label for="exampleInputPassword1">글귀</label>
 															<textarea type="text" style="height: 100px"
 																class="form-control" id="sc_subject" name="sc_subject">${adminTodayStorySelect.sc_subject }
-																</textarea>
+															</textarea>
+
+															<input type="hidden" style="height: 100px"
+																class="form-control" id="sc_no" name="sc_no">
 														</div>
 
 													</div>
@@ -308,8 +339,8 @@ th#th-management {
 											<!-- /.card -->
 										</div>
 										<div class="modal-footer justify-content-between">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal" onclick="">닫기</button>
+											<button type="button" class="btn btn-default" id="close-btn"
+												data-dismiss="modal">닫기</button>
 											<button type="button" class="btn btn-primary"
 												id="updateSubmit" name="updateSubmit">등록</button>
 										</div>
@@ -369,7 +400,7 @@ th#th-management {
 			$('.select2').select2()
 		});
 
-		//폼 제출
+		//글 등록 제출
 		$(function() {
 			$("#submit").click(function() {
 				frm.action = "adminTodayStoryRegister.do";
@@ -411,14 +442,34 @@ th#th-management {
 		//수정 
 		$(function(){
 			$("#updateSubmit").click(function(){
+				
 				updateFrm.action="adminTodayStoryUpdate.do";
 				updateFrm.submit();
+				alert("수정이 완료되었습니다.");
 			});
 		});
+		
+		//모달 창 끄기 
+					/* const close = document.querySelector(".btn btn-default");
+					function init(){
+						
+						close.addEventListener("click",function(){
+							
+							 $("#updatemodal-lg").attr("class", "modal fade");
+						})
+						
+					}
+					init(); */
+					
+					
+					
 		
 		//수정테스트
 		function updateFnc(sc_no) {
 			console.log('수정버튼');
+			
+			let textarea3 = document.querySelectorAll('#sc_no')[0];
+			textarea3.value = sc_no;
 			
 			
 			let textarea = document.querySelectorAll('#sc_title')[2];
@@ -430,6 +481,8 @@ th#th-management {
 			let subject = event.target.closest('tr').childNodes[5].innerHTML;
 			textarea2.value = subject;
 			
+			
+			
 			console.log(title);
 			console.log(subject);
 			
@@ -438,7 +491,7 @@ th#th-management {
 			
 			
 			$.ajax({
-				url : 'adminTodayStoryUpdateModal.do',
+				url : 'adminTodayStoryUpdateForm.do',
 
 				data : {
 					sc_no : sc_no
@@ -452,6 +505,7 @@ th#th-management {
 					
 					/* alert('test중');  */
 					//모달을 띄워줘
+		
 					
 				},
 				error : function() {
@@ -462,6 +516,18 @@ th#th-management {
 			});
 			
 		}
+					
+					
+					document.getElementById('area-hidden').onclick = function(){
+						
+						 $("#updatemodal-lg").fadeOut();
+					} 
+					
+					document.getElementById('close-btn').onclick = function(){
+						
+						 $("#updatemodal-lg").fadeOut();
+					} 
+						
 	</script>
 </body>
 </html>

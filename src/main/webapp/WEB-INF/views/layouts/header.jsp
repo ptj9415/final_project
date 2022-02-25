@@ -145,7 +145,7 @@ nav ul ul ul {
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
 						<ul class="drop-down-menu" id="drop-first">
-							<li><a href="#">개인상담</a></li>
+							<li><a href="personalCounsel.do">개인상담</a></li>
 							<li><a href="#">그룹상담</a></li>
 						</ul></li>
 
