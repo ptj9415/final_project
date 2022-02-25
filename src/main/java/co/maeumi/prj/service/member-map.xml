@@ -35,6 +35,13 @@
 		WHERE M_EMAIL =
 		#{m_email}
 	</select>
+	
+	<select id="kakaoSelect" resultType="co.maeumi.prj.service.MemberVO">
+		select * from member
+		where m_email = #{m_email} 
+		and
+		m_type = #{m_type}
+	</select>
 
 	<insert id="memberInsert"
 		parameterType="co.maeumi.prj.service.MemberVO">

@@ -4478,8 +4478,9 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 	align-items: center;
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 0.5rem 1rem;
+	margin-right: 5px;
 }
 
 .navbar>.container, .navbar>.container-fluid {

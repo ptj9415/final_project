@@ -7,69 +7,30 @@
 <head>
 <meta charset="UTF-8">
 <title>오늘의 한마디</title>
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+
+
 <style>
 table {
 	border: solid 1px;
 }
 
-/* 버튼 스타일*/
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
- 
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-}
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 600px; /* Could be more or less, depending on screen size */
-}
+/*modal*/
 
-/* The Close Button */
-.closing {
-  color: #aaa;
-  float: right;
-  padding-left: 500px;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.closing:hover,
-.closing:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-#btn-write {
-	border: none;
-	border-radius: 30px;
-	background-color: white;
-	width: 120px;
-	height: 50px;
-	font-size: 15px;
-	font-weight: bold;
-}
-
-#btn-write:hover {
-	background-color: lightgray;
-	transition: all ease 3s 0s;
-	opacity: 0.7;
-}
-
-.btn-delete {
-	float: right;
-}
+/*modal end*/
 </style>
 </head>
 <body>
@@ -89,29 +50,79 @@ table {
 							class="ion-ios-arrow-forward"></i>
 						</span> <br> <br> <span>${todaySelect.sc_subject}</span> <br>
 						<br>
-						<!-- Trigger/Open The Modal -->
-						<button id="myBtn">Open Modal</button>
-
-					<button class="btn-write" id="btn-write">글 등록 →</button>
-
 
 					</p>
+
+			
+					
+					<!-- modal btn -->
+
+		<span type="button" class="btn btn-default" id="submit-btn"
+			data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
+					<!-- modal btn -->
 
 				</div>
 			</div>
 		</div>
+
 	</section>
+	<!-- modal contents start -->
 
-						<!-- The Modal -->
-					<div id="myModal" class="modal">
-
-						<!-- Modal content -->
-						<div class="modal-content">
-							<span class="closing">&times;</span>
-							<p>Some text in the Modal..</p>
+<div class="modal fade" id="modal-lg">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Today Story</h4>
+					<button type="button" class="close" data-dismiss="modal" style="width:300px"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- general form elements -->
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">주제를 보고 어떤생각이 드는지 적어보세요</h3>
 						</div>
+						<!-- /.card-header -->
+						<!-- form start -->
+						<form id="frm" method="post">
+							<div class="card-body">
+								
+									<span> 작성자 : </span>
+									<br>
+								  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" style="float:right">
+                    <label class="form-check-label" for="exampleCheck1"  style="float:right">닉네임 비공개</label>
+                  </div> 
+								<div class="form-group">
+									<label for="exampleInputPassword1">글귀</label>
+									 <input type="text" style="height:300px" class="form-control"  id="sc_subject" name="sc_subject"
+										placeholder="글귀를 입력하세요..">
+								</div>
+							</div>
+							<!-- /.card-body -->
 
+							<!--  <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div> -->
+						</form>
 					</div>
+					<!-- /.card -->
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary" id="submit" name="submit">등록</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<!-- modal contents end -->
+	<!-- modal contents end -->
+
 	<!-- 댓글 start -->
 
 	<section class="ftco-services">
@@ -124,10 +135,14 @@ table {
 							<div class="col-md-6 d-flex align-items-stretch">
 								<div
 									class="media block-6 services services-2 d-block bg-light p-4 mb-4">
+									
+									<c:if test="${nickname eq todayReplyList.sr_writer}">
+									
 									<div class="btn-delete" id="btn-delete">
 										<span id="delete"
 											onclick="replyDelete('${todayReplyList.sr_no}')">❌</span>
 									</div>
+									</c:if>
 									<div class="media-body p-2 mt-3">
 										<h3 class="heading">${todayReplyList.sr_writer}</h3>
 										<p>${todayReplyList.sr_subject}</p>
@@ -161,40 +176,18 @@ table {
 
 				console.log(responseText);
 
-				alert("댓글이 삭제되었습니다.");
+				alert("오늘의 한마디가 삭제되었습니다.");
 				location.reload();
 
 			},
 			error : function() {
-				alert('댓글 삭제 실패.');
+				alert('error! 관리자에게 문의하세요');
 			}
 		})
 	}
-	
-	// Get the modal
-	var modal = document.getElementById("myModal");
 
-	// Get the button that opens the modal
-	var btn = document.getElementById("myBtn");
+	/* modal start */
 
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("closing")[0];
-
-	// When the user clicks on the button, open the modal
-	btn.onclick = function() {
-	  modal.style.display = "block";
-	}
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-	  modal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
-	}
+	/* modal end */
 </script>
 </html>
