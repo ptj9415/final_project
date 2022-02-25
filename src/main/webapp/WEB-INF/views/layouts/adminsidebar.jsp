@@ -64,7 +64,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="../forms/general.html"
+						<li class="nav-item"><a href="membermanage.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>일반회원 관리</p>
 						</a></li>

@@ -30,7 +30,7 @@ import co.maeumi.prj.counselor.service.CounselorVO;
 public class CounselorController {
 	@Autowired
 	private CounselorService counselorDao;
-
+	
 	// 상담 관리 - 개인상담 신청내역 화면
 	@RequestMapping("/personalcounsel.do")
 	public String personalcounsel(Model model) {
@@ -41,13 +41,6 @@ public class CounselorController {
 	@RequestMapping("/groupcounselopen.do")
 	public String groupcounselopen(Model model) {
 		return "counselor/groupcounselopen";
-	}
-
-
-	// 상담 관리 - 그룹상담 관리 화면
-	@RequestMapping("/groupcounselmanage.do")
-	public String groupcounselmanage(Model model) {
-		return "counselor/groupcounselmanage";
 	}
   
 	@RequestMapping("/counselormypage.do")
