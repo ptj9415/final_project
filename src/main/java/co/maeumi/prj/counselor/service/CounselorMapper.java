@@ -14,6 +14,10 @@ public interface CounselorMapper {
 	List<CounselorVO> counselorCareerList(CounselorVO cvo);
 	int counselorCareerDelete(CounselorVO cvo);
 	int counselorCareerInsert(CounselorVO cvo);
+
+  //이메일 
+	CounselorVO counselorFindEmail(CounselorVO cvo);
+
 	
 	//자격사항
 	List<CounselorVO> counselorCertificationList(CounselorVO cvo);
@@ -29,4 +33,5 @@ public interface CounselorMapper {
 	List<CounselorVO> counselortimeList(CounselorVO cvo);
 	int counselortimeDelete(CounselorVO cvo);
 	int counselortimeInsert(CounselorVO cvo);
+
 }

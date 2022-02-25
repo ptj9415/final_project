@@ -55,5 +55,23 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return map.kakaoSelect(mvo);
 	}
+
+	@Override
+	public MemberVO naverSelect(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.naverSelect(mvo);
+	}
+
+	@Override
+	public MemberVO memberFindEmail(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.memberFindEmail(mvo);
+	}
+
+	@Override
+	public List<MemberVO> findEmailList() {
+		// TODO Auto-generated method stub
+		return map.findEmailList();
+	}
 	
 }

@@ -70,6 +70,11 @@ public class CounselorServiceImpl implements CounselorService {
 	}
 
 	@Override
+
+	public CounselorVO counselorFindEmail(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorFindEmail(cvo);
+
 	public List<CounselorVO> counselorCertificationList(CounselorVO cvo) {
 		// TODO Auto-generated method stub
 		return map.counselorCertificationList(cvo);
@@ -121,6 +126,7 @@ public class CounselorServiceImpl implements CounselorService {
 	public int counselortimeInsert(CounselorVO cvo) {
 		// TODO Auto-generated method stub
 		return map.counselortimeInsert(cvo);
+
 	}
 	
 }
