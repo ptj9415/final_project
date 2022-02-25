@@ -228,4 +228,16 @@ public class groupCounselController {
 		return "counselor/groupcounselmanage";	
 	}
 	
+	@RequestMapping("/selapplication.do")
+	public String selapplication(Model model, HttpServletRequest request){
+		String c_email = request.getParameter("c_email");
+		model.addAttribute("email",c_email);
+		return "counselor/counselappli";
+	}
+	@RequestMapping("/seldetail.do")
+	public String seldetail(Model model, HttpServletRequest request) {
+		String c_email = request.getParameter("c_email");
+		model.addAttribute("email",c_email);
+		return "counselor/counseldetail";
+	}
 }
