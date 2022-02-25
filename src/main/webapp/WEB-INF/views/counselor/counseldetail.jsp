@@ -24,6 +24,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+                     <br><br>
                         <h1>그룹상담관리-나의 자존감을 쑥쑥 성장시켜요</h1>
                     </div>
                 </div>
@@ -32,11 +33,12 @@
 
         <section class="content">
             <div class="container-fluid">
+            <br><br>
+               <h2 class="text-left display-5">개요</h2>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                              <h3 class="card-title">개요</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -68,6 +70,7 @@
     
     <section class="content">
         <div class="container-fluid">
+         <br><br><br>
             <h2 class="text-left display-5">검색</h2>
             <form action="enhanced-results.html">
                 <div class="row">
@@ -103,7 +106,7 @@
                             </div>
                           </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </form>
         </div>
