@@ -68,11 +68,82 @@
 
 	<insert id="counselorCareerInsert"
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
-		<selectKey keyProperty="cc_no" resultType="String" order="BEFORE">
+		<selectKey keyProperty="cc_no" resultType="String"
+			order="BEFORE">
 			SELECT
-			MAX(CC_NO)+1 FROM CS_CAREER
+			NVL(MAX(CC_NO),0)+1 FROM CS_CAREER
 		</selectKey>
 		INSERT INTO CS_CAREER VALUES(#{cc_no}, #{c_email}, #{cc_status},
 		#{cc_subject})
+	</insert>
+
+	<select id="counselorCertificationList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM cs_certification
+		where c_email=#{c_email}
+	</select>
+
+	<delete id="counselorCertificationDelete"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		DELETE FROM cs_certification
+		WHERE c_email=#{c_email}
+	</delete>
+
+	<insert id="counselorCertificationInsert"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		<selectKey keyProperty="ccf_no" resultType="String"
+			order="BEFORE">
+			SELECT
+			NVL(MAX(CCF_NO),0)+1 FROM cs_certification
+		</selectKey>
+		INSERT INTO cs_certification VALUES(#{ccf_no}, #{c_email},
+		#{ccf_name},
+		#{ccf_issueby}, #{ccf_date})
+	</insert>
+
+	<select id="counselorinfoList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM cs_info
+		where c_email=#{c_email}
+	</select>
+
+	<delete id="counselorinfoDelete"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		DELETE FROM cs_info
+		WHERE c_email=#{c_email}
+	</delete>
+
+	<insert id="counselorinfoInsert"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		<selectKey keyProperty="ci_no" resultType="String"
+			order="BEFORE">
+			SELECT
+			NVL(MAX(Ci_NO),0)+1 FROM cs_info
+		</selectKey>
+		INSERT INTO cs_info VALUES(#{ci_no}, #{c_email}, #{ci_title},
+		#{ci_subject})
+	</insert>
+
+	<select id="counselortimeList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT * FROM cs_date
+		where c_email=#{c_email}
+	</select>
+
+	<delete id="counselortimeDelete"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		DELETE FROM cs_date
+		WHERE c_email=#{c_email}
+	</delete>
+
+	<insert id="counselortimeInsert"
+		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		<selectKey keyProperty="cd_no" resultType="String"
+			order="BEFORE">
+			SELECT
+			NVL(MAX(Cd_NO),0)+1 FROM cs_date
+		</selectKey>
+		INSERT INTO cs_date VALUES(#{cd_no}, #{c_email}, #{cd_day},
+		#{cd_time})
 	</insert>
 </mapper>

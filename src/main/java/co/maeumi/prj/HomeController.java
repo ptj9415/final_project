@@ -94,9 +94,6 @@ public class HomeController {
 	}
 	
 	
-	
-	
-	
 	// 오늘의 한마디 admin 글 삭제
 	@RequestMapping("/adminTodayStoryDelete.do")
 	@ResponseBody
@@ -106,16 +103,25 @@ public class HomeController {
 		return "ok";
 	}
 	
-	//오늘의 한마디 admin update modal
-		@RequestMapping("/adminTodayStoryUpdateModal.do")
+	//오늘의 한마디 admin update modal form 호출
+		@RequestMapping("/adminTodayStoryUpdateForm.do")
 		@ResponseBody
 		public String adminTodayStoryUpdateModal(TodayVO vo, Model model, HttpServletRequest request) {
 			model.addAttribute("adminTodayStorySelect",todayDao.AdminTodaySelect(vo));
-			System.out.println(vo);
-			System.out.println(todayDao.AdminTodaySelect(vo));
+		//	System.out.println(vo);
+		//	System.out.println(todayDao.AdminTodaySelect(vo));
 			return "ok";
 		}
-	
-	
-	
+		
+	//오늘의 한마디 admin update 글 수정
+		@RequestMapping("/adminTodayStoryUpdate.do")
+		public String adminTodayStoryUpdate(Model model, TodayVO vo, HttpServletRequest request) {
+			System.out.println(request.getParameter("sc_title"));
+			System.out.println(vo.getSc_no());
+			model.addAttribute("adminTodayStoryUpdate",vo);
+			todayDao.TodayUpdate(vo);
+			
+			return "redirect:adminTodayStory.do";
+			
+		}
 }
