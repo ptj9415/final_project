@@ -72,152 +72,150 @@ th {
 				</tr>
 				<tr>
 					<th class="timeth">09:00 ~ 10:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 0910"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 0910"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 0910"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 0910"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 0910"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 0910"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 0910"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon0910"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue0910"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed0910"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu0910"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri0910"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat0910"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun0910"></td>
 				</tr>
 				<tr>
 					<th class="timeth">10:00 ~ 11:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1011"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1011"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1011"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1011"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1011"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1011"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1011"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1011"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1011"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1011"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1011"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1011"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1011"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1011"></td>
 				</tr>
 				<tr>
 					<th class="timeth">11:00 ~ 12:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1112"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1112"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1112"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1112"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1112"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1112"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1112"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1112"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1112"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1112"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1112"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1112"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1112"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1112"></td>
 				</tr>
 				<tr>
 					<th class="timeth">12:00 ~ 13:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1213"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1213"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1213"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1213"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1213"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1213"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1213"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1213"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1213"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1213"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1213"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1213"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1213"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1213"></td>
 				</tr>
 				<tr>
 					<th class="timeth">13:00 ~ 14:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1314"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1314"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1314"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1314"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1314"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1314"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1314"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1314"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1314"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1314"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1314"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1314"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1314"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1314"></td>
 				</tr>
 				<tr>
 					<th class="timeth">14:00 ~ 15:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1415"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1415"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1415"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1415"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1415"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1415"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1415"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1415"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1415"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1415"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1415"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1415"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1415"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1415"></td>
 				</tr>
 				<tr>
 					<th class="timeth">15:00 ~ 16:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1516"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1516"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1516"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1516"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1516"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1516"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1516"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1516"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1516"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1516"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1516"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1516"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1516"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1516"></td>
 				</tr>
 				<tr>
 					<th class="timeth">16:00 ~ 17:00</th>
-					<td><input type="checkbox" name="checkmon" id="check"
-						value="mon 1617"></td>
-					<td><input type="checkbox" name="checktue" id="check"
-						value="tue 1617"></td>
-					<td><input type="checkbox" name="checkwed" id="check"
-						value="wed 1617"></td>
-					<td><input type="checkbox" name="checkthu" id="check"
-						value="thu 1617"></td>
-					<td><input type="checkbox" name="checkfri" id="check"
-						value="fri 1617"></td>
-					<td><input type="checkbox" name="checksat" id="check"
-						value="sat 1617"></td>
-					<td><input type="checkbox" name="checksun" id="check"
-						value="sun 1617"></td>
+					<td><input type="checkbox" name="checkmon" class="check"
+						value="mon1617"></td>
+					<td><input type="checkbox" name="checktue" class="check"
+						value="tue1617"></td>
+					<td><input type="checkbox" name="checkwed" class="check"
+						value="wed1617"></td>
+					<td><input type="checkbox" name="checkthu" class="check"
+						value="thu1617"></td>
+					<td><input type="checkbox" name="checkfri" class="check"
+						value="fri1617"></td>
+					<td><input type="checkbox" name="checksat" class="check"
+						value="sat1617"></td>
+					<td><input type="checkbox" name="checksun" class="check"
+						value="sun1617"></td>
 				</tr>
 			</table>
-			<br>
-			<input type="hidden" name="hiddenValue" id="hiddenValue" value=""/>
-			<button type="button" class="modify" id="modify2"
-				onclick="checkval();">수정</button>
+			<br> <input type="hidden" name="hiddenValue" id="hiddenValue"
+				value="" />
+			<button type="button" id="saveformbtn">수정</button>
 			<br> <br>
 		</div>
 	</div>
 
 	<script>
-	
-	//월요일 체크박스 전체선택
+		//월요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallmon").click(function() {
 				if ($("#checkallmon").is(":checked"))
@@ -236,8 +234,8 @@ th {
 					$("#checkallmon").prop("checked", true);
 			});
 		});
-		
-	//화요일 체크박스 전체선택
+
+		//화요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkalltue").click(function() {
 				if ($("#checkalltue").is(":checked"))
@@ -256,8 +254,8 @@ th {
 					$("#checkalltue").prop("checked", true);
 			});
 		});
-		
-	//수요일 체크박스 전체선택
+
+		//수요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallwed").click(function() {
 				if ($("#checkallwed").is(":checked"))
@@ -276,8 +274,8 @@ th {
 					$("#checkallwed").prop("checked", true);
 			});
 		});
-		
-	//목요일 체크박스 전체선택
+
+		//목요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallthu").click(function() {
 				if ($("#checkallthu").is(":checked"))
@@ -296,8 +294,8 @@ th {
 					$("#checkallthu").prop("checked", true);
 			});
 		});
-		
-	//금요일 체크박스 전체선택
+
+		//금요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallfri").click(function() {
 				if ($("#checkallfri").is(":checked"))
@@ -316,8 +314,8 @@ th {
 					$("#checkallfri").prop("checked", true);
 			});
 		});
-		
-	//토요일 체크박스 전체선택
+
+		//토요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallsat").click(function() {
 				if ($("#checkallsat").is(":checked"))
@@ -336,8 +334,8 @@ th {
 					$("#checkallsat").prop("checked", true);
 			});
 		});
-		
-	//일요일 체크박스 전체선택
+
+		//일요일 체크박스 전체선택
 		$(document).ready(function() {
 			$("#checkallsun").click(function() {
 				if ($("#checkallsun").is(":checked"))
@@ -356,19 +354,122 @@ th {
 					$("#checkallsun").prop("checked", true);
 			});
 		});
-	
-		function checkval(){
-	        var obj = $("[id=check]");
-	        var chkArray = new Array(); // 배열 선언	 
-	        
-	        $('input:checkbox[id=check]:checked').each(function() {
-	            chkArray.push(this.value);
-	        });
-	        
-	        $('#hiddenValue').val(chkArray);	        
-	        alert($('#hiddenValue').val());
-	        
-	    }
+
+		$("#saveformbtn").click(function() {
+
+			var cd_day = [];
+			var cd_time = [];
+
+			$('input:checkbox[class=check]:checked').each(function() {
+				var day = $(this).val().substring(0, 3);
+				var time = $(this).val().substring(3, 8);
+				cd_day.push(day);
+				cd_time.push(time);
+			});
+
+			var list = new Array();
+
+			for (var i = 0; i < cd_day.length; i++) {
+				var obj = new Object();
+				obj.cd_day = cd_day[i];
+				obj.cd_time = cd_time[i];
+
+				list.push(obj);
+			}
+
+			var datalist = JSON.stringify(list);
+
+			jQuery.ajaxSettings.traditional = true;
+			$.ajax({
+				url : "counseltimeupdate.do",
+				type : 'post',
+				contentType : 'application/json; charset=UTF-8',
+				dataType : "json",
+				data : datalist,
+				success : function() {
+					alert("수정이 완료되었습니다.");
+					location.reload();
+				},
+				error : function() {
+					alert("수정이 완료되었습니다.");
+					location.reload();
+				}
+			});
+		});
+
+		<c:forEach items="${time}" var="time">
+		var param = '${time.cd_day}' + '${time.cd_time}';
+
+		$('.check').each(function() {
+			var val = $(this).val();
+			if (param == val) {
+				$(this).prop('checked', true);
+			}
+		});
+		</c:forEach>
+
+		var total = $("input[name=checkmon]").length;
+		var checked = $("input[name=checkmon]:checked").length;
+
+		if (total != checked) {
+			$("#checkallmon").prop("checked", false);
+		} else {
+			$("#checkallmon").prop("checked", true);
+		}
+		
+		var total = $("input[name=checktue]").length;
+		var checked = $("input[name=checktue]:checked").length;
+
+		if (total != checked) {
+			$("#checkalltue").prop("checked", false);
+		} else {
+			$("#checkalltue").prop("checked", true);
+		}
+		
+		var total = $("input[name=checkwed]").length;
+		var checked = $("input[name=checkwed]:checked").length;
+
+		if (total != checked) {
+			$("#checkallwed").prop("checked", false);
+		} else {
+			$("#checkallwed").prop("checked", true);
+		}
+		
+		var total = $("input[name=checkthu]").length;
+		var checked = $("input[name=checkthu]:checked").length;
+
+		if (total != checked) {
+			$("#checkallthu").prop("checked", false);
+		} else {
+			$("#checkallthu").prop("checked", true);
+		}
+		
+		var total = $("input[name=checkfri]").length;
+		var checked = $("input[name=checkfri]:checked").length;
+
+		if (total != checked) {
+			$("#checkallfri").prop("checked", false);
+		} else {
+			$("#checkallfri").prop("checked", true);
+		}
+		
+		var total = $("input[name=checksat]").length;
+		var checked = $("input[name=checksat]:checked").length;
+
+		if (total != checked) {
+			$("#checkallsat").prop("checked", false);
+		} else {
+			$("#checkallsat").prop("checked", true);
+		}
+		
+		var total = $("input[name=checksun]").length;
+		var checked = $("input[name=checksun]:checked").length;
+
+		if (total != checked) {
+			$("#checkallsun").prop("checked", false);
+		} else {
+			$("#checkallsun").prop("checked", true);
+		}
 	</script>
 </body>
 </html>

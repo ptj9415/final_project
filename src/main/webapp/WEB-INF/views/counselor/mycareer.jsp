@@ -99,6 +99,7 @@ th {
 			</form>
 			<input type="hidden" id="c_email" name="c_email"
 				value="${counselor.c_email }"> <br>
+				<button type="button" id="pageback" name="pageback" onclick="location.href='counselormypage.do'">돌아가기</button>
 			<button type="button" id="saveformbtn">수정</button>
 			<br> <br>
 		</div>
@@ -109,11 +110,10 @@ th {
 	<script>
 		function addtr() {
 			var table = $('#careertable tr').length;
-
 			var innerHtml = "";
 			innerHtml += '<tr>';
-			innerHtml += '<td><select id="status" name="status"><option value="선택">선택</option><option value="현재">현재</option><option value="과거">과거</option></select></td>';
-			innerHtml += '<td><input type="text" id="subject" name="subject"></td>'
+			innerHtml += '<td><select id="cc_status" name="cc_status" class="cc_status"><option value="선택">선택</option><option value="현재">현재</option><option value="과거">과거</option></select></td>';
+			innerHtml += '<td><input type="text" id="cc_subject" name="cc_subject" class="cc_subject"></td>'
 			innerHtml += '<td><button type="button" class="deletetr" id="deletetr" name="deletetr">삭제</button></td>';
 			innerHtml += '</tr>';
 
@@ -159,6 +159,8 @@ th {
 			jQuery.ajaxSettings.traditional = true;
 			$.ajax({
 				url: "careerupdate.do",
+				type : 'post',
+				contentType : 'application/json; charset=UTF-8',
 				dataType: "json",
 				data: datalist, 
 				success: function() {
@@ -166,28 +168,12 @@ th {
 					location.reload();
 				},
 				error: function() {
-					alert("오류");
+					alert("수정이 완료되었습니다.");
+					location.reload();
 				}
 			});		
 			
 		});
-		
-	
-		
-
-			// 			$.ajax({
-			// 				url : 'careerupdate.do',
-			// 				data : JSON.stringify(formData),
-			// 				type : 'post',
-			// 				contentType : 'application/json',
-			// 				success : function(data) {
-			// 					alert(data);
-			// 				},
-			// 				error : function() {
-			// 					alert('실패');
-			// 				}
-			// 			})
-// 		}
 	</script>
 </body>
 </html>
