@@ -68,5 +68,11 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return map.counselorCareerInsert(cvo);
 	}
+
+	@Override
+	public CounselorVO counselorFindEmail(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorFindEmail(cvo);
+	}
 	
 }

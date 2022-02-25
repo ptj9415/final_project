@@ -73,8 +73,8 @@ button:hover {
 $(document).ready(function() {
 		
 	// 인증번호 이메일 중복체크 & 인증메일 전송
+	var code = "";
 	$("#emailSendBtn").click(function (){
-		var code = "";
 		var inputEmail = $("#inputEmail").val();  // 이메일 입력한 값. 
 		if(inputEmail == "") {
 			alert("이메일 주소를 입력해주세요.");

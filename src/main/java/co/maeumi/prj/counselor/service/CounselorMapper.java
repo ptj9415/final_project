@@ -12,4 +12,5 @@ public interface CounselorMapper {
 	List<CounselorVO> counselorCareerList(CounselorVO cvo);
 	int counselorCareerDelete(CounselorVO cvo);
 	int counselorCareerInsert(CounselorVO cvo);
+	CounselorVO counselorFindEmail(CounselorVO cvo);
 }
