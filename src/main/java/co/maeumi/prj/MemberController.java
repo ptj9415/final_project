@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.maeumi.prj.counselor.service.CounselorService;
+import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.service.CoolsmsService;
 import co.maeumi.prj.service.MemberService;
 import co.maeumi.prj.service.MemberVO;
@@ -22,6 +24,8 @@ import co.maeumi.prj.service.MemberVO;
 public class MemberController {
 	@Autowired
 	private MemberService memberDao;
+	@Autowired
+	private CounselorService counselorDao;
 	
 	// root-context.xml에서 등록했던 mailSender bean을 의존성 주입ㄱㄱ
 	@Autowired
@@ -154,6 +158,39 @@ public class MemberController {
 		return Integer.toString(randomNumber);
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ajaxFindEmail.do", produces = "application/text; charset=utf8")
+	public String ajaxFindEmail(Model model, HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
+		
+		String checkPhone = request.getParameter("sendPhoneNum");
+		System.out.println("폼에서 넘어온 휴대폰 번호" +  checkPhone);
+		mvo.setM_phone(checkPhone);
+		mvo.setM_type("MAEUMI");
+		mvo = memberDao.memberFindEmail(mvo);
+		
+		String responseText = null;
+		if(mvo != null) {
+			String email = mvo.getM_email();
+			String type = mvo.getM_type();
+			responseText = "조회된 Email은 " + email + ", 가입경로는 " + type;
+			System.out.println("멤버에 존재: " + responseText);
+		} else  {
+			cvo.setC_phone(checkPhone);
+			cvo = counselorDao.counselorFindEmail(cvo);
+			if(cvo != null) {
+				String email = cvo.getC_email();
+				responseText = "상담사님의 email은  " + email + " 입니다. ";
+				System.out.println("상담사에 존재: " + responseText);
+			} else {
+				responseText = "NO";
+			}
+		}
+		return responseText;
+		
+		
+	}
+
 	
 	
 }

@@ -72,6 +72,7 @@ button:hover {
 	height: 45px;
 	width: 250px;
 }
+
 </style>
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
@@ -86,8 +87,8 @@ button:hover {
 			<input type='password' id='password' name="password"
 				placeholder='비밀번호를 입력하세요' onkeyup="enterLogin()">
 		</form>
-		<button type="button" class="findbtn">이메일 찾기&nbsp;&nbsp;</button>
-		<button type="button" class="findbtn">비밀번호 찾기</button>
+		<button type="button" class="findbtn" id="findEmail">이메일 찾기&nbsp;&nbsp;</button>
+		<button type="button" class="findbtn" id="findPassword">비밀번호 찾기</button>
 		<button type="button" onclick="inputCheck()" style="float: right;">Maeumi. 로그인</button>
 	</div>
 
@@ -99,8 +100,8 @@ button:hover {
 			<img src="resources/image/kakao_login_medium_wide.png" class="social">
 		</a> 
 		<!-- 네이버 --> 
-		<a href="naverLogin.do"> 
-			&nbsp;&nbsp;<img src="resources/image/btnG_완성형.png" class="social">
+		<a href="${url }"> 
+			&nbsp;&nbsp;<img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" class="social">
 		</a>
 		<p style="font-size: 20px; margin-top: 20px;">
 			Maeumi가 처음이신가요?<a href="termsCheck.do"
@@ -162,6 +163,24 @@ button:hover {
 			inputCheck();
 		}
 	};
+	
+	// 이메일 찾기 팝업창 호출
+	$("#findEmail").on("click", function() {
+	    alert("휴대폰 인증을 완료한 계정만 이메일 찾기 가능~~~");
+		 popupOpen();
+	})
+	
+	function  popupOpen() {
+		var url= "findEmailPopup.do";    //팝업창 페이지 URL
+		var winWidth = 500;    
+	    var winHeight = 400;
+	    var popupX = (window.screen.width / 2) - (800 / 2);
+	    var popupY= (window.screen.height /2) - (600 / 2);
+	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
+		window.open(url,"",popupOption);
+	}
+	
+	
 
 </script>
 </body>

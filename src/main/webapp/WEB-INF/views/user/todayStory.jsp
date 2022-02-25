@@ -36,7 +36,7 @@ table {
 <body>
 	<!-- 오늘의 한마디 주제 -->
 	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('images/bg_1.jpg');"
+		style="background-image: url('resources/user/images/bg_1.jpg');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
@@ -97,7 +97,7 @@ table {
                   </div> 
 								<div class="form-group">
 									<label for="exampleInputPassword1">글귀</label>
-									 <input type="text" style="height:300px" class="form-control"  id="sc_subject" name="sc_subject"
+									 <input type="text" style="height:300px" class="form-control"  id="sr_subject" name="sr_subject"
 										placeholder="글귀를 입력하세요..">
 								</div>
 							</div>

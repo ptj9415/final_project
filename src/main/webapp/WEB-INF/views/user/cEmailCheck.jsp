@@ -68,10 +68,8 @@ button:hover {
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	var code = "";
-
 $(document).ready(function() {
-		
+	var code = "";
 // 인증번호 이메일 중복체크 & 인증메일 전송
 $("#emailSendBtn").click(function (){
 	
@@ -81,7 +79,7 @@ $("#emailSendBtn").click(function (){
 		$("#inputEmail").focus();
 		return;
 	}
-	setTimeout('location.reload()',10000);    //테스트용 10초뒤 페이지 새로고침. 화면설계서엔 5분으로 되어있음.
+	setTimeout('location.reload()',600000);    //테스트용 1분뒤 페이지 새로고침. 화면설계서엔 5분으로 되어있음.
 	$.ajax({
 		url: "ajaxEmailCheck.do",
 		type: "POST",

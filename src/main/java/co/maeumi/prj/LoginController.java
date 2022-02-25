@@ -37,13 +37,97 @@ public class LoginController {
 	private CounselorService counselorDao;
 	
 
+	/* -----------네이버 로그인  관련  시작.---------------- */
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;	
+	}	
+	
 	// 로그인하는 페이지로 이동
 	@RequestMapping("/loginForm.do")
-	public String loginForm(Model model) {
+	public String loginForm(Model model, HttpSession session) {
+		
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+
+		System.out.println("네이버 :" + naverAuthUrl);
+
+		// 네이버
+		model.addAttribute("url", naverAuthUrl);
+		/* 생성한 인증 URL을 View로 전달 */
+		
 		return "user/loginForm";
 	}
-
-	// 로그인 처리
+	
+	
+	// 네이버 로그인 성공시 callback호출 메소드
+		@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, MemberVO mvo)
+				throws IOException, ParseException {
+			
+			System.out.println("여기는 callback");
+			OAuth2AccessToken oauthToken;
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);
+			// 로그인 사용자 정보를 읽어온다.
+			apiResult = naverLoginBO.getUserProfile(oauthToken);
+			System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
+			
+			model.addAttribute("result", apiResult);
+			System.out.println("result:  " + apiResult);
+			
+			// DB에 넣기
+			String message = null;
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject)jsonParser.parse(naverLoginBO.getUserProfile(oauthToken).toString());
+			
+			JSONObject response = (JSONObject)jsonObject.get("response");
+			
+			System.out.println("이것은: " + jsonObject.get("response"));
+			System.out.println("이메일은: " + (String)response.get("email"));
+			System.out.println("닉네임은: " + (String)response.get("nickname"));
+			System.out.println("연락처는 선택이지만 : " + (String)response.get("mobile"));
+			
+			
+			MemberVO mvo2 = new MemberVO(); // 기존에 존재유무 판단하기 위한 용도의 인스턴스 생성.
+			mvo2.setM_email((String)response.get("email"));
+			mvo2.setM_type("네이버");
+			mvo2 = memberDao.naverSelect(mvo2);
+			
+			if(mvo2 == null) {   // db에 해당 유저의 정보가 없다면.
+				mvo.setM_email((String)response.get("email"));
+				mvo.setM_nickname((String)response.get("nickname"));
+				String beforePhone = (String)response.get("mobile");
+				String realPhone = beforePhone.replaceAll("-", "");
+				mvo.setM_phone(realPhone);
+				mvo.setM_password("");
+				mvo.setM_type("네이버");
+				int n = memberDao.memberInsert(mvo);
+				if(n != 0) {
+					message = (String)response.get("email");
+					System.out.println(message + " 님 네이버 로그인 성공" );
+					session.setAttribute("email", message); // 세션값 설정
+					session.setAttribute("nickname", (String)response.get("nickname"));
+					return "home/home";
+				} else {
+					message = "실패햇다.....";
+					System.out.println(message);
+					return "home/loginForm";
+				}
+			}
+			// null이 아니었다면 바로 db에 데이터를 넣을 필요없이 바로 로그인 
+			session.setAttribute("email", (String)response.get("email")); // 세션값 설정
+			session.setAttribute("nickname", (String)response.get("nickname"));
+			System.out.println("네이버 로그인으로 담은 세션값1 email: " +  (String)response.get("email") );
+			System.out.println("네이버 로그인으로 담은 세션2 nickname: " + (String)response.get("nickname"));
+			return "home/home";  
+		}
+	
+	
+	// 일반 로그인 처리
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method =  RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request, MemberVO mvo, HttpSession session, CounselorVO cvo) {
@@ -138,92 +222,32 @@ public class LoginController {
 				System.out.println("에러발생"); // 에러발생하면 로그인화면으로 다시. 
 				return "home/loginForm";
 			}
-		}
+		} 
+		// mvo가 null이 아닌 경우, 즉 이미 해당 아이디와 유형이 존재히면~
+		mvo2.setM_email(k_email); // 세션값을 이용하기 위함. 
+		mvo2.setM_nickname(k_nickname);  // 세션값을 통해 header메뉴 동적으로 보여주기 위하여 
 		session.setAttribute("email", mvo2.getM_nickname());
+		session.setAttribute("nickname", mvo2.getM_nickname());
 		System.out.println("로그인 성공으로 담은 세션값 " + mvo2.getM_email());
+		System.out.println("로그인 성공으로 담은 세션값 2 : " + mvo2.getM_nickname());
 		return "home/home";
 	} // 카카오로그인
+	
+	
+	@RequestMapping("/findEmailPopup.do")
+	public String findEmailPopup(Model model, HttpServletRequest request) {
+		
+		return "user/popup/findEmail";
+	};
+	
 
 	
 	
 	
-	/* -----------네이버 로그인 부분 시작.---------------- */
-	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
+	
 
-	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-		this.naverLoginBO = naverLoginBO;
-	}
+	
 
-	// 로그인 첫 화면 요청 메소드
-	@RequestMapping(value = "/naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String naverLogin(Model model, HttpSession session) {
-
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-
-		System.out.println("네이버:" + naverAuthUrl);
-
-		// 네이버
-		model.addAttribute("url", naverAuthUrl);
-
-		/* 생성한 인증 URL을 View로 전달 */
-		return "user/naverLogin";
-	}
-
-	// 네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, MemberVO mvo)
-			throws IOException, ParseException {
-		
-		System.out.println("여기는 callback");
-		OAuth2AccessToken oauthToken;
-		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		// 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken);
-		System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
-		
-		session.setAttribute("user", "naver");  // header용.
-		model.addAttribute("result", apiResult);
-		System.out.println("result:  " + apiResult);
-		
-		// DB에 넣기
-		String message = null;
-		
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject)jsonParser.parse(naverLoginBO.getUserProfile(oauthToken).toString());
-		
-		JSONObject response = (JSONObject)jsonObject.get("response");
-		
-		System.out.println("이것은: " + jsonObject.get("response"));
-		System.out.println("이메일은: " + (String)response.get("email"));
-		System.out.println("닉네임은: " + (String)response.get("nickname"));
-		System.out.println("연락처는 선택이지만 : " + (String)response.get("mobile"));
-		
-		
-		MemberVO mvo2 = new MemberVO();
-		mvo2.setM_email((String)response.get("email"));
-		mvo2 = memberDao.memberSelect(mvo2);
-		
-		if(mvo2 == null) {   // 해당 이메일 주소로 네이버
-			mvo.setM_email((String)response.get("email"));
-			mvo.setM_nickname((String)response.get("nickname"));
-			mvo.setM_phone((String)response.get("mobile"));
-			mvo.setM_password("");
-			mvo.setM_type("NAVER");
-			int n = memberDao.memberInsert(mvo);
-			if(n != 0) {
-				message = (String)response.get("email");
-				System.out.println(message + " 님 네이버 로그인 성공" );
-				return "home/home";
-			} else {
-				message = "실패햇다.....";
-				System.out.println(message);
-				return "home/loginForm";
-			}
-		}	
-		return "home/home";  /* 네이버 로그인 성공 페이지 View 호출 */
-	}
+	
 
 }

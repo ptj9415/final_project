@@ -44,11 +44,11 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="groupcounselmanagedd.do"
+						<li class="nav-item"><a href="selapplication.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리-신청자목록(임시)</p>
 						</a></li>
-						<li class="nav-item"><a href="groupcounselmanageddd.do"
+						<li class="nav-item"><a href="seldetail.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리-그룹상담 상세 조회(임시)</p>
 						</a></li>
