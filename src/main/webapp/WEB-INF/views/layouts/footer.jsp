@@ -10,12 +10,20 @@
 .footerLogo {
 	width: 100px;
 }
+
+.myfooter{
+/* 	margin-top:800px; */
+	padding-top: 100px;
+	padding-bottom:100px;
+	background-color:black;
+	color:white
+}
 </style>
 <body>
 
 	<!-- footer -->
 
-	<footer class="ftco-footer ftco-bg-dark ftco-section">
+	 <footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
 			<div class="row mb-5">
 				<div class="col-md">
@@ -75,7 +83,7 @@
 				<div class="col-md-12 text-center">
 
 					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 						Copyright ©
 						<script>
 							document.write(new Date().getFullYear());
@@ -83,14 +91,14 @@
 						2022 All rights reserved | <i class="icon-heart"
 							aria-hidden="true"></i> ♪ by <a href="https://colorlib.com"
 							target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 					</p>
 				</div>
 			</div>
 		</div>
 	</footer>
 
-	<!-- loader -->
+	loader
 	<div id="ftco-loader" class="fullscreen">
 		<svg class="circular" width="48px" height="48px">
   <circle class="path-bg" cx="24" cy="24" r="22" fill="none"
@@ -99,8 +107,11 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"></circle></svg>
 	</div>
 
+ 
 
-
+<!-- <div class="myfooter">
+	<div class="footerlogo">여기 푸터 새로 만들거임 왜냐면 그것이 푸터이니까</div>
+</div> -->
 
 
 

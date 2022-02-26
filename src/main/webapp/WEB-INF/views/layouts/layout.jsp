@@ -12,6 +12,71 @@
 	scope="application" />
 <!DOCTYPE html>
 <html>
+<style style="text/css">
+
+html,
+
+body {
+
+    margin:0;
+
+    padding:0;
+
+    height:100%;
+
+}
+
+#wrapper {
+
+   position:relative;
+
+    min-height:100%;
+
+}
+
+#header {
+
+   height:70px;
+
+    background:#ccc;
+
+}
+
+#container {
+
+    padding:20px;
+
+}
+
+#footer {
+
+    position:absolute;
+
+    bottom:0;
+	left:0;
+	right:0;
+	padding-top:500px;
+    width:100%;
+
+    height:70px;   
+
+    background:#ccc;
+
+}
+.div.wrap{
+	position:relative;
+	
+}
+* {
+box-sizing: border-box;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+}
+#body{
+	height:100%;
+}
+	
+</style>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="">
@@ -72,7 +137,7 @@
 <body>
 
 
-	<div class='wrap'>
+<%-- 	<div class='wrap'>
 		<tiles:insertAttribute name="header" />
 		<div class='content'>
 			<div class="page_content">
@@ -83,12 +148,26 @@
 		</div>
 
 	</div>
+	 --%>
+	<div class='wrap'>
+		<tiles:insertAttribute name="header" />
+	</div>
+		
+		<main>
+				<tiles:insertAttribute name="body" />
+		</main>
+				
+				<tiles:insertAttribute name="footer" />
+			
+		
+
+	
 
 
 
 
 
-	<script src="resources/user/js/jquery.min.js"></script>
+<!-- 	<script src="resources/user/js/jquery.min.js"></script>
 	<script src="resources/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/user/js/popper.min.js"></script>
 	<script src="resources/user/js/bootstrap.min.js"></script>
@@ -104,7 +183,7 @@
 	<script src="resources/user/js/scrollax.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
 	<script src="resources/user/js/google-map.js"></script>
-	<script src="resources/user/js/main.js"></script>
+	<script src="resources/user/js/main.js"></script> -->
 
 </body>
 
