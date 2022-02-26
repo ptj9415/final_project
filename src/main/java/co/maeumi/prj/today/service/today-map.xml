@@ -13,6 +13,7 @@
 		SELECT * FROM
 		(SELECT * FROM short_comment order by dbms_random.value)
 		where rownum ='1'
+		
 	</select>
 	
 	<!-- admin select -->

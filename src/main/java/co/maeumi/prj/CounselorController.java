@@ -42,7 +42,7 @@ public class CounselorController {
 	public String groupcounselopen(Model model) {
 		return "counselor/groupcounselopen";
 	}
-  
+
 	@RequestMapping("/counselormypage.do")
 	public String adminhome(Model model, CounselorVO cvo, HttpSession session) {
 //			String c_email = (String)session.getAttribute("email");
