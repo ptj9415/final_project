@@ -25,7 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.groupCounsel.service.GroupCounslerService;
+import co.maeumi.prj.groupCounsel.service.group_CounselJoinVO;
+import co.maeumi.prj.groupCounsel.service.group_CounselReserveVO;
 import co.maeumi.prj.groupCounsel.service.group_CounselVO;
 import co.maeumi.prj.pagination.Pagination;
 
@@ -156,14 +159,16 @@ public class groupCounselController {
 	// 페이징을 하려면 pagination이라는 클래스 안에 검색 조건을 걸어줄 변수들을 생성하고 넣어줘야함.
 	@RequestMapping("/groupsearchmanage.do")
 	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
-			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, @Param("gc_type") String gc_type, @Param("gc_status") String gc_status,
-			Model model, HttpServletRequest request,HttpSession session ) {
+			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date,
+			Model model, HttpServletRequest request,HttpSession session ) {//@Param("gc_type") String gc_type, @Param("gc_status") String gc_status,
 			session = request.getSession();
 			String nowPage = request.getParameter("nowPage");
 			//검색 기능에서 가지고 있는 세션값 지워주기
 			System.out.println(nowPage);
-			System.out.println(gc_type);
-			System.out.println(gc_status);
+			System.out.println(gc_title);
+			System.out.println(gc_startdate);
+			System.out.println(gc_finaldate);
+			System.out.println(gc_date);
 			//get 방식으로 가져오기 때문에 nowPage는 jsp 페이지에서 가져온다.
 			//세션값 넣어주기.
 			
@@ -171,9 +176,7 @@ public class groupCounselController {
 			session.setAttribute("gc_title", gc_title);
 			session.setAttribute("gc_date", gc_date);
 			session.setAttribute("gc_startdate", gc_startdate);
-			session.setAttribute("gc_finaldate", gc_finaldate);
-			session.setAttribute("gc_type", gc_type);
-			session.setAttribute("gc_status", gc_status);			
+			session.setAttribute("gc_finaldate", gc_finaldate);		
 			}else {
 				if ((String)session.getAttribute("gc_title") == null && (String)session.getAttribute("gc_date") ==null &&
 					(String)session.getAttribute("gc_startdate") == null && (String)session.getAttribute("gc_finaldate") == null) {
@@ -181,8 +184,6 @@ public class groupCounselController {
 					session.setAttribute("gc_date", gc_date);
 					session.setAttribute("gc_startdate", gc_startdate);
 					session.setAttribute("gc_finaldate", gc_finaldate);
-					session.setAttribute("gc_type", gc_type);
-					session.setAttribute("gc_status", gc_status);	
 				}
 			}
 			
@@ -229,15 +230,45 @@ public class groupCounselController {
 	}
 	
 	@RequestMapping("/selapplication.do")
-	public String selapplication(Model model, HttpServletRequest request){
+	public String selapplication(Model model, HttpServletRequest request, group_CounselJoinVO vo){
 		String c_email = request.getParameter("c_email");
-		model.addAttribute("email",c_email);
+		vo.setC_email(c_email);
+		model.addAttribute("group", groupCounselDao.joinSelectList(vo));
 		return "counselor/counselappli";
 	}
+	
 	@RequestMapping("/seldetail.do")
 	public String seldetail(Model model, HttpServletRequest request) {
 		String c_email = request.getParameter("c_email");
 		model.addAttribute("email",c_email);
 		return "counselor/counseldetail";
+	}
+	
+	@RequestMapping("/selectFunc.do")
+	@ResponseBody
+	public group_CounselReserveVO selectFunc(Model model, HttpServletRequest request, group_CounselReserveVO vo) {
+		String gr_no = request.getParameter("gr_no");
+		group_CounselReserveVO gvo = groupCounselDao.selectgroupRserve(vo); 
+		return gvo;
+	}
+	
+	@RequestMapping("/deleteFuncForm.do")
+	@ResponseBody
+	public String deleteForm() {
+		return "성공";
+	}
+	
+	@RequestMapping("/deleteFunc.do")
+	@ResponseBody
+	public List<group_CounselJoinVO> deleteFunc(Model model,HttpServletRequest request,group_CounselReserveVO vo, group_CounselJoinVO jvo) {
+		String gr_no = request.getParameter("gr_no");
+		vo.setGr_no(gr_no);
+		groupCounselDao.GroupUserDelete(vo);
+		String c_email = request.getParameter("c_email");
+		jvo.setC_email(c_email);
+		List<group_CounselJoinVO> list = groupCounselDao.joinSelectList(jvo);
+		return list;
+		
+		
 	}
 }
