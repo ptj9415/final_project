@@ -18,7 +18,6 @@ public class Pagination {
 	private String gc_status;
 	private String gc_type;
 	
-	
 	public Pagination(int total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
