@@ -35,6 +35,21 @@
 <link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
 <!-- modal end -->
 <style>
+
+/* font 예시 */
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'InfinitySans-RegularA1';
+}
+
 .card-title {
 	padding-top: 20px;
 	font-weight: bold;
@@ -60,7 +75,25 @@ table {
 
 #submit-btn {
 	float: right;
+	font-size:3px;
+	margin-right: 3px;
+    
 }
+
+#updatesubmit-btn{
+	float: right;
+	font-size:3px;
+	margin-right: 3px;
+	background-color:#81a3c5;
+}
+
+#deletesubmit-btn{
+	float: right;
+	font-size:3px;
+	margin-right: 3px;
+	background-color:#eea7a0;
+}
+
 
 th#th-no {
 	width: 15px;
@@ -86,7 +119,10 @@ th#th-management {
 .row mb-2 {
 	float: right;
 }
-
+.col-sm-6{
+	max-width: 100%;
+    margin-top: 50px;
+}
 /*삭제버튼*/
 
 /*삭제버튼 end*/
@@ -179,7 +215,7 @@ th#th-management {
 					<h4 class="modal-title">Today Story</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true" >&times;</span>
+						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
@@ -242,15 +278,15 @@ th#th-management {
 				<div class="col-12">
 					<div class="card">
 						<div class="col-sm-6">
-							<!-- <h1>오늘의 한마디 주제</h1> -->
+							 	<h3 class="card-title">오늘의 한마디 주제 관리</h3>
 							<span type="button" class="btn btn-default" id="submit-btn"
-								style="float: right" data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
+								 data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
 							<span type="button" class="btn btn-default" id="submit-btn"
-								style="float: right" data-toggle="modal" data-target="#modal-lg">다중등록&nbsp;</span>
+								data-toggle="modal" data-target="#doublemodal-lg">다중등록(excel)&nbsp;</span>
 						</div>
 						<!-- 하얀색 바 표시 시작-->
 						<div class="card-header">
-							<h3 class="card-title">오늘의 한마디 주제 관리</h3>
+						
 
 						</div>
 						<!-- /.card-header -->
@@ -280,10 +316,10 @@ th#th-management {
 												class="btn btn-default" id="submit-btn" data-toggle="modal"
 												data-target="#updatemodal-lg">수정&nbsp;</span>  --> <span
 												type="button" style="font-size: 12px"
-												class="btn btn-default" id="submit-btn" data-toggle="modal"
+												class="btn btn-default" id="updatesubmit-btn" data-toggle="modal"
 												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정&nbsp;</span>
 												<span type="button" style="font-size: 12px"
-												class="btn btn-default" id="submit-btn"
+												class="btn btn-default" id="deletesubmit-btn"
 												onclick="deleteFnc('${adminTodayStoryList.sc_no}')">삭제</span>
 											</td>
 										</tr>
@@ -301,8 +337,8 @@ th#th-management {
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">Today Story</h4>
-											<button type="button" class="close" data-dismiss="modal"  id="area-hidden"
-												aria-label="Close">
+											<button type="button" class="close" data-dismiss="modal"
+												id="area-hidden" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
@@ -310,7 +346,7 @@ th#th-management {
 											<!-- general form elements -->
 											<div class="card card-primary">
 												<div class="card-header">
-													<h3 class="card-title">오늘의 한마디 수정</h3>
+													<h3 class="card-title">목록 조회 하기</h3>
 												</div>
 												<!-- /.card-header -->
 												<!-- form start -->
@@ -449,21 +485,7 @@ th#th-management {
 			});
 		});
 		
-		//모달 창 끄기 
-					/* const close = document.querySelector(".btn btn-default");
-					function init(){
-						
-						close.addEventListener("click",function(){
-							
-							 $("#updatemodal-lg").attr("class", "modal fade");
-						})
-						
-					}
-					init(); */
-					
-					
-					
-		
+	
 		//수정테스트
 		function updateFnc(sc_no) {
 			console.log('수정버튼');
