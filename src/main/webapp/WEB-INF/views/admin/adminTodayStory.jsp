@@ -346,7 +346,7 @@ th#th-management {
 											<!-- general form elements -->
 											<div class="card card-primary">
 												<div class="card-header">
-													<h3 class="card-title">오늘의 한마디 수정</h3>
+													<h3 class="card-title">목록 조회 하기</h3>
 												</div>
 												<!-- /.card-header -->
 												<!-- form start -->

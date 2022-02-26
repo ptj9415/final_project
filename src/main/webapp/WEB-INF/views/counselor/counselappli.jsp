@@ -1,10 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <!-- Toastr -->
+    <link rel="stylesheet" href="subHomeFile/plugins/toastr/toastr.min.css">
+
+<!-- modal -->
+
+
+<!-- SweetAlert2 -->
+<link rel="stylesheet"
+	href="subHomeFile/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet"
+	href="subHomeFile/dist/css/adminlte.min.css/plugins/toastr/toastr.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
+<!-- modal end -->
+<style>
+.card-title {
+	padding-top: 20px;
+	font-weight: bold;
+}
+
+.card {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table {
+	font-size: 14px;
+}
+
+#subject-height {
+	height: 100px;
+}
+
+.container-fluid {
+	margin-top: 30px;
+}
+
+#submit-btn {
+	float: right;
+}
+
+th#th-no {
+	width: 15px;
+}
+
+th#th-title {
+	/* background-color:gray; */
+	width: 300px;
+}
+
+th#th-subject {
+	width: 400px%;
+}
+
+th#th-numChange {
+	width: 20px;
+}
+
+th#th-management {
+	width: 200px;
+}
+
+.row mb-2 {
+	float: right;
+}
+
+/*삭제버튼*/
+
+/*삭제버튼 end*/
+/*paging*/
+
+/*paging end*/
+</style>    
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- Main content -->
@@ -24,21 +100,18 @@
                                     <input type="text" class="form-control form-control-lg" placeholder="Type your keywords here">
                                 </div>
                             </div>
-
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>이메일</label><br>
                                     <input type="text" class="form-control form-control-lg" placeholder="Type your keywords here">
                                 </div>
                             </div>
-
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>신청일</label><br>
-                                    <input type="date" class="form form-control-lg" placeholder="Type your keywords here">
+                                    <input type="date" placeholder="Type your keywords here">
                                 </div>
                             </div>
-
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>상태</label>
@@ -59,8 +132,7 @@
             </form>
         </div>
     </section>
-    
-    
+  	
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -71,7 +143,8 @@
           </div>
         </div><!-- /.container-fluid -->
       </section>
-      
+
+    
       <!-- Main content -->
       <section class="content"> <!-- 메인 컨텐츠-->
         <div class="container-fluid"> <!-- 메인 밑 메인 컨텐츠-->
@@ -86,44 +159,129 @@
                   <table class="table table-hover text-nowrap">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Reason</th>
+                        <th>닉네임</th>
+                        <th>이메일</th>
+                        <th>신청일</th>
+                        <th>상태</th>
+                        <th>신청내용</th>
+                        <th>관리</th>
                       </tr>
                     </thead>
                     <tbody>
+                     <c:forEach items="${group}" var="groups">
                       <tr>
-                        <td>183</td>
-                        <td>John Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-success">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                        <td>${groups.m_nickname}</td>
+                        <td>${groups.m_email}</td>
+                        <td>${groups.gr_reservedate}</td>
+                        <c:if test="${groups.gr_status eq '0'}">
+                        <td>신청완료</td>
+                        </c:if>
+                        <c:if test="${groups.gr_status eq '1'}">
+                        <td>취소</td>
+                        </c:if>
+						<td><span type="button" style="font-size: 12px" class="btn btn-default" id="submit-btn" data-toggle="modal"
+							onclick="selectSubject(${groups.gr_no})">조회</span></td>
+                        <td><span type="button" style="font-size: 12px" class="btn btn-default" id="submit-btn"
+							onclick="deleteFnc('${groups.gr_no}','${groups.c_email }')">취소</span></td>
                       </tr>
-                      <tr>
-                        <td>219</td>
-                        <td>Alexander Pierce</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-warning">Pending</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>657</td>
-                        <td>Bob Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-primary">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>175</td>
-                        <td>Mike Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-danger">Denied</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
+                     </c:forEach>
                     </tbody>
                   </table>
+                  
+                  	<!-- 조회 modal start -->
+							<div class="modal fade" id="updatemodal-lg" style="display: none">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">신청 내용 조회</h4>
+											<button type="button" class="close" data-dismiss="modal"  id="area-hidden"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<!-- general form elements -->
+											<div class="card card-primary">
+												<div class="card-header">
+													<h3 class="card-title">신청 내용 조회</h3>
+												</div>
+												<!-- /.card-header -->
+												<!-- form start -->
+													<div class="card-body">
+														<br>
+                  										<input id="editProjectName" name="editProjectName" type="text" class="form-control" style="width:600px; height:60px;" />
+							                              <br>
+							                              <br>
+							                              <br>
+							                              <br>
+							                              <br>
+							                              <br>
+							                              <br>
+							                              <br>
+													</div>
+											</div>
+											<!-- /.card -->
+										</div>
+										<div class="modal-footer justify-content-between">
+											<button type="button" class="btn btn-default" id="close-btn"
+												data-dismiss="modal">닫기</button>
+										</div>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!-- /.modal -->
+							<!-- modal contents end -->
+							<!-- form end -->
+							<!-- 수정 modal end -->
+					
+					<!-- 삭제 modal start -->
+							<div class="modal fade" id="deletemodal-lg" style="display: none">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">상담 취소 하기</h4>
+											<button type="button" class="close" data-dismiss="modal"  id="area-hidden"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<!-- general form elements -->
+											<div class="card card-primary">
+												<div class="card-header">
+													<h3 class="card-title">상담 취소 사유</h3>
+												</div>
+												<!-- /.card-header -->
+												<!-- form start -->
+												<form id="updateFrm" method="post">
+													<div class="card-body">
+														<div class="form-group">
+															<label for="exampleInputEmail1">상담 취소</label>
+															<textarea type="text" style="height: 100px"
+																class="form-control" id="gr_refund" name="gr_refund">
+															</textarea>
+														</div>
+													  </div>
+													</form>
+												</div>
+											</div>
+											<!-- /.card -->
+										</div>
+										<div class="modal-footer justify-content-between">
+											<button type="button" class="btn btn-default" id="close-btn"
+												data-dismiss="modal">닫기</button>
+										</div>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!-- /.modal -->
+							<!-- modal contents end -->
+							<!-- form end -->
+							<!-- 수정 modal end -->		
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -135,10 +293,64 @@
       </section>
       <!-- jQuery -->
 	  <script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
+	  <!-- Bootstrap 4 -->
+	  <script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
     $(function () {
       $('.select2').select2()
     });
+    
+    function selectSubject(gr_no){
+		$.ajax({
+			url : 'selectFunc.do',
+			data : { gr_no : gr_no},
+			dataType : "json",
+			success : function (data){
+				$("#updatemodal-lg").attr("class", "modal fade show");
+				$("#updatemodal-lg").attr("style", "display:block");
+				$("#editProjectName").val(data.gr_subject);
+			}
+			
+		});
+		document.getElementById('area-hidden').onclick = function(){
+			
+			 $("#updatemodal-lg").fadeOut();
+		} 
+		
+		document.getElementById('close-btn').onclick = function(){
+			
+			 $("#updatemodal-lg").fadeOut();
+		} 
+		
+    }
+    function deleteFnc(gr_no, c_email){
+    	if (confirm("정말 취소하시겠습니까?") == true) {
+    		$.ajax({
+    			url : 'deleteFunc.do',
+    			data : { gr_no : gr_no},
+    			dataType : "json",
+    			success : function (data){
+    				console.log(data);
+    				$("#deletemodal-lg").attr("class", "modal fade show");
+    				$("#deletemodal-lg").attr("style", "display:block");
+    			}
+    			
+    		});
+    		
+    		
+    		document.getElementById('area-hidden').onclick = function(){
+    			
+    			 $("#deletemodal-lg").fadeOut();
+    		} 
+    		
+    		document.getElementById('close-btn').onclick = function(){
+    			
+    			 $("#deletemodal-lg").fadeOut();
+    		} 
+    	}
+    }
+    
+    
 </script>
 </body>
 </html>

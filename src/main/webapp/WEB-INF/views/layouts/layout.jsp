@@ -144,9 +144,7 @@ box-sizing: border-box;
 				<tiles:insertAttribute name="body" />
 				<tiles:insertAttribute name="footer" />
 			</div>
-
 		</div>
-
 	</div>
 	 --%>
 	<div class='wrap'>

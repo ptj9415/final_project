@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.groupCounsel.service.GroupCounslerService;
 import co.maeumi.prj.groupCounsel.service.groupCounselMapper;
+import co.maeumi.prj.groupCounsel.service.group_CounselJoinVO;
+import co.maeumi.prj.groupCounsel.service.group_CounselReserveVO;
 import co.maeumi.prj.groupCounsel.service.group_CounselVO;
 import co.maeumi.prj.pagination.Pagination;
+import co.maeumi.prj.service.MemberVO;
 
 @Repository("groupCounselDao")
 public class groupCounselServiceImpl implements GroupCounslerService {
@@ -48,6 +52,23 @@ public class groupCounselServiceImpl implements GroupCounslerService {
 	public int searchcountGroupCounsel(Pagination page) {
 		// TODO Auto-generated method stub
 		return map.searchcountGroupCounsel(page);
+	}
+
+	@Override
+	public List<group_CounselJoinVO> joinSelectList(group_CounselJoinVO vo) {
+		return map.joinSelectList(vo);
+	}
+
+	@Override
+	public int GroupUserDelete(group_CounselReserveVO vo) {
+		// TODO Auto-generated method stub
+		return map.GroupUserDelete(vo);
+	}
+
+	@Override
+	public group_CounselReserveVO selectgroupRserve(group_CounselReserveVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectgroupRserve(vo);
 	}
 	
 }
