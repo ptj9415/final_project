@@ -26,21 +26,18 @@ public class AdminController {
 			,@ModelAttribute("search") Search svo
 			) throws Exception {
 		
-		//검색
+		
 		model.addAttribute("search", svo);
 		svo.setM_email(m_email);
 		svo.setM_nickname(m_nickname);
 		svo.setM_type(m_type);
-		svo.setM_phone(m_phone);
-		
-		// 전체 유저수를 얻어와 listCnt에 저장
+		svo.setM_phone(m_phone);		
+
 		int listCnt = memberDao.getMemberListCnt(svo);
 
-		//검색
 		svo.pageinfo(page, range, listCnt);
-		//페이징
+
 		model.addAttribute("pagination", svo);
-		//목록 보여주기
 		model.addAttribute("member", memberDao.memberSearchselect(svo));
 
 		return "admin/membermanage";
