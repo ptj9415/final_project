@@ -2,6 +2,8 @@ package co.maeumi.prj.service;
 
 import java.util.List;
 
+import co.maeumi.prj.pagination.Search;
+
 public interface MemberMapper {
 	List<MemberVO> memberSelectList();
 	MemberVO memberLogin(MemberVO mvo); 
@@ -15,4 +17,9 @@ public interface MemberMapper {
 	
 	MemberVO kakaoSelect(MemberVO mvo);  // 카카오 로그인 조회용 이메일과 가입유형으로 판단.
 	MemberVO naverSelect(MemberVO mvo);  // 네이버 로그인 조회용. 
+	
+	int getMemberListCnt(Search svo) throws Exception;
+	public List<MemberVO> memberSearchselect(Search svo) throws Exception;
+	
+
 }
