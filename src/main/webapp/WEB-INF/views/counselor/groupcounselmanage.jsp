@@ -126,7 +126,7 @@
                       </c:if>
                       <td>
                       <form id="frm" method="post" action="seldetail.do">
-                      <input type="hidden" name="c_email" id="c_email" value="${group.c_email}">
+                      <input type="hidden" name="gc_no" id="gc_no" value="${group.gc_no}">
                       <button type="submit" id="sel2" name="sel2" style="font-size: 12px" class="btn btn-default">조회</button>
                       </form>                      
                       </td>

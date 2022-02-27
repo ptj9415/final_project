@@ -142,11 +142,11 @@ public class groupCounselController {
 	         date = date.substring(0, 10);
 	         list.get(i).setGc_date(date);
 	         String date2 = list.get(i).getGc_startdate();
-	         date = date.substring(0, 10);
-	         list.get(i).setGc_date(date2);
+	         date2 = date.substring(0, 10);
+	         list.get(i).setGc_startdate(date2);
 	         String date3 = list.get(i).getGc_finaldate();
-	         date = date.substring(0, 10);
-	         list.get(i).setGc_date(date3);
+	         date3 = date.substring(0, 10);
+	         list.get(i).setGc_finaldate(date3);
 	         
 	    }
 		request.setAttribute("groupCounsel", list);
@@ -214,9 +214,11 @@ public class groupCounselController {
 		         String date = list.get(i).getGc_date();
 		         date = date.substring(0, 10);
 		         list.get(i).setGc_date(date);
+		         
 		         String date2 = list.get(i).getGc_startdate();
-		         date = date.substring(0, 10);
+		         date2 = date.substring(0, 10);
 		         list.get(i).setGc_date(date2);
+		         
 		         String date3 = list.get(i).getGc_finaldate();
 		         date = date.substring(0, 10);
 		         list.get(i).setGc_date(date3);
@@ -234,13 +236,31 @@ public class groupCounselController {
 		String c_email = request.getParameter("c_email");
 		vo.setC_email(c_email);
 		model.addAttribute("group", groupCounselDao.joinSelectList(vo));
+		model.addAttribute("email",c_email);
+		
 		return "counselor/counselappli";
 	}
 	
 	@RequestMapping("/seldetail.do")
-	public String seldetail(Model model, HttpServletRequest request) {
-		String c_email = request.getParameter("c_email");
-		model.addAttribute("email",c_email);
+	public String seldetail(Model model, HttpServletRequest request, group_CounselVO vo) {
+		String gc_no = request.getParameter("gc_no");
+		vo.setGc_no(gc_no);
+		group_CounselVO gvo =  groupCounselDao.selectDetailList(vo);
+		
+		String date = gvo.getGc_date();
+        date = date.substring(0, 10);
+        gvo.setGc_date(date);
+        
+        String date2 = gvo.getGc_startdate();
+        date2 = date.substring(0, 10);
+        gvo.setGc_startdate(date2);
+        
+        String date3 = gvo.getGc_date();
+        date3 = date3.substring(0, 10);
+        gvo.setGc_finaldate(date3);
+
+        model.addAttribute("detail",gvo);
+        
 		return "counselor/counseldetail";
 	}
 	
@@ -260,15 +280,62 @@ public class groupCounselController {
 	
 	@RequestMapping("/deleteFunc.do")
 	@ResponseBody
-	public List<group_CounselJoinVO> deleteFunc(Model model,HttpServletRequest request,group_CounselReserveVO vo, group_CounselJoinVO jvo) {
+	public String deleteFunc(Model model,HttpServletRequest request,group_CounselReserveVO vo, group_CounselJoinVO jvo) {
+		return "모달 성공";
+	}
+	
+	@RequestMapping("/upDateService.do")
+	public String upDateService(HttpServletRequest request,group_CounselReserveVO vo, group_CounselJoinVO jvo, Model model) {
 		String gr_no = request.getParameter("gr_no");
-		vo.setGr_no(gr_no);
-		groupCounselDao.GroupUserDelete(vo);
 		String c_email = request.getParameter("c_email");
+		String gr_refund = request.getParameter("gr_refund");
+		
+		vo.setGr_no(gr_no);
+		vo.setGr_refund(gr_refund);
+		groupCounselDao.GroupUserDelete(vo);
 		jvo.setC_email(c_email);
-		List<group_CounselJoinVO> list = groupCounselDao.joinSelectList(jvo);
-		return list;
 		
+		model.addAttribute("group", groupCounselDao.joinSelectList(jvo));
+		model.addAttribute("email",c_email);
 		
+		return "counselor/counselappli";
+	}
+	
+	@RequestMapping("/detailinsert.do")
+	public String detailinsert(Model model, HttpServletRequest request, group_CounselVO vo,HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=EUC-KR");
+		PrintWriter out = response.getWriter();
+		String gc_no = request.getParameter("gc_no");
+		String gc_report = request.getParameter("gc_report");
+		String gc_result = request.getParameter("gc_result");
+		if(gc_report == "" && gc_result == "") {
+			out.println("<script>alert('상담 결과 등록 실패'); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 결과 등록 성공'); </script>");
+			out.flush();
+		}
+			vo.setGc_no(gc_no);
+			group_CounselVO gvo =  groupCounselDao.selectDetailList(vo);
+	
+			String date = gvo.getGc_date();
+	        date = date.substring(0, 10);
+	        gvo.setGc_date(date);
+	        
+	        String date2 = gvo.getGc_startdate();
+	        date2 = date.substring(0, 10);
+	        gvo.setGc_startdate(date2);
+	        
+	        String date3 = gvo.getGc_date();
+	        date3 = date3.substring(0, 10);
+	        gvo.setGc_finaldate(date3);
+	
+	        model.addAttribute("detail", gvo);
+	        
+	        vo.setGc_report(gc_report);
+	        vo.setGc_result(gc_result);
+	        groupCounselDao.groupCounselResult(vo);
+        
+		return "counselor/counseldetail";
 	}
 }

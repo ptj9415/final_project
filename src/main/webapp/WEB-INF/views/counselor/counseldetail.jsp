@@ -34,11 +34,12 @@
         <section class="content">
             <div class="container-fluid">
             <br><br>
-               <h2 class="text-left display-5">개요</h2>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
+                            <br>
+                            <h2 class="text-left display-5">개요</h2>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -47,15 +48,15 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>Rendering</th><td>ffefefefefef</td>
-                                        <th>Browser</th><td>feffefefefef</td>
+                                        <th>모집일</th><td>${detail.gc_startdate}~${detail.gc_finaldate }</td>
+                                        <th>상담일</th><td>${detail.gc_date } : ${detail.gc_time }</td>
                                     </tr>
                                     <tr>
-                                        <th>Platform(s)</th><td>fefefeffff</td>
-                                        <th>Engine version</th><td>fefwefefewf</td>
+                                        <th>상담방식</th><td>${detail.gc_type }</td>
+                                        <th>상담비용</th><td>${detail.gc_price }원</td>
                                     </tr>
                                     <tr>
-                                        <th colspan="1">CSS grade</th><td colspan="3">efefewffef</td>
+                                        <th colspan="1">상담명</th><td colspan="3">${detail.gc_title}</td>
                                     </tr>
                                 </tbody>
                               </table>
@@ -71,38 +72,32 @@
     <section class="content">
         <div class="container-fluid">
          <br><br><br>
-            <h2 class="text-left display-5">검색</h2>
-            <form action="enhanced-results.html">
+            <form action="detailinsert.do">
                 <div class="row">
-                    <div class="col-md-12 offset-md-0">
+                    <div class="col-md-12">
                       <div class="card"> <!-- 하얀색 바 표시 시작-->
-                        <div class="card-header">  
                           <div class="row">
-                            <div class="col-6">        
+                             <div class="col-12">
+                             <br>
+                             <div class="card-header">  
+	                             <h2 class="text-left display-5">검색</h2>
+                        	</div>
+                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>상담카테고리</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="전체" style="width: 100%;">
-                                        <option>카카오톡</option>
-                                        <option>줌</option>
-                                    </select>
-                                </div>
-                             </div>
-
-                             <div class="col-12">        
-                                <div class="form-group">
+                                	<br>
                                     <label>상담내용</label>
-                                    <textarea style="height: 150px;" class="form-control form-control-lg" placeholder="Type your keywords here"></textarea>
+                                    <textarea style="height: 150px;" class="form-control form-control-lg" placeholder="Type your keywords here" id="gc_report" name="gc_report"></textarea>
                                 </div>
                              </div>
 
                             <div class="col-12">        
                                 <div class="form-group">
                                     <label>상담결과</label>
-                                    <textarea style="height: 150px;" class="form-control form-control-lg" placeholder="Type your keywords here"></textarea>
+                                    <textarea style="height: 150px;" class="form-control form-control-lg" placeholder="Type your keywords here" id="gc_result" name="gc_result"></textarea>
                                 </div>
                             </div>
-                                <button type="button" class="btn btn-lg btn-default">초기화</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button type="submit" class="btn btn-lg btn-default">검색&nbsp;<i class="fa fa-search"></i></button>
+                            	<input type="hidden" id="gc_no" name="gc_no" value="${detail.gc_no}">
+                                <button type="submit" class="btn btn-lg btn-default">등록</i></button>
                             </div>
                           </div>
                         </div>

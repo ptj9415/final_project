@@ -142,7 +142,7 @@ th#th-management {
             </div>
           </div>
         </div><!-- /.container-fluid -->
-      </section>
+     </section>
 
     
       <!-- Main content -->
@@ -209,15 +209,9 @@ th#th-management {
 												<!-- form start -->
 													<div class="card-body">
 														<br>
-                  										<input id="editProjectName" name="editProjectName" type="text" class="form-control" style="width:600px; height:60px;" />
-							                              <br>
-							                              <br>
-							                              <br>
-							                              <br>
-							                              <br>
-							                              <br>
-							                              <br>
-							                              <br>
+							                          <textarea type="text" style="height: 100px"
+															class="form-control" id="editProjectName" name="editProjectName">
+													  </textarea>
 													</div>
 											</div>
 											<!-- /.card -->
@@ -242,7 +236,7 @@ th#th-management {
 									<div class="modal-content">
 										<div class="modal-header">
 											<h4 class="modal-title">상담 취소 하기</h4>
-											<button type="button" class="close" data-dismiss="modal"  id="area-hidden"
+											<button type="button" class="close" data-dismiss="modal"  id="area-hidden1"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
@@ -262,16 +256,20 @@ th#th-management {
 															<textarea type="text" style="height: 100px"
 																class="form-control" id="gr_refund" name="gr_refund">
 															</textarea>
+															<input type="hidden" id="gr_no" name="gr_no">
+															<input type="hidden" id="c_email" name="c_email" value="${email}">
 														</div>
 													  </div>
 													</form>
 												</div>
 											</div>
 											<!-- /.card -->
-										</div>
-										<div class="modal-footer justify-content-between">
-											<button type="button" class="btn btn-default" id="close-btn"
-												data-dismiss="modal">닫기</button>
+											<div class="modal-footer justify-content-between">
+													<button type="button" class="btn btn-default" id="close-btn1"
+														data-dismiss="modal">닫기</button>
+													<button type="button" class="btn btn-primary"
+													id="updateSubmit" name="updateSubmit">삭제</button>
+											</div>
 										</div>
 									</div>
 									<!-- /.modal-content -->
@@ -279,9 +277,9 @@ th#th-management {
 								<!-- /.modal-dialog -->
 							</div>
 							<!-- /.modal -->
-							<!-- modal contents end -->
-							<!-- form end -->
-							<!-- 수정 modal end -->		
+					     <!-- modal contents end -->
+				     <!-- form end -->
+				<!-- 수정 modal end -->		
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -289,7 +287,7 @@ th#th-management {
             </div>
           </div>
           <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        <!-- /.container-fluid -->
       </section>
       <!-- jQuery -->
 	  <script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
@@ -303,7 +301,7 @@ th#th-management {
     function selectSubject(gr_no){
 		$.ajax({
 			url : 'selectFunc.do',
-			data : { gr_no : gr_no},
+			data : { gr_no : gr_no },
 			dataType : "json",
 			success : function (data){
 				$("#updatemodal-lg").attr("class", "modal fade show");
@@ -323,33 +321,39 @@ th#th-management {
 		} 
 		
     }
+    $(function(){
+    	$("#updateSubmit").click(function(){
+    		updateFrm.action="upDateService.do";
+    		updateFrm.submit();
+    		alert("수정이 완료되었습니다.");
+    		
+    	});
+    });
+    
     function deleteFnc(gr_no, c_email){
     	if (confirm("정말 취소하시겠습니까?") == true) {
     		$.ajax({
     			url : 'deleteFunc.do',
     			data : { gr_no : gr_no},
-    			dataType : "json",
+    			dataType : "text",
     			success : function (data){
-    				console.log(data);
     				$("#deletemodal-lg").attr("class", "modal fade show");
     				$("#deletemodal-lg").attr("style", "display:block");
+					$("#gr_no").val(gr_no);    				
     			}
     			
     		});
-    		
-    		
-    		document.getElementById('area-hidden').onclick = function(){
-    			
-    			 $("#deletemodal-lg").fadeOut();
-    		} 
-    		
-    		document.getElementById('close-btn').onclick = function(){
-    			
-    			 $("#deletemodal-lg").fadeOut();
-    		} 
     	}
     }
-    
+	document.getElementById('area-hidden1').onclick = function(){
+		
+		 $("#deletemodal-lg").fadeOut();
+	} 
+	
+	document.getElementById('close-btn1').onclick = function(){
+		
+		 $("#deletemodal-lg").fadeOut();
+	} 
     
 </script>
 </body>
