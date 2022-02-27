@@ -16,4 +16,6 @@ public interface groupCounselMapper {
 	
 	int GroupUserDelete(group_CounselReserveVO vo);
 	group_CounselReserveVO selectgroupRserve(group_CounselReserveVO vo);
+	group_CounselVO selectDetailList(group_CounselVO vo);
+	int groupCounselResult(group_CounselVO vo);
 }

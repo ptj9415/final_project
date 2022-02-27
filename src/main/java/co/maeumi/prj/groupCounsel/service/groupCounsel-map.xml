@@ -106,9 +106,9 @@
 		</select>
 		
 		<update id="GroupUserDelete" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselReserveVO">
-			update group_reserve
-			set  gr_status = 1
-			where gr_no = #{gr_no}
+				update group_reserve
+				set  gr_status = 1
+				where gr_no = #{gr_no}
 		</update>
 		
 		<select id="selectgroupRserve" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselReserveVO"
@@ -117,4 +117,18 @@
 				from group_reserve
 				where gr_no = #{gr_no}
 		</select>
+		
+		<select id="selectDetailList" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselVO"
+		resultType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+		  		select *
+		  		from group_counsel
+		  		where gc_no = #{gc_no}
+		</select>
+		
+		<update id="groupCounselResult" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+				update group_counsel
+				set gc_report = #{gc_report}, gc_result = #{gc_result}
+				where gc_no = #{gc_no};
+		</update>
+		
 </mapper>

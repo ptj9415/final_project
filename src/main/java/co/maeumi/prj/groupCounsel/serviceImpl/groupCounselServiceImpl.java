@@ -70,5 +70,17 @@ public class groupCounselServiceImpl implements GroupCounslerService {
 		// TODO Auto-generated method stub
 		return map.selectgroupRserve(vo);
 	}
+
+	@Override
+	public group_CounselVO selectDetailList(group_CounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectDetailList(vo);
+	}
+
+	@Override
+	public int groupCounselResult(group_CounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupCounselResult(vo);
+	}
 	
 }
