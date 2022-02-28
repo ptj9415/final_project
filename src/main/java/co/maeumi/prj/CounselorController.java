@@ -43,12 +43,6 @@ public class CounselorController {
 		return "counselor/groupcounselopen";
 	}
 
-
-	// 상담 관리 - 그룹상담 관리 화면
-	@RequestMapping("/groupcounselmanage.do")
-	public String groupcounselmanage(Model model) {
-		return "counselor/groupcounselmanage";
-	}
   
 	@RequestMapping("/counselormypage.do")
 	public String adminhome(Model model, CounselorVO cvo, HttpSession session) {

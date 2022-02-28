@@ -174,7 +174,6 @@ public class LoginController {
 		session.invalidate();
 		return "home/home";
 	}
-
 	@Autowired
 	private KakaoService ks;
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.notice.service.NoticeMapper">
+
+	<select id="noticeSelectList" resultType="co.maeumi.prj.notice.service.NoticeVO">
+		select * 
+		from notice	
+	</select>
+	
+	<select id="noticeSelect" resultType="co.maeumi.prj.notice.service.NoticeVO">
+		select * from notice 
+		where n_no = #{n_no}
+	</select>
+	
+	<insert id="noticeInsert" parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		<selectKey keyProperty="n_no" resultType="int" order="BEFORE">
+			select max(n_no)+1 from notice
+		</selectKey>
+		INSERT INTO 
+		NOTICE( N_NO, N_WRITEDATE, N_WRITER, N_TITLE, N_CONTENT, N_FILENAME, N_PFILENAME, N_CATEGORY)
+		VALUES(#{n_no} , #{n_writedate} , #{n_writer}, #{n_title}, #{n_content}, #{n_filename}, #{n_pfilename}, #{n_category} )
+	</insert>
+	
+	
+	<update id="noticeUpdate" parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		
+	</update>
+	
+	
+	<delete id="noticeDelete" parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		DELETE FROM NOTICE 
+		WHERE N_NO = #{n_no} 
+	</delete>
+
+
+
+
+
+
+</mapper>

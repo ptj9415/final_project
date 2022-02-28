@@ -45,6 +45,9 @@
          </beans:list>
       </beans:property>
    </beans:bean>
+   
+   <!-- ck에디터 파일 업로드 경로 -->
+   <resources location="/resources/ckeditor/" mapping="/ckeditor/**" />
 	
 	
 	<task:annotation-driven />    
