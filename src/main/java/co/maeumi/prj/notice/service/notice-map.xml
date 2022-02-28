@@ -24,17 +24,10 @@
 	
 	<update id="noticeUpdate" parameterType="co.maeumi.prj.notice.service.NoticeVO">
 		
-	</update>
-	
+	</update>	
 	
 	<delete id="noticeDelete" parameterType="co.maeumi.prj.notice.service.NoticeVO">
 		DELETE FROM NOTICE 
 		WHERE N_NO = #{n_no} 
 	</delete>
-
-
-
-
-
-
 </mapper>

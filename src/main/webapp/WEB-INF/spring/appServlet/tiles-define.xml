@@ -5,42 +5,41 @@
        
 <tiles-definitions>
  <!-- admin layout -->
- 	<definition name="Maeumi.admin" template="/WEB-INF/views/layouts/adminlayout.jsp">
+ 	<definition name="Maeumi.admin" template="/WEB-INF/views/layouts/adminLayout.jsp">
 	    <put-attribute name="atitle" value="Maeumi Admin" />
-	    <put-attribute name="aheader" value="/WEB-INF/views/layouts/adminheader.jsp"/>
-	    <put-attribute name="asidebar" value="/WEB-INF/views/layouts/adminsidebar.jsp" />
+	    <put-attribute name="aheader" value="/WEB-INF/views/layouts/adminHeader.jsp"/>
+	    <put-attribute name="asidebar" value="/WEB-INF/views/layouts/adminSidebar.jsp" />
 	    <put-attribute name="abody" value="" />
-	    <put-attribute name="afooter" value="/WEB-INF/views/layouts/adminfooter.jsp"/>
+	    <put-attribute name="afooter" value="/WEB-INF/views/layouts/adminFooter.jsp"/>
   	</definition>
   	
-   <definition name="admin/*" extends="Maeumi.admin">
-   		<put-attribute name="abody" value="/WEB-INF/views/admin/{1}.jsp"/>
+   <definition name="admin/*/*" extends="Maeumi.admin">
+   		<put-attribute name="abody" value="/WEB-INF/views/admin/{1}/{2}.jsp"/>
    </definition>
 
  <!-- counselor layout -->
- 	<definition name="Maeumi.counselor" template="/WEB-INF/views/layouts/adminlayout.jsp">
+ 	<definition name="Maeumi.counselor" template="/WEB-INF/views/layouts/adminLayout.jsp">
 	    <put-attribute name="atitle" value="Maeumi Admin" />
-	    <put-attribute name="aheader" value="/WEB-INF/views/layouts/adminheader.jsp"/>
-	    <put-attribute name="asidebar" value="/WEB-INF/views/layouts/adminsidebar.jsp" />
+	    <put-attribute name="aheader" value="/WEB-INF/views/layouts/adminHeader.jsp"/>
+	    <put-attribute name="asidebar" value="/WEB-INF/views/layouts/adminSidebar.jsp" />
 	    <put-attribute name="abody" value="" />
-	    <put-attribute name="afooter" value="/WEB-INF/views/layouts/adminfooter.jsp"/>
+	    <put-attribute name="afooter" value="/WEB-INF/views/layouts/adminFooter.jsp"/>
   	</definition>
   	
-   <definition name="counselor/*" extends="Maeumi.counselor">
-   		<put-attribute name="abody" value="/WEB-INF/views/counselor/{1}.jsp"/>
+   <definition name="counselor/*/*" extends="Maeumi.counselor">
+   		<put-attribute name="abody" value="/WEB-INF/views/counselor/{1}/{2}.jsp"/>
    </definition>
  
  <!-- user layout -->
-    <definition name="Maeumi.user" template="/WEB-INF/views/layouts/layout.jsp">
+    <definition name="Maeumi.user" template="/WEB-INF/views/layouts/userLayout.jsp">
 	    <put-attribute name="title" value="Maeumi" />
-	    <put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
-	    <put-attribute name="left" value="/WEB-INF/views/layouts/sidebar.jsp" />
+	    <put-attribute name="header" value="/WEB-INF/views/layouts/userHeader.jsp" />
 	    <put-attribute name="body" value="" />
-	    <put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/layouts/userFooter.jsp" />
   	</definition>
   
-   <definition name="*/*" extends="Maeumi.user">
-   		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+   <definition name="user/*/*" extends="Maeumi.user">
+   		<put-attribute name="body" value="/WEB-INF/views/user/{1}/{2}.jsp"/>
    </definition>
    
 </tiles-definitions>

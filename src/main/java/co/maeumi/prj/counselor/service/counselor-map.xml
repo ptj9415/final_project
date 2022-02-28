@@ -28,11 +28,13 @@
 		WHERE C_EMAIL
 		= #{c_email}
 	</select>
-	
-	<select id="counselorFindEmail" resultType="co.maeumi.prj.counselor.service.CounselorVO">
-		select c_email 
+
+	<select id="counselorFindEmail"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		select c_email
 		from counselor
-		where regexp_replace(c_phone, '[-]', '') = #{c_phone}
+		where regexp_replace(c_phone,
+		'[-]', '') = #{c_phone}
 	</select>
 
 	<insert id="counselorInsert"

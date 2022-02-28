@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.todaystory.service.TodaystoryMapper">
+
+	<select id="TodayStorySelectList" resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+		select * from short_comment
+		order by sc_no desc
+		
+	</select>
+
+
+	<select id="TodaySelect" resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+		SELECT * FROM
+		(SELECT * FROM short_comment order by dbms_random.value)
+		where rownum ='1'
+		
+	</select>
+	
+	<!-- admin select -->
+	<select id="AdminTodaySelect" resultType="co.maeumi.prj.todaystory.service.TodaystoryVO"> 
+	
+		select * from short_comment
+		where sc_no = #{sc_no}
+	</select>
+	<insert id="TodayInsert" parameterType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+		
+		<selectKey keyProperty="sc_no" resultType="String" order="BEFORE">
+			SELECT
+			NVL(MAX(TO_NUMBER(sc_no)), 0) + 1 FROM short_comment
+		</selectKey>
+		insert into short_comment (sc_no, sc_title, sc_subject)
+		values (#{sc_no}, #{sc_title},#{sc_subject})
+	</insert>
+	
+	
+	<update id="TodayUpdate" parameterType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+		update short_comment
+		set sc_title = #{sc_title}, sc_subject = #{sc_subject}
+		where sc_no = #{sc_no}
+	</update>
+	
+	<delete id="TodayDelete" parameterType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+			delete from short_comment
+			where sc_no = #{sc_no}
+	</delete>
+</mapper>
