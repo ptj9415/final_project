@@ -43,6 +43,18 @@
 			FROM GROUP_COUNSEL
 	</select>
 	
+	<select id="joinSelectList" resultType="co.maeumi.prj.groupCounsel.service.group_CounselJoinVO"
+	parameterType="co.maeumi.prj.groupCounsel.service.group_CounselJoinVO">
+			select m.m_nickname, m.m_email, r.gr_reservedate, r.gr_status, r.gr_subject, r.gr_no
+			from member m join group_reserve r
+			on(m.m_email = r.m_email)
+			join group_counsel c
+  			on(r.gc_no = c.gc_no)
+    		where c.c_email = #{c_email}
+    		ORDER BY r.gr_no DESC
+	
+	</select>
+	
 	<select id="countGroupCounsel" resultType="int">
 			SELECT COUNT(*)
 			FROM GROUP_COUNSEL
@@ -84,11 +96,39 @@
 					select count(*)
 					from group_counsel
 				<where>
-					<if test="gc_title != null">gc_title like '%'||#{gc_title}||'%'</if>
+					1=1
+					<if test="gc_title != null">and gc_title like '%'||#{gc_title}||'%'</if>
 					<if test="gc_startdate != null">and gc_startdate like '%'||#{gc_startdate}||'%'</if>
 					<if test="gc_finaldate != null">and gc_finaldate like '%'||#{gc_finaldate}||'%'</if>
 					<if test="gc_status != null">and gc_status like '%'||#{gc_status}||'%'</if>
-			        <if test="gc_type != null">gc_type like '%'||#{gc_type}||'%'</if>
+			        <if test="gc_type != null">and gc_type like '%'||#{gc_type}||'%'</if>
 				</where>
 		</select>
+		
+		<update id="GroupUserDelete" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselReserveVO">
+				update group_reserve
+				set  gr_status = 1
+				where gr_no = #{gr_no}
+		</update>
+		
+		<select id="selectgroupRserve" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselReserveVO"
+				resultType="co.maeumi.prj.groupCounsel.service.group_CounselReserveVO">
+				select gr_subject
+				from group_reserve
+				where gr_no = #{gr_no}
+		</select>
+		
+		<select id="selectDetailList" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselVO"
+		resultType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+		  		select *
+		  		from group_counsel
+		  		where gc_no = #{gc_no}
+		</select>
+		
+		<update id="groupCounselResult" parameterType="co.maeumi.prj.groupCounsel.service.group_CounselVO">
+				update group_counsel
+				set gc_report = #{gc_report}, gc_result = #{gc_result}
+				where gc_no = #{gc_no};
+		</update>
+		
 </mapper>

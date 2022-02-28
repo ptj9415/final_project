@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.pagination.Pagination;
+import co.maeumi.prj.pagination.Search;
 import co.maeumi.prj.service.MemberMapper;
 import co.maeumi.prj.service.MemberService;
 import co.maeumi.prj.service.MemberVO;
@@ -72,6 +74,18 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> findEmailList() {
 		// TODO Auto-generated method stub
 		return map.findEmailList();
+	}
+
+	@Override
+	public int getMemberListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getMemberListCnt(svo);
+	}
+
+	@Override
+	public List<MemberVO> memberSearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.memberSearchselect(svo);
 	}
 	
 }

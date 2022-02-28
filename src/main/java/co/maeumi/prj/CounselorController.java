@@ -1,3 +1,4 @@
+
 package co.maeumi.prj;
 
 import java.io.File;
@@ -8,7 +9,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -30,7 +30,7 @@ import co.maeumi.prj.counselor.service.CounselorVO;
 public class CounselorController {
 	@Autowired
 	private CounselorService counselorDao;
-
+	
 	// 상담 관리 - 개인상담 신청내역 화면
 	@RequestMapping("/personalcounsel.do")
 	public String personalcounsel(Model model) {
@@ -43,7 +43,6 @@ public class CounselorController {
 		return "counselor/groupcounselopen";
 	}
 
-  
 	@RequestMapping("/counselormypage.do")
 	public String adminhome(Model model, CounselorVO cvo, HttpSession session) {
 //			String c_email = (String)session.getAttribute("email");
@@ -291,16 +290,6 @@ public class CounselorController {
 
 			return "OK";
 		}
-
-	@RequestMapping("/groupcounselmanagedd.do")
-	public String groupcounselmanagedd() {
-		return "counselor/groupcounselmanagedd";
-	}
-
-	@RequestMapping("/groupcounselmanageddd.do")
-	public String groupcounselmanageddd() {
-		return "counselor/groupcounselmanageddd";
-	}
 	
 	@RequestMapping("/cTermsCheck.do")
 	public String cTermsCheck(Model model) {

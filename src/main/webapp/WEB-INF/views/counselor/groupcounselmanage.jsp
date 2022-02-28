@@ -14,7 +14,7 @@
           <br>
           <h1 class="text-left display-5">&nbsp;그룹 상담 관리</h1><br>
             <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2><br>
-            <form action="groupsearchmanage.do">
+            <form id="frm2" name="frm2" action="groupsearchmanage.do">
                 <div class="row">
                 <!-- 검색 기능 시작. -->
                     <div class="col-md-12 offset-md-0">
@@ -41,6 +41,7 @@
                                 <div class="form-group">
                                     <label>상담방식 : </label>
                                     <select name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
+                                        <option value="null">전체</option>
                                         <option value="카톡">카카오톡</option>
                                         <option value="줌">줌</option>
                                     </select>
@@ -49,14 +50,11 @@
                             <div class="col-6">        
                                 <div class="form-group">
                                     <label>상태 : </label>
-                                    <select name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
+                                    <select name="gc_status" data-placeholder="전체" style="height: 40px; width: 100%;">
+                                        <option value="null">전체</option>
                                         <option value="0">모집 중</option>
                                         <option value="1">상담 완료</option>
                                     </select>
-                                     <!-- <select class="select2" name="gc_type" data-placeholder="전체" style="height: 40px; width: 100%;">
-                                        <option value="0">모집 중</option>
-                                        <option value="1">상담 완료</option>
-                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-12">
@@ -81,7 +79,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>신청자목록</h1>
+            <h1>내 그룹 상담 목록</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -119,22 +117,27 @@
                       <td>${group.gc_title}</td>
                       <td>${group.gc_type }</td>
                       <td>${group.gc_person}/${group.gc_max_person }</td>
-                      <td><button>조회</button></td>
+                      <td><button id="sel1" name="sel1" onclick="location.href='selapplication.do?c_email=${group.c_email}'" style="font-size: 12px" class="btn btn-default">조회</button></td>
                       <c:if test="${group.gc_status eq 0 }">
                       <td>진행 중</td>
                       </c:if>
                       <c:if test="${group.gc_status eq 1 }">
                       <td>상담 완료</td>
                       </c:if>
-                      <td><button>조회</button></td>
+                      <td>
+                      <form id="frm" method="post" action="seldetail.do">
+                      <input type="hidden" name="gc_no" id="gc_no" value="${group.gc_no}">
+                      <button type="submit" id="sel2" name="sel2" style="font-size: 12px" class="btn btn-default">조회</button>
+                      </form>                      
+                      </td>
                     </tr>
                     </c:forEach>
                   </tbody>
                 </table>
                 <br>
                 <!-- 페이지 네이션 -->
-                <c:if test="${gc_type == null and gc_date == null and gc_startdate == null and gc_finaldate == null and gc_title == null and gc_status == null}">
-		        <nav aria-label="...">
+                <c:if test="${gc_title == null}">
+		       <nav aria-label="...">
 				  <ul class="pagination">
 				    <li class="page-item">
 				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
@@ -153,7 +156,7 @@
 				  </ul>
 				</nav>
 				</c:if>
-				<c:if test="${gc_type != null or gc_date != null or gc_startdate != null or gc_finaldate != null or gc_title != null or gc_status != null}">
+				<%-- <c:if test="${gc_date != null or gc_startdate != null or gc_finaldate != null or gc_title != null}">
 		        <nav aria-label="...">
 				  <ul class="pagination">
 				    <li class="page-item">
@@ -172,7 +175,7 @@
 				    </li>
 				  </ul>
 				</nav>
-				</c:if>
+				</c:if> --%>
 				<!-- 페이지 네이션 끝 -->
 				<!-- 검색 및 페이징 끝. -->		
               </div>

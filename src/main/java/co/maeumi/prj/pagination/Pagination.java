@@ -1,5 +1,10 @@
 package co.maeumi.prj.pagination;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Pagination {
 
 
@@ -12,7 +17,6 @@ public class Pagination {
 	private String gc_title;
 	private String gc_status;
 	private String gc_type;
-	
 	
 	public Pagination(int total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);

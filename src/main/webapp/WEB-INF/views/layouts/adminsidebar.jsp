@@ -44,11 +44,11 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="groupcounselmanagedd.do"
+						<li class="nav-item"><a href="selapplication.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리-신청자목록(임시)</p>
 						</a></li>
-						<li class="nav-item"><a href="groupcounselmanageddd.do"
+						<li class="nav-item"><a href="seldetail.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>그룹상담 관리-그룹상담 상세 조회(임시)</p>
 						</a></li>
@@ -64,7 +64,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="../forms/general.html"
+						<li class="nav-item"><a href="membermanage.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>일반회원 관리</p>
 						</a></li>
@@ -84,11 +84,12 @@
 							class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 								<p>오늘의 한마디 관리</p>
 						</a></li>
+
 						<li class="nav-item"><a href="noticeMain.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>공지사항 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="../tables/data.html"
+						<li class="nav-item"><a href="boardList.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>자유게시판 관리</p>
 						</a></li>
@@ -108,7 +109,7 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>공지사항 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="../mailbox/compose.html"
+						<li class="nav-item"><a href="faqList.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>FAQ 관리</p>
 						</a></li>
