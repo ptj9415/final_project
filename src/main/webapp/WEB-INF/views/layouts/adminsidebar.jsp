@@ -84,6 +84,11 @@
 							class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 								<p>오늘의 한마디 관리</p>
 						</a></li>
+
+						<li class="nav-item"><a href="noticeMain.do"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>공지사항 관리</p>
+						</a></li>
 						<li class="nav-item"><a href="boardList.do"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>자유게시판 관리</p>
