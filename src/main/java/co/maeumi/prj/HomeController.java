@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.maeumi.prj.admin.board.service.boardService;
+import co.maeumi.prj.admin.board.service.boardVO;
+import co.maeumi.prj.admin.faq.service.FaqService;
+import co.maeumi.prj.admin.faq.service.FaqVO;
 import co.maeumi.prj.service.MemberService;
 import co.maeumi.prj.today.service.TodayService;
 import co.maeumi.prj.today.service.TodayVO;
@@ -27,6 +31,14 @@ public class HomeController {
 	private TodayService todayDao;
 	@Autowired
 	private TodayReplyService todayReplyDao;
+	
+	// F&Q
+	@Autowired
+	private FaqService faqDao;
+	
+	// 자유게시판
+	@Autowired
+	private boardService boardDao;
 
 	@RequestMapping(value = "/homes.do", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -124,4 +136,35 @@ public class HomeController {
 			return "redirect:adminTodayStory.do";
 			
 		}
+		
+		// ❤ ❤ 은 솔 ❤ ❤
+		
+		// FAQ 목록
+		@RequestMapping("/faq.do")
+		public String faq(FaqVO vo, Model model) {
+			List<FaqVO> list = faqDao.faqSelectList();
+			model.addAttribute("faqs",list);
+			return "user/faq/faq";
+		}
+		
+		// 자유게시판 목록
+		@RequestMapping("/userBoardList.do")
+		public String board(boardVO vo, Model model, HttpSession session) {
+			vo.setB_subject((String)session.getAttribute("subject"));
+			List<boardVO> list = boardDao.boardSelectList();
+			
+			for(int i = 0; i < list.size(); i++) {
+				String date = list.get(i).getB_wdate();
+				date = date.substring(0,10);
+				list.get(i).setB_wdate(date);
+			}
+				model.addAttribute("board", list);
+				return "user/board/userBoardList";
+		}
+		
+		
+		// 자유게시판 글 작성
+		
+		
+		
 }
