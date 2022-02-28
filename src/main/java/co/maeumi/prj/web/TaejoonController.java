@@ -243,6 +243,7 @@ public class TaejoonController {
 
 	/* ===== 관리자 화면 ===== */
 
+	// 관리자 - 일반회원 관리 메인화면
 	@RequestMapping(value = "adminMemberList.do")
 	public String adminMemberList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
