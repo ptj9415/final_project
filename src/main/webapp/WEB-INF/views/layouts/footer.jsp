@@ -37,7 +37,7 @@
 						<h2 class="ftco-heading-2">고객센터</h2>
 						<ul class="list-unstyled">
 							<li><a href="#">공지사항</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="faq.do">FAQ</a></li>
 							<li><a href="#">1:1 문의</a></li>
 
 
