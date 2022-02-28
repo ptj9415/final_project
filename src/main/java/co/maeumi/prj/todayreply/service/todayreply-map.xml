@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.todayreply.service.TodayreplyMapper">
+	
+	<select id="readTodayReply" resultType="co.maeumi.prj.todayreply.service.TodayreplyVO">
+		SELECT * FROM sc_reply
+		WHERE sc_no = #{sc_no} 		
+	</select>	
+	
+	<delete id="todayReplyDelete" parameterType="co.maeumi.prj.todayreply.service.TodayreplyVO">
+		delete from sc_reply
+		where sr_no = #{sr_no}
+	</delete>
+	
+	<insert id="todayReplyInsert" parameterType="co.maeumi.prj.todayreply.service.TodayreplyVO">
+		<selectKey keyProperty="sr_no" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(TO_NUMBER(sr_no)), 0) + 1 FROM sc_reply
+		</selectKey>
+		INSERT INTO sc_reply
+		VALUES (#{sr_no}, #{sc_subject}, #{sc_no}, #{sr_writer})
+	</insert>	
+</mapper>
