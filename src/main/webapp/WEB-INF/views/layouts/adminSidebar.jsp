@@ -88,7 +88,7 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>자유게시판 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="admintherapy.do" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>심리테라피 관리</p>
 						</a></li>

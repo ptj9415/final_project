@@ -27,6 +27,8 @@ import com.google.gson.JsonObject;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.therapy.service.TherapyService;
+import co.maeumi.prj.therapy.service.TherapyVO;
 
 @Controller
 public class YoungohController {
@@ -34,6 +36,9 @@ public class YoungohController {
 	
 	@Autowired
 	private GroupcounselService groupCounselDao;
+	
+	@Autowired
+	private TherapyService therapyDao;
 	
 	Pagination page;
 	
@@ -357,4 +362,21 @@ public class YoungohController {
 		return "admin/adminhome/adminHome";
 	}	
 
+	@RequestMapping("/admintherapy.do")
+	public String admintherapy(Model model) {
+		List<TherapyVO> list = therapyDao.therapyList();
+		model.addAttribute("therapy", list);
+		return "admin/therapy/therapyList";
+	}
+	@RequestMapping("/therapyInsert.do")
+	public String therapy() {
+		
+		return "admin/therapy/therapyInsert";
+	}
+	
+	@RequestMapping("/therapyInsert.do")
+	public String therapyInsert() {
+		
+		return "admin/therapy/therapyList";
+	}
 }
