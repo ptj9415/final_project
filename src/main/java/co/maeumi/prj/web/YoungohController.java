@@ -132,9 +132,9 @@ public class YoungohController {
 		public String counselorGroupList(Model model, HttpServletRequest request) {
 			String nowPage = request.getParameter("nowPage");
 			if (nowPage==null) {
-				page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 2); //전체 수, start, end
+				page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 5); //전체 수, start, end
 			}else {
-				page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 2); //전체 수, start, end
+				page = new Pagination(groupCounselDao.countGroupCounsel(), Integer.parseInt(nowPage), 5); //전체 수, start, end
 			}
 			
 			// 리스트 타입 담아주기

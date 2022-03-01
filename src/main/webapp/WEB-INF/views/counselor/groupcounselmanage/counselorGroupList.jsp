@@ -140,18 +140,18 @@
 		       <nav aria-label="...">
 				  <ul class="pagination">
 				    <li class="page-item">
-				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+				      <a class="page-link" href="counselorGroupList.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
 				    </li>
 				    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
 						<c:if test="${status.count ne page.nowPage}">
-				    		<li class="page-item"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}</a></li>
+				    		<li class="page-item"><a class="page-link" href="counselorGroupList.do?nowPage=${status.count}">${status.count}</a></li>
 				   		</c:if>
 				   		<c:if test="${status.count eq page.nowPage}">
-							<li class="page-item active"><a class="page-link" href="groupcounselmanage.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+							<li class="page-item active"><a class="page-link" href="counselorGroupList.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
 				   		</c:if>
 				    </c:forEach>
 				    <li class="page-item">
-				      <a class="page-link" href="groupcounselmanage.do?nowPage=${page.next}">Next</a>
+				      <a class="page-link" href="counselorGroupList.do?nowPage=${page.next}">Next</a>
 				    </li>
 				  </ul>
 				</nav>
