@@ -39,6 +39,12 @@ public class EjuController {
 		return "user/personalcounsel/userPersonalCounsel";
 	}
 	
+	//개인상담 신청 확인내역 
+	@RequestMapping("/personalCounselApplication.do")
+	public String personalCounselApplication() {
+		return "user/personalcounsel/personalCounselApplication";
+	}
+	
 	// 오늘의 한마디 메인화면 
 	@RequestMapping("/userTodayStory.do")
 	public String userTodayStory(Model model, TodaystoryVO vo, HttpSession session) throws Exception {
@@ -55,6 +61,12 @@ public class EjuController {
 		return "user/todaystory/userTodayStory";
 	}
 
+	// 오늘의 한마디 댓글 등록
+	@RequestMapping("/todayReplyInsert.do")
+	public String todayReplyInsert(TodayreplyVO vo, Model model, HttpServletRequest request) {
+		model.addAttribute("todayReplyInsertForm", todayReplyDao.todayReplyInsert(vo));
+		return "redirect:user/todaystory/userTodayStory";
+	}
 	// 오늘의 한마디 user 댓글 삭제
 	@RequestMapping("/todayReplyDelete.do")
 	@ResponseBody
