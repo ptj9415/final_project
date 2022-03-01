@@ -163,6 +163,18 @@ table {
 	<!-- 댓글 end -->
 
 <script>
+	//댓글 등록
+	$(function() {
+			$("#submit").click(function() {
+				frm.action = "todayReplyInsert.do";
+				frm.submit();
+
+			});
+
+		});
+	
+	
+	//댓글 삭제
 	function replyDelete(sr_no) {
 		console.log(sr_no);
 		$.ajax({

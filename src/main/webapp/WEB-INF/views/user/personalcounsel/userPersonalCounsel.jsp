@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+<link href='https://fonts.googleapis.com/css?family=Lato'
+	rel='stylesheet' type='text/css'>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
@@ -89,9 +90,11 @@ body {
 
 .steps input, .steps textarea {
 	outline: none;
-	display: block;
-	width: 100%;
+	display: inline-block;
+	width: 33%;
 	margin: 0 0 20px;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 10px 15px;
 	border: 1px solid #d9d9d9;
 	-webkit-border-radius: 3px;
@@ -111,6 +114,7 @@ body {
 	-ms-transition: all 0.3s linear 0s;
 	-o-transition: all 0.3s linear 0s;
 	transition: all 0.3s linear 0s;
+	padding: 10px 15px;
 }
 
 .steps input:focus, .steps textarea:focus {
@@ -522,80 +526,294 @@ body {
 }
 
 /*arccordion start*/
-@import
-	url("https://fonts.googleapis.com/css?family=Poppins:400,400i,700");
+@charset "UTF-8";
 
-*, *::after, *::before {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-div.c {
+.card-accordion {
 	position: relative;
-	margin: 2em;
-}
-
-.faq-1 {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	opacity: 0;
-	visibility: 0;
-}
-
-.categoryTitle {
-	background: steelblue;
-	color: white;
-	padding: 1em;
-	position: relative;
-	border-radius: 50px;
-}
-
-.categoryLabel::before {
-	content: "";
-	display: inline-block;
-	border: 15px solid transparent;
-	border-left: 20px solid white;
-}
-
-.categoryLabel {
-	cursor: pointer;
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
-div.p {
-	max-height: 0px;
 	overflow: hidden;
-	transition: max-height 0.5s;
-	background-color: white;
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	border: 1px solid #468FB6;
+	border-radius: 8px;
+	transition: 0.20s ease-in-out;
+	margin: 15px;
+	color: #4f4f4f;
+	border-radius: 30px;
 }
 
-div.p p {
-	padding: 2em;
+.card-accordion:hover {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-.faq-1:checked ~ h1 label::before {
-	border-left: 15px solid transparent;
-	border-top: 20px solid white;
-	margin-top: 12px;
-	margin-right: 10px;
+.card-accordion .card-accordion-checkbox {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
 }
 
-.faq-1:checked ~ h1 ~ div.p {
-	max-height: 100px;
+.card-accordion .card-accordion-label {
+	display: block;
+	padding: 20px 30px;
+	color: #468FB6;
+	position: relative;
+	cursor: pointer;
 }
 
-a {
-	color: steelblue;
+.card-accordion .card-accordion-label::after {
+	content: "";
+	font-family: FontAwesome;
+	font-size: 0.75rem;
+	position: absolute;
+	top: 28px;
+	right: 30px;
+	color: #468FB6;
+	transition: 0.30s ease-in-out;
+	transform-origin: center center;
+}
+
+.card-accordion .card-accordion-content {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: 0.4s;
+}
+
+.card-accordion .card-accordion-content .card-accordion-content-inner {
+	padding: 0px 40px 40px 40px;
+}
+
+.card-accordion input:checked ~ .card-accordion-content {
+	max-height: 20em;
+	opacity: 1;
+	padding-left: 30px;
+	padding-bottom: 20px;
+	padding-top: 20px
+}
+
+.card-accordion input:checked ~ .card-accordion-label::after {
+	transform: rotate(45deg);
+}
+
+.mini-p {
+	font-size: 0.8em;
+}
+
+.text-field {
+	width: 50%;
+	height: 100px;
+	border: 1px solid lightgray;
+	margin-top: 20px;
 }
 
 /*arccordion end*/
+
+/*step 2*/
+input.type-btn {
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100px;
+	height: 50px;
+}
+
+div.counsel-type {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*step 2 end*/
+
+/*step calendar*/
+#calendar {
+	margin-left: auto;
+	margin-right: auto;
+	width: 320px;
+	font-family: 'Lato', sans-serif;
+}
+
+#calendar_weekdays div {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#calendar_content, #calendar_weekdays, #calendar_header {
+	position: relative;
+	width: 320px;
+	overflow: hidden;
+	float: left;
+	z-index: 10;
+}
+
+#calendar_weekdays div, #calendar_content div {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	text-align: center;
+	background-color: #FFFFFF;
+	color: #787878;
+}
+
+#calendar_content {
+	-webkit-border-radius: 0px 0px 12px 12px;
+	-moz-border-radius: 0px 0px 12px 12px;
+	border-radius: 0px 0px 12px 12px;
+}
+
+#calendar_content div {
+	float: left;
+}
+
+#calendar_content div:hover {
+	background-color: #F8F8F8;
+}
+
+#calendar_content div.blank {
+	background-color: #E8E8E8;
+}
+
+#calendar_header, #calendar_content div.today {
+	zoom: 1;
+	filter: alpha(opacity = 70);
+	opacity: 0.7;
+}
+
+#calendar_content div.today {
+	color: #FFFFFF;
+}
+
+#calendar_header {
+	width: 100%;
+	height: 37px;
+	text-align: center;
+	background-color: #FF6860;
+	padding: 18px 0;
+	-webkit-border-radius: 12px 12px 0px 0px;
+	-moz-border-radius: 12px 12px 0px 0px;
+	border-radius: 12px 12px 0px 0px;
+}
+
+#calendar_header h1 {
+	font-size: 1.5em;
+	color: #FFFFFF;
+	float: left;
+	width: 70%;
+}
+
+i[class^=icon-chevron] {
+	color: #FFFFFF;
+	float: left;
+	width: 15%;
+	border-radius: 50%;
+}
+/*step calendar end*/
+/* #Universal and Default Styles button start
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	background: #fff;
+	color: #333;
+	font-family: 'Barlow', sans-serif;
+	font-size: 1.4rem;
+	font-weight: 400;
+	letter-spacing: 0.05rem;
+	line-height: 1;
+	margin: 0;
+}
+
+.drawer__btn__wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2rem;
+	max-width: 44rem;
+}
+
+.drawer__btn__container {
+	display: flex;
+	/* flex-wrap: wrap; */
+	margin-left: -2rem;
+	margin-top: -2rem;
+	margin-bottom: 0.3rem;
+}
+
+.drawer__btn {
+	flex-basis: 50%;
+	max-width: 50%;
+	padding-left: .03rem;
+	padding-top: 2rem;
+}
+
+.drawer__btn span {
+	cursor: pointer;
+	display: block;
+	font-size: 1.6rem;
+	font-weight: 600;
+	padding: 1.5rem 1rem;
+	text-align: center;
+	transition: 0.25s ease;
+	width: 100px !important;
+	font-weight: bold;
+	border: 0 none;
+	border-radius: 4px;
+	cursor: pointer;
+	-webkit-transition: all 0.3s linear 0s;
+	-moz-transition: all 0.3s linear 0s;
+	-ms-transition: all 0.3s linear 0s;
+	-o-transition: all 0.3s linear 0s;
+	transition: all 0.3s linear 0s;
+	display: block;
+	border: 1px solid #468FB6;
+	color: #468FB6;
+	background-color: white;
+}
+
+.drawer__btn span:hover {
+	background: #468FB6;
+	color: white;
+}
+
+.drawer__container {
+	background: #fff;
+	height: 100%;
+	padding: 2rem;
+	position: fixed;
+	/* right: -32rem; */
+	top: 0;
+	transition: 0.15s ease-in;
+	width: 32rem;
+}
+
+.drawer__active {
+	right: 0;
+}
+
+.drawer__overlay {
+	background: rgba(0, 0, 0, 0.75);
+	display: none;
+	position: fixed;
+	height: 100%;
+	top: 0;
+	width: 100%;
+}
+
+.drawer__close__btn {
+	color: white;
+	cursor: pointer;
+	display: none;
+	position: absolute;
+	right: 34rem;
+	text-align: center;
+	top: 1rem;
+}
+
+.drawer__close__btn .fa-times {
+	font-size: 3rem;
+	width: 100%;
+}
 </style>
 </head>
 <body>
@@ -637,56 +855,79 @@ a {
 
 	<!-- Modal -info -->
 
-	<form class="steps" accept-charset="UTF-8"
+	<form id="frm" class="steps" accept-charset="UTF-8"
 		enctype="multipart/form-data" novalidate="">
 		<ul id="progressbar">
 			<li class="active">상담 키워드 선택</li>
-			<li>Aquisition</li>
-			<li>Cultivation</li>
-			<li>Cultivation2</li>
-			<li>Retention</li>
+			<li>상담방법 선택</li>
+			<li>상담사 선택</li>
+			<li>상담날짜 선택</li>
+			<li>상담시간 선택</li>
+
 		</ul>
 
 
 
-		<!-- USER INFORMATION FIELD SET -->
+		<!-- step 1 FIELD SET -->
 		<fieldset>
 			<h2 class="fs-title">상담 키워드 선택</h2>
 			<h3 class="fs-subtitle">상담 받을 고민 키워드를 선택하세요</h3>
 			<!-- Begin What's Your First Name Field -->
-			<div class="c">
-				<input type="checkbox" id="faq-1" class="faq-1">
-				<h1 class="categoryTitle">
-					<label for="faq-1" class="categoryLabel">What Is This ?</label>
-				</h1>
-				<div class="p">
-					<p>This a very very simple accordion.</p>
+
+			<link
+				href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+				rel="stylesheet">
+			<div class="card-accordion">
+				<input id="card-1" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-1">분노/우울</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="1"
+						onclick="doOpenCheck(this);"> 우울 불안</label><br> <label><input
+						name="onecheck" type="checkbox" value="2"
+						onclick="doOpenCheck(this);"> 분노</label><br> <label><input
+						name="onecheck" type="checkbox" value="3"
+						onclick="doOpenCheck(this);"> 무기력 자존감상실</label><br> <label><input
+						name="onecheck" type="checkbox" value="4"
+						onclick="doOpenCheck(this);"> 자살</label>
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 				</div>
 			</div>
-			<div class="c">
-				<input type="checkbox" id="faq-2" class="faq-1">
-				<h1 class="categoryTitle">
-					<label for="faq-2" class="categoryLabel">With Pure Css ?</label>
-				</h1>
-				<div class="p">
-					<p>Yes with pure CSS and HTML.</p>
+			<div class="card-accordion">
+				<input id="card-2" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-2">사랑/우정</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="5"
+						onclick="doOpenCheck(this);"> 연인</label><br> <label><input
+						name="onecheck" type="checkbox" value="6"
+						onclick="doOpenCheck(this);"> 데이트폭력</label><br> <label><input
+						name="onecheck" type="checkbox" value="7"
+						onclick="doOpenCheck(this);"> 친구관계</label><br> <label><input
+						name="onecheck" type="checkbox" value="8"
+						onclick="doOpenCheck(this);"> 부부</label><br> <label><input
+						name="onecheck" type="checkbox" onclick="doOpenCheck(this);">
+						<input name="onecheck" class="text-field" type="text"
+						placeholder="직접입력.."> </label>
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+
 				</div>
 			</div>
-			<div class="c">
-				<input type="checkbox" id="faq-3" class="faq-1">
-				<h1 class="categoryTitle">
-					<label for="faq-3" class="categoryLabel">Where did you get
-						inpiration ?</label>
-				</h1>
-				<div class="p">
-					<p>
-						I was inpired by an article on css-tricks. <a
-							href="https://css-tricks.com/the-checkbox-hack/">link to
-							article</a>
-					</p>
+			<div class="card-accordion">
+				<input id="card-3" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-3">진로/취업</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="9"
+						onclick="doOpenCheck(this);"> 진로</label><br> <label><input
+						name="onecheck" type="checkbox" value="10"
+						onclick="doOpenCheck(this);"> 취업준비</label><br> <label><input
+						name="onecheck" type="checkbox" value="11"
+						onclick="doOpenCheck(this);"> 동료관계</label><br>
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+
 				</div>
 			</div>
-			<div class="hs_firstname field hs-form-field">
+
+
+			<!-- <div class="hs_firstname field hs-form-field">
 
 				<label for="firstname-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">What's
 					your First Name? *</label> <input
@@ -697,11 +938,11 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 			<!-- End What's Your First Name Field -->
 
 			<!-- Begin What's Your Email Field -->
-			<div class="hs_email field hs-form-field">
+			<!-- <div class="hs_email field hs-form-field">
 
 				<label for="email-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">What's
 					your E-mail Address? *</label> <input
@@ -712,11 +953,11 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 			<!-- End What's Your Email Field -->
 
 			<!-- Begin Total Number of Constituents in Your Database Field -->
-			<div
+			<!-- <div
 				class="hs_email field hs-form-field hs_total_number_of_constituents_in_your_database">
 
 				<label
@@ -731,26 +972,29 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 
 			<!-- End Total Number of Constituents in Your Database Field -->
 			<input type="button" data-page="1" name="next"
 				class="next action-button" value="Next" />
 			<div class="explanation btn btn-small modal-trigger">
 				<!-- 	//data-modal-id="modal-3" -->
-				<i class="question-log fa fa-question-circle"></i> M A E U M I
+				M A E U M I
 			</div>
 		</fieldset>
 
 
 
-		<!-- ACQUISITION FIELD SET -->
+		<!-- STEP 2 FIELD SET -->
 		<fieldset>
-			<h2 class="fs-title">Acquisition of Donors</h2>
-			<h3 class="fs-subtitle">How have you been doing in acquiring
-				donors?</h3>
+			<h2 class="fs-title">상담사 선택</h2>
+			<h3 class="fs-subtitle">선택한 카테고리의 전문분야이신 상담사들중에 나와 맞는 상담사를
+				찾아보세요.</h3>
+
+
+
 			<!-- Begin Total Number of Donors in Year 1 Field -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_1 field hs-form-field"
 				id="webform-component-acquisition--amount-1">
 
@@ -765,11 +1009,11 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 			<!-- End Total Number of Donors in Year 1 Field -->
 
 			<!-- Begin Total Number of Donors in Year 2 Field -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield hs_total_number_of_donors_in_year_2 field hs-form-field"
 				id="webform-component-acquisition--amount-2">
 
@@ -784,12 +1028,12 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 			<!-- End Total Number of Donors in Year 2 Field -->
 
 			<!-- Begin Calc of Total Number of Donors Fields -->
 			<!-- THIS FIELD IS NOT EDITABLE | GRAYED OUT -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield webform-container-inline hs_total_donor_percent_change field hs-form-field">
 
 				<label
@@ -799,25 +1043,35 @@ a {
 					class="form-text hs-input" name="total_donor_percent_change"
 					readonly="readonly" size="60" maxlength="128" type="text" value=""
 					placeholder="0">
-			</div>
+			</div> -->
 			<!-- End Calc of Total Number of Donors Fields -->
 			<input type="button" data-page="2" name="previous"
 				class="previous action-button" value="Previous" /> <input
 				type="button" data-page="2" name="next" class="next action-button"
 				value="Next" />
 			<div class="explanation btn btn-small modal-trigger"
-				data-modal-id="modal-3">What Is This?</div>
+				data-modal-id="modal-3">M A E U M I</div>
 		</fieldset>
 
 
 
-		<!-- Cultivation FIELD SET -->
+		<!-- step3 FIELD SET -->
 		<fieldset>
-			<h2 class="fs-title">Cultivation and Nurturing your Donors</h2>
-			<h3 class="fs-subtitle">How have you been nurturing donors to
-				get better donations?</h3>
+			<h2 class="fs-title">상담방법 선택</h2>
+			<h3 class="fs-subtitle">나에게 맞는 상담 방법을 선택해보세요</h3>
+
+
+			<div class="counsel-type">
+				<span><img class="type-btn" style="width: 100px"
+					src="resources/user/images/chat.PNG"> <br> <input
+					type="button" class="type-btn" value="40,000"> <img
+					class="type-btn" src=""> <input type="button"
+					class="type-btn"> 화상 <img class="type-btn" src=""> <input
+					type="button" class="type-btn"> 전화 </span>
+			</div>
+
 			<!-- Begin Average Gift Size in Year 1 Field -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield hs_average_gift_size_in_year_1 field hs-form-field"
 				id="edit-submitted-cultivation-amount-1 average_gift_size_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_3256">
 
@@ -832,11 +1086,11 @@ a {
 					class="error1" style="display: none;"> <i
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
-			</div>
+			</div> -->
 			<!-- End Average Gift Size in Year 1 Field -->
 
 			<!-- Begin Average Gift Size in Year 2 Field -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield hs_average_gift_size_in_year_2 field hs-form-field"
 				id="webform-component-cultivation--amount-2">
 
@@ -852,11 +1106,11 @@ a {
 					class="error-log fa fa-exclamation-triangle"></i>
 				</span>
 			</div>
-			<!-- End Average Gift Size in Year 2 Field -->
+			End Average Gift Size in Year 2 Field -->
 
 			<!-- Begin Average Gift Size Perchent Change Field -->
 			<!-- THIS FIELD IS NOT EDITABLE | GRAYED OUT -->
-			<div
+			<!-- <div
 				class="form-item webform-component webform-component-textfield webform-container-inline hs_average_gift_size_percent_change field hs-form-field"
 				id="webform-component-cultivation--percent-change1">
 
@@ -867,75 +1121,83 @@ a {
 					class="form-text hs-input" name="average_gift_size_percent_change"
 					readonly="readonly" size="60" maxlength="128" type="text" value=""
 					placeholder="0">
-			</div>
+			</div> -->
 			<!-- End Average Gift Size Perchent Change Field -->
-			<input type="button" data-page="3" name="previous"
-				class="previous action-button" value="Previous" /> <input
-				type="button" data-page="3" name="next" class="next action-button"
-				value="Next" />
+			<br> <br> <input type="button" data-page="3"
+				name="previous" class="previous action-button" value="Previous" />
+			<input type="button" data-page="3" name="next"
+				class="next action-button" value="Next" />
 			<div class="explanation btn btn-small modal-trigger"
-				data-modal-id="modal-3">What Is This?</div>
+				data-modal-id="modal-3">M A E U M I</div>
 		</fieldset>
 
 
 
-		<!-- Cultivation2 FIELD SET -->
+		<!-- step4 FIELD SET -->
 		<fieldset>
-			<h2 class="fs-title">Total Cultivation in Donation</h2>
-			<h3 class="fs-subtitle">Let's talk about your donations as a
-				whole</h3>
-			<!-- Begin Total Giving In Year 1 Field -->
-			<div class="form-item webform-component webform-component-textfield"
-				id="webform-component-cultivation--amount-3 hs_total_giving_in_year_1 field hs-form-field">
+			<h2 class="fs-title">상담시간 선택</h2>
+			<h3 class="fs-subtitle">상담가능한 시간을 선택해주세요.</h3>
 
-				<label
-					for=" edit-submitted-cultivation-amount-3 total_giving_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_4902">What
-					was your total giving in Year 1? *</label> <input
-					id="edit-submitted-cultivation-amount-3" class="form-text hs-input"
-					name="total_giving_in_year_1" required="required" size="60"
-					maxlength="128" type="number" value="" placeholder=""
-					data-rule-required="true"
-					data-msg-required="Please enter a valid number"> <span
-					class="error1" style="display: none;"> <i
-					class="error-log fa fa-exclamation-triangle"></i>
-				</span>
+			<div id="calendar">
+				<div id="calendar_header">
+					<i class="icon-chevron-left"></i>
+					<h1></h1>
+					<i class="icon-chevron-right"></i>
+				</div>
+				<div id="calendar_weekdays"></div>
+				<div id="calendar_content"></div>
 			</div>
+
+
+			<section class="drawer__btn__wrapper">
+				<div class="drawer__btn__container">
+					<div class="drawer__btn__1 drawer__btn" data-drawer="__1">
+						<span>Button 1</span>
+					</div>
+
+					<div class="drawer__btn__2 drawer__btn" data-drawer="__2">
+						<span>Button 2</span>
+					</div>
+
+					<div class="drawer__btn__3 drawer__btn" data-drawer="__3">
+						<span>Button 3</span>
+					</div>
+
+					<div class="drawer__btn__4 drawer__btn" data-drawer="__4">
+						<span>Button 4</span>
+					</div>
+				</div>
+				<div class="drawer__btn__container">
+					<div class="drawer__btn__1 drawer__btn" data-drawer="__1">
+						<span>Button 1</span>
+					</div>
+
+					<div class="drawer__btn__2 drawer__btn" data-drawer="__2">
+						<span>Button 2</span>
+					</div>
+
+					<div class="drawer__btn__3 drawer__btn" data-drawer="__3">
+						<span>Button 3</span>
+					</div>
+
+					<div class="drawer__btn__4 drawer__btn" data-drawer="__4">
+						<span>Button 4</span>
+					</div>
+				</div>
+			</section>
+
+
+			<!-- Begin Total Giving In Year 1 Field -->
+
 			<!-- End Total Giving In Year 1 Field -->
 
 			<!-- Begin Total Giving In Year 2 Field -->
-			<div
-				class="form-item webform-component webform-component-textfield hs_total_giving_in_year_2 field hs-form-field"
-				id="webform-component-cultivation--amount-4">
-
-				<label
-					for=" edit-submitted-cultivation-amount-4 total_giving_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_4902">What
-					was your total giving in Year 2? *</label> <input
-					id="edit-submitted-cultivation-amount-4" class="form-text hs-input"
-					name="total_giving_in_year_2" required="required" size="60"
-					maxlength="128" type="number" value="" placeholder=""
-					data-rule-required="true"
-					data-msg-required="Please enter a valid number"> <span
-					class="error1" style="display: none;"> <i
-					class="error-log fa fa-exclamation-triangle"></i>
-				</span>
-			</div>
 
 			<!-- End Total Giving In Year 2 Field -->
 
 			<!-- Begin Average Gift Size Percent Change Field 2 -->
 			<!-- THIS FIELD IS NOT EDITABLE | GRAYED OUT -->
-			<div
-				class="form-item webform-component webform-component-textfield webform-container-inline hs_total_giving_percent_change field hs-form-field"
-				id="webform-component-cultivation--percent-change2">
 
-				<label
-					for=" edit-submitted-cultivation-percent-change2 total_giving_percent_change-99a6d115-5e68-4355-a7d0-529207feb0b3_4902">Average
-					Gift Size Percent Change</label> <input
-					id="edit-submitted-cultivation-percent-change2"
-					class="form-text hs-input" name="total_giving_percent_change"
-					readonly="readonly" size="60" maxlength="128" type="text" value=""
-					placeholder="0">
-			</div>
 			<!-- End Average Gift Size Percent Change Field 2 -->
 			<input type="button" data-page="4" name="previous"
 				class="previous action-button" value="Previous" /> <input
@@ -947,79 +1209,187 @@ a {
 
 
 
-		<!-- RETENTION FIELD SET -->
+		<!-- step5 FIELD SET -->
 		<fieldset>
 			<h2 class="fs-title">Retention of your donors</h2>
 			<h3 class="fs-subtitle">How long can you keep your donors and
 				their donations?</h3>
-			<!-- Begin Total Number of Donors Who Gave in Year 1 Field -->
-			<div
-				class="form-item webform-component webform-component-textfield hs_number_of_donors_in_year_1 field hs-form-field"
-				id="webform-component-retention--amount-1">
 
-				<label
-					for=" edit-submitted-retention-amount-1 number_of_donors_in_year_1-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">What
-					was your total number of donors who gave in year 1? *</label> <input
-					id="edit-submitted-retention-amount-1" class="form-text hs-input"
-					name="number_of_donors_in_year_1" required="required" size="60"
-					maxlength="128" type="number" value="" placeholder=""
-					data-rule-required="true"
-					data-msg-required="Please enter a valid number"> <span
-					class="error1" style="display: none;"> <i
-					class="error-log fa fa-exclamation-triangle"></i>
-				</span>
+			<div id="invoiceholder">
+
+				<div id="headerimage"></div>
+				<div id="invoice" class="effect2">
+
+					<div id="invoice-top">
+						<div class="logo"></div>
+						<div class="info">
+							<h2>Michael Truong</h2>
+							<p>
+								hello@michaeltruong.ca </br> 289-335-6503
+							</p>
+						</div>
+						<!--End Info-->
+						<div class="title">
+							<h1>Invoice #1069</h1>
+							<p>
+								Issued: May 27, 2015</br> Payment Due: June 27, 2015
+							</p>
+						</div>
+						<!--End Title-->
+					</div>
+					<!--End InvoiceTop-->
+
+
+
+					<div id="invoice-mid">
+
+						<div class="clientlogo"></div>
+						<div class="info">
+
+							<h2>이소정 상담사</h2>
+
+							<p>
+								potato@gmail.com</br> 555-555-5555</br>
+						</div>
+
+						<div id="project">
+							<h2>Project Description</h2>
+							<p>Proin cursus, dui non tincidunt elementum, tortor ex
+								feugiat enim, at elementum enim quam vel purus. Curabitur semper
+								malesuada urna ut suscipit.</p>
+						</div>
+
+					</div>
+					<!--End Invoice Mid-->
+
+					<div id="invoice-bot">
+
+						<div id="table">
+							<table>
+								<tr class="tabletitle">
+									<td class="item"><h2>상담 신청 내역</h2></td>
+									<td class="Hours"><h2></h2></td>
+									<td class="Rate"><h2></h2></td>
+									<td class="subtotal"><h2></h2></td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext">상담방식</p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext">채팅</td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext">상담날짜</p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext">2022-03-23 수</p></td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem">
+										<p class="itemtext"></p> <select name='coupon'>
+											<option value='' selected>-- 선택 --</option>
+											<option value='2000'>회원가입 축하쿠폰 (2000원)</option>
+											<option value='500'>상담후기 작성 쿠폰(500원)</option>
+
+									</select>
+									</td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext">Animation</p></td>
+									<td class="tableitem"><p class="itemtext">20</p></td>
+									<td class="tableitem"><p class="itemtext">$75</p></td>
+									<td class="tableitem"><p class="itemtext">$1,500.00</p></td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext">Animation
+											Revisions</p></td>
+									<td class="tableitem"><p class="itemtext">10</p></td>
+									<td class="tableitem"><p class="itemtext">$75</p></td>
+									<td class="tableitem"><p class="itemtext">$750.00</p></td>
+								</tr>
+
+								<tr class="service">
+									<td class="tableitem"><p class="itemtext"></p></td>
+									<td class="tableitem"><p class="itemtext">HST</p></td>
+									<td class="tableitem"><p class="itemtext">13%</p></td>
+									<td class="tableitem"><p class="itemtext">$419.25</p></td>
+								</tr>
+
+
+								<tr class="tabletitle">
+									<td></td>
+									<td></td>
+									<td class="Rate"><h2>Total</h2></td>
+									<td class="payment"><h2>$3,644.25</h2></td>
+								</tr>
+
+							</table>
+						</div>
+						<!--End Table-->
+
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+							target="_top">
+							<input type="hidden" name="cmd" value="_s-xclick"> <input
+								type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+							<input type="button" id="pay-btn" name="submit" value="결제하기">
+						</form>
+
+
+
+						<div id="legalcopy">
+							<a href="userPersonalCounsel.do"><input type="button"
+								id="back-btn" name="submit" value="뒤로가기"></a>
+						</div>
+
+					</div>
+					<!--End InvoiceBot-->
+				</div>
+				<!--End Invoice-->
 			</div>
+
+			<!-- End Invoice Holder-->
+			<!-- Begin Total Number of Donors Who Gave in Year 1 Field -->
+
+			<!-- <div class="drawer__overlay"></div> -->
+
+			<!-- <section class="drawer__wrapper">
+				<div class="drawer__close__btn">
+							<i class="fa fa-times"></i>
+				</div>
+
+				<div class="drawer__1 drawer__container">Content Drawer 1</div>
+
+				<div class="drawer__2 drawer__container">Content Drawer 2</div>
+
+				<div class="drawer__3 drawer__container">Content Drawer 3</div>
+
+				<div class="drawer__4 drawer__container">Content Drawer 4</div>
+			</section> -->
+
+
+
 			<!-- End Total Number of Donors Who Gave in Year 1 Field-->
 
 
 			<!-- Begin Total Number of Donors Who Gave in Year 1 and Year 2 Field -->
-			<div class="form-item webform-component webform-component-textfield"
-				id="webform-component-retention--amount-2 hs_number_of_year_1_donors_who_also_gave_in_year_2 field hs-form-field">
 
-				<label
-					for=" edit-submitted-retention-amount-2 number_of_year_1_donors_who_also_gave_in_year_2-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">What
-					was your total number of donors who gave in year 1 that also gave
-					in year 2? *</label> <input id="edit-submitted-retention-amount-2"
-					class="form-text hs-input"
-					name="number_of_year_1_donors_who_also_gave_in_year_2"
-					required="required" size="60" maxlength="128" type="number"
-					value="" placeholder="" data-rule-required="true"
-					data-msg-required="Please enter a valid number"> <span
-					class="error1" style="display: none;"> <i
-					class="error-log fa fa-exclamation-triangle"></i>
-				</span>
-			</div>
 			<!-- End Total Number of Donors Who Gave in Year 1 and Year 2 Field -->
 
 			<!-- Begin Retention Rate Percent -->
-			<div class="form-item webform-component webform-component-textfield"
-				id="webform-component-retention--percent-change field hs-form-field">
-
-				<label for="edit-submitted-retention-percent-change">Retention
-					Rate</label> <input id="edit-submitted-retention-percent-change"
-					class="form-text hs-input" name="retention_rate_percent"
-					readonly="readonly" size="60" maxlength="128" type="text" value=""
-					placeholder="0"> <span class="error1"
-					style="display: none;"> <i
-					class="error-log fa fa-exclamation-triangle"></i>
-				</span>
-			</div>
 
 			<!-- End Retention Rate Percent -->
 
 
 			<!-- Begin Final Calc -->
-			<div
-				class="form-item webform-component webform-component-textfield hs_fundraising_400_index field hs-form-field"
-				id="webform-component-final-grade--grade">
 
-				<label
-					for=" fundraising_400_index-99a6d115-5e68-4355-a7d0-529207feb0b3_2983">Fundraising
-					400 Index Score</label> <input id="edit-submitted-final-grade-grade"
-					class="form-text hs-input" name="fundraising_400_index"
-					readonly="readonly" size="60" maxlength="128" type="text" value=""
-					placeholder="0">
-			</div>
 			<!-- End Final Calc -->
 			<input type="button" data-page="5" name="previous"
 				class="previous action-button" value="Previous" /> <input
@@ -1028,7 +1398,7 @@ a {
 			<div class="explanation btn btn-small modal-trigger"
 				data-modal-id="modal-3">What Is This?</div>
 		</fieldset>
-
+		<!-- 
 		<fieldset>
 			<h2 class="fs-title">It's on the way!</h2>
 			<h3 class="fs-subtitle">Thank you for trying out our marketing
@@ -1036,7 +1406,7 @@ a {
 				and some helpful tips to improve it!</h3>
 			<div class="explanation btn btn-small modal-trigger"
 				data-modal-id="modal-3">What Is This?</div>
-		</fieldset>
+		</fieldset> -->
 	</form>
 	<script>
 		/* Fundraising Grader
@@ -1119,8 +1489,13 @@ a {
 									easing : 'easeInOutExpo'
 								});
 							});
-					$(".submit").click(
-							function() {
+					$("#submit").click(function(){
+						frm.action = "personalCounselApplication.do";
+						frm.submit();
+						
+					}
+							
+							/* function() {
 								$(".steps").validate(
 										{
 											errorClass : 'invalid',
@@ -1165,14 +1540,14 @@ a {
 											'opacity' : opacity
 										});
 									},
-									duration : 800,
+									duration : 50,
 									complete : function() {
 										current_fs.hide();
 										animating = false;
 									},
 									easing : 'easeInOutExpo'
 								});
-							});
+							} */);
 					$(".previous").click(
 							function() {
 								if (animating)
@@ -1200,7 +1575,7 @@ a {
 											'opacity' : opacity
 										});
 									},
-									duration : 800,
+									duration : 50,
 									complete : function() {
 										current_fs.hide();
 										animating = false;
@@ -1504,6 +1879,86 @@ a {
 			}
 		}
 		modules.init();
-	</script>
+
+		function doOpenCheck(chk) {
+			var obj = document.getElementsByName("onecheck");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
+		
+		
+		//calendar start
+	
+		$(function(){
+    function c(){p();
+        var e=h();
+        var r=0;
+        var u=false;
+        l.empty();
+        while(!u){
+            if(s[r]==e[0].weekday){
+                u=true
+            }else{
+                l.append('<div class="blank"></div>');
+                r++}}
+                for(var c=0;c<42-r;c++){
+                    if(c>=e.length){
+                        l.append('<div class="blank"></div>')}
+                        else{var v=e[c].day;
+                            var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";l.append(m+""+v+"</div>")}}
+                            var y=o[n-1];
+                            a.css("background-color",y).find("h1").text(i[n-1]+" "+t);
+                            f.find("div").css("color",y);l.find(".today").css("background-color",y);
+                            d()}function h(){var e=[];for(var r=1;
+                                r<v(t,n)+1;
+                                r++){e.push({day:r,weekday:s[m(t,n,r)]})}return e
+                            }function p(){f.empty();
+                                for(var e=0;e<7;e++){
+                                f.append("<div>"+s[e].substring(0,3)+"</div>")}}
+                                function d(){var t;
+                                    var n=$("#calendar").css("width",e+"px");
+                                    n.find(t="#calendar_weekdays, #calendar_content").css("width",e+"px").find("div").css({width:e/7+"px",height:e/7+"px","line-height":e/7+"px"});
+                                    n.find("#calendar_header").css({height:e*(1/7)+"px"}).find('i[class^="icon-chevron"]').css("line-height",e*(1/7)+"px")}
+                                    function v(e,t){
+                                        return(new Date(e,t,0)).getDate()
+                                    }
+                                    function m(e,t,n){
+                                        return(new Date(e,t-1,n)).getDay()
+                                    }function g(e){
+                                        return y(new Date)==y(e)
+                                    }function y(e){
+                                        return e.getFullYear()+"/"+(e.getMonth()+1)+"/"+e.getDate()
+                                    }function b(){var e=new Date;t=e.getFullYear()
+                                        ;n=e.getMonth()+1}var e=480
+                                        ;var t=2013
+                                        ;var n=9
+                                        ;var r=[]
+                                        ;var i=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+                                        var s=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                                        var o=["#16a085","#1abc9c","#c0392b","#27ae60","#FF6860","#f39c12","#f1c40f","#e67e22","#2ecc71","#e74c3c","#d35400","#2c3e50"];
+                                        var u=$("#calendar");
+                                        var a=u.find("#calendar_header");
+                                        var f=u.find("#calendar_weekdays");var l=u.find("#calendar_content")
+                                        ;
+                                        b();
+                                        c();
+                                        a.find('i[class^="icon-chevron"]').on("click",function(){
+                                            var e=$(this);
+                                            var r=function(e){n=e=="next"?n+1:n-1;if(n<1){n=12;
+                                                t--
+                                            }
+                                            else if(n>12){n=1;
+                                                t++}c()};
+                                                if(e.attr("class").indexOf("left")!=-1){
+                                                    r("previous")
+                                                }
+                                                else{
+                                                    r("next")}})})
+		//calendar end
+		</script>
+
 </body>
 </html>
