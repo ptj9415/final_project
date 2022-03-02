@@ -16,6 +16,7 @@ public class CounselorVO {
 	private String c_picture;
 	private String c_picturepath;
 	private String c_birthdate;
+	private String c_status;
 	private String cc_no;
 	private String cc_status;
 	private String cc_subject;

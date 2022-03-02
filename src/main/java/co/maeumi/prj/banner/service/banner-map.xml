@@ -2,4 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.banner.service.BannerMapper">
 
+	<select id="getBannerListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		BANNER
+	</select>
+
+	<select id="bannerSelectList"
+		resultType="co.maeumi.prj.banner.service.BannerVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM
+		BANNER) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="bannerSelect"
+		resultType="co.maeumi.prj.banner.service.BannerVO">
+		SELECT * 
+		FROM BANNER
+		WHERE BN_NO = #{bn_no}
+	</select>
+
+	<delete id="bannerDelete"
+		parameterType="co.maeumi.prj.banner.service.BannerVO">
+		DELETE FROM BANNER
+		WHERE BN_NO=#{bn_no}
+	</delete>
+
+	<insert id="bannerInsert"
+		parameterType="co.maeumi.prj.banner.service.BannerVO">
+		<selectKey keyProperty="bn_no" resultType="int"
+			order="BEFORE">
+			SELECT
+			NVL(MAX(BN_NO),0)+1 FROM BANNER
+		</selectKey>
+		INSERT INTO BANNER VALUES(#{bn_no}, #{bn_name}, #{bn_filename},
+		#{bn_pfilename}, #{bn_title}, #{bn_subject})
+	</insert>
+
+	<update id="bannerUpdate"
+		parameterType="co.maeumi.prj.banner.service.BannerVO">
+		UPDATE BANNER SET
+		BN_NAME = #{bn_name},
+		BN_FILENAME=#{bn_filename},
+		BN_PFILENAME=#{bn_pfilename},
+		BN_TITLE=#{bn_title},
+		BN_SUBJECT=#{bn_subject}
+		WHERE BN_NO = #{bn_no}
+	</update>
+
 </mapper>
