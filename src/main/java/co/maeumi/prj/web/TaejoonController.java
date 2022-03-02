@@ -1,6 +1,7 @@
 package co.maeumi.prj.web;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.maeumi.prj.banner.service.BannerService;
 import co.maeumi.prj.banner.service.BannerVO;
-import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.member.service.MemberService;
@@ -38,6 +38,14 @@ public class TaejoonController {
 	@Autowired
 	private BannerService bannerDao;
 
+	/* ===== 상담사 화면 ===== */
+	
+	@RequestMapping("/home.do")
+	public String home(Model model, BannerVO bvo) {
+		model.addAttribute("banner", bannerDao.bannerList(bvo));
+		return "user/home/home";
+	}
+	
 	/* ===== 상담사 화면 ===== */
 
 	// 상담사 마이페이지 메인화면
@@ -335,33 +343,68 @@ public class TaejoonController {
 
 		return "admin/bannermanage/adminBannerList";
 	}
-	
+
 	@RequestMapping("/adminBannerDetail.do")
-	public String adminBannerDetail(Model model, BannerVO bvo){
-		
+	public String adminBannerDetail(Model model, BannerVO bvo) {
+
 		model.addAttribute("banner", bannerDao.bannerSelect(bvo));
 
 		return "admin/bannermanage/adminBannerDetail";
-	}	
-	
+	}
+
 	@RequestMapping("/adminBannerUpdate.do")
-	public String adminBannerUpdate(Model model, BannerVO bvo){
+	public String adminBannerUpdate(Model model, BannerVO bvo) {
 		bannerDao.bannerUpdate(bvo);
 
 		return "redirect:adminBannerList.do";
 	}
-	
+
 	@RequestMapping("/adminBannerInsertForm.do")
-	public String adminBannerInsertForm(){
-		
+	public String adminBannerInsertForm() {
+
 		return "admin/bannermanage/adminBannerInsertForm";
 	}
-	
-	@RequestMapping("/adminBannerInsert.do")
-	public String adminBannerInsert(Model model, BannerVO bvo){
-		bannerDao.bannerInsert(bvo);
 
-		return "redirect:adminBannerList.do";
+	@ResponseBody
+	@RequestMapping(value = "/adminBannerInsert.do", produces = "application/text; charset=utf8")
+	public String adminBannerInsert(Model model, BannerVO bvo, @RequestParam(value = "filename") MultipartFile mf,
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\";
+		
+		String originalFileName = mf.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		System.out.println(originalFileName);
+		String saveFile = uuid + originalFileName;
+		System.out.println(saveFile);
+		System.out.println(msaveFile);
+		if(originalFileName == null) {
+			
+		}
+		bvo.setBn_filename(originalFileName);
+		bvo.setBn_pfilename(saveFile);
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		bannerDao.bannerInsert(bvo);
+		
+		return "img/" + saveFile;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/adminDeleteBanner.do")
+	public String adminDeleteBanner(BannerVO bvo, Model model) {
+		
+		bannerDao.bannerDelete(bvo);
+
+		return "redirect:adminNoticeList.do";
+	}
+
 }

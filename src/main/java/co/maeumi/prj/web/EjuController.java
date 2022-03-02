@@ -28,10 +28,10 @@ public class EjuController {
 	/* =====사용자 화면===== */
 	
 	//사용자 메인화면
-	@RequestMapping("/home.do")
-	public String home() {
-		return "user/home/home";
-	}
+//	@RequestMapping("/home.do")
+//	public String home() {
+//		return "user/home/home";
+//	}
 	
 	//개인상담 메인화면 불러오기
 	@RequestMapping("/userPersonalCounsel.do")

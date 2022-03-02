@@ -142,8 +142,7 @@ th {
 				ci_subject.push(subject);
 			});
 
-			console.log(ci_title);
-			console.log(ci_subject);
+			
 			var list = new Array();
 
 			for (var i = 0; i < ci_title.length; i++) {

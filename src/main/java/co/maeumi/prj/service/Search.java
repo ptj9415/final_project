@@ -19,5 +19,6 @@ public class Search extends Paging {
 	private String c_phone;
 	private String c_address;
 	private String c_status;
+	
 
 }

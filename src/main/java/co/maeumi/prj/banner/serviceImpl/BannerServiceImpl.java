@@ -52,6 +52,12 @@ public class BannerServiceImpl implements BannerService {
 		// TODO Auto-generated method stub
 		return map.bannerInsert(vo);
 	}
+
+	@Override
+	public List<BannerVO> bannerList(BannerVO vo) {
+		// TODO Auto-generated method stub
+		return map.bannerList(vo);
+	}
 	
 	
 

@@ -7,7 +7,7 @@ public interface BannerService {
 	
 	int getBannerListCnt(Search svo) throws Exception;
 	public List<BannerVO> bannerSelectList(Search svo) throws Exception;
-	
+	List<BannerVO> bannerList(BannerVO vo);
 	BannerVO bannerSelect(BannerVO vo);
 	int bannerUpdate(BannerVO vo);
 	int bannerDelete(BannerVO vo);

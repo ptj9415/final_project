@@ -36,8 +36,9 @@
 								<option value="20"
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
-							</select> 
-							<button type="button" id="insertbtn" name="insertbtn" onclick="location.href='adminBannerInsertForm.do'">등록</button>
+							</select>
+							<button type="button" id="insertbtn" name="insertbtn"
+								onclick="location.href='adminBannerInsertForm.do'">등록</button>
 							<br> <br>
 							<table class="table table-hover text-nowrap" id="membertable">
 								<thead>
@@ -57,7 +58,10 @@
 											<td>${banner.bn_title }</td>
 											<td>${banner.bn_subject }</td>
 											<td><button type="button" class="managebtn"
-													id="managebtn" onclick="location.href='adminBannerDetail.do?bn_no=${banner.bn_no}';">관리</button></td>
+													id="managebtn"
+													onclick="location.href='adminBannerDetail.do?bn_no=${banner.bn_no}';">관리</button>
+												<button type="button" class="managebtn" id="managebtn"
+													onclick="deleteFnc('${banner.bn_no}');">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -138,6 +142,29 @@
 						+ "&listSize=" + listSize
 			}
 			location.href = url;
+		}
+
+		function deleteFnc(bn_no) {
+			if (confirm("정말 삭제하시겠습니까?") == true) {
+				
+				$.ajax({
+					url : "adminDeleteBanner.do",
+					type : "post",
+					data : {bn_no : bn_no},
+					dataType : "json",
+					success : function(data) {
+						console.log("삭제가 완료되었습니다.");
+						location.reload();
+					},
+					error : function(data) {
+						console.log("오류가 발생하였습니다. 관리자에게 문의해주세요.");
+						location.reload();
+					}
+
+				});
+			} else {
+				return;
+			}
 		}
 	</script>
 
