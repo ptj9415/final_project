@@ -1,10 +1,10 @@
 package co.maeumi.prj.board.service;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class BoardVO {
 	private int b_no;
 	private String b_subject;
@@ -15,4 +15,6 @@ public class BoardVO {
 	private String m_nickname;
 	private String c_name;
 	private int b_hit; 	// 조회수
+	private String b_anony;		// 글 익명 처리
+	private String b_onlyco;	// 댓글 상담사만 가능
 }

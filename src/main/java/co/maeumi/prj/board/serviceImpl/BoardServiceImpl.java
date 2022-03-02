@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.board.service.BoardMapper;
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
+import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("boardDao")
 public class BoardServiceImpl implements BoardService {
@@ -49,6 +51,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int userBoardUpdate(BoardVO vo) {
 		return map.userBoardUpdate(vo);
+	}
+
+	@Override
+	public int getBoardListCnt(Search svo) throws Exception {
+		return map.getBoardListCnt(svo);
+	}
+
+	@Override
+	public List<MemberVO> boardSearchselect(Search svo) throws Exception {
+		return map.boardSearchselect(svo);
 	}
 
 }

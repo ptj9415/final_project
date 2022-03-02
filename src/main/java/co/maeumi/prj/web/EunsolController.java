@@ -8,13 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.faq.service.FaqService;
 import co.maeumi.prj.faq.service.FaqVO;
+import co.maeumi.prj.service.Search;
 
 @Controller
 public class EunsolController {
@@ -41,7 +44,24 @@ public class EunsolController {
 
 	// 사용자 자유게시판 메인화면
 	@RequestMapping("/userBoardList.do")
-	public String userBoardList(BoardVO vo, Model model) {
+	public String userBoardList(BoardVO vo, Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false) String b_email, @RequestParam(required = false) String b_title,
+			@RequestParam(required = false) String b_subject,
+			@RequestParam(required = false, defaultValue = "all") String b_wdate, @ModelAttribute("search") Search svo)
+			throws Exception {
+
+		model.addAttribute("search", svo);
+		svo.setB_email(b_email);
+		svo.setB_title(b_title);
+		svo.setB_subject(b_subject);
+		svo.setB_wdate(b_wdate);
+
+		int listCnt = boardDao.getBoardListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
 
 		List<BoardVO> list = boardDao.boardSelectList();
 
@@ -76,8 +96,9 @@ public class EunsolController {
 		
 		model.addAttribute("boardRead", vo);
 		return "user/board/userBoardRead";
-		}
+	}
 			
+	
 	// 자유게시판 글 작성
 	@RequestMapping("/userBoardForm.do")
 	public String userBoardForm() {
@@ -96,7 +117,7 @@ public class EunsolController {
 	
 	// 자유게시판 글 수정
 	@RequestMapping("/userBoardUpdateForm.do")
-	public String userBoardUpdateForm(BoardVO vo, Model model, HttpSession session) {
+	public String userBoardUpdateForm(BoardVO vo, Model model) {
 		model.addAttribute("boardSelect", boardDao.boardSelect(vo));
 		return "user/board/userBoardUpdateForm";
 	}
@@ -210,7 +231,23 @@ public class EunsolController {
 
 	// FAQ 목록
 	@RequestMapping("/adminFaqList.do")
-	public String adminFaqList(FaqVO vo, Model model) {
+	public String adminFaqList(FaqVO vo, Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false) String c_name,
+			@RequestParam(required = false) String f_title,
+			@ModelAttribute("search") Search svo)
+			throws Exception {
+
+		model.addAttribute("search", svo);
+		svo.setC_name(c_name);
+		svo.setF_title(f_title);
+	
+		int listCnt = faqDao.getFaqListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		model.addAttribute("faq", faqDao.FaqSearchselect(svo));
 		List<FaqVO> list = faqDao.faqSelectList();
 
 		// 날짜 뒤에 시간 자르고 년-월-일만
@@ -242,8 +279,7 @@ public class EunsolController {
 	// FAQ 등록
 	@RequestMapping("/faqResister.do")
 	public String faqResister(FaqVO vo, HttpSession session) {
-//			vo.setF_email((String) session.getAttribute("f_email"));
-		vo.setF_email("luna@naver.com");
+		vo.setF_email((String) session.getAttribute("f_email"));
 		faqDao.faqInsert(vo);
 		System.out.println(vo.getF_title());
 		return "redirect:adminFaqList.do";
@@ -273,17 +309,5 @@ public class EunsolController {
 		return "redirect:adminFaqList.do";
 	}
 
-//	// FAQ 검색 -- 다시해야됨
-//	@ResponseBody
-//	@RequestMapping("/faqSearch.do")
-//	public List<FaqVO> faqSearch(FaqVO vo, Model model) {
-//		List<FaqVO> list = faqDao.faqSearch(vo);
-//		for (int i = 0; i < list.size(); i++) {
-//			String date = list.get(i).getF_wdate();
-//			date = date.substring(0, 10);
-//			list.get(i).setF_wdate(date);
-//		}
-//		return list;
-//	}
 
 }

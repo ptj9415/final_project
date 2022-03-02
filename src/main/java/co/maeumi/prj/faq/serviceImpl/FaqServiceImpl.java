@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.faq.service.FaqMapper;
 import co.maeumi.prj.faq.service.FaqService;
 import co.maeumi.prj.faq.service.FaqVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("faqDao")
 public class FaqServiceImpl implements FaqService {
@@ -43,6 +44,16 @@ public class FaqServiceImpl implements FaqService {
 	@Override
 	public List<FaqVO> faqSearch(FaqVO vo) {
 		return map.faqSearch(vo);
+	}
+
+	@Override
+	public int getFaqListCnt(Search svo) throws Exception {
+		return map.getFaqListCnt(svo);
+	}
+
+	@Override
+	public List<FaqVO> FaqSearchselect(Search svo) throws Exception {
+		return map.FaqSearchselect(svo);
 	}
 
 }
