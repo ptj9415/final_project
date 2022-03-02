@@ -3,11 +3,16 @@
 <mapper namespace="co.maeumi.prj.board.service.BoardMapper">
 	<select id="boardSelectList"
 		resultType="co.maeumi.prj.board.service.BoardVO">
-		SELECT B.*, C.*
+		SELECT * FROM(
+		SELECT B.*, C.C_NAME
 		FROM BOARD B, COUNSELOR C
-		WHERE B.B_EMAIL =
-		C.C_EMAIL
-		ORDER BY B.B_NO DESC
+		WHERE B.B_EMAIL = C.C_EMAIL
+		UNION ALL
+		SELECT B.*, M.M_NICKNAME
+		FROM BOARD
+		B, MEMBER M
+		WHERE B.B_EMAIL = M.M_EMAIL)
+		ORDER BY B_NO
 	</select>
 
 	<select id="boardSelect"
@@ -41,6 +46,7 @@
 
 	<!-- 조회수 -->
 	<update id="updateCount" parameterType="String">
-		UPDATE BOARD SET B_CNT = B_CNT + 1 WHERE B_NO = #{b_no}
+		UPDATE BOARD SET B_CNT =
+		B_CNT + 1 WHERE B_NO = #{b_no}
 	</update>
 </mapper>

@@ -68,7 +68,7 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>일반회원 관리</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="adminCounselorList.do" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>상담사 관리</p>
 						</a></li>
@@ -120,7 +120,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="adminBannerList.do" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>배너 관리</p>
 						</a></li>

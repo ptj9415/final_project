@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.counselor.service.CounselorMapper;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("counselorDao")
 public class CounselorServiceImpl implements CounselorService {
@@ -128,6 +129,18 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return map.counselortimeInsert(cvo);
 
+	}
+
+	@Override
+	public int getCounselorListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getCounselorListCnt(svo);
+	}
+
+	@Override
+	public List<CounselorVO> counselorSearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.counselorSearchselect(svo);
 	}
 	
 }

@@ -22,6 +22,7 @@
 						<div class="card-body text-primary">
 							<h5 class="card-title">${board.b_title}</h5>
 							<p class="card-text">${board.b_content}</p>
+							<p class="card-text">${board.c_name}</p>
 						</div>
 					</div>
 				</div>
