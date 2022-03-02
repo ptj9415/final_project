@@ -11,7 +11,7 @@
 		SELECT B.*, M.M_NICKNAME
 		FROM BOARD B, MEMBER M
 		WHERE B.B_EMAIL = M.M_EMAIL)
-		ORDER BY B_NO;
+		ORDER BY B_NO DESC
 	</select>
 
 	<select id="boardSelect" resultType="co.maeumi.prj.board.service.BoardVO">
@@ -23,7 +23,7 @@
 		SELECT B.*, M.M_NICKNAME
 		FROM BOARD B, MEMBER M
 		WHERE B.B_EMAIL = M.M_EMAIL)
-		WHERE B_NO = #{b_no};
+		WHERE B_NO = #{b_no}
 	</select>
 
 	<delete id="boardDelete" parameterType="co.maeumi.prj.board.service.BoardVO">
@@ -43,6 +43,23 @@
 		ORDER BY B_NO DESC
 	</select>
 
+	<!--  페이징 처리 & 검색  -->
+	<select id="boardSearchselect"
+		resultType="co.maeumi.prj.board.service.BoardVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM MEMBER <trim prefix="where" prefixOverrides="and | or">
+				<if test="b_email != ''"> AND B_EMAIL LIKE '%' || #{b_email} || '%' </if>
+			<if test="b_title != ''"> AND B_TITLE LIKE '%' || #{b_title} || '%' </if>
+			<if test="b_subject != 'null'"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%'</if>
+			<if test="b_wdate != 'null'"> AND TO_CHAR(B_WDATE,'YY-MM-DD') like '%' || #{b_wdate} || '%'</if>
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
 	<!-- 조회수 -->
 	<update id="updateCount" parameterType="int">
       	UPDATE BOARD SET B_HIT = B_HIT + 1 WHERE B_NO = #{b_no}

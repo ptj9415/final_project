@@ -45,4 +45,19 @@
 		ORDER BY F_NO DESC
 	</select>
 	
+	<!-- 게시물 검색 & 페이징 처리 -->
+	<select id="faqSearchselect"
+		resultType="co.maeumi.prj.faq.service.FaqVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM FAQ <trim prefix="where" prefixOverrides="and | or">
+			<if test="c_name != ''"> AND C_NAME LIKE '%' || #{c_name} || '%' </if>
+		<if test="f_title != ''"> AND F_TITLE LIKE '%' || #{f_title} || '%' </if>	
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
 </mapper> 

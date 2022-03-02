@@ -2,6 +2,9 @@ package co.maeumi.prj.board.service;
 
 import java.util.List;
 
+import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.service.Search;
+
 public interface BoardService {
 	List<BoardVO> boardSelectList();
 	BoardVO boardSelect(BoardVO vo);
@@ -10,4 +13,8 @@ public interface BoardService {
 	int updateCount(int b_hit); // 조회수
 	int userBoardInsert(BoardVO vo); // user 자유게시판 등록
 	int userBoardUpdate(BoardVO vo); // user 자유게시판 수정 등록
+	
+	// 검색 & 페이징 처리
+	int getBoardListCnt(Search svo) throws Exception;
+	public List<MemberVO> boardSearchselect(Search svo) throws Exception;
 }

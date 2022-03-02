@@ -97,7 +97,12 @@
 							<p class="card-text">${board.b_subject}</p>
 							<h5 class="card-title">${board.b_title}</h5>
 							<pre class="card-text" id="content">${board.b_content}</pre>
+							<c:if test="${board.b_anony eq 'T' }">
+							<p class="card-text" style="text-align: right;">익명</p>
+							</c:if>
+							<c:if test="${board.b_anony eq 'F' }">
 							<p class="card-text" style="text-align: right;">${board.c_name}</p>
+							</c:if>
 						</div>
 					</div>
 				</div>

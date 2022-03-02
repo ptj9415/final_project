@@ -18,6 +18,7 @@ public interface MemberMapper {
 	MemberVO kakaoSelect(MemberVO mvo);  // 카카오 로그인 조회용 이메일과 가입유형으로 판단.
 	MemberVO naverSelect(MemberVO mvo);  // 네이버 로그인 조회용. 
 	
+	// 검색
 	int getMemberListCnt(Search svo) throws Exception;
 	public List<MemberVO> memberSearchselect(Search svo) throws Exception;
 	
