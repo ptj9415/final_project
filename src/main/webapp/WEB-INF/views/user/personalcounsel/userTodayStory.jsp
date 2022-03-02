@@ -53,12 +53,12 @@ table {
 
 					</p>
 
-			
-					
+
+
 					<!-- modal btn -->
 
-		<span type="button" class="btn btn-default" id="submit-btn"
-			data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
+					<span type="button" class="btn btn-default" id="submit-btn"
+						data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
 					<!-- modal btn -->
 
 				</div>

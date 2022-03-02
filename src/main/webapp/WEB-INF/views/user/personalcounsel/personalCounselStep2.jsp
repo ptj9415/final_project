@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<title>개인상담 신청2단계</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Lato'
 	rel='stylesheet' type='text/css'>
@@ -14,7 +16,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
-<title>개인상담</title>
 <style>
 /* html {
 	-webkit-font-smoothing: antialiased!important;
@@ -185,94 +186,6 @@
 	margin-top: 100px;
 }
 
-/*arccordion start*/
-@charset "UTF-8";
-
-.card-accordion {
-	position: relative;
-	overflow: hidden;
-	border: 1px solid #468FB6;
-	border-radius: 8px;
-	transition: 0.20s ease-in-out;
-	margin-right: auto;
-	margin-left: auto;
-	width: 65%;
-	color: #4f4f4f;
-	border-radius: 10px;
-	margin-top: 1rem;
-}
-
-.card-accordion:hover {
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-.card-accordion .card-accordion-checkbox {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
-}
-
-.card-accordion .card-accordion-label {
-	display: block;
-	padding: 20px 30px;
-	color: #468FB6;
-	position: relative;
-	cursor: pointer;
-	font-weight: bold;
-}
-
-.card-accordion .card-accordion-label::after {
-	content: "";
-	font-family: FontAwesome;
-	font-size: 0.75rem;
-	position: absolute;
-	top: 28px;
-	right: 30px;
-	color: #468FB6;
-	transition: 0.30s ease-in-out;
-	transform-origin: center center;
-}
-
-.card-accordion .card-accordion-content {
-	max-height: 0;
-	opacity: 0;
-	overflow: hidden;
-	transition: 0.4s;
-}
-
-.card-accordion .card-accordion-content .card-accordion-content-inner {
-	padding: 0px 40px 40px 40px;
-}
-
-.card-accordion input:checked ~ .card-accordion-content {
-	max-height: 20em;
-	opacity: 1;
-	padding-left: 30px;
-	padding-bottom: 20px;
-	padding-top: 20px
-}
-
-.card-accordion input:checked ~ .card-accordion-label::after {
-	transform: rotate(45deg);
-}
-
-.mini-p {
-	font-size: 0.8em;
-}
-
-.text-field {
-	width: 50%;
-	height: 100px;
-	border: 1px solid lightgray;
-	margin-top: 20px;
-}
-
-.category-detail {
-	margin-top: 60px;
-	margin-bottom: 60px;
-}
-/*arccordion end*/
-/*next btn*/
 #next-btn {
 	width: 100px;
 	height: 40px;
@@ -293,45 +206,52 @@
 	cursor: pointer;
 }
 
+#previous-btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	background-color: #468FB6;
+	color: white;
+	border: solid 1px #468FB6;
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+}
+
+#previous-btn:hover {
+	background: #fff;
+	color: #468FB6;
+	border: solid 1px #468FB6;
+	transition: 0.3s ease-in-out;
+	cursor: pointer;
+}
+
 .next-btn-field {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	padding-left: 100px;
 }
 /*next btn end*/
-/*buttons*/
-.steps .next, .steps .submit {
-	float: right;
+
+/*counselor-list*/
+.counselor-list {
+	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margint-top: 50px;
+	padding-top: 100px
 }
 
-.steps .previous {
-	float: left;
+.staff .img {
+	height: 200px;
 }
 
-.steps .action-button:hover, .steps .action-button:focus, .action-button:hover,
-	.action-button:focus {
-	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+.col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated {
+	border: solid 0.3px lightgray;
 }
 
-.steps .explanation {
-	display: block;
-	clear: both;
-	width: 100%;
-	background: #f2f2f2;
-	position: relative;
-	/* margin-left: -30px; */
-	padding: 22px 0px;
-	margin-bottom: -10px;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
-	top: 10px;
-	text-align: center;
-	color: #333333;
-	font-size: 12px;
-	font-weight: 200;
-	cursor: pointer;
+.btn btn-primary px-4 py-3 mt-3 {
+	heigth: 30px;
 }
 </style>
 </head>
@@ -381,7 +301,7 @@
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step">
+		<div class="md-step active editable">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
@@ -410,85 +330,45 @@
 		</div>
 	</div>
 
-	<form id="step1" action="personalCounselStep2.do">
+<form id="step2" action="personalCounselStep3.do">
 
-		<div class="category-detail">
-
-			<div class="card-accordion">
-				<input id="card-1" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-1">분노/우울</label>
-				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="우울/불안"
-						onclick="doOpenCheck(this);"> 우울/불안</label><br> <label><input
-						name="onecheck" type="checkbox" value="분노"
-						onclick="doOpenCheck(this);"> 분노</label><br> <label><input
-						name="onecheck" type="checkbox" value="무기력 자존감상실"
-						onclick="doOpenCheck(this);"> 무기력 자존감상실</label><br> <label><input
-						name="onecheck" type="checkbox" value="자살"
-						onclick="doOpenCheck(this);"> 자살</label>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
-				</div>
-			</div>
-			<div class="card-accordion">
-				<input id="card-2" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-2">사랑/우정</label>
-				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="연인"
-						onclick="doOpenCheck(this);"> 연인</label><br> <label><input
-						name="onecheck" type="checkbox" value="데이트폭력"
-						onclick="doOpenCheck(this);"> 데이트폭력</label><br> <label><input
-						name="onecheck" type="checkbox" value="친구관계"
-						onclick="doOpenCheck(this);"> 친구관계</label><br> <label><input
-						name="onecheck" type="checkbox" value="부부"
-						onclick="doOpenCheck(this);"> 부부</label><br> <label><input
-						name="onecheck" type="checkbox" onclick="doOpenCheck(this);">
-						<!-- <input name="onecheck" class="text-field" type="text"
-				placeholder="직접입력..">  --></label>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
-
-				</div>
-			</div>
-			<div class="card-accordion">
-				<input id="card-3" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-3">진로/취업</label>
-				<div class="card-accordion-content">
-					<label>
-						<input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label>
-						<br>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
-
+	<div class="counselor-list">
+	<c:forEach items="${counselorList }" var="counselorList">
+		<div class="row">
+			<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+				<div class="staff">
+					<div class="img" style="background-image: url(images/team-4.jpg);"></div>
+					<div class="text px-4 pt-4">
+						<h3>${counselorList.c_name}</h3>
+						<span class="position mb-2">${counselorList.c_grade}</span>
+							
+						
+						<div class="faded">
+							<p>${counselorList.p_kakaoprice}</p>
+							<p>${counselorList.p_zoomprice}</p>
+						</div>
+						<input type="button" class="btn btn-primary px-4 py-3 mt-3" value="선택하기">
+					</div>
 				</div>
 			</div>
 		</div>
-			<input type="submit" data-page="2" name="next"
+	</c:forEach>
+	</div>
+</form>
+	<input type="button" data-page="2" name="previous"
+		class="previous action-button" value="Previous" id="previous-btn" />
+	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
-	</form>
-	<input type="hidden" data-page="2" name="previous"
-		class="previous action-button" value="Previous" />
-	
 
 
 	<script>
-		function doOpenCheck(chk) {
-			var obj = document.getElementsByName("onecheck");
-			for (var i = 0; i < obj.length; i++) {
-				if (obj[i] != chk) {
-					obj[i].checked = false;
-				}
-			}
-		}
+		$('#previous-btn').click(function() {
+			location.href = 'userPersonalCounsel.do'
+		});
 
 		$('#next-btn').click(function() {
-			step1.submit();
-		/* 	var selected = $("input[name='onecheck']:checked").val();
-			console.log(selected); */
-			location.href = 'personalCounselStep2.do'
+			step2.submit();
+			location.href = 'personalCounselStep3.do'
 		});
 	</script>
 </body>

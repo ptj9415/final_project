@@ -290,10 +290,148 @@ form {
 				</div>
 			</div>
 		</div>
-		
-		<h1>결제페이지</h1>
-	</section>
 
+
+	</section>
+	<div id="invoiceholder">
+
+		<div id="headerimage"></div>
+		<div id="invoice" class="effect2">
+
+			<div id="invoice-top">
+				<div class="logo"></div>
+				<div class="info">
+					<h2>Michael Truong</h2>
+					<p>
+						hello@michaeltruong.ca </br> 289-335-6503
+					</p>
+				</div>
+				<!--End Info-->
+				<div class="title">
+					<h1>Invoice #1069</h1>
+					<p>
+						Issued: May 27, 2015</br> Payment Due: June 27, 2015
+					</p>
+				</div>
+				<!--End Title-->
+			</div>
+			<!--End InvoiceTop-->
+
+
+
+			<div id="invoice-mid">
+
+				<div class="clientlogo"></div>
+				<div class="info">
+
+					<h2>이소정 상담사</h2>
+
+					<p>
+						potato@gmail.com</br> 555-555-5555</br>
+				</div>
+
+				<div id="project">
+					<h2>Project Description</h2>
+					<p>Proin cursus, dui non tincidunt elementum, tortor ex feugiat
+						enim, at elementum enim quam vel purus. Curabitur semper malesuada
+						urna ut suscipit.</p>
+				</div>
+
+			</div>
+			<!--End Invoice Mid-->
+
+			<div id="invoice-bot">
+
+				<div id="table">
+					<table>
+						<tr class="tabletitle">
+							<td class="item"><h2>상담 신청 내역</h2></td>
+							<td class="Hours"><h2></h2></td>
+							<td class="Rate"><h2></h2></td>
+							<td class="subtotal"><h2></h2></td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">상담방식</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext">채팅</td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext">2022-03-23 수</p></td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem">
+								<p class="itemtext"></p> <select name='coupon'>
+									<option value='' selected>-- 선택 --</option>
+									<option value='2000'>회원가입 축하쿠폰 (2000원)</option>
+									<option value='500'>상담후기 작성 쿠폰(500원)</option>
+
+							</select>
+							</td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">Animation</p></td>
+							<td class="tableitem"><p class="itemtext">20</p></td>
+							<td class="tableitem"><p class="itemtext">$75</p></td>
+							<td class="tableitem"><p class="itemtext">$1,500.00</p></td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">Animation
+									Revisions</p></td>
+							<td class="tableitem"><p class="itemtext">10</p></td>
+							<td class="tableitem"><p class="itemtext">$75</p></td>
+							<td class="tableitem"><p class="itemtext">$750.00</p></td>
+						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext">HST</p></td>
+							<td class="tableitem"><p class="itemtext">13%</p></td>
+							<td class="tableitem"><p class="itemtext">$419.25</p></td>
+						</tr>
+
+
+						<tr class="tabletitle">
+							<td></td>
+							<td></td>
+							<td class="Rate"><h2>Total</h2></td>
+							<td class="payment"><h2>$3,644.25</h2></td>
+						</tr>
+
+					</table>
+				</div>
+				<!--End Table-->
+
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+					target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick"> <input
+						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+					<input type="button" id="pay-btn" name="submit" value="결제하기">
+				</form>
+
+
+
+				<div id="legalcopy">
+					<a href="personalCounselStep4.do"><input type="button"
+						id="back-btn" name="submit" value="뒤로가기"></a>
+				</div>
+
+			</div>
+			<!--End InvoiceBot-->
+		</div>
+		<!--End Invoice-->
+	</div>
 
 
 </body>

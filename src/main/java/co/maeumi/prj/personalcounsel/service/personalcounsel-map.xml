@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.maeumi.prj.personalcounsel.service.PersonalcounselMapper">
+<mapper
+	namespace="co.maeumi.prj.personalcounsel.service.PersonalcounselMapper">
+
+
+
+	<select id="CounselorSelectList"
+		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+
+		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender,
+		c.c_grade, p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice, p.p_phone ,p.p_phoneprice
+		
+		
+		from cs_category cs join counselor c 
+		on(cs.c_email = c.c_email)
+		join price p
+		on(cs.c_email = p.c_email)
+		where cs.ccg_subname = #{ccg_subname}
+	</select>
 
 </mapper>
