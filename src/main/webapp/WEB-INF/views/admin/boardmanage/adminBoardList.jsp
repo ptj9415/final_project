@@ -138,7 +138,7 @@ select option[value=""][disabled] {
 			<tbody id="dbtbody">
 				<c:forEach items="${board}" var="board">
 					<tr class="color"
-						onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">
+						onclick="location.href='boardRead.do?b_no=${board.b_no}';">
 						<td>${board.c_name}</td>
 						<td>${board.b_subject}</td>
 						<td>${board.b_title}</td>
@@ -177,7 +177,7 @@ select option[value=""][disabled] {
 				},
 				dataType : "text",
 				success : function() {
-					location.href = "adminBoardList.do";
+					location.href = "boardList.do";
 				},
 				error : function() {
 					alert("삭제 실패")

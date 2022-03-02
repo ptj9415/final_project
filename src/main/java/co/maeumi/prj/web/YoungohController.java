@@ -373,10 +373,4 @@ public class YoungohController {
 		
 		return "admin/therapy/therapyInsert";
 	}
-	
-	@RequestMapping("/therapyInsert.do")
-	public String therapyInsert() {
-		
-		return "admin/therapy/therapyList";
-	}
 }
