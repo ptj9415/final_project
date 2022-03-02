@@ -17,12 +17,12 @@
 	</select>
 
 	<insert id="faqInsert" parameterType="co.maeumi.prj.faq.service.FaqVO">
-		<selectKey keyProperty="f_no" resultType="String" order="BEFORE">
+		<selectKey keyProperty="f_no" resultType="int" order="BEFORE">
 		<!-- DB에 데이터 없어도 홈페이지에서 글 작성하면 등록 가능 -->
 		SELECT NVL(MAX(F_NO),0)+1 FROM FAQ
 		</selectKey>
 		INSERT INTO FAQ (F_NO, F_TITLE, F_SUBJECT, F_EMAIL)
-		values(#{f_no}, #{f_title}, #{f_subject}, #{f_email})
+		VALUES(#{f_no}, #{f_title}, #{f_subject}, #{f_email})
 	</insert>
 	
 	<update id="faqUpdate" parameterType="co.maeumi.prj.faq.service.FaqVO">
@@ -44,4 +44,5 @@
 		<if test="f_title != ''"> AND F.F_TITLE LIKE '%' || #{f_title} || '%' </if>	
 		ORDER BY F_NO DESC
 	</select>
+	
 </mapper> 

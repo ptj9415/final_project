@@ -4,164 +4,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel='stylesheet'
-	href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
-<link rel="stylesheet" href="style.css">
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css?family=Hind:300,400');
-
-*, *:before, *:after {
-	-webkit-box-sizing: inherit;
-	box-sizing: inherit;
-}
-
-html {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Bootstrap Expand and Collapse FAQ Accordion</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
 body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Hind', sans-serif;
 	background: #fff;
-	color: #4d5974;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	min-height: 100vh;
 }
 
-h2 {
-	text-align: center;
-	margin-top: 100px;
-	color: #C1AEEE;
+.accordion .card {
+	background: none;
+	border: none;
 }
 
-.all {
-	margin-bottom: 300px;
+.accordion .card .card-header {
+	background: none;
+	border: none;
+	padding: .4rem 1rem;
+	font-family: "Roboto", sans-serif;
 }
 
-accordion {
-	
+.accordion .card-header h2 span {
+	float: left;
+	margin-top: 10px;
 }
-.accordion a {
+
+.accordion .card-header .btn {
+	color: #2f2f31;
+	font-size: 1.04rem;
+	text-align: left;
 	position: relative;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	width: 100%;
-	padding: 1rem 3rem 1rem 1rem;
-	color: #7288a2;
-	font-size: 1.15rem;
-	font-weight: 400;
-	border-bottom: 1px solid #e5e5e5;
-	padding-left: 200px;
+	font-weight: 500;
+	padding-left: 2rem;
 }
 
-.accordion a:hover, .accordion a:hover::after {
-	cursor: pointer;
-	color: #ff5353;
-}
-
-.accordion a:hover::after {
-	border: 1px solid #ff5353;
-}
-
-.accordion a.active {
-	color: #ff5353;
-	border-bottom: 1px solid #ff5353;
-	padding-left: 200px;
-	
-}
-
-.accordion a::after {
-	font-family: 'Ionicons';
-	content: '❤';
+.accordion .card-header i {
+	font-size: 1.2rem;
+	font-weight: bold;
 	position: absolute;
-	float: right;
-	right: 1rem;
-	font-size: 1rem;
-	color: #7288a2;
-	padding: 5px;
-	width: 30px;
-	height: 30px;
-	-webkit-border-radius: 30%;
-	-moz-border-radius: 30%;
-	border-radius: 30%;
-	border: 1px solid #7288a2;
-	text-align: center;
+	left: 0;
+	top: 9px;
 }
 
-.accordion a.active::after {
-	font-family: 'Ionicons';
-	content: '❤';
-	color: #ff5353;
-	border: 1px solid #ff5353;
+.accordion .card-header .btn:hover {
+	color: #ff8300;
 }
 
-.accordion .content {
-	opacity: 0;
-	padding: 0 1rem;
-	max-height: 0;
-	border-bottom: 1px solid #e5e5e5;
-	overflow: hidden;
-	clear: both;
-	-webkit-transition: all 0.2s ease 0.15s;
-	-o-transition: all 0.2s ease 0.15s;
-	transition: all 0.2s ease 0.15s;
+.accordion .card-body {
+	color: #324353;
+	padding: 0.5rem 3rem;
 }
 
-.accordion .content p {
-	font-size: 1rem;
-	font-weight: 300;
+.page-title {
+	margin: 3rem 0 3rem 1rem;
+	font-family: "Roboto", sans-serif;
+	position: relative;
 }
 
-.accordion .content.active {
-	opacity: 1;
-	padding: 1rem;
-	max-height: 100%;
-	-webkit-transition: all 0.35s ease 0.15s;
-	-o-transition: all 0.35s ease 0.15s;
-	transition: all 0.35s ease 0.15s;
-	padding-left: 200px;
+.page-title::after {
+	content: "";
+	width: 80px;
+	position: absolute;
+	height: 3px;
+	border-radius: 1px;
+	background: #73bb2b;
+	left: 0;
+	bottom: -15px;
+}
+
+.accordion .highlight .btn {
+	color: #74bd30;
+}
+
+.accordion .highlight i {
+	transform: rotate(180deg);
 }
 </style>
+<script>
+	$(document).ready(function() {
+		// Add minus icon for collapse element which is open by default
+		$(".collapse.show").each(function() {
+			$(this).prev(".card-header").addClass("highlight");
+		});
+
+		// Highlight open collapsed element 
+		$(".card-header .btn").click(function() {
+			$(".card-header").not($(this).parents()).removeClass("highlight");
+			$(this).parents(".card-header").toggleClass("highlight");
+		});
+	});
+</script>
 </head>
 <body>
-<div class="all">
-	<h2>Frequently Asked Questions</h2>
-	<br><br><br>
-	<div class="accordion">
-		<div class="accordion-item">
-			<c:forEach items="${faqs}" var="faq">
-				<a>${faq.f_title}</a>
-				<div class="content">
-					<p>${faq.f_subject}</p>
+	<div class="container-lg">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-title">FAQs</h1>
+				<div class="accordion" id="accordionExample">
+					<c:forEach items="${faqs}" var="faq">
+						<div class="card">
+							<div class="card-header" id="headingOne">
+								<h2 class="clearfix mb-0">
+									<a class="btn btn-link" data-toggle="collapse"
+										data-target="#collapseOne" aria-expanded="true"
+										aria-controls="collapseOne"><i
+										class="fa fa-chevron-circle-down"></i>${faq.f_title}</a>
+								</h2>
+							</div>
+							<div id="collapseOne" class="collapse show"
+								aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div class="card-body">${faq.f_subject}</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
+			</div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript">
-//Code By Webdevtrick ( https://webdevtrick.com )
-const items = document.querySelectorAll(".accordion a");
-
-function toggleAccordion(){
-  this.classList.toggle('active');
-  this.nextElementSibling.classList.toggle('active');
-}
-
-items.forEach(item => item.addEventListener('click', toggleAccordion));
-</script>
 </body>
 </html>

@@ -37,22 +37,114 @@ public class EunsolController {
 		model.addAttribute("faqs", list);
 		return "user/faq/userFaq";
 	}
+	
 
 	// 사용자 자유게시판 메인화면
-	@RequestMapping("/userBoard.do")
-	public String userBoard(BoardVO vo, Model model, HttpSession session) {
-//		vo.setB_subject((String) session.getAttribute("subject"));
+	@RequestMapping("/userBoardList.do")
+	public String userBoardList(BoardVO vo, Model model) {
+
 		List<BoardVO> list = boardDao.boardSelectList();
 
 		for (int i = 0; i < list.size(); i++) {
 			String date = list.get(i).getB_wdate();
 			date = date.substring(0, 10);
 			list.get(i).setB_wdate(date);
+			System.out.println(list.get(i).getC_name());
 		}
 		model.addAttribute("board", list);
-		return "user/board/userBoard";
+		return "user/board/userBoardList";
 	}
 	
+	
+	// 자유게시판 글 상세 보기
+	@RequestMapping("/userBoardRead.do")
+	public String userBoardRead(BoardVO vo, Model model, HttpServletRequest request) {
+		int no = Integer.parseInt(request.getParameter("b_no"));
+		vo.setB_no(no);
+		vo = boardDao.boardSelect(vo);
+		
+		// 날짜 뒤에 시간 자르고 년-월-일 표시
+		String date = vo.getB_wdate();
+		date = date.substring(0,10);
+		vo.setB_wdate(date);
+		
+		// 조회수 
+		boardDao.updateCount(no);
+		
+		// 댓글 목록
+		
+		
+		model.addAttribute("boardRead", vo);
+		return "user/board/userBoardRead";
+		}
+			
+	// 자유게시판 글 작성
+	@RequestMapping("/userBoardForm.do")
+	public String userBoardForm() {
+		return "user/board/userBoardForm";
+	}
+		
+		
+	// 자유게시판 글 등록
+	@RequestMapping("/userBoardResister.do")
+	public String userBoardResister(BoardVO vo, HttpSession session) {
+		vo.setB_email((String)session.getAttribute("email")); // 로그인 정보. 작성자가 누군지 알기 위해 담는 거
+		boardDao.userBoardInsert(vo);
+		return"redirect:userBoardList.do";
+	}
+	
+	
+	// 자유게시판 글 수정
+	@RequestMapping("/userBoardUpdateForm.do")
+	public String userBoardUpdateForm(BoardVO vo, Model model, HttpSession session) {
+		model.addAttribute("boardSelect", boardDao.boardSelect(vo));
+		return "user/board/userBoardUpdateForm";
+	}
+	
+	
+	// 자유게시판 글 수정 등록
+	@RequestMapping("/userBoardUpdate.do")
+	public String userBoardUpdate(BoardVO vo) {
+		boardDao.userBoardUpdate(vo);
+		return "redirect:userBoardList.do";
+	}
+	
+	
+	// 자유게시판 삭제
+	@ResponseBody
+	@RequestMapping("/userBoardDelete.do")
+	public String userBoardDelete(Model model, BoardVO vo, HttpServletRequest request) {
+		int b_no = Integer.parseInt(request.getParameter("b_no"));
+		vo.setB_no(b_no);
+		boardDao.boardDelete(vo);
+		return "redirect:userBoardList.do";
+	}
+	
+	
+	// 자유게시판 검색
+	@ResponseBody
+	@RequestMapping("/userBoardSearch.do")
+	public List<BoardVO> userBoardSearch(BoardVO vo, Model model) {
+		List<BoardVO> list = boardDao.boardSearch(vo);
+		
+		// 날짜 뒤에 시간 자르고 년-월-일 표시
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getB_wdate();
+			date = date.substring(0,10);
+			list.get(i).setB_wdate(date);
+		}
+		return list;
+	}
+	
+	
+	// 자유게시판 글 댓글 작성
+	
+	// 자유게시판 글 댓글 수정
+	
+	// 자유게시판 글 댓글 삭제 
+
+		
+		
 	/* ===== 관리자 화면 ===== */
 
 	// 관리자 자유게시판 메인화면
@@ -75,7 +167,7 @@ public class EunsolController {
 	// 자유게시판 상세 보기
 	@RequestMapping("/adminBoardRead.do")
 	public String adminBoardRead(BoardVO vo, Model model, HttpServletRequest request) {
-		String no = request.getParameter("b_no");
+		int no = Integer.parseInt( request.getParameter("b_no"));
 		vo.setB_no(no);
 		vo = boardDao.boardSelect(vo);
 
@@ -95,8 +187,8 @@ public class EunsolController {
 	@ResponseBody
 	@RequestMapping("/boardDelete.do")
 	public String boardDelete(Model model, BoardVO vo, HttpServletRequest request) {
-		String b_no = request.getParameter("b_no");
-		vo.setB_no(b_no);
+		int no = Integer.parseInt( request.getParameter("b_no"));
+		vo.setB_no(no);
 		boardDao.boardDelete(vo);
 		return "redirect:adminBoardList.do";
 	}
@@ -134,7 +226,7 @@ public class EunsolController {
 	// FAQ 상세 보기
 	@RequestMapping("/adminFaqRead.do")
 	public String adminFaqRead(FaqVO vo, Model model, HttpServletRequest request) {
-		String no = request.getParameter("f_no");
+		int no = Integer.parseInt(request.getParameter("f_no"));
 		vo.setF_no(no);
 		vo = faqDao.faqSelect(vo);
 		model.addAttribute("faqRead", vo);
@@ -159,7 +251,7 @@ public class EunsolController {
 
 	// FAQ 수정
 	@RequestMapping("/adminFaqUpdateForm.do")
-	public String faqUpdateForm(FaqVO vo, Model model, HttpSession session) {
+	public String adminFaqUpdateForm(FaqVO vo, Model model, HttpSession session) {
 		model.addAttribute("faqSelect", faqDao.faqSelect(vo));
 		return "admin/faqmanage/adminFaqUpdateForm";
 	}
@@ -175,8 +267,8 @@ public class EunsolController {
 	@ResponseBody
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(Model model, FaqVO vo, HttpServletRequest request) {
-		String f_no = request.getParameter("f_no");
-		vo.setF_no(f_no);
+		int no = Integer.parseInt(request.getParameter("f_no"));
+		vo.setF_no(no);
 		faqDao.faqDelete(vo);
 		return "redirect:adminFaqList.do";
 	}
