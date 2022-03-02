@@ -18,6 +18,13 @@
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+		<select id="bannerList"
+		resultType="co.maeumi.prj.banner.service.BannerVO">
+		SELECT *
+		FROM 
+		BANNER
+	</select>
 
 	<select id="bannerSelect"
 		resultType="co.maeumi.prj.banner.service.BannerVO">
@@ -53,5 +60,7 @@
 		BN_SUBJECT=#{bn_subject}
 		WHERE BN_NO = #{bn_no}
 	</update>
+	
+	
 
 </mapper>

@@ -1,16 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript"
-  src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
-  charset="utf-8"></script>
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+	charset="utf-8"></script>
 
 <style>
+
+/*배너*/
+.banner {
+	position: relative;
+	width: 1200px;
+	height: 210px;
+	top: 50px;
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+}
+
+.banner ul {
+	position: absolute;
+	margin: 0px;
+	padding: 0;
+	list-style: none;
+}
+
+.banner ul li {
+	float: left;
+	width: 1200px;
+	height: 210px;
+	margin: 0;
+	padding: 0;
+}
 
 /*상담 start*/
 .tab-wrap {
@@ -181,9 +208,6 @@
 .hide-space {
 	padding: 100px;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -191,105 +215,37 @@
 	data-aos-delay="300">
 
 
-	<!-- 베너 start -->
+	<!-- banner start -->
+	<div class="contents">
 
+		<h3>롤링 배너 만들기</h3>
 
-
-
-	<section class="home-slider js-fullheight owl-carousel bg-white">
-	
-	
-		<div class="slider-item js-fullheight">
-			<div class="overlay"></div>
-			<div class="container">
-				<div
-					class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
-					data-scrollax-parent="true">
-					<div class="one-third order-md-last img js-fullheight"
-						style="background-image: url(resources/user/images/bg_1.jpg);">
-						<h3 class="vr">M A E U M I</h3>
-					</div>
-					<div
-						class="one-forth d-flex js-fullheight align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<div class="text">
-							<h1 class="mb-4">
-								MENU1 <br>HERE IS THE 1ST MENU
-							</h1>
-							<p>A small river named Duden flows by their place and
-								supplies it with the necessary regelialia. It is a paradisematic
-								country, in which roasted parts of sentences fly into your
-								mouth.</p>
-							<p>
-								<a href="#" class="btn btn-primary px-4 py-3 mt-3">View our
-									works</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="banner">
+			<ul>
+				<li><img
+					src="https://cdn.pixabay.com/photo/2016/02/01/16/10/eye-1173863__340.jpg"
+					width="1200px" height="210px"></li>
+				<li><img
+					src="https://cdn.pixabay.com/photo/2017/12/30/13/25/portrait-3050076__340.jpg"
+					width="1200px" height="210px"></li>
+				<li><img
+					src="https://cdn.pixabay.com/photo/2015/07/09/22/45/tree-838667__340.jpg"
+					width="1200" height="210px"></li>
+				<li><img
+					src="https://cdn.pixabay.com/photo/2016/03/05/20/01/art-1238602__340.jpg"
+					width="1200" height="210px"></li>
+				<li><img
+					src="https://cdn.pixabay.com/photo/2015/07/31/15/01/guitar-869217__340.jpg"
+					width="1200" height="210px"></li>
+			</ul>
 		</div>
-		
-		<div class="slider-item js-fullheight">
-			<div class="overlay"></div>
-			<div class="container">
-				<div
-					class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
-					data-scrollax-parent="true">
-					<div class="one-third order-md-last img js-fullheight"
-						style="background-image: url(resources/user/images/bg_1.jpg);">
-						<h3 class="vr">M A E124123412341234123412341234U M I</h3>
-					</div>
-					<div
-						class="one-forth d-flex js-fullheight align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<div class="text">
-							<h1 class="mb-4">
-								MENU1 <br>124123412412431234
-							</h1>
-							<p>A 12431234124123412341234123412341234123412341234123412341234</p>
-							<p>
-								<a href="#" class="btn btn-primary px-4 py-3 mt-3">View our
-									works</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="slider-item js-fullheight">
-			<div class="overlay"></div>
-			<div class="container">
-				<div
-					class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
-					data-scrollax-parent="true">
-					<div class="one-third order-md-last img js-fullheight"
-						style="background-image: url(resources/user/images/textMessage.gif);">
-						<h3 class="vr">Since - 2022</h3>
-					</div>
-					<div
-						class="one-forth d-flex js-fullheight align-items-center ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<div class="text">
-							<h1 class="mb-4">텍스트 테라피</h1>
-							<p>A small river named Duden flows by their place and
-								supplies it with the necessary regelialia. It is a paradisematic
-								country, in which roasted parts of sentences fly into your
-								mouth.</p>
-							<p>
-								<a href="#" class="btn btn-primary px-4 py-3 mt-3">View our
-									works</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	</div>
 
 
-	<!-- 베너 end -->
+
+
+
+	<!-- banner end -->
 
 	<!-- 상담 tab -->
 	<div class="container">
@@ -674,7 +630,7 @@
 						</a>
 					</div>
 				</div>
-				
+
 				<div class="col-md-6 col-lg-3 ftco-animate">
 					<div class="project">
 						<img src="resources/user/images/wowool.png" class="img-fluid"
@@ -689,7 +645,7 @@
 						</a>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</section>
@@ -710,9 +666,41 @@
 	<script src="resources/user/js/bootstrap-datepicker.js"></script>
 	<script src="resources/user/js/jquery.timepicker.min.js"></script>
 	<script src="resources/user/js/scrollax.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
 	<script src="resources/user/js/google-map.js"></script>
 	<script src="resources/user/js/main.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+					var $banner = $(".banner").find("ul");
+
+					var $bannerWidth = $banner.children().outerWidth();//이미지의 폭
+					var $bannerHeight = $banner.children().outerHeight(); // 높이
+					var $length = $banner.children().length;//이미지의 갯수
+					var rollingId;
+
+					rollingId = setInterval(function() {
+						rollingStart();
+					}, 3000);
+
+					function rollingStart() {
+						$banner.css("width", $bannerWidth * $length + "px");
+						$banner.css("height", $bannerHeight + "px");
+						$banner.animate({
+							left : -$bannerWidth + "px"
+						}, 1500, function() {
+							$(this).append(
+									"<li>" + $(this).find("li:first").html()
+											+ "</li>");
+							$(this).find("li:first").remove();
+							$(this).css("left", 0);
+						});
+					}
+				});
+	</script>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 		SELECT B.*, M.M_NICKNAME
 		FROM BOARD B, MEMBER M
 		WHERE B.B_EMAIL = M.M_EMAIL)
-		ORDER BY B_NO;
+		ORDER BY B_NO
 	</select>
 
 	<select id="boardSelect" resultType="co.maeumi.prj.board.service.BoardVO">
@@ -23,7 +23,7 @@
 		SELECT B.*, M.M_NICKNAME
 		FROM BOARD B, MEMBER M
 		WHERE B.B_EMAIL = M.M_EMAIL)
-		WHERE B_NO = #{b_no};
+		WHERE B_NO = #{b_no}
 	</select>
 
 	<delete id="boardDelete" parameterType="co.maeumi.prj.board.service.BoardVO">
