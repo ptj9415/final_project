@@ -16,7 +16,7 @@
 /*배너*/
 .banner {
 	position: relative;
-	width: 1200px;
+	width: 1300px;
 	height: 210px;
 	top: 50px;
 	margin: 0 auto;
@@ -33,7 +33,7 @@
 
 .banner ul li {
 	float: left;
-	width: 1200px;
+	width: 1300px;
 	height: 210px;
 	margin: 0;
 	padding: 0;
@@ -218,25 +218,25 @@
 	<!-- banner start -->
 	<div class="contents">
 
-		<h3>롤링 배너 만들기</h3>
+		
 
 		<div class="banner">
 			<ul>
 				<li><img
 					src="https://cdn.pixabay.com/photo/2016/02/01/16/10/eye-1173863__340.jpg"
-					width="1200px" height="210px"></li>
+					width="1300px" height="210px"></li>
 				<li><img
 					src="https://cdn.pixabay.com/photo/2017/12/30/13/25/portrait-3050076__340.jpg"
-					width="1200px" height="210px"></li>
+					width="1300px" height="210px"></li>
 				<li><img
 					src="https://cdn.pixabay.com/photo/2015/07/09/22/45/tree-838667__340.jpg"
-					width="1200" height="210px"></li>
+					width="1300px" height="210px"></li>
 				<li><img
 					src="https://cdn.pixabay.com/photo/2016/03/05/20/01/art-1238602__340.jpg"
-					width="1200" height="210px"></li>
+					width="1300px" height="210px"></li>
 				<li><img
 					src="https://cdn.pixabay.com/photo/2015/07/31/15/01/guitar-869217__340.jpg"
-					width="1200" height="210px"></li>
+					width="1300px" height="210px"></li>
 			</ul>
 		</div>
 	</div>

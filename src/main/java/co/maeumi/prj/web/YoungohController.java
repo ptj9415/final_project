@@ -318,23 +318,6 @@ public class YoungohController {
 	public String counselorGroupOpen(Model model) {
 		return "counselor/groupcounselmanage/counselorGroupOpen";
 	}
-
-	@RequestMapping("/detailinsert.do")
-	public String detailinsert(Model model, HttpServletRequest request, GroupcounselVO vo, HttpServletResponse response)
-			throws IOException {
-		response.setContentType("text/html; charset=EUC-KR");
-		PrintWriter out = response.getWriter();
-		String gc_no = request.getParameter("gc_no");
-		String gc_report = request.getParameter("gc_report");
-		String gc_result = request.getParameter("gc_result");
-		if (gc_report == "" && gc_result == "") {
-			out.println("<script>alert('상담 결과 등록 실패'); </script>");
-			out.flush();
-		} else {
-			out.println("<script>alert('상담 결과 등록 성공'); </script>");
-			out.flush();
-		}
-
 		
 		@RequestMapping("/detailinsert.do")
 		public String detailinsert(Model model, HttpServletRequest request, GroupcounselVO vo,HttpServletResponse response) throws IOException {

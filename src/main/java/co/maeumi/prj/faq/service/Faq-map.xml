@@ -46,7 +46,7 @@
 	</select>
 	
 	<!-- 게시물 검색 & 페이징 처리 -->
-	<select id="faqSearchselect"
+	<select id="FaqSearchselect"
 		resultType="co.maeumi.prj.faq.service.FaqVO">
 		SELECT *
 		FROM (SELECT ROWNUM RN, A.*
