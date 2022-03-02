@@ -12,9 +12,9 @@
         <section class="content">
         <div class="container-fluid">
           <br>
-          <h1 class="text-left display-5">&nbsp;칼럼 관리</h1><br>
+          <h1 class="text-left display-5">&nbsp;심리테라피 관리</h1><br>
             <h2 class="text-left display-5">&nbsp;&nbsp;&nbsp;검색</h2><br>
-            <form id="frm2" name="frm2" action="groupsearchmanage.do">
+            <form id="frm2" name="frm2" action="groupsearchmanage.do" method="post" enctype="multipart/form-data">
                 <div class="row">
                 <!-- 검색 기능 시작. -->
                     <div class="col-md-12 offset-md-0">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
 
-                             <div class="col-6">        
+                            <div class="col-6">        
                                 <div class="form-group">
                                     <label>제목 : </label>
                                     <input type="text" name="t_title" class="form-control" placeholder="Type your keywords here">
@@ -81,7 +81,7 @@
             <div class="card"> <!-- 하얀색 바 표시 시작-->
               <div class="card-header">
                 <h3 class="card-title">심리 테라피 목록</h3>
-                <button type="button" class="btn btn-lg btn-default" onclick="location.href='therapyInsert.do'">등록</button>
+                <button type="button" class="btn btn-lg btn-default" onclick="location.href='therapyInsertForm.do'">등록</button>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
