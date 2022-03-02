@@ -2,6 +2,8 @@ package co.maeumi.prj.counselor.service;
 
 import java.util.List;
 
+import co.maeumi.prj.service.Search;
+
 public interface CounselorMapper {
 	List<CounselorVO> counselorSelectList();
 	CounselorVO counselorLogin(CounselorVO cvo);
@@ -9,6 +11,9 @@ public interface CounselorMapper {
 	int counselorPictureUpdate(CounselorVO cvo);
 	boolean counselorEmailCheck(CounselorVO cvo); // 상담사 이메일 중복체크.
 	int counselorInsert(CounselorVO cvo);
+	
+	int getCounselorListCnt(Search svo) throws Exception;
+	public List<CounselorVO> counselorSearchselect(Search svo) throws Exception;
 	
 	//상담 경력
 	List<CounselorVO> counselorCareerList(CounselorVO cvo);

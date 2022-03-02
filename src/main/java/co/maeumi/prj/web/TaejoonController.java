@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import co.maeumi.prj.banner.service.BannerService;
+import co.maeumi.prj.banner.service.BannerVO;
+import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.member.service.MemberService;
@@ -32,10 +35,12 @@ public class TaejoonController {
 	private MemberService memberDao;
 	@Autowired
 	private CounselorService counselorDao;
+	@Autowired
+	private BannerService bannerDao;
 
 	/* ===== 상담사 화면 ===== */
-	
-	//상담사 마이페이지 메인화면	
+
+	// 상담사 마이페이지 메인화면
 	@RequestMapping("/counselorMyPageMain.do")
 	public String counselorMyPageMain(Model model, CounselorVO cvo, HttpSession session) {
 //				String c_email = (String)session.getAttribute("email");
@@ -244,7 +249,7 @@ public class TaejoonController {
 	/* ===== 관리자 화면 ===== */
 
 	// 관리자 - 일반회원 관리 메인화면
-	@RequestMapping(value = "adminMemberList.do")
+	@RequestMapping("/adminMemberList.do")
 	public String adminMemberList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false) String m_nickname, @RequestParam(required = false) String m_email,
@@ -268,4 +273,95 @@ public class TaejoonController {
 		return "admin/membermanage/adminMemberList";
 	}
 
+	// 관리자 - 일반회원 관리 메인화면
+	@RequestMapping("/adminCounselorList.do")
+	public String adminCounselorList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false) String c_name,
+			@RequestParam(required = false, defaultValue = "all") String c_gender,
+			@RequestParam(required = false, defaultValue = "all") String c_grade,
+			@RequestParam(required = false, defaultValue = "") String c_birthdate,
+			@RequestParam(required = false) String c_email, @RequestParam(required = false) String c_phone,
+			@RequestParam(required = false) String c_address,
+			@RequestParam(required = false, defaultValue = "all") String c_status, @ModelAttribute("search") Search svo)
+			throws Exception {
+
+		model.addAttribute("search", svo);
+		svo.setC_email(c_email);
+		svo.setC_name(c_name);
+		svo.setC_gender(c_gender);
+		svo.setC_grade(c_grade);
+		svo.setC_birthdate(c_birthdate);
+		svo.setC_email(c_email);
+		svo.setC_phone(c_phone);
+		svo.setC_address(c_address);
+		svo.setC_status(c_status);
+
+		int listCnt = counselorDao.getCounselorListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+
+		List<CounselorVO> list = counselorDao.counselorSearchselect(svo);
+
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getC_birthdate();
+			if (date != "") {
+				date = date.substring(0, 10);
+				list.get(i).setC_birthdate(date);
+			} else if (date == "") {
+				list.get(i).setC_birthdate(c_birthdate);
+			}
+		}
+
+		model.addAttribute("counselor", list);
+
+		return "admin/membermanage/adminCounselorList";
+	}
+
+	@RequestMapping("/adminBannerList.do")
+	public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range, @ModelAttribute("search") Search svo)
+			throws Exception {
+
+		model.addAttribute("search", svo);
+		int listCnt = bannerDao.getBannerListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		model.addAttribute("banner", bannerDao.bannerSelectList(svo));
+
+		return "admin/bannermanage/adminBannerList";
+	}
+	
+	@RequestMapping("/adminBannerDetail.do")
+	public String adminBannerDetail(Model model, BannerVO bvo){
+		
+		model.addAttribute("banner", bannerDao.bannerSelect(bvo));
+
+		return "admin/bannermanage/adminBannerDetail";
+	}	
+	
+	@RequestMapping("/adminBannerUpdate.do")
+	public String adminBannerUpdate(Model model, BannerVO bvo){
+		bannerDao.bannerUpdate(bvo);
+
+		return "redirect:adminBannerList.do";
+	}
+	
+	@RequestMapping("/adminBannerInsertForm.do")
+	public String adminBannerInsertForm(){
+		
+		return "admin/bannermanage/adminBannerInsertForm";
+	}
+	
+	@RequestMapping("/adminBannerInsert.do")
+	public String adminBannerInsert(Model model, BannerVO bvo){
+		bannerDao.bannerInsert(bvo);
+
+		return "redirect:adminBannerList.do";
+	}
+	
 }
