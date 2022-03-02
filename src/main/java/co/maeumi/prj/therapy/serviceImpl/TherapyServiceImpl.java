@@ -21,4 +21,10 @@ public class TherapyServiceImpl implements TherapyService {
 		return map.therapyList();
 	}
 
+	@Override
+	public int InsertTherapy(TherapyVO vo) {
+		// TODO Auto-generated method stub
+		return map.InsertTherapy(vo);
+	}
+
 }

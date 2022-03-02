@@ -16,5 +16,4 @@ public class TherapyVO {
 	private int t_hit;
 	private int t_like_it;
 	private String t_name;
-	private String t_filename;
 }
