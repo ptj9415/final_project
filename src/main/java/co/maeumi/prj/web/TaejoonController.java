@@ -38,7 +38,7 @@ public class TaejoonController {
    @Autowired
    private BannerService bannerDao;
 
-   /* ===== 상담사 화면 ===== */
+   /* ===== 사용자 화면 ===== */
    
    @RequestMapping("/home.do")
    public String home(Model model, BannerVO bvo) {
