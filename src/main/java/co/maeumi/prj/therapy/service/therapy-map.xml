@@ -5,4 +5,27 @@
 		select *
 		from therapy
 	</select>
+	
+	<insert id="InsertTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+		Insert into THERAPY(
+			t_no,
+			t_title
+		   ,t_picture,
+		    t_writedate,
+		    t_hit,
+		    t_like_it,
+		    t_subject,
+		    t_name
+		)
+		values(
+			(SELECT NVL(MAX(t_no),0)+1 FROM THERAPY N),
+			#{t_title},
+			#{t_picture},
+			sysdate,
+			0,
+			0,
+			#{t_subject},
+			'세션값이 들어가야함'
+		)
+	</insert>
 </mapper>

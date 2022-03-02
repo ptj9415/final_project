@@ -45,7 +45,7 @@
     <section class="content">
         <div class="container-fluid">
          <br>
-            <form action="therapyInsert.do">
+            <form action="therapyInsert.do" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-md-12">
                       <div class="card"> <!-- 하얀색 바 표시 시작-->
@@ -59,39 +59,24 @@
                         	 <div class="card-body">       
                                 <div class="form-group">
                                     <label>제목 : </label>
-                                    <input type="text" name="gc_title" class="form-control" placeholder="Type your keywords here">
+                                    <input type="text" name="t_title" class="form-control" placeholder="Type your keywords here">
                                 </div>
                             </div>
                         	
                              <div class="card-body">
                                 <div class="form-group">
                                     <label>칼럼내용 : </label>
-                                   <div class="container">
 	                      				<textarea class="summernote" name="summernote"></textarea>    
-	                   		       </div>
                                 </div>
-                             </div>
-                             
+                             </div>                             
                              <div class="card-body">
                                 <div class="form-group">
-                                    <label>썸네일 : </label>
-                                   <div class="container">
-	                      				<input type="file" name="t_picture" class="form-control">  
-	                   		       </div>
+                                    <label>썸네일 등록하기 : </label>
+	                      				<input type="file" name="filename" class="form-control">  
                                 </div>
                              </div>
-                             
-                             <div class="card-body">
-                                <div class="form-group">
-                                    <label>첨부파일 : </label>
-                                   <div class="container">
-											<input type="file" id ="t_filename" name="t_filename" class="form-control">
-	                   		       </div>
-                                </div>
-                             </div>
-                            	<input type="hidden" id="gc_no" name="t_no" value="">
                             	<button type="button" class="btn btn-default" onclick="location.href='admintherapy.do'">돌아가기</i></button>
-                                <button type="submit" class="btn btn-default">등록하기</i></button>
+                                <button type="submit" class="btn btn-default">등록하기</button>
                             </div>
                           </div>
                         </div>
@@ -157,7 +142,7 @@
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "uploadSummernoteImageFile.do",
+			url : "uploadSummernoteImageFileList.do",
 			contentType : false,
 			enctype : 'multipart/form-data',
 			processData : false,
@@ -166,7 +151,6 @@
 			}
 		});
 	}
-
 </script>
 </body>
 </html>

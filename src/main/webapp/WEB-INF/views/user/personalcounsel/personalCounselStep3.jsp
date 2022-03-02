@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Lato'
 	rel='stylesheet' type='text/css'>
@@ -14,18 +14,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
-<title>개인상담</title>
 <style>
-/* html {
-	-webkit-font-smoothing: antialiased!important;
-	-moz-osx-font-smoothing: grayscale!important;
-	-ms-font-smoothing: antialiased!important;
-} */
-/* body {
-  font-family: 'Open Sans', sans-serif;
-  font-size:16px;
-  color:#555555; 
-} */
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -185,94 +174,6 @@
 	margin-top: 100px;
 }
 
-/*arccordion start*/
-@charset "UTF-8";
-
-.card-accordion {
-	position: relative;
-	overflow: hidden;
-	border: 1px solid #468FB6;
-	border-radius: 8px;
-	transition: 0.20s ease-in-out;
-	margin-right: auto;
-	margin-left: auto;
-	width: 65%;
-	color: #4f4f4f;
-	border-radius: 10px;
-	margin-top: 1rem;
-}
-
-.card-accordion:hover {
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-.card-accordion .card-accordion-checkbox {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
-}
-
-.card-accordion .card-accordion-label {
-	display: block;
-	padding: 20px 30px;
-	color: #468FB6;
-	position: relative;
-	cursor: pointer;
-	font-weight: bold;
-}
-
-.card-accordion .card-accordion-label::after {
-	content: "";
-	font-family: FontAwesome;
-	font-size: 0.75rem;
-	position: absolute;
-	top: 28px;
-	right: 30px;
-	color: #468FB6;
-	transition: 0.30s ease-in-out;
-	transform-origin: center center;
-}
-
-.card-accordion .card-accordion-content {
-	max-height: 0;
-	opacity: 0;
-	overflow: hidden;
-	transition: 0.4s;
-}
-
-.card-accordion .card-accordion-content .card-accordion-content-inner {
-	padding: 0px 40px 40px 40px;
-}
-
-.card-accordion input:checked ~ .card-accordion-content {
-	max-height: 20em;
-	opacity: 1;
-	padding-left: 30px;
-	padding-bottom: 20px;
-	padding-top: 20px
-}
-
-.card-accordion input:checked ~ .card-accordion-label::after {
-	transform: rotate(45deg);
-}
-
-.mini-p {
-	font-size: 0.8em;
-}
-
-.text-field {
-	width: 50%;
-	height: 100px;
-	border: 1px solid lightgray;
-	margin-top: 20px;
-}
-
-.category-detail {
-	margin-top: 60px;
-	margin-bottom: 60px;
-}
-/*arccordion end*/
-/*next btn*/
 #next-btn {
 	width: 100px;
 	height: 40px;
@@ -293,45 +194,66 @@
 	cursor: pointer;
 }
 
+#previous-btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	background-color: #468FB6;
+	color: white;
+	border: solid 1px #468FB6;
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+}
+
+#previous-btn:hover {
+	background: #fff;
+	color: #468FB6;
+	border: solid 1px #468FB6;
+	transition: 0.3s ease-in-out;
+	cursor: pointer;
+}
+
 .next-btn-field {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	padding-left: 100px;
 }
 /*next btn end*/
-/*buttons*/
-.steps .next, .steps .submit {
-	float: right;
+
+/*step3*/
+input.type-btn {
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100px;
+	height: 50px;
 }
 
-.steps .previous {
-	float: left;
+div.counsel-type {
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.steps .action-button:hover, .steps .action-button:focus, .action-button:hover,
-	.action-button:focus {
-	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+/*step 3end*/
+.choice-btn {
+	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
-.steps .explanation {
-	display: block;
-	clear: both;
-	width: 100%;
-	background: #f2f2f2;
-	position: relative;
-	/* margin-left: -30px; */
-	padding: 22px 0px;
-	margin-bottom: -10px;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
-	top: 10px;
-	text-align: center;
-	color: #333333;
-	font-size: 12px;
-	font-weight: 200;
-	cursor: pointer;
+.chat-btn {
+	width: 100px;
+	height: 50px;
+	border: 1px solid #468FB6;
+	background-color: white;
+	border-radius: 20px;
+}
+
+.chat-img {
+	width: 150px;
+	height: 150px;
 }
 </style>
 </head>
@@ -381,7 +303,7 @@
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step">
+		<div class="md-step active editable">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
@@ -390,7 +312,7 @@
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>3</span>
 			</div>
@@ -410,85 +332,40 @@
 		</div>
 	</div>
 
-	<form id="step1" action="personalCounselStep2.do">
+	<div class="choice-btn">
+		<div class="row mt-5 pt-4">
+			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<h3 class="h4">채팅</h3>
+				<input type=button class="chat-btn" value="40,000">
 
-		<div class="category-detail">
-
-			<div class="card-accordion">
-				<input id="card-1" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-1">분노/우울</label>
-				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="우울/불안"
-						onclick="doOpenCheck(this);"> 우울/불안</label><br> <label><input
-						name="onecheck" type="checkbox" value="분노"
-						onclick="doOpenCheck(this);"> 분노</label><br> <label><input
-						name="onecheck" type="checkbox" value="무기력 자존감상실"
-						onclick="doOpenCheck(this);"> 무기력 자존감상실</label><br> <label><input
-						name="onecheck" type="checkbox" value="자살"
-						onclick="doOpenCheck(this);"> 자살</label>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
-				</div>
 			</div>
-			<div class="card-accordion">
-				<input id="card-2" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-2">사랑/우정</label>
-				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="연인"
-						onclick="doOpenCheck(this);"> 연인</label><br> <label><input
-						name="onecheck" type="checkbox" value="데이트폭력"
-						onclick="doOpenCheck(this);"> 데이트폭력</label><br> <label><input
-						name="onecheck" type="checkbox" value="친구관계"
-						onclick="doOpenCheck(this);"> 친구관계</label><br> <label><input
-						name="onecheck" type="checkbox" value="부부"
-						onclick="doOpenCheck(this);"> 부부</label><br> <label><input
-						name="onecheck" type="checkbox" onclick="doOpenCheck(this);">
-						<!-- <input name="onecheck" class="text-field" type="text"
-				placeholder="직접입력..">  --></label>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<h3 class="h4">화상</h3>
+				<input type=button class="chat-btn" value="40,000">
 
-				</div>
 			</div>
-			<div class="card-accordion">
-				<input id="card-3" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-3">진로/취업</label>
-				<div class="card-accordion-content">
-					<label>
-						<input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label>
-						<br>
-					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<h3 class="h4">채팅</h3>
+				<input type=button class="chat-btn" value="40,000">
 
-				</div>
 			</div>
 		</div>
-			<input type="submit" data-page="2" name="next"
+	</div>
+	<input type="button" data-page="2" name="previous"
+		class="previous action-button" value="Previous" id="previous-btn" />
+	<input type="button" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
-	</form>
-	<input type="hidden" data-page="2" name="previous"
-		class="previous action-button" value="Previous" />
-	
-
 
 	<script>
-		function doOpenCheck(chk) {
-			var obj = document.getElementsByName("onecheck");
-			for (var i = 0; i < obj.length; i++) {
-				if (obj[i] != chk) {
-					obj[i].checked = false;
-				}
-			}
-		}
+		$('#previous-btn').click(function() {
+			location.href = 'personalCounselStep2.do'
+		});
 
 		$('#next-btn').click(function() {
-			step1.submit();
-		/* 	var selected = $("input[name='onecheck']:checked").val();
-			console.log(selected); */
-			location.href = 'personalCounselStep2.do'
+			location.href = 'personalCounselStep4.do'
 		});
 	</script>
 </body>

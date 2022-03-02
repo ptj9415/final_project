@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.todayreply.service.TodayreplyService;
 import co.maeumi.prj.todayreply.service.TodayreplyVO;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
@@ -24,28 +26,51 @@ public class EjuController {
 
 	@Autowired
 	private TodayreplyService todayReplyDao;
+	
+	@Autowired
+	private PersonalcounselService personalCounselDao;
 
 	/* =====사용자 화면===== */
-	
-	//사용자 메인화면
-	@RequestMapping("/home.do")
-	public String home() {
-		return "user/home/home";
-	}
-	
-	//개인상담 메인화면 불러오기
+
+	// 개인상담 메인화면 불러오기
 	@RequestMapping("/userPersonalCounsel.do")
-	public String userPersonalCounsel() {
+	public String userPersonalCounsel(Model model, HttpServletRequest request) {
 		return "user/personalcounsel/userPersonalCounsel";
 	}
-	
-	//개인상담 신청 확인내역 
+
+	// 개인상담 신청 step2
+	@RequestMapping("/personalCounselStep2.do")
+	public String personalCounselStep2(Model model, PersonalcounselVO vo, HttpServletRequest request) {
+		String test = request.getParameter("onecheck");
+		System.out.println(test);
+		vo.setCcg_subname(test);
+		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
+		model.addAttribute("counselorList",counselorList);
+		return "user/personalcounsel/personalCounselStep2";
+	}
+
+	// 개인상담 신청 step3
+	@RequestMapping("/personalCounselStep3.do")
+	public String personalCounselStep3(PersonalcounselVO vo, Model model, HttpServletRequest request) {
+		String test2 = request.getParameter("next");
+		System.out.println(test2);
+		return "user/personalcounsel/personalCounselStep3";
+	}
+
+	// 개인상담 신청 step4
+	@RequestMapping("/personalCounselStep4.do")
+	public String personalCounselStep4() {
+		return "user/personalcounsel/personalCounselStep4";
+	}
+
+	// 개인상담 신청내역 확인 페이지
 	@RequestMapping("/personalCounselApplication.do")
 	public String personalCounselApplication() {
 		return "user/personalcounsel/personalCounselApplication";
+
 	}
-	
-	// 오늘의 한마디 메인화면 
+
+	// 오늘의 한마디 메인화면
 	@RequestMapping("/userTodayStory.do")
 	public String userTodayStory(Model model, TodaystoryVO vo, HttpSession session) throws Exception {
 		// session.setAttribute("sc_no", sc_no);
@@ -67,6 +92,7 @@ public class EjuController {
 		model.addAttribute("todayReplyInsertForm", todayReplyDao.todayReplyInsert(vo));
 		return "redirect:user/todaystory/userTodayStory";
 	}
+
 	// 오늘의 한마디 user 댓글 삭제
 	@RequestMapping("/todayReplyDelete.do")
 	@ResponseBody
@@ -77,29 +103,25 @@ public class EjuController {
 
 		return "OK";
 	}
-	
-	
+
 	/* ===== 상담사 화면 ===== */
-	
-	//개인상담 신청내역 메인화면
+
+	// 개인상담 신청내역 메인화면
 	@RequestMapping("/counselorPersonalApplyList.do")
 	public String personalCounselApplyList() {
-		
+
 		return "counselor/personalcounselmanage/counselorPersonalApplyList";
 	}
-	
-	//개인상담 관리 메인화면
+
+	// 개인상담 관리 메인화면
 	@RequestMapping("/counselorPersonalList.do")
 	public String counselorPersonalList() {
-		
+
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}
-	
-	
-	
 
 	/* =====관리자 화면===== */
-	
+
 	// 오늘의 한마디 메인화면
 	@RequestMapping("/adminTodayStoryList.do")
 	public String adminTodayStoryList(Model model, TodaystoryVO vo) {
@@ -146,7 +168,5 @@ public class EjuController {
 		return "redirect:adminTodayStoryList.do";
 
 	}
-	
-	
 
 }

@@ -17,9 +17,19 @@ public class Search extends Paging {
 	private String b_title;
 	private String b_subject;
 	private String b_wdate;
-	
-	// faq
-	private String c_name;
+
 	private String f_title;
 	
+
+	private String c_name;
+	private String c_gender;
+	private String c_grade;
+	private String c_birthdate;
+	private String c_email;
+	private String c_phone;
+	private String c_address;
+	private String c_status;
+	
+
+
 }
