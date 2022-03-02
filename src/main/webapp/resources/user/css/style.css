@@ -5548,7 +5548,7 @@ a.badge-dark:hover, a.badge-dark:focus {
 
 .alert-warning {
 	color: #856404;
-	background-color: #fff3cd;
+	background-color: #ffcd;
 	border-color: #ffeeba;
 }
 
@@ -8535,7 +8535,7 @@ supports ((position: -webkit-sticky) or (position: sticky)) { .sticky-top
 }
 
 .pt-4, .py-4 {
-	padding-top: 1.5rem !important;
+	/* padding-top: 1.5rem !important; */
 }
 
 .pr-4, .px-4 {
@@ -11099,20 +11099,20 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .staff {
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	-webkit-transition: all 0.3s ease;
-	-ms-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
+	-ms-transition: all 0.4s ease;
+	transition: all 0.4s ease;
 }
 
 .staff .img {
-	height: 320px;
+	height: 200px;
 	background-position: top center;
 }
 
 .staff .text {
-	background: #fff;
+	background: #fcfcfc;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	-webkit-transition: all 0.3s ease;
