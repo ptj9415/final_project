@@ -100,13 +100,8 @@
                       <td>${therapys.t_name}</td>
                       <td>${therapys.t_title}</td>
                       <td>${therapys.t_writedate}</td>
-                      <td><button id="sel1" name="sel1" onclick="location.href='therapyUpdate.do?t_no=${therapys.t_no}'" style="font-size: 12px" class="btn btn-default">수정</button></td>
-                      <td>
-                      <form id="frm" method="post" action="therapyDelete.do">
-                      <input type="hidden" name="t_no" id="t_no" value="${therapys.t_no}">
-                      <button type="submit" id="sel2" name="sel2" style="font-size: 12px; float:left" class="btn btn-default">삭제</button>
-                      </form>                      
-                      </td>
+                      <td><button id="sel1" name="sel1" onclick="location.href='therapyUpdateForm.do?t_no=${therapys.t_no}'" style="font-size: 12px" class="btn btn-default">수정하기</button></td>
+                      <td><button id="sel2" name="sel2" onclick="delfunc('${therapys.t_no}')" style="font-size: 12px" class="btn btn-default">삭제하기</button></td> 
                     </tr>
                     </c:forEach>
                   </tbody>
@@ -130,6 +125,26 @@
     $(function () {
       $('.select2').select2()
     });
+    function delfunc(t_no){
+    	if (confirm("정말 삭제하시겠습니까?") == true) {
+    		$.ajax({
+    			url : 'therapyDelete.do',
+    			data : { t_no : t_no},
+    			dataType : 'text',
+    			success : function (data){
+    				console.log(data);
+    				
+    				location.reload();
+    				alert("삭제 완료");
+    			},
+    			error : function(){
+    				alert('error 삭제 실패');
+    			}
+    			
+    		});
+    	
+    	}
+    }
 </script>
 </body>
 </html>

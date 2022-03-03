@@ -450,10 +450,61 @@ public class YoungohController {
 		return "admin/therapy/therapyInsert";
 	}
 	
-	@RequestMapping("/therapyUpdate.do")
-	public String therapyUpdate() {
+	@RequestMapping("/therapyUpdateForm.do")
+	public String therapyUpdate(TherapyVO vo, HttpServletRequest request,Model model) {
+		String req = request.getParameter("t_no");
+		int t_no = Integer.parseInt(req);
+		vo.setT_no(t_no);
+	    
+		TherapyVO tvo = therapyDao.selectTherapy(vo);
+		model.addAttribute("therapy", tvo);	
 		return "admin/therapy/therapyUpdate";
 	}
+	@RequestMapping("/therapyUpdate.do")
+	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value="filename") MultipartFile mf, HttpServletRequest request) {
+				String t_no = request.getParameter("t_no");
+				int t_nos = Integer.parseInt(t_no);
+				vo.setT_no(t_nos);
+				
+				//썸네일 파일업로드
+				String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+				String originalFileName = mf.getOriginalFilename();
+				
+				String uuid = UUID.randomUUID().toString();	//UUID를 통해서 물리파일명 만들기.
+				String msaveFile = SAVE_PATH + uuid +originalFileName;  //원본 확장자명을 찾아서 붙여준다.
+				String saveFile = uuid +originalFileName;
+				vo.setT_picture(saveFile);
+				
+				try {
+		            mf.transferTo(new File(msaveFile));
+		           } catch (IllegalStateException e) {
+		                e.printStackTrace();
+		           } catch (IOException e) {
+		                e.printStackTrace();
+		           }
+		
+				String origincode = request.getParameter("summernote");
+				String result = origincode.replaceAll("/prj/resources/fileupload/","therapyEditor/");
+				vo.setT_subject(result);
+				
+				therapyDao.UpdateTherapy(vo);
+
+		return "redirect:admintherapy.do";
+	}
+	@RequestMapping("/therapyDelete.do")
+	@ResponseBody
+	public String therapyDelete(HttpServletRequest request, TherapyVO vo, Model model) {
+				
+				String t_no = request.getParameter("t_no");
+				System.out.println(t_no);
+				int t_nos = Integer.parseInt(t_no);
+				vo.setT_no(t_nos);
+
+				List<TherapyVO> list = therapyDao.therapyList();
+				
+				therapyDao.DeleteTherapy(vo);
+				return "Ok";
+		}
 }
 
 

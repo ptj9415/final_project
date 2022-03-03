@@ -5,4 +5,7 @@ import java.util.List;
 public interface TherapyService {
 	List<TherapyVO> therapyList();
 	int InsertTherapy(TherapyVO vo);
+	TherapyVO selectTherapy(TherapyVO vo);
+	int UpdateTherapy (TherapyVO vo);
+	int DeleteTherapy (TherapyVO vo);
 }

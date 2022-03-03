@@ -27,4 +27,22 @@ public class TherapyServiceImpl implements TherapyService {
 		return map.InsertTherapy(vo);
 	}
 
+	@Override
+	public TherapyVO selectTherapy(TherapyVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectTherapy(vo);
+	}
+
+	@Override
+	public int UpdateTherapy(TherapyVO vo) {
+		// TODO Auto-generated method stub
+		return map.UpdateTherapy(vo);
+	}
+
+	@Override
+	public int DeleteTherapy(TherapyVO vo) {
+		// TODO Auto-generated method stub
+		return map.DeleteTherapy(vo);
+	}
+
 }
