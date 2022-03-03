@@ -8,15 +8,34 @@
 	<select id="CounselorSelectList"
 		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
 
-		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender,
-		c.c_grade, p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice, p.p_phone ,p.p_phoneprice
+		<!-- select cs.c_email, cs.ccg_name, c.c_name, c.c_gender, c.c_grade, c.c_password 
+			from cs_category cs join counselor c on(cs.c_email = c.c_email) where cs.ccg_subname 
+			= #{ccg_subname} -->
+
+
+		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender, c.c_grade,
+		p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice, p.p_phone ,p.p_phoneprice 
 		
-		
-		from cs_category cs join counselor c 
-		on(cs.c_email = c.c_email)
-		join price p
-		on(cs.c_email = p.c_email)
+		from cs_category
+		cs join counselor c on(cs.c_email = c.c_email) join price p
+		on(cs.c_email = p.c_email) 
 		where cs.ccg_subname = #{ccg_subname}
 	</select>
 
+	<!-- 상담사 상세페이지 -->
+	<select id="CounselorSelect"
+		parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender,
+		c.c_grade, p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice,
+		p.p_phone ,p.p_phoneprice
+
+
+		from cs_category cs join counselor c
+		on(cs.c_email = c.c_email)
+		join price p
+		on(cs.c_email = p.c_email)
+		where
+		cs.c_email =
+		#{c_email}
+	</select>
 </mapper>
