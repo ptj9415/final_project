@@ -45,11 +45,11 @@ button {
 			<tbody>
 				<tr>
 					<th width="100px">작성자</th>
-					<td width="100px">${boardRead.c_name}</td>
+					<td width="100px">${boardRead.m_nickname}</td>
 					<th width="100px">작성일</th>
 					<td width="100px">${boardRead.b_wdate}</td>
 					<th width="100px">조회수</th>
-					<td width="100px">${boardRead.b_cnt}</td>
+					<td width="100px">${boardRead.b_hit}</td>
 				</tr>
 				<tr>
 				<tr>

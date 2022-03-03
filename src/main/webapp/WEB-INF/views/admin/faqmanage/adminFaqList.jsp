@@ -110,7 +110,7 @@ h3 {
 	<section class="content">
 		<div class="container-fluid">
 			<br>
-			<h3>일반회원 관리</h3>
+			<h3>faq 관리</h3>
 			<br>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
@@ -150,6 +150,9 @@ h3 {
 			</div>
 		</div>
 	</section>
+		<button type="button" class="button"
+			style="float: right" onclick="location.href='adminFaqForm.do'">등록하기</button>
+		<br> <br>
 	<br>
 
 	<section class="content">
@@ -238,74 +241,79 @@ h3 {
 	</section>
 
 	<script>
+	
+	
+		// 페이징 처리
+		
 		function fn_prev(page, range, rangeSize, listSize, c_name, f_title) {
 
-			var page = ((range - 2) * rangeSize) + 1;
-			var range = range - 1;
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
 
-			var url = "adminFaqList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			url = url + "&listSize=" + listSize;
-			url = url + "&c_name=" + c_name;
-			url = url + "&f_title=" + f_title;
-			location.href = url;
-		}
+		var url = "adminFaqList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		url = url + "&listSize=" + listSize;
+		url = url + "&c_name=" + c_name;
+		url = url + "&f_title=" + f_title;
+		location.href = url;
+	}
 
 		function fn_pagination(page, range, rangeSize, listSize, c_name, f_title) {
 
-			var url = "adminFaqList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			url = url + "&listSize=" + listSize;
-			url = url + "&c_name=" + c_name;
-			url = url + "&f_title=" + f_title;
-			location.href = url;
-		}
+		var url = "adminFaqList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		url = url + "&listSize=" + listSize;
+		url = url + "&c_name=" + c_name;
+		url = url + "&f_title=" + f_title;
+		location.href = url;
+	}
 
 		function fn_next(page, range, rangeSize, listSize, c_name, f_title) {
-			var page = parseInt((range * rangeSize)) + 1;
-			var range = parseInt(range) + 1;
-			var url = "adminFaqList.do";
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			url = url + "&listSize=" + listSize;
-			url = url + "&c_name=" + c_name;
-			url = url + "&f_title=" + f_title;
-			location.href = url;
-		}
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		var url = "adminFaqList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		url = url + "&listSize=" + listSize;
+		url = url + "&c_name=" + c_name;
+		url = url + "&f_title=" + f_title;
+		location.href = url;
+	}
 
 		function page(Paging) {
-			var startPage = Paging;
-			var listSize = $("#listSize option:selected").val();
+		var startPage = Paging;
+		var listSize = $("#listSize option:selected").val();
 
-			if (listSize == 10) {
-				var url = "adminFaqList.do?startPage=" + startPage
-						+ "&listSize=" + listSize
-			} else if (listSize == 15) {
-				var url = "adminFaqList.do?startPage=" + startPage
-						+ "&listSize=" + listSize
-			} else if (listSize == 20) {
-				var url = "adminFaqList.do?startPage=" + startPage
-						+ "&listSize=" + listSize
-			}
-			location.href = url;
+		if (listSize == 10) {
+			var url = "adminFaqList.do?startPage=" + startPage
+					+ "&listSize=" + listSize
+		} else if (listSize == 15) {
+			var url = "adminFaqList.do?startPage=" + startPage
+					+ "&listSize=" + listSize
+		} else if (listSize == 20) {
+			var url = "adminFaqList.do?startPage=" + startPage
+					+ "&listSize=" + listSize
 		}
+		location.href = url;
+	}
 
 		$(document).on('click', '#btnSearch', function(e) {
-			e.preventDefault();
+		e.preventDefault();
 
-			var url = "adminFaqList.do";
-			url = url + "?c_name=" + $('#c_name').val();
-			url = url + "&f_title=" + $('#f_title').val();
-			location.href = url;
-			console.log(url);
+		var url = "adminFaqList.do";
+		url = url + "?c_name=" + $('#c_name').val();
+		url = url + "&f_title=" + $('#f_title').val();
+		location.href = url;
+		console.log(url);
 
-		});
+	});
 		
 		
 		
 		// 삭제 (디자인적용)
+		
 		function deleteFnc(f_no){
 			Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
