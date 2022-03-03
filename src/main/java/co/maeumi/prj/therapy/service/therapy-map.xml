@@ -28,4 +28,22 @@
 			'세션값이 들어가야함'
 		)
 	</insert>
+	
+	<select id="selectTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO"
+	                           resultType="co.maeumi.prj.therapy.service.TherapyVO">
+			SELECT *
+			FROM THERAPY
+			WHERE t_no = #{t_no}
+	</select>
+	
+	<update id="UpdateTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+			UPDATE THERAPY
+			SET t_picture = #{t_picture}, t_title = #{t_title}, t_subject = #{t_subject}
+			WHERE t_no = #{t_no}
+	</update>
+	
+	<delete id="DeleteTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+			DELETE FROM THERAPY
+			WHERE t_no = #{t_no}
+	</delete>
 </mapper>
