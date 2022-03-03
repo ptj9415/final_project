@@ -90,7 +90,7 @@
                                 </div>
                              </div>
 
-                            <div class="col-12">        
+                           <div class="card-body">    
                                 <div class="form-group">
                                     <label>상담결과</label>
                                     <textarea style="height: 150px;" class="form-control form-control-lg" placeholder="Type your keywords here" id="gc_result" name="gc_result"></textarea>
