@@ -1,7 +1,6 @@
 package co.maeumi.prj.web;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +23,10 @@ import co.maeumi.prj.banner.service.BannerService;
 import co.maeumi.prj.banner.service.BannerVO;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
+import co.maeumi.prj.coupon.service.CouponService;
+import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.member.service.MemberService;
+import co.maeumi.prj.member.service.MemberVO;
 import co.maeumi.prj.service.Search;
 
 @Controller
@@ -37,6 +38,8 @@ public class TaejoonController {
    private CounselorService counselorDao;
    @Autowired
    private BannerService bannerDao;
+   @Autowired
+   private CouponService couponDao;
 
    /* ===== 사용자 화면 ===== */
    
@@ -262,14 +265,10 @@ public class TaejoonController {
          @RequestParam(required = false, defaultValue = "1") int range,
          @RequestParam(required = false) String m_nickname, @RequestParam(required = false) String m_email,
          @RequestParam(required = false) String m_phone,
-         @RequestParam(required = false, defaultValue = "all") String m_type, @ModelAttribute("search") Search svo)
+         @RequestParam(required = false, defaultValue = "all") String m_type, Search svo)
          throws Exception {
 
       model.addAttribute("search", svo);
-      svo.setM_email(m_email);
-      svo.setM_nickname(m_nickname);
-      svo.setM_type(m_type);
-      svo.setM_phone(m_phone);
 
       int listCnt = memberDao.getMemberListCnt(svo);
 
@@ -277,11 +276,35 @@ public class TaejoonController {
 
       model.addAttribute("pagination", svo);
       model.addAttribute("member", memberDao.memberSearchselect(svo));
-
+      
       return "admin/membermanage/adminMemberList";
    }
+   
+   @RequestMapping("/adminMemberDetail.do")
+   public String adminMemberDetail(Model model, MemberVO mvo, CouponVO cvo) {
+	   
+	   model.addAttribute("member", memberDao.memberSelect(mvo));
+	   
+	   List<CouponVO> list = couponDao.couponSelect(cvo);
+	   for (int i = 0; i < list.size(); i++) {
+		   
+	         String sdate = list.get(i).getC_startdate();
+	         String fdate = list.get(i).getC_finaldate();
+	       
+	         sdate = sdate.substring(0, 10);
+	         fdate = fdate.substring(0, 10);
+	         
+	         list.get(i).setC_startdate(sdate);
+	         list.get(i).setC_finaldate(fdate);
+	      }
+	   
+	   model.addAttribute("member", memberDao.memberSelect(mvo));
+	   model.addAttribute("coupon", list);
+	   
+	   return "admin/membermanage/adminMemberDetail";
+   }
 
-   // 관리자 - 일반회원 관리 메인화면
+   // 관리자 - 상담사 관리 메인화면
    @RequestMapping("/adminCounselorList.do")
    public String adminCounselorList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
          @RequestParam(required = false, defaultValue = "1") int range,
@@ -291,19 +314,10 @@ public class TaejoonController {
          @RequestParam(required = false, defaultValue = "") String c_birthdate,
          @RequestParam(required = false) String c_email, @RequestParam(required = false) String c_phone,
          @RequestParam(required = false) String c_address,
-         @RequestParam(required = false, defaultValue = "all") String c_status, @ModelAttribute("search") Search svo)
+         @RequestParam(required = false, defaultValue = "all") String c_status, Search svo)
          throws Exception {
 
       model.addAttribute("search", svo);
-      svo.setC_email(c_email);
-      svo.setC_name(c_name);
-      svo.setC_gender(c_gender);
-      svo.setC_grade(c_grade);
-      svo.setC_birthdate(c_birthdate);
-      svo.setC_email(c_email);
-      svo.setC_phone(c_phone);
-      svo.setC_address(c_address);
-      svo.setC_status(c_status);
 
       int listCnt = counselorDao.getCounselorListCnt(svo);
 
@@ -330,7 +344,7 @@ public class TaejoonController {
 
    @RequestMapping("/adminBannerList.do")
    public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-         @RequestParam(required = false, defaultValue = "1") int range, @ModelAttribute("search") Search svo)
+         @RequestParam(required = false, defaultValue = "1") int range, Search svo, CouponVO cvo)
          throws Exception {
 
       model.addAttribute("search", svo);
@@ -340,7 +354,7 @@ public class TaejoonController {
 
       model.addAttribute("pagination", svo);
       model.addAttribute("banner", bannerDao.bannerSelectList(svo));
-
+      model.addAttribute("coupon", couponDao.couponSelectList());
       return "admin/bannermanage/adminBannerList";
    }
 
@@ -379,8 +393,6 @@ public class TaejoonController {
       String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
       System.out.println(originalFileName);
       String saveFile = uuid + originalFileName;
-      System.out.println(saveFile);
-      System.out.println(msaveFile);
       if(originalFileName == null) {
          
       }

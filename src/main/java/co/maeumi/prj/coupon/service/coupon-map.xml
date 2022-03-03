@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.coupon.service.CouponMapper">
+	<select id="couponSelectList"
+		resultType="co.maeumi.prj.coupon.service.CouponVO">
+		SELECT *
+		FROM COUPON
+	</select>
+
+	<select id="couponRowNum" resultType="int">
+		SELECT COUNT(*)
+		FROM COUPON
+		WHERE M_EMAIL = #{m_email}
+	</select>
+
+	<select id="couponSelect"
+		resultType="co.maeumi.prj.coupon.service.CouponVO">
+		SELECT *
+		FROM COUPON
+		WHERE M_EMAIL = #{m_email}
+	</select>
+
+	<insert id="couponInsert"
+		parameterType="co.maeumi.prj.coupon.service.CouponVO">
+		<selectKey keyProperty="c_no" resultType="int"
+			order="BEFORE">
+			SELECT
+			NVL(MAX(C_NO),0)+1 FROM COUPON
+		</selectKey>
+		INSERT INTO COUPON VALUES(#{m_email}, #{c_no}, #{c_name}, #{c_price},
+		SYSDATE, SYSDATE+(INTERVAL '2' MONTH))
+	</insert>
+
+	<delete id="couponDelete"
+		parameterType="co.maeumi.prj.coupon.service.CouponVO">
+		DELETE FROM COUPON
+		WHERE M_EMAIL = #{m_email}
+		AND C_NO =
+		#{c_no}
+	</delete>
+</mapper>
