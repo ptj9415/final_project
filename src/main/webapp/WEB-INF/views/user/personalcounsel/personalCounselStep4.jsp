@@ -487,7 +487,7 @@ i[class^=icon-chevron] {
 
 
 
-	<section class="drawer__btn__wrapper">
+	<!-- <section class="drawer__btn__wrapper">
 		<div class="drawer__btn__container">
 			<div class="drawer__btn__1 drawer__btn" data-drawer="__1">
 				<span>Button 1</span>
@@ -522,7 +522,7 @@ i[class^=icon-chevron] {
 				<span>Button 4</span>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />

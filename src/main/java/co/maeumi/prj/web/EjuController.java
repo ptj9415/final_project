@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
@@ -26,7 +28,7 @@ public class EjuController {
 
 	@Autowired
 	private TodayreplyService todayReplyDao;
-	
+
 	@Autowired
 	private PersonalcounselService personalCounselDao;
 
@@ -48,18 +50,23 @@ public class EjuController {
 	@RequestMapping("/personalCounselStep2.do")
 	public String personalCounselStep2(Model model, PersonalcounselVO vo, HttpServletRequest request) {
 		String test = request.getParameter("onecheck");
-		System.out.println(test);
+		System.out.println("step1 : "+test);
 		vo.setCcg_subname(test);
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
-		model.addAttribute("counselorList",counselorList);
+		model.addAttribute("counselorList", counselorList);
+		model.addAttribute("type",test);
 		return "user/personalcounsel/personalCounselStep2";
 	}
 
 	// 개인상담 신청 step3
 	@RequestMapping("/personalCounselStep3.do")
-	public String personalCounselStep3(PersonalcounselVO vo, Model model, HttpServletRequest request) {
-		String test2 = request.getParameter("next");
-		System.out.println(test2);
+	public String personalCounselStep3(PersonalcounselVO vo,@RequestParam("c_email") String c_email, Model model, HttpServletRequest request, HttpSession session) {
+		String type = request.getParameter("onecheck");
+		System.out.println("step2 : "+type);
+		System.out.println(c_email);
+		
+
+
 		return "user/personalcounsel/personalCounselStep3";
 	}
 
@@ -75,6 +82,12 @@ public class EjuController {
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
+	// 페이지 sample page
+		@RequestMapping("/samplePage.do")
+		public String samplePage() {
+			return "user/personalcounsel/samplePage";
+
+		}
 
 	// 오늘의 한마디 메인화면
 	@RequestMapping("/userTodayStory.do")
