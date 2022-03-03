@@ -35,7 +35,6 @@
 .btn1:hover, .btn2:hover, .button:hover {
 	background-color: skyblue;
 	color: white;
-	'
 }
 
 .all {

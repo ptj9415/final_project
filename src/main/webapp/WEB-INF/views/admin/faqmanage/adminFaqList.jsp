@@ -57,41 +57,26 @@ h3 {
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-#membertable {
+#faqTable {
 	text-align: center;
-}
-
-#membertable {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
 
-/* 기존 */
-.wrap {
-	border: 1px solid #9282CD;
-	padding-top: 20px;
-	padding-bottom: 30px;
-	width: 1400px;
+.button:hover {
+	background-color: skyblue;
+	color: white;
 }
 
-.filterinput {
-	border: 1px solid #CED4DA;
-	padding: 0;
+.button {
+	margin-left: 20px;
+	border: 1px solid skyblue;
+	background-color: rgba(0, 0, 0, 0);
+	color: skyblue;
+	padding: 5px;
+	border: 1px solid skyblue;
 }
 
-th, td {
-	border: 1px solid #3C3C8C;
-	height: 30px;
-}
-
-button {
-	width: 70px;
-	height: 26px;
-}
-
-.color:hover {
-	background: linear-gradient(to left, #BEAEE2, #F7DBF0);
-}
 
 /* 삭제 Swal 디자인  */
 #swal2-title {
@@ -163,6 +148,7 @@ button {
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 	<br>
 
@@ -192,7 +178,7 @@ button {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="membertable">
+							<table class="table table-hover text-nowrap" id="faqTable">
 								<thead>
 									<tr>
 										<th style="width: 150px">작성자</th>
@@ -210,9 +196,9 @@ button {
 											<td>${faq.f_wdate}</td>
 											<!-- 수정 / 삭제 부분은 클릭 안되게  -->
 											<td onclick="event.cancelBubble=true;"><button
-													type="button" name="update" id="update"
+													type="button" name="update" id="update" class="button"
 													onclick="location.href='adminFaqUpdateForm.do?f_no=${faq.f_no }';">수정</button>
-												<button type="button" name="delete" id="delete"
+												<button type="button" name="delete" id="delete" class="button"
 													onclick="deleteFnc('${faq.f_no}')">삭제</button></td>
 										</tr>
 									</c:forEach>
@@ -224,7 +210,7 @@ button {
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"
 											onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
-					,'${search.c_name}', '${search.f_title}', '${search.f_wdate}'')">이전</a></li>
+					,'${search.c_name}', '${search.f_title}')">이전</a></li>
 									</c:if>
 									<c:forEach begin="${pagination.startPage}"
 										end="${pagination.endPage}" var="faqNo">
@@ -232,7 +218,7 @@ button {
 										<li
 											class="page-item <c:out value="${pagination.page == faqNo ? 'active' : ''}"/> ">
 											<a class="page-link" href="#"
-											onClick="fn_pagination('${faqNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.c_name}', '${search.f_title}', '${search.f_wdate}')">
+											onClick="fn_pagination('${faqNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.c_name}', '${search.f_title}')">
 												${faqNo} </a>
 										</li>
 									</c:forEach>
@@ -240,7 +226,7 @@ button {
 
 										<li class="page-item"><a class="page-link" href="#"
 											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
-					,'${search.c_name}', '${search.f_title}', '${search.f_wdate}')">다음</a></li>
+					,'${search.c_name}', '${search.f_title}')">다음</a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -252,8 +238,7 @@ button {
 	</section>
 
 	<script>
-		function fn_prev(page, range, rangeSize, listSize, c_name, f_title,
-				f_wdate) {
+		function fn_prev(page, range, rangeSize, listSize, c_name, f_title) {
 
 			var page = ((range - 2) * rangeSize) + 1;
 			var range = range - 1;
@@ -264,34 +249,29 @@ button {
 			url = url + "&listSize=" + listSize;
 			url = url + "&c_name=" + c_name;
 			url = url + "&f_title=" + f_title;
-			url = url + "&f_wdate=" + f_wdate;
 			location.href = url;
 		}
 
-		function fn_pagination(page, range, rangeSize, listSize, c_name, f_title,
-				f_wdate) {
+		function fn_pagination(page, range, rangeSize, listSize, c_name, f_title) {
 
-			var url = "adminMemberList.do";
+			var url = "adminFaqList.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			url = url + "&listSize=" + listSize;
 			url = url + "&c_name=" + c_name;
 			url = url + "&f_title=" + f_title;
-			url = url + "&f_wdate=" + f_wdate;
 			location.href = url;
 		}
 
-		function fn_next(page, range, rangeSize, listSize, c_name, f_title,
-				f_wdate) {
+		function fn_next(page, range, rangeSize, listSize, c_name, f_title) {
 			var page = parseInt((range * rangeSize)) + 1;
 			var range = parseInt(range) + 1;
-			var url = "adminMemberList.do";
+			var url = "adminFaqList.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			url = url + "&listSize=" + listSize;
 			url = url + "&c_name=" + c_name;
 			url = url + "&f_title=" + f_title;
-			url = url + "&f_wdate=" + f_wdate;
 			location.href = url;
 		}
 
@@ -300,13 +280,13 @@ button {
 			var listSize = $("#listSize option:selected").val();
 
 			if (listSize == 10) {
-				var url = "adminMemberList.do?startPage=" + startPage
+				var url = "adminFaqList.do?startPage=" + startPage
 						+ "&listSize=" + listSize
 			} else if (listSize == 15) {
-				var url = "adminMemberList.do?startPage=" + startPage
+				var url = "adminFaqList.do?startPage=" + startPage
 						+ "&listSize=" + listSize
 			} else if (listSize == 20) {
-				var url = "adminMemberList.do?startPage=" + startPage
+				var url = "adminFaqList.do?startPage=" + startPage
 						+ "&listSize=" + listSize
 			}
 			location.href = url;
@@ -315,10 +295,9 @@ button {
 		$(document).on('click', '#btnSearch', function(e) {
 			e.preventDefault();
 
-			var url = "adminMemberList.do";
+			var url = "adminFaqList.do";
 			url = url + "?c_name=" + $('#c_name').val();
 			url = url + "&f_title=" + $('#f_title').val();
-			url = url + "&f_wdate=" + $('#f_wdate').val();
 			location.href = url;
 			console.log(url);
 

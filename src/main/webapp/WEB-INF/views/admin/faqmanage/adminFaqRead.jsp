@@ -54,7 +54,7 @@ button {
 	</div>
 	<button type="button" id="button"
 		style="float: right; margin-right: 500px; margin-top: 20px"
-		onclick="location.href='faqList.do'">돌아가기</button>
+		onclick="location.href='adminFaqList.do'">돌아가기</button>
 	<input type="hidden" name="f_no" id="f_no" value="${faqRead.f_no}">
 </body>
 </html>

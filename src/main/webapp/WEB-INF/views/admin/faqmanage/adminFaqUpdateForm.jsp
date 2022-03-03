@@ -13,7 +13,7 @@
 	padding-top: 20px;
 	padding-bottom: 30px;
 	width: 1400px;
-	height: 600px;
+	height: 800px;
 }
 
 th, td {
@@ -55,10 +55,10 @@ button {
 		</div>
 		<button type="button" id="button"
 			style="float: right; margin-right: 120px; margin-top: 20px"
-			onclick="location.href='faqList.do'">돌아가기</button>
+			onclick="location.href='adminFaqList.do'">돌아가기</button>
 		<button type="submit" id="submit" style="float: right; margin-top: 20px">등록하기</button>
 		<input type="hidden" name="f_no" id="f_no" value="${faqSelect.f_no}">
 	</form>
-
+<br><br><br><br>
 </body>
 </html>

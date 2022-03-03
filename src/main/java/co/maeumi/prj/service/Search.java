@@ -12,16 +12,19 @@ public class Search extends Paging {
 	private String m_email;
 	private String m_phone;
 	
-	// 자유 게시판
+	// 자유 게시판 
 	private String b_email;
 	private String b_title;
 	private String b_subject;
 	private String b_wdate;
-
-	private String f_title;
 	
-
+	// faqVO
+	private String f_title;
+	private String f_subject;
+	private String f_email;
+	private String f_wdate;
 	private String c_name;
+	
 	private String c_gender;
 	private String c_grade;
 	private String c_birthdate;

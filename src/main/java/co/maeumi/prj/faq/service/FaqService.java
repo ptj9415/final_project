@@ -12,7 +12,7 @@ public interface FaqService {
 	int faqDelete(FaqVO vo);
 	List<FaqVO> faqSearch(FaqVO vo); // 검색
 	
-	// 검색 & 페이징
+	// 검색
 	int getFaqListCnt(Search svo) throws Exception;
 	public List<FaqVO> FaqSearchselect(Search svo) throws Exception;
 }
