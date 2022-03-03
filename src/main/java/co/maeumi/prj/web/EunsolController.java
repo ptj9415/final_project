@@ -247,8 +247,7 @@ public class EunsolController {
 		svo.pageinfo(page, range, listCnt);
 
 		model.addAttribute("pagination", svo);
-		model.addAttribute("faq", faqDao.FaqSearchselect(svo));
-		List<FaqVO> list = faqDao.faqSelectList();
+		List<FaqVO> list = faqDao.FaqSearchselect(svo); // 페이징 처리 할 수 있게
 
 		// 날짜 뒤에 시간 자르고 년-월-일만
 		for (int i = 0; i < list.size(); i++) {
