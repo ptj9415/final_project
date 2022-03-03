@@ -64,6 +64,18 @@ h3 {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
+
+#managebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+	width: 65px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -177,7 +189,7 @@ h3 {
 											<td>2개</td>
 											<td>${member.m_type }</td>
 											<td><button type="button" class="managebtn"
-													id="managebtn" name="${member.m_nickname }">관리</button></td>
+													id="managebtn" name="${member.m_nickname }" onclick="location.href='adminMemberDetail.do?m_email=${member.m_email}'">관리</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
