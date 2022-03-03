@@ -3,62 +3,55 @@
 <mapper namespace="co.maeumi.prj.board.service.BoardMapper">
 
 	<select id="boardSelectList" resultType="co.maeumi.prj.board.service.BoardVO">
-		SELECT * FROM(
-		SELECT B.*, C.C_NAME
-		FROM BOARD B, COUNSELOR C 
-		WHERE B.B_EMAIL = C.C_EMAIL
-		UNION ALL
-		SELECT B.*, M.M_NICKNAME
+		SELECT B.*, M.*
 		FROM BOARD B, MEMBER M
-		WHERE B.B_EMAIL = M.M_EMAIL)
-		ORDER BY B_NO DESC
+		WHERE B.B_EMAIL = M.M_EMAIL
+		ORDER BY B.B_NO DESC
 	</select>
 
 	<select id="boardSelect" resultType="co.maeumi.prj.board.service.BoardVO">
-		SELECT * FROM(
-		SELECT B.*, C.C_NAME
-		FROM BOARD B, COUNSELOR C 
-		WHERE B.B_EMAIL = C.C_EMAIL
-		UNION ALL
-		SELECT B.*, M.M_NICKNAME
+		SELECT B.*, M.*
 		FROM BOARD B, MEMBER M
-		WHERE B.B_EMAIL = M.M_EMAIL)
-		WHERE B_NO = #{b_no}
+		WHERE B.B_EMAIL = M.M_EMAIL
+		AND B_NO = #{b_no}
 	</select>
 
 	<delete id="boardDelete" parameterType="co.maeumi.prj.board.service.BoardVO">
 		DELETE FROM BOARD WHERE B_NO = #{b_no}
 	</delete>
 
-	<!-- 검색 -->
-	<select id="boardSearch" resultType="co.maeumi.prj.board.service.BoardVO">
-		SELECT * FROM BOARD
-		<!--  맨 앞에 있는 연산자를(AND 또는 OR) 제거 -->
-		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="b_email != ''"> AND B_EMAIL LIKE '%' || #{b_email} || '%' </if>
-			<if test="b_title != ''"> AND B_TITLE LIKE '%' || #{b_title} || '%' </if>
-			<if test="b_subject != 'null'"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%'</if>
-			<if test="b_wdate != 'null'"> AND TO_CHAR(B_WDATE,'YY-MM-DD') like '%' || #{b_wdate} || '%'</if>
-		</trim>	
-		ORDER BY B_NO DESC
-	</select>
-
-	<!--  페이징 처리 & 검색  -->
-	<select id="boardSearchselect"
+		<!-- 검색 조건에 맞는 데이터 리스트 -->
+	<select id="boardSearchSelect"
 		resultType="co.maeumi.prj.board.service.BoardVO">
 		SELECT *
-		FROM (SELECT ROWNUM RN, A.*
-		FROM (SELECT *
-		FROM MEMBER <trim prefix="where" prefixOverrides="and | or">
-				<if test="b_email != ''"> AND B_EMAIL LIKE '%' || #{b_email} || '%' </if>
+		FROM(SELECT ROWNUM RN, A.*
+		FROM(SELECT B.*, M.* FROM BOARD B, MEMBER M
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="m_nickname != ''"> AND M_NICKNAME LIKE '%' || #{m_nickname} || '%' </if>
+			<if test="b_subject != ''"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%' </if>
 			<if test="b_title != ''"> AND B_TITLE LIKE '%' || #{b_title} || '%' </if>
-			<if test="b_subject != 'null'"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%'</if>
-			<if test="b_wdate != 'null'"> AND TO_CHAR(B_WDATE,'YY-MM-DD') like '%' || #{b_wdate} || '%'</if>
+			<if test="b_wdate != ''"> AND TO_CHAR(B_WDATE, 'YYYY-MM-DD') = #{b_wdate} </if>
+			AND B.B_EMAIL = M.M_EMAIL
 		</trim>
-		) A
+		)A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+
+	<!-- 검색 조건에 맞는 데이터 개수 -->
+	<select id="getBoardListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD B, MEMBER M
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="m_nickname != ''"> AND M_NICKNAME LIKE '%' || #{m_nickname} || '%' </if>
+			<if test="b_subject != ''"> AND B_SUBJECT LIKE '%' || #{b_subject} || '%' </if>
+			<if test="b_title != ''"> AND B_TITLE LIKE '%' || #{b_title} || '%' </if>
+			<if test="b_wdate != ''"> AND TO_CHAR(B_WDATE, 'YYYY-MM-DD') = #{b_wdate} </if>
+			AND B.B_EMAIL = M.M_EMAIL
+		</trim>
+	</select>
+
+	<!-- 페이징은 자바에서 직접 처리 sql ㄴㄴ -->
 	
 	<!-- 조회수 -->
 	<update id="updateCount" parameterType="int">

@@ -13,8 +13,7 @@ public class BoardVO {
 	private String b_email;
 	private String b_wdate;
 	private String m_nickname;
-	private String c_name;
+	private String m_eamil;
 	private int b_hit; 	// 조회수
-	private String b_anony;		// 글 익명 처리
-	private String b_onlyco;	// 댓글 상담사만 가능
+	private String b_anony;	 // 글 익명 처리
 }

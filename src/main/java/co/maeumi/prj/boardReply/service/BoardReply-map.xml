@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.maeumi.prj.boardReply.service.BoardReply-map">
+<mapper namespace="co.maeumi.prj.boardReply.service.BoardReplyMapper">
+
+<!-- 댓글 조회 -->
+<select id="boardReplyList" resultType="co.maeumi.prj.board.service.BoardVO">
+	SELECT * FROM(
+	SELECT B.*, B.B_NO
+	FROM BOARD B, BOARD_REPLY BR 
+	WHERE B.B_NO = BR.BR_NO
+	UNION ALL
+	SELECT BR.*, M.M_NICKNAME
+	FROM BOARD_REPLY BR, MEMBER M
+	WHERE BR.BR_EMAIL = M.M_EMAIL)
+	ORDER BY BR_NO DESC
+
+
+</select>
+
+
+
+
+
+
+
+
+
+
 </mapper>

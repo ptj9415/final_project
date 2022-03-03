@@ -16,13 +16,13 @@ public class Search extends Paging {
 	private String b_email;
 	private String b_title;
 	private String b_subject;
-	private String b_wdate;
+	private String b_wdate = "all";
 	
 	// faqVO
 	private String f_title;
 	private String f_subject;
 	private String f_email;
-	private String f_wdate;
+	private String f_wdate = "all";
 	private String c_name;
 	
 	private String c_gender;

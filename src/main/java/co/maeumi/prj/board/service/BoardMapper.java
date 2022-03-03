@@ -15,6 +15,6 @@ public interface BoardMapper {
 	int userBoardUpdate(BoardVO vo); // user 자유게시판 수정 등록
 	
 	// 검색 & 페이징 처리
+	public List<BoardVO> boardSearchSelect(Search svo) throws Exception;
 	int getBoardListCnt(Search svo) throws Exception;
-	public List<MemberVO> boardSearchselect(Search svo) throws Exception;
 }

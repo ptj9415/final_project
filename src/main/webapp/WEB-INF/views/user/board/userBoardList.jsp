@@ -100,7 +100,7 @@
 							<p class="card-text" style="text-align: right;">익명</p>
 							</c:if>
 							<c:if test="${board.b_anony eq 'F' }">
-							<p class="card-text" style="text-align: right;">${board.c_name}</p>
+							<p class="card-text" style="text-align: right;">${board.m_nickname}</p>
 							</c:if>
 						</div>
 					</div>

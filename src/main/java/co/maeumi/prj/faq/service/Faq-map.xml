@@ -6,8 +6,7 @@
 		resultType="co.maeumi.prj.faq.service.FaqVO">
 		SELECT F.*, C.*
 		FROM FAQ F, COUNSELOR C
-		WHERE F.F_EMAIL =
-		C.C_EMAIL
+		WHERE F.F_EMAIL = C.C_EMAIL
 		ORDER BY F.F_NO DESC
 	</select>
 
@@ -15,8 +14,7 @@
 		resultType="co.maeumi.prj.faq.service.FaqVO">
 		SELECT F.*, C.C_NAME
 		FROM FAQ F, COUNSELOR C
-		WHERE F.F_EMAIL
-		= C.C_EMAIL
+		WHERE F.F_EMAIL = C.C_EMAIL
 		AND F_NO = #{f_no}
 	</select>
 
@@ -28,8 +26,7 @@
 			SELECT NVL(MAX(F_NO),0)+1 FROM FAQ
 		</selectKey>
 		INSERT INTO FAQ (F_NO, F_TITLE, F_SUBJECT, F_EMAIL)
-		VALUES(#{f_no},
-		#{f_title}, #{f_subject}, #{f_email})
+		VALUES(#{f_no}, #{f_title}, #{f_subject}, #{f_email})
 	</insert>
 
 	<update id="faqUpdate"
@@ -44,21 +41,8 @@
 		DELETE FROM FAQ WHERE F_NO = #{f_no}
 	</delete>
 
-	<!-- 게시물 검색 -->
-	<select id="faqSearch"
-		resultType="co.maeumi.prj.faq.service.FaqVO"
-		parameterType="co.maeumi.prj.faq.service.FaqVO">
-		SELECT COUNT(*)
-		FROM FAQ F, COUNSELOR C
-		<trim prefix="where" prefixOverrides="and | or">
-			<if test="c_name != ''"> AND C_NAME LIKE '%' || #{c_name} || '%' </if>
-			<if test="f_title != ''"> AND F_TITLE LIKE '%' || #{f_title} || '%' </if>
-			AND F.F_EMAIL = C.C_EMAIL
-		</trim>
-	</select>
-
 	<!-- 검색 조건에 맞는 데이터 리스트 -->
-	<select id="FaqSearchselect"
+	<select id="FaqSearchSelect"
 		resultType="co.maeumi.prj.faq.service.FaqVO">
 		SELECT *
 		FROM(SELECT ROWNUM RN, A.*

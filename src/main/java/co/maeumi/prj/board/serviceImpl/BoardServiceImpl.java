@@ -54,13 +54,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public List<BoardVO> boardSearchSelect(Search svo) throws Exception {
+		return map.boardSearchSelect(svo);
+	}
+	
+	@Override
 	public int getBoardListCnt(Search svo) throws Exception {
 		return map.getBoardListCnt(svo);
 	}
 
-	@Override
-	public List<MemberVO> boardSearchselect(Search svo) throws Exception {
-		return map.boardSearchselect(svo);
-	}
 
 }

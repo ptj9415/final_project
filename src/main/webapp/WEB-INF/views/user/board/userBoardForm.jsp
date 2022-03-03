@@ -62,8 +62,6 @@ button {
 					</select>&nbsp; 
 					<label><input type="checkbox" id="anony" name="anony"> 닉네임 비공개 &nbsp;  </label>
 					<input type="hidden" id="b_anony" name="b_anony" value="F">
-					<label><input type="checkbox" id="onlyco" name="onlyco"> 상담사만 댓글 작성 가능 </label>
-					<input type="hidden" id="b_onlyco" name="b_onlyco" value="F">
 					</td>
 					
 					<tr>
@@ -82,7 +80,7 @@ button {
 	<br><br>
 	<script>
 	
-	// 글쓴이 익명, 댓글 상담사 체크 여부
+	// 글쓴이 익명 체크 여부
 	$('#anony').change( function() {
 		if($('#anony').is(':checked')) {
 			$('#b_anony').val('T');
@@ -90,15 +88,6 @@ button {
 			$('#b_anony').val('F');
 		}
 	});
-	
-	$('#onlyco').change( function() {
-		if($('#onlyco').is(':checked')) {
-			$('#b_onlyco').val('T');
-		} else {
-			$('#b_onlyco').val('F');
-		}
-	});
-	
 
 	</script>
 </body>

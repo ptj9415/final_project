@@ -47,13 +47,14 @@ public class FaqServiceImpl implements FaqService {
 	}
 
 	@Override
+	public List<FaqVO> FaqSearchSelect(Search svo) throws Exception {
+		return map.FaqSearchSelect(svo);
+	}
+	
+	@Override
 	public int getFaqListCnt(Search svo) throws Exception {
 		return map.getFaqListCnt(svo);
 	}
 
-	@Override
-	public List<FaqVO> FaqSearchselect(Search svo) throws Exception {
-		return map.FaqSearchselect(svo);
-	}
 
 }

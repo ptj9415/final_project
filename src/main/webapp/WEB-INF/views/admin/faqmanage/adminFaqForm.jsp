@@ -30,7 +30,7 @@ button {
 	<div
 		style="border: 1px solid; width: 1400px; padding-bottom: 10px; padding-top: 10px; margin-bottom: 10px">FAQ
 		등록</div>
-			<form id="frm" action="faqResister.do" method="post">
+			<form id="frm" action="adminFaqResister.do" method="post">
 	<div class="wrap" align="center">
 		<table>
 			<thead>
@@ -49,7 +49,7 @@ button {
 			</tbody>
 		</table>
 	</div>
-		<button type="button" id="button" style="float: right; margin-right: 120px; margin-top: 20px" onclick="location.href='faqList.do'">돌아가기</button>
+		<button type="button" id="button" style="float: right; margin-right: 120px; margin-top: 20px" onclick="location.href='adminFaqList.do'">돌아가기</button>
 		<button type="submit" id="button" style="float: right;  margin-top: 20px" >등록하기</button>
 		</form>
 </body>
