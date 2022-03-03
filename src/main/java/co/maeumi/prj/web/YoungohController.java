@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +70,7 @@ public class YoungohController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
 			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", "/prj/resources/fileupload/" + savedFileName);
+			jsonObject.addProperty("url", request.getContextPath() +"/resources/fileupload/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 
@@ -114,20 +115,15 @@ public class YoungohController {
 		}
 
 		// 서머노트 코드 원본
-		String origincode = req.getParameter("summernote");
-		System.out.println(origincode);
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-		if (origincode.contains("src=")) {
-			String editedcode = origincode.substring(0, origincode.indexOf("src=") + 5) + "editor/"
-					+ origincode.substring(origincode.indexOf("src=") + 31);
-			System.out.println(editedcode);
-			vo.setGc_infos(editedcode);
-		} else {
-			vo.setGc_infos(origincode);
-		}
+		
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() +"/resources/fileupload/","therapyEditor/");
+		vo.setGc_infos(result);
+		
 		groupCounselDao.insertGroupCounsel(vo);
-		return "counselor/groupcounselmanage/counselorGroupList";
+		return "redirect:counselorGroupList.do";
 	}
 
 	@RequestMapping("/counselorGroupList.do")
@@ -210,7 +206,7 @@ public class YoungohController {
 		} else {
 			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); // 전체 수,
 																												// start,
-																												// end
+		 																										// end
 		}
 
 		page.setGc_title((String) session.getAttribute("gc_title"));
@@ -279,7 +275,6 @@ public class YoungohController {
 	@RequestMapping("/selectFunc.do")
 	@ResponseBody
 	public GroupcounselVO selectFunc(Model model, HttpServletRequest request, GroupcounselVO vo) {
-		String gr_no = request.getParameter("gr_no");
 		GroupcounselVO gvo = groupCounselDao.selectgroupRserve(vo);
 		return gvo;
 	}
@@ -397,7 +392,7 @@ public class YoungohController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
 			multipartFile.transferTo(mtargetFile); //다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", "/prj/resources/fileupload/"+savedFileName);
+			jsonObject.addProperty("url", request.getContextPath() +"/resources/fileupload/"+savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 				
@@ -438,11 +433,11 @@ public class YoungohController {
 		//이미지 파일일 경우 코드 잘라서 쓰기.
 		//홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 		
-		String result = origincode.replaceAll("/prj/resources/fileupload/","therapyEditor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/","therapyEditor/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
-		return "admin/therapy/therapyList";
+		return "redirect:admintherapy.do";
 	}
 	
 	@RequestMapping("/therapyInsertForm.do")
@@ -484,7 +479,7 @@ public class YoungohController {
 		           }
 		
 				String origincode = request.getParameter("summernote");
-				String result = origincode.replaceAll("/prj/resources/fileupload/","therapyEditor/");
+				String result = origincode.replaceAll(request.getContextPath() +"/resources/fileupload/","therapyEditor/");
 				vo.setT_subject(result);
 				
 				therapyDao.UpdateTherapy(vo);
