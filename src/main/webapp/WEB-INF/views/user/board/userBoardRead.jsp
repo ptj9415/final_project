@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,6 @@
 	padding-top: 20px;
 	padding-bottom: 30px;
 	width: 1400px;
-	height: 900px;
 }
 
 th, td {
@@ -22,19 +22,24 @@ th, td {
 	height: 30px;
 }
 
-#button {
+#button, #replySubmit {
 	margin-left: 20px;
 	border: 1px solid skyblue;
 	background-color: rgba(0, 0, 0, 0);
 	color: skyblue;
 	padding: 5px;
 	border: 1px solid skyblue;
-	margin-top: 30px;
 }
 
-#button:hover {
+#button:hover, replySubmit:hover {
 	background-color: skyblue;
 	color: white;
+}
+
+#br_content {
+	height: 70px;
+	width: 1280px;
+	margin-bottom: 30px;
 }
 </style>
 </head>
@@ -42,8 +47,16 @@ th, td {
 	<div class="wrap2" align="center">
 		<div class="titleDiv" style="border-bottom: 1px solid black">
 			<h3 style="text-align: left; margin-left: 20px;">${boardRead.b_title}</h3>
-			<a style="float: right; margin-right: 20px;">${boardRead.b_wdate}
-				| ${boardRead.c_name} | ${boardRead.b_hit}</a> <br>
+				<c:choose>
+					<c:when test="${board.b_anony eq 'F' }">
+						<a class="card-text" style="float: right; margin-right: 20px;"> 🕒 ${boardRead.b_wdate} &nbsp;
+				| &nbsp; 👱‍♀️ ${board.m_nickname} &nbsp; | &nbsp; 💕 ${boardRead.b_hit}</a> <br>
+					</c:when>
+					<c:otherwise>
+						<a class="card-text" style="float: right; margin-right: 20px;"> 🕒 ${boardRead.b_wdate} &nbsp;
+				| &nbsp; 👱‍♀️ 익명 &nbsp; | &nbsp; 💕 ${boardRead.b_hit}</a> <br>
+					</c:otherwise>
+				</c:choose>
 		</div>
 		<div>
 			<pre
@@ -64,36 +77,84 @@ th, td {
 					<button id="button" name="button" type="button"
 						onclick="deleteFnc('${boardRead.b_no}');">삭제</button>
 				</div>
+				<br>
+				<br>
 			</c:if>
 		</div>
-
-
-		<!--  댓글  -->
-		<div id="reply">
-			<ol class="replyList">
-
-				<c:if test="${not empty reply.content}">
-					<hr align="left" style="border: solid 1px #C29F6D; width: 105%;">
-					<br>
-					<p style="color: #AE8B59; font-weight: bold; font-size: 20px">댓글</p>
-					<br>
-						${reply.content }
+			<c:if test="${not empty email }">
+		<button type="button" id="button"
+			style="float: right; margin-right: 200px; margin-top: 20px"
+			onclick="location.href='userBoardForm.do'">글쓰기</button>
 			</c:if>
+		<button type="button" id="button"
+			style="float: right; margin-right: 10px; margin-top: 20px"
+			onclick="location.href='userBoardList.do'">돌아가기</button>
 
+		<br> <br> <br>
+
+		<!-- 댓글 목록 -->
+		<div div align="left">
+			<ol class="replyList">
+				<p style="text-align: left; margin-left: 40px;">💌 댓글</p>
+				<hr align="left"width: 90%>
+				
+				<c:set var="replyContent" value="${boardReplyList }" />
+				<c:choose>
+					<c:when test="${not empty replyContent}">
+						<c:forEach var="boardReply" items="${boardReplyList}">
+							<div style="text-align: left; margin-left: 40px;">
+								<p>👱‍♀️ ${boardReply.br_name} &emsp;
+								   <a>🕒 <fmt:parseDate value="${boardReply.br_wdate}" var= "replyDate" pattern="yyyy-MM-dd"/>
+								   <fmt:formatDate value="${replyDate}" pattern="yyyy-MM-dd"/></a>
+								   &emsp; &emsp; &emsp; &emsp;
+								<c:if test="${boardReply.br_email eq email}">
+									<button id="button" name="button" type="button"
+										onclick="delReply('${boardReply.br_no}');">삭제</button>
+								</c:if>
+								<p>
+									${boardReply.br_content}
+									<hr align="left"width: 90%>	
+								</p>
+								<br>
+							
+							</div>
+						</c:forEach>
+					</c:when>
+					
+					<c:otherwise>
+						<br>
+						<br>
+						<p align="center">아직 댓글이 없어요 😥 댓글을 작성해 보세요 🥰</p>
+						<br>
+					</c:otherwise>
+				</c:choose>
 			</ol>
 		</div>
+		<!-- 댓글 작성 -->
+		<c:if test="${not empty email}">
+			<div>
+				<p style="text-align: left; margin-left: 60px;">👱‍♀️ 작성자 :
+					${nickname}</p>
+				<input type="hidden" id="br_name" name="br_name" value=" ${br_name}" />
+				<input type="hidden" id="br_email" name="br_email"
+					value=" ${br_email}" /> <input type="text" id="br_content"
+					name="br_content" placeholder="댓글 내용을 작성하세요." /> <span><br>
+					<button type="button" id="replySubmit" name="replySubmit">등록</button>
+			</div>
+			<br>
+		</c:if>
 
-
+		<c:if test="${empty email}">
+			<hr align="left"width: 90%>
+			<br>
+			<br>
+			<br>
+			<p align="center">사용자만 댓글 등록이 가능합니다😥</p>
+			<br>
+			<br>
+		</c:if>
 	</div>
-	<button type="button" id="button"
-		style="float: right; margin-right: 500px; margin-top: 20px"
-		onclick="location.href='userBoardForm.do'">글쓰기</button>
-	<button type="button" id="button"
-		style="float: right; margin-right: 10px; margin-top: 20px"
-		onclick="location.href='userBoardList.do'">돌아가기</button>
-	<br>
-	<br>
-	<br>
+
 	<br>
 	<br>
 
@@ -130,6 +191,54 @@ th, td {
 		  }
 		})
 	}
+	
+	
+	
+	// 댓글 등록
+	$('#replySubmit').on('click', function() {
+		var b_no = $('#b_no').val();
+		var br_no = $('#br_no').val();
+		var br_content = $('#br_content').val();
+		$.ajax({
+			url : 'boardReplyResister.do',
+			data : {
+				b_no : b_no,
+				br_no : br_no,
+				br_content : br_content
+			},
+			dataType : 'text',
+			success : function(responseText) {
+				console.log(responseText);
+				location.reload();
+			},
+			error : function() {
+				alert("댓글 등록 실패");
+			}
+		});
+	});
+
+	
+	
+	// 댓글 삭제
+	function delReply(br_no) {
+		console.log("댓글 번호" + br_no)
+		$.ajax ({
+			url : "boardReplyDelete.do",
+			type : "post",
+			data : {
+				br_no : br_no				
+			},
+			dataType :  "text",
+			success : function() {
+				location.reload();
+			},
+			error : function() {
+				alret("댓글 삭제 실패")
+			}
+})
+	}
+	
+	
 	
 </script>
 </body>
