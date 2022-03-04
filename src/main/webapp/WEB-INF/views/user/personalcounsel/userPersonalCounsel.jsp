@@ -419,8 +419,8 @@
 				<label class="card-accordion-label" for="card-1">분노/우울</label>
 				<div class="card-accordion-content">
 					<label><input name="onecheck" type="checkbox" value="우울/불안"
-						onclick="doOpenCheck(this);"> 우울/불안</label><br> <label><input
-						name="onecheck" type="checkbox" value="분노"
+						onclick="doOpenCheck(this);"> 우울/불안</label><br> 
+						<label><input name="onecheck" type="checkbox" value="분노"
 						onclick="doOpenCheck(this);"> 분노</label><br> <label><input
 						name="onecheck" type="checkbox" value="무기력 자존감상실"
 						onclick="doOpenCheck(this);"> 무기력 자존감상실</label><br> <label><input
@@ -459,8 +459,7 @@
 					<input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label>
 						<br> 
 					<label>
-					<input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label>
-						<br>
+					<input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label><br>
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 
 				</div>
@@ -484,12 +483,12 @@
 			}
 		}
 
-		$('#next-btn').click(function() {
+	/* 	$('#next-btn').click(function() {
 			step1.submit();
 		/* 	var selected = $("input[name='onecheck']:checked").val();
-			console.log(selected); */
+			console.log(selected); 
 			location.href = 'personalCounselStep2.do'
-		});
+		}); */
 	</script>
 </body>
 </html>

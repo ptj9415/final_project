@@ -253,6 +253,21 @@
 .btn btn-primary px-4 py-3 mt-3 {
 	heigth: 30px;
 }
+
+#p_kakao_text{
+	border: 0px;
+	width:50%;
+}
+
+#p_zoom_text{
+	border: 0px;
+	width:50%;
+}
+
+#p_phone_text{
+	border:0px;
+	width:50%;
+}
 </style>
 </head>
 <body>
@@ -330,36 +345,85 @@
 		</div>
 	</div>
 
-<form id="step2" action="personalCounselStep3.do">
-
+<form id="step2" action="personalCounselStep3.do" method="post">
 	<div class="counselor-list">
-	<c:forEach items="${counselorList }" var="counselorList">
 		<div class="row">
+	<c:forEach items="${counselorList }" var="counselorList">
 			<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
 				<div class="staff">
-					<div class="img" style="background-image: url(images/team-4.jpg);"></div>
+				<!-- 	<div class="img" style="background-image: url(resources/users/images/kitty.jpg);"></div> -->
 					<div class="text px-4 pt-4">
 						<h3>${counselorList.c_name}</h3>
 						<span class="position mb-2">${counselorList.c_grade}</span>
-							
 						
-						<div class="faded">
-							<p>${counselorList.p_kakaoprice}</p>
-							<p>${counselorList.p_zoomprice}</p>
-						</div>
-						<input type="button" class="btn btn-primary px-4 py-3 mt-3" value="선택하기">
+							<input type="hidden" id="p_kakao" value="${counselorList.p_kakao }">
+						<%-- 	<input type="text" id="p_kakao_text" value="채팅">
+							<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
+							<input type="text" id="p_kakao_text" value="원"> --%>
+							
+							<c:if test="${counselorList.p_kakao eq 1}">
+								<input type="text" id="p_kakao_text" value="채팅">
+								<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
+								<input type="text" id="p_kakao_text" value="원">
+							</c:if>
+							
+							<c:if test="${counselorList.p_kakao eq 0}">
+								<input type="hidden" id="p_kakao_text" value="채팅">
+								<input type="hidden" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
+								<input type="hidden" id="p_kakao_text" value="원">
+							</c:if>
+							
+							<br>
+							<br>
+							
+							<input type="hidden" id="p_zoom" value="${counselorList.p_zoom }">
+							
+							<c:if test="${counselorList.p_zoom eq 1}">
+								<input type="text" id="p_zoom_text" value="화상"> 
+								<input type="text" id="p_zoom_text" value="${counselorList.p_zoomprice}">
+								<input type="text" id="p_zoom_text" value="원">
+							</c:if>
+							
+							<c:if test="${counselorList.p_zoom eq 0}">
+								<input type="hidden" id="p_zoom_text" value="화상"> 
+								<input type="hidden" id="p_zoom_text" value="${counselorList.p_zoomprice}">
+								<input type="hidden" id="p_zoom_text" value="원">
+							</c:if>
+							
+							<br>
+							<br>
+							
+								<input type="hidden" id="p_phone" value="${counselorList.p_phone }">
+							<c:if test="${counselorList.p_phone eq 0}">
+								<input type="hidden" id="p_phone_text" value="전화">
+								<input type="hidden" id="p_phone_text" value="${counselorList.p_phoneprice}">
+								<input type="hidden" id="p_phone_text" value="원">
+							<%-- <p>전화 ${counselorList.p_phoneprice}</p> --%>
+							</c:if>
+							
+							<c:if test="${counselorList.p_phone eq 1}">
+								<input type="text" id="p_phone_text" value="전화">
+								<input type="text" id="p_phone_text" value="${counselorList.p_phoneprice}">
+								<input type="text" id="p_phone_text" value="원">
+							<%-- <p>전화 ${counselorList.p_phoneprice}</p> --%>
+							</c:if>
+					
+						<input type="checkbox" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}" >
 					</div>
 				</div>
 			</div>
-		</div>
 	</c:forEach>
+		</div>
+	<input type="hidden" id="c_email" name="onecheck" value="${type }"> 
 	</div>
-</form>
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />
-	<input type="submit" data-page="2" name="next"
+	<input type="submit" data-page="2" name="next" 
 		class="next action-button" id="next-btn" value="Next" />
+</form>
 
+	
+	
 
 	<script>
 		$('#previous-btn').click(function() {
@@ -367,9 +431,50 @@
 		});
 
 		$('#next-btn').click(function() {
+			/* let e_mail = $("input[name=e_mail]:checked").val();
+			$("c_email").attr('value', 이메일값); */
 			step2.submit();
 			location.href = 'personalCounselStep3.do'
 		});
+		
+		function counselorSelect(str){
+			frm.c_email.value=str;
+			frm.submit();
+		};
+		
+	/* 	//채팅
+		var kakaotype = document.querySelector("#p_kakao").value;
+		var typetext = document.getElementById("p_kakao_text");
+		
+		if (kakaotype == 0 ){
+			typetext.type = "hidden";
+			
+		} else {
+			typetext.type="text";
+		};
+		
+		//화상
+		var zoomtype = document.querySelector("#p_zoom").value;
+		
+		var typetext2 = document.getElementById("p_zoom_text");
+		if (zoomtype == 0 ){
+			typetext2.type = "hidden";
+			
+		} else {
+			typetext2.type="text";
+		};
+		
+		//전화
+		var phonetype = document.querySelector("#p_phone").value;
+		var typetext3 = document.getElementById("p_phone_text");
+		if (phonetype == 0 ){
+			typetext3.type = "hidden";
+			
+		} else {
+			typetext3.type="text";
+		}; */
+		
+		
 	</script>
 </body>
 </html>

@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Lato'
-	rel='stylesheet' type='text/css'>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script
-	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <style>
 .md-stepper-horizontal {
 	display: table;
@@ -170,90 +161,192 @@
 	margin-right: 20px;
 }
 
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 .pb-2, .py-2 {
 	margin-top: 100px;
 }
 
-#next-btn {
-	width: 100px;
-	height: 40px;
-	border-radius: 50px;
-	background-color: #468FB6;
-	color: white;
-	border: solid 1px #468FB6;
-	font-size: 14px;
-	cursor: pointer;
-	position: relative;
-}
-
-#next-btn:hover {
-	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
-	transition: 0.3s ease-in-out;
-	cursor: pointer;
-}
-
-#previous-btn {
-	width: 100px;
-	height: 40px;
-	border-radius: 50px;
-	background-color: #468FB6;
-	color: white;
-	border: solid 1px #468FB6;
-	font-size: 14px;
-	cursor: pointer;
-	position: relative;
-}
-
-#previous-btn:hover {
-	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
-	transition: 0.3s ease-in-out;
-	cursor: pointer;
-}
-
-.next-btn-field {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding-left: 100px;
-}
-/*next btn end*/
-
-/*step3*/
-input.type-btn {
-	padding-left: 20px;
-	padding-right: 20px;
-	width: 100px;
-	height: 50px;
-}
-
-div.counsel-type {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/*step 3end*/
-.choice-btn {
-	width: 70%;
+body {
+	font-weight: 400;
+	letter-spacing: 0;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-moz-font-feature-settings: "liga" on;
+	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
 }
 
-.chat-btn {
-	width: 100px;
-	height: 50px;
-	border: 1px solid #468FB6;
+p {
+	display: block;
+	float: right;
+	margin-right: 20px;
+	margin-block-start: 0.5em;
+	margin-block-end: 0.6em;
+	margin-inline-start: 0px;
+	/* margin-inline-end: 0px; */
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+}
+
+.btn {
 	background-color: white;
-	border-radius: 20px;
+	border: 1px solid #468FB6;
+	color: #468FB6;
+	padding: 0.5rem;
+	text-transform: lowercase;
+	border-radius: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-right: 20px;
 }
 
-.chat-img {
-	width: 150px;
-	height: 150px;
+.btn:hover {
+	transition: 0.3s ease-in-out;
+	background-color: #468FB6;
+	color: white;
+	cursor: pointer;
+}
+
+.card__doctor {
+	/* background-color: white;
+    /* border: 1px solid #468FB6; */
+	/* color: #468FB6; */
+	/* padding: 0.5rem;  */
+	text-transform: lowercase;
+	border-radius: 30px;
+	font-size: 0.8em;
+	width: 100%;
+}
+
+.btn--block {
+	display: block;
+	width: 30%;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cards__item {
+	display: flex;
+	padding: 1rem;
+}
+
+@media ( min-width : 40rem) {
+	.cards__item {
+		width: 50%;
+	}
+}
+
+@media ( min-width : 56rem) {
+	.cards__item {
+		width: 33.3333%;
+	}
+}
+
+.card {
+	background-color: white;
+	border-radius: 0.25rem;
+	box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.card:hover .card__image {
+	filter: contrast(100%);
+}
+
+.card__content {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	padding: 1rem;
+}
+
+.cart__person {
+	padding-top: 2%
+}
+
+.card__image {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+	filter: contrast(70%);
+	overflow: hidden;
+	position: relative;
+	transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+}
+
+.card__image::before {
+	content: "";
+	display: block;
+	padding-top: 56.25%;
+}
+
+@media ( min-width : 40rem) {
+	.card__image::before {
+		padding-top: 66.6%;
+	}
+}
+
+.card__image--flowers {
+	background-image: url(https://unsplash.it/800/600?image=82);
+}
+
+.card__image--river {
+	background-image: url(https://unsplash.it/800/600?image=11);
+}
+
+.card__image--record {
+	background-image: url(https://unsplash.it/800/600?image=39);
+}
+
+.card__image--fence {
+	background-image: url(https://unsplash.it/800/600?image=59);
+}
+
+.card__title {
+	color: #696969;
+	font-size: 1.25rem;
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-weight: bolder;
+}
+
+.card__text {
+	flex: 1 1 auto;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+}
+
+.doctor-name {
+	float: right;
+}
+
+.group-menu {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 100px;
 }
 </style>
 </head>
@@ -266,7 +359,7 @@ div.counsel-type {
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 style="color: white">개인상담</h1>
+					<h1 style="color: white">그룹상담</h1>
 				</div>
 			</div>
 		</div>
@@ -278,7 +371,7 @@ div.counsel-type {
 				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
 				<span class="subheading subheading-with-line"><small
 					class="pr-2 bg-white">MAEUMI</small></span>
-				<h2 class="mb-4">개인상담 신청</h2>
+				<h2 class="mb-4">그룹상담 신청</h2>
 			</div>
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
@@ -312,7 +405,7 @@ div.counsel-type {
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active">
+		<div class="md-step">
 			<div class="md-step-circle">
 				<span>3</span>
 			</div>
@@ -332,44 +425,75 @@ div.counsel-type {
 		</div>
 	</div>
 
-	<div class="choice-btn">
-		<div class="row mt-5 pt-4">
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">채팅</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
+	<div class="group-menu">
+		<ul class="cards">
+			<li class="cards__item">
+				<div class="card">
+					<div class="card__image card__image--fence"></div>
+					<div class="card__content">
+						<div class="card__title">그림검사로 나의 스트레스 지수 알아보기</div>
+						<p class="card__text">정아람 전문의</p>
+						<span class="card__doctor">
+							<p>⏱ 3월 23일 오후 2시</p>
+						</span> <span class="card__doctor">
+							<p>👨‍👩‍👧 정원 2명-4명</p>
+						</span>
+						<button class="btn btn--block card__btn">신청하기</button>
+					</div>
+				</div>
+			</li>
+			<li class="cards__item">
+				<div class="card">
+					<div class="card__image card__image--river"></div>
+					<div class="card__content">
+						<div class="card__title">소통방식 이해하기 이해를 많이 해보자</div>
+						<p class="card__text">이소정 전문의</p>
+						<span class="card__doctor">
+							<p>⏱ 3월 23일 오후 2시</p>
+						</span> <span class="card__doctor">
+							<p>👨‍👩‍👧 정원 2명-4명</p>
+						</span>
+						<button class="btn btn--block card__btn">신청하기</button>
+					</div>
+				</div>
 
-			</div>
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">화상</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
-
-			</div>
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">전화</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
-
-			</div>
-		</div>
+			</li>
+			<li class="cards__item">
+				<div class="card">
+					<div class="card__image card__image--record"></div>
+					<div class="card__content">
+						<div class="card__title">Flex Shrink</div>
+						<p class="card__text">This defines the ability for a flex item
+							to shrink if necessary. Negative numbers are invalid.</p>
+						<button class="btn btn--block card__btn">신청하기</button>
+					</div>
+				</div>
+			</li>
+			<li class="cards__item">
+				<div class="card">
+					<div class="card__image card__image--flowers"></div>
+					<div class="card__content">
+						<div class="card__title">Flex Basis</div>
+						<p class="card__text">This defines the default size of an
+							element before the remaining space is distributed. It can be a
+							length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword
+							means "look at my width or height property."</p>
+						<button class="btn btn--block card__btn">신청하기</button>
+					</div>
+				</div>
+			</li>
+			<li class="cards__item">
+				<div class="card">
+					<div class="card__image card__image--record"></div>
+					<div class="card__content">
+						<div class="card__title">Flex Shrink</div>
+						<p class="card__text">This defines the ability for a flex item
+							to shrink if necessary. Negative numbers are invalid.</p>
+						<button class="btn btn--block card__btn">신청하기</button>
+					</div>
+				</div>
+			</li>
+		</ul>
 	</div>
-	<input type="button" data-page="2" name="previous"
-		class="previous action-button" value="Previous" id="previous-btn" />
-	<input type="button" data-page="2" name="next"
-		class="next action-button" id="next-btn" value="Next" />
-
-	<script>
-		$('#previous-btn').click(function() {
-			location.href = 'personalCounselStep2.do'
-		});
-
-		$('#next-btn').click(function() {
-			location.href = 'personalCounselStep4.do'
-		});
-	</script>
 </body>
 </html>
