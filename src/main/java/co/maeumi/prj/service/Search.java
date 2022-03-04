@@ -37,8 +37,6 @@ public class Search extends Paging {
 	// 공지사항
 	private String n_title;
 	private String n_category;
-	private String n_writedate;
-	private String n_content;
 	
 
 

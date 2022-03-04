@@ -2,6 +2,8 @@ package co.maeumi.prj.notice.service;
 
 import java.util.List;
 
+import co.maeumi.prj.service.Search;
+
 public interface NoticeMapper {
 	List<NoticeVO> noticeSelectList();
 	NoticeVO noticeSelect(NoticeVO vo);
@@ -16,4 +18,6 @@ public interface NoticeMapper {
 //	// 게시판 총 갯수 
 //	public int getTotal(Criteria cri); 
 	
+	int getNoticeListCnt(Search svo) throws Exception;
+	public List<NoticeVO> noticeSearchselect(Search svo) throws Exception;
 }
