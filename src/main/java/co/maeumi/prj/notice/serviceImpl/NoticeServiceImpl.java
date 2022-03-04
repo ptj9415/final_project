@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.notice.service.NoticeMapper;
 import co.maeumi.prj.notice.service.NoticeService;
 import co.maeumi.prj.notice.service.NoticeVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("noticeDao")
 public class NoticeServiceImpl implements NoticeService {
@@ -43,18 +44,18 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return map.noticeDelete(vo);
 	}
-	
-//	@Override
-//	public List<NoticeVO> getListPaging(Criteria cri) {
-//		// TODO Auto-generated method stub
-//		return map.getListPaging(cri);
-//	}
-//
-//	@Override
-//	public int getTotal(Criteria cri) {
-//		// TODO Auto-generated method stub
-//		return map.getTotal(cri);
-//	}
+
+	@Override
+	public int getNoticeListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getNoticeListCnt(svo);
+	}
+
+	@Override
+	public List<NoticeVO> noticeSearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.noticeSearchselect(svo);
+	}
 	
 
 }

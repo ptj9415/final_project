@@ -1,306 +1,340 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
- <script src="https://kit.fontawesome.com/f124f87943.js" crossorigin="anonymous"></script>
- <style>
- .mainForm {
-	padding: 50px
- }
- .searchFormTitle {
- 	border: 1px solid gray;
- }
- .searchContent {
- 	border: 1px solid gray;
- }
- .searchForm {
- 	border: 1px solid gray;
- 	width: 100%;
- }
- .searchTable {
- 	margin-top: 30px;
- 	margin-left: 40px;
- 	margin-right: 40px;
- 	margin-top: 30px;
- }
- #searchCategory{
- 	width: 100%;
- 	
- }
- input {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+h3 {
+	font-size: 19px;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+.btndiv {
+	float: right;
+	width: 150px;
+	margin-right: -8px;
+}
+
+#btnSearch {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
+}
+
+#clearbtn {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid red;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
+}
+
+.status {
+	display: block;
 	width: 100%;
+	height: calc(2.25rem + 1px);
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	box-shadow: inset 0 0 0 transparent;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+#membertable {
 	text-align: center;
 }
-.outBtn {
-	margin-top: 15px;
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 30px;
-	margin-right: 240px;
+
+#membertable {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
-#resetBtn, #allDelete {
-	margin-right: 10px;
-}
-.searchListForm {
-	border: 1px solid gray;
-}
-.searchListTitle {
-	border: 1px solid gray;
-}
-.searchListOut {
-	margin-top: 20px;
-	margin-left: 40px;
-}
-.noticeList {
-	margin: 10px;
+#managebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+	width: 65px;
 }
 
-#categorySelect {
-	width: 90%
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
 }
-th, td{
-	text-align: center;
-}
-th {
-	background-color: #FFD9E4;
-}
-button {
-	background-color: #FFF0F5;
-}
-input[type='checkbox']{
-	width:20px;
-	height: 20px;
-	margin-top: 5px;
-}
-table > input {
-	width: 100%;
-}
-	
 
- </style>
- <script>
- 
- // 검색창 항목들 초기화시킴
-$(document).ready(function(){
-	 $("#resetBtn").on("click", function() {
-		 $("#searchWriter").val("");
-		 $("#searchCategory").val("");
-	 	 $("#searchTitle").val("");
-	 	 $("#searchDate").val("");
-	 });
- 
-}); 
- </script>
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
+}
+</style>
 </head>
-<body>
-    <div class="mainForm">
-        <div class="title">
-            <h3>공지사항 관리<i class="fa-solid fa-chevron-down"></i></h3>
-        </div>
-        <div class="searchForm">
-            <div class="searchFormTitle">
-                <h4>검색</h4>
-            </div>
-            <div class="searchContent" align="center">
-                <table border="1" class="searchTable">
-                    <tr>
-                        <th width="150px">작성자</th>
-                        <td width="450px"><input type="text" name="searchWriter" id="searchWriter"></td>
-                        <th width="150px">말머리</th>
-                        <td width="450px">
-                        	<select name="searchCategory" id="searchCategory">
-                        		<option value="전체" selected="selected">전체</option>
-                        		<option value="urgency">긴급</option>
-                        		<option value="event">이벤트</option>
-                        		<option value="etc">뻘글</option>
-                        	</select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td><input type="text" id="searchTitle" name="searchTitle"></td>
-                        <th>작성일</th>
-                        <td><input type="date" name="searchDate" id="searchDate"></td>
-                    </tr>
-                </table>
-                <div class="outBtn">
-	                <button id="resetBtn">초기화</button>
-	                <button >검색</button>
-        		</div>
-        	</div>
-        </div>
-        <br>
-        <hr>
-        
-        <!-- 페이지 하단 공지사항 목록치 출력되는 곳  -->
-        <div class="searchListForm">
-            <div class="searchListTitle">
-                공지사항 목록
-            </div>
-            <div class="searchListContent">
-            	<div class="searchListOut">
-	                <span>(총 4건 중 4건)</span>
-                </div>
-                <div class="outBtn">
-	                <button id="allDelete" >일괄 삭제</button>
-	                <button onclick="location.href='adminNoticeForm.do'">공지사항 작성</button>
-	            </div>
-                <div class="noticeListForm" align="center">
-	                <table class="noticeList" border="1">
-	                    <tr>
-		                    <th width="50px"><input type="checkbox" id="allCheck"></th>
-		                    <th width="100px">작성자</th>
-		                    <th width="100px">말머리</th>
-		                    <th width="400px">제목</th>
-		                    <th width="120px">작성일</th>
-		                    <th width="100px">고정/유동</th>
-		                    <th width="200px">관리</th>
-		                    <th width="150px">고정 게시물 설정</th>
-	                    </tr>
-	                    <c:forEach items="${notices }" var="notice" varStatus="status">
-	                    	<tr class="noticeTr"  id="line${status.count }"
-	                    		onmouseover="this.style.background='#ebf7fd'"
-	                    		onmouseleave="this.style.background='white'"
-	                    		>
-	                    		<td><input type="checkbox" name="check" data-partNum="${notice.n_no }"></td>
-	                    		<td align="center">${notice.n_writer }</td>
-	                    		<td align="center">${notice.n_category }</td>
-	                    		<td align="center" id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
-	                    		<td align="center">${notice.n_writedate }</td>
-	                    		<td align="center">${notice.n_status }</td>
-	                    		<td>
-	                    			<button type="button" onclick="noticeUpdate('${notice.n_no}')">수정</button>
-	                    			<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
-	                    		</td>
-	                    		<td>
-	                    			<button type="button" id="status" onclick="noticeStatus('${notice.n_no}')">고정 게시물 등록</button>
-	                    		</td>
-	                    	</tr>
-	                    </c:forEach>
-	                </table>
-	             </div>
-            </div>
-            <form action="noticeRead.do" id="frm" method="post"> <!-- 공지사항 조회할 때 넘어갈 폼값. -->
-            	<input type="hidden" name="no" id="no">
-            </form>
-            <form action="noticeUpdate.do" id="frm2" method="post"> <!-- 공지사항 수정할 때 넘어갈 폼값 -->
-            	<input type="hidden" name="updateNo" id="updateNo">
-            </form>
-            <div class="outBtn">
-            	<!--  이 부분에 페이지 버튼들이 들어가야 함. -->
-	            <button>처음</button>
-	            <button>이전</button>
-	            <button>다음</button>
-	            <button>끝</button>
-        	</div>
-        </div>
-    </div>
+<body class="hold-transition sidebar-mini">
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<br>
+			<h3>공지사항 관리</h3>
+			<br>
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							검색
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="maindiv1">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label>제목</label> <br> <input type="text"
+											class="form-control" id="n_title"
+											placeholder="닉네임을 입력해주세요.">
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label>말머리</label> <select class="status" id="n_category">
+											<option value="all">전체</option>
+											<option value="긴급">긴급</option>
+											<option value="이벤트">이벤트</option>
+											<option value="공지">공지</option>											
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="btndiv">
+								<button type="reset" id="clearbtn">초기화</button>
+								<button type="button" id="btnSearch">
+									검색&nbsp;<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<br>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							공지사항 목록
+							<button type="button" class="minusbtn" id="minusbtn2">
+								<i id="minusicon2" class="fa fa-minus"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="maindiv2">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<c:choose>
+								<c:when test="${pagination.listCnt lt pagination.end }">
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.listCnt }건)</span>
+								</c:when>
+								<c:otherwise>
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.end }건)</span>
+								</c:otherwise>
+							</c:choose>
+							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType" id="listSize"
+								onchange="page(1)">
+								<option value="10"
+									<c:if test="${pagination.getListSize() == 10 }">selected="selected"</c:if>>10건
+									보기</option>
+								<option value="15"
+									<c:if test="${pagination.getListSize() == 15 }">selected="selected"</c:if>>15건
+									보기</option>
+								<option value="20"
+									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
+									보기</option>
+							</select> <br> <br>
+							<table class="table table-hover text-nowrap" id="membertable">
+								<thead>
+									<tr>
+										<th><input type="checkbox" /></th>
+										<th>작성자</th>
+										<th>말머리</th>
+										<th>제목</th>
+										<th>작성일</th>
+										<th>고정여부</th>
+										<th>관리</th>
+										<th>고정게시물 설정</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${notice }" var="notice">
+										<tr>
+										<td><input type="checkbox"></td>
+										<td>${notice.n_writer }</td>
+										<td>${notice.n_category }</td>
+										<td>${notice.n_title }</td>
+										<td>${notice.n_writedate }</td>
+										<td>${notice.n_status }</td>
+											<td><button type="button">버튼</button>
+											<button type="button">버튼</button></td>											
+											<td><button type="button" class="managebtn"	id="managebtn" onclick="#">관리</button></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<br>
+							<div id="paginationBox" class="pagination1" style="float: right;">
+								<ul class="pagination">
+									<c:if test="${pagination.prev}">
+										<li class="page-item"><a class="page-link" href="#"	onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}', '${search.n_title}', '${search.n_category}')">이전</a></li>
+									</c:if>
+									<c:forEach begin="${pagination.startPage}"
+										end="${pagination.endPage}" var="NoticeNo">
+
+										<li
+											class="page-item <c:out value="${pagination.page == NoticeNo ? 'active' : ''}"/> ">
+											<a class="page-link" href="#"
+											onClick="fn_pagination('${NoticeNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.n_title}', '${search.n_category}')">
+												${NoticeNo} </a>
+										</li>
+									</c:forEach>
+									<c:if test="${pagination.next}">
+
+										<li class="page-item"><a class="page-link" href="#"
+											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
+					,'${search.n_title}', '${search.n_category}')">다음</a></li>
+									</c:if>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		$('#minusbtn1').click(function() {
+			if ($('#maindiv1').css('display') == 'none') {
+				$('#maindiv1').show();
+				$('#minusicon1').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv1').css('display') != 'none') {
+				$('#maindiv1').hide();
+				$('#minusicon1').attr('class', 'fa fa-plus');
+			}
+		});
+
+		$('#minusbtn2').click(function() {
+			if ($('#maindiv2').css('display') == 'none') {
+				$('#maindiv2').show();
+				$('#minusicon2').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv2').css('display') != 'none') {
+				$('#maindiv2').hide();
+				$('#minusicon2').attr('class', 'fa fa-plus');
+			}
+		});
+
+		function fn_prev(page, range, rangeSize, listSize, n_title, n_category) {
+
+			var page = ((range - 2) * rangeSize) + 1;
+			var range = range - 1;
+
+			var url = "adminNoticeList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			url = url + "&n_title=" + n_title;
+			url = url + "&n_category=" + n_category;
+			location.href = url;
+		}
+
+		function fn_pagination(page, range, rangeSize, listSize, n_title, n_category) {
+
+			var url = "adminNoticeList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			url = url + "&n_title=" + n_title;
+			url = url + "&n_category=" + n_category;
+			location.href = url;
+		}
+
+		function fn_next(page, range, rangeSize, listSize, n_title, n_category) {
+			var page = parseInt((range * rangeSize)) + 1;
+			var range = parseInt(range) + 1;
+			var url = "adminNoticeList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			url = url + "&n_title=" + n_title;
+			url = url + "&n_category=" + n_category;
+			location.href = url;
+		}
+
+		function page(Paging) {
+			var startPage = Paging;
+			var listSize = $("#listSize option:selected").val();
+
+			if (listSize == 10) {
+				var url = "adminNoticeList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			} else if (listSize == 15) {
+				var url = "adminNoticeList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			} else if (listSize == 20) {
+				var url = "adminNoticeList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			}
+			location.href = url;
+		}
+
+		$(document).on('click', '#btnSearch', function(e) {
+			e.preventDefault();
+
+			var url = "adminNoticeList.do";
+			url = url + "?n_title=" + $('#n_title').val();
+			url = url + "&n_category=" + $('#n_category').val();
+			location.href = url;
+
+		});
+	</script>
 </body>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-	
-	// 고정 게시물 설정 
-	function noticeStatus(str){
-		var statusNum = str;
-		$.ajax({
-			url: "statusUpdate.do",
-			data: {
-				statusNum : statusNum
-			},
-			dataType: "text",
-			success: function(responseText){
-								
-			}
-		})
-	};
-	
-	
-	//선택삭제 구현
-	$("#checkDeleteBtn").on("click", function() {
-		var confirmCheck = confirm("선택하신 것을 삭제하시겠습니까?");
-		
-		if(confirmCheck){
-			var checkAry = new Array();   // 체크한 것을 담을 리스트변수 선언.
-			
-			$("input[name='check']:checked").each(function(){
-				checkAry.push($(this).attr("data-partNum"));    // 체크했던 것들을 리스변수 checkAry에 모두 담는다.
-			});
-			
-			//이제 ajax처리를 통해 삭제시킨다. 
-			$.ajax({
-				url: "ajaxCheckDelete.do",
-				type: "post",
-				data: {  sendCheck : checkAry},
-				success: function(responseText){
-					
-					if(responseText == 1) {
-						alert("삭제되었습니다.");
-						location.href = 'adminNoticeList.do';
-					} else {
-						alert("삭제실패");
-					}
-				}
-			});  //ajax끝
-		}
-	});
-	
-	
-	//행 조회하기 (noticeRead)
-	function noticeRead(str) {
-		frm.no.value = str;
-		alert(frm.no.value);     // 값이 제대로 담겼는지 체크
-		frm.submit();
-	};
-	
-	
-	// 행 삭제하기. ajax로 처리해서 해당 화면으로 돌아오는 방식으로. 
-	function noticeDelete(str) {
-		var deleteNum = str;
-		$.ajax({
-			url: "noticeDelete.do",
-			data: {
-				deleteNum : deleteNum
-			},
-			type: "POST",
-			dataType: "text",
-			success: function(responseText){
-				if(responseText == "YES"){
-					alert("정상적으로 삭제되었습니다.");
-					location.reload();
-				} 
-			}
-		});  //ajax끝
-	};
-
-	// 공지 수정하기
-	function noticeUpdate(str) {
-		frm2.updateNo.value = str;
-		alert(frm2.updateNo.value);  // 대상이 맞는지 체크.
-		frm2.submit();
-	}
-	
-	// 전체 선택, 전체 해제 시키기
-	$("#allCheck").on("click", function() {
-		if($("#allCheck").prop("checked")) {
-			$("input[name='check']").prop("checked", true);
-		} else {
-			$("input[name='check']").prop("checked", false);
-		}
-	});	
-	
-	
-	//전체 중에서 하나라도 체크를 해제하면, allCheck도 체크가 해제되도록 하기. 
-	$("input[name='check']").on("click", function() {
-		$("#allCheck").prop("checked", false);
-	});
-	
-	
-</script>
-
 </html>

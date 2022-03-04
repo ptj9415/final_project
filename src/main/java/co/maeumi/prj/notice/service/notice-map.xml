@@ -2,37 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.notice.service.NoticeMapper">
 
-	<select id="noticeSelectList" resultType="co.maeumi.prj.notice.service.NoticeVO">
-		select * 
-		from notice	
+	<select id="getNoticeListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="n_title != ''">AND N_TITLE LIKE '%'||#{n_title}||'%'</if>
+			<if test="n_category != 'all'">AND N_CATEGORY LIKE '%'||#{n_category}||'%'</if>
+		</trim>
 	</select>
-	
-	<select id="noticeSelect" resultType="co.maeumi.prj.notice.service.NoticeVO">
-		select * from notice 
+
+	<select id="noticeSearchselect"
+		resultType="co.maeumi.prj.notice.service.NoticeVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM NOTICE
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="n_title != ''">AND N_TITLE LIKE '%'||#{n_title}||'%'</if>
+			<if test="n_category != 'all'">AND N_CATEGORY LIKE '%'||#{n_category}||'%'</if>
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="noticeSelectList"
+		resultType="co.maeumi.prj.notice.service.NoticeVO">
+		select *
+		from notice
+	</select>
+
+	<select id="noticeSelect"
+		resultType="co.maeumi.prj.notice.service.NoticeVO">
+		select * from notice
 		where n_no = #{n_no}
 	</select>
-	
-	<insert id="noticeInsert" parameterType="co.maeumi.prj.notice.service.NoticeVO">
-		<selectKey keyProperty="n_no" resultType="int" order="BEFORE">
+
+	<insert id="noticeInsert"
+		parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		<selectKey keyProperty="n_no" resultType="int"
+			order="BEFORE">
 			select max(n_no)+1 from notice
 		</selectKey>
-		INSERT INTO 
-		NOTICE( N_NO, N_WRITEDATE, N_WRITER, N_TITLE, N_CONTENT, N_FILENAME, N_PFILENAME, N_CATEGORY)
-		VALUES(#{n_no} , #{n_writedate} , #{n_writer}, #{n_title}, #{n_content}, #{n_filename}, #{n_pfilename}, #{n_category} )
+		INSERT INTO
+		NOTICE( N_NO, N_WRITEDATE, N_WRITER, N_TITLE, N_CONTENT, N_FILENAME,
+		N_PFILENAME, N_CATEGORY)
+		VALUES(#{n_no} , #{n_writedate} , #{n_writer},
+		#{n_title}, #{n_content}, #{n_filename}, #{n_pfilename}, #{n_category}
+		)
 	</insert>
-	
-	
-	<update id="noticeUpdate" parameterType="co.maeumi.prj.notice.service.NoticeVO">
-		UPDATE NOTICE 
-		SET N_TITLE = #{n_title}, N_CONTENT = #{n_content}, N_FILENAME = #{n_filename}
-			, N_PFILENAME = #{n_pfilename}, N_CATEGORY = #{n_category} 
+
+
+	<update id="noticeUpdate"
+		parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		UPDATE NOTICE
+		SET N_TITLE = #{n_title}, N_CONTENT = #{n_content}, N_FILENAME =
+		#{n_filename}
+		, N_PFILENAME = #{n_pfilename}, N_CATEGORY = #{n_category}
 		WHERE N_NO = #{n_no}
-	</update>	
-	
-	<delete id="noticeDelete" parameterType="co.maeumi.prj.notice.service.NoticeVO">
-		DELETE FROM NOTICE 
-		WHERE N_NO = #{n_no} 
+	</update>
+
+	<delete id="noticeDelete"
+		parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		DELETE FROM NOTICE
+		WHERE N_NO = #{n_no}
 	</delete>
-	
-	
+
+
 </mapper>
