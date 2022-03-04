@@ -108,8 +108,8 @@ tr, th, td {
 											name="gc_title"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
-												<option value="연애">연애</option>
-												<option value="우울증">우울증</option>
+												<option value="카톡">카톡</option>
+												<option value="줌">줌</option>
 										</select></td>
 									</tr>
 									<tr>
