@@ -12,6 +12,10 @@ h3 {
 	font-size: 19px;
 }
 
+.row {
+	margin-bottom: -10px;
+}
+
 .btndiv {
 	float: right;
 	width: 150px;
@@ -76,6 +80,19 @@ h3 {
 	height: 30px;
 	width: 65px;
 }
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+}
+
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -87,12 +104,17 @@ h3 {
 			<br>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
-					<div class="card">
-						<p id="headerp">검색</p>
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							검색
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="maindiv1">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
 						<div class="card-header">
@@ -146,18 +168,32 @@ h3 {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
-					<div class="card">
-						<p id="headerp">회원 목록</p>
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							회원 목록
+							<button type="button" class="minusbtn" id="minusbtn2">
+								<i id="minusicon2" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="maindiv2">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
-							<span>(총 ${pagination.listCnt }건 중 ${pagination.start } ~
-								${pagination.end }건)</span> <select class="paging" name="searchType"
-								id="listSize" onchange="page(1)">
+							<c:choose>
+								<c:when test="${pagination.listCnt lt pagination.end }">
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.listCnt }건)</span>
+								</c:when>
+								<c:otherwise>
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.end }건)</span>
+								</c:otherwise>
+							</c:choose>
+							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType" id="listSize"
+								onchange="page(1)">
 								<option value="10"
 									<c:if test="${pagination.getListSize() == 10 }">selected="selected"</c:if>>10건
 									보기</option>
@@ -167,15 +203,13 @@ h3 {
 								<option value="20"
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
-							</select> <br>
-							<br>
+							</select> <br> <br>
 							<table class="table table-hover text-nowrap" id="membertable">
 								<thead>
 									<tr>
 										<th>닉네임</th>
 										<th>이메일</th>
 										<th>연락처</th>
-										<th>보유쿠폰</th>
 										<th>상태</th>
 										<th>관리</th>
 									</tr>
@@ -186,16 +220,16 @@ h3 {
 											<td>${member.m_nickname }</td>
 											<td>${member.m_email }</td>
 											<td>${member.m_phone }</td>
-											<td>2개</td>
 											<td>${member.m_type }</td>
 											<td><button type="button" class="managebtn"
-													id="managebtn" name="${member.m_nickname }" onclick="location.href='adminMemberDetail.do?m_email=${member.m_email}'">관리</button></td>
+													id="managebtn" name="${member.m_nickname }"
+													onclick="location.href='adminMemberDetail.do?m_email=${member.m_email}'">관리</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 							<br>
-							<div id="paginationBox" class="pagination1">
+							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"
@@ -228,6 +262,26 @@ h3 {
 	</section>
 
 	<script>
+		$('#minusbtn1').click(function() {
+			if ($('#maindiv1').css('display') == 'none') {
+				$('#maindiv1').show();
+				$('#minusicon1').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv1').css('display') != 'none') {
+				$('#maindiv1').hide();
+				$('#minusicon1').attr('class', 'fa fa-plus');
+			}
+		});
+
+		$('#minusbtn2').click(function() {
+			if ($('#maindiv2').css('display') == 'none') {
+				$('#maindiv2').show();
+				$('#minusicon2').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv2').css('display') != 'none') {
+				$('#maindiv2').hide();
+				$('#minusicon2').attr('class', 'fa fa-plus');
+			}
+		});
+
 		function fn_prev(page, range, rangeSize, listSize, m_nickname, m_email,
 				m_phone, m_type) {
 
@@ -287,7 +341,7 @@ h3 {
 			} else if (listSize == 20) {
 				var url = "adminMemberList.do?startPage=" + startPage
 						+ "&listSize=" + listSize
-			} 
+			}
 			location.href = url;
 		}
 
@@ -300,7 +354,6 @@ h3 {
 			url = url + "&m_phone=" + $('#m_phone').val();
 			url = url + "&m_type=" + $('select[id="m_type"]').val();
 			location.href = url;
-			console.log(url);
 
 		});
 	</script>

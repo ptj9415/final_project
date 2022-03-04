@@ -219,7 +219,8 @@ h3 {
 											<td>${counselor.c_address }</td>
 											<td>${counselor.c_status }</td>
 											<td><button type="button" class="managebtn"
-													id="managebtn" name="${counselor.c_email }">관리</button></td>
+													id="managebtn" name="${counselor.c_email }"
+													onclick="location.href='adminCounselorDetail.do?c_email=${counselor.c_email}'">관리</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>

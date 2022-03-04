@@ -131,7 +131,7 @@
 								</p>
 						</a>
 							<ul class="a">
-								<li class="nav-item"><a href="#" class="nav-link"> <i
+								<li class="nav-item"><a href="test.do" class="nav-link"> <i
 										class="far fa-circle nav-icon"></i>
 										<p>상담 통계</p>
 								</a></li>

@@ -38,5 +38,7 @@ public interface CounselorService {
 	List<CounselorVO> counselortimeList(CounselorVO cvo);
 	int counselortimeDelete(CounselorVO cvo);
 	int counselortimeInsert(CounselorVO cvo);
+	List<CounselorVO> counselorTimeAndDay(CounselorVO cvo);
+	List<CounselorVO> reservedCounsel(CounselorVO cvo);
 
 }

@@ -86,5 +86,11 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return map.memberSearchselect(svo);
 	}
+
+	@Override
+	public int memberInfoUpdate(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.memberInfoUpdate(mvo);
+	}
 	
 }
