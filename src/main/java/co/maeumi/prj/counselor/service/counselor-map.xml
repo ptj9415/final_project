@@ -3,14 +3,15 @@
 <mapper
 	namespace="co.maeumi.prj.counselor.service.CounselorMapper">
 
-<select id="getCounselorListCnt" resultType="int">
+	<select id="getCounselorListCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM COUNSELOR
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="c_name != ''">AND C_NAME LIKE '%'||#{c_name}||'%'</if>
 			<if test="c_gender != 'all'">AND C_GENDER LIKE '%'||#{c_gender}||'%'</if>
 			<if test="c_grade != 'all'">AND C_GRADE LIKE '%'||#{c_grade}||'%'</if>
-			<if test="c_birthdate != ''">AND TO_CHAR(C_BIRTHDATE, 'YYYY-MM-DD') = #{c_birthdate}</if>
+			<if test="c_birthdate != ''">AND TO_CHAR(C_BIRTHDATE, 'YYYY-MM-DD') = #{c_birthdate}
+			</if>
 			<if test="c_email != ''">AND C_EMAIL LIKE '%'||#{c_email}||'%'</if>
 			<if test="c_phone != ''">AND C_PHONE LIKE '%'||#{c_phone}||'%'</if>
 			<if test="c_address != ''">AND C_ADDRESS LIKE '%'||#{c_address}||'%'</if>
@@ -23,11 +24,13 @@
 		SELECT *
 		FROM (SELECT ROWNUM RN, A.*
 		FROM (SELECT *
-		FROM COUNSELOR <trim prefix="where" prefixOverrides="and | or">
+		FROM COUNSELOR
+		<trim prefix="where" prefixOverrides="and | or">
 			<if test="c_name != ''">AND C_NAME LIKE '%'||#{c_name}||'%'</if>
 			<if test="c_gender != 'all'">AND C_GENDER LIKE '%'||#{c_gender}||'%'</if>
 			<if test="c_grade != 'all'">AND C_GRADE LIKE '%'||#{c_grade}||'%'</if>
-			<if test="c_birthdate != ''">AND TO_CHAR(C_BIRTHDATE, 'YYYY-MM-DD') = #{c_birthdate}</if>
+			<if test="c_birthdate != ''">AND TO_CHAR(C_BIRTHDATE, 'YYYY-MM-DD') = #{c_birthdate}
+			</if>
 			<if test="c_email != ''">AND C_EMAIL LIKE '%'||#{c_email}||'%'</if>
 			<if test="c_phone != ''">AND C_PHONE LIKE '%'||#{c_phone}||'%'</if>
 			<if test="c_address != ''">AND C_ADDRESS LIKE '%'||#{c_address}||'%'</if>
@@ -37,7 +40,7 @@
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
-	
+
 	<select id="counselorSelectList"
 		resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM COUNSELOR
@@ -165,6 +168,7 @@
 		resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		SELECT * FROM cs_date
 		where c_email=#{c_email}
+
 	</select>
 
 	<delete id="counselortimeDelete"
@@ -183,4 +187,19 @@
 		INSERT INTO cs_date VALUES(#{cd_no}, #{c_email}, #{cd_day},
 		#{cd_time})
 	</insert>
+	
+	<select id="counselorTimeAndDay"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT cd_time FROM cs_date
+		where c_email=#{c_email}
+		and
+		cd_day = #{cd_day}
+	</select>
+
+	<select id="reservedCounsel"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT PR_TIME FROM PERSONAL_RESERVE
+		WHERE C_EMAIL = #{c_email}
+		AND PR_DATE = #{pr_date}
+	</select>
 </mapper>

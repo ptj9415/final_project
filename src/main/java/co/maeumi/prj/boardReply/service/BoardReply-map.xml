@@ -2,28 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.boardReply.service.BoardReplyMapper">
 
-<!-- 댓글 조회 -->
-<select id="boardReplyList" resultType="co.maeumi.prj.board.service.BoardVO">
-	SELECT * FROM(
-	SELECT B.*, B.B_NO
-	FROM BOARD B, BOARD_REPLY BR 
-	WHERE B.B_NO = BR.BR_NO
-	UNION ALL
-	SELECT BR.*, M.M_NICKNAME
-	FROM BOARD_REPLY BR, MEMBER M
-	WHERE BR.BR_EMAIL = M.M_EMAIL)
-	ORDER BY BR_NO DESC
+	<!-- 댓글 조회 -->
+	<select id="boardReplyList" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO" resultType="co.maeumi.prj.boardReply.service.BoardReplyVO">
+		SELECT * FROM BOARD_REPLY
+		WHERE B_NO = #{b_no}
+	</select>
+	
+	<insert id="boardReplyInsert" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO">
+	<selectKey keyProperty="br_no" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(br_no),0)+1 FROM BOARD_REPLY
+	</selectKey>
+		INSERT INTO BOARD_REPLY
+		VALUES (#{b_no}, #{br_no}, #{br_content}, #{br_email}, sysdate, #{br_name})
+	</insert>
 
-
-</select>
-
-
-
-
-
-
-
-
-
+	<delete id="boardReplyDelete" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO">
+		DELETE FROM BOARD_REPLY
+		WHERE BR_NO = #{br_no}
+	</delete>
 
 </mapper>
