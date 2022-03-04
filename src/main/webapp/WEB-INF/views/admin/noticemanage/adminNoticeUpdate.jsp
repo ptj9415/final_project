@@ -56,8 +56,8 @@ span {
 					<td width="350px">
 						<select name="category" id="category">
 							<option value="전체" selected="selected">전체</option>
-							<option value="urgency">긴급</option>
-							<option value="event">이벤트</option>
+							<option value="긴급">긴급</option>
+							<option value="이벤트">이벤트</option>
 							<option value="etc">뻘글</option>
 						</select>
 					</td>

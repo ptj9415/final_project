@@ -59,6 +59,9 @@ h3 {
 	box-shadow: inset 0 0 0 transparent;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+#readTd:hover{
+	cursor: pointer;
+}
 
 #membertable {
 	text-align: center;
@@ -93,7 +96,20 @@ h3 {
 	border: none;
 	margin-right: 15px;
 }
+.noticeBtn {
+	float: right;
+}
 </style>
+<script>
+// 검색창 항목들 초기화시킴
+$(document).ready(function(){
+	 $("#clearbtn").on("click", function() {
+		 $("#n_title").val("");
+		 $("#n_category").val("");
+	 });
+ 
+});
+</script>
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- Main content -->
@@ -123,7 +139,7 @@ h3 {
 									<div class="form-group">
 										<label>제목</label> <br> <input type="text"
 											class="form-control" id="n_title"
-											placeholder="닉네임을 입력해주세요.">
+											placeholder="제목을 입력해주세요.">
 									</div>
 								</div>
 								<div class="col-6">
@@ -190,11 +206,16 @@ h3 {
 								<option value="20"
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
-							</select> <br> <br>
+							</select>
+							<div class="noticeBtn">
+								 <button id="allDelete" >일괄 삭제</button>
+	              			     <button onclick="location.href='adminNoticeForm.do'">공지사항 작성</button>
+							</div>
+							 <br> <br>
 							<table class="table table-hover text-nowrap" id="membertable">
 								<thead>
 									<tr>
-										<th><input type="checkbox" /></th>
+										<th><input type="checkbox"  id="allCheck"/></th>
 										<th>작성자</th>
 										<th>말머리</th>
 										<th>제목</th>
@@ -207,19 +228,29 @@ h3 {
 								<tbody>
 									<c:forEach items="${notice }" var="notice">
 										<tr>
-										<td><input type="checkbox"></td>
+										<td><input type="checkbox"  name="check" data-partNum="${notice.n_no }"></td>
 										<td>${notice.n_writer }</td>
 										<td>${notice.n_category }</td>
-										<td>${notice.n_title }</td>
+										<td id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
 										<td>${notice.n_writedate }</td>
 										<td>${notice.n_status }</td>
-											<td><button type="button">버튼</button>
-											<button type="button">버튼</button></td>											
+										<td>
+											<button type="button" onclick="noticeUpdate('${notice.n_no}')">수정</button>
+											<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
+										</td>											
 											<td><button type="button" class="managebtn"	id="managebtn" onclick="#">관리</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
+							<!-- 공지사항 조회할 때 넘어갈 폼값. -->
+							<form action="noticeRead.do" id="frm" method="post"> 
+            					<input type="hidden" name="no" id="no">
+            				</form>
+            				<!-- 공지사항 수정할 때 넘어갈 폼값 -->
+            				<form action="noticeUpdate.do" id="frm2" method="post"> 
+            					<input type="hidden" name="updateNo" id="updateNo">
+            				</form>
 							<br>
 							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
@@ -252,6 +283,90 @@ h3 {
 	</section>
 
 	<script>
+	
+		// 체크박스 전체 선택/해제
+		$("#allCheck").on("click", function() {
+			if($("#allCheck").prop("checked")) {
+				$("input[name='check']").prop("checked", true);
+			} else {
+				$("input[name='check']").prop("checked", false);
+			}
+		});	
+		
+		// 체크박스 하나라도 체크해제 => allCheck버튼도 해제되도록.
+		$("input[name='check']").on("click", function() {
+			$("#allCheck").prop("checked", false);
+		});
+		
+		
+		// 공지사항 조회하기 (noticeRead)
+		function noticeRead(str){
+			frm.no.value = str;
+			alert(frm.no.value);  // 값이 제대로 갔는지 체크
+			frm.submit();
+		};
+		
+		// 공지사항 수정하기 (noticeUpdate)
+		function noticeUpdate(str) {
+			frm2.updateNo.value = str;
+			alert(frm2.updateNo.value);  // 대상이 맞는지 체크.
+			frm2.submit();
+		};
+		
+		// 공지사항 삭제하기. ajax로 처리
+		function noticeDelete(str) {
+			var deleteNum = str;
+			$.ajax({
+				url: "noticeDelete.do",
+				data: {
+					deleteNum : deleteNum
+				},
+				type: "POST",
+				dataType: "text",
+				success: function(responseText){
+					if(responseText == "YES"){
+						alert("정상적으로 삭제되었습니다.");
+						location.reload();
+					} 
+				}
+			});  //ajax끝
+		};
+		
+		//선택삭제 구현
+		$("#allDelete").on("click", function() {
+			var confirmCheck = confirm("선택하신 것을 삭제하시겠습니까?");
+			
+			if(confirmCheck){
+				var checkAry = new Array();   // 체크한 것을 담을 리스트변수 선언.
+				
+				$("input[name='check']:checked").each(function(){
+					checkAry.push($(this).attr("data-partNum"));    // 체크했던 것들을 리스트 변수 checkAry에 모두 담는다.
+				});
+				
+				//이제 ajax처리를 통해 삭제시킨다. 
+				$.ajax({
+					url: "ajaxCheckDelete.do",
+					type: "post",
+					data: {  sendCheck : checkAry},
+					success: function(responseText){
+						
+						if(responseText == 1) {
+							alert("삭제되었습니다.");
+							location.href = 'adminNoticeList.do';
+						} else {
+							alert("삭제실패");
+						}
+					}
+				});  //ajax끝
+			}
+		});
+			
+		
+		
+		
+		
+		
+	
 		$('#minusbtn1').click(function() {
 			if ($('#maindiv1').css('display') == 'none') {
 				$('#maindiv1').show();
