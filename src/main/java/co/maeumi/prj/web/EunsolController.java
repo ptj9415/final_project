@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
+import co.maeumi.prj.boardReply.service.BoardReplyService;
+import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.faq.service.FaqService;
 import co.maeumi.prj.faq.service.FaqVO;
 import co.maeumi.prj.service.Search;
@@ -29,6 +32,10 @@ public class EunsolController {
 	// 자유게시판
 	@Autowired
 	private BoardService boardDao;
+	
+	// 자유게시판 댓글
+	@Autowired
+	private BoardReplyService boardReplyDao;
 
 	
 	/* ===== 사용자 화면 ===== */
@@ -49,7 +56,8 @@ public class EunsolController {
 			Model model, 
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
-			Search svo)
+			Search svo,
+			HttpSession session)
 			throws Exception {
 
 		int listCnt = boardDao.getBoardListCnt(svo);
@@ -64,8 +72,10 @@ public class EunsolController {
 			String date = list.get(i).getB_wdate();
 			date = date.substring(0, 10);
 			list.get(i).setB_wdate(date);
-			System.out.println(list.get(i).getM_nickname() );
 		}
+		
+		vo.setB_email((String)session.getAttribute("email")); 
+		
 		model.addAttribute("board", list);
 		return "user/board/userBoardList";
 	}
@@ -73,7 +83,7 @@ public class EunsolController {
 	
 	// 자유게시판 글 상세 보기
 	@RequestMapping("/userBoardRead.do")
-	public String userBoardRead(BoardVO vo, Model model, HttpServletRequest request) {
+	public String userBoardRead(BoardVO vo, Model model, @Param("b_no") int b_no, HttpServletRequest request, BoardReplyVO rvo, HttpSession session) throws Exception {
 		vo = boardDao.boardSelect(vo);
 		
 		// 날짜 뒤에 시간 자르고 년-월-일 표시
@@ -84,14 +94,41 @@ public class EunsolController {
 		// 조회수 
 		boardDao.updateCount(vo.getB_no());
 		
+		rvo.setB_no(b_no);
 		// 댓글 목록
+		List<BoardReplyVO> boardReplyList = boardReplyDao.boardReplyList(rvo);
+		model.addAttribute("boardReplyList",boardReplyList);
+		model.addAttribute("b_no", b_no);
 		
-		
+		vo.setB_email((String)session.getAttribute("email")); 
 		
 		model.addAttribute("boardRead", vo);
 		return "user/board/userBoardRead";
 	}
 			
+	
+	// 자유게시판 글 댓글 등록
+	@RequestMapping("/boardReplyResister.do")
+	@ResponseBody
+	public String boardReplyResister(BoardReplyVO vo, HttpSession session) {
+		vo.setBr_name((String)session.getAttribute("nickname")); // 로그인 정보. 댓쓴이가 누군지 알기 위해 담는 거
+		vo.setBr_email((String)session.getAttribute("email")); 
+		boardReplyDao.boardReplyInsert(vo);
+		
+		return "OK";
+	}
+	
+	
+	// 자유게시판 글 댓글 삭제 
+	@RequestMapping("/boardReplyDelete.do")
+	@ResponseBody
+	public String boardReplyDelete(BoardReplyVO vo, HttpServletRequest request) {
+		int br_no= Integer.parseInt(request.getParameter("br_no"));
+		vo.setBr_no(br_no);
+		boardReplyDao.boardReplyDelete(vo);
+		return "user/board/userBoardRead";
+	}
+	
 	
 	// 자유게시판 글 작성
 	@RequestMapping("/userBoardForm.do")
@@ -105,6 +142,10 @@ public class EunsolController {
 	public String userBoardResister(BoardVO vo, HttpSession session) {
 		vo.setB_email((String)session.getAttribute("email")); // 로그인 정보. 작성자가 누군지 알기 위해 담는 거
 		boardDao.userBoardInsert(vo);
+		System.out.println(vo.getB_anony());
+		System.out.println(vo.getB_title());
+		System.out.println(vo.getB_content());
+		
 		return"redirect:userBoardList.do";
 	}
 	
@@ -133,12 +174,6 @@ public class EunsolController {
 		return "redirect:userBoardList.do";
 	}
 	
-	
-	// 자유게시판 글 댓글 작성
-	
-	// 자유게시판 글 댓글 수정
-	
-	// 자유게시판 글 댓글 삭제 
 
 		
 		
