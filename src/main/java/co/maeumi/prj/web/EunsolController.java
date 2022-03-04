@@ -7,22 +7,29 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.boardReply.service.BoardReplyService;
 import co.maeumi.prj.boardReply.service.BoardReplyVO;
+import co.maeumi.prj.chatbot.service.KeyboardVO;
+import co.maeumi.prj.chatbot.service.MessageButtonVO;
+import co.maeumi.prj.chatbot.service.MessageVO;
+import co.maeumi.prj.chatbot.service.PhotoVO;
+import co.maeumi.prj.chatbot.service.RequestMessageVO;
+import co.maeumi.prj.chatbot.service.ResponseMessageVO;
 import co.maeumi.prj.faq.service.FaqService;
 import co.maeumi.prj.faq.service.FaqVO;
 import co.maeumi.prj.service.Search;
 
-@Controller
+@RestController /* @Controller + @ResponseBody */
 public class EunsolController {
 
 	// F&Q
@@ -109,7 +116,6 @@ public class EunsolController {
 	
 	// 자유게시판 글 댓글 등록
 	@RequestMapping("/boardReplyResister.do")
-	@ResponseBody
 	public String boardReplyResister(BoardReplyVO vo, HttpSession session) {
 		vo.setBr_name((String)session.getAttribute("nickname")); // 로그인 정보. 댓쓴이가 누군지 알기 위해 담는 거
 		vo.setBr_email((String)session.getAttribute("email")); 
@@ -121,7 +127,6 @@ public class EunsolController {
 	
 	// 자유게시판 글 댓글 삭제 
 	@RequestMapping("/boardReplyDelete.do")
-	@ResponseBody
 	public String boardReplyDelete(BoardReplyVO vo, HttpServletRequest request) {
 		int br_no= Integer.parseInt(request.getParameter("br_no"));
 		vo.setBr_no(br_no);
@@ -167,7 +172,6 @@ public class EunsolController {
 	
 	
 	// 자유게시판 삭제
-	@ResponseBody
 	@RequestMapping("/userBoardDelete.do")
 	public String userBoardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
@@ -228,7 +232,6 @@ public class EunsolController {
 
 	
 	// 자유게시판 삭제
-	@ResponseBody
 	@RequestMapping("/boardDelete.do")
 	public String boardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
@@ -306,7 +309,6 @@ public class EunsolController {
 
 	
 	// FAQ 삭제
-	@ResponseBody
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(Model model, FaqVO vo, HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("f_no"));
@@ -316,4 +318,57 @@ public class EunsolController {
 	}
 
 
+	// 챗봇
+	
+	@RequestMapping(value = "/keyboard", method = RequestMethod.GET)
+	public KeyboardVO keyboard()
+	{
+		KeyboardVO keyboard=new KeyboardVO(new String[] {"사진", "라벨", "에코메세지"});
+
+		return keyboard;
+	}
+
+	@RequestMapping(value = "/message", method = RequestMethod.POST)
+	public ResponseMessageVO message(@RequestBody RequestMessageVO vo)
+	{
+		ResponseMessageVO res_vo=new ResponseMessageVO();
+		MessageVO mes_vo=new MessageVO();
+
+		if(vo.getContent().equals("메인화면"))
+		{
+			mes_vo.setText("첫 화면을 호출합니다.");
+
+			KeyboardVO keyboard=new KeyboardVO(new String[] {"사진", "라벨", "에코메세지"});
+
+			res_vo.setKeyboard(keyboard);
+		}
+		else if(vo.getContent().equals("사진"))
+		{
+			PhotoVO photo=new PhotoVO();
+
+			photo.setUrl("http://placehold.it/640x480.jpg");
+			photo.setWidth(640);
+			photo.setHeight(480);
+
+			mes_vo.setPhoto(photo);
+			mes_vo.setText(vo.getContent());
+		}
+		else if(vo.getContent().equals("라벨"))
+		{
+			MessageButtonVO messageButton=new MessageButtonVO();
+
+			messageButton.setLabel("GITHUB");
+			messageButton.setUrl("https://github.com/sjh836/Spring_KakaoBot_Sample");
+
+			mes_vo.setMessage_button(messageButton);
+			mes_vo.setText("많은 피드백부탁드립니다! STAR는 개발자를 춤추게 만들어요!");
+		}
+		else //에코메시지
+		{
+			mes_vo.setText(vo.getContent());
+		}
+
+		res_vo.setMessage(mes_vo);
+		return res_vo;
+	}
 }

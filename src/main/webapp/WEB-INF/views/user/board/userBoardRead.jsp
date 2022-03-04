@@ -149,7 +149,7 @@ th, td {
 			<br>
 			<br>
 			<br>
-			<p align="center">사용자만 댓글 등록이 가능합니다😥</p>
+			<p align="center">사용자만 댓글 등록이 가능합니다 😥</p>
 			<br>
 			<br>
 		</c:if>
