@@ -30,5 +30,7 @@ public class CounselorVO {
 	private String cd_no;
 	private String cd_day;
 	private String cd_time;
+	private String pr_date;
+	private String pr_time;
 	
 }

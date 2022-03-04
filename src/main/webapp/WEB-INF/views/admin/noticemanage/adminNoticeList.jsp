@@ -85,8 +85,9 @@ table > input {
 
  </style>
  <script>
+ 
+ // 검색창 항목들 초기화시킴
 $(document).ready(function(){
-	
 	 $("#resetBtn").on("click", function() {
 		 $("#searchWriter").val("");
 		 $("#searchCategory").val("");
@@ -148,7 +149,7 @@ $(document).ready(function(){
                 </div>
                 <div class="outBtn">
 	                <button id="allDelete" >일괄 삭제</button>
-	                <button onclick="location.href='noticeForm.do'">공지사항 작성</button>
+	                <button onclick="location.href='adminNoticeForm.do'">공지사항 작성</button>
 	            </div>
                 <div class="noticeListForm" align="center">
 	                <table class="noticeList" border="1">
@@ -166,26 +167,33 @@ $(document).ready(function(){
 	                    	<tr class="noticeTr"  id="line${status.count }"
 	                    		onmouseover="this.style.background='#ebf7fd'"
 	                    		onmouseleave="this.style.background='white'"
-	                    		onclick="noticeRead(line${status.count})">
-	                    		<td><input type="checkbox" name="check"></td>
+	                    		>
+	                    		<td><input type="checkbox" name="check" data-partNum="${notice.n_no }"></td>
 	                    		<td align="center">${notice.n_writer }</td>
 	                    		<td align="center">${notice.n_category }</td>
-	                    		<td align="center">${notice.n_title }</td>
+	                    		<td align="center" id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
 	                    		<td align="center">${notice.n_writedate }</td>
 	                    		<td align="center">${notice.n_status }</td>
 	                    		<td>
-	                    			<button>수정</button>
-	                    			<button type="button" onclick="noticeDelete()">삭제</button>
+	                    			<button type="button" onclick="noticeUpdate('${notice.n_no}')">수정</button>
+	                    			<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
 	                    		</td>
 	                    		<td>
-	                    			<button>고정 게시물 등록</button>
+	                    			<button type="button" id="status" onclick="noticeStatus('${notice.n_no}')">고정 게시물 등록</button>
 	                    		</td>
 	                    	</tr>
 	                    </c:forEach>
 	                </table>
 	             </div>
             </div>
+            <form action="noticeRead.do" id="frm" method="post"> <!-- 공지사항 조회할 때 넘어갈 폼값. -->
+            	<input type="hidden" name="no" id="no">
+            </form>
+            <form action="noticeUpdate.do" id="frm2" method="post"> <!-- 공지사항 수정할 때 넘어갈 폼값 -->
+            	<input type="hidden" name="updateNo" id="updateNo">
+            </form>
             <div class="outBtn">
+            	<!--  이 부분에 페이지 버튼들이 들어가야 함. -->
 	            <button>처음</button>
 	            <button>이전</button>
 	            <button>다음</button>
@@ -196,7 +204,86 @@ $(document).ready(function(){
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-$(document).ready(function(){
+	
+	// 고정 게시물 설정 
+	function noticeStatus(str){
+		var statusNum = str;
+		$.ajax({
+			url: "statusUpdate.do",
+			data: {
+				statusNum : statusNum
+			},
+			dataType: "text",
+			success: function(responseText){
+								
+			}
+		})
+	};
+	
+	
+	//선택삭제 구현
+	$("#checkDeleteBtn").on("click", function() {
+		var confirmCheck = confirm("선택하신 것을 삭제하시겠습니까?");
+		
+		if(confirmCheck){
+			var checkAry = new Array();   // 체크한 것을 담을 리스트변수 선언.
+			
+			$("input[name='check']:checked").each(function(){
+				checkAry.push($(this).attr("data-partNum"));    // 체크했던 것들을 리스변수 checkAry에 모두 담는다.
+			});
+			
+			//이제 ajax처리를 통해 삭제시킨다. 
+			$.ajax({
+				url: "ajaxCheckDelete.do",
+				type: "post",
+				data: {  sendCheck : checkAry},
+				success: function(responseText){
+					
+					if(responseText == 1) {
+						alert("삭제되었습니다.");
+						location.href = 'adminNoticeList.do';
+					} else {
+						alert("삭제실패");
+					}
+				}
+			});  //ajax끝
+		}
+	});
+	
+	
+	//행 조회하기 (noticeRead)
+	function noticeRead(str) {
+		frm.no.value = str;
+		alert(frm.no.value);     // 값이 제대로 담겼는지 체크
+		frm.submit();
+	};
+	
+	
+	// 행 삭제하기. ajax로 처리해서 해당 화면으로 돌아오는 방식으로. 
+	function noticeDelete(str) {
+		var deleteNum = str;
+		$.ajax({
+			url: "noticeDelete.do",
+			data: {
+				deleteNum : deleteNum
+			},
+			type: "POST",
+			dataType: "text",
+			success: function(responseText){
+				if(responseText == "YES"){
+					alert("정상적으로 삭제되었습니다.");
+					location.reload();
+				} 
+			}
+		});  //ajax끝
+	};
+
+	// 공지 수정하기
+	function noticeUpdate(str) {
+		frm2.updateNo.value = str;
+		alert(frm2.updateNo.value);  // 대상이 맞는지 체크.
+		frm2.submit();
+	}
 	
 	// 전체 선택, 전체 해제 시키기
 	$("#allCheck").on("click", function() {
@@ -205,43 +292,15 @@ $(document).ready(function(){
 		} else {
 			$("input[name='check']").prop("checked", false);
 		}
-	});
+	});	
+	
 	
 	//전체 중에서 하나라도 체크를 해제하면, allCheck도 체크가 해제되도록 하기. 
 	$("input[name='check']").on("click", function() {
 		$("#allCheck").prop("checked", false);
 	});
 	
-	// noticeRead() 부분해야 함.
-	function noticeRead(${status.count}){
-		alert("line");
-		
-	}
 	
-	
-	// 행 삭제시키기
-	function noticeDelete(${notice.n_no}){
-		$.ajax({
-			url: "noticeDelete.do",
-			type: "POST",
-			data: {
-				deleteNum : num
-			},
-			success: function(responseText){
-				if(responseText == 'YES'){
-					alert("삭제성공");
-					location.reload();
-				} else {
-					alert("삭제실패");
-					return false;
-				}
-			}
-			
-		});
-	}
-	
-	
-});
 </script>
 
 </html>

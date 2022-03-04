@@ -21,6 +21,6 @@ public interface MemberMapper {
 	// 검색
 	int getMemberListCnt(Search svo) throws Exception;
 	public List<MemberVO> memberSearchselect(Search svo) throws Exception;
-	
+	int memberInfoUpdate(MemberVO mvo);
 
 }

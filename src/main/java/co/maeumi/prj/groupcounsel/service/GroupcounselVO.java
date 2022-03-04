@@ -26,6 +26,7 @@ public class GroupcounselVO {
 	private String gc_person; 	  //현재 인원
 	private String gc_infos;      //그룹 상담 개설 내용 (에디터 들어감).
 	private String gc_status;      //그룹 상담 진행인지 아닌지
+	private String gc_name;
 	
 	//그룹상담 예약
 	private String gr_no;

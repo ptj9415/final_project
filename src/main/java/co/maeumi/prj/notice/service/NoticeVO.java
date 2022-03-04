@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class NoticeVO {
-	private String n_no; 	        // 공지사항 번호
+	private int n_no; 	        // 공지사항 번호
 	private String n_writedate; 	// 작성일
 	private String n_writer;		// 작성자
 	private String n_title;			// 제목

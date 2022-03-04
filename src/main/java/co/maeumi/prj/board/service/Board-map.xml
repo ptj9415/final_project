@@ -64,13 +64,13 @@
    		<!-- DB에 데이터 없어도 홈페이지에서 글 작성하면 등록 가능 -->
       	SELECT NVL(MAX(B_NO),0)+1 FROM BOARD
    		</selectKey>
-   		INSERT INTO BOARD (B_NO, B_TITLE, B_SUBJECT, B_CONTENT, B_EMAIL)
-   		VALUES(#{b_no}, #{b_title}, #{b_subject}, #{b_content}, #{b_email})
+   		INSERT INTO BOARD (B_NO, B_TITLE, B_SUBJECT, B_CONTENT, B_EMAIL, B_ANONY)
+   		VALUES(#{b_no}, #{b_title}, #{b_subject}, #{b_content}, #{b_email}, #{b_anony})
 	</insert>
    
 	<update id="userBoardUpdate" parameterType="co.maeumi.prj.board.service.BoardVO">
    		UPDATE BOARD
-   		SET B_TITLE = #{b_title}, B_CONTENT = #{b_content}, B_SUBJECT = #{b_subject}
+   		SET B_TITLE = #{b_title}, B_CONTENT = #{b_content}, B_SUBJECT = #{b_subject}, B_ANONY = #{b_anony}
 		WHERE B_NO = #{b_no}
 	</update>
 	

@@ -19,11 +19,12 @@
 		gc_sumnail,
 		gc_kakao,
 		gc_infos,
-		gc_status
+		gc_status,
+		gc_name
 		)
 		values(
 		(SELECT NVL(MAX(GC_NO),0)+1 FROM GROUP_COUNSEL N),
-		'지금은 세션값 들어감',
+		'이메일 세션값 들어감',
 		#{gc_date},
 		#{gc_startdate},
 		#{gc_finaldate},
@@ -36,7 +37,8 @@
 		#{gc_sumnail},
 		#{gc_kakao},
 		#{gc_infos},
-		0
+		0,
+		'네임값 세션 들어감'
 		)
 	</insert>
 

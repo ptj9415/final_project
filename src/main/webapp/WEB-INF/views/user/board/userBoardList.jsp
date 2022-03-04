@@ -35,6 +35,7 @@
 .btn1:hover, .btn2:hover, .button:hover {
 	background-color: skyblue;
 	color: white;
+	'
 }
 
 .all {
@@ -42,25 +43,12 @@
 	justify-content: center;
 }
 
-
 #insertbtn {
 	width: 70px;
 	height: 30px;
 	margin-left: 980px;
 	margin-bottom: 20px;
-
 }
-
-/* 텍스트 두줄 이상 ..로 표시 */
-#content { 
-	width: 200px;
-	overflow: hidden;
-	text-overflow: content;
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-}
-
 </style>
 
 </head>
@@ -90,18 +78,21 @@
 		</div>
 		<div class="row">
 			<c:forEach items="${board}" var="board">
-				<div class="col-6"  onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
+				<div class="col-6"
+					onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
 					<div class="card border-primary mb-4">
 						<div class="card-body text-primary">
 							<p class="card-text">${board.b_subject}</p>
 							<h5 class="card-title">${board.b_title}</h5>
-							<pre class="card-text" id="content">${board.b_content}</pre>
-							<c:if test="${board.b_anony eq 'T' }">
-							<p class="card-text" style="text-align: right;">익명</p>
-							</c:if>
-							<c:if test="${board.b_anony eq 'F' }">
-							<p class="card-text" style="text-align: right;">${board.m_nickname}</p>
-							</c:if>
+							<p class="card-text">${board.b_content}</p>
+							<c:choose>
+								<c:when test="${board.b_anony eq 'F' }">
+									<p class="card-text" style="text-align: right;">${board.m_nickname}</p>
+								</c:when>
+								<c:otherwise>
+									<p class="card-text" style="text-align: right;">익명</p>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>

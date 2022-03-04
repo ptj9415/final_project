@@ -123,7 +123,7 @@ public class YoungohController {
 		vo.setGc_infos(result);
 		
 		groupCounselDao.insertGroupCounsel(vo);
-		return "redirect:counselorGroupList.do";
+		return "redirect:adminHome.do";
 	}
 
 	@RequestMapping("/counselorGroupList.do")
@@ -500,6 +500,13 @@ public class YoungohController {
 				therapyDao.DeleteTherapy(vo);
 				return "Ok";
 		}
+	
+	@RequestMapping("/userGroupCounsel.do")
+	public String userGroupCounsel(Model model) {
+		List<GroupcounselVO> list =  groupCounselDao.groupSelectList();
+		model.addAttribute("groupCounselList",list);
+		return "user/groupcounsel/groupCounselApplication";
+	}
 }
 
 

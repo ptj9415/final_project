@@ -209,7 +209,7 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="faqTable">
+							<table class="table table-hover text-nowrap" id="boardTable">
 								<thead>
 									<tr>
 										<th style="width: 150px">작성자</th>
@@ -222,7 +222,7 @@ h3 {
 								<tbody>
 									<c:forEach items="${board}" var="board">
 										<tr class="color"
-											onclick="location.href='adminBoardRead.do?f_no=${board.b_no}';">
+											onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">
 											<td>${board.m_nickname}</td>
 											<td>${board.b_subject}</td>
 											<td>${board.b_title}</td>

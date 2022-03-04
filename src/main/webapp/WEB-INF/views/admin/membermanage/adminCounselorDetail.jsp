@@ -59,13 +59,13 @@ table>tbody>tr>th {
 	<section class="content">
 		<div class="container-fluid">
 			<br>
-			<h3>회원정보 상세보기</h3>
+			<h3>상담사 정보 상세보기</h3>
 			<br>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
 						<p id="headerp">
-							회원 정보
+							상담사 정보
 							<button type="button" class="minusbtn" id="minusbtn1">
 								<i id="minusicon1" class="fa fa-minus"></i>
 							</button>
@@ -81,24 +81,30 @@ table>tbody>tr>th {
 								<br>
 								<table class="table text-nowrap" id="infotable">
 									<tr>
-										<th>닉네임</th>
-										<td><input type="text" class="infotext" id="m_nickname"
-											name="m_nickname" value="${member.m_nickname }"></td>
-										<th>상태</th>
-										<td>${member.m_type }</td>
+										<th>이름</th>
+										<td>${counselor.c_name }</td>
+										<th>성별</th>
+										<td>${counselor.c_gender }</td>
+									</tr>
+									<tr>
+										<th>상담사 등급</th>
+										<td>${counselor.c_grade }</td>
+										<th>생년월일</th>
+										<td>${counselor.c_birthdate }</td>
 									</tr>
 									<tr>
 										<th>이메일</th>
-										<td>${member.m_email }</td>
+										<td>${counselor.c_email }</td>
 										<th>연락처</th>
-										<td><input type="text" class="infotext" id="m_phone"
-											name="m_phone" value="${member.m_phone }"></td>
+										<td>${counselor.c_phone }</td>
+									</tr>
+									<tr>
+										<th>상담사 주소</th>
+										<td colspan="3">${counselor.c_address }</td>
 									</tr>
 								</table>
-								<input type="hidden" id="m_email" name="m_email" value="${member.m_email }">
+								<input type="hidden" id="c_email" name="c_email" value="${counselor.c_email }">
 								<br>
-								<button type="button" onclick="infosubmit()"
-											class="btn btn-primary  py-2 px-5" id="infosubmitbtn">등록</button>
 							</div>
 						</form>
 					</div>
@@ -113,7 +119,7 @@ table>tbody>tr>th {
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
 						<p id="headerp">
-							보유 쿠폰
+							상담 내역
 							<button type="button" class="minusbtn" id="minusbtn2">
 								<i id="minusicon2" class="fa fa-minus"></i>
 							</button>
@@ -122,58 +128,6 @@ table>tbody>tr>th {
 				</div>
 			</div>
 			<div class="row" id="maindiv2">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-body table-responsive p-00">
-							<br>
-							<table class="table text-nowrap" id="coupontable">
-								<tr>
-									<th>쿠폰 이름</th>
-									<th>쿠폰 금액</th>
-									<th>발급일</th>
-									<th>만료일</th>
-								</tr>
-								<c:choose>
-									<c:when test="${not empty coupon}">
-										<c:forEach items="${coupon }" var="coupon">
-											<tr>
-												<td>${coupon.c_name }</td>
-												<td>${coupon.c_price }</td>
-												<td>${coupon.c_startdate }</td>
-												<td>${coupon.c_finaldate }</td>
-											</tr>
-										</c:forEach>
-									</c:when>
-									<c:when test="${empty coupon }">
-										<tr>
-											<td colspan="4">보유한 쿠폰이 없습니다.</td>
-										</tr>
-									</c:when>
-								</c:choose>
-							</table>
-							<br>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<br>
-	<section class="content">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 offset-md-0">
-					<div class="card">
-						<p id="headerp">
-							상담 내역
-							<button type="button" class="minusbtn" id="minusbtn3">
-								<i id="minusicon3" class="fa fa-minus"></i>
-							</button>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="row" id="maindiv3">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
@@ -234,19 +188,9 @@ table>tbody>tr>th {
 			$('#minusicon2').attr('class', 'fa fa-plus');
 		}
 	});
-
-	$('#minusbtn3').click(function() {
-		if ($('#maindiv3').css('display') == 'none') {
-			$('#maindiv3').show();
-			$('#minusicon3').attr('class', 'fa fa-minus');
-		} else if ($('#maindiv3').css('display') != 'none') {
-			$('#maindiv3').hide();
-			$('#minusicon3').attr('class', 'fa fa-plus');
-		}
-	});
 	
 	function infosubmit() {
-		var url = "adminUserInfoUpdate.do";
+		var url = "adminCounselorInfoUpdate.do";
 		var formData = new FormData($("#form")[0]);
 		$.ajax({
 			url : url,
