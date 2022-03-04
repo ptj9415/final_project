@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -332,42 +333,95 @@ div.counsel-type {
 		</div>
 	</div>
 
+<form id="step3" action="personalCounselStep4.do" method="post">
 	<div class="choice-btn">
 		<div class="row mt-5 pt-4">
+		
+		<c:if test="${counselorSelect.p_kakao eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">채팅</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
+				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
 
 			</div>
+		</c:if>
+		
+		<c:if test="${counselorSelect.p_kakao eq 0 }">
+			<div style="display:none">
+			<div type=hidden class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img type=hidden src="resources/user/images/chat.PNG" class="chat-img">
+				<h3  type=hidden class="h4">채팅</h3>
+				<input type=hidden class="chat-btn" value="${counselorSelect.p_kakaoprice }">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
+
+			</div>
+			</div>
+		</c:if>
+			
+			
+		<c:if test="${counselorSelect.p_zoom eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">화상</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
 
 			</div>
+		</c:if>	
+		<c:if test="${counselorSelect.p_zoom eq 0 }">
+			<div style="display:none">
+			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<h3 class="h4">화상</h3>
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
+
+			</div>
+			</div>
+		</c:if>	
+			
+		<c:if test="${counselorSelect.p_phone eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">전화</h3>
-				<input type=button class="chat-btn" value="40,000">
-				<input type=checkbox class="chat-btn" name="c-type">
+				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
 
 			</div>
+		</c:if>	
+		
+		<c:if test="${counselorSelect.p_phone eq 0 }">
+			<div style="display:none">
+			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
+				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<h3 class="h4">전화</h3>
+				<input type=hidden class="chat-btn" value="${counselorSelect.p_phoneprice}">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
+
+			</div>
+			</div>
+		</c:if>	
+		
+		
+		
+			
 		</div>
 	</div>
+	<input type="hidden" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${email}" >
+	<input type="hidden" id="onecheck" name="onecheck" value="${type }"> 
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />
-	<input type="button" data-page="2" name="next"
+	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
-
+</form>
 	<script>
 		$('#previous-btn').click(function() {
 			location.href = 'personalCounselStep2.do'
 		});
 
 		$('#next-btn').click(function() {
+			step3.submit();
 			location.href = 'personalCounselStep4.do'
 		});
 	</script>

@@ -44,7 +44,7 @@ public class EjuController {
 	@RequestMapping("/personalCounselStep2.do")
 	public String personalCounselStep2(Model model, PersonalcounselVO vo, HttpServletRequest request) {
 		String test = request.getParameter("onecheck");
-		System.out.println("step1 : "+test);
+		System.out.println("step2 : "+test);
 		vo.setCcg_subname(test);
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
 		model.addAttribute("counselorList", counselorList);
@@ -56,23 +56,36 @@ public class EjuController {
 	@RequestMapping("/personalCounselStep3.do")
 	public String personalCounselStep3(PersonalcounselVO vo,@RequestParam("c_email") String c_email, Model model, HttpServletRequest request, HttpSession session) {
 		String type = request.getParameter("onecheck");
-		System.out.println("step2 : "+type);
-		System.out.println(c_email);
+		System.out.println("step3 : "+type);
+		System.out.println("step3 : "+c_email);
+		vo = personalCounselDao.CounselorSelect(vo);
 		
-
-
+		model.addAttribute("type",type);
+		model.addAttribute("email",c_email);
+		
+		model.addAttribute("counselorSelect",vo);
 		return "user/personalcounsel/personalCounselStep3";
 	}
 
 	// 개인상담 신청 step4
 	@RequestMapping("/personalCounselStep4.do")
-	public String personalCounselStep4() {
+	public String personalCounselStep4(PersonalcounselVO vo,@RequestParam("c_email") String c_email, Model model, HttpServletRequest request, HttpSession session) {
+		String type2 = request.getParameter("onecheck");
+		System.out.println("step4 : "+type2);
+		System.out.println("step4 : "+c_email);
+		vo = personalCounselDao.CounselorSelect(vo);
+		
+		String type3 = request.getParameter("c-type");
+		System.out.println("가격선택 : "+ type3);
+		model.addAttribute("type3", type3);
+		
 		return "user/personalcounsel/personalCounselStep4";
 	}
 
 	// 개인상담 신청내역 확인 페이지
 	@RequestMapping("/personalCounselApplication.do")
 	public String personalCounselApplication() {
+		
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
@@ -130,7 +143,14 @@ public class EjuController {
 	@RequestMapping("/counselorPersonalList.do")
 	public String counselorPersonalList() {
 
+		
 		return "counselor/personalcounselmanage/counselorPersonalList";
+	}
+	
+	// 개인상담 관리 상세화면
+	@RequestMapping("/counselorPersonalDetail.do")
+	public String counselorPersonalDetail() {
+		return "counselor/personalcounselmanage/counselorPersonalDetail";
 	}
 
 	/* =====관리자 화면===== */

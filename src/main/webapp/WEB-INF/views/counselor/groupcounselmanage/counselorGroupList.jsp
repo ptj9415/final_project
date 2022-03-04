@@ -6,6 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+.btndiv {
+	float: right;
+	width: 150px;
+	margin-right: -8px;
+}
+
+#btnSearch {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
+}
+
+#clearbtn {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid red;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
+}
+
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- Main content -->

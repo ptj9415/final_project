@@ -523,7 +523,8 @@ i[class^=icon-chevron] {
 			</div>
 		</div>
 	</section> -->
-
+		<input type="hidden" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}" >
+	<input type="hidden" id="c_email" name="onecheck" value="${type3}"> 
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="button" data-page="2" name="next"

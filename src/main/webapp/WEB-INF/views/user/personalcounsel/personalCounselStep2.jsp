@@ -442,38 +442,7 @@
 			frm.submit();
 		};
 		
-	/* 	//채팅
-		var kakaotype = document.querySelector("#p_kakao").value;
-		var typetext = document.getElementById("p_kakao_text");
-		
-		if (kakaotype == 0 ){
-			typetext.type = "hidden";
-			
-		} else {
-			typetext.type="text";
-		};
-		
-		//화상
-		var zoomtype = document.querySelector("#p_zoom").value;
-		
-		var typetext2 = document.getElementById("p_zoom_text");
-		if (zoomtype == 0 ){
-			typetext2.type = "hidden";
-			
-		} else {
-			typetext2.type="text";
-		};
-		
-		//전화
-		var phonetype = document.querySelector("#p_phone").value;
-		var typetext3 = document.getElementById("p_phone_text");
-		if (phonetype == 0 ){
-			typetext3.type = "hidden";
-			
-		} else {
-			typetext3.type="text";
-		}; */
-		
+	
 		
 	</script>
 </body>
