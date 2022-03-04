@@ -12,6 +12,7 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 
 	@Override
 	public List<BoardReplyVO> boardReplyList(int br_no) throws Exception {
+		
 		return ;
 	}
 
