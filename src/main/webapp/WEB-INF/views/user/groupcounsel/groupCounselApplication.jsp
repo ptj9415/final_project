@@ -436,7 +436,7 @@ img {
 		<c:forEach items="${groupCounselList }" var="group">
 			<li class="cards__item">
 				<div class="card">
-					<img id="imgfix" alt="asdf" src="therapysumnail/36aca57d-62bf-4b5b-a395-83c88beb7793케냐 오크라톡신.jpg">
+					<img id="imgfix" alt="asdf" src="editorsumnail/${group.gc_sumnail }">
 					<div class="card__content">
 						<div class="card__title">${group.gc_title}</div>
 						<p class="card__text">${group.gc_name }</p>
@@ -446,64 +446,18 @@ img {
 						<span class="card__doctor">
 							<p style="font-size: 20px;">👨‍👩‍👧 정원 ${group.gc_min_person }명 - ${group.gc_max_person}명</p>
 						</span>
-						<button class="btn btn--block card__btn">신청하기</button>
+						<button id="btn" onclick="func('${group.gc_no}')" class="btn btn--block card__btn">신청하기</button>
 					</div>
 				</div>
 			</li>
 		</c:forEach>
-<!-- 			<li class="cards__item">
-				<div class="card">
-					<img id="imgfix" alt="asdf" src="therapysumnail/36aca57d-62bf-4b5b-a395-83c88beb7793케냐 오크라톡신.jpg">
-					<div class="card__content">
-						<div class="card__title">소통방식 이해하기 이해를 많이 해보자</div>
-						<p class="card__text">이소정 전문의</p>
-						<span class="card__doctor">
-							<p>⏱ 3월 23일 오후 2시</p>
-						</span> 
-						<span class="card__doctor">
-							<p>👨‍👩‍👧 정원 2명-4명</p>
-						</span>
-						<button class="btn btn--block card__btn">신청하기</button>
-					</div>
-				</div>
-
-			</li>
-			<li class="cards__item">
-				<div class="card">
-					<img id="imgfix" alt="asdf" src="therapysumnail/36aca57d-62bf-4b5b-a395-83c88beb7793케냐 오크라톡신.jpg">
-					<div class="card__content">
-						<div class="card__title">Flex Shrink</div>
-						<p class="card__text">This defines the ability for a flex item
-							to shrink if necessary. Negative numbers are invalid.</p>
-						<button class="btn btn--block card__btn">신청하기</button>
-					</div>
-				</div>
-			</li>
-			<li class="cards__item">
-				<div class="card">
-					<img id="imgfix" alt="asdf" src="therapysumnail/36aca57d-62bf-4b5b-a395-83c88beb7793케냐 오크라톡신.jpg">
-					<div class="card__content">
-						<div class="card__title">Flex Basis</div>
-						<p class="card__text">This defines the default size of an
-							element before the remaining space is distributed. It can be a
-							length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword
-							means "look at my width or height property."</p>
-						<button class="btn btn--block card__btn">신청하기</button>
-					</div>
-				</div>
-			</li>
-			<li class="cards__item">
-				<div class="card">
-					<img id="imgfix" alt="asdf" src="therapysumnail/36aca57d-62bf-4b5b-a395-83c88beb7793케냐 오크라톡신.jpg">
-					<div class="card__content">
-						<div class="card__title">Flex Shrink</div>
-						<p class="card__text">This defines the ability for a flex item
-							to shrink if necessary. Negative numbers are invalid.</p>
-						<button class="btn btn--block card__btn">신청하기</button>
-					</div>
-				</div>
-			</li> -->
 		</ul>
 	</div>
+	<script type="text/javascript">
+		function func(gc_no){
+			console.log(gc_no);
+			location.href = "userGroup.do?gc_no="+gc_no;
+		}
+	</script>
 </body>
 </html>

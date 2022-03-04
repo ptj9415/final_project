@@ -46,6 +46,7 @@
 		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
 		SELECT *
 		FROM GROUP_COUNSEL
+		ORDER BY GC_NO DESC
 	</select>
 
 	<select id="joinSelectList"
@@ -142,6 +143,11 @@
 		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
 		update group_counsel
 		set gc_report = #{gc_report}, gc_result = #{gc_result}
-		where gc_no = #{gc_no};
+		where gc_no = #{gc_no}
 	</update>
+	
+	<select id="selectUserGroup" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO" resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+			select * from group_counsel
+			where gc_no = #{gc_no}
+	</select>
 </mapper>

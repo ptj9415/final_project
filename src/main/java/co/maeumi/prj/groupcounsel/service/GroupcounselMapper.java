@@ -17,4 +17,5 @@ public interface GroupcounselMapper {
 	GroupcounselVO selectgroupRserve(GroupcounselVO vo); //예약자 리스트 조회
 	GroupcounselVO selectDetailList(GroupcounselVO vo);
 	int groupCounselResult(GroupcounselVO vo); // 그룹 상담 결과 등록하기.
+	GroupcounselVO selectUserGroup(GroupcounselVO vo);
 }
