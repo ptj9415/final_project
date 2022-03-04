@@ -43,7 +43,18 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return map.noticeDelete(vo);
 	}
-
+	
+//	@Override
+//	public List<NoticeVO> getListPaging(Criteria cri) {
+//		// TODO Auto-generated method stub
+//		return map.getListPaging(cri);
+//	}
+//
+//	@Override
+//	public int getTotal(Criteria cri) {
+//		// TODO Auto-generated method stub
+//		return map.getTotal(cri);
+//	}
 	
 
 }

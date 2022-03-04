@@ -15,7 +15,6 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	@Autowired
 	private BoardReplyMapper map;
 	
-	@Override
 
 	public List<BoardReplyVO> boardReplyList(BoardReplyVO vo) throws Exception {
 		return map.boardReplyList(vo);

@@ -1,18 +1,27 @@
 package co.maeumi.prj.web;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,14 +29,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.JsonObject;
 
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
@@ -41,7 +53,7 @@ import co.maeumi.prj.service.NaverLoginBO;
 
 @Controller
 public class BadaController {
-
+		
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
 	MemberVO mvo = new MemberVO();
@@ -57,6 +69,8 @@ public class BadaController {
 	private KakaoService ks;
 	@Autowired
 	private NoticeService noticeDao;
+	@Resource(name="uploadPath")   // servlet-context.xml에서 정의함. 상대경로로 변경해주어야 함(현재 하드코딩 상태)
+    String uploadPath;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -89,38 +103,38 @@ public class BadaController {
 	}
 	
 	// 일반 로그인 처리
-		@ResponseBody
-		@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-		public String login(Model model, HttpServletRequest request, MemberVO mvo, HttpSession session, CounselorVO cvo) {
+	@ResponseBody
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String login(Model model, HttpServletRequest request, MemberVO mvo, HttpSession session, CounselorVO cvo) {
 
-			mvo.setM_email(request.getParameter("email"));
-			mvo.setM_password(request.getParameter("password"));
-			mvo = memberDao.memberLogin(mvo);
+		mvo.setM_email(request.getParameter("email"));
+		mvo.setM_password(request.getParameter("password"));
+		mvo = memberDao.memberLogin(mvo);
 
-			String message = "";
-			if (mvo != null) { // 멤버로 로그인 성공한 경우~
+		String message = "";
+		if (mvo != null) { // 멤버로 로그인 성공한 경우~
+			session.setAttribute("email", request.getParameter("email"));
+			session.setAttribute("nickname", mvo.getM_nickname());
+			System.out.println("로그인 성공");
+			System.out.println("로그인하면서 내가 담은 세션값 이름 : " + session.getAttribute("email"));
+			System.out.println("로그인 하면서 닉네임이 담겼나??? 확인. 제발. " + session.getAttribute("nickname"));
+			message = "YES";
+		} else {
+			cvo.setC_email(request.getParameter("email"));
+			cvo.setC_password(request.getParameter("password"));
+			cvo = counselorDao.counselorLogin(cvo);
+
+			if (cvo != null) { // 상담사로 로그인 성공한 경우.
 				session.setAttribute("email", request.getParameter("email"));
-				session.setAttribute("nickname", mvo.getM_nickname());
-				System.out.println("로그인 성공");
-				System.out.println("로그인하면서 내가 담은 세션값 이름 : " + session.getAttribute("email"));
-				System.out.println("로그인 하면서 닉네임이 담겼나??? 확인. 제발. " + session.getAttribute("nickname"));
+				System.out.println("세션에 이메일이 담겼나? " + session.getAttribute("email"));
 				message = "YES";
-			} else {
-				cvo.setC_email(request.getParameter("email"));
-				cvo.setC_password(request.getParameter("password"));
-				cvo = counselorDao.counselorLogin(cvo);
-
-				if (cvo != null) { // 상담사로 로그인 성공한 경우.
-					session.setAttribute("email", request.getParameter("email"));
-					System.out.println("세션에 이메일이 담겼나? " + session.getAttribute("email"));
-					message = "YES";
-				} else { // 일반회원, 상담사 둘 다 로그인 실패한 경우.
-					message = "NO";
-				}
+			} else { // 일반회원, 상담사 둘 다 로그인 실패한 경우.
+				message = "NO";
 			}
-
-			return message;
 		}
+
+		return message;
+	}
 
 		@RequestMapping("/loginSuccess.do")
 		public String loginSuccess(Model model, HttpServletRequest request) {
@@ -135,6 +149,72 @@ public class BadaController {
 			session.invalidate();
 			return "user/home/home";
 		}
+		
+		
+		// 네이버 로그인 성공시 callback호출 메소드
+		@RequestMapping(value = "/callback.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, MemberVO mvo)
+				throws IOException, ParseException {
+			
+			System.out.println("여기는 callback");
+			OAuth2AccessToken oauthToken;
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);
+			// 로그인 사용자 정보를 읽어온다.
+			apiResult = naverLoginBO.getUserProfile(oauthToken);
+			System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
+			
+			model.addAttribute("result", apiResult);
+			System.out.println("result:  " + apiResult);
+			
+			// DB에 넣기
+			String message = null;
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject)jsonParser.parse(naverLoginBO.getUserProfile(oauthToken).toString());
+			
+			JSONObject response = (JSONObject)jsonObject.get("response");
+			
+			System.out.println("이것은: " + jsonObject.get("response"));
+			System.out.println("이메일은: " + (String)response.get("email"));
+			System.out.println("닉네임은: " + (String)response.get("nickname"));
+			System.out.println("연락처는 선택이지만 : " + (String)response.get("mobile"));
+			
+			
+			MemberVO mvo2 = new MemberVO(); // 기존에 존재유무 판단하기 위한 용도의 인스턴스 생성.
+			mvo2.setM_email((String)response.get("email"));
+			mvo2.setM_type("네이버");
+			mvo2 = memberDao.naverSelect(mvo2);
+			
+			if(mvo2 == null) {   // db에 해당 유저의 정보가 없다면.
+				mvo.setM_email((String)response.get("email"));
+				mvo.setM_nickname((String)response.get("nickname"));
+				String beforePhone = (String)response.get("mobile");
+				String realPhone = beforePhone.replaceAll("-", "");
+				mvo.setM_phone(realPhone);
+				mvo.setM_password("");
+				mvo.setM_type("네이버");
+				int n = memberDao.memberInsert(mvo);
+				if(n != 0) {
+					message = (String)response.get("email");
+					System.out.println(message + " 님 네이버 로그인 성공" );
+					session.setAttribute("email", message); // 세션값 설정
+					session.setAttribute("nickname", (String)response.get("nickname"));
+					return "home/home";
+				} else {
+					message = "실패햇다.....";
+					System.out.println(message);
+					return "home/loginForm";
+				}
+			}
+			// null이 아니었다면 바로 db에 데이터를 넣을 필요없이 바로 로그인 
+			session.setAttribute("email", (String)response.get("email")); // 세션값 설정
+			session.setAttribute("nickname", (String)response.get("nickname"));
+			System.out.println("네이버 로그인으로 담은 세션값1 email: " +  (String)response.get("email") );
+			System.out.println("네이버 로그인으로 담은 세션2 nickname: " + (String)response.get("nickname"));
+			return "home/home/home";  
+		}
+		
+		
 
 		// 카카오 로그인 컨트롤러. code를 받을 메서드.
 		@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.GET)
@@ -360,8 +440,10 @@ public class BadaController {
 		
 		
 
-	/* ===== 관리자 화면 ===== */
-
+	/* ============================== 관리자 화면 (공지사항 관리 ) ====================================================== */
+		
+		
+	// 공지사항 메인폼으로 이동
 	@RequestMapping("/adminNoticeList.do")
 	public String adminNoticeList(HttpSession session, HttpServletRequest request, Model model) {
 
@@ -369,81 +451,265 @@ public class BadaController {
 
 		return "admin/noticemanage/adminNoticeList";
 	}
-
+	
+	// 공지사항 작성하는 폼으로 이동
 	@RequestMapping("/adminNoticeForm.do")
 	public String adminNoticeForm(Model model, HttpServletRequest request, HttpSession session) {
 
 		return "admin/noticemanage/adminNoticeForm";
 	}
-
-	// ckupload
-	@RequestMapping("/imageUpload.do")
-	public void imageUpload(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam MultipartFile upload) // view단에서 업로드한 파일이 'upload'에 담기게 된다.
-			throws Exception {
-
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		OutputStream out = null;
-		PrintWriter printWriter = null;
-		String fileName = upload.getOriginalFilename(); // 업로드한 파일 이름
-		byte[] bytes = upload.getBytes(); // 파일을 바이트 배열로 만든다.
-		ServletContext application = request.getSession().getServletContext();
-		String uploadPath = application.getRealPath("/resources/ckUpload"); // 업로드 될 공간.
-		out = new FileOutputStream(new File(uploadPath + fileName));
-		out.write(bytes); // 배포 경로에 파일이 저장된다.
-		printWriter = response.getWriter(); // 웹브라우저에 출력해주기 위한 객체.
-		String fileUrl = request.getContextPath() + "/images/" + fileName;
-		printWriter.println("{\"filename\":\"" + fileName + "\",\"uploaded\":1,\"url\":\"" + fileUrl + "\"}");
-		printWriter.flush();
+	
+	// 공지사항 조회하는 폼
+	@RequestMapping("/noticeRead.do")
+	public String noticeRead(Model model, HttpServletRequest request, NoticeVO vo) {
+		System.out.println("넘겨받은 no의 값: " + request.getParameter("no"));
+		
+		vo.setN_no( Integer.valueOf(request.getParameter("no")));
+		vo = noticeDao.noticeSelect(vo);
+		
+		model.addAttribute("notices", vo);
+		
+		return "admin/noticemanage/adminNoticeRead";
 	}
-
+	
+	// 공지사항 삭제
+	@ResponseBody
+	@PostMapping("/noticeDelete.do")
+	public String noticeDelete(HttpServletRequest request, Model model, NoticeVO vo) {
+		
+		System.out.println("ajax로 제대로 no번호가 넘어왔는지? : " + request.getParameter("deleteNum"));
+		
+		int number = Integer.valueOf(request.getParameter("deleteNum"));
+		vo.setN_no(number);
+		
+		int n = noticeDao.noticeDelete(vo);
+		String message = null;
+		
+		if(n != 0) {
+			message = "YES";
+		} else {
+			message = "NO";
+		}	
+		return message;
+	}
+	
+	
+	// 공지사항 수정하러 이동.
+	@RequestMapping("/noticeUpdate.do")
+	public String noticeUpdate(HttpServletRequest request, Model model, NoticeVO vo) {
+		// 파라미터 가져와서 해당 no에 해당하는 정보들을 폼에 넘겨줘야 함. 
+		
+		System.out.println("전달받은 값: " + Integer.valueOf(request.getParameter("updateNo")));
+		
+		int num = Integer.valueOf(request.getParameter("updateNo"));
+		vo.setN_no(num);
+		
+		model.addAttribute("notices", noticeDao.noticeSelect(vo));
+		
+		return "admin/noticemanage/adminNoticeUpdate";
+	}
+	
+	
+	// 공지사항 수정 후 저장 
+	@RequestMapping("/noticeUpdateEnd.do")
+	public String noticeUpdateEnd(HttpServletRequest request, Model model, NoticeVO vo) {
+		// 뭐가 필요할까. 일단은 각각 새로 작성한 부븐들 모두 name값 찾아와서 vo에 실어서 update실행. ㅇ
+		// n_titel, n_content, n_category, n_filename, n_pfilename, 
+		System.out.println("no 얘 무슨 값이지 ? " + request.getParameter("no"));
+		System.out.println("값 전환 되나? " + Integer.valueOf(request.getParameter("no")));
+	
+		vo.setN_category(request.getParameter("category"));
+		vo.setN_title(request.getParameter("title"));
+		vo.setN_content(request.getParameter("content"));
+		vo.setN_filename(request.getParameter("filename"));
+		vo.setN_pfilename(request.getParameter("pfilename"));
+		int upNum = Integer.valueOf(request.getParameter("no"));
+		vo.setN_no(upNum);
+		
+		noticeDao.noticeUpdate(vo);
+		
+		return "redirect:adminNoticeList.do";
+	}
+	
+	// 공지사항 선택삭제
+	@ResponseBody
+	@RequestMapping(value = "/ajaxCheckDelete.do", method = RequestMethod.POST)
+	public int ajaxCheckDelete(HttpServletRequest request, NoticeVO vo, 
+									@RequestParam(value = "sendCheck[]") List<String> chAry) {
+		
+		int result = 0;
+		int partNum = 0;
+		
+		for(String i : chAry) {
+			partNum = Integer.parseInt(i);
+			vo.setN_no(partNum);
+			noticeDao.noticeDelete(vo);
+			result = 1;
+		} 
+		return result;   // 이 값이 ajax의 responseText. 
+	};
+	
+	
+	
+	//공지사항 등록
 	@RequestMapping("/noticeRegister.do")
-	public String noticeRegister(Model model, NoticeVO vo, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) {
+	public ModelAndView noticeRegister(ModelAndView mav, NoticeVO vo, HttpServletRequest request, HttpServletResponse response
+			, @RequestParam("fileName") MultipartFile file)  throws Exception {
+		 
 
+		// 파일 업로드 처리 
+		String savedName = file.getOriginalFilename();
+        String mSavedName = null;   // 중복 가공된 파일. 실제 물리파일.
+        mSavedName = uploadFile(savedName, file.getBytes());
+        
+        //모델앤뷰의 뷰 경로지정noticeMain.do
+        mav.setViewName("redirect:adminNoticeList.do");
+        //속성추가 
+        mav.addObject("savedName", mSavedName);
+        
 		// 파라미터값 넘어왔는지 확인. 이 값들을 테이블에 집어넣을 생각.
 		System.out.println("title은 " + request.getParameter("title"));
 		System.out.println("말머리 : " + request.getParameter("category"));
 		System.out.println("내용 : " + request.getParameter("content"));
-		System.out.println("첨부파일: " + request.getParameter("fileName"));
 		System.out.println("작성자: " + request.getParameter("writer"));
 		System.out.println("작성일: " + request.getParameter("wdate"));
-
-		// insert구문. 첨부파일 있으면 첨부파일도.
-		vo.setN_writer(request.getParameter("writer"));
-		vo.setN_title(request.getParameter("title"));
-		vo.setN_content(request.getParameter("content"));
-		vo.setN_filename(request.getParameter("fileName"));
-		vo.setN_category(request.getParameter("category"));
-		vo.setN_writedate(request.getParameter("wdate"));
-		vo.setN_pfilename(request.getParameter("pfileName"));
-		vo.setN_writedate(request.getParameter("wdate"));
-
-		vo.setN_writer((String) session.getAttribute("email"));
+		System.out.println("첨부파일 원본명: " + savedName);
+		System.out.println("다운받을 물리파일명: " + mSavedName);
+		
+//		String fixedContent = request.getParameter("content");
+//		fixedContent = fixedContent.replace(0, 0)
+				
+		//insert구문. 첨부파일 있으면 첨부파일도.
+		vo.setN_writer(request.getParameter("writer"));   // 작성자
+		vo.setN_title(request.getParameter("title"));		// 제목
+		vo.setN_content(request.getParameter("content"));	// 내용
+		vo.setN_category(request.getParameter("category"));	// 말머리 선택
+		vo.setN_writedate(request.getParameter("wdate"));	// 작성날짜.
+		vo.setN_filename(savedName);      // db에 저장될 원본파일명
+		vo.setN_pfilename(mSavedName);		//  db에 저장될 실제 물리파일명.
+		
+		//값 넣기.
 		noticeDao.noticeInsert(vo);
-
-		return "redirect:adminNoticeList.do";
+		
+		return mav;
 	}
+	
+	// 위 공지사항 등록 커멘드 내부 첨부파일명  랜덤생성 
+		private String uploadFile(String originalName, byte[] fileData) throws Exception {
+			// uuid 생성 
+			UUID uuid = UUID.randomUUID();
+			//랜덤생성 + 파일이름 저장
+			String savedName = uuid.toString() + "_" + originalName;
+			File target = new File(uploadPath, savedName);
+			// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사. 실제 프로젝트 시연할 때는 uploadPath 의 경로를 변경해야 함( servlet-context.xml)
+			FileCopyUtils.copy(fileData, target);
+			return savedName;
+		}
+	
+	
+	
+	// summernote를 통한 이미지 업로드.  => 경로를 작성하는 부분 모두 상대경로로 수정해야 함
+	@RequestMapping(value = "/summernoteImageFile.do", produces = "application/json; charset=utf8" )
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		//일반 파일 물리 경로
+        //String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+        
+		//경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
+        //Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image\\"; // 저장 경로도 이클립스 내부로, 상대경로를 통해서 특정 디렉토리로 경로를 설정해주어야 함
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/fileupload/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);   
+		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			multipartFile.transferTo(mtargetFile); //다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			jsonObject.addProperty("url", "/prj/resources/fileupload/"+savedFileName);
+			// contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		System.out.println(a);
+		return a;
+	}	
+	
+	
+	//첨부파일 다운로드       		* 밑에 경로를 작성하는 부분은 모두 상대경로로 수정해야 함
+	@RequestMapping("/fileDownload.do")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String filename = request.getParameter("fileName"); 
+		String encodingFilename=	"";			
+		System.out.println("1. filename: " + filename);
+		String realFilename = "";
+		
+		try {
+			String browser = request.getHeader("User-Agent");
+			//파일 인코딩
+			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
+				encodingFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("2. filename: " + filename);
+            } else {
+            	encodingFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+            }
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("UnsupportedEncodingException");
+        }
+			realFilename = "C:\\Users\\gnjqt\\git\\final_project\\src\\main\\webapp\\editor\\" + filename;
+			System.out.println("3. realfilename: " + realFilename );
+			File file1 = new File(realFilename);
+	        if (!file1.exists()) {
+	        	System.out.println("확인 ~=================");
+	            return ;
+	        }
+	         
+	        // 파일명 지정        
+	        response.setContentType("application/octer-stream");
+	        response.setHeader("Content-Transfer-Encoding", "binary;");
+	        response.setHeader("Content-Disposition", "attachment; filename=\"" + encodingFilename + "\"");
+	        try {
+	            OutputStream os = response.getOutputStream();
+	            FileInputStream fis = new FileInputStream(realFilename);
+	 
+	            int ncount = 0;
+	            byte[] bytes = new byte[512];
+	 
+	            while ((ncount = fis.read(bytes)) != -1 ) {
+	                os.write(bytes, 0, ncount);
+	            }
+	            fis.close();
+	            os.close();
+	        } catch (Exception e) {
+	            System.out.println("FileNotFoundException : " + e);
+	        }
+			
+	}
+	
+	
+	// 공지사항 고정 처리하기 
+	@ResponseBody
+	@RequestMapping("noticeStatus.do")
+	public String noticeStatus(HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {
+		
+		
+		
+	}
+	
+	
 
-//	@ResponseBody
-//	@RequestMapping("/noticeDelete.do")
-//	public String noticeDelete(HttpServletRequest request, Model model, NoticeVO vo) {
-//		
-//		System.out.println("넘어온 값: " + request.getParameter("deleteNum"));
-//		
-//		vo.setN_no(request.getParameter("deleteNum"));
-//		int n  =noticeDao.noticeDelete(vo);
-//		String responseText = null;
-//		
-//		if(n !=0) {
-//			responseText = "YES";
-//			System.out.println("성공~~");
-//		} else {
-//			System.out.println("실패");
-//		}
-//		
-//		return responseText;
-//		
-//	}
+
 }
