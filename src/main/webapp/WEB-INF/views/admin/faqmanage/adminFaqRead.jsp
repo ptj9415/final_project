@@ -45,9 +45,9 @@ button {
 			<tbody>
 				<tr>
 					<th style="width: 200px; height: 400px;">내 용</th>
-					<td colspan="3"><input type="text"
+					<td colspan="3"><pre type="text"
 						style="border: none; height: 400px; width: 820px" id="f_subject"
-						name="f_subject" value="${faqRead.f_subject}" readonly></td>
+						name="f_subject">${faqRead.f_subject}</pre></td>
 				</tr>
 			</tbody>
 		</table>

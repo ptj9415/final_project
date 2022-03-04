@@ -54,9 +54,9 @@ button {
 				<tr>
 				<tr>
 					<th style="width: 100px; height: 400px;">내 용</th>
-					<td colspan="5"><input type="text"
+					<td colspan="5"><pre
 						style="border: none; height: 400px; width: 820px" id="b_content"
-						name="b_content" value="${boardRead.b_content}" readonly></td>
+						name="b_content" >${boardRead.b_content}</pre></td>
 				</tr>
 			</tbody>
 		</table>

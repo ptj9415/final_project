@@ -2,7 +2,6 @@ package co.maeumi.prj.board.service;
 
 import java.util.List;
 
-import co.maeumi.prj.member.service.MemberVO;
 import co.maeumi.prj.service.Search;
 
 public interface BoardService {
