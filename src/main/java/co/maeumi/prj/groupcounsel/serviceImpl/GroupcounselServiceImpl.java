@@ -80,6 +80,12 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	public int groupCounselResult(GroupcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.groupCounselResult(vo);
+	}
+
+	@Override
+	public GroupcounselVO selectUserGroup(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectUserGroup(vo);
 	}	
 
 }

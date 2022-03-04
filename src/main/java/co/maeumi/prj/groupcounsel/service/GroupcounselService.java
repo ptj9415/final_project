@@ -16,5 +16,6 @@ public interface GroupcounselService {
 	int GroupUserDelete(GroupcounselVO vo);  //delete 라고 하지만 상태값 업데이트 구문임
 	GroupcounselVO selectgroupRserve(GroupcounselVO vo); //예약자 리스트 조회
 	GroupcounselVO selectDetailList(GroupcounselVO vo);
-	int groupCounselResult(GroupcounselVO vo); // 그룹 상담 결과 등록하기.
+	int groupCounselResult(GroupcounselVO vo); // 그룹 상담 결과 등록하기
+	GroupcounselVO selectUserGroup(GroupcounselVO vo);
 }
