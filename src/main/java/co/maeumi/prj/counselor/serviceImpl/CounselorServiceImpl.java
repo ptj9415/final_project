@@ -142,5 +142,19 @@ public class CounselorServiceImpl implements CounselorService {
 		// TODO Auto-generated method stub
 		return map.counselorSearchselect(svo);
 	}
+
+	@Override
+	public List<CounselorVO> counselorTimeAndDay(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorTimeAndDay(cvo);
+	}
+
+	@Override
+	public List<CounselorVO> reservedCounsel(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.reservedCounsel(cvo);
+	}
+
+
 	
 }

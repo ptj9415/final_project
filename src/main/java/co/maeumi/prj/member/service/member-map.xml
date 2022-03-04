@@ -29,6 +29,11 @@
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+	<update id="memberInfoUpdate" parameterType="co.maeumi.prj.member.service.MemberVO">
+		UPDATE MEMBER SET M_NICKNAME = #{m_nickname}, M_PHONE = #{m_phone}
+		WHERE M_EMAIL = #{m_email}
+	</update>
 
 	<select id="memberSelectList"
 		resultType="co.maeumi.prj.member.service.MemberVO">
