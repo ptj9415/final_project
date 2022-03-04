@@ -483,12 +483,7 @@
 			}
 		}
 
-	/* 	$('#next-btn').click(function() {
-			step1.submit();
-		/* 	var selected = $("input[name='onecheck']:checked").val();
-			console.log(selected); 
-			location.href = 'personalCounselStep2.do'
-		}); */
+	
 	</script>
 </body>
 </html>

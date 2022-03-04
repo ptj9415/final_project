@@ -316,9 +316,6 @@ form {
 				<!--End Title-->
 			</div>
 			<!--End InvoiceTop-->
-
-
-
 			<div id="invoice-mid">
 
 				<div class="clientlogo"></div>
@@ -396,9 +393,9 @@ form {
 
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">HST</p></td>
-							<td class="tableitem"><p class="itemtext">13%</p></td>
-							<td class="tableitem"><p class="itemtext">$419.25</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
 						</tr>
 
 

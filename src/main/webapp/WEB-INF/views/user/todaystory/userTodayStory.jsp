@@ -26,10 +26,7 @@
 table {
 	border: solid 1px;
 }
-
-
 /*modal*/
-
 /*modal end*/
 </style>
 </head>
@@ -53,12 +50,12 @@ table {
 
 					</p>
 
-
-
+			
+					
 					<!-- modal btn -->
 
-					<span type="button" class="btn btn-default" id="submit-btn"
-						data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
+		<span type="button" class="btn btn-default" id="submit-btn"
+			data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
 					<!-- modal btn -->
 
 				</div>
@@ -86,7 +83,7 @@ table {
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form id="frm" method="post">
+						<form id="frm" action="todayReplyInsert.do" method="post">
 							<div class="card-body">
 								
 									<span> 작성자 : </span>
@@ -112,7 +109,7 @@ table {
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="submit" name="submit">등록</button>
+					<button type="submit" class="btn btn-primary" id="submit" name="submit">등록</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -163,18 +160,6 @@ table {
 	<!-- 댓글 end -->
 
 <script>
-	//댓글 등록
-	$(function() {
-			$("#submit").click(function() {
-				frm.action = "todayReplyInsert.do";
-				frm.submit();
-
-			});
-
-		});
-	
-	
-	//댓글 삭제
 	function replyDelete(sr_no) {
 		console.log(sr_no);
 		$.ajax({
@@ -184,9 +169,7 @@ table {
 			},
 			dataType : 'text',
 			success : function(responseText) {
-
 				console.log(responseText);
-
 			
 				location.reload();
 				alert("삭제 완료");
@@ -196,9 +179,7 @@ table {
 			}
 		})
 	}
-
 	/* modal start */
-		
 	/* modal end */
 	
 </script>
