@@ -2,11 +2,9 @@ package co.maeumi.prj.web;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -15,7 +13,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +25,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -168,7 +167,7 @@ public class BadaController {
 
 		// DB에 넣기
 		String message = null;
-
+										
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(naverLoginBO.getUserProfile(oauthToken).toString());
 
@@ -312,29 +311,29 @@ public class BadaController {
 		int checkNum = random.nextInt(8888) + 1111; // 1111~9999 범위의 숫자를 얻기 위함.
 		System.out.println("인증번호" + checkNum); // 콘솔창에 인증번호 나오는지 확인.
 
-//					// 이메일 보내기. 주석 삭제하면 실제 이메일 날라감. ( 변수를 선언해서 이메일 전송에 필요로 한 데이터를 할당한다.) 
-//					String setFrom = "yd23fp@gmail.com";  // root-context.xml에 작성한 자신의 이메일 계정. 아이디랑 메일주소 모두 입력!
-//					String toMail = inputEmail;					// 수신받을 이메일. view로부터 받은 이메일 주소인 변수 email을 사용
-//					String title = "회원가입 인증 이메일 입니다.";  // 자신이 보낼 이메일 제목
-//					String content = 						// 자신이 보낼 이메일 내용
-//							"Maeumi 에 방문해주셔서 감사ㅎㅎ" +
-//							"<br><br>" +
-//							"인증번호는 " + checkNum + " << 이거. " +
-//							"<br>" +
-//							"해당 인증번호를 인증번호 확인란에 입력해~ ";
-//					
-//					try  {
-//						MimeMessage message = mailSender.createMimeMessage();
-//						MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-//						helper.setFrom(setFrom);
-//						helper.setTo(toMail);
-//						helper.setSubject(title);
-//						helper.setText(content, true);
-//						mailSender.send(message);
-//						
-//					} catch (Exception e ) {
-//						e.printStackTrace();
-//					}
+					// 이메일 보내기. 주석 삭제하면 실제 이메일 날라감. ( 변수를 선언해서 이메일 전송에 필요로 한 데이터를 할당한다.) 
+					String setFrom = "yd23fp@gmail.com";  // root-context.xml에 작성한 자신의 이메일 계정. 아이디랑 메일주소 모두 입력!
+					String toMail = inputEmail;					// 수신받을 이메일. view로부터 받은 이메일 주소인 변수 email을 사용
+					String title = "회원가입 인증 이메일 입니다.";  // 자신이 보낼 이메일 제목
+					String content = 						// 자신이 보낼 이메일 내용
+							"Maeumi 에 방문해주셔서 감사ㅎㅎ" +
+							"<br><br>" +
+							"인증번호는 " + checkNum + " << 이거. " +
+							"<br>" +
+							"해당 인증번호를 인증번호 확인란에 입력하슈~ ";
+					
+					try  {
+						MimeMessage message = mailSender.createMimeMessage();
+						MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+						helper.setFrom(setFrom);
+						helper.setTo(toMail);
+						helper.setSubject(title);
+						helper.setText(content, true);
+						mailSender.send(message);
+						
+					} catch (Exception e ) {
+						e.printStackTrace();
+					}
 
 		// 생성한 인증번호 변수를 view로 반환. 생성한 인증번호의 경우 int 타입. ajax를 통한 요청으로 인해 view로 다시 반환할 때
 		// 데이터 타입은 String만 가능.
@@ -680,7 +679,6 @@ public class BadaController {
 			System.out.println("확인 ~=================");
 			return;
 		}
-
 		// 파일명 지정
 		response.setContentType("application/octer-stream");
 		response.setHeader("Content-Transfer-Encoding", "binary;");
