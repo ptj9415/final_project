@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .row {
@@ -20,6 +21,8 @@ h3 {
 	position: relative;
 	top: 7px;
 	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .minusbtn {
@@ -52,6 +55,36 @@ table>tbody>tr>th {
 
 #infosubmitbtn {
 	float: right;
+}
+
+#counseltable>tbody>tr>td {
+	text-align: center;
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+}
+
+#counseltable>tbody>tr>th {
+	background-color: rgb(245,245,245);
+}
+
+#btnSearch {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
+}
+
+#clearbtn {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid red;
+	border-radius: 4px;
+	height: 33px;
+	width: 70px;
 }
 </style>
 </head>
@@ -103,8 +136,8 @@ table>tbody>tr>th {
 										<td colspan="3">${counselor.c_address }</td>
 									</tr>
 								</table>
-								<input type="hidden" id="c_email" name="c_email" value="${counselor.c_email }">
-								<br>
+								<input type="hidden" id="c_email" name="c_email"
+									value="${counselor.c_email }"> <br>
 							</div>
 						</form>
 					</div>
@@ -166,6 +199,72 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</section>
+	<br>
+
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">
+							등급 변경 신청 내역
+							<button type="button" class="minusbtn" id="minusbtn3">
+								<i id="minusicon3" class="fa fa-minus"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="maindiv3">
+				<div class="col-12">
+					<div class="card">
+						<form method="post" id="form">
+							<div class="card-body table-responsive p-00">
+								<br>
+								<table class="table text-nowrap" id="counseltable">
+									<tr>
+										<th>신청일</th>
+										<th>기존 등급</th>
+										<th>신청 등급</th>
+										<th>증빙서류</th>
+										<th>상태</th>
+										<th>관리</th>
+									</tr>
+									<tr>
+										<td>2021-06-17</td>
+										<td>심리상담사</td>
+										<td>전문상담사</td>
+										<td>증빙서류</td>
+										<td>승인대기</td>
+										<td><button type="button" id="clearbtn">반려</button>
+											<button type="button" id="btnSearch">승인</button></td>
+									</tr>
+									<%-- 								<c:choose> --%>
+									<%-- 									<c:when test="${not empty coupon}"> --%>
+									<%-- 										<c:forEach items="${coupon }" var="coupon"> --%>
+									<!-- 											<tr> -->
+									<%-- 												<td>${coupon.c_name }</td> --%>
+									<%-- 												<td>${coupon.c_price }</td> --%>
+									<%-- 												<td>${coupon.c_startdate }</td> --%>
+									<%-- 												<td>${coupon.c_finaldate }</td> --%>
+									<!-- 											</tr> -->
+									<%-- 										</c:forEach> --%>
+									<%-- 									</c:when> --%>
+									<%-- 									<c:when test="${empty coupon }"> --%>
+									<!-- 										<tr> -->
+									<!-- 											<td colspan="4">보유한 쿠폰이 없습니다.</td> -->
+									<!-- 										</tr> -->
+									<%-- 									</c:when> --%>
+									<%-- 								</c:choose> --%>
+								</table>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 </body>
 
 <script>
@@ -188,7 +287,17 @@ table>tbody>tr>th {
 			$('#minusicon2').attr('class', 'fa fa-plus');
 		}
 	});
-	
+
+	$('#minusbtn3').click(function() {
+		if ($('#maindiv3').css('display') == 'none') {
+			$('#maindiv3').show();
+			$('#minusicon3').attr('class', 'fa fa-minus');
+		} else if ($('#maindiv3').css('display') != 'none') {
+			$('#maindiv3').hide();
+			$('#minusicon3').attr('class', 'fa fa-plus');
+		}
+	});
+
 	function infosubmit() {
 		var url = "adminCounselorInfoUpdate.do";
 		var formData = new FormData($("#form")[0]);

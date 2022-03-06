@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .row {
@@ -69,6 +70,10 @@ h3 {
 	border-bottom: 1px solid black;
 }
 
+#membertable>thead>tr>th {
+	background-color: rgb(245, 245, 245);
+}
+
 #managebtn {
 	background-color: #1E90FF;
 	color: white;
@@ -85,6 +90,8 @@ h3 {
 	position: relative;
 	top: 7px;
 	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .minusbtn {
@@ -259,6 +266,7 @@ h3 {
 				</div>
 			</div>
 		</div>
+		<br>
 	</section>
 
 	<script>
