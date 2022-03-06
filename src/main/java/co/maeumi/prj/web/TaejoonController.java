@@ -46,7 +46,8 @@ public class TaejoonController {
 
 	@RequestMapping("/home.do")
 	public String home(Model model, BannerVO bvo) {
-		model.addAttribute("banner", bannerDao.bannerList(bvo));
+		List<BannerVO> list = bannerDao.bannerList(bvo);
+		model.addAttribute("banner", list);
 		return "user/home/home";
 	}
 

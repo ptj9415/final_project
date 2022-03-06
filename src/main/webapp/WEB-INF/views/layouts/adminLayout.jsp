@@ -16,12 +16,17 @@
 		  <link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
 		  <!-- Select2 -->
  		  <link rel="stylesheet" href="subHomeFile/plugins/select2/css/select2.min.css">
+ 		  <style>
+ 		  #mainarticle {
+ 		  	border-left: 1px solid rgb(222, 226, 230);
+ 		  }
+ 		  </style>
 		</head>
 	<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 		<tiles:insertAttribute name="aheader"/>
 		<tiles:insertAttribute name="asidebar"/>
-		 <div class="content-wrapper">
+		 <div class="content-wrapper" id="mainarticle">
 			<tiles:insertAttribute name="abody"/>
 		</div>
 		<tiles:insertAttribute name="afooter"/>
