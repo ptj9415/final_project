@@ -363,7 +363,8 @@ public class BadaController {
 		}
 		return check;
 	}
-
+	
+	// db에 회원가입 정보 넣기
 	@PostMapping("/memberJoin.do")
 	public String memberJoin(HttpServletRequest request, Model model, MemberVO mvo) {
 		mvo.setM_email(request.getParameter("email"));
@@ -396,7 +397,8 @@ public class BadaController {
 		return Integer.toString(randomNumber);
 
 	}
-
+	
+	// 이메일 찾기
 	@ResponseBody
 	@RequestMapping(value = "/ajaxFindEmail.do", produces = "application/text; charset=utf8")
 	public String ajaxFindEmail(Model model, HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
@@ -447,15 +449,16 @@ public class BadaController {
 		svo.setN_category(n_category);
 		svo.setN_title(n_title);
 
-		int listCnt = noticeDao.getNoticeListCnt(svo);
+		int listCnt = noticeDao.getNoticeListCnt(svo); // 페이징 처리를 위해 필요한, 총 게시글 수 계산.
 
-		svo.pageinfo(page, range, listCnt);
+		svo.pageinfo(page, range, listCnt);  // 현재페이지, 현재 속한 페이지범위, 총 게시글 수를 인자로 가진다.
 
-		model.addAttribute("pagination", svo);
-		model.addAttribute("notice", noticeDao.noticeSearchselect(svo));
+		model.addAttribute("pagination", svo);  // 페이징처리 
+		model.addAttribute("notice", noticeDao.noticeSearchselect(svo));  // 기존의 공지사항 리스트 대신
 
 		return "admin/noticemanage/adminNoticeList";
 	}
+	
 
 	// 공지사항 작성하는 폼으로 이동
 	@RequestMapping("/adminNoticeForm.do")
@@ -559,9 +562,12 @@ public class BadaController {
 
 		// 파일 업로드 처리
 		String savedName = file.getOriginalFilename();
+		System.out.println("첨부파일 한 게 없는데, 뭐지? " + savedName);
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
-		mSavedName = uploadFile(savedName, file.getBytes());
-
+		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
+		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		} 
+		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
 		mav.setViewName("redirect:adminNoticeList.do");
 		// 속성추가
@@ -573,8 +579,6 @@ public class BadaController {
 		System.out.println("내용 : " + request.getParameter("content"));
 		System.out.println("작성자: " + request.getParameter("writer"));
 		System.out.println("작성일: " + request.getParameter("wdate"));
-		System.out.println("첨부파일 원본명: " + savedName);
-		System.out.println("다운받을 물리파일명: " + mSavedName);
 
 //		String fixedContent = request.getParameter("content");
 //		fixedContent = fixedContent.replace(0, 0)
@@ -590,7 +594,6 @@ public class BadaController {
 
 		// 값 넣기.
 		noticeDao.noticeInsert(vo);
-
 		return mav;
 	}
 
@@ -599,8 +602,8 @@ public class BadaController {
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
 		// 랜덤생성 + 파일이름 저장
-		String savedName = uuid.toString() + "_" + originalName;
-		File target = new File(uploadPath, savedName);
+		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
+		File target = new File(uploadPath, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사. 실제 프로젝트 시연할 때는 uploadPath 의 경로를 변경해야 함(
 		// servlet-context.xml)
 		FileCopyUtils.copy(fileData, target);
@@ -613,20 +616,16 @@ public class BadaController {
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile,
 			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
-		// 일반 파일 물리 경로
-		// String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		// String SAVE_PATH =
 		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image\\"; // 저장 경로도 이클립스
-																										// 내부로, 상대경로를
-																										// 통해서 특정 디렉토리로
-																										// 경로를 설정해주어야 함
-		// 내부경로로 저장
+		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+		
+		
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot + "resources/fileupload/";
+		String fileRoot = contextRoot + "resources/image/";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -638,7 +637,7 @@ public class BadaController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
 			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", "/prj/resources/fileupload/" + savedFileName);
+			jsonObject.addProperty("url", "/prj/resources/image/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 
@@ -655,7 +654,7 @@ public class BadaController {
 	// 첨부파일 다운로드 * 밑에 경로를 작성하는 부분은 모두 상대경로로 수정해야 함
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String filename = request.getParameter("fileName");
+		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
 		System.out.println("1. filename: " + filename);
 		String realFilename = "";
@@ -672,7 +671,7 @@ public class BadaController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\gnjqt\\git\\final_project\\src\\main\\webapp\\editor\\" + filename;
+		realFilename = uploadPath + filename;  
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -698,7 +697,88 @@ public class BadaController {
 		} catch (Exception e) {
 			System.out.println("FileNotFoundException : " + e);
 		}
-
 	}
+	
+	
+	// 공지사항 상단 고정 처리하기. 
+	@ResponseBody
+	@RequestMapping("/statusUpdate.do")
+	public String statusUpdate(HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {
+		
+		int statusNum = Integer.valueOf(request.getParameter("statusNum"));
+		String statusVal = request.getParameter("statusVal");
+		
+		System.out.println("넘어온 게시글의 번호: " + statusNum);
+		System.out.println("넘어온 고정상태 : " + statusVal ); // null이거나 '고정' 이거나 
+		
+		String message = null;
+		
+		vo.setN_no(statusNum);
+		
+		if(!statusVal.equals("")) {   // null상태가 아닌, 즉 '고정'인 상태. => null로 바꿔줘야 함.
+			vo.setN_status("");   
+		} else {  // null이었던 경우, '고정'으로 값 변경
+			vo.setN_status("고정");
+		}	
+		
+		System.out.println("넘버는 정상적으로 당맜는지 체크 =======  " + vo.getN_no());
+		System.out.println("고정상태값은 제대로 담았는지 체크 ========== " +  vo.getN_status());
+		
+		
+		int n = noticeDao.statusUpdate(vo);
+		if(n !=0) { // 성공한 경우
+			message = "YES";
+		}
+		return message;  
+	}
+	
+	// 사용자뷰 공지사항으로 이동. (여기도 페이징 처리해야 함..) 
+	@RequestMapping("/userNoticeList.do")
+	public String userNoticeList(HttpServletRequest request, HttpServletResponse response, Model model
+			, @RequestParam(required = false, defaultValue = "1") int page
+			, @RequestParam(required = false, defaultValue = "1") int range
+			, @RequestParam(required = false, defaultValue = "all") String n_category
+			, @RequestParam(required = false) String n_title, Search svo) throws Exception {
+		
+		model.addAttribute("search", svo);  // '제목'과 '말머리' 요소로 서칭하기 위함.
+		svo.setN_category(n_category);	
+		svo.setN_title(n_title);
+		
+		int listCnt = noticeDao.getNoticeListCnt(svo);  // 페이징 처리를 위해 필요한, 총 게시글 수 계산. ('제목'과 '말머리' 값이 있다면 반영한 결과로)
+		
+		svo.pageinfo(page, range, listCnt); // 페이징처리를 위해 필수 정보인 '현재페이지', '현재 속한 페이지 범위', '총 게시글 수' 
+		
+		model.addAttribute("pagination", svo);   // 페이징처리
+		model.addAttribute("notice", noticeDao.noticeSearchselect(svo));   // 기존의 단순 공지사항 리스트 대신 페이징처리가 반영된 상태로.
+		
+		return "user/notice/userNoticeList";
+	}
+	
+	// 사용자단에서 공지사항 조회하기. 조회수 올라가는 작업해야 함
+	@RequestMapping("/userNoticeRead.do")
+	public String userNoticeRead(Model model, HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {
+		
+			System.out.println("넘겨받은 no의 값: " + request.getParameter("no"));
+	
+			vo.setN_no(Integer.valueOf(request.getParameter("no")));
+			vo = noticeDao.noticeSelect(vo);
+	
+			model.addAttribute("notices", vo);
+	
+			return "user/notice/userNoticeRead";
+	}
+	
+	
+	
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

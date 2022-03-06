@@ -46,9 +46,9 @@
       </beans:property>
    </beans:bean>
    
-   
+   	<!-- 임시방편으로 경로를 하드코딩함. 나중에 조원들이랑 업로드/다운로드 경로 통일해야 함. -->
    <beans:bean id="uploadPath" class="java.lang.String">
-   		<beans:constructor-arg value="C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image" />
+   		<beans:constructor-arg value="C:\\final_project\\final_project\\src\\main\\webapp\\resources\\attachfile\\" />
    </beans:bean>
 	
 	

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 조회하기</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="resources/ckeditor/ckeditor.js"></script>
 <style>
 .noticeForm {
 	width: 100%;
@@ -44,6 +43,7 @@ span {
 }
 </style>
 </head>
+<body>
 <body>
 <!-- 공지사항 등록하는 폼에서 형식을 가져오자.ㅏ 그리고 ck에디터만 제외  넘오오는 변수이름은 notices임.  -->
 <br><br><br>
@@ -84,12 +84,10 @@ span {
 		</div>
 			<div style="display: flex; justify-content: flex-end; margin-right: 100px; margin-bottom: 30px;">
 				<input type="button" value="돌아가기" id="beforeBtn"  class="belowBtn">
-				<input type="submit" value="수정하기" class="belowBtn">
 			</div>
 		</form>
 	</div>
 </div>
-		
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
