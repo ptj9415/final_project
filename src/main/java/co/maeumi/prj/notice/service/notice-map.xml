@@ -23,7 +23,7 @@
 		</trim>
 		) A
 		)
-		WHERE RN BETWEEN #{start} AND #{end}
+		WHERE RN BETWEEN #{start} AND #{end} order by n_status
 	</select>
 
 	<select id="noticeSelectList"
@@ -67,6 +67,14 @@
 		DELETE FROM NOTICE
 		WHERE N_NO = #{n_no}
 	</delete>
-
+	
+	
+	<!-- 공지사항 상단고정 처리 쿼리 -->
+	<update id="statusUpdate" parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		UPDATE NOTICE
+		SET N_STATUS = #{n_status}
+		WHERE N_NO = ${n_no}
+	</update>
+	
 
 </mapper>

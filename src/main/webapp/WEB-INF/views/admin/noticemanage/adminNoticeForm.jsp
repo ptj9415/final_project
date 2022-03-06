@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
- <script src="https://kit.fontawesome.com/e20d670992.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,7 +30,6 @@ th {
 .belowBtn{
 	margin-right: 10px;
 	
-	
 }
 #title {
 	width: 100%;
@@ -40,9 +38,6 @@ span {
 	margin-left: 100px;
 	font-size: 20px;
 	font-size: x-large;
-}
-#contentTh {
-	height: 400px;
 }
 
 </style>
@@ -61,8 +56,8 @@ span {
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th width="250px" height="50px">말머리</th>
-					<td width="350px">
+					<th width="200px" height="50px">말머리</th>
+					<td width="400px">
 						<select name="category" id="category">
 							<option value="전체" selected="selected">전체</option>
 							<option value="긴급">긴급</option>
@@ -108,17 +103,15 @@ $("#beforeBtn").on("click", function() {
 	history.back();
 });
 
-
 //날짜에 sysdate값 할당해주기. 해당 selelctKey  => map.xml 상에서 sysdate로 해도 됨.
 document.getElementById("wdate").value = new Date().toISOString().substring(0,10);
-
 
 
 // Summernote 에디터 설정 시작.
     $('.summernote').summernote({
   // 에디터 높이
-  height: 300,
-  weight: 350,
+  height: 350,
+  weight: null,
   // 에디터 한글 설정
   lang: "ko-KR",
   // 에디터에 커서 이동 (input창의 autofocus라고 생각하시면 됩니다.)

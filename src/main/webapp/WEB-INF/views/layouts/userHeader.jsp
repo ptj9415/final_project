@@ -158,6 +158,7 @@ span.top-nav-admin {
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="drop-down-menu" id="drop-third">
+							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userTodayStory.do">오늘의 한마디</a></li>
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="#">심리 테라피</a></li>

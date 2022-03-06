@@ -233,12 +233,14 @@ $(document).ready(function(){
 										<td>${notice.n_category }</td>
 										<td id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
 										<td>${notice.n_writedate }</td>
-										<td>${notice.n_status }</td>
+										<td id="status">${notice.n_status }</td>
 										<td>
 											<button type="button" onclick="noticeUpdate('${notice.n_no}')">수정</button>
 											<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
 										</td>											
-											<td><button type="button" class="managebtn"	id="managebtn" onclick="#">관리</button></td>
+											<td>
+												<button type="button" class="managebtn"	id="statusBtn" onclick="statusBtn('${notice.n_no}' , '${notice.n_status }')">고정/취소</button>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -254,24 +256,20 @@ $(document).ready(function(){
 							<br>
 							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
-									<c:if test="${pagination.prev}">
+									<c:if test="${pagination.prev}"> 
 										<li class="page-item"><a class="page-link" href="#"	onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}', '${search.n_title}', '${search.n_category}')">이전</a></li>
 									</c:if>
-									<c:forEach begin="${pagination.startPage}"
+									<c:forEach begin="${pagination.startPage}" 
 										end="${pagination.endPage}" var="NoticeNo">
-
-										<li
-											class="page-item <c:out value="${pagination.page == NoticeNo ? 'active' : ''}"/> ">
+										<li class="page-item <c:out value="${pagination.page == NoticeNo ? 'active' : ''}"/> ">
 											<a class="page-link" href="#"
 											onClick="fn_pagination('${NoticeNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.n_title}', '${search.n_category}')">
 												${NoticeNo} </a>
 										</li>
 									</c:forEach>
 									<c:if test="${pagination.next}">
-
 										<li class="page-item"><a class="page-link" href="#"
-											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
-					,'${search.n_title}', '${search.n_category}')">다음</a></li>
+											onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}' ,'${search.n_title}', '${search.n_category}')">다음</a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -283,6 +281,31 @@ $(document).ready(function(){
 	</section>
 
 	<script>
+	
+		// 공지사항 고정 처리. ajax처리. 글번호와 고정상태 두 값을 매개변수로 보낸다.
+		function statusBtn(num, status){
+				var statusNum = num; 
+				var statusVal = status;
+				alert("글번호: " + statusNum + ", 고정상태: " + statusVal);
+				$.ajax({
+					url: "statusUpdate.do",
+					data: {
+						statusNum : statusNum,
+						statusVal : statusVal
+					},
+					dataType: "text",
+					success: function(responseText){
+						if(responseText == "YES"){  // 성공한 경우.
+							alert("처리완료");
+							location.reload();
+						}
+						
+					} // success문
+					
+				}); // ajax끝
+				
+		}
+		
 	
 		// 체크박스 전체 선택/해제
 		$("#allCheck").on("click", function() {
@@ -334,7 +357,7 @@ $(document).ready(function(){
 		
 		//선택삭제 구현
 		$("#allDelete").on("click", function() {
-			var confirmCheck = confirm("선택하신 것을 삭제하시겠습니까?");
+			var confirmCheck = confirm("선택하신 것을 모두 삭제하시겠습니까?");
 			
 			if(confirmCheck){
 				var checkAry = new Array();   // 체크한 것을 담을 리스트변수 선언.
@@ -361,11 +384,6 @@ $(document).ready(function(){
 			}
 		});
 			
-		
-		
-		
-		
-		
 	
 		$('#minusbtn1').click(function() {
 			if ($('#maindiv1').css('display') == 'none') {
