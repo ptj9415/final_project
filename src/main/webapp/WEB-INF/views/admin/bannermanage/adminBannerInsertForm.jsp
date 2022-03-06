@@ -44,6 +44,42 @@ textarea {
 	height: 6.25em;
 	resize: none;
 }
+
+#bannerimg {
+	height: 3%;
+	width: 40%;
+}
+
+.filebox .uploadname {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 31%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
 </style>
 </head>
 <body>
@@ -71,13 +107,16 @@ textarea {
 									</tr>
 									<tr>
 										<th>파일첨부</th>
-										<td><img
-											src="https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052"
-											class="preImage" id="preImage" name="preImage"
-											style= "height:3%; width: 40%;"> <br> <br>
-											<input multiple="multiple" type="file" id="filename"
-											name="filename" accept="image/*"
-											onchange="setThumbnail(event);">
+										<td>
+											<div class="filebox">
+												<img src="img/bannerimg/mainbanner.png" id="bannerimg">
+												<p>※배너 크기는 1200p x 216p 로 조절하시기 바랍니다.
+												<p>
+													<input class="uploadname" value="첨부파일" placeholder="첨부파일">
+													<label for="filename">파일 찾기</label> <input type="file"
+														id="filename" name="filename"
+														onchange="setThumbnail(event);">
+											</div>
 									</tr>
 									<tr>
 										<th>주제</th>
@@ -104,7 +143,7 @@ textarea {
 		function setThumbnail(event) {
 			var reader = new FileReader();
 			reader.onload = function(event) {
-				var preimg = $('#preImage');
+				var preimg = $('#bannerimg');
 				preimg.attr('src', event.target.result);
 			};
 			reader.readAsDataURL(event.target.files[0]);
@@ -130,6 +169,11 @@ textarea {
 				}
 			});
 		}
+
+		$("#filename").on('change', function() {
+			var fileName = $("#filename").val();
+			$(".uploadname").val(fileName);
+		});
 	</script>
 </body>
 </html>

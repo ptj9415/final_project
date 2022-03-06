@@ -1,7 +1,11 @@
 package co.maeumi.prj.web;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -447,5 +451,52 @@ public class TaejoonController {
 		bannerDao.bannerDelete(bvo);
 
 		return "redirect:adminNoticeList.do";
+	}
+	
+	@RequestMapping("/fileDownload1.do")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
+		String encodingFilename = "";
+		System.out.println("1. filename: " + filename);
+		String realFilename = "";
+
+		try {
+			String browser = request.getHeader("User-Agent");
+			// 파일 인코딩
+			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
+				encodingFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("2. filename: " + filename);
+			} else {
+				encodingFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+			}
+		} catch (UnsupportedEncodingException ex) {
+			System.out.println("UnsupportedEncodingException");
+		}
+		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;  
+		System.out.println("3. realfilename: " + realFilename);
+		File file1 = new File(realFilename);
+		if (!file1.exists()) {
+			System.out.println("확인 ~=================");
+			return;
+		}
+		// 파일명 지정
+		response.setContentType("application/octer-stream");
+		response.setHeader("Content-Transfer-Encoding", "binary;");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodingFilename + "\"");
+		try {
+			OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(realFilename);
+
+			int ncount = 0;
+			byte[] bytes = new byte[512];
+
+			while ((ncount = fis.read(bytes)) != -1) {
+				os.write(bytes, 0, ncount);
+			}
+			fis.close();
+			os.close();
+		} catch (Exception e) {
+			System.out.println("FileNotFoundException : " + e);
+		}
 	}
 }
