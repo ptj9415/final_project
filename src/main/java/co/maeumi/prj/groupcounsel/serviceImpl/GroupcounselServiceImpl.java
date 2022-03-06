@@ -86,6 +86,12 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	public GroupcounselVO selectUserGroup(GroupcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.selectUserGroup(vo);
+	}
+
+	@Override
+	public GroupcounselVO selectInvoice(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectInvoice(vo);
 	}	
 
 }

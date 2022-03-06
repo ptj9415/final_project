@@ -515,8 +515,39 @@ public class YoungohController {
 	public String userGroup(GroupcounselVO vo, Model model) {
 		System.out.println(vo.getGc_no());
 		GroupcounselVO gvo =  groupCounselDao.selectUserGroup(vo);
+		gvo.setM_email("이메일");
 		model.addAttribute("userGroup",gvo);
 		return "user/groupcounsel/userGroup";
+	}
+	
+	/*
+	 * @RequestMapping("/usergroupDetail.do") public String
+	 * usergroupDetail(HttpServletRequest request,Model model, GroupcounselVO vo) {
+	 * String gc_no = request.getParameter("gc_no"); System.out.println(gc_no);
+	 * vo.setGc_no(gc_no); GroupcounselVO gvo =
+	 * groupCounselDao.selectDetailList(vo);
+	 * model.addAttribute("gCounselDetail",gvo); return
+	 * "user/groupcounsel/groupCounselDetail"; 
+	 * }
+	 */
+	
+	@RequestMapping("/usergroupinvoice.do")
+	public String usergroupinvoice(GroupcounselVO vo, Model model,HttpServletRequest request) {
+		String gc_no = request.getParameter("gc_no");
+		System.out.println(gc_no);
+		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
+		gvo.setM_email("이메일 성공");
+		model.addAttribute("groupInvoice",gvo);
+		return "user/groupcounsel/groupInvoice";
+	}
+	
+	@RequestMapping("/payment.do")
+	public String payment(GroupcounselVO vo){
+		System.out.println(vo.getM_email());
+		System.out.println(vo.getGc_no());
+		System.out.println(vo.getGr_price());
+		System.out.println();
+		return "user/groupcounsel/groupResult";
 	}
 }
 

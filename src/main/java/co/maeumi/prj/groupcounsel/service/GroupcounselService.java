@@ -17,5 +17,6 @@ public interface GroupcounselService {
 	GroupcounselVO selectgroupRserve(GroupcounselVO vo); //예약자 리스트 조회
 	GroupcounselVO selectDetailList(GroupcounselVO vo);
 	int groupCounselResult(GroupcounselVO vo); // 그룹 상담 결과 등록하기
-	GroupcounselVO selectUserGroup(GroupcounselVO vo);
+	GroupcounselVO selectUserGroup(GroupcounselVO vo); // 그룹상담 상세목록 보여주기
+	GroupcounselVO selectInvoice (GroupcounselVO vo); // 그룹상담 결제 페이지 조인 구문.
 }
