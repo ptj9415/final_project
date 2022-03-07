@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.order.service.orderMapper">
+		<insert id="orderInsert" parameterType="co.maeumi.prj.order.service.order_datailVO">
+				INSERT INTO ORDER_DETAIL(
+					OR_NO,
+					OR_UID,
+					PR_NO,
+					GC_NO,
+					OR_DATE,
+					OR_TYPE,
+					OR_PRICE,
+					M_NICKNAME,
+					M_EMAIL
+				)
+				VALUES(
+					(SELECT NVL(MAX(OR_NO),0)+1 FROM ORDER_DETAIL O),
+					#{or_uid},
+					0,
+					#{gc_no},
+					sysdate,
+					'0',
+					#{or_price},
+					'닉네임 세션값이 들어감',
+					'이메일 세션값이 들어감'						
+				)
+		</insert>
+		
+		<select id="selectorderList" parameterType="co.maeumi.prj.order.service.order_datailVO" resultType="co.maeumi.prj.order.service.order_datailVO">
+		  			SELECT O.OR_UID, C.GC_DATE, C.GC_TYPE, O.OR_DATE, O.OR_PRICE
+		  			FROM ORDER_DETAIL O JOIN GROUP_COUNSEL C
+					ON (O.GC_NO = C.GC_NO)
+		  			WHERE OR_NO = #{or_no}
+		</select>
+</mapper>
