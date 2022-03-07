@@ -185,20 +185,20 @@ public class EjuController {
 	/* =====관리자 화면===== */
 
 	// 오늘의 한마디 메인화면
-	@RequestMapping("/adminTodayStoryList.do")
-	public String adminTodayStoryList(Model model, TodaystoryVO vo, HttpServletRequest request) {
-		String nowPage = request.getParameter("nowPage");
-		if (nowPage == null) {
-			page = new Pagination(todayDao.CountTodayStory(), 1, 10); // 전체 수, start, end
-		} else {
-			page = new Pagination(todayDao.CountTodayStory(), Integer.parseInt(nowPage), 10); // 전체 수, start,
-			// end
-		}
-		List<TodaystoryVO> list = todayDao.TodayStorySelectList(page);
-		model.addAttribute("page",page);
-		model.addAttribute("adminTodayStoryList", list);
-		return "admin/todaystorymanage/adminTodayStoryList";
-	}
+//	@RequestMapping("/adminTodayStoryList.do")
+//	public String adminTodayStoryList(Model model, TodaystoryVO vo, HttpServletRequest request) {
+//		String nowPage = request.getParameter("nowPage");
+//		if (nowPage == null) {
+//			page = new Pagination(todayDao.CountTodayStory(), 1, 10); // 전체 수, start, end
+//		} else {
+//			page = new Pagination(todayDao.CountTodayStory(), Integer.parseInt(nowPage), 10); // 전체 수, start,
+//			// end
+//		}
+//		List<TodaystoryVO> list = todayDao.TodayStorySelectList(page);
+//		model.addAttribute("page",page);
+//		model.addAttribute("adminTodayStoryList", list);
+//		return "admin/todaystorymanage/adminTodayStoryList";
+//	}
 
 	// 오늘의 한마디 등록
 	@RequestMapping("/adminTodayStoryRegister.do")

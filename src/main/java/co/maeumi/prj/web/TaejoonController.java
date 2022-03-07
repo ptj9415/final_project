@@ -32,7 +32,11 @@ import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.service.Search;
+import co.maeumi.prj.therapy.service.TherapyService;
+import co.maeumi.prj.todaystory.service.TodaystoryService;
+import co.maeumi.prj.todaystory.service.TodaystoryVO;
 
 @Controller
 public class TaejoonController {
@@ -45,6 +49,10 @@ public class TaejoonController {
 	private BannerService bannerDao;
 	@Autowired
 	private CouponService couponDao;
+	@Autowired
+	private TodaystoryService todayDao;
+	@Autowired
+	private TherapyService therapyDao;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -264,7 +272,7 @@ public class TaejoonController {
 	}
 
 	/* ===== 관리자 화면 ===== */
-	
+
 	@RequestMapping("/adminhome.do")
 	public String adminhome() {
 		return "admin/adminhome/adminHome";
@@ -307,80 +315,78 @@ public class TaejoonController {
 			list.get(i).setC_startdate(sdate);
 			list.get(i).setC_finaldate(fdate);
 		}
-		
+
 		model.addAttribute("coupon", list);
 
 		return "admin/membermanage/adminMemberDetail";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/adminUserInfoUpdate.do")
 	public String adminUserInfoUpdate(Model model, MemberVO mvo) {
 		memberDao.memberInfoUpdate(mvo);
-		
+
 		return "OK";
 	}
 
 	// 관리자 - 상담사 관리 메인화면
 	@RequestMapping("/adminCounselorList.do")
-	   public String adminCounselorList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-	         @RequestParam(required = false, defaultValue = "1") int range,
-	         @RequestParam(required = false) String c_name,
-	         @RequestParam(required = false, defaultValue = "all") String c_gender,
-	         @RequestParam(required = false, defaultValue = "all") String c_grade,
-	         @RequestParam(required = false, defaultValue = "") String c_birthdate,
-	         @RequestParam(required = false) String c_email, @RequestParam(required = false) String c_phone,
-	         @RequestParam(required = false) String c_address,
-	         @RequestParam(required = false, defaultValue = "all") String c_status, Search svo)
-	         throws Exception {
+	public String adminCounselorList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false) String c_name,
+			@RequestParam(required = false, defaultValue = "all") String c_gender,
+			@RequestParam(required = false, defaultValue = "all") String c_grade,
+			@RequestParam(required = false, defaultValue = "") String c_birthdate,
+			@RequestParam(required = false) String c_email, @RequestParam(required = false) String c_phone,
+			@RequestParam(required = false) String c_address,
+			@RequestParam(required = false, defaultValue = "all") String c_status, Search svo) throws Exception {
 
-	      model.addAttribute("search", svo);
-	      svo.setC_name(c_name);
-	      svo.setC_gender(c_gender);
-	      svo.setC_grade(c_grade);
-	      svo.setC_birthdate(c_birthdate);
-	      svo.setC_email(c_email);
-	      svo.setC_phone(c_phone);
-	      svo.setC_address(c_address);
-	      svo.setC_status(c_status);
+		model.addAttribute("search", svo);
+		svo.setC_name(c_name);
+		svo.setC_gender(c_gender);
+		svo.setC_grade(c_grade);
+		svo.setC_birthdate(c_birthdate);
+		svo.setC_email(c_email);
+		svo.setC_phone(c_phone);
+		svo.setC_address(c_address);
+		svo.setC_status(c_status);
 
-	      int listCnt = counselorDao.getCounselorListCnt(svo);
+		int listCnt = counselorDao.getCounselorListCnt(svo);
 
-	      svo.pageinfo(page, range, listCnt);
+		svo.pageinfo(page, range, listCnt);
 
-	      model.addAttribute("pagination", svo);
+		model.addAttribute("pagination", svo);
 
-	      List<CounselorVO> list = counselorDao.counselorSearchselect(svo);
+		List<CounselorVO> list = counselorDao.counselorSearchselect(svo);
 
-	      for (int i = 0; i < list.size(); i++) {
-	         String date = list.get(i).getC_birthdate();
-	         if (date != "") {
-	            date = date.substring(0, 10);
-	            list.get(i).setC_birthdate(date);
-	         } else if (date == "") {
-	            list.get(i).setC_birthdate(c_birthdate);
-	         }
-	      }
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getC_birthdate();
+			if (date != "") {
+				date = date.substring(0, 10);
+				list.get(i).setC_birthdate(date);
+			} else if (date == "") {
+				list.get(i).setC_birthdate(c_birthdate);
+			}
+		}
 
-	      model.addAttribute("counselor", list);
+		model.addAttribute("counselor", list);
 
-	      return "admin/membermanage/adminCounselorList";
-	   }
-	
+		return "admin/membermanage/adminCounselorList";
+	}
+
 	@RequestMapping("/adminCounselorDetail.do")
 	public String adminCounselorDetail(Model model, CounselorVO cvo) {
-		
+
 		cvo = counselorDao.counselorSelect(cvo);
-		
+
 		String birthdate = cvo.getC_birthdate();
 		birthdate = birthdate.substring(0, 10);
 		cvo.setC_birthdate(birthdate);
-		
+
 		model.addAttribute("counselor", cvo);
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
-	
 
 	@RequestMapping("/adminBannerList.do")
 	public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
@@ -457,7 +463,7 @@ public class TaejoonController {
 
 		return "redirect:adminNoticeList.do";
 	}
-	
+
 	@RequestMapping("/fileDownload1.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
@@ -465,29 +471,34 @@ public class TaejoonController {
 		System.out.println("1. filename: " + filename);
 		String realFilename = "";
 
+		String downName = request.getParameter("downName");
+		System.out.println("downName 확인 : " + downName);
+
 		try {
 			String browser = request.getHeader("User-Agent");
 			// 파일 인코딩
 			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
-				encodingFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
-				System.out.println("2. filename: " + filename);
+				encodingFilename = URLEncoder.encode(downName, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("2. filename: " + downName);
 			} else {
-				encodingFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+				encodingFilename = new String(downName.getBytes("UTF-8"), "ISO-8859-1");
 			}
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;  
+		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
-			System.out.println("확인 ~=================");
+			System.out.println("존재유무 확인 ~=================");
 			return;
 		}
 		// 파일명 지정
+		System.out.println("encodingFilename의 이름: " + encodingFilename);
 		response.setContentType("application/octer-stream");
 		response.setHeader("Content-Transfer-Encoding", "binary;");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodingFilename + "\"");
+
 		try {
 			OutputStream os = response.getOutputStream();
 			FileInputStream fis = new FileInputStream(realFilename);
@@ -503,5 +514,37 @@ public class TaejoonController {
 		} catch (Exception e) {
 			System.out.println("FileNotFoundException : " + e);
 		}
+
+	}
+
+	@RequestMapping("/adminTodayStoryList.do")
+	public String adminTodayStoryList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range, Search svo) throws Exception {
+
+		model.addAttribute("search", svo);
+		int listCnt = todayDao.getTodayListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		model.addAttribute("adminTodayStoryList", todayDao.todaySearchselect(svo));
+		return "admin/todaystorymanage/adminTodayStoryList";
+	}
+	
+	@RequestMapping("/admintherapy.do")
+	public String admintherapyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false) String t_name, @RequestParam(required = false) String t_title, Search svo) throws Exception {
+
+		model.addAttribute("search", svo);
+
+		int listCnt = therapyDao.getTherapyListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		model.addAttribute("therapy", therapyDao.therapySearchselect(svo));
+
+		return "admin/therapy/therapyList";
 	}
 }

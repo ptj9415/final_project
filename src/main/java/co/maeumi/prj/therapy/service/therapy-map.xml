@@ -1,49 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.therapy.service.TherapyMapper">
-	<select id="therapyList" resultType="co.maeumi.prj.therapy.service.TherapyVO">
+
+	<select id="getTherapyListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM THERAPY
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="t_name != ''">AND t_name like '%'||#{t_name}||'%'</if>
+			<if test="t_title != ''">AND t_title like '%'||#{t_title}||'%'</if>
+		</trim>
+	</select>
+
+	<select id="therapySearchselect"
+		resultType="co.maeumi.prj.therapy.service.TherapyVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM THERAPY
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="t_name != ''">AND t_name like '%'||#{t_name}||'%'</if>
+			<if test="t_title != ''">AND t_title like '%'||#{t_title}||'%'</if>
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="therapyList"
+		resultType="co.maeumi.prj.therapy.service.TherapyVO">
 		select *
 		from therapy
 	</select>
-	
-	<insert id="InsertTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+
+	<insert id="InsertTherapy"
+		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
 		Insert into THERAPY(
-			t_no,
-			t_title
-		   ,t_picture,
-		    t_writedate,
-		    t_hit,
-		    t_like_it,
-		    t_subject,
-		    t_name
+		t_no,
+		t_title
+		,t_picture,
+		t_writedate,
+		t_hit,
+		t_like_it,
+		t_subject,
+		t_name
 		)
 		values(
-			(SELECT NVL(MAX(t_no),0)+1 FROM THERAPY N),
-			#{t_title},
-			#{t_picture},
-			sysdate,
-			0,
-			0,
-			#{t_subject},
-			'세션값이 들어가야함'
+		(SELECT NVL(MAX(t_no),0)+1 FROM THERAPY N),
+		#{t_title},
+		#{t_picture},
+		sysdate,
+		0,
+		0,
+		#{t_subject},
+		'세션값이 들어가야함'
 		)
 	</insert>
-	
-	<select id="selectTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO"
-	                           resultType="co.maeumi.prj.therapy.service.TherapyVO">
-			SELECT *
-			FROM THERAPY
-			WHERE t_no = #{t_no}
+
+	<select id="selectTherapy"
+		parameterType="co.maeumi.prj.therapy.service.TherapyVO"
+		resultType="co.maeumi.prj.therapy.service.TherapyVO">
+		SELECT *
+		FROM THERAPY
+		WHERE t_no = #{t_no}
 	</select>
-	
-	<update id="UpdateTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
-			UPDATE THERAPY
-			SET t_picture = #{t_picture}, t_title = #{t_title}, t_subject = #{t_subject}
-			WHERE t_no = #{t_no}
+
+	<update id="UpdateTherapy"
+		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+		UPDATE THERAPY
+		SET t_picture = #{t_picture}, t_title = #{t_title}, t_subject =
+		#{t_subject}
+		WHERE t_no = #{t_no}
 	</update>
-	
-	<delete id="DeleteTherapy" parameterType="co.maeumi.prj.therapy.service.TherapyVO">
-			DELETE FROM THERAPY
-			WHERE t_no = #{t_no}
+
+	<delete id="DeleteTherapy"
+		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
+		DELETE FROM THERAPY
+		WHERE t_no = #{t_no}
 	</delete>
 </mapper>

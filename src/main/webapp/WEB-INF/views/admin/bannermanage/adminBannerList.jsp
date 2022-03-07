@@ -117,8 +117,7 @@ h3 {
 }
 </style>
 </head>
-<body class="hold-transition sidebar-mini">
-	<!-- Main content -->
+<body>
 	<section class="content">
 		<div class="container-fluid">
 			<br>
@@ -186,7 +185,7 @@ h3 {
 											<td>${banner.bn_subject }</td>
 											<td><button type="button" class="managebtn"
 													id="managebtn"
-													onclick="location.href='adminBannerDetail.do?bn_no=${banner.bn_no}';">관리</button>
+													onclick="location.href='adminBannerDetail.do?bn_no=${banner.bn_no}';">수정</button>
 												<button type="button" class="deletebtn" id="deletebtn"
 													onclick="deleteFnc('${banner.bn_no}');">삭제</button></td>
 										</tr>

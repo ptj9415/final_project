@@ -57,11 +57,11 @@ th {
 <body>
 	<div class="pagetitlediv">
 		<br>
-		<h3 class="pagetitle">상담사 마이페이지 - 상담 경력 수정</h3>
+		<h3 class="pagetitle">상담사 마이페이지 - 자격사항 수정</h3>
 	</div>
 
 	<div class="titlebar">
-		<span class="titlespan">상담 경력 수정
+		<span class="titlespan">자격사항 수정
 			<button type="button" class="minusbtn" id="minusbtn1">
 				<i class="fa fa-minus" id="minusicon"></i>
 			</button>

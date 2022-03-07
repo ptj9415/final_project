@@ -78,11 +78,6 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview" id="treeview">
-						<li class="nav-item"><a href="counselorPersonalApplyList.do"
-							class="nav-link" id="nav-link" id="asdf"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>개인상담 신청내역</p>
-						</a></li>
 						<li class="nav-item"><a href="counselorPersonalList.do"
 							class="nav-link" id="nav-link"> <i
 								class="far fa-circle nav-icon"></i>

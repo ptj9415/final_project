@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 import co.maeumi.prj.todaystory.service.TodaystoryMapper;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
 import co.maeumi.prj.todaystory.service.TodaystoryVO;
@@ -69,6 +70,22 @@ public class TodaystoryServiceImpl implements TodaystoryService {
 	public int CountTodayStory() {
 		// TODO Auto-generated method stub
 		return map.CountTodayStory();
+	}
+
+
+
+	@Override
+	public int getTodayListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getTodayListCnt(svo);
+	}
+
+
+
+	@Override
+	public List<TodaystoryVO> todaySearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.todaySearchselect(svo);
 	}
 
 }

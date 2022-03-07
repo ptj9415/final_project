@@ -137,7 +137,7 @@ textarea {
 													<label for="filename">파일 찾기</label> <input type="file"
 														id="filename" name="filename"
 														onchange="setThumbnail(event);" >
-														<a href="fileDownload1.do?fileName=${banner.bn_pfilename }">${banner.bn_filename }</a>
+														<a href="fileDownload1.do?fileName=${banner.bn_pfilename }&downName=${banner.bn_filename}">${banner.bn_filename }</a>
 														
 											</div>
 									</tr>
