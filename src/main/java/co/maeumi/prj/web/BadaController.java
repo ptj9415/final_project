@@ -191,11 +191,11 @@ public class BadaController {
 				System.out.println(message + " 님 네이버 로그인 성공");
 				session.setAttribute("email", message); // 세션값 설정
 				session.setAttribute("nickname", (String) response.get("nickname"));
-				return "home/home";
+				return "user/home/home";
 			} else {
 				message = "실패햇다.....";
 				System.out.println(message);
-				return "home/loginForm";
+				return "user/login/loginForm";
 			}
 		}
 		// null이 아니었다면 바로 db에 데이터를 넣을 필요없이 바로 로그인
@@ -203,7 +203,7 @@ public class BadaController {
 		session.setAttribute("nickname", (String) response.get("nickname"));
 		System.out.println("네이버 로그인으로 담은 세션값1 email: " + (String) response.get("email"));
 		System.out.println("네이버 로그인으로 담은 세션2 nickname: " + (String) response.get("nickname"));
-		return "home/home/home";
+		return "user/home/home";
 	}
 
 	// 카카오 로그인 컨트롤러. code를 받을 메서드.
@@ -245,7 +245,7 @@ public class BadaController {
 			int n = memberDao.memberInsert(mvo2);
 			if (n != 0) { // insert 결과 성공이면,
 				session.setAttribute("email", mvo2.getM_nickname()); // 세션값 담아주고 홈으로.
-				return "home/home";
+				return "user/home/home";
 			} else { // insert가 실패한 경우.
 				System.out.println("에러발생"); // 에러발생하면 로그인화면으로 다시.
 				return "user/login/loginForm";
@@ -258,7 +258,7 @@ public class BadaController {
 		session.setAttribute("nickname", mvo2.getM_nickname());
 		System.out.println("로그인 성공으로 담은 세션값 " + mvo2.getM_email());
 		System.out.println("로그인 성공으로 담은 세션값 2 : " + mvo2.getM_nickname());
-		return "home/home";
+		return "user/home/home";
 	} // 카카오로그인
 
 	@RequestMapping("/findEmailPopup.do")
@@ -808,6 +808,17 @@ public class BadaController {
 			return "user/notice/userNoticeRead";
 	}
 	
+	
+	
+	/* =============사용자 마이페이지============ */
+	
+	// 사용자 마이페이지 이동
+	@RequestMapping("/userMypage.do")
+	public String userMypage(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		
+		return "user/mypage/mypageMain";
+	}
 	
 	
 			

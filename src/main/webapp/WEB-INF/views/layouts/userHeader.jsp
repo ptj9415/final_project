@@ -163,7 +163,7 @@ span.top-nav-admin {
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="#">심리 테라피</a></li>
 						</ul></li>
-					<li class="nav-item"><a href="#" class="nav-link">마이페이지</a></li>
+					<li class="nav-item"><a href="userMypage.do" class="nav-link">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>
