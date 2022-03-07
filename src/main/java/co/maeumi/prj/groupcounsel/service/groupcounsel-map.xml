@@ -158,4 +158,27 @@
 			ON(G.C_EMAIL = C.C_EMAIL)
 			WHERE GC_NO = #{gc_no}
 	</select>
+	
+	<insert id="groupReserveInsert" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+			INSERT INTO GROUP_RESERVE(
+				GR_NO,
+				M_EMAIL,
+				GC_NO,
+				GR_SUBJECT,
+				GR_RESERVEDATE,
+				GR_STATUS,
+				GR_REFUND,
+				GR_PRICE
+			)
+			VALUES(
+				(SELECT NVL(MAX(GR_NO),0)+1 FROM GROUP_RESERVE O),
+				'세션값이 들어감',
+				#{gc_no},
+				#{gr_subject},
+				sysdate,
+				'0',
+				'0',
+				#{gr_price}
+			)
+	</insert>
 </mapper>

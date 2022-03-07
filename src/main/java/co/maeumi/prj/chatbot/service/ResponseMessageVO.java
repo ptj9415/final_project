@@ -1,8 +1,5 @@
 package co.maeumi.prj.chatbot.service;
 
-import lombok.Data;
-
-@Data
 public class ResponseMessageVO {
 	private MessageVO message;
 	private KeyboardVO keyboard;

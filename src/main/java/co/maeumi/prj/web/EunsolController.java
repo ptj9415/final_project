@@ -7,12 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.maeumi.prj.board.service.BoardService;
@@ -29,7 +31,8 @@ import co.maeumi.prj.faq.service.FaqService;
 import co.maeumi.prj.faq.service.FaqVO;
 import co.maeumi.prj.service.Search;
 
-@RestController /* @Controller + @ResponseBody */
+//@RestController는... 전부다.. ajax처리할 때.... 아님 발자국처럼 보임;
+@Controller
 public class EunsolController {
 
 	// F&Q
@@ -90,7 +93,14 @@ public class EunsolController {
 	
 	// 자유게시판 글 상세 보기
 	@RequestMapping("/userBoardRead.do")
-	public String userBoardRead(BoardVO vo, Model model, @Param("b_no") int b_no, HttpServletRequest request, BoardReplyVO rvo, HttpSession session) throws Exception {
+	public String userBoardRead(BoardVO vo, 
+			Model model, 
+			@Param("b_no") int b_no, 
+			HttpServletRequest request,
+			BoardReplyVO rvo, 
+			HttpSession session)
+			throws Exception {
+		
 		vo = boardDao.boardSelect(vo);
 		
 		// 날짜 뒤에 시간 자르고 년-월-일 표시
@@ -107,14 +117,19 @@ public class EunsolController {
 		model.addAttribute("boardReplyList",boardReplyList);
 		model.addAttribute("b_no", b_no);
 		
+		// 댓글 개수
+		int count = boardReplyDao.selectReplyCount(rvo); 
+
 		vo.setB_email((String)session.getAttribute("email")); 
 		
 		model.addAttribute("boardRead", vo);
+		model.addAttribute("br_count", count);
 		return "user/board/userBoardRead";
 	}
 			
 	
 	// 자유게시판 글 댓글 등록
+	@ResponseBody
 	@RequestMapping("/boardReplyResister.do")
 	public String boardReplyResister(BoardReplyVO vo, HttpSession session) {
 		vo.setBr_name((String)session.getAttribute("nickname")); // 로그인 정보. 댓쓴이가 누군지 알기 위해 담는 거
@@ -126,6 +141,7 @@ public class EunsolController {
 	
 	
 	// 자유게시판 글 댓글 삭제 
+	@ResponseBody
 	@RequestMapping("/boardReplyDelete.do")
 	public String boardReplyDelete(BoardReplyVO vo, HttpServletRequest request) {
 		int br_no= Integer.parseInt(request.getParameter("br_no"));
@@ -172,6 +188,7 @@ public class EunsolController {
 	
 	
 	// 자유게시판 삭제
+	@ResponseBody
 	@RequestMapping("/userBoardDelete.do")
 	public String userBoardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
@@ -186,7 +203,8 @@ public class EunsolController {
 	
 	// 관리자 자유게시판 메인화면
 	@RequestMapping("/adminBoardList.do")
-	public String adminBoardList(BoardVO vo, Model model,
+	public String adminBoardList(BoardVO vo, 
+					Model model,
 					@RequestParam(required = false, defaultValue = "1") int page,
 					@RequestParam(required = false, defaultValue = "1") int range,
 					@ModelAttribute("search") Search svo)
@@ -232,6 +250,7 @@ public class EunsolController {
 
 	
 	// 자유게시판 삭제
+	@ResponseBody
 	@RequestMapping("/boardDelete.do")
 	public String boardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
@@ -241,7 +260,8 @@ public class EunsolController {
 	
 	// 관리자 FAQ 메인화면
 	@RequestMapping("/adminFaqList.do")
-	public String adminFaqList(FaqVO vo, Model model, 
+	public String adminFaqList(FaqVO vo, 
+			Model model, 
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@ModelAttribute("search") Search svo)
@@ -269,7 +289,10 @@ public class EunsolController {
 	
 	// FAQ 상세 보기
 	@RequestMapping("/adminFaqRead.do")
-	public String adminFaqRead(FaqVO vo, Model model, HttpServletRequest request) {
+	public String adminFaqRead(FaqVO vo, 
+			Model model, 
+			HttpServletRequest request) {
+		
 		vo = faqDao.faqSelect(vo);
 		model.addAttribute("faqRead", vo);
 		return "admin/faqmanage/adminFaqRead";
@@ -309,6 +332,7 @@ public class EunsolController {
 
 	
 	// FAQ 삭제
+	@ResponseBody
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(Model model, FaqVO vo, HttpServletRequest request) {
 		int no = Integer.parseInt(request.getParameter("f_no"));
@@ -320,6 +344,7 @@ public class EunsolController {
 
 	// 챗봇
 	
+	@ResponseBody
 	@RequestMapping(value = "/keyboard", method = RequestMethod.GET)
 	public KeyboardVO keyboard()
 	{
@@ -327,7 +352,8 @@ public class EunsolController {
 
 		return keyboard;
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	public ResponseMessageVO message(@RequestBody RequestMessageVO vo)
 	{

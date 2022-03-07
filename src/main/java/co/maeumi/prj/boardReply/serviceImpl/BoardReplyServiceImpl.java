@@ -30,4 +30,10 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		return map.boardReplyDelete(vo);
 	}
 
+	@Override
+	public int selectReplyCount(BoardReplyVO vo) {
+		return map.selectReplyCount(vo);
+	}
+
+
 }
