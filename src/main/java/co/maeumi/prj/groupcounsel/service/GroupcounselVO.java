@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GroupcounselVO {
-	private String gc_no;		  //그룹 상담 번호
+	private int gc_no;		  //그룹 상담 번호
 	private String c_email;		  //회원 이메일(조인용)
 	private String gc_date;		  //그룹 상담일
 	private String gc_startdate;  //그룹 상담 시작일
@@ -36,7 +36,6 @@ public class GroupcounselVO {
 	private String gr_status;
 	private String gr_refund;
 	private String gr_price;
-	private String gr_uid;
 	
 	//그룹상담 신청용
 	private String m_nickname;

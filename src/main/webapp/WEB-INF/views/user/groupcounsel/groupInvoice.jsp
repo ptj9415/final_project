@@ -403,8 +403,7 @@ form {
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
 					<input type="hidden" id="gr_price" name="gr_price" value="${groupInvoice.gc_price}">
-					<input type="hidden" id="m_email" name="m_email" value="${groupInvoice.m_email}">
-					 <input type="hidden" id="gr_uid" name="gr_uid">
+					<input type="hidden" id="or_uid" name="or_uid">
 				</form>
 				<!--End Table-->
 			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
@@ -424,7 +423,6 @@ form {
 	</div>
 	<script>
 		var gr_price = $("#gr_price").val();
-		alert(gr_price);
         $(".check_module").click(function () {
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');
@@ -478,22 +476,20 @@ form {
         }, function (rsp) {
         console.log(rsp);
         if (rsp.success) {
-        $("#gr_uid").val(rsp.imp_uid);
+        $("#or_uid").val(rsp.imp_uid);
         $("#frm").submit();
-        var ddd = '결제가 완료되었습니다.';
-        var msg = '결제가 완료되었습니다.';
+         var msg = '결제가 완료되었습니다.';
         msg += '고유ID : ' + rsp.imp_uid;
-        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        /* msg += '상점 거래ID : ' + rsp.merchant_uid;
         msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num;
+        msg += '카드 승인번호 : ' + rsp.apply_num; */
         } else {
-    	var ddd = '결제가 실패되었습니다';
         var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
+        /*msg += '에러내용 : ' + rsp.error_msg;
         msg += 'ㅜㅜ' + rsp.amount;
-        msg += rsp.imp_uid;
+        msg += rsp.imp_uid; */
         }
-    		    alert(ddd);
+        alert(msg);
 	        });
         });
     </script>
