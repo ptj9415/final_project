@@ -658,15 +658,18 @@ public class BadaController {
 		String encodingFilename = "";
 		System.out.println("1. filename: " + filename);
 		String realFilename = "";
-
+		
+		String downName = request.getParameter("downName");
+		System.out.println("downName 확인 : " + downName);
+		
 		try {
 			String browser = request.getHeader("User-Agent");
 			// 파일 인코딩
 			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
-				encodingFilename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
-				System.out.println("2. filename: " + filename);
+				encodingFilename = URLEncoder.encode(downName, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("2. filename: " + downName);
 			} else {
-				encodingFilename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+				encodingFilename = new String(downName.getBytes("UTF-8"), "ISO-8859-1");
 			}
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
@@ -675,13 +678,15 @@ public class BadaController {
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
-			System.out.println("확인 ~=================");
+			System.out.println("존재유무 확인 ~=================");
 			return;
 		}
 		// 파일명 지정
+		System.out.println("encodingFilename의 이름: " + encodingFilename);
 		response.setContentType("application/octer-stream");
 		response.setHeader("Content-Transfer-Encoding", "binary;");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodingFilename + "\"");
+		
 		try {
 			OutputStream os = response.getOutputStream();
 			FileInputStream fis = new FileInputStream(realFilename);
@@ -697,6 +702,8 @@ public class BadaController {
 		} catch (Exception e) {
 			System.out.println("FileNotFoundException : " + e);
 		}
+		
+		
 	}
 	
 	
@@ -761,8 +768,9 @@ public class BadaController {
 			System.out.println("넘겨받은 no의 값: " + request.getParameter("no"));
 	
 			vo.setN_no(Integer.valueOf(request.getParameter("no")));
+			noticeDao.hitUpdate(vo);   // 폼으로 넘어가면서 조회수도 올라가도록
+			
 			vo = noticeDao.noticeSelect(vo);
-	
 			model.addAttribute("notices", vo);
 	
 			return "user/notice/userNoticeRead";

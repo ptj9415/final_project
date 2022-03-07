@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지 사항</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- 화면 상단 이미지-->
@@ -52,9 +53,6 @@
 					<div class="card" id="headerdiv">
 						<p id="headerp">
 							검색
-							<button type="button" class="minusbtn" id="minusbtn1">
-								<i id="minusicon1" class="fa fa-minus"></i>
-							</button>
 						</p>
 					</div>
 				</div>
@@ -106,9 +104,6 @@
 					<div class="card" id="headerdiv">
 						<p id="headerp">
 							공지사항 목록
-							<button type="button" class="minusbtn" id="minusbtn2">
-								<i id="minusicon2" class="fa fa-minus"></i>
-							</button>
 						</p>
 					</div>
 				</div>
@@ -155,14 +150,14 @@
 								<tbody>
 									<!--  관리자가 고정한 게시글은 색깔을 tr의 전체적인 배경색을 변경해서 구분해야 한다 -->
 									<c:forEach items="${notice }" var="notice">
-										<tr>
+										<tr class="noticeTr">
 											<td>${notice.n_no}</td>  <!-- rownum으로 가져와야 할 듯. 아니면 지우거나 -->
 											<td>${notice.n_writer }</td>
 											<td>${notice.n_category }</td>
 											<td id="readTd" onclick="userNoticeRead(${notice.n_no})">${notice.n_title }</td>
 											<td>${notice.n_writedate }</td>
 											<td id="hit">${notice.n_hit }</td>
-											<td>${notice.n_filename }</td> <!-- 있으면 아이콘으로 교체?  -->											
+											<td>${notice.n_filename }</td> <!-- 있으면 아이콘으로 교체?  -->	
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -199,14 +194,16 @@
 	</section>
 
 <script>
+	// 고정게시글 색상변경
+	
+	
+
 	// 검색창 항목들 초기화시킴
-	$(document).ready(function(){
-		 $("#clearbtn").on("click", function() {
-			 $("#n_title").val("");
-			 $("#n_category").val("");
-		 });
+	 $("#clearbtn").on("click", function() {
+		 $("#n_title").val("");
+		 $("#n_category").val("");
+	 });
 	 
-	});
 
 	// 공지사항 조회하기 (userNoticeRead)
 	function userNoticeRead(str){
@@ -240,7 +237,7 @@
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 
-		var url = "adminNoticeList.do";
+		var url = "userNoticeList.do";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		url = url + "&listSize=" + listSize;
@@ -251,7 +248,7 @@
 
 	function fn_pagination(page, range, rangeSize, listSize, n_title, n_category) {
 
-		var url = "adminNoticeList.do";
+		var url = "userNoticeList.do";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		url = url + "&listSize=" + listSize;
@@ -263,7 +260,7 @@
 	function fn_next(page, range, rangeSize, listSize, n_title, n_category) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
-		var url = "adminNoticeList.do";
+		var url = "userNoticeList.do";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		url = url + "&listSize=" + listSize;
@@ -277,13 +274,13 @@
 		var listSize = $("#listSize option:selected").val();
 
 		if (listSize == 10) {
-			var url = "adminNoticeList.do?startPage=" + startPage
+			var url = "userNoticeList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		} else if (listSize == 15) {
-			var url = "adminNoticeList.do?startPage=" + startPage
+			var url = "userNoticeList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		} else if (listSize == 20) {
-			var url = "adminNoticeList.do?startPage=" + startPage
+			var url = "userNoticeList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		}
 		location.href = url;
@@ -292,7 +289,7 @@
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 
-		var url = "adminNoticeList.do";
+		var url = "userNoticeList.do";
 		url = url + "?n_title=" + $('#n_title').val();
 		url = url + "&n_category=" + $('#n_category').val();
 		location.href = url;

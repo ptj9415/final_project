@@ -239,7 +239,10 @@ $(document).ready(function(){
 											<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
 										</td>											
 											<td>
-												<button type="button" class="managebtn"	id="statusBtn" onclick="statusBtn('${notice.n_no}' , '${notice.n_status }')">고정/취소</button>
+												<button type="button" class="managebtn"	id="statusBtn" onclick="statusBtn('${notice.n_no}' , '${notice.n_status }')">
+													<c:if test="${notice.n_status == '고정'}">고정 취소</c:if>
+													<c:if test="${notice.n_status != '고정'}">고정 등록</c:if>
+												</button>
 											</td>
 										</tr>
 									</c:forEach>

@@ -21,16 +21,9 @@ th {
 }
 .belowBtn{
 	margin-right: 10px;
-	
-	
 }
 #title {
 	width: 100%;
-}
-span {
-	margin-left: 100px;
-	font-size: 20px;
-	font-size: x-large;
 }
 #content {
 	width: 100%;
@@ -72,7 +65,7 @@ span {
 				</tr>
 				<tr>
 					<th height="50px">첨부파일</th>
-					<td colspan="3"><a href="fileDownload.do?fileName=${notices.n_pfilename }">${notices.n_filename }</a></td>
+					<td colspan="3"><a href="fileDownload.do?fileName=${notices.n_pfilename }&downName=${notices.n_filename }">${notices.n_filename }</a></td>
 				</tr>
 			</table>
 								<input type="hidden" name="fileName" value="${notices.n_filename }">
