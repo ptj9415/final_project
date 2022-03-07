@@ -424,6 +424,7 @@ div.counsel-type {
 			step3.submit();
 			location.href = 'personalCounselStep4.do'
 		});
+		
 	</script>
 </body>
 </html>

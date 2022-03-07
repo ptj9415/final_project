@@ -392,9 +392,24 @@ th#th-management {
 
 
 							<!-- paging -->
-							<div class="btnContent">
-								<div class="pagination" id="pagination">페이지 영역</div>
-							</div>
+							 <nav aria-label="...">
+				  				<ul class="pagination">
+				    				<li class="page-item">
+				      				<a class="page-link" href="adminTodayStoryList.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+				    			</li>
+				    	 <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+								<c:if test="${status.count ne page.nowPage}">
+				    			<li class="page-item"><a class="page-link" href="adminTodayStoryList.do?nowPage=${status.count}">${status.count}</a></li>
+				   			</c:if>
+				   			<c:if test="${status.count eq page.nowPage}">
+								<li class="page-item active"><a class="page-link" href="adminTodayStoryList.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+				   			</c:if>
+				   		 </c:forEach>
+				    			<li class="page-item">
+				     				<a class="page-link" href="adminTodayStoryList.do?nowPage=${page.next}">Next</a>
+				    			</li>
+				  			 </ul>
+							</nav>
 							<!-- paging end -->
 						</div>
 						<!-- /.card-body -->

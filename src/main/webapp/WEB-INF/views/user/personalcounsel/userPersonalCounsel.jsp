@@ -6,14 +6,11 @@
 <meta charset="UTF-8">
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Lato'
-	rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script
-	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <title>개인상담</title>
 <style>
 /* html {

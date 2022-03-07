@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-counselPersonalDetail
+counselorPersonalDetail
 </body>
 </html>
