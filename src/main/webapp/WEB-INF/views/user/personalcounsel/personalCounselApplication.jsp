@@ -55,8 +55,8 @@ p {
 
 #invoiceholder {
 	width: 100%;
-	height: 100%;
-	/* padding-top: 50px; */
+	height: 1300px;
+	padding-top: 50px;
 }
 
 #headerimage {
@@ -281,7 +281,7 @@ form {
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">개인상담</h1>
+					<h1 class="mb-2 bread">그룹상담</h1>
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html"><i
 								class="ion-ios-arrow-forward"></i></a></span> <span><i
@@ -303,19 +303,21 @@ form {
 				<div class="info">
 					<h2>Michael Truong</h2>
 					<p>
-						hello@michaeltruong.ca </br> 289-335-6503
+						hello@michaeltruong.ca <br> 289-335-6503
 					</p>
 				</div>
 				<!--End Info-->
 				<div class="title">
 					<h1>Invoice #1069</h1>
 					<p>
-						Issued: May 27, 2015</br> Payment Due: June 27, 2015
+						Issued: May 27, 2015<br> Payment Due: June 27, 2015
 					</p>
 				</div>
 				<!--End Title-->
 			</div>
 			<!--End InvoiceTop-->
+		<form id="invoiceForm">
+		
 			<div id="invoice-mid">
 
 				<div class="clientlogo"></div>
@@ -323,8 +325,8 @@ form {
 
 					<h2>이소정 상담사</h2>
 
-					<p>
-						potato@gmail.com</br> 555-555-5555</br>
+					<input type="text" id="c_email" name="c_email"  value="${c_email}">
+						</br> 555-555-5555</br>
 				</div>
 
 				<div id="project">
@@ -336,7 +338,7 @@ form {
 
 			</div>
 			<!--End Invoice Mid-->
-
+	
 			<div id="invoice-bot">
 
 				<div id="table">
@@ -408,16 +410,18 @@ form {
 
 					</table>
 				</div>
-				<!--End Table-->
-
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-					target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick"> <input
-						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+			</div>
+				<!--End Table 이메일,방식, 가격,시간(날짜도포함되어야하는데...)--> 
+					<input type="text" class="counsel-time" name="counsel-time" value="${counselTime}">
+					<input type="hidden" id="c_email" name="c_email" class="btn btn-primary px-4 py-3 mt-3"  value="${c_email}" >
+					<input type="text" id="oncheck" name="onecheck" value="${type4}">
+					<input type="hidden" name="cmd" value="_s-xclick"> 
+					
+					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 					<input type="button" id="pay-btn" name="submit" value="결제하기">
+				
+
 				</form>
-
-
 
 				<div id="legalcopy">
 					<a href="personalCounselStep4.do"><input type="button"
@@ -428,7 +432,15 @@ form {
 			<!--End InvoiceBot-->
 		</div>
 		<!--End Invoice-->
-	</div>
+<script>
+$('#previous-btn').click(function() {
+	location.href = 'personalCounselStep3.do'
+});
+
+$('#pay-btn').click(function() {
+	location.href = 'personalCounselApplication.do'
+});
+</script>
 
 
 </body>

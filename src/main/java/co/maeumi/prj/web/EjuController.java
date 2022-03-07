@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
+import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.todayreply.service.TodayreplyService;
 import co.maeumi.prj.todayreply.service.TodayreplyVO;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
@@ -32,6 +33,8 @@ public class EjuController {
 	@Autowired
 	private PersonalcounselService personalCounselDao;
 
+	Pagination page; // 전역변수로 선언해준것
+
 	/* =====사용자 화면===== */
 
 	// 개인상담 메인화면 불러오기
@@ -44,57 +47,84 @@ public class EjuController {
 	@RequestMapping("/personalCounselStep2.do")
 	public String personalCounselStep2(Model model, PersonalcounselVO vo, HttpServletRequest request) {
 		String test = request.getParameter("onecheck");
-		System.out.println("step2 : "+test);
+		System.out.println("step2 : " + test);
 		vo.setCcg_subname(test);
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
 		model.addAttribute("counselorList", counselorList);
-		model.addAttribute("type",test);
+		model.addAttribute("type", test);
 		return "user/personalcounsel/personalCounselStep2";
 	}
 
 	// 개인상담 신청 step3
 	@RequestMapping("/personalCounselStep3.do")
-	public String personalCounselStep3(PersonalcounselVO vo,@RequestParam("c_email") String c_email, Model model, HttpServletRequest request, HttpSession session) {
+	public String personalCounselStep3(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
+			HttpServletRequest request, HttpSession session) {
 		String type = request.getParameter("onecheck");
-		System.out.println("step3 : "+type);
-		System.out.println("step3 : "+c_email);
+		System.out.println("step3 : " + type);
+		System.out.println("step3 : " + c_email);
 		vo = personalCounselDao.CounselorSelect(vo);
-		
-		model.addAttribute("type",type);
-		model.addAttribute("email",c_email);
-		
-		model.addAttribute("counselorSelect",vo);
+
+		model.addAttribute("type", type);
+		model.addAttribute("email", c_email);
+
+		model.addAttribute("counselorSelect", vo);
 		return "user/personalcounsel/personalCounselStep3";
 	}
 
 	// 개인상담 신청 step4
 	@RequestMapping("/personalCounselStep4.do")
-	public String personalCounselStep4(PersonalcounselVO vo,@RequestParam("c_email") String c_email, Model model, HttpServletRequest request, HttpSession session) {
+	public String personalCounselStep4(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
+			HttpServletRequest request, HttpSession session) {
 		String type2 = request.getParameter("onecheck");
-		System.out.println("step4 : "+type2);
-		System.out.println("step4 : "+c_email);
+		System.out.println("step4주제 : " + type2);
+		System.out.println("이메일 : " + c_email);
 		vo = personalCounselDao.CounselorSelect(vo);
-		
+
 		String type3 = request.getParameter("c-type");
-		System.out.println("가격선택 : "+ type3);
-		model.addAttribute("type3", type3);
-		
+		System.out.println("방식,가격 : " + type3);
+		model.addAttribute("type3", type3); //방식,가격
+		model.addAttribute("type2",type2); //주제
+		model.addAttribute("c_email", c_email); //회원이메일
+
 		return "user/personalcounsel/personalCounselStep4";
 	}
 
 	// 개인상담 신청내역 확인 페이지
 	@RequestMapping("/personalCounselApplication.do")
-	public String personalCounselApplication() {
+	public String personalCounselApplication(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
+			HttpServletRequest request, HttpSession session) {
+		String type2 = request.getParameter("onecheck");
+		String type3 = request.getParameter("c-type");
+		String time = request.getParameter("time");
+		int times = Integer.parseInt(time);
+		times = times +1;
+		String timess = String.valueOf(times);
+		time = time + timess;
+		
+		System.out.println("==========================");
+		System.out.println(time);
+		System.out.println("application"+ c_email);
+		System.out.println("app주제 : " + type2);
+		System.out.println("방식,가격 : " + type3);
+		
+		model.addAttribute("time", time);
+		model.addAttribute("c_email",c_email);
+		model.addAttribute("type2",type2);
+		model.addAttribute("type3",type3);
 		
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
-	// 페이지 sample page
-		@RequestMapping("/samplePage.do")
-		public String samplePage() {
-			return "user/personalcounsel/samplePage";
+	
+	//결제완료 페이지
+	
 
-		}
+	// css sample page
+	@RequestMapping("/samplePage.do")
+	public String samplePage() {
+		return "user/personalcounsel/samplePage";
+
+	}
 
 	// 오늘의 한마디 메인화면
 	@RequestMapping("/userTodayStory.do")
@@ -143,10 +173,9 @@ public class EjuController {
 	@RequestMapping("/counselorPersonalList.do")
 	public String counselorPersonalList() {
 
-		
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}
-	
+
 	// 개인상담 관리 상세화면
 	@RequestMapping("/counselorPersonalDetail.do")
 	public String counselorPersonalDetail() {
@@ -157,8 +186,16 @@ public class EjuController {
 
 	// 오늘의 한마디 메인화면
 	@RequestMapping("/adminTodayStoryList.do")
-	public String adminTodayStoryList(Model model, TodaystoryVO vo) {
-		List<TodaystoryVO> list = todayDao.TodayStorySelectList();
+	public String adminTodayStoryList(Model model, TodaystoryVO vo, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			page = new Pagination(todayDao.CountTodayStory(), 1, 10); // 전체 수, start, end
+		} else {
+			page = new Pagination(todayDao.CountTodayStory(), Integer.parseInt(nowPage), 10); // 전체 수, start,
+			// end
+		}
+		List<TodaystoryVO> list = todayDao.TodayStorySelectList(page);
+		model.addAttribute("page",page);
 		model.addAttribute("adminTodayStoryList", list);
 		return "admin/todaystorymanage/adminTodayStoryList";
 	}

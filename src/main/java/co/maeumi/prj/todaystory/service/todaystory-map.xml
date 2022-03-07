@@ -2,9 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.maeumi.prj.todaystory.service.TodaystoryMapper">
 
-	<select id="TodayStorySelectList" resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
-		select * from short_comment
-		order by sc_no desc
+	<select id="TodayStorySelectList" resultType="co.maeumi.prj.todaystory.service.TodaystoryVO" parameterType="co.maeumi.prj.service.Pagination">
+	  SELECT *
+      FROM (
+      SELECT ROWNUM RN, A.*
+      FROM (SELECT * FROM short_comment
+      ORDER BY sc_no DESC
+
+      ) A
+      )
+      WHERE RN BETWEEN #{start} AND #{end}
 		
 	</select>
 
@@ -43,4 +50,9 @@
 			delete from short_comment
 			where sc_no = #{sc_no}
 	</delete>
+	
+	<select id="CountTodayStory" resultType="int">
+		select count(*) 
+		from short_comment
+	</select>
 </mapper>

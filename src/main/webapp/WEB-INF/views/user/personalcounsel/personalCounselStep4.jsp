@@ -15,6 +15,121 @@
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <style>
+
+/*calendar start*/
+.sec_cal {
+	width: 500px;
+	margin-top: 100px;
+	margin-left: 300px;
+	font-family: "NotoSansR";
+	height: 600px;
+}
+
+.sec_cal .cal_nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: 48px;
+	line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+	width: 300px;
+	text-align: center;
+	line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+	display: flex;
+	border: 1px solid #333333;
+	border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prev, .sec_cal .cal_nav .go-next {
+	display: block;
+	width: 50px;
+	height: 78px;
+	font-size: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sec_cal .cal_nav .go-prev::before, .sec_cal .cal_nav .go-next::before {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 20px;
+	border: 3px solid #000;
+	border-width: 3px 3px 0 0;
+	transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prev:hover::before, .sec_cal .cal_nav .go-next:hover::before
+	{
+	border-color: #ed2a61;
+}
+
+.sec_cal .cal_nav .go-prev::before {
+	transform: rotate(-135deg);
+}
+
+.sec_cal .cal_nav .go-next::before {
+	transform: rotate(45deg);
+}
+
+.sec_cal .cal_wrap {
+	padding-top: 40px;
+	position: relative;
+	margin: 0 auto;
+}
+
+.sec_cal .cal_wrap .days {
+	display: flex;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+.sec_cal .cal_wrap::after {
+	top: 368px;
+}
+
+.sec_cal .cal_wrap .day {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(100%/ 7);
+	text-align: left;
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+	border-radius: 5px
+}
+
+.current.today {
+	background: #468fb629;
+}
+
+.sec_cal .cal_wrap .dates {
+	display: flex;
+	flex-flow: wrap;
+	height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {
+	color: #3c6ffa;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n) {
+	color: #ed2a61;
+}
+
+.sec_cal .cal_wrap .day.disable {
+	color: #ddd;
+}
+/*calendar end*/
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -221,180 +336,110 @@
 }
 /*next btn end*/
 
-/*calendar*/
-/*step calendar*/
-#calendar {
-	margin-left: auto;
-	margin-right: auto;
-	width: 320px;
-	font-family: 'Lato', sans-serif;
+/*시간표 생성 style*/
+.timediv {
+	height: 400px;
+	display: grid;
+	grid-auto-rows: 50px;
+	grid-template-columns: 120px 120px;
+	margin-top:300px;
+	margin-left:900px;
 }
 
-#calendar_weekdays div {
-	display: inline-block;
-	vertical-align: top;
 }
-
-#calendar_content, #calendar_weekdays, #calendar_header {
-	position: relative;
-	width: 320px;
-	overflow: hidden;
-	float: left;
-	z-index: 10;
+div.asdf {
+	width: 150px;
 }
-
-#calendar_weekdays div, #calendar_content div {
-	width: 40px;
+/*시간표 생성 style end*/
+#btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8 {
+	width: 80px;
 	height: 40px;
-	overflow: hidden;
+	background-color: #468FB6;
+	border-radius: 30px;
 	text-align: center;
-	background-color: #FFFFFF;
-	color: #787878;
+	font-size: 14px;
+	color: white;
+	border: 0px;
 }
 
-#calendar_content {
-	-webkit-border-radius: 0px 0px 12px 12px;
-	-moz-border-radius: 0px 0px 12px 12px;
-	border-radius: 0px 0px 12px 12px;
-}
-
-#calendar_content div {
-	float: left;
-}
-
-#calendar_content div:hover {
-	background-color: #F8F8F8;
-}
-
-#calendar_content div.blank {
-	background-color: #E8E8E8;
-}
-
-#calendar_header, #calendar_content div.today {
-	zoom: 1;
-	filter: alpha(opacity = 70);
-	opacity: 0.7;
-}
-
-#calendar_content div.today {
-	color: #FFFFFF;
-}
-
-#calendar_header {
-	width: 100%;
-	height: 37px;
-	text-align: center;
-	background-color: #FF6860;
-	padding: 18px 0;
-	-webkit-border-radius: 12px 12px 0px 0px;
-	-moz-border-radius: 12px 12px 0px 0px;
-	border-radius: 12px 12px 0px 0px;
-}
-
-#calendar_header h1 {
-	font-size: 1.5em;
-	color: #FFFFFF;
-	float: left;
-	width: 70%;
-}
-
-i[class^=icon-chevron] {
-	color: #FFFFFF;
-	float: left;
-	width: 15%;
-	border-radius: 50%;
-}
-
-.drawer__btn__wrapper {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 2rem;
-	max-width: 44rem;
-}
-
-.drawer__btn__container {
-	display: flex;
-	/* flex-wrap: wrap; */
-	margin-left: -2rem;
-	margin-top: -2rem;
-	margin-bottom: 0.3rem;
-}
-
-.drawer__btn {
-	flex-basis: 50%;
-	max-width: 50%;
-	padding-left: .03rem;
-	padding-top: 2rem;
-}
-
-.drawer__btn span {
-	cursor: pointer;
-	display: block;
-	font-size: 1.6rem;
-	font-weight: 600;
-	padding: 1.5rem 1rem;
-	text-align: center;
-	transition: 0.25s ease;
-	width: 100px !important;
-	font-weight: bold;
-	border: 0 none;
-	border-radius: 4px;
-	cursor: pointer;
-	-webkit-transition: all 0.3s linear 0s;
-	-moz-transition: all 0.3s linear 0s;
-	-ms-transition: all 0.3s linear 0s;
-	-o-transition: all 0.3s linear 0s;
-	transition: all 0.3s linear 0s;
-	display: block;
+#btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover, #btn5:hover, #btn6:hover,
+	#btn7:hover, #btn8:hover {
+	width: 80px;
+	height: 40px;
 	border: 1px solid #468FB6;
-	color: #468FB6;
 	background-color: white;
-}
-
-.drawer__btn span:hover {
-	background: #468FB6;
-	color: white;
-}
-
-.drawer__container {
-	background: #fff;
-	height: 100%;
-	padding: 2rem;
-	position: fixed;
-	/* right: -32rem; */
-	top: 0;
-	transition: 0.15s ease-in;
-	width: 32rem;
-}
-
-.drawer__active {
-	right: 0;
-}
-
-.drawer__overlay {
-	background: rgba(0, 0, 0, 0.75);
-	display: none;
-	position: fixed;
-	height: 100%;
-	top: 0;
-	width: 100%;
-}
-
-.drawer__close__btn {
-	color: white;
-	cursor: pointer;
-	display: none;
-	position: absolute;
-	right: 34rem;
+	border-radius: 30px;
 	text-align: center;
-	top: 1rem;
+	font-size: 14px;
+	color: #468FB6;
+	transition: 300ms ease-in-out;
+	cursor: pointer;
 }
 
-.drawer__close__btn .fa-times {
-	font-size: 3rem;
-	width: 100%;
+#btn1:disabled, #btn1[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
 }
-/*step calendar end*/
+
+#btn2:disabled, #btn2[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn3:disabled, #btn3[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn4:disabled, #btn4[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn5:disabled, #btn5[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn6:disabled, #btn6[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn7:disabled, #btn7[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+#btn8:disabled, #btn8[disabled] {
+	border: 0px solid #999999;
+	background-color: #d6d6d6;
+	color: #666666;
+	cursor: default;
+}
+
+.total {
+	width:80%;
+	height: 1000px;
+	display: grid;
+	grid-auto-rows: 50px;
+	grid-template-columns: 120px 120px;
+	
+}
 </style>
 </head>
 <body>
@@ -472,64 +517,45 @@ i[class^=icon-chevron] {
 		</div>
 	</div>
 
-
-	<div id="calendar1"
-		style="width: 480px; height: 800px; margin-top: 100px">
-		<div id="calendar_header">
-			<i class="icon-chevron-left"></i>
-			<h1></h1>
-			<i class="icon-chevron-right"></i>
+	<div class="total">
+		<div class="sec_cal">
+			<div class="cal_nav">
+				<a href="javascript:;" class="nav-btn go-prev">prev</a>
+				<div class="year-month"></div>
+				<a href="javascript:;" class="nav-btn go-next">next</a>
+			</div>
+			<div class="cal_wrap">
+				<div class="days">
+					<div class="day">MON</div>
+					<div class="day">TUE</div>
+					<div class="day">WED</div>
+					<div class="day">THU</div>
+					<div class="day">FRI</div>
+					<div class="day">SAT</div>
+					<div class="day">SUN</div>
+				</div>
+				<div class="dates"></div>
+			</div>
 		</div>
-		<div id="calendar_weekdays"></div>
-		<div id="calendar_content"></div>
+		<form id="timeform" action="personalCounselApplication.do" method="post">
+			<div class="timediv"></div>
+
+			<input type="hidden" class="counsel-time" name="counsel-time" value="${counselTime}">
+			<input type="hidden" id="c_email" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${c_email}">
+			<input type="hidden" id="oncheck" name="onecheck" value="${type2}">
+			<input type="hidden" id="c-type" name="c-type" value="${type3}">
+			<input type="hidden" id="time" name="time" value="">
+			<input type="button" data-page="2" name="previous"
+				class="previous action-button" value="Previous" id="previous-btn" />
+			<input type="submit" data-page="2" name="next"
+				class="next action-button" id="next-btn" value="신청하기" />
+		</form>
 	</div>
 
 
-
-
-	<!-- <section class="drawer__btn__wrapper">
-		<div class="drawer__btn__container">
-			<div class="drawer__btn__1 drawer__btn" data-drawer="__1">
-				<span>Button 1</span>
-			</div>
-
-			<div class="drawer__btn__2 drawer__btn" data-drawer="__2">
-				<span>Button 2</span>
-			</div>
-
-			<div class="drawer__btn__3 drawer__btn" data-drawer="__3">
-				<span>Button 3</span>
-			</div>
-
-			<div class="drawer__btn__4 drawer__btn" data-drawer="__4">
-				<span>Button 4</span>
-			</div>
-		</div>
-		<div class="drawer__btn__container">
-			<div class="drawer__btn__1 drawer__btn" data-drawer="__1">
-				<span>Button 1</span>
-			</div>
-
-			<div class="drawer__btn__2 drawer__btn" data-drawer="__2">
-				<span>Button 2</span>
-			</div>
-
-			<div class="drawer__btn__3 drawer__btn" data-drawer="__3">
-				<span>Button 3</span>
-			</div>
-
-			<div class="drawer__btn__4 drawer__btn" data-drawer="__4">
-				<span>Button 4</span>
-			</div>
-		</div>
-	</section> -->
-		<input type="hidden" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}" >
-	<input type="hidden" id="c_email" name="onecheck" value="${type3}"> 
-	<input type="button" data-page="2" name="previous"
-		class="previous action-button" value="Previous" id="previous-btn" />
-	<input type="button" data-page="2" name="next"
-		class="next action-button" id="next-btn" value="신청하기" />
 	<script>
+	
+	 
 		$('#previous-btn').click(function() {
 			location.href = 'personalCounselStep3.do'
 		});
@@ -541,72 +567,222 @@ i[class^=icon-chevron] {
 		
 		//calendar start
 		
-		$(function(){
-    function c(){p();
-        var e=h();
-        var r=0;
-        var u=false;
-        l.empty();
-        while(!u){
-            if(s[r]==e[0].weekday){
-                u=true
-            }else{
-                l.append('<div class="blank"></div>');
-                r++}}
-                for(var c=0;c<42-r;c++){
-                    if(c>=e.length){
-                        l.append('<div class="blank"></div>')}
-                        else{var v=e[c].day;
-                            var m=g(new Date(t,n-1,v))?'<div class="today">':"<div>";l.append(m+""+v+"</div>")}}
-                            var y=o[n-1];
-                            a.css("background-color",y).find("h1").text(i[n-1]+" "+t);
-                            f.find("div").css("color",y);l.find(".today").css("background-color",y);
-                            d()}function h(){var e=[];for(var r=1;
-                                r<v(t,n)+1;
-                                r++){e.push({day:r,weekday:s[m(t,n,r)]})}return e
-                            }function p(){f.empty();
-                                for(var e=0;e<7;e++){
-                                f.append("<div>"+s[e].substring(0,3)+"</div>")}}
-                                function d(){var t;
-                                    var n=$("#calendar").css("width",e+"px");
-                                    n.find(t="#calendar_weekdays, #calendar_content").css("width",e+"px").find("div").css({width:e/7+"px",height:e/7+"px","line-height":e/7+"px"});
-                                    n.find("#calendar_header").css({height:e*(1/7)+"px"}).find('i[class^="icon-chevron"]').css("line-height",e*(1/7)+"px")}
-                                    function v(e,t){
-                                        return(new Date(e,t,0)).getDate()
-                                    }
-                                    function m(e,t,n){
-                                        return(new Date(e,t-1,n)).getDay()
-                                    }function g(e){
-                                        return y(new Date)==y(e)
-                                    }function y(e){
-                                        return e.getFullYear()+"/"+(e.getMonth()+1)+"/"+e.getDate()
-                                    }function b(){var e=new Date;t=e.getFullYear()
-                                        ;n=e.getMonth()+1}var e=480
-                                        ;var t=2013
-                                        ;var n=9
-                                        ;var r=[]
-                                        ;var i=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
-                                        var s=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-                                        var o=["#16a085","#1abc9c","#c0392b","#27ae60","#FF6860","#f39c12","#f1c40f","#e67e22","#2ecc71","#e74c3c","#d35400","#2c3e50"];
-                                        var u=$("#calendar");
-                                        var a=u.find("#calendar_header");
-                                        var f=u.find("#calendar_weekdays");var l=u.find("#calendar_content")
-                                        ;
-                                        b();
-                                        c();
-                                        a.find('i[class^="icon-chevron"]').on("click",function(){
-                                            var e=$(this);
-                                            var r=function(e){n=e=="next"?n+1:n-1;if(n<1){n=12;
-                                                t--
-                                            }
-                                            else if(n>12){n=1;
-                                                t++}c()};
-                                                if(e.attr("class").indexOf("left")!=-1){
-                                                    r("previous")
-                                                }
-                                                else{
-                                                    r("next")}})})
+    $(document).ready(function () {
+      calendarInit();
+
+    });
+
+
+    /*
+        달력 렌더링 할 때 필요한 정보 목록 
+
+        현재 월(초기값 : 현재 시간)
+        금월 마지막일 날짜와 요일
+        전월 마지막일 날짜와 요일
+    */
+
+    function calendarInit() {
+
+      // 날짜 정보 가져오기
+      var date = new Date(); // 현재 날짜(로컬 기준) 가져오기
+      var utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000); // uct 표준시 도출
+      var kstGap = 9 * 60 * 60 * 1000; // 한국 kst 기준시간 더하기
+      var today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들기(오늘)
+
+      var thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      // 달력에서 표기하는 날짜 객체
+
+
+      var currentYear = thisMonth.getFullYear(); // 달력에서 표기하는 연
+      var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
+      var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
+
+      // kst 기준 현재시간
+      // console.log(thisMonth);
+
+      // 캘린더 렌더링
+      renderCalender(thisMonth);
+
+      function renderCalender(thisMonth) {
+
+        // 렌더링을 위한 데이터 정리
+        currentYear = thisMonth.getFullYear();
+        currentMonth = thisMonth.getMonth();
+        currentDate = thisMonth.getDate();
+
+        // 이전 달의 마지막 날 날짜와 요일 구하기
+        var startDay = new Date(currentYear, currentMonth, 0);
+        var prevDate = startDay.getDate();
+        var prevDay = startDay.getDay();
+
+        // 이번 달의 마지막날 날짜와 요일 구하기
+        var endDay = new Date(currentYear, currentMonth + 1, 0);
+        var nextDate = endDay.getDate();
+        var nextDay = endDay.getDay();
+
+        // console.log(prevDate, prevDay, nextDate, nextDay);
+
+        // 현재 월 표기
+        $('.year-month').text(currentYear + '-' + (currentMonth + 1));
+
+        // 렌더링 html 요소 생성
+        calendar = document.querySelector('.dates')
+        calendar.innerHTML = '';
+
+        // 지난달
+        for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+          calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
+        }
+        // 이번달
+        for (var i = 1; i <= nextDate; i++) {
+          calendar.innerHTML = calendar.innerHTML + '<div class="day current">' + i + '</div>'
+        }
+        // 다음달
+        for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
+          calendar.innerHTML = calendar.innerHTML + '<div class="day next disable">' + i + '</div>'
+        }
+
+        // 오늘 날짜 표기
+        if (today.getMonth() == currentMonth) {
+          todayDate = today.getDate();
+          var currentMonthDate = document.querySelectorAll('.dates .current');
+          currentMonthDate[todayDate - 1].classList.add('today');
+        }
+        /*   test
+         if(어쩌구....){
+        	 
+        	   $('.day.current').on('click', function () {
+        	          var val = $(this).html();
+        	          var c_email = $("#c_email").val();
+        	       
+        	          makediv(val,c_email);
+        	        })
+         }esle{
+        	 
+        	 $('.day.current').css('backgroundColor','#468fb629');
+        	 $('.day.current').attr('dispaly',disabled);
+         }
+        test end   */
+        
+        
+        $('.day.current').on('click', function () {
+          var val = $(this).html();
+          var c_email = $("#c_email").val();
+        /*   alert('05 그만 놀리자.'); */
+          makediv(val,c_email);
+        })
+      }
+
+      // 이전달로 이동
+      $('.go-prev').on('click', function () {
+        thisMonth = new Date(currentYear, currentMonth - 1, 1);
+        renderCalender(thisMonth);
+      });
+
+      // 다음달로 이동
+      $('.go-next').on('click', function () {
+        thisMonth = new Date(currentYear, currentMonth + 1, 1);
+        renderCalender(thisMonth);
+      });
+    }
+
+    function makediv(val,c_email) {
+    	var yearmonth = $('.year-month').html();
+    	var year = yearmonth.substr(0,4);
+    	if(yearmonth.slice(-2, 5) == '-') {
+    		var month = '0' + yearmonth.slice(-1);
+    	} else {
+    		var month = yearmonth.slice(-2);
+    	}
+    	if(val.length == 1) {
+    		val = '0' + val;
+    	}
+    	var week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    	var pr_date = year + '-' + month + '-' + val;
+    	var cd_day = week[new Date(pr_date).getDay()];
+    	var c_email = c_email;
+    	$.ajax({
+    		url: 'testTime.do',
+    		type: 'get',
+    		data: {cd_day:cd_day, c_email:c_email},
+    		dataType: 'json',
+    		success: function(data) {
+				$('.asdf').remove();
+				var timediv = $('.timediv');
+				for (var i = 1; i < 9; i++) {
+				let button1 = $('<div class="asdf">'+'<button id='+"btn"+ i + ' type="button" value='+(i+8) +' disabled="disabled">'+ (i+8)+'~'+(i+9)+'시' +'</button>'+'</div>');
+				timediv.append(button1);
+				}
+				for (datas of data) {
+					var time = datas.cd_time.substring(0,2);
+					time = Number(time);
+ 					 for (var i = 1; i < 9; i++) {
+					     var btns = $("#btn"+i).val();
+						     if (btns == time) {
+								 $("#btn"+i).attr("disabled", false);
+							}
+					}
+/*  					var div = $('<div class="asdf">' + datas.cd_time + '</div>')
+						timediv.append(div); */	 				
+    			} 
+					getTime(val,c_email);
+    		},
+    		error: function() {
+    			alert('에러');
+    		}
+    	});
+    }
+    
+    function getTime(val,c_email) {
+    	var yearmonth = $('.year-month').html();
+    	var year = yearmonth.substr(0,4);
+    	if(yearmonth.slice(-2, 5) == '-') {
+    		var month = '0' + yearmonth.slice(-1);
+    	} else {
+    		var month = yearmonth.slice(-2);
+    	}
+    	var week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    	var pr_date = year + '-' + month + '-' + val;
+    	var cd_day = week[new Date(pr_date).getDay()];
+    	var c_email = c_email;
+    	console.log('asdf');
+    	$.ajax({
+			url: 'testTimeselect.do',
+			type: 'get',
+			data: {pr_date:pr_date, c_email:c_email},
+			dataType: 'json',
+			success: function(data) {
+				var div = $('.asdf');
+				for(datas of data) {
+					var pr_time = datas.pr_time.substring(0,2);
+					pr_time = Number(pr_time);
+ 					 for (var i = 1; i < 9; i++) {
+					     var btns = $("#btn"+i).val();
+						     if (btns == pr_time) {
+						    	 
+								 $("#btn"+i).attr("disabled", true);
+							}
+					}
+/* 					$('.asdf').each(function() {
+S						if($(this).html() == datas.pr_time) {
+						$(this).attr("disabled", true);	
+						}
+					}); */
+				}
+			},
+			error: function() {
+				alert('에러');
+			}
+		});
+    }
+    
 		//calendar end
+		 $("body").click(function(){
+			var counselTime = event.target.value;
+			if (counselTime != "신청하기") {
+			$("#time").val(counselTime);				
+			}
+		})
 	</script>
 </body>
 </html>
