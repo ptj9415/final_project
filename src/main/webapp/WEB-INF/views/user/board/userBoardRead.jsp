@@ -95,10 +95,12 @@ th, td {
 		<!-- 댓글 목록 -->
 		<div div align="left">
 			<ol class="replyList">
-				<p style="text-align: left; margin-left: 40px;">💌 댓글</p>
-				<hr align="left"width: 90%>
-				
 				<c:set var="replyContent" value="${boardReplyList }" />
+				<p style="text-align: left; margin-left: 40px;">💌 댓글
+					<small><b>&nbsp;💕 ${br_count}&nbsp;</b></small>
+				</p>
+				
+				<hr align="left"width: 90%>
 				<c:choose>
 					<c:when test="${not empty replyContent}">
 						<c:forEach var="boardReply" items="${boardReplyList}">

@@ -1,8 +1,5 @@
 package co.maeumi.prj.chatbot.service;
 
-import lombok.Data;
-
-@Data
 public class RequestMessageVO {
 	private String user_key;
 	private String type;

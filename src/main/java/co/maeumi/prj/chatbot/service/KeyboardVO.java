@@ -1,9 +1,7 @@
 package co.maeumi.prj.chatbot.service;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-import lombok.Data;
+import java.util.Arrays;
 
-@Data
 public class KeyboardVO {
 	private String type;
 	private String[] buttons;
