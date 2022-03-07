@@ -40,5 +40,11 @@ public interface CounselorMapper {
 	int counselortimeInsert(CounselorVO cvo);
 	List<CounselorVO> counselorTimeAndDay(CounselorVO cvo);
 	List<CounselorVO> reservedCounsel(CounselorVO cvo);
+	
+	//등급변경신청
+	List<CounselorVO> counselorGradeList(CounselorVO cvo);
+	int counselorGradeInsert(CounselorVO cvo);
+	int counselorGradeUpdate(CounselorVO cvo);
+	int counselorUpdate(CounselorVO cvo);
 
 }

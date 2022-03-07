@@ -1,0 +1,3532 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes, height=device-height, viewport-fit=cover, shrink-to-fit=no">
+	<meta name="title" content="충북대학교">
+	<meta name="description" content="충북대학교 CIEAT 시스템 (Chungbuk Integrated Extracurricular Administrative sysTem)">
+	<meta name="copyrigt" content="충북대학교">
+	<meta name="keywords" content="충북대학교, CIEAT, 씨앗시스템, 역량관리, 상담, 대학, 대학생, 역량관리시스템, 경력관리">
+	<title>충북대학교 관리자</title>
+	<link rel="apple-touch-icon" href="https://cieat.chungbuk.ac.kr:443/contents/images/favicon.png">
+	<link rel="shortcut icon" href="https://cieat.chungbuk.ac.kr:443/contents/images/favicon.png">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/fonts/font-awesome/css/font-awesome.min.css">
+<!-- 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"> -->
+
+	<!-- css -->
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/dataTables/select.dataTables.min.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/dataTables/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/src/select2/css/select2.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/plugin/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/plugin/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/plugin/Ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/src/AdminLTE.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/src/skins/_all-skins.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/jquery.mCustomScrollbar.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/dl_common.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/dl_global.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/dl_layout.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/dl_custom.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/dl_table.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/dl_popup.css">
+	<link rel="stylesheet" href="https://cieat.chungbuk.ac.kr:443/contents/css/admin/dl_ui.css">
+
+	<!-- 풀캘린더 전용 -->
+	<link rel="stylesheet" type="text/css" href="https://cieat.chungbuk.ac.kr:443/contents/css/fullcalendar.css">
+	<link rel="stylesheet" type="text/css" href="https://cieat.chungbuk.ac.kr:443/contents/css/jquery-ui.css"/>
+
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/jquery-1.12.3.min.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/plugin/jquery/dist/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dp_common.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/jquery.form.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/jquery-ui.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cieat.chungbuk.ac.kr:443/contents/js/jstree/themes/style.css">
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/jstree/jstree.min.js"></script>
+
+	<!-- Data Tables -->
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/dataTables.select.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/buttons.print.min.js"></script>
+
+
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/src/select2/js/select2.min.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/plugin/jquery-ui/jquery-ui.min.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/plugin/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/plugin/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/plugin/fastclick/lib/fastclick.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/js/jquery.mCustomScrollbar.min.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/js/admin/src/adminlte.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/js/admin/src/demo.js"></script>
+	<script src="https://cieat.chungbuk.ac.kr:443/contents/js/admin/pp_ui.js"></script>
+	<!-- dataTables -->
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/dataTables/dl_careerpass_admin.js"></script>
+	<!-- apexchart -->
+	<script type="text/javascript" src="https://cieat.chungbuk.ac.kr:443/contents/js/apexchart/apexcharts.js"></script>
+<!-- //js -->
+
+	<script type="text/javascript">
+		$(function() {
+			sessionStorage.setItem("contextRootPath", "https://cieat.chungbuk.ac.kr:443");
+		});
+
+		// 로딩 이미지
+		function fnCloseLoadingImage()	{
+			setTimeout(function() {
+				$("#loading").hide();
+				}, 300);
+		}
+
+		// 선택 메뉴 불들어오게 하기
+		function menuOnClass(){
+			var path = window.location.pathname;
+			var tempArry = [];
+			tempArry = path.split('/');
+			$("li > a").each(function(){
+				if( $(this).attr("name") == tempArry[1]){
+					$(this).parents("li").addClass("menu-open active");
+				}
+			});
+		}
+	</script>
+
+</head>
+
+<body class="hold-transition sidebar-mini fixed" style="height: auto; min-height: 100%;"	 id="MAIN_BODY" onload="fnCloseLoadingImage();menuOnClass();">
+	<div id="loading"  style="display: block;">
+		<p id="loading_image">
+			<img src="https://cieat.chungbuk.ac.kr:443/contents/images/loading.gif" alt="Loading..."><br>
+			<span>Loading</span>
+		</p>
+	</div>
+	<div class="wrapper">
+		<header class="main-header">
+			<h1>
+				<a href="https://cieat.chungbuk.ac.kr:443/adminMain/a/t/main.do" class="logo">
+					<span class="logo-mini">
+						<img src="https://cieat.chungbuk.ac.kr:443/contents/images/admin/mini_logo.png" alt="충북대학교 로고">
+					</span>
+				</a>
+			</h1>
+			<nav class="navbar navbar-static-top">
+				<a href="javascript:void(0);" class="sidebar-toggle" data-toggle="push-menu" role="button" >
+					<span class="sr-only">주요메뉴 열고닫기</span>
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<li class="hidden-xs pp_username">
+							<a href="javascript:void(0);">
+								<i class="fa fa-user"></i>
+								<span class="pp_user_txt">다인리더스&#40;dainls&#41;님 접속을 환영합니다.</span>
+							</a>
+						</li>
+						
+						
+						<li id="goClientBtn">
+							<a href="javascript:void(0);" class="pp_client_link">
+								<i class="fa fa-television"></i>
+								<span class="hidden-xs pp_user_txt">학생화면 바로가기</span>
+							</a>
+						</li>
+						
+						<li id="logoutBtn">
+							<a href="javascript:void(0);">
+								<i class="fa fa-unlock-alt"></i>
+								<span class="hidden-xs pp_user_txt">LOGOUT</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<aside class="main-sidebar">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 학생 쪽 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 학생신청상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 동료평가 진행단계 -->
+
+
+
+
+
+<!-- 진로설계 목표 계획 구분 값 -->
+
+
+
+
+
+<!-- 진단 타입값 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 취업상담 -->
+
+<!-- 학생생활상담(미사용) -->
+
+<!-- 예비군 및 병역상담 -->
+
+<!-- 학사상담 -->
+
+<!-- 성희롱.성폭력 신고센터 -->
+
+<!-- 건강상담-->
+
+<!-- 심리상담 및 심리검사-->
+
+
+<!-- 방문상담 신청구분 -->
+
+
+
+
+<!-- 방문상담 신청상태 -->
+
+
+
+
+
+
+<!-- 온라인 상담 상태 -->
+
+
+
+
+
+
+<!-- 심리검사 및 심리상담 상태 -->
+
+
+
+
+
+
+<!-- 학생생활상담 상태 -->
+
+
+
+
+
+
+
+<!-- 성희롱.성폭력  상담 상태 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
+
+
+
+
+	
+	
+	
+		
+	
+
+
+
+
+<section class="sidebar">
+	<div class="user-panel">
+		<div class="pull-left image">
+			<img src="https://cieat.chungbuk.ac.kr:443/contents/images/admin/user_img.png" class="img-circle" alt="User Image">
+		</div>
+		<div class="pull-left info">
+			<p>다인리더스&#40;dainls&#41;님</p>
+			<span>
+				<i class="fa fa-calendar"></i>&nbsp;
+													
+			</span>
+		</div>
+	</div>
+	<ul class="sidebar-menu" data-widget="tree" id="sidebarMenu_ul" >
+		
+		
+		
+			
+				
+					
+					
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-cogs"></i><span>포탈 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/menuMng/r/m/selectMenuList.do','SUPERADMIN_04');" name="menuMng" >-&nbsp;메뉴 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/contentsMng/r/m/selectContentsList.do','MNU0000000');" name="contentsMng" >-&nbsp;콘텐츠 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/dataTableSample/r/m/goDataTableSampls.do','MNU0000420');" name="dataTableSample" >-&nbsp;DataTableSample</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-desktop"></i><span>사이트관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/staffMenuMng/r/m/selectStaffMenuList.do','MNU0000616');" name="staffMenuMng" >-&nbsp;메뉴별 권한관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/roleMng/r/m/selectRoleList.do','MNU0000508');" name="roleMng" >-&nbsp;권한 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/userMng/z/m/selectUserList.do','MNU0000507');" name="userMng" >-&nbsp;사용자별 권한관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/userRegMngSTF/r/m/goCreateCpsUserReg.do','MNU0000509');" name="userRegMngSTF" >-&nbsp;외부 사용자 등록</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/loginHistory/r/m/goLoginHistory.do','MNU0000510');" name="loginHistory" >-&nbsp;로그인 이력</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-street-view"></i><span>중도탈락방지</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/stdFailChkStdrdSTF/a/m/getStdFailChkInfo.do','MNU0000598');" name="stdFailChkStdrdSTF" >-&nbsp;요인 및 기준점 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/stdFailChkListSTF/r/m/getStdFailChkList.do','MNU0000627');" name="stdFailChkListSTF" >-&nbsp;대상자 조회</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/stdFailStatSTF/r/m/getStdFailStatList.do','MNU0000675');" name="stdFailStatSTF" >-&nbsp;중도탈락 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-book"></i><span>교과 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/rcrProgramMileageMng/r/m/goRcrProgramMileageMngList.do','MNU0000513');" name="rcrProgramMileageMng" >-&nbsp;교과 정보 조회</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-line-chart"></i><span>비교과 프로그램 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/blacklistMngSTF/r/m/getBlacklistList.do','MNU0000004');" name="blacklistMngSTF" >-&nbsp;블랙리스트 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramRegSTF/r/m/goProgramRegInfo.do','MNU0000443');" name="ncrProgramRegSTF" >-&nbsp;비교과 프로그램 등록</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramApprovSTF/r/m/getProgramList.do','MNU0000461');" name="ncrProgramApprovSTF" >-&nbsp;비교과 프로그램 승인</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramListSTF/r/m/getProgramList.do','MNU0000462');" name="ncrProgramListSTF" >-&nbsp;비교과 프로그램 내역</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramRepoSTF/r/m/getProgramRepoList.do','MNU0000489');" name="ncrProgramRepoSTF" >-&nbsp;비교과 프로그램 결과보고</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramRepoApprSTF/r/m/getProgramRepoApprList.do','MNU0000711');" name="ncrProgramRepoApprSTF" >-&nbsp;비교과 프로그램 결과승인</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/programTotReport/r/m/goProgramTotReportList.do','MNU0000658');" name="programTotReport" >-&nbsp;비교과 종합보고서</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/dbtBoardSTF/r/m/getDbtBoardList.do','MNU0000750');" name="dbtBoardSTF" >-&nbsp;토론광장 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-child"></i><span>자기주도활동 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/certiSTF/r/m/getActList.do','MNU0000446');" name="certiSTF" >-&nbsp;자격증 신청 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/langSTF/r/m/getActList.do','MNU0000447');" name="langSTF" >-&nbsp;어학점수 신청 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/awardSTF/r/m/getActList.do','MNU0000742');" name="awardSTF" >-&nbsp;수상실적 신청 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/clubSTF/r/m/getActList.do','MNU0000749');" name="clubSTF" >-&nbsp;동아리 신청 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-mortar-board"></i><span>인증제 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;독서 인증제<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/readingCertiSTF/r/m/getCertiTermList.do','MNU0000731');" name="readingCertiSTF">-&nbsp;학기관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/recommBookSTF/r/m/getRecommendBookListSTF.do','MNU0000732');" name="recommBookSTF">-&nbsp;추천도서 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/readingCertiSubmitState/r/m/getReadingCertiSubmitState.do','MNU0000733');" name="readingCertiSubmitState">-&nbsp;보고서 검토</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/readingCertiStaffMng/r/m/getReadingCertiStaffAssign.do','MNU0000734');" name="readingCertiStaffMng">-&nbsp;보고서 담당자 지정</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/readingCertiStateSTF/r/m/getReadingCertiStateSTF.do','MNU0000735');" name="readingCertiStateSTF">-&nbsp;인증 현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;봉사활동 인증제<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/serviceCertiSTF/r/m/getCertiTermList.do','MNU0000737');" name="serviceCertiSTF">-&nbsp;학기 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/serviceCertiMngSTF/r/m/getServiceCertiMng.do','MNU0000740');" name="serviceCertiMngSTF">-&nbsp;봉사활동 신청내역</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/serviceCertiStateSTF/r/m/getServiceCertiStateSTF.do','MNU0000741');" name="serviceCertiStateSTF">-&nbsp;인증현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+					</ul></li>
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-check-square-o"></i><span>진단센터 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;역량자가진단<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/diagAddSTF/r/m/createDiag.do','MNU0000436');" name="diagAddSTF">-&nbsp;진단 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/diagMngSTF/r/m/getDiagMngList.do','MNU0000437');" name="diagMngSTF">-&nbsp;진단 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/diagQusAddSTF/r/m/createDiagQus.do','MNU0000438');" name="diagQusAddSTF">-&nbsp;진단문항 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/diagQusMngSTF/r/m/getDiagQusList.do','MNU0000439');" name="diagQusMngSTF">-&nbsp;진단문항 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/diagRsltSTF/r/m/getDiagRsltList.do','MNU0000440');" name="diagRsltSTF">-&nbsp;진단 결과</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;핵심역량검사<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/coreTestAddSTF/r/m/createDiag.do','MNU0000782');" name="coreTestAddSTF">-&nbsp;검사 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/coreTestMngSTF/r/m/getDiagMngList.do','MNU0000783');" name="coreTestMngSTF">-&nbsp;검사 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/coreTestQusMngSTF/r/m/getDiagQusList.do','MNU0000785');" name="coreTestQusMngSTF">-&nbsp;검사문항 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;학습유형진단<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/learnDiagAddSTF/r/m/createDiag.do','MNU0000524');" name="learnDiagAddSTF">-&nbsp;진단 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/learnDiagMngSTF/r/m/getDiagMngList.do','MNU0000525');" name="learnDiagMngSTF">-&nbsp;진단 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/learnDiagQusAddSTF/r/m/createDiagQus.do','MNU0000526');" name="learnDiagQusAddSTF">-&nbsp;진단 문항 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/learnDiagQusMngSTF/r/m/getDiagQusList.do','MNU0000527');" name="learnDiagQusMngSTF">-&nbsp;진단 문항 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/learnDiagRsltSTF/r/m/getDiagRsltList.do','MNU0000528');" name="learnDiagRsltSTF">-&nbsp;진단 결과</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;대학생활적응진단<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/universAssDiagRsltSTF/r/m/getDiagRsltList.do','MNU0000666');" name="universAssDiagRsltSTF">-&nbsp;진단결과</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;학습자가진단검사<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/studyDiagAddSTF/r/m/createDiag.do','MNU0000713');" name="studyDiagAddSTF">-&nbsp;진단 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/studyDiagMngSTF/r/m/getDiagMngList.do','MNU0000714');" name="studyDiagMngSTF">-&nbsp;진단 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/studyDiagQusAddSTF/r/m/createDiagQus.do','MNU0000715');" name="studyDiagQusAddSTF">-&nbsp;진단문항 등록</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/studyDiagQusMngSTF/r/m/getDiagQusList.do','MNU0000716');" name="studyDiagQusMngSTF">-&nbsp;진단문항 관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/studyDiagRsltSTF/r/m/getDiagRsltList.do','MNU0000717');" name="studyDiagRsltSTF">-&nbsp;진단 결과</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;워크넷 진단<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/adultJobExamSTF/r/m/getAdultJobAptExamList.do','MNU0000518');" name="adultJobExamSTF">-&nbsp;성인용 직업적성검사</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/jobPrefExamSTF/r/m/getJobPrefExamList.do','MNU0000519');" name="jobPrefExamSTF">-&nbsp;직업선호도검사 S형</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/foundAptExamSTF/r/m/getFoundAptExamList.do','MNU0000520');" name="foundAptExamSTF">-&nbsp;창업적성검사</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/jobValuesExamSTF/r/m/getJobValuesExamList.do','MNU0000521');" name="jobValuesExamSTF">-&nbsp;직업가치관검사</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+					</ul></li>
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-map-o"></i><span>마일스톤 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/roadMapMng/r/m/goRoadMapMngList.do','MNU0000618');" name="roadMapMng" >-&nbsp;마일스톤 게시물 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/mileStoneMng/r/m/goMileStoneMngList.do','MNU0000619');" name="mileStoneMng" >-&nbsp;마일스톤 기준점 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-briefcase"></i><span>취업 지원 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/cmpInfoMng/r/m/goCmpInfoReg.do','MNU0000596');" name="cmpInfoMng" >-&nbsp;기업정보 등록</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/cmpInfoMngList/r/m/goCmpInfoMngList.do','MNU0000599');" name="cmpInfoMngList" >-&nbsp;기업정보관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;KEDI 취업보고<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/employResearch/r/m/goEmployResearchList.do','MNU0000601');" name="employResearch">-&nbsp;취업보고 조사(졸업자관리)</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/employResearchStatistics/r/m/goEmployResearchStatiscs.do','MNU0000608');" name="employResearchStatistics">-&nbsp;취업보고통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/recoEmployStatistics/r/m/goRecoEmployStatiscs.do','MNU0000609');" name="recoEmployStatistics">-&nbsp;추천 취업보고 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/emploReportAnalysis/r/m/goEmploReportAnalysis.do','MNU0000610');" name="emploReportAnalysis">-&nbsp;취업보고 분석 현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+					</ul></li>
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-comments"></i><span>전문상담 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/admitCnsStateSTF/r/m/getAdmitCnsStateList.do','MNU0000748');" name="admitCnsStateSTF" >-&nbsp;평생사제제 현황 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;지도교수 상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offProfCnsSTF/r/m/createCnsForm.do','MNU0000719');" name="offProfCnsSTF">-&nbsp;사후 상담일지 작성</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/profCnsMngSTF/r/m/getProfCnsMng.do','MNU0000551');" name="profCnsMngSTF">-&nbsp;상담관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/profOffCnsSTF/r/m/getProfOfflineCns.do','MNU0000552');" name="profOffCnsSTF">-&nbsp;총 상담 현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;진로 및 취업상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offEmployCnsSTF/r/m/createCnsForm.do','MNU0000727');" name="offEmployCnsSTF">-&nbsp;사후 상담일지 작성</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offEmployCnsDaily/r/m/getCnsCnslrProList.do','MNU0000546');" name="offEmployCnsDaily">-&nbsp;방문상담 일정관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offEmployCnsJnal/r/m/getCnsJnalList.do','MNU0000547');" name="offEmployCnsJnal">-&nbsp;상담사별 일지관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offEmployCnsState/r/m/getCnsStateList.do','MNU0000728');" name="offEmployCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;심리상담 및 심리검사<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/cpsLifeCnsState/r/m/getCnsStateList.do','MNU0000754');" name="cpsLifeCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;글쓰기 상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offWritingCnsSTF/r/m/createCnsForm.do','MNU0000744');" name="offWritingCnsSTF">-&nbsp;사후 상담일지 작성</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/writingCnsDaily/r/m/getCnsCnslrProList.do','MNU0000745');" name="writingCnsDaily">-&nbsp;방문상담 일정관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/writingCnsJnal/r/m/getCnsJnalList.do','MNU0000746');" name="writingCnsJnal">-&nbsp;상담사별 일지관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/writingCnsState/r/m/getCnsStateList.do','MNU0000747');" name="writingCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;창업상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/offStartUpCnsSTF/r/m/createCnsForm.do','MNU0000760');" name="offStartUpCnsSTF">-&nbsp;사후 상담일지 작성</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/startUpCnsState/r/m/getCnsStateList.do','MNU0000761');" name="startUpCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;장애지원상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/disabilityCnsSTF/r/m/createCnsForm.do','MNU0000723');" name="disabilityCnsSTF">-&nbsp;사후 상담일지 작성</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/disabilityCnsDaily/r/m/getCnsCnslrProList.do','MNU0000724');" name="disabilityCnsDaily">-&nbsp;방문상담 일정관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/disabilityCnsJnal/r/m/getCnsJnalList.do','MNU0000725');" name="disabilityCnsJnal">-&nbsp;담당자별 일지관리</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/disabilityCnsState/r/m/getCnsStateList.do','MNU0000726');" name="disabilityCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					</ul>
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;학사 및 기타상담<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/schoolEtcCnsJnal/r/m/getCnsJnalList.do','MNU0000707');" name="schoolEtcCnsJnal">-&nbsp;온라인상담</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/schoolEtcCnsSTF/r/m/createCnsForm.do','MNU0000738');" name="schoolEtcCnsSTF">-&nbsp;1:1 개별 상담입력</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/schoolEtcCnsState/r/m/getCnsStateList.do','MNU0000739');" name="schoolEtcCnsState">-&nbsp;총 상담현황</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+					</ul></li>
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-users"></i><span>커뮤니티 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/noticeSTF/r/m/getBoardList.do','MNU0000141');" name="noticeSTF" >-&nbsp;공지사항</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/resourceSTF/r/m/getBoardList.do','MNU0000143');" name="resourceSTF" >-&nbsp;자료실 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/faqSTF/r/m/getBoardList.do','MNU0000382');" name="faqSTF" >-&nbsp;FAQ 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/surveyAdmin/r/m/getSurveyList.do','MNU0000710');" name="surveyAdmin" >-&nbsp;설문 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-diamond"></i><span>역량/인증 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ablityPointStatus/r/m/goAblityPointStatus.do','MNU0000580');" name="ablityPointStatus" >-&nbsp;마일리지/핵심역량 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/certiState/r/m/getCertiStateList.do','MNU0000488');" name="certiState" >-&nbsp;인증 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/certiIssueSTF/r/m/getCertiIssueStateList.do','MNU0000473');" name="certiIssueSTF" >-&nbsp;증명서 발급 현황</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-square"></i><span>기타마일리지 관리</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/etcMileageSTF/r/m/getEtcMileageList.do','MNU0000672');" name="etcMileageSTF" >-&nbsp;기타마일리지 관리</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+					
+					</ul></li>
+					<li class="treeview">
+						<a href="javascript:void(0);" name=""><i class="fa fa-pie-chart"></i><span>통계 현황</span>
+							<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+						</a>
+						<ul class="treeview-menu">
+				
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/mileageStatSTF/r/m/mileageStatList.do','MNU0000515');" name="mileageStatSTF" >-&nbsp;씨앗 마일리지 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/diagStatSTF/r/m/getDiagStatList.do','MNU0000498');" name="diagStatSTF" >-&nbsp;역량자가진단 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/coreTestStatSTF/r/m/getCoreTestStatList.do','MNU0000002');" name="coreTestStatSTF" >-&nbsp;핵심역량검사 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/learnDiagStatSTF/r/n/goLearnDiagStatSTF.do','MNU0000697');" name="learnDiagStatSTF" >-&nbsp;학습유형진단 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/studyDiagStatSTF/r/n/goStudyDiagStatSTF.do','MNU0000698');" name="studyDiagStatSTF" >-&nbsp;학습자가진단검사 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrProgramStatSTF/r/m/getNcrProgramStatList.do','MNU0000499');" name="ncrProgramStatSTF" >-&nbsp;비교과 프로그램 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrSatRschStatSTF/r/m/getNcrSatRschStatList.do','MNU0000793');" name="ncrSatRschStatSTF" >-&nbsp;비교과 만족도 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/activityStatSTF/r/m/getActivityStatList.do','MNU0000500');" name="activityStatSTF" >-&nbsp;자기주도활동 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;인증제 통계<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/readingCertiStatSTF/r/n/goReadingCertiStatSTF.do','MNU0000788');" name="readingCertiStatSTF">-&nbsp;독서인증제 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/serviceCertiStatSTF/r/n/goServiceCertiStatSTF.do','MNU0000789');" name="serviceCertiStatSTF">-&nbsp;봉사인증제 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					</ul></li>
+							<li>
+								<a href="javascript:fnGoMoveMenu('/mileStoneStatSTF/r/m/getMileStoneList.do','MNU0000007');" name="mileStoneStatSTF" >-&nbsp;마일스톤 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ncrTotReportSTF/r/m/getNcrTotReportList.do','MNU0000008');" name="ncrTotReportSTF" >-&nbsp;비교과 참여실적 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+					
+							<li class="treeview">
+								<a href="javascript:void(0);" name="">
+									-&nbsp;상담통계<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+								</a>
+								<ul class="treeview-menu">
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisProfCns/r/m/getStatisProfCns.do','MNU0000798');" name="statisProfCns">-&nbsp;지도교수 상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisEmployCnsByType/r/m/goStatisEmployCnsByType.do','MNU0000594');" name="statisEmployCnsByType">-&nbsp;진로 및 취업상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisWritingCns/r/m/getStatisWritingCns.do','MNU0000794');" name="statisWritingCns">-&nbsp;글쓰기상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisCpsLifeCns/r/m/getStatisCpsLifeCns.do','MNU0000799');" name="statisCpsLifeCns">-&nbsp;심리상담 및 심리검사 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisStartUpCns/r/m/getStatisStartUpCns.do','MNU0000795');" name="statisStartUpCns">-&nbsp;창업상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisDisabilityCns/r/m/getStatisDisabilityCns.do','MNU0000796');" name="statisDisabilityCns">-&nbsp;장애지원상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+				
+				
+									<li>
+										<a href="javascript:fnGoMoveMenu('/statisSchoolCns/r/m/getStatisSchoolCns.do','MNU0000797');" name="statisSchoolCns">-&nbsp;학사 및 기타상담 통계</a>
+									</li>
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					</ul></li>
+							<li>
+								<a href="javascript:fnGoMoveMenu('/ablityPointStatSTF/r/m/ablityPointStatList.do','MNU0000501');" name="ablityPointStatSTF" >-&nbsp;핵심역량지수 통계</a>
+							</li>
+				
+				
+				
+			
+			
+			
+			
+		
+			
+				
+				
+					
+							<li>
+								<a href="javascript:fnGoMoveMenu('/loginConnStatSTF/r/m/getLoginConnStatList.do','MNU0000502');" name="loginConnStatSTF" >-&nbsp;로그인 접속 통계</a>
+							</li>
+				
+				
+				
+			
+			</ul></li>
+			
+			
+		
+	</ul>
+</section>
+
+<form id="menuMoveForm" method="post">
+	<input type="hidden" name="menuId">
+	<input type="hidden" name="menuUrlGubun">
+</form>
+
+<script type="text/javascript">
+function fnGoMoveMenu(contentsUrl, menuId) {
+	var _url = "https://cieat.chungbuk.ac.kr:443" + contentsUrl;
+	$("#menuMoveForm input[name=menuId]").val(menuId);
+	$("#menuMoveForm input[name=menuUrlGubun]").val("ADMIN_SUB");
+	$("#menuMoveForm").attr("action", _url).submit();
+}
+</script>
+		</aside>
+
+		<div class="ad_container_wrap">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 학생 쪽 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 학생신청상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 동료평가 진행단계 -->
+
+
+
+
+
+<!-- 진로설계 목표 계획 구분 값 -->
+
+
+
+
+
+<!-- 진단 타입값 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 취업상담 -->
+
+<!-- 학생생활상담(미사용) -->
+
+<!-- 예비군 및 병역상담 -->
+
+<!-- 학사상담 -->
+
+<!-- 성희롱.성폭력 신고센터 -->
+
+<!-- 건강상담-->
+
+<!-- 심리상담 및 심리검사-->
+
+
+<!-- 방문상담 신청구분 -->
+
+
+
+
+<!-- 방문상담 신청상태 -->
+
+
+
+
+
+
+<!-- 온라인 상담 상태 -->
+
+
+
+
+
+
+<!-- 심리검사 및 심리상담 상태 -->
+
+
+
+
+
+
+<!-- 학생생활상담 상태 -->
+
+
+
+
+
+
+
+<!-- 성희롱.성폭력  상담 상태 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
+
+
+
+
+	
+	
+	
+		
+	
+
+
+
+<div class="content-wrapper">
+<!--[pp] 본문 타이틀 영역/페이지제목,페이지네비게이션 -->
+<section class="content-header">
+	<h2><i class="fa fa-home"></i>&nbsp;HOME </h2>
+	<ol class="breadcrumb">
+		<li><a href="javascript:void(0);"><i class="fa fa-home"></i>HOME</a></li>
+	</ol>
+</section>
+<!--[pp] //본문 타이틀 영역/페이지제목,페이지네비게이션 -->
+<!--[pp] 본문내용영역 -->
+<section class="content container-fluid" id="mainSection">
+
+	<!-- [pp] 바로가기 리스트 -->
+	<div class="row">
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>진단관리</h3>
+				</div>
+				<div class="icon">
+					<i class="ion ion-connection-bars"></i>
+				</div>
+				<a href="https://cieat.chungbuk.ac.kr:443/diagMngSTF/r/m/getDiagMngList.do"
+						class="small-box-footer">바로가기 <i class="fa fa-arrow-circle-right"></i></a>
+			</div>
+		</div>
+
+
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-green">
+				<div class="inner">
+					<h3>비교과 관리</h3>
+				</div>
+				<div class="icon">
+					<i class="ion ion-filing"></i>
+				</div>
+				<a href="https://cieat.chungbuk.ac.kr:443/ncrProgramListSTF/r/m/getProgramList.do" class="small-box-footer">바로가기 <i class="fa fa-arrow-circle-right"></i></a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3>핵심 역량 인증 현황</h3>
+				</div>
+				<div class="icon">
+					<i class="ion ion-trophy"></i>
+				</div>
+				<a href="https://cieat.chungbuk.ac.kr:443/certiState/r/m/getCertiStateList.do"
+						class="small-box-footer">바로가기 <i class="fa fa-arrow-circle-right"></i></a>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-xs-6">
+			<div class="small-box bg-red">
+				<div class="inner">
+					<h3>메뉴얼 다운로드</h3>
+				</div>
+				<div class="icon">
+					<i class="ion ion-chatboxes"></i>
+				</div>
+					<a href="javascript:void(0);" class="small-box-footer" onclick="fn_fileDownload('https://cieat.chungbuk.ac.kr:443','FLSM00000000341');">다운로드 <i class="fa fa-arrow-circle-right"></i></a>
+			</div>
+		</div>
+
+	</div>
+	<!-- [pp] //바로가기 리스트 -->
+	<!-- [pp] 통계 -->
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">날짜별 로그인 횟수</h3>
+					<a href="https://cieat.chungbuk.ac.kr:443/loginConnStatSTF/r/m/getLoginConnStatList.do"
+							class="ad_dash_more" title="상세보기"><i class="fa fa-plus-square"></i></a>
+				</div>
+				<div class="box-body">
+					<div class="pp_dash_graph" id="loginStatChart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">진단별 역량 평균</h3>
+					<a href="https://cieat.chungbuk.ac.kr:443/diagStatSTF/r/m/getDiagStatList.do"
+							class="ad_dash_more" title="상세보기"><i class="fa fa-plus-square"></i></a>
+				</div>
+				<div class="box-body">
+					<div class="pp_dash_graph" id="diagStatChart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">비교과 상태별 학생 수</h3>
+					<a href="https://cieat.chungbuk.ac.kr:443/ncrProgramStatSTF/r/m/getNcrProgramStatList.do"
+							class="ad_dash_more" title="상세보기"><i class="fa fa-plus-square"></i></a>
+				</div>
+				<div class="box-body">
+					<div class="pp_dash_graph" id="ncrStatChart"></div>
+				</div>
+			</div>
+		</div>
+
+		
+
+		<div class="col-md-6">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">신호등 현황</h3>
+					<a href="#"
+							class="ad_dash_more" title="상세보기"><i class="fa fa-plus-square"></i></a>
+				</div>
+				<div class="box-body">
+					<div id="trafficLightStatChart" style="width: 380px; height: 268px; margin: 0 auto;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- [pp] //통계 -->
+</section>
+<!--[pp] //본문내용영역 -->
+</div>
+
+<script type="text/javascript">
+var catagoryNames = [];
+var abilityCodes = [];	// 그래프의 역량 코드들 A001, A002, A003, ...
+var diagChartData = [];
+$(document).ready(function(){
+
+	
+	if ('SUPERADMIN_01' == 'STF_PROFESSOR' || 'SUPERADMIN_01' == 'RLE0000067') {
+		$('#mainSection').children().remove();
+		$('#mainSection').append('<img src="https://cieat.chungbuk.ac.kr:443/contents/images/admin/staff_prof_main.png" style="width: 100%; position: relative;">');
+	}else{
+
+		// 날짜별 로그인 횟수
+		drawLoginStatChart();
+
+		// 진단별 역량 평균
+		// 카테고리 이름 셋팅
+		
+			catagoryNames.push("C(창의성)");
+		
+			catagoryNames.push("H(휴머니즘)");
+		
+			catagoryNames.push("A(능동성)");
+		
+			catagoryNames.push("N(공동체)");
+		
+			catagoryNames.push("G(글로벌)");
+		
+			catagoryNames.push("E(전문성)");
+		
+
+		// 그래프 점수 셋팅
+		
+		var diagObjDataArry = [];
+			
+				
+					diagObjDataArry.push("3.99");
+			
+				
+					diagObjDataArry.push("4.2");
+			
+				
+					diagObjDataArry.push("3.9");
+			
+				
+					diagObjDataArry.push("3.97");
+			
+				
+					diagObjDataArry.push("3.91");
+			
+				
+					diagObjDataArry.push("3.53");
+			
+				var diagObj = {
+					name: '2021학년도 역량자가진단'
+				  , data: diagObjDataArry
+				};
+
+				diagChartData.push(diagObj);
+			
+
+		drawDiagStatChart();
+
+		// 월별 운영부서 프로그램 개설 갯수
+		drawNcrStatChart();
+
+		// 년도별 역량획득 점수
+		drawAblityPointStatChart();
+
+		/* var stdFailChkDataArry = [];
+		
+			stdFailChkDataArry.push(Number("1706"));
+		
+			stdFailChkDataArry.push(Number("7022"));
+		
+			stdFailChkDataArry.push(Number("9355"));
+		
+		// 신호등 상담 현황
+		drawTrafficLightStatChart(); */
+		drawTrafficLightStatAjax();
+
+	}
+});
+
+function drawTrafficLightStatAjax() {
+	var colgCdNm = '';
+	var sustCdNm = '';
+	var shyrCd = '';
+
+	var _url = "https://cieat.chungbuk.ac.kr:443/adminMain/a/n/getStdFailStatAjax.do"
+
+	$.ajax({
+		url : _url
+		, type : "POST"
+		, dataType : "json"
+		, data : {
+			shyrCd : shyrCd
+			,sustCdNm : sustCdNm
+			,colgCdNm : colgCdNm
+		}
+		, success : function(res) {
+			var stdFailChkDataArry = [];
+			for (var idx = 0; idx < res.stdFailChkStatInfo.length; idx++) {
+				stdFailChkDataArry.push(Number(res.stdFailChkStatInfo[idx].STD_CNT));
+			}
+			$("#trafficLightStatChart").empty();
+			drawTrafficLightStatChart(res.stdFailChkStatInfo);
+		}
+	});
+}
+
+
+function drawTrafficLightStatChart(stdFailChkStatInfo){
+	var greenNum = 0;
+	var redNum = 0;
+	var yelNum = 0;
+	var stdFailChkDataArry = [];
+	console.log('stdFailChkStatInfo.length = ' + stdFailChkStatInfo.length);
+	for(var i = 0; i < stdFailChkStatInfo.length; i++){
+		console.log('stdFailChkStatInfo[i].STD_LIGHT = ' + stdFailChkStatInfo[i].STD_LIGHT);
+		if(stdFailChkStatInfo[i].STD_LIGHT == 'G'){
+			greenNum = Number(stdFailChkStatInfo[i].STD_CNT);
+		} else if(stdFailChkStatInfo[i].STD_LIGHT == 'R'){
+			redNum = Number(stdFailChkStatInfo[i].STD_CNT);
+		} else if(stdFailChkStatInfo[i].STD_LIGHT == 'Y'){
+			yelNum = Number(stdFailChkStatInfo[i].STD_CNT);
+		}
+	}
+	var stdFailChkDataArry = [greenNum, redNum, yelNum];
+
+	var options = {
+		series: stdFailChkDataArry,
+		chart: {
+			width: 380,
+			height: 268,
+			type: 'pie'
+		},
+		colors: ['#00e396', '#f91837', '#febc43'],
+		labels: ['Green Light', 'Red Light', 'Yellow Light'],
+		responsive: [{
+			breakpoint: 480,
+			options: {
+				chart: {
+					width: 200
+				},
+				legend: {
+					position: 'bottom'
+				}
+			}
+		}]
+	};
+
+	var chart = new ApexCharts(document.querySelector("#trafficLightStatChart"), options);
+	chart.render();
+}
+
+
+function drawLoginStatChart(){
+	var options = {
+		chart: {
+			id: 'drawLoginStatChart',
+			height: 250,
+			type: 'bar',
+			stacked: true
+		},
+// 		responsive: [{
+// 			breakpoint: 480,
+// 			options: {
+// 				legend: {
+// 					position: 'bottom',
+// 					offsetX: -10,
+// 					offsetY: 0
+// 				}
+// 			}
+// 		}],
+		plotOptions: {
+			bar: {
+				horizontal: false,
+			},
+		},
+		grid: {
+			borderColor: '#e7e7e7',
+			row: {
+				colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+				opacity: 0.5
+			},
+		},
+		series: [{
+			name: '교직원',
+			data: ['5', '20', '9', '109']
+		},{
+			name: '학생',
+			data: ['33', '256', '190', '773']
+		},{
+			name: '외부자',
+			data: ['1', '2', '0', '6']
+		},{
+			name: '실패',
+			data: ['8', '44', '21', '192']
+		}],
+		xaxis: {
+			categories: ['오늘', '어제', '그제', '엊그제'],
+		}
+	}
+
+	var chart = new ApexCharts(document.querySelector("#loginStatChart"),options);
+	chart.render();
+}
+
+
+function drawDiagStatChart(){
+	var options = {
+		chart: {
+			id: 'drawDiagStatChart',
+			height: 250,
+			type: 'line',
+			shadow: {
+				enabled: true,
+				color: '#000',
+				top: 18,
+				left: 7,
+				blur: 10,
+				opacity: 1
+			}
+		},
+		stroke: {
+			curve: 'smooth'
+		},
+		markers: {
+			size: 5
+		},
+		grid: {
+			borderColor: '#e7e7e7',
+			row: {
+				colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+				opacity: 0.5
+			},
+		},
+		series: diagChartData,
+		xaxis: {
+			categories: catagoryNames
+		},
+		yaxis: {
+			min: 0,
+			max: 5
+		}
+	}
+
+	var chart = new ApexCharts(document.querySelector("#diagStatChart"),options);
+	chart.render();
+}
+
+
+function drawNcrStatChart(){
+	var options = {
+		chart: {
+			height: 250,
+			type: 'bar',
+			stacked: true
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true,
+			},
+		},
+		stroke: {
+			width: 1,
+			colors: ['#fff']
+		},
+		series: [{
+			name: '대기신청',
+			data: ['23', '80', '0']
+		},{
+			name: '승인대기',
+			data: ['127', '1327', '1']
+		},{
+			name: '승인',
+			data: ['243', '1989', '17']
+		},{
+			name: '학생 취소',
+			data: ['37', '439', '3']
+		},{
+			name: '관리자 취소',
+			data: ['18', '439', '1']
+		},{
+			name: '이수',
+			data: ['5872', '61185', '741']
+		},{
+			name: '미이수',
+			data: ['175', '3212', '0']
+		}],
+		xaxis: {
+			categories: ['올해', '작년', '재작년']
+		},
+		yaxis: {
+			title: {
+				text: undefined
+			}
+		}
+	}
+
+	var chart = new ApexCharts(document.querySelector("#ncrStatChart"),options);
+	chart.render();
+}
+
+function drawAblityPointStatChart(){
+	var ablityPointDataArry = [];
+		
+			var ablityPointData = [];
+			
+				ablityPointData.push('4565200');
+				ablityPointData.push('33473145');
+				ablityPointData.push('220');
+			var ablityObj = {
+						name:'비교과'
+	  				  , data: ablityPointData
+				};
+			ablityPointDataArry.push(ablityObj);
+		
+			var ablityPointData = [];
+			
+				ablityPointData.push('98000');
+				ablityPointData.push('847000');
+				ablityPointData.push('3000');
+			var ablityObj = {
+						name:'자격증'
+	  				  , data: ablityPointData
+				};
+			ablityPointDataArry.push(ablityObj);
+		
+			var ablityPointData = [];
+			
+				ablityPointData.push('34500');
+				ablityPointData.push('270000');
+				ablityPointData.push('1000');
+			var ablityObj = {
+						name:'어학'
+	  				  , data: ablityPointData
+				};
+			ablityPointDataArry.push(ablityObj);
+		
+			var ablityPointData = [];
+			
+				ablityPointData.push('99000');
+				ablityPointData.push('807000');
+				ablityPointData.push('6000');
+			var ablityObj = {
+						name:'수상실적'
+	  				  , data: ablityPointData
+				};
+			ablityPointDataArry.push(ablityObj);
+		
+			var ablityPointData = [];
+			
+				ablityPointData.push('0');
+				ablityPointData.push('54100');
+				ablityPointData.push('0');
+			var ablityObj = {
+						name:'동아리'
+	  				  , data: ablityPointData
+				};
+			ablityPointDataArry.push(ablityObj);
+		
+
+	var options = {
+		chart: {
+			height: 250,
+			type: 'bar',
+			stacked: true
+		},
+		plotOptions: {
+			bar: {
+				horizontal: true,
+			},
+		},
+		stroke: {
+			width: 1,
+			colors: ['#fff']
+		},
+		series: ablityPointDataArry,
+		xaxis: {
+			categories: ['올해', '작년', '재작년']
+		},
+		yaxis: {
+			title: {
+				text: undefined
+			}
+		}
+	}
+
+	var chart = new ApexCharts(document.querySelector("#mileageStatChart"),options);
+	chart.render();
+}
+//메뉴얼 다운로드
+function Manualdownload(){
+
+}
+</script>
+
+		</div>
+
+		<footer class="main-footer">
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 학생 쪽 프로그램 상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 학생신청상태 -->
+
+
+
+
+
+
+
+
+
+<!-- 동료평가 진행단계 -->
+
+
+
+
+
+<!-- 진로설계 목표 계획 구분 값 -->
+
+
+
+
+
+<!-- 진단 타입값 -->
+
+
+
+
+
+
+
+
+
+
+<!-- 취업상담 -->
+
+<!-- 학생생활상담(미사용) -->
+
+<!-- 예비군 및 병역상담 -->
+
+<!-- 학사상담 -->
+
+<!-- 성희롱.성폭력 신고센터 -->
+
+<!-- 건강상담-->
+
+<!-- 심리상담 및 심리검사-->
+
+
+<!-- 방문상담 신청구분 -->
+
+
+
+
+<!-- 방문상담 신청상태 -->
+
+
+
+
+
+
+<!-- 온라인 상담 상태 -->
+
+
+
+
+
+
+<!-- 심리검사 및 심리상담 상태 -->
+
+
+
+
+
+
+<!-- 학생생활상담 상태 -->
+
+
+
+
+
+
+
+<!-- 성희롱.성폭력  상담 상태 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
+
+
+
+
+	
+	
+	
+		
+	
+
+
+
+<div class="pull-right hidden-xs pp_footer_logo">
+	<img src="https://cieat.chungbuk.ac.kr:443/contents/images/admin/footer_logo.svg" alt="충북대학교 로고">
+</div>
+<strong>Copyright &copy; 2020 <a href="https://www.chungbuk.ac.kr/intro/corona.html" target="_blank">Chungbuk National University</a>.</strong> All Right Reserved.
+<a id="back-to-top" href="javascript:void(0);" class="btn btn-default btn-sm back-to-top" role="button" title="페이지 상단으로 이동" data-toggle="tooltip" data-placement="left">
+	<span class="glyphicon glyphicon-chevron-up"></span>
+</a>
+
+
+		</footer>
+	</div>
+
+	<button type="button" class="btn btn-md btn-primary" style="display: none;" id="POPUP_OPEN_BTN" data-toggle="modal" data-target="#mymodal"><i class="fa fa-check mg_r5"></i></button>
+	<button type="button" class="close closeBtn" data-dismiss="modal" aria-label="Close closeBtn" id="COMMON_POP_UP_CLOSE_BTN" style="display: none;"><span aria-hidden="true">&times;</span></button>
+
+	<div id="mymodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" id="layerPopup">
+			</div>
+		</div>
+	</div>
+
+	
+	<button type="button" class="btn btn-md btn-primary" style="display: none;" id="POPUP_OPEN_BTN_PROF" data-toggle="modal" data-target="#mymodal_prof"><i class="fa fa-check mg_r5"></i></button>
+	<div id="mymodal_prof" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content" id="layerPopup_prof">
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+$("#goClientBtn").on("click", function(e) {
+	document.location.href = "https://cieat.chungbuk.ac.kr:443/cmm/fms/changeClient.do";
+});
+
+
+$("#logoutBtn").on("click", function(e) {
+	if (confirm("로그아웃 하시겠습니까?")) {
+		location.href = "https://cieat.chungbuk.ac.kr:443/login/a/n/logOut.do?loginType=ADMIN";
+	}
+});
+
+
+$("#goadminBtn").on("click", function(e) {
+	document.location.href = "https://cieat.chungbuk.ac.kr:443/cmm/fms/changeAdmin.do";
+});
+
+</script>
+
+</body>
+</html>

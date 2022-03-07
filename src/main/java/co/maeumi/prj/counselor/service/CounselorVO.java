@@ -33,5 +33,13 @@ public class CounselorVO {
 	private String pr_date;
 	private String pr_time;
 	private String c_admin;
+	private String cu_no;
+	private String cu_currentgrade;
+	private String cu_applygrade;
+	private String cu_filename;
+	private String cu_pfilename;
+	private String cu_status;
+	private String cu_rejection;
+	private String cu_applydate;
 	
 }
