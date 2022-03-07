@@ -80,6 +80,27 @@ textarea {
 	overflow: hidden;
 	border: 0;
 }
+
+#submitbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
+}
+
+#backbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	margin-right: 10px;
+	border: 1px solid red;
+	border-radius: 5px;
+	background-color: white;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -130,10 +151,11 @@ textarea {
 										<td><textarea id="bn_subject" name="bn_subject">${banner.bn_subject }</textarea></td>
 									</tr>
 								</table>
-								<button type="button" onclick="picture()"
-									class="btn btn-primary  py-2 px-5">등록</button>
-								<button type="button" id="back" name="back"
-									onclick="location.href='adminBannerList.do'">돌아가기</button>
+								<div class="btndiv">
+									<button type="button" onclick="picture()" id="submitbtn">등록</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='adminBannerList.do'">돌아가기</button>
+								</div>
 							</form>
 							<br>
 						</div>
