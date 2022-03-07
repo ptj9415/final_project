@@ -9,8 +9,8 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 .noticeForm {
-	width: 100%;
-	border: 1px solid gray;
+	width: 70%;
+	margin-left: 300px;
 }
 select {
 	width: 100%;
@@ -20,7 +20,9 @@ th {
 	text-align: center;
 }
 .belowBtn{
-	margin-right: 10px;
+	width: 10%;
+	margin: auto;
+	display: block;
 }
 #title {
 	width: 100%;
@@ -32,29 +34,30 @@ th {
 #contentTh {
 	height: 350px;
 }
-.contentBox {
+.sameRow {
+	margin-left: 30px;
+}
+.noticeTitle {
+	font-size: 20px;
 }
 </style>
 </head>
 <body>
-<body>
 <!-- 공지사항 등록하는 폼에서 형식을 가져오자.ㅏ 그리고 ck에디터만 제외  넘오오는 변수이름은 notices임.  -->
 <br><br><br>
-<div class="noticeFormMain">
-	
 	<div class="noticeForm">
-		<span>공지사항 조회</span>
+		<h3>공지사항 상세보기</h3><hr>
+		<span class="noticeTitle">${notices.n_title}</span><br>
+		<span>작성일:&nbsp;${notices.n_writedate }</span>
+		<span class="sameRow">조회수&nbsp; | ${notices.n_hit }</span>
+		<span class="sameRow">작성자:&nbsp;${notices.n_writer } </span>
 		<hr>
 		<form action="noticeUpdate.do" method="post" id="frm" enctype="multipart/form-data">	
 		<div align="center">
 			<table border="1">
 				<tr>
 					<th width="250px" height="50px">말머리</th>
-					<td width="350px"><c:out value="${notices.n_category }" />
-					</td>
-					<th width="250px">제목</th>
-					<td width="600px;"><c:out value="${notices.n_title }" />
-					</td>
+					<td width="1200px"><c:out value="${notices.n_category }" /></td>
 				</tr>
 				<tr>
 					<th id="contentTh">내용</th>
@@ -75,13 +78,15 @@ th {
 								<input type="hidden" name="updateNo" id="updateNo" value="${notices.n_no }">	
 			<br>
 		</div>
-			<div style="display: flex; justify-content: flex-end; margin-right: 100px; margin-bottom: 30px;">
+			<div>
 				<input type="button" value="돌아가기" id="beforeBtn"  class="belowBtn">
 			</div>
 		</form>
+		<br><br><br><br>
 	</div>
-</div>
 </body>
+
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$("#beforeBtn").on("click", function() {

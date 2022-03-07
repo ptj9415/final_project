@@ -23,7 +23,7 @@
 		</trim>
 		) A
 		)
-		WHERE RN BETWEEN #{start} AND #{end} order by n_status
+		WHERE RN BETWEEN #{start} AND #{end} order by n_status, n_no desc
 	</select>
 
 	<select id="noticeSelectList"
