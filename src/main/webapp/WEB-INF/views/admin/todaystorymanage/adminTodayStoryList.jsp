@@ -6,208 +6,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>admin Today Story</title>
-<!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="subHomeFile/plugins/fontawesome-free/css/all.min.css">
-<!-- Select2 -->
-<link rel="stylesheet"
-	href="subHomeFile/plugins/select2/css/select2.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
-
-
-
-
-<!-- modal -->
-
-
-<!-- SweetAlert2 -->
-<link rel="stylesheet"
-	href="subHomeFile/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-<!-- Toastr -->
-<link rel="stylesheet"
-	href="subHomeFile/dist/css/adminlte.min.css/plugins/toastr/toastr.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
-<!-- modal end -->
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-
-/* font 예시 */
-@font-face {
-	font-family: 'InfinitySans-RegularA1';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+textarea {
+	resize: none;
 }
 
-body {
-	font-family: 'InfinitySans-RegularA1';
+.maintitle {
+	font-size: 24px;
+	font-weight: 600;
 }
 
-.card-title {
-	padding-top: 20px;
-	font-weight: bold;
+.row {
+	margin-bottom: -10px;
 }
 
-.card {
-	width: 90%;
-	margin-right: auto;
-	margin-left: auto;
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
-table {
-	font-size: 14px;
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
 }
 
-#subject-height {
-	height: 100px;
+#todaystorytable {
+	text-align: center;
 }
 
-.container-fluid {
-	margin-top: 30px;
+#todaystorytable {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+#todaystorytable>thead>tr>th {
+	background-color: rgb(245, 245, 245);
 }
 
 #submit-btn {
-	float: right;
-	font-size:3px;
-	margin-right: 3px;
-    
-}
-
-#updatesubmit-btn{
-	float: right;
-	font-size:3px;
-	margin-right: 3px;
-	background-color:#81a3c5;
-}
-
-#deletesubmit-btn{
-	float: right;
-	font-size:3px;
-	margin-right: 3px;
-	background-color:#eea7a0;
-}
-
-
-th#th-no {
-	width: 15px;
-}
-
-th#th-title {
-	/* background-color:gray; */
-	width: 300px;
-}
-
-th#th-subject {
-	width: 400px%;
-}
-
-th#th-numChange {
-	width: 20px;
-}
-
-th#th-management {
-	width: 200px;
-}
-
-.row mb-2 {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
 	float: right;
 }
-.col-sm-6{
-	max-width: 100%;
-    margin-top: 50px;
+
+#updatesubmit-btn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
 }
-/*삭제버튼*/
 
-/*삭제버튼 end*/
-/*paging*/
-
-/*paging end*/
+#deletesubmit-btn {
+	background-color: #EB4646;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
 </style>
-
-
 </head>
-
-<body class="hold-transition sidebar-mini">
-	<!-- 어드민 부트스트랩에 적용 되있어서 빼야됨-->
-
-	<!-- Content Wrapper. Contains page content -->
-	<!-- 어드민 부트스트랩 적용한 곳에 들어 있음 이부분은 제거해야됨-->
-	<!-- Main content -->
-	<!-- <section class="content">
-		<div class="container-fluid">
-			<h1 class="text-left display-5">오늘의 한마디 관리</h1>
-			<br>
-			<h2 class="text-left display-5">검색</h2>
-			<form>
-				<div class="row">
-					<div class="col-md-12 offset-md-0">
-						<div class="card">
-							하얀색 바 표시 시작
-							<div class="card-header">
-								<div class="row">
-
-
-
-
-									<div class="col-12">
-										<div class="form-group">
-											<label>주제</label> <input type="text"
-												class="form-control form-control-lg"
-												placeholder="Type your keywords here">
-										</div>
-									</div>
-
-
-									<div class="col-12">
-										<div class="form-group">
-											<label>글귀</label> <input type="text"
-												class="form-control form-control-lg"
-												placeholder="Type your keywords here">
-										</div>
-									</div>
-									<button type="button" class="btn btn-lg btn-default">초기화</button>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="submit" class="btn btn-lg btn-default">
-										검색&nbsp;<i class="fa fa-search"></i>
-									</button>
-
-
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</section>
- -->
-
-	<!-- Content Header (Page header) -->
-	<!-- <section class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2"></div>
-		</div>
-		/.container-fluid
-				<span type="button" class="btn btn-lg btn-default" id="submit-btn">다중등록(excel)&nbsp;</span>
-
-
-
-		 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                  Launch Large Modal
-                </button>
-	</section> -->
-
-	<!-- modal contents start -->
-
-	<!-- /.modal -->
+<body>
+	<!-- 등록 모달 시작 -->
 	<div class="modal fade" id="modal-lg">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -219,13 +86,10 @@ th#th-management {
 					</button>
 				</div>
 				<div class="modal-body">
-					<!-- general form elements -->
 					<div class="card card-primary">
 						<div class="card-header">
 							<h3 class="card-title">오늘의 한마디 등록</h3>
 						</div>
-						<!-- /.card-header -->
-						<!-- form start -->
 						<form id="frm" method="post">
 							<div class="card-body">
 								<div class="form-group">
@@ -238,20 +102,9 @@ th#th-management {
 										type="text" style="height: 100px" class="form-control"
 										id="sc_title" name="sc_subject" placeholder="글귀를 입력하세요..">
 								</div>
-
-								<!--  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div> -->
 							</div>
-							<!-- /.card-body -->
-
-							<!--  <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div> -->
 						</form>
 					</div>
-					<!-- /.card -->
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -259,79 +112,82 @@ th#th-management {
 						name="submit">등록</button>
 				</div>
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal -->
-	<!-- modal contents end -->
-	<!-- form end -->
-	<br>
-	<br>
+	<!-- 등록 모달 끝 -->
 
-	<!-- Main content -->
 	<section class="content">
-		<!-- 메인 컨텐츠-->
 		<div class="container-fluid">
-			<!-- 메인 밑 메인 컨텐츠-->
+			<br>
+			<h3 class="maintitle">오늘의 한마디 관리</h3>
+			<br>
 			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							오늘의 한마디 목록
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="maindiv1">
 				<div class="col-12">
 					<div class="card">
-						<div class="col-sm-6">
-							 	<h3 class="card-title">오늘의 한마디 주제 관리</h3>
-							<span type="button" class="btn btn-default" id="submit-btn"
-								 data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
-							<span type="button" class="btn btn-default" id="submit-btn"
-								data-toggle="modal" data-target="#doublemodal-lg">다중등록(excel)&nbsp;</span>
-						</div>
-						<!-- 하얀색 바 표시 시작-->
-						<div class="card-header">
-						
-
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0">
-							<table class="table table-hover text-nowrap"
-								style="font-size: 12px">
+						<div class="card-body table-responsive p-00">
+							<c:choose>
+								<c:when test="${pagination.listCnt lt pagination.end }">
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.listCnt }건)</span>
+								</c:when>
+								<c:otherwise>
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.end }건)</span>
+								</c:otherwise>
+							</c:choose>
+							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType"
+								id="listSize" onchange="page(1)">
+								<option value="10"
+									<c:if test="${pagination.getListSize() == 10 }">selected="selected"</c:if>>10건
+									보기</option>
+								<option value="15"
+									<c:if test="${pagination.getListSize() == 15 }">selected="selected"</c:if>>15건
+									보기</option>
+								<option value="20"
+									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
+									보기</option>
+							</select> <span type="button" class="btn btn-default" id="submit-btn"
+								data-toggle="modal" data-target="#modal-lg">등록</span> <br>
+							<br>
+							<table class="table text-nowrap" id="todaystorytable">
 								<thead>
-									<tr style="background-color: #b0c4de3b">
-										<th id="th-no">NO</th>
-										<th id="th-title">주제</th>
-										<th id="th-subject">글귀</th>
-										<th id="th-numChange">순서변경</th>
-										<th id="th-management" style="text-align: center">관리</th>
+									<tr>
+										<th>주제</th>
+										<th>글귀</th>
+										<th style="width: 150px;">관리</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${adminTodayStoryList }"
 										var="adminTodayStoryList">
 										<tr>
-											<td>${adminTodayStoryList.sc_no }</td>
-											<td>${adminTodayStoryList.sc_title }</td>
-											<td>${adminTodayStoryList.sc_subject }</td>
-											<td><span class="tag tag-success">-</span></td>
-											<td>
-												<!-- <span type="button" class="btn btn-default"
-												id="submit-btn">수정&nbsp;</span>  --> <!-- <span type="button"
-												class="btn btn-default" id="submit-btn" data-toggle="modal"
-												data-target="#updatemodal-lg">수정&nbsp;</span>  --> <span
-												type="button" style="font-size: 12px"
-												class="btn btn-default" id="updatesubmit-btn" data-toggle="modal"
-												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정&nbsp;</span>
-												<span type="button" style="font-size: 12px"
-												class="btn btn-default" id="deletesubmit-btn"
+											<td style="vertical-align: middle;">${adminTodayStoryList.sc_title }</td>
+											<td style="vertical-align: middle;">${adminTodayStoryList.sc_subject }</td>
+											<td><span type="button" class="btn btn-default"
+												id="updatesubmit-btn" data-toggle="modal"
+												onclick="updateFnc(${adminTodayStoryList.sc_no})">수정</span>
+												<span type="button" class="btn btn-default"
+												id="deletesubmit-btn"
 												onclick="deleteFnc('${adminTodayStoryList.sc_no}')">삭제</span>
 											</td>
 										</tr>
-
 									</c:forEach>
-
-
 								</tbody>
 							</table>
 
-
-							<!-- 수정 modal start -->
+							<!-- 수정 모달 시작 -->
 							<div class="modal fade" id="updatemodal-lg" style="display: none">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content">
@@ -343,13 +199,10 @@ th#th-management {
 											</button>
 										</div>
 										<div class="modal-body">
-											<!-- general form elements -->
 											<div class="card card-primary">
 												<div class="card-header">
-													<h3 class="card-title">목록 조회 하기</h3>
+													<h3 class="card-title">오늘의 한마디 수정</h3>
 												</div>
-												<!-- /.card-header -->
-												<!-- form start -->
 												<form id="updateFrm" method="post">
 													<div class="card-body">
 														<div class="form-group">
@@ -367,89 +220,108 @@ th#th-management {
 															<input type="hidden" style="height: 100px"
 																class="form-control" id="sc_no" name="sc_no">
 														</div>
-
 													</div>
-
 												</form>
 											</div>
-											<!-- /.card -->
 										</div>
 										<div class="modal-footer justify-content-between">
 											<button type="button" class="btn btn-default" id="close-btn"
 												data-dismiss="modal">닫기</button>
 											<button type="button" class="btn btn-primary"
-												id="updateSubmit" name="updateSubmit">등록</button>
+												id="updateSubmit" name="updateSubmit">수정</button>
 										</div>
 									</div>
-									<!-- /.modal-content -->
 								</div>
-								<!-- /.modal-dialog -->
 							</div>
-							<!-- /.modal -->
-							<!-- modal contents end -->
-							<!-- form end -->
-							<!-- 수정 modal end -->
-
-
-							<!-- paging -->
-							 <nav aria-label="...">
-				  				<ul class="pagination">
-				    				<li class="page-item">
-				      				<a class="page-link" href="adminTodayStoryList.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
-				    			</li>
-				    	 <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
-								<c:if test="${status.count ne page.nowPage}">
-				    			<li class="page-item"><a class="page-link" href="adminTodayStoryList.do?nowPage=${status.count}">${status.count}</a></li>
-				   			</c:if>
-				   			<c:if test="${status.count eq page.nowPage}">
-								<li class="page-item active"><a class="page-link" href="adminTodayStoryList.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
-				   			</c:if>
-				   		 </c:forEach>
-				    			<li class="page-item">
-				     				<a class="page-link" href="adminTodayStoryList.do?nowPage=${page.next}">Next</a>
-				    			</li>
-				  			 </ul>
-							</nav>
-							<!-- paging end -->
+							<!-- 수정 모달 끝 -->
+							<br>
+							<div id="paginationBox" class="pagination1" style="float: right;">
+								<ul class="pagination">
+									<c:if test="${pagination.prev}">
+										<li class="page-item"><a class="page-link" href="#"
+											onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}')">이전</a></li>
+									</c:if>
+									<c:forEach begin="${pagination.startPage}"
+										end="${pagination.endPage}" var="StoryNo">
+										<li
+											class="page-item <c:out value="${pagination.page == StoryNo ? 'active' : ''}"/> ">
+											<a class="page-link" href="#"
+											onClick="fn_pagination('${StoryNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}')">
+												${StoryNo} </a>
+										</li>
+									</c:forEach>
+									<c:if test="${pagination.next}">
+										<li class="page-item"><a class="page-link" href="#"
+											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}')">다음</a></li>
+									</c:if>
+								</ul>
+							</div>
 						</div>
-						<!-- /.card-body -->
 					</div>
-					<!-- /.card -->
 				</div>
 			</div>
-			<!-- /.row -->
 		</div>
-		<!-- /.container-fluid -->
-
 	</section>
-
-
-	<!-- Control Sidebar -->
-	<aside class="control-sidebar control-sidebar-dark">
-		<!-- Control sidebar content goes here -->
-	</aside>
-	<!-- /.control-sidebar -->
-
-	<!-- ./wrapper -->
-
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
-	<!-- Bootstrap 4 -->
-	<script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Select2 -->
-	<script src="subHomeFile/plugins/select2/js/select2.full.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="subHomeFile/dist/js/adminlte.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+	<br>
 
 	<script>
-		//paging 처리
-
-		//modal
-		$(function() {
-			$('.select2').select2()
+		$('#minusbtn1').click(function() {
+			if ($('#maindiv1').css('display') == 'none') {
+				$('#maindiv1').show();
+				$('#minusicon1').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv1').css('display') != 'none') {
+				$('#maindiv1').hide();
+				$('#minusicon1').attr('class', 'fa fa-plus');
+			}
 		});
+
+		function fn_prev(page, range, rangeSize, listSize) {
+
+			var page = ((range - 2) * rangeSize) + 1;
+			var range = range - 1;
+
+			var url = "adminTodayStoryList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			location.href = url;
+		}
+
+		function fn_pagination(page, range, rangeSize, listSize) {
+
+			var url = "adminTodayStoryList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			location.href = url;
+		}
+
+		function fn_next(page, range, rangeSize, listSize) {
+			var page = parseInt((range * rangeSize)) + 1;
+			var range = parseInt(range) + 1;
+			var url = "adminTodayStoryList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			location.href = url;
+		}
+
+		function page(Paging) {
+			var startPage = Paging;
+			var listSize = $("#listSize option:selected").val();
+
+			if (listSize == 10) {
+				var url = "adminTodayStoryList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			} else if (listSize == 15) {
+				var url = "adminTodayStoryList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			} else if (listSize == 20) {
+				var url = "adminTodayStoryList.do?startPage=" + startPage
+						+ "&listSize=" + listSize
+			}
+			location.href = url;
+		}
 
 		//글 등록 제출
 		$(function() {
@@ -464,13 +336,9 @@ th#th-management {
 		//삭제
 		function deleteFnc(sc_no) {
 			if (confirm("정말 삭제하시겠습니까?") == true) {
-
 				$.ajax({
 					url : 'adminTodayStoryDelete.do',
-
-					data : {
-						sc_no : sc_no
-					},
+					data : {sc_no : sc_no},
 					dataType : "text",
 					success : function(responseText) {
 						console.log(responseText);
@@ -480,13 +348,10 @@ th#th-management {
 					error : function() {
 						alert("error! 관리자에게 문의하세요");
 					}
-
 				});
-
 			} else {
 				return;
 			}
-
 		}
 		
 		//수정 
@@ -501,48 +366,29 @@ th#th-management {
 		
 	
 		//수정테스트
-		function updateFnc(sc_no) {
-			console.log('수정버튼');
-			
+		function updateFnc(sc_no) {	
 			let textarea3 = document.querySelectorAll('#sc_no')[0];
-			textarea3.value = sc_no;
-			
+			textarea3.value = sc_no;			
 			
 			let textarea = document.querySelectorAll('#sc_title')[2];
-			let title = event.target.closest('tr').childNodes[3].innerHTML;
+			let title = event.target.closest('tr').childNodes[1].innerHTML;
 			textarea.value = title;
 			
 			let textarea2 = document.querySelectorAll('#sc_subject')[0];
 			
-			let subject = event.target.closest('tr').childNodes[5].innerHTML;
-			textarea2.value = subject;
-			
-			
-			
-			console.log(title);
-			console.log(subject);
-			
-			
-			console.log(sc_no);
-			
+			let subject = event.target.closest('tr').childNodes[3].innerHTML;
+			textarea2.value = subject;			
 			
 			$.ajax({
 				url : 'adminTodayStoryUpdateForm.do',
 
-				data : {
-					sc_no : sc_no
-				},
+				data : {sc_no : sc_no},
 				dataType : "text",
 				success : function(responseText) {
 					console.log(responseText);
 				/* 	$('#updatemodal-lg').attr('data-target','#updatemodal-lg'); */
 					 $("#updatemodal-lg").attr("class", "modal fade show");
-					$("#updatemodal-lg").attr("style", "display:block");
-					
-					/* alert('test중');  */
-					//모달을 띄워줘
-		
-					
+					$("#updatemodal-lg").attr("style", "display:block");					
 				},
 				error : function() {
 					alert("error! 관리자에게 문의하세요");
@@ -551,19 +397,14 @@ th#th-management {
 
 			});
 			
-		}
-					
-					
-					document.getElementById('area-hidden').onclick = function(){
-						
-						 $("#updatemodal-lg").fadeOut();
-					} 
-					
-					document.getElementById('close-btn').onclick = function(){
-						
-						 $("#updatemodal-lg").fadeOut();
-					} 
-						
+		}					
+		document.getElementById('area-hidden').onclick = function(){
+			$("#updatemodal-lg").fadeOut();
+		} 
+		document.getElementById('close-btn').onclick = function(){
+			$("#updatemodal-lg").fadeOut();
+		} 
 	</script>
+</body>
 </body>
 </html>

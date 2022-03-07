@@ -142,6 +142,7 @@ textarea {
 														id="filename" name="filename"
 														onchange="setThumbnail(event);">
 											</div>
+											</td>
 									</tr>
 									<tr>
 										<th>주제</th>

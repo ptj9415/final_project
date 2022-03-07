@@ -349,15 +349,14 @@ public class YoungohController {
 		return "admin/adminhome/adminHome";
 	}
 
-	// 테라피 관리 페이지 입니다.
-	@RequestMapping("/admintherapy.do")
-	public String admintherapy(Model model) {
-		List<TherapyVO> list = therapyDao.therapyList();
-		model.addAttribute("therapy", list);
-
-		return "admin/therapy/therapyList";
-	}
-
+    //테라피 관리 페이지 입니다.
+//	@RequestMapping("/admintherapy.do")
+//	public String admintherapy(Model model) {
+//		List<TherapyVO> list = therapyDao.therapyList();
+//		model.addAttribute("therapy", list);
+//
+//		return "admin/therapy/therapyList";
+//	}
 	// 써머노트 이미지 파일 띄우기 및 물리경로 다운로드 아작스 입니다.
 	@RequestMapping(value = "/uploadSummernoteImageFileList.do", produces = "application/json; charset=utf8")
 	@ResponseBody
