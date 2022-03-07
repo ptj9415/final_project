@@ -12,4 +12,5 @@ public class MemberVO {
 	private String m_mbti;
 	private String m_phone;
 	private String m_type;
+	private String m_status;
 }
