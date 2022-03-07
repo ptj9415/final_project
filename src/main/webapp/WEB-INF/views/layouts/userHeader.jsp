@@ -147,6 +147,8 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-first">
 							<li><a href="userPersonalCounsel.do">개인상담</a></li>
 							<li><a href="userGroupCounsel.do">그룹상담</a></li>
+							<li><a href="usergroupDetail.do">그룹상담상세</a></li>
+							<li><a href="usergroupinvoice.do">그룹상담어쩔티비</a></li>
 						</ul></li>
 
 					<li class="nav-item"><a href="#" class="nav-link">심리검사</a>

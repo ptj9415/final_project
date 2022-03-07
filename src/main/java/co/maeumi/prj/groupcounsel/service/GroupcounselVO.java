@@ -35,7 +35,15 @@ public class GroupcounselVO {
 	private Date gr_reservedate;
 	private String gr_status;
 	private String gr_refund;
+	private String gr_price;
+	private String gr_uid;
 	
 	//그룹상담 신청용
 	private String m_nickname;
+	
+	//그룹상담 상담사
+	private String c_name;
+	private String c_phone;
+	private String c_picturepath;
+	
 }
