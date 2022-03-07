@@ -264,6 +264,11 @@ public class TaejoonController {
 	}
 
 	/* ===== 관리자 화면 ===== */
+	
+	@RequestMapping("/adminhome.do")
+	public String adminhome() {
+		return "admin/adminhome/adminHome";
+	}
 
 	// 관리자 - 일반회원 관리 메인화면
 	@RequestMapping("/adminMemberList.do")
