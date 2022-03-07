@@ -73,6 +73,12 @@ table>tbody>tr>th {
 	border: none;
 	border-radius: 4px;
 }
+
+.infotext {
+	width: 200px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
 </style>
 </head>
 <body>

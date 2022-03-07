@@ -131,7 +131,99 @@ public class TaejoonController {
 
 		cvo.setC_email("3244509@naver.com");
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
+		List<CounselorVO> list = counselorDao.counselorGradeList(cvo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getCu_applydate();
+			date = date.substring(0, 10);
+			list.get(i).setCu_applydate(date);
+		}
+		model.addAttribute("apply", list);
 		return "counselor/mypage/counselorMyPageInfo";
+	}
+	
+	@RequestMapping("/fileDownload2.do")
+	public void fileDownload2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
+		String encodingFilename = "";
+		System.out.println("1. filename: " + filename);
+		String realFilename = "";
+
+		String downName = request.getParameter("downName");
+		System.out.println("downName 확인 : " + downName);
+
+		try {
+			String browser = request.getHeader("User-Agent");
+			// 파일 인코딩
+			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
+				encodingFilename = URLEncoder.encode(downName, "UTF-8").replaceAll("\\+", "%20");
+				System.out.println("2. filename: " + downName);
+			} else {
+				encodingFilename = new String(downName.getBytes("UTF-8"), "ISO-8859-1");
+			}
+		} catch (UnsupportedEncodingException ex) {
+			System.out.println("UnsupportedEncodingException");
+		}
+		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\" + filename;
+		System.out.println("3. realfilename: " + realFilename);
+		File file1 = new File(realFilename);
+		if (!file1.exists()) {
+			System.out.println("존재유무 확인 ~=================");
+			return;
+		}
+		// 파일명 지정
+		System.out.println("encodingFilename의 이름: " + encodingFilename);
+		response.setContentType("application/octer-stream");
+		response.setHeader("Content-Transfer-Encoding", "binary;");
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + encodingFilename + "\"");
+
+		try {
+			OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(realFilename);
+
+			int ncount = 0;
+			byte[] bytes = new byte[512];
+
+			while ((ncount = fis.read(bytes)) != -1) {
+				os.write(bytes, 0, ncount);
+			}
+			fis.close();
+			os.close();
+		} catch (Exception e) {
+			System.out.println("FileNotFoundException : " + e);
+		}
+
+	}
+	
+	//상담사 마이페이지 - 상담사 등급 변경 신청
+	@ResponseBody
+	@RequestMapping(value = "/counselorUpgradeApply.do", produces = "application/text; charset=utf8")
+	public String counselorUpgradeApply(Model model, CounselorVO cvo, @RequestParam(value = "filename1") MultipartFile mf,
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\";
+
+		String originalFileName = mf.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		System.out.println(originalFileName);
+		String saveFile = uuid + originalFileName;
+		if (originalFileName == null) {
+
+		}
+		cvo.setCu_filename(originalFileName);
+		cvo.setCu_pfilename(saveFile);
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		counselorDao.counselorGradeInsert(cvo);
+
+		return "img/" + saveFile;
 	}
 
 	// 상담사 마이페이지 - 상담 경력 수정 화면
@@ -245,7 +337,7 @@ public class TaejoonController {
 	public String counselorMyPageIntro(Model model, CounselorVO cvo) {
 		cvo.setC_email("3244509@naver.com");
 		model.addAttribute("info", counselorDao.counselorinfoList(cvo));
-
+		
 		return "counselor/mypage/counselorMyPageIntro";
 	}
 
@@ -382,12 +474,51 @@ public class TaejoonController {
 		String birthdate = cvo.getC_birthdate();
 		birthdate = birthdate.substring(0, 10);
 		cvo.setC_birthdate(birthdate);
-
+		List<CounselorVO> list = counselorDao.counselorGradeList(cvo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getCu_applydate();
+			date = date.substring(0, 10);
+			list.get(i).setCu_applydate(date);
+		}
 		model.addAttribute("counselor", cvo);
+		model.addAttribute("apply", list);
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/adminCounselorGradeComfirm.do")
+	public String adminCounselorGradeComfirm(CounselorVO cvo) {
+		
+		counselorDao.counselorGradeUpdate(cvo);
+		counselorDao.counselorUpdate(cvo);
+		
+		return "OK";
+	}
+	
+	@RequestMapping("/adminCounselorGradeReject.do")
+	public String adminCounselorGradeReject(CounselorVO cvo, Model model, HttpServletRequest request) {
+		
+		counselorDao.counselorGradeUpdate(cvo);
+		
+		cvo.setC_email(request.getParameter("c_email"));
+		cvo = counselorDao.counselorSelect(cvo);
 
+		String birthdate = cvo.getC_birthdate();
+		birthdate = birthdate.substring(0, 10);
+		cvo.setC_birthdate(birthdate);
+		List<CounselorVO> list = counselorDao.counselorGradeList(cvo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getCu_applydate();
+			date = date.substring(0, 10);
+			list.get(i).setCu_applydate(date);
+		}
+		model.addAttribute("counselor", cvo);
+		model.addAttribute("apply", list);
+
+		return "admin/membermanage/adminCounselorDetail";
+	}
+			
 	@RequestMapping("/adminBannerList.do")
 	public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range, Search svo, CouponVO cvo) throws Exception {
@@ -461,7 +592,7 @@ public class TaejoonController {
 
 		bannerDao.bannerDelete(bvo);
 
-		return "redirect:adminNoticeList.do";
+		return "redirect:adminBannerList.do";
 	}
 
 	@RequestMapping("/fileDownload1.do")

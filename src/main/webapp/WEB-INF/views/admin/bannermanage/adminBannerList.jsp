@@ -17,11 +17,14 @@ h3 {
 	margin-bottom: -10px;
 }
 
-.btndiv {
-	float: right;
-	width: 150px;
-	margin-right: -8px;
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
 }
+
+
 
 #btnSearch {
 	background-color: #1E90FF;

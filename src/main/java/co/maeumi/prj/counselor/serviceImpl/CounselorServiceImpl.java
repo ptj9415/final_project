@@ -155,6 +155,30 @@ public class CounselorServiceImpl implements CounselorService {
 		return map.reservedCounsel(cvo);
 	}
 
+	@Override
+	public int counselorGradeInsert(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorGradeInsert(cvo);
+	}
+
+	@Override
+	public int counselorGradeUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorGradeUpdate(cvo);
+	}
+
+	@Override
+	public List<CounselorVO> counselorGradeList(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorGradeList(cvo);
+	}
+
+	@Override
+	public int counselorUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorUpdate(cvo);
+	}
+
 
 	
 }
