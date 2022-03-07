@@ -20,5 +20,12 @@
 		DELETE FROM BOARD_REPLY
 		WHERE BR_NO = #{br_no}
 	</delete>
-
+	
+	<!-- 댓글 개수 -->
+	<select id="selectReplyCount" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD_REPLY
+		WHERE B_NO = #{b_no}
+	</select>
+	
 </mapper>
