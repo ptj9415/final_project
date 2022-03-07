@@ -95,13 +95,7 @@ public class BadaController {
 		return "user/login/loginForm";
 	}
 
-	// 상담사 회원가입 양식 화면
-	@RequestMapping("/counselorJoinForm.do")
-	public String counselorJoinForm(Model model, HttpServletRequest request) {
-		model.addAttribute("c_email", request.getParameter("inputEmail"));
-		return "user/login/counselorJoinForm";
-	}
-
+	
 	// 일반 로그인 처리
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -372,6 +366,7 @@ public class BadaController {
 		mvo.setM_password(request.getParameter("password"));
 		mvo.setM_phone(request.getParameter("phone"));
 		mvo.setM_type(request.getParameter("type"));
+		mvo.setM_status("T");
 
 		String joinMessage = null;
 		int n = memberDao.memberInsert(mvo);
@@ -435,6 +430,43 @@ public class BadaController {
 	public String counselorTermsOfService() {
 		return "user/login/counselorTermsOfService";
 	}
+	
+	// 상담사 이메일 체크
+	@RequestMapping("/counselorEmailCheck.do")
+	public String cEmailCheck(Model model) {
+		return "user/login/counselorEmailCheck";
+	}
+	
+	// 상담사 회원가입 양식 화면
+	@RequestMapping("/counselorJoinForm.do")
+	public String counselorJoinForm(Model model, HttpServletRequest request) {
+		model.addAttribute("c_email", request.getParameter("inputEmail"));
+		return "user/login/counselorJoinForm";
+	}
+
+	
+	// 상담사 회원가입 처리. 
+	@RequestMapping("/counselorJoin.do")
+	public String counselorJoin(HttpServletRequest request, Model model, CounselorVO cvo) {
+		
+		// JoinForm에서 넘긴 8개 값. 
+		cvo.setC_email(request.getParameter("email"));
+		cvo.setC_name(request.getParameter("name"));
+		cvo.setC_birthdate(request.getParameter("birthdate"));
+		cvo.setC_gender(request.getParameter("gender"));
+		cvo.setC_password(request.getParameter("password"));
+		cvo.setC_address(request.getParameter("address"));
+		cvo.setC_phone(request.getParameter("phone"));
+		cvo.setC_grade(request.getParameter("grade"));
+		cvo.setC_admin("C");
+		
+		counselorDao.counselorInsert(cvo);
+		
+		return "user/login/counselorJoinFinish";
+		
+		
+	}
+	
 
 	/* ========== 관리자 화면 (공지사항 관리 ) ========= */
 

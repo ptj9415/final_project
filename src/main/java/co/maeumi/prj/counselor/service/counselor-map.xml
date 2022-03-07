@@ -80,10 +80,10 @@
 		INSERT INTO
 		COUNSELOR( C_EMAIL, C_NAME, C_GENDER,
 		C_PHONE, C_PASSWORD, C_ADDRESS,
-		C_BIRTHDATE, C_GRADE )
+		C_BIRTHDATE, C_GRADE, C_ADMIN )
 		VALUES(#{c_email}, #{c_name}, #{c_gender},
 		#{c_phone}, #{c_password},
-		#{c_address},#{c_birthdate}, #{c_grade} )
+		#{c_address},#{c_birthdate}, #{c_grade} , #{c_admin})
 	</insert>
 
 	<update id="counselorPictureUpdate"

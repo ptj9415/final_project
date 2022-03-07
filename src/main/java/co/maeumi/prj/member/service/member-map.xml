@@ -111,9 +111,9 @@
 		parameterType="co.maeumi.prj.member.service.MemberVO">
 		INSERT INTO
 		MEMBER(M_EMAIL, M_NICKNAME, M_TYPE, M_PHONE,
-		M_PASSWORD)
+		M_PASSWORD, M_STATUS, C_ADMIN)
 		VALUES(#{m_email},#{m_nickname},#{m_type}, #{m_phone},
-		#{m_password} )
+		#{m_password}, #{m_status} , #{c_admin} )
 	</insert>
 
 

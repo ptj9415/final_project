@@ -196,8 +196,8 @@ button:hover {
                     <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
                     <hr color="tomato">
                 </div>
-                <input type="hidden" id="type" name="type" value="MAEUMI">
-                <input type="hidden" id="mphone" name="phone" value="미기재">
+                <input type="hidden" id="type" name="type" value="마으미">
+                <input type="hidden" id="mphone" name="phone" value="-">
             </form>
         <button class='joinbtn' onclick="formCheck()">Maeumi.&nbsp;가입!</button>
         </div>
