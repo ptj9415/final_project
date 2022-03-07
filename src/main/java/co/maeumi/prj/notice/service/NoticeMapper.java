@@ -15,4 +15,5 @@ public interface NoticeMapper {
 	
 	int getNoticeListCnt(Search svo) throws Exception;
 	public List<NoticeVO> noticeSearchselect(Search svo) throws Exception;
+	int hitUpdate(NoticeVO vo);  // 조회수 올리기
 }

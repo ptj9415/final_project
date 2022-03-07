@@ -76,5 +76,10 @@
 		WHERE N_NO = ${n_no}
 	</update>
 	
+	<!-- 공지사항 조회수 올리기. userNoticeRead.do 탈 때 업데이트 하기-->
+	<update id="hitUpdate" parameterType="co.maeumi.prj.notice.service.NoticeVO">
+		update notice set n_hit = n_hit + 1 where n_no = #{n_no}
+	</update>
+	
 
 </mapper>

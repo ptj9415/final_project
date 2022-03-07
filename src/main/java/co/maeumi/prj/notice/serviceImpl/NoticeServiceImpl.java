@@ -62,6 +62,12 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return map.statusUpdate(vo);
 	}
+
+	@Override
+	public int hitUpdate(NoticeVO vo) {
+		// TODO Auto-generated method stub
+		return map.hitUpdate(vo);
+	}
 	
 
 }
