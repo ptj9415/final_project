@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>공지 사항</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://kit.fontawesome.com/f124f87943.js" crossorigin="anonymous"></script>
+<style>
+.container-fluid {
+	width: 70%;
+}
+.btndiv > button {
+	width:8%;
+}
+#n_category {
+	width: 30%;
+}
+#readTd:hover {
+	cursor: pointer;
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 	<!-- 화면 상단 이미지-->
@@ -41,7 +56,6 @@
 	</section>
 	
 
-
 	<!-- 공지사항 검색 영역-->
 	<section>
 		<div class="container-fluid">
@@ -63,28 +77,25 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-6">
+								<div class="form-group">
+										<label>말머리</label> <br>
+											<select class="status" id="n_category">
+												<option value="all">전체</option>
+												<option value="긴급">긴급</option>
+												<option value="이벤트">이벤트</option>
+												<option value="공지">공지</option>											
+											</select>
+									</div>
 									<div class="form-group">
 										<label>제목</label> <br> <input type="text"
 											class="form-control" id="n_title"
-											placeholder="제목을 입력해주세요.">
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="form-group">
-										<label>말머리</label> <select class="status" id="n_category">
-											<option value="all">전체</option>
-											<option value="긴급">긴급</option>
-											<option value="이벤트">이벤트</option>
-											<option value="공지">공지</option>											
-										</select>
+												placeholder="제목을 입력해주세요.">
 									</div>
 								</div>
 							</div>
-							<div class="btndiv">
+							<div class="btndiv" >
 								<button type="reset" id="clearbtn">초기화</button>
-								<button type="button" id="btnSearch">
-									검색&nbsp;<i class="fa fa-search"></i>
-								</button>
+								<button type="button" id="btnSearch">검색</button>
 							</div>
 						</div>
 					</div>
@@ -151,7 +162,7 @@
 									<!--  관리자가 고정한 게시글은 색깔을 tr의 전체적인 배경색을 변경해서 구분해야 한다 -->
 									<c:forEach items="${notice }" var="notice">
 										<tr class="noticeTr">
-											<td>${notice.n_no}</td>  <!-- rownum으로 가져와야 할 듯. 아니면 지우거나 -->
+											<td>${notice.n_no}<input type="hidden" class="colorChanged" value="${notice.n_status }"></td>  <!-- rownum으로 가져와야 할 듯. 아니면 지우거나 -->
 											<td>${notice.n_writer }</td>
 											<td>${notice.n_category }</td>
 											<td id="readTd" onclick="userNoticeRead(${notice.n_no})">${notice.n_title }</td>
@@ -194,9 +205,10 @@
 	</section>
 
 <script>
-	// 고정게시글 색상변경
-	
-	
+	//고정게시글 색상변경 id값으로 고정값 비교. => '고정'이면 부모요소 tr에 배경색 부여
+	if( $(".colorChanged").val() == '고정' ){
+		$("input[value='고정']").parent().parent().css('background', '#FDF5E6');
+	}
 
 	// 검색창 항목들 초기화시킴
 	 $("#clearbtn").on("click", function() {
@@ -295,6 +307,8 @@
 		location.href = url;
 
 	});
+	
+
 </script>
 </body>
 </html>
