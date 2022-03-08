@@ -18,4 +18,6 @@ public interface GroupcounselMapper {
 	GroupcounselVO selectDetailList(GroupcounselVO vo);
 	int groupCounselResult(GroupcounselVO vo); // 그룹 상담 결과 등록하기.
 	GroupcounselVO selectUserGroup(GroupcounselVO vo);
+	GroupcounselVO selectInvoice (GroupcounselVO vo); // 그룹상담 결제 페이지 조인 구문.
+	int groupReserveInsert(GroupcounselVO vo); //그룹 상담 예약에 값 넣어주기.
 }

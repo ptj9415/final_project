@@ -7,63 +7,170 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+h3 {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+#bannertable>tbody>tr {
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+}
+
+#bannertable>tbody>tr>th {
+	width: 13%;
+	background-color: rgb(245, 245, 245);
+	text-align: center;
+	vertical-align: middle;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
+#bn_name {
+	width: 40%;
+}
+
+textarea {
+	width: 40%;
+	height: 6.25em;
+	resize: none;
+}
+
+#bannerimg {
+	height: 3%;
+	width: 40%;
+}
+
+.filebox .uploadname {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 31%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+#btndiv {
+	
+}
+
+#submitbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
+}
+
+#backbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	margin-right: 10px;
+	border: 1px solid red;
+	border-radius: 5px;
+	background-color: white;
+	color: red;
+}
+</style>
 </head>
 <body>
-	<h3>배너 등록</h3>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12 offset-md-0">
-				<div class="card">
-					<p id="headerp">배너 등록</p>
+	<section class="content">
+		<div class="container-fluid">
+			<br>
+			<h3>배너 등록</h3>
+			<br>
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">배너 등록</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body table-responsive p-00">
-						<form method="post" enctype="multipart/form-data" id="form">
-							<table class="table table-hover text-nowrap" id="membertable">
-								<tr>
-									<th>이름</th>
-									<td><input type="text" id="bn_name" name="bn_name"></td>
-								</tr>
-								<tr>
-									<th>파일첨부</th>
-									<td><img src="https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052"
-										class="preImage" id="preImage" name="preImage"
-										style="height: 150px; width: 112.5px;">
-										<br><br>
-									<input multiple="multiple" type="file" id="filename"
-										name="filename" accept="image/*"
-										onchange="setThumbnail(event);">
-								</tr>
-								<tr>
-									<th>주제</th>
-									<td><input type="text" id="bn_title" name="bn_title"></td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td><input type="text" id="bn_subject" name="bn_subject"></td>
-								</tr>
-							</table>
-							<button type="button" onclick="picture()"
-											class="btn btn-primary  py-2 px-5">등록</button>
-							<button type="button" id="back" name="back"
-								onclick="location.href='adminBannerList.do'">돌아가기</button>
-						</form>
-						<br>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<form method="post" enctype="multipart/form-data" id="form">
+								<table class="table text-nowrap" id="bannertable">
+									<tr>
+										<th>이름</th>
+										<td><input type="text" id="bn_name" name="bn_name"></td>
+									</tr>
+									<tr>
+										<th>파일첨부</th>
+										<td>
+											<div class="filebox">
+												<img src="img/bannerimg/mainbanner.png" id="bannerimg">
+												<p>※배너 크기는 1200p x 216p 로 조절하시기 바랍니다.
+												<p>
+													<input class="uploadname" value="첨부파일" placeholder="첨부파일">
+													<label for="filename">파일 찾기</label> <input type="file"
+														id="filename" name="filename"
+														onchange="setThumbnail(event);">
+											</div>
+											</td>
+									</tr>
+									<tr>
+										<th>주제</th>
+										<td><textarea id="bn_title" name="bn_title"></textarea></td>
+									</tr>
+									<tr>
+										<th>내용</th>
+										<td><textarea id="bn_subject" name="bn_subject"></textarea></td>
+									</tr>
+								</table>
+								<div class="btndiv">
+									<button type="button" onclick="picture()" id="submitbtn">등록</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='adminBannerList.do'">돌아가기</button>
+								</div>
+							</form>
+							<br>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 	<script>
 		function setThumbnail(event) {
 			var reader = new FileReader();
 			reader.onload = function(event) {
-				var preimg = $('#preImage');
+				var preimg = $('#bannerimg');
 				preimg.attr('src', event.target.result);
 			};
 			reader.readAsDataURL(event.target.files[0]);
@@ -82,13 +189,18 @@
 				processData : false,
 				success : function() {
 					alert("배너 등록이 완료되었습니다.");
-					location.href="adminBannerList.do"
+					location.href = "adminBannerList.do"
 				},
 				error : function() {
 					console.log("실패");
 				}
 			});
 		}
+
+		$("#filename").on('change', function() {
+			var fileName = $("#filename").val();
+			$(".uploadname").val(fileName);
+		});
 	</script>
 </body>
 </html>

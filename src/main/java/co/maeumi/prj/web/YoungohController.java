@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
-import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.coupon.service.CouponService;
+import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
+import co.maeumi.prj.order.service.orderService;
+import co.maeumi.prj.order.service.order_datailVO;
 import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.therapy.service.TherapyVO;
@@ -40,10 +43,22 @@ public class YoungohController {
 	@Autowired
 	private TherapyService therapyDao;
 
+	@Autowired
+	private orderService orderDao;
+	
+	@Autowired
+	private CouponService couponDao;
+
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
-
-	// 이미지 보여주기 밑 이미지 업로드 아작스.
+	
+	// 상담 관리 - 그룹상담 개설 화면
+	@RequestMapping("/counselorGroupOpen.do")
+	public String counselorGroupOpen(Model model) {
+		return "counselor/groupcounselmanage/counselorGroupOpen";
+	}
+	
+	//상담사 개설 페이지 이미지 업로드 아작스.
 	@RequestMapping(value = "/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile,
@@ -70,7 +85,7 @@ public class YoungohController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
 			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", request.getContextPath() +"/resources/fileupload/" + savedFileName);
+			jsonObject.addProperty("url", request.getContextPath() + "/resources/fileupload/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 
@@ -84,19 +99,13 @@ public class YoungohController {
 		return a;
 	}
 
+	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
 	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
-		response.setContentType("text/html; charset=EUC-KR");
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		// vo값에 따라 성공 실패 여부 확인
-		if (vo == null) {
-			out.println("<script>alert('상담 페이지 개설 실패'); </script>");
-			out.flush();
-			return "counselor/groupcounselmanage/counselorGroupList";
-		}
-		out.println("<script>alert('상담 페이지 개설 성공'); </script>");
-		out.flush();
+
 
 		// 썸네일 파일업로드
 		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
@@ -117,15 +126,25 @@ public class YoungohController {
 		// 서머노트 코드 원본
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-		
-		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() +"/resources/fileupload/","editor/");
-		vo.setGc_infos(result);
-		
-		groupCounselDao.insertGroupCounsel(vo);
-		return "admin/adminhome/adminHome";
-	}
 
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		vo.setGc_infos(result);
+
+		int insert = groupCounselDao.insertGroupCounsel(vo);
+		
+		// vo값에 따라 성공 실패 여부 확인
+		if (insert != 1) {
+			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
+			out.flush();
+		}else {
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
+			out.flush();
+		}
+		return null;
+	}
+	
+	//상담사 관리 페이지 메인화면
 	@RequestMapping("/counselorGroupList.do")
 	public String counselorGroupList(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
@@ -206,7 +225,7 @@ public class YoungohController {
 		} else {
 			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); // 전체 수,
 																												// start,
-		 																										// end
+																												// end
 		}
 
 		page.setGc_title((String) session.getAttribute("gc_title"));
@@ -238,7 +257,8 @@ public class YoungohController {
 
 		return "counselor/groupcounselmanage/counselorGroupList";
 	}
-
+	
+	//상담사 관리 페이지 신청자 관리 페이지
 	@RequestMapping("/counselorGroupApply.do")
 	public String counselorGroupApply(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		String c_email = request.getParameter("c_email");
@@ -249,10 +269,12 @@ public class YoungohController {
 		return "counselor/groupcounselmanage/counselorGroupApply";
 	}
 	
+	//상담사 관리 페이지 상세 목록 페이지
 	@RequestMapping("/counselorGroupDetail.do")
 	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		String gc_no = request.getParameter("gc_no");
-		vo.setGc_no(gc_no);
+		int gc_nos = Integer.parseInt(gc_no);
+		vo.setGc_no(gc_nos);
 		GroupcounselVO gvo = groupCounselDao.selectDetailList(vo);
 
 		String date = gvo.getGc_date();
@@ -271,133 +293,108 @@ public class YoungohController {
 
 		return "counselor/groupcounselmanage/counselorGroupDetail";
 	}
-	//그룹 상담 상세 페이지 조회 모달창 띄우기 아작스입니다.
+
+	// 그룹 상담 신청자 목록 페이지 신청 내용 조회 가져오기 아작스.
 	@RequestMapping("/selectFunc.do")
 	@ResponseBody
 	public GroupcounselVO selectFunc(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		GroupcounselVO gvo = groupCounselDao.selectgroupRserve(vo);
 		return gvo;
 	}
-
+	// 그룹 상담 신청자 목록 페이지 삭제 모달 띄우기 아작스.
 	@RequestMapping("/deleteFuncForm.do")
 	@ResponseBody
 	public String deleteForm() {
 		return "성공";
 	}
-	//그룹 상담 상세 페이지 삭제 모달창 띄우기 아작스 입니다.
+
+	// 그룹 상담 신청자 목록 페이지 삭제 모달창 띄우기 아작스 입니다.
 	@RequestMapping("/deleteFunc.do")
 	@ResponseBody
 	public String deleteFunc(Model model, HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo) {
 		return "모달 성공";
 	}
 	
+	//그룹 상담 신청자 목록 페이지 삭제 페이지입니다.
 	@RequestMapping("/upDateService.do")
 	public String upDateService(HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo, Model model) {
-		String gr_no = request.getParameter("gr_no");
-		String c_email = request.getParameter("c_email");
-		String gr_refund = request.getParameter("gr_refund");
-
-		vo.setGr_no(gr_no);
-		vo.setGr_refund(gr_refund);
 		groupCounselDao.GroupUserDelete(vo);
-		jvo.setC_email(c_email);
+		jvo.setC_email(vo.getC_email());
 
 		model.addAttribute("group", groupCounselDao.joinSelectList(jvo));
-		model.addAttribute("email", c_email);
+		model.addAttribute("email", vo.getC_email());
 
 		return "counselor/groupcounselmanage/counselorGroupApply";
 	}
 
-	// 상담 관리 - 그룹상담 개설 화면
-	@RequestMapping("/counselorGroupOpen.do")
-	public String counselorGroupOpen(Model model) {
-		return "counselor/groupcounselmanage/counselorGroupOpen";
+	//그룹 상담 상세 페이지 상담 결과 등록 처리. 
+	@RequestMapping("/detailinsert.do")
+	public String detailinsert(Model model, HttpServletRequest request, GroupcounselVO vo, HttpServletResponse response)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (vo.getGc_report() == "" && vo.getGc_result() == "") {
+			out.println("<script>alert('상담 결과 등록 실패'); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 결과 등록 성공'); </script>");
+			out.flush();
+			groupCounselDao.groupCounselResult(vo);
+		}
+
+		return "redirect:counselorGroupList.do";
 	}
-		//상세목록 페이지 입니다.
-		@RequestMapping("/detailinsert.do")
-		public String detailinsert(Model model, HttpServletRequest request, GroupcounselVO vo,HttpServletResponse response) throws IOException {
-			response.setContentType("text/html; charset=EUC-KR");
-			PrintWriter out = response.getWriter();
-			String gc_no = request.getParameter("gc_no");
-			String gc_report = request.getParameter("gc_report");
-			String gc_result = request.getParameter("gc_result");
-			if(gc_report == "" && gc_result == "") {
-				out.println("<script>alert('상담 결과 등록 실패'); </script>");
-				out.flush();
-			} else {
-				out.println("<script>alert('상담 결과 등록 성공'); </script>");
-				out.flush();
-			}
-				vo.setGc_no(gc_no);
-				GroupcounselVO gvo =  groupCounselDao.selectDetailList(vo);
-		
-				String date = gvo.getGc_date();
-		        date = date.substring(0, 10);
-		        gvo.setGc_date(date);
-		        
-		        String date2 = gvo.getGc_startdate();
-		        date2 = date.substring(0, 10);
-		        gvo.setGc_startdate(date2);
-		        
-		        String date3 = gvo.getGc_date();
-		        date3 = date3.substring(0, 10);
-		        gvo.setGc_finaldate(date3);
-		
-		        model.addAttribute("detail", gvo);
-		        
-		        vo.setGc_report(gc_report);
-		        vo.setGc_result(gc_result);
-		        groupCounselDao.groupCounselResult(vo);
-	        
-			return "counselor/groupcounselmanage/counselorGroupList";
-		}	
 
 	/* ===== 관리자 화면 ===== */
-	//관리자 메인 화면입니다.
+	// 관리자 메인 화면입니다.
 	@RequestMapping("/adminHome.do")
 	public String adminMainPage() {
 		return "admin/adminhome/adminHome";
 	}
-    //테라피 관리 페이지 입니다.
-	@RequestMapping("/admintherapy.do")
-	public String admintherapy(Model model) {
-		List<TherapyVO> list = therapyDao.therapyList();
-		model.addAttribute("therapy", list);
 
-		return "admin/therapy/therapyList";
-	}
-	//써머노트 이미지 파일 띄우기 및 물리경로 다운로드 아작스 입니다.
-	@RequestMapping(value="/uploadSummernoteImageFileList.do", produces = "application/json; charset=utf8")
+    //테라피 관리 페이지 입니다.
+//	@RequestMapping("/admintherapy.do")
+//	public String admintherapy(Model model) {
+//		List<TherapyVO> list = therapyDao.therapyList();
+//		model.addAttribute("therapy", list);
+//
+//		return "admin/therapy/therapyList";
+//	}
+	
+	// 심리 테라피 등록 이미지 처리 아작스 입니다.
+	@RequestMapping(value = "/uploadSummernoteImageFileList.do", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String uploadSummernoteImageFileList(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+	public String uploadSummernoteImageFileList(@RequestParam("file") MultipartFile multipartFile,
+			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
-		//일반 파일 물리 경로
-        //String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-        
-		//경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
-        //Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
+		// 일반 파일 물리 경로
+		// String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+
+		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
+		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
-		
+
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/fileupload/";
-		
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
+		String fileRoot = contextRoot + "resources/fileupload/";
+
+		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+		System.out.println("jpg로 들어오나요 : "+extension);
+		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
+
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			multipartFile.transferTo(mtargetFile); //다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", request.getContextPath() +"/resources/fileupload/"+savedFileName);
+			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
+			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			jsonObject.addProperty("url", request.getContextPath() + "/resources/fileupload/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
-				
+
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
@@ -405,119 +402,175 @@ public class YoungohController {
 		System.out.println(a);
 		return a;
 	}
-	//테라피 등록입니다.
-	@RequestMapping("/therapyInsert.do") 
-	public String therapy(Model model, TherapyVO vo,HttpServletResponse response,@RequestParam(value="filename") MultipartFile mf,HttpServletRequest req) {
-		
-		//썸네일 파일업로드
+
+	// 테라피 등록 페이지 입니다.
+	@RequestMapping("/therapyInsert.do")
+	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) {
+
+		// 썸네일 파일업로드
 		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
 		String originalFileName = mf.getOriginalFilename();
-		
-		String uuid = UUID.randomUUID().toString();	//UUID를 통해서 물리파일명 만들기.
-		String msaveFile = SAVE_PATH + uuid +originalFileName;  //원본 확장자명을 찾아서 붙여준다.
-		String saveFile = uuid +originalFileName;
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		String saveFile = uuid + originalFileName;
 		vo.setT_picture(saveFile);
-		
+
 		try {
-            mf.transferTo(new File(msaveFile));
-           } catch (IllegalStateException e) {
-                e.printStackTrace();
-           } catch (IOException e) {
-                e.printStackTrace();
-           }
-		
-		//서머노트 코드 원본
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 서머노트 코드 원본
 		String origincode = req.getParameter("summernote");
 		System.out.println(origincode);
-		
-		//이미지 파일일 경우 코드 잘라서 쓰기.
-		//홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-		
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/","therapyEditor/");
+
+		// 이미지 파일일 경우 코드 잘라서 쓰기.
+		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
+
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "therapyEditor/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
 		return "redirect:/admintherapy.do";
 	}
 	
+	//심리 테라피 등록 폼 페이지입니다.
 	@RequestMapping("/therapyInsertForm.do")
 	public String therapyInsertForm() {
 		return "admin/therapy/therapyInsert";
 	}
-	
+
+	//심리 테라피 수정 페이지 폼 입니다.
 	@RequestMapping("/therapyUpdateForm.do")
-	public String therapyUpdate(TherapyVO vo, HttpServletRequest request,Model model) {
+	public String therapyUpdate(TherapyVO vo, HttpServletRequest request, Model model) {
 		String req = request.getParameter("t_no");
 		int t_no = Integer.parseInt(req);
 		vo.setT_no(t_no);
-	    
+
 		TherapyVO tvo = therapyDao.selectTherapy(vo);
-		model.addAttribute("therapy", tvo);	
+		model.addAttribute("therapy", tvo);
 		return "admin/therapy/therapyUpdate";
 	}
-	//테라피 업데이트 입니다.
+
+	// 테라피 업데이트 입니다.
 	@RequestMapping("/therapyUpdate.do")
-	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value="filename") MultipartFile mf, HttpServletRequest request) {
-				String t_no = request.getParameter("t_no");
-				int t_nos = Integer.parseInt(t_no);
-				vo.setT_no(t_nos);
-				
-				//썸네일 파일업로드
-				String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
-				String originalFileName = mf.getOriginalFilename();
-				
-				String uuid = UUID.randomUUID().toString();	//UUID를 통해서 물리파일명 만들기.
-				String msaveFile = SAVE_PATH + uuid +originalFileName;  //원본 확장자명을 찾아서 붙여준다.
-				String saveFile = uuid +originalFileName;
-				vo.setT_picture(saveFile);
-				
-				try {
-		            mf.transferTo(new File(msaveFile));
-		           } catch (IllegalStateException e) {
-		                e.printStackTrace();
-		           } catch (IOException e) {
-		                e.printStackTrace();
-		           }
-		
-				String origincode = request.getParameter("summernote");
-				String result = origincode.replaceAll(request.getContextPath() +"/resources/fileupload/","therapyEditor/");
-				vo.setT_subject(result);
-				
-				therapyDao.UpdateTherapy(vo);
+	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value = "filename") MultipartFile mf,
+			HttpServletRequest request) {
+
+		// 썸네일 파일업로드
+		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String originalFileName = mf.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		String saveFile = uuid + originalFileName;
+		vo.setT_picture(saveFile);
+
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String origincode = request.getParameter("summernote");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		vo.setT_subject(result);
+
+		therapyDao.UpdateTherapy(vo);
 
 		return "redirect:admintherapy.do";
 	}
-	//테라피 삭제 아작스 입니다.
+
+	// 테라피 삭제 아작스 입니다.
 	@RequestMapping("/therapyDelete.do")
 	@ResponseBody
 	public String therapyDelete(HttpServletRequest request, TherapyVO vo, Model model) {
-				
-				String t_no = request.getParameter("t_no");
-				System.out.println(t_no);
-				int t_nos = Integer.parseInt(t_no);
-				vo.setT_no(t_nos);
+		String t_no = request.getParameter("t_no");
+		int t_nos = Integer.parseInt(t_no);
+		vo.setT_no(t_nos);
 
-				List<TherapyVO> list = therapyDao.therapyList();
-				
-				therapyDao.DeleteTherapy(vo);
-				return "Ok";
-		}
+		List<TherapyVO> list = therapyDao.therapyList();
+
+		therapyDao.DeleteTherapy(vo);
+		return "Ok";
+	}
+
 	// 그룹 상담 유저 페이지 시작입니다.
 	@RequestMapping("/userGroupCounsel.do")
 	public String userGroupCounsel(Model model) {
-		List<GroupcounselVO> list =  groupCounselDao.groupSelectList();
-		model.addAttribute("groupCounselList",list);
+		List<GroupcounselVO> list = groupCounselDao.groupSelectList();
+		model.addAttribute("groupCounselList", list);
 		return "user/groupcounsel/groupCounselApplication";
 	}
-	
+
 	// 그룹 상담 유저 상세 페이지입니다.
 	@RequestMapping("/userGroup.do")
 	public String userGroup(GroupcounselVO vo, Model model) {
-		System.out.println(vo.getGc_no());
-		GroupcounselVO gvo =  groupCounselDao.selectUserGroup(vo);
-		model.addAttribute("userGroup",gvo);
+		GroupcounselVO gvo = groupCounselDao.selectUserGroup(vo);
+		String date = gvo.getGc_date();
+		date = date.substring(0, 10);
+		gvo.setGc_date(date);
+		
+		model.addAttribute("userGroup", gvo);
 		return "user/groupcounsel/userGroup";
 	}
+
+	//그룹 상담 유저 invoice 페이지입니다.
+	//유저 이메일 세션값이 들어가야 됩니다.
+	@RequestMapping("/usergroupinvoice.do")
+	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
+		String gc_no = request.getParameter("gc_no");
+		System.out.println(gc_no);
+		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
+		gvo.setM_email("이메일 성공");
+		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
+		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
+		model.addAttribute("groupInvoice", gvo);
+		model.addAttribute("coupon", cplist);
+		return "user/groupcounsel/groupInvoice";
+	}
+	
+	//그룹 상담 유저 결제 완료 페이지입니다.
+	@RequestMapping("/payment.do")
+	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo) {
+		groupCounselDao.groupReserveInsert(vo); 
+		ovo.setGc_no(vo.getGc_no());
+		ovo.setOr_price(vo.getGr_price());
+		int orderInsert = orderDao.orderInsert(ovo);
+		if (orderInsert == 1) {
+			order_datailVO gvo = orderDao.selectorderList(ovo);
+			model.addAttribute("result", gvo);
+		}
+		return "user/groupcounsel/groupResult";
+	}
+	
+	//심리 테라피 유저 페이지 폼 입니다.
+	@RequestMapping("/userTerapy.do")
+	public String userTerapy(Model model, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+		} else {
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+		}
+		List<TherapyVO> list = therapyDao.therapyLists(page);
+		model.addAttribute("therapylist", list);
+		model.addAttribute("page", page);
+		return "user/therapy/therapyList";
+	}
+	
+	//심리 테라피 디테일 페이지 입니다.
+	@RequestMapping("/therapyDetail.do")
+	public String therapyDetail(TherapyVO vo, Model model) {
+		TherapyVO gvo = therapyDao.selectTherapyDetail(vo);
+		model.addAttribute("selectTherapy", gvo);
+		return "user/therapy/therapyDetail";
+	}
 }
-
-

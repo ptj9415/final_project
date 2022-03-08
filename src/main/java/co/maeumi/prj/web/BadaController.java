@@ -514,8 +514,14 @@ public class BadaController {
 
 		svo.pageinfo(page, range, listCnt);  // 현재페이지, 현재 속한 페이지범위, 총 게시글 수를 인자로 가진다.
 
+		List<NoticeVO> list = noticeDao.noticeSearchselect(svo);
+		for(int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getN_writedate();
+			date = date.substring(0, 10);
+			list.get(i).setN_writedate(date);
+		}
 		model.addAttribute("pagination", svo);  // 페이징처리 
-		model.addAttribute("notice", noticeDao.noticeSearchselect(svo));  // 기존의 공지사항 리스트 대신
+		model.addAttribute("notice", list);  // 기존의 공지사항 리스트 대신
 
 		return "admin/noticemanage/adminNoticeList";
 	}
@@ -531,12 +537,8 @@ public class BadaController {
 	// 공지사항 조회하는 폼
 	@RequestMapping("/noticeRead.do")
 	public String noticeRead(Model model, HttpServletRequest request, NoticeVO vo) {
-		System.out.println("넘겨받은 no의 값: " + request.getParameter("no"));
 
-		vo.setN_no(Integer.valueOf(request.getParameter("no")));
-		vo = noticeDao.noticeSelect(vo);
-
-		model.addAttribute("notices", vo);
+		model.addAttribute("notices", noticeDao.noticeSelect(vo));
 
 		return "admin/noticemanage/adminNoticeRead";
 	}
@@ -564,14 +566,9 @@ public class BadaController {
 
 	// 공지사항 수정하러 이동.
 	@RequestMapping("/noticeUpdate.do")
-	public String noticeUpdate(HttpServletRequest request, Model model, NoticeVO vo) {
+	public String noticeUpdate(Model model, NoticeVO vo) {
 		// 파라미터 가져와서 해당 no에 해당하는 정보들을 폼에 넘겨줘야 함.
-
-		System.out.println("전달받은 값: " + Integer.valueOf(request.getParameter("updateNo")));
-
-		int num = Integer.valueOf(request.getParameter("updateNo"));
-		vo.setN_no(num);
-
+		
 		model.addAttribute("notices", noticeDao.noticeSelect(vo));
 
 		return "admin/noticemanage/adminNoticeUpdate";
@@ -579,23 +576,31 @@ public class BadaController {
 
 	// 공지사항 수정 후 저장
 	@RequestMapping("/noticeUpdateEnd.do")
-	public String noticeUpdateEnd(HttpServletRequest request, Model model, NoticeVO vo) {
-		// 뭐가 필요할까. 일단은 각각 새로 작성한 부븐들 모두 name값 찾아와서 vo에 실어서 update실행. ㅇ
-		// n_titel, n_content, n_category, n_filename, n_pfilename,
-		System.out.println("no 얘 무슨 값이지 ? " + request.getParameter("no"));
-		System.out.println("값 전환 되나? " + Integer.valueOf(request.getParameter("no")));
+	public ModelAndView noticeUpdateEnd(ModelAndView mav, NoticeVO vo, HttpServletRequest request,
+			HttpServletResponse response, @RequestParam("fileName") MultipartFile file) throws Exception {
 
-		vo.setN_category(request.getParameter("category"));
-		vo.setN_title(request.getParameter("title"));
-		vo.setN_content(request.getParameter("content"));
-		vo.setN_filename(request.getParameter("filename"));
-		vo.setN_pfilename(request.getParameter("pfilename"));
-		int upNum = Integer.valueOf(request.getParameter("no"));
-		vo.setN_no(upNum);
+		// 파일 업로드 처리
+		String savedName = file.getOriginalFilename();
+		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
+		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
+		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		} 		
+		// 모델앤뷰의 뷰 경로지정noticeMain.do
+		mav.setViewName("redirect:adminNoticeList.do");
+		// 속성추가
+		mav.addObject("savedName", mSavedName);
+		String origincode = request.getParameter("summernote");
+		System.out.println(origincode);
 
+		// 이미지 파일일 경우 코드 잘라서 쓰기.
+		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
+
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		System.out.println(result);
+		vo.setN_content(result);
 		noticeDao.noticeUpdate(vo);
-
-		return "redirect:adminNoticeList.do";
+		
+		return mav;
 	}
 
 	// 공지사항 선택삭제
@@ -634,24 +639,17 @@ public class BadaController {
 		// 속성추가
 		mav.addObject("savedName", mSavedName);
 
-		// 파라미터값 넘어왔는지 확인. 이 값들을 테이블에 집어넣을 생각.
-		System.out.println("title은 " + request.getParameter("title"));
-		System.out.println("말머리 : " + request.getParameter("category"));
-		System.out.println("내용 : " + request.getParameter("content"));
-		System.out.println("작성자: " + request.getParameter("writer"));
-		System.out.println("작성일: " + request.getParameter("wdate"));
-
-//		String fixedContent = request.getParameter("content");
-//		fixedContent = fixedContent.replace(0, 0)
-
 		// insert구문. 첨부파일 있으면 첨부파일도.
-		vo.setN_writer(request.getParameter("writer")); // 작성자
-		vo.setN_title(request.getParameter("title")); // 제목
-		vo.setN_content(request.getParameter("content")); // 내용
-		vo.setN_category(request.getParameter("category")); // 말머리 선택
-		vo.setN_writedate(request.getParameter("wdate")); // 작성날짜.
+		String origincode = request.getParameter("summernote");
+		System.out.println(origincode);
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		System.out.println(result);
+		
+		
 		vo.setN_filename(savedName); // db에 저장될 원본파일명
 		vo.setN_pfilename(mSavedName); // db에 저장될 실제 물리파일명.
+		vo.setN_writer("관리자"); // 작성자(나중에 세션값 집어넣음)
+		vo.setN_content(result); // 내용		
 
 		// 값 넣기.
 		noticeDao.noticeInsert(vo);
@@ -856,8 +854,6 @@ public class BadaController {
 		
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
-		
-	}
 	
 	// 사용자 닉네임 변경
 	@ResponseBody
@@ -888,6 +884,7 @@ public class BadaController {
 		return "layouts/updatePassword";
 	}
 	
+
 	// 비밀번호 확인 체크
 	@ResponseBody
 	@RequestMapping("/ajaxPassChk.do")
@@ -951,6 +948,4 @@ public class BadaController {
 		}
 		return message;
 	}
-	
-
 }

@@ -4,7 +4,7 @@
 	namespace="co.maeumi.prj.personalcounsel.service.PersonalcounselMapper">
 
 
-
+	<!-- user -->
 	<select id="CounselorSelectList"
 		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
 
@@ -13,7 +13,7 @@
 			= #{ccg_subname} -->
 
 
-		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender, c.c_grade,
+		select cs.c_email, cs.ccg_name, cs.ccg_subname, c.c_name, c.c_gender, c.c_grade, c.c_picture, c.c_picturepath,
 		p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice, p.p_phone ,p.p_phoneprice 
 		
 		from cs_category
@@ -25,17 +25,42 @@
 	<!-- 상담사 상세페이지 -->
 	<select id="CounselorSelect"
 		parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-		select cs.c_email, cs.ccg_name, c.c_name, c.c_gender,
-		c.c_grade, p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice,
+		select cs.c_email, cs.ccg_name,cs.ccg_subname,c.c_name, c.c_gender, c.c_phone,c.c_picture,
+		c.c_grade, p.p_kakao, p.p_kakaoprice, p.p_zoom, p.p_zoomprice,c.c_picturepath,
 		p.p_phone ,p.p_phoneprice
-
-
 		from cs_category cs join counselor c
 		on(cs.c_email = c.c_email)
 		join price p
 		on(cs.c_email = p.c_email)
 		where
-		cs.c_email =
-		#{c_email}
+		cs.c_email = #{c_email} and cs.ccg_subname = #{ccg_subname}
 	</select>
+	
+	<!--카테고리 리스트 -->
+	<select id="SubnameSelectList" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		SELECT cs.ccg_subname
+		FROM cs_category cs join counselor c
+		ON(cs.c_email = c.c_email)
+		JOIN price p
+		ON(cs.c_email = p.c_email)
+		WHERE
+		cs.c_email = #{c_email}
+
+	</select>
+	
+	
+	
+	<!-- counselor 개인상담관리 -->
+	
+	<select id="PersonalCounselList" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+	<!-- 	select m.m_nickname , m.m_email , re.c_email ,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status
+		from personal_reserve re, member m
+		where m.m_email = re.m_email and re.c_email=#{c_email}
+		order by re.pr_no -->
+		
+		select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, ct.ccg_subname
+		from personal_reserve re, member m, cs_category ct
+		order by re.pr_no
+	</select>
+	
 </mapper>

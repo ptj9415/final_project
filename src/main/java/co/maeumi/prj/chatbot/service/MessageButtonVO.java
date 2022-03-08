@@ -1,8 +1,6 @@
 package co.maeumi.prj.chatbot.service;
 
-import lombok.Data;
 
-@Data
 public class MessageButtonVO {
 	private String label;
 	private String url;

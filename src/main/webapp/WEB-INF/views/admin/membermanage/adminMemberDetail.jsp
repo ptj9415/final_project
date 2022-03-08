@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .row {
@@ -20,6 +21,7 @@ h3 {
 	position: relative;
 	top: 7px;
 	margin-left: 15px;
+	font-weight: 600;
 }
 
 .minusbtn {
@@ -41,7 +43,7 @@ table>tbody>tr>th {
 	border-bottom: 0.5px solid rgb(222, 226, 230);
 }
 
-#infotable>tbody>tr>th {
+#infotable>tbody>tr>th, #coupontable>tbody>tr>th, #counseltable>tbody>tr>th {
 	width: 15%;
 	background-color: rgb(245, 245, 245);
 }
@@ -52,6 +54,30 @@ table>tbody>tr>th {
 
 #infosubmitbtn {
 	float: right;
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
+
+#siteback {
+	float: right;
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
+
+.infotext {
+	width: 200px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 }
 </style>
 </head>
@@ -78,7 +104,6 @@ table>tbody>tr>th {
 					<div class="card">
 						<form method="post" id="form">
 							<div class="card-body table-responsive p-00">
-								<br>
 								<table class="table text-nowrap" id="infotable">
 									<tr>
 										<th>닉네임</th>
@@ -95,10 +120,10 @@ table>tbody>tr>th {
 											name="m_phone" value="${member.m_phone }"></td>
 									</tr>
 								</table>
-								<input type="hidden" id="m_email" name="m_email" value="${member.m_email }">
-								<br>
-								<button type="button" onclick="infosubmit()"
-											class="btn btn-primary  py-2 px-5" id="infosubmitbtn">등록</button>
+								<input type="hidden" id="m_email" name="m_email"
+									value="${member.m_email }"> <br>
+								<button type="button" onclick="infosubmit()" id="infosubmitbtn">정보
+									수정</button>
 							</div>
 						</form>
 					</div>
@@ -187,6 +212,18 @@ table>tbody>tr>th {
 									<th>상담 상태</th>
 									<th>관리</th>
 								</tr>
+								<tr>
+								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+								</tr>
+								<tr>
+								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+								</tr>
+								<tr>
+								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+								</tr>
+								<tr>
+								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+								</tr>
 								<%-- 								<c:choose> --%>
 								<%-- 									<c:when test="${not empty coupon}"> --%>
 								<%-- 										<c:forEach items="${coupon }" var="coupon"> --%>
@@ -210,7 +247,12 @@ table>tbody>tr>th {
 					</div>
 				</div>
 			</div>
+			<br>
+		<button type="button" onclick="location.href='adminMemberList.do'" id="siteback">목록으로</button>
 		</div>
+		<br>
+		<br>
+		<br>
 	</section>
 </body>
 
@@ -244,7 +286,7 @@ table>tbody>tr>th {
 			$('#minusicon3').attr('class', 'fa fa-plus');
 		}
 	});
-	
+
 	function infosubmit() {
 		var url = "adminUserInfoUpdate.do";
 		var formData = new FormData($("#form")[0]);

@@ -6,210 +6,348 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script -->
-<!-- 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-<!-- <script -->
-<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <title>Insert title here</title>
 <style>
-.pagetitle {
-	margin-left: 40px;
+h3 {
+	font-size: 24px;
+	font-weight: 600;
 }
 
-.titlebar, .maindiv {
-	border: 0.5px solid black;
-	border-radius: 3px;
-	background-color: white;
-	width: 1050px;
-	margin-left: 40px;
+.row {
+	margin-bottom: -10px;
 }
 
-.titlebar {
-	margin-top: 10px;
-	height: 35px;
-}
-
-.titlespan {
+#headerp {
+	position: relative;
+	top: 7px;
 	margin-left: 15px;
-	line-height: 35px;
+	font-weight: 600;
 }
 
-.maindiv {
-	margin-top: 2px;
+.filebox .uploadname, .filebox .uploadname1 {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 31%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+#infotable {
+	width: 86.3%;
+}
+
+#infotable>tbody>tr, #gradetable>tbody>tr, #gradeapplytable>tbody>tr {
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+}
+
+#infotable>tbody>tr>th, #gradetable>tbody>tr>th, #gradeapplytable>tbody>tr>th
+	{
+	width: 13%;
+	background-color: rgb(245, 245, 245);
+	text-align: center;
+	vertical-align: middle;
+}
+
+#gradetable>tbody>tr>td {
+	text-align: center;
+	vertical-align: middle;
 }
 
 .headshotdiv {
-	margin-top: 15px;
-	margin-left: 15px;
 	float: left;
-	width: 120px;
+	margin-right: 35px;
 }
 
-.myinfotablediv, .gradeupdatediv, .fileuploaddiv {
-	margin-left: 10px;
-	margin-top: 15px;
+#submitbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
 }
 
-table, tr, th, td {
-	border: 0.5px solid black;
+#backbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	margin-right: 10px;
+	border: 1px solid red;
+	border-radius: 5px;
+	background-color: white;
+	color: red;
 }
 
-th {
-	text-align: center;
+#certfiledown {
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
 }
 
-.myinfotable {
-	height: 150px;
-}
-
-.myinfotable>tbody>tr>th {
-	width: 100px;
-}
-
-.myinfotable>tbody>tr>td {
-	width: 300px;
-}
-
-.gradetable {
-	height: 50px;
-}
-
-.gradetable>tbody>tr>th {
-	width: 100px;
-}
-
-.gradetable>tbody>tr>td {
-	width: 300px;
-}
-
-.fileuploadtable {
-	height: 200px;
-}
-
-.fileuploadtable>tbody>tr>td {
-	width: 800px;
+#rejectbtn {
+	border: 1px solid #EB4646;
+	border-radius: 5px;
+	background-color: #EB4646;
+	color: white;
 }
 </style>
 </head>
 <body>
-	<div class="pagetitlediv">
-		<br>
-		<h3 class="pagetitle">마이페이지 - 내 정보 수정</h3>
-	</div>
-
-	<div class="titlebar">
-		<span class="titlespan">내 정보
-			<button type="button" class="minusbtn" id="minusbtn1">
-				<i class="fa fa-minus" id="minusicon"></i>
-			</button>
-		</span>
-	</div>
-
-	<div class="maindiv" id="maindiv1">
-		<div class="headshotdiv">
-			<img src="img/counselorpicture/${counselor.c_picturepath }"
-				class="preImage" id="preImage" name="preImage"
-				style="height: 150px; width: 112.5px;"
-				onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';">
+	<section class="content">
+		<div class="container-fluid">
 			<br>
-			<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
-		</div>
-
-		<div class="myinfotablediv">
-			<table class="myinfotable">
-				<tr>
-					<th>이름</th>
-					<td>${counselor.c_name }</td>
-					<th>성별</th>
-					<td>${counselor.c_gender }</td>
-				</tr>
-				<tr>
-					<th>연락처</th>
-					<td>${counselor.c_phone }</td>
-					<th>이메일</th>
-					<td>${counselor.c_email }</td>
-				</tr>
-				<tr>
-					<th>등급</th>
-					<td>${counselor.c_grade }</td>
-					<th>주소</th>
-					<td>${counselor.c_address }</td>
-				</tr>
-			</table>
-		</div>
-		<div class="imageuploaddiv">
-			<form method="post" enctype="multipart/form-data" id="form">
-				<input multiple="multiple" type="file" id="filename" name="filename"
-					accept="image/*" onchange="setThumbnail(event);" /> <br>
-				<div class="row form-group">
-					<div class="col-md-12">
-						<input type="hidden" value="${counselor.c_email}" name="id">
-						<button type="button" onclick="picture()"
-							class="btn btn-primary  py-2 px-5">사진등록</button>
+			<h3>내 정보 수정</h3>
+			<br>
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">내 정보</p>
 					</div>
 				</div>
-			</form>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<form method="post" enctype="multipart/form-data" id="form">
+								<div class="headshotdiv">
+									<img src="img/counselorpicture/${counselor.c_picturepath }"
+										class="preImage" id="preImage" name="preImage"
+										style="height: 228px; width: 171px;"
+										onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';">
+									<br>
+									<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
+								</div>
+								<table class="table text-nowrap" id="infotable">
+									<tr>
+										<th>이름</th>
+										<td>${counselor.c_name }</td>
+										<th>성별</th>
+										<td>${counselor.c_gender }</td>
+									</tr>
+									<tr>
+										<th>연락처</th>
+										<td>${counselor.c_phone }</td>
+										<th>이메일</th>
+										<td>${counselor.c_email }</td>
+									</tr>
+									<tr>
+										<th>등급</th>
+										<td>${counselor.c_grade }</td>
+										<th>주소</th>
+										<td>${counselor.c_address }</td>
+									</tr>
+									<tr>
+										<th>사진 변경</th>
+										<td colspan="3"><div class="filebox">
+												<input class="uploadname"> <label for="filename">파일
+													찾기</label> <input type="file" id="filename" name="filename"
+													onchange="setThumbnail(event);">
+											</div></td>
+									</tr>
+								</table>
+								<div class="btndiv">
+									<button type="button" onclick="picture()" id="submitbtn">등록</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='counselorMyPageMain.do'">돌아가기</button>
+								</div>
+							</form>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-	<button type="button" class="modify" id="modify1"
-		onclick="location.href='counselorinfo.do'">수정</button>
+	</section>
 	<br>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">등급 변경 신청내역</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<table class="table text-nowrap" id="gradetable">
+								<tr>
+									<th>신청일</th>
+									<th>기존 등급</th>
+									<th>신청 등급</th>
+									<th>증빙서류</th>
+									<th>신청 결과</th>
+									<th>비고</th>
+								</tr>
+								<c:choose>
+									<c:when test="${empty apply }">
+										<tr>
+											<td colspan="5">등급 변경 신청 내역이 없습니다.</td>
+										</tr>
+									</c:when>
+									<c:when test="${not empty apply }">
+										<c:forEach items="${apply }" var="apply">
+											<tr>
+												<td>${apply.cu_applydate }</td>
+												<td>${apply.cu_currentgrade }</td>
+												<td>${apply.cu_applygrade }</td>
+												<c:choose>
+													<c:when test="${empty apply.cu_filename }">
+														<td>-</td>
+													</c:when>
+													<c:otherwise>
+														<td>
+															<button type="button" id="certfiledown"
+																onclick="location.href='fileDownload2.do?fileName=${apply.cu_pfilename }&downName=${apply.cu_filename}'">다운로드</button>
+														</td>
+													</c:otherwise>
+												</c:choose>
+												<td>${apply.cu_status }</td>
+												<c:if
+													test="${apply.cu_status eq '신청완료'|| apply.cu_status eq '승인' }">
+													<td>-</td>
+												</c:if>
+												<c:if test="${apply.cu_status eq '반려' }">
+													<td><button type="button" id="rejectbtn"
+															data-toggle="modal" data-target="#modal-lg" data-reason="${apply.cu_rejection }">반려사유</button></td>
+												</c:if>
+											</tr>
+										</c:forEach>
+									</c:when>
+								</c:choose>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<br>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">등급 변경 신청</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<form method="post" enctype="multipart/form-data" id="form1">
+								<table class="table text-nowrap" id="gradeapplytable">
+									<tr>
+										<th>현재 등급</th>
+										<td><input type="hidden" id="cu_currentgrade"
+											name="cu_currentgrade" value="${counselor.c_grade }">
+											${counselor.c_grade }</td>
+										<th>변경할 등급</th>
+										<td><select id="cu_applygrade" name="cu_applygrade"
+											class="cc_status">
+												<option value="선택">선택</option>
+												<option value="심리상담사"
+													<c:if test="${counselor.c_grade eq '심리상담사' }">selected</c:if>>심리상담사</option>
+												<option value="전문상담사"
+													<c:if test="${counselor.c_grade eq '전문상담사' }">selected</c:if>>전문상담사</option>
+												<option value="정신과의사"
+													<c:if test="${counselor.c_grade eq '정신과의사' }">selected</c:if>>정신과의사</option>
+										</select></td>
+									</tr>
+									<tr>
+										<th>증빙서류 제출</th>
+										<td colspan="3">
+											<div class="filebox">
+												<input class="uploadname1" value="${banner.bn_filename }">
+												<label for="filename1">파일 찾기</label> <input type="file"
+													id="filename1" name="filename1">
+											</div>
+										</td>
+									</tr>
+								</table>
+								<input type="hidden" id="c_email" name="c_email"
+									value="${counselor.c_email }"> <input type="hidden"
+									id="cu_status" name="cu_status" value="신청완료">
+								<div class="btndiv">
+									<button type="button" onclick="certsubmit()" id="submitbtn">등록</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='counselorMyPageMain.do'">돌아가기</button>
+								</div>
+							</form>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<br>
 
-	<div class="titlebar">
-		<span class="titlespan">등급 변경 신청
-			<button type="button" class="minusbtn" id="minusbtn2">
-				<i class="fa fa-minus" id="minusicon"></i>
-			</button>
-		</span>
-	</div>
-	<div class="maindiv" id="maindiv2">
-		<div class="gradeupdatediv">
-			<table class="gradetable">
-				<tr>
-					<th>현재 등급</th>
-					<td>${counselor.c_grade }</td>
-					<th>변경할 등급</th>
-					<td><select id="cc_status" name="cc_status" class="cc_status">
-							<option value="선택">선택</option>
-							<option value="심리상담사"
-								<c:if test="${counselor.c_grade eq '심리상담사' }">selected</c:if>>심리상담사</option>
-							<option value="전문상담사"
-								<c:if test="${counselor.c_grade eq '전문상담사' }">selected</c:if>>전문상담사</option>
-							<option value="정신과의사"
-								<c:if test="${counselor.c_grade eq '정신과의사' }">selected</c:if>>정신과의사</option>
-					</select></td>
-				</tr>
-			</table>
-		</div>
-		<div class="fileuploaddiv">
-			<table class="fileuploadtable">
-				<tr>
-					<th>증빙서류 제출</th>
-					<td><form name="dataForm" id="dataForm"
-							onsubmit="return registerAction()">
-							<button id="btn-upload" type="button"
-								style="border: 1px solid #ddd; outline: none;">파일 추가</button>
-							<input id="input_file" multiple="multiple" type="file"
-								style="display: none;"> <span
-								style="font-size: 10px; color: gray;">※첨부파일은 최대 10개까지 등록이
-								가능합니다.</span>
-							<div class="data_file_txt" id="data_file_txt"
-								style="margin: 40px;">
-								<span>첨부 파일</span> <br />
-								<div id="articlefileChange"></div>
+	<!-- 모달시작 -->
+	<div class="modal fade" id="modal-lg">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">반려 사유</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">반려 사유 확인</h3>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<input type="text" style="height: 100px" class="form-control"
+									id="cu_rejections" name="cu_rejection" value="">
 							</div>
-							<button type="submit"
-								style="border: 1px solid #ddd; outline: none;">전송</button>
-						</form></td>
-				</tr>
-			</table>
+						</div>						
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
 		</div>
 	</div>
-
 	<script>
+		$(document).on('click', '#rejectbtn', function() {
+			var cu_rejection = $(this).data('reason');
+			$('#cu_rejections').val(cu_rejection);
+		});
+		
 		$('#minusbtn1').click(function() {
 			if ($('#maindiv1').css('display') == 'none') {
 				$('#maindiv1').show();
@@ -251,119 +389,45 @@ th {
 				contentType : false,
 				processData : false,
 				success : function(data) {
-					alert("사진등록되었습니다.");
+					alert("수정이 완료되었습니다.");
+					location.reload();
 				},
 				error : function() {
 					console.log("실패");
 				}
 			});
 		}
-		
-		<!--다중파일 업로드-->
-		// input file 파일 첨부시 fileCheck 함수 실행
-		$(document).ready(function() {
-			$("#input_file").on("change", fileCheck);
-		});
 
-		/**
-		 * 첨부파일로직
-		 */
-		$(function() {
-			$('#btn-upload').click(function(e) {
-				e.preventDefault();
-				$('#input_file').click();
-			});
-		});
-
-		// 파일 현재 필드 숫자 totalCount랑 비교값
-		var fileCount = 0;
-		// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
-		var totalCount = 10;
-		// 파일 고유넘버
-		var fileNum = 0;
-		// 첨부파일 배열
-		var content_files = new Array();
-
-		function fileCheck(e) {
-			var files = e.target.files;
-
-			// 파일 배열 담기
-			var filesArr = Array.prototype.slice.call(files);
-
-			// 파일 개수 확인 및 제한
-			if (fileCount + filesArr.length > totalCount) {
-				$.alert('파일은 최대 ' + totalCount + '개까지 업로드 할 수 있습니다.');
-				return;
-			} else {
-				fileCount = fileCount + filesArr.length;
-			}
-
-			// 각각의 파일 배열담기 및 기타
-			filesArr.forEach(function(f) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					content_files.push(f);
-					$('#articlefileChange').append(
-							'<div id="file' + fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">' 
-							+ '<font style="font-size:12px">' + f.name + '</font>' 
-							+ '<img src="resources/img/headshot.jpg" style="width:20px; height:auto; vertical-align: middle; cursor: pointer;"/>'
-							+ '<div/>');
-					fileNum++;
-				};
-				reader.readAsDataURL(f);
-			});
-			console.log(content_files);
-			
-			//초기화 한다.
-			$("#input_file").val("");
-		}
-
-		// 파일 부분 삭제 함수
-		function fileDelete(fileNum) {
-			var no = fileNum.replace(/[^0-9]/g, "");
-			content_files[no].is_delete = true;
-			$('#' + fileNum).remove();
-			fileCount--;
-			console.log(content_files);
-		}
-
-		/*
-		 * 폼 submit 로직
-		 */
-		function registerAction() {
-
-			var form = $("form")[0];
-			var formData = new FormData(form);
-			for (var x = 0; x < content_files.length; x++) {
-				// 삭제 안한것만 담아 준다. 
-				if (!content_files[x].is_delete) {
-					formData.append("article_file", content_files[x]);
-				}
-			}
-			/*
-			 * 파일업로드 multiple ajax처리
-			 */
+		function certsubmit() {
+			var url = "counselorUpgradeApply.do";
+			var formData = new FormData($("#form1")[0]);
 			$.ajax({
-				type : "POST",
-				enctype : "multipart/form-data",
-				url : "fileupload.do",
+				url : url,
+				type : "post",
+				enctype : 'multipart/form-data',
 				data : formData,
-				processData : false,
+				cache : false,
 				contentType : false,
+				processData : false,
 				success : function(data) {
-					if (JSON.parse(data)['result'] == "OK") {
-						alert("파일업로드 성공");
-					} else
-						alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+					alert("신청이 완료되었습니다.");
+					location.reload();
 				},
-				error : function(xhr, status, error) {
-					alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
-					return false;
+				error : function() {
+					console.log("실패");
 				}
 			});
-			return false;
 		}
-	</script>
 
+		$("#filename").on('change', function() {
+			var fileName = $("#filename").val();
+			$(".uploadname").val(fileName);
+		});
+
+		$("#filename1").on('change', function() {
+			var fileName = $("#filename1").val();
+			$(".uploadname1").val(fileName);
+		});
+	</script>
 </body>
 </html>

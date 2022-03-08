@@ -10,7 +10,26 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
 }
 
 .btndiv {
@@ -63,18 +82,35 @@ h3 {
 	border-bottom: 1px solid black;
 }
 
-.button:hover {
-	background-color: skyblue;
-	color: white;
+#boardTable>thead {
+background-color: rgb(245, 245, 245);
+}
+	
+}
+#boardTable>tbody>tr>td {
+	vertical-align: middle;
+	
 }
 
-.button {
-	margin-left: 20px;
-	border: 1px solid skyblue;
-	background-color: rgba(0, 0, 0, 0);
-	color: skyblue;
-	padding: 5px;
-	border: 1px solid skyblue;
+#detailbtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#deletebtn {
+	background-color: #EB4646;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+.select2-container .select2-selection--single {
+	height: 38px;
+	border: 0.5px solid rgb(206, 212, 218);
 }
 
 /* 삭제 Swal 디자인  */
@@ -101,7 +137,7 @@ h3 {
 	height: 30px;
 	width: 80px;
 }
-}
+
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -114,7 +150,12 @@ h3 {
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
-						<p id="headerp">검색</p>
+						<p id="headerp">
+							검색
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -132,26 +173,26 @@ h3 {
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label>주제</label><br> <select id="select2"
-											style="width: 780px;"subject">
-											<option value="" disabled selected>선택</option>
-											<option>연애</option>
-											<option>취업/진로</option>
-											<option>직장</option>
-											<option>성추행</option>
-											<option>육아</option>
-											<option>대인관계</option>
-											<option>외모</option>
-											<option>가족</option>
-											<option>학업/고시</option>
-											<option>금전/사업</option>
-											<option>성생활</option>
-											<option>이별/이혼</option>
-											<option>중독</option>
-											<option>성소수자</option>
-											<option>자아/성격</option>
-											<option>해외생활</option>
-											<option>우울/불안</option>
+										<label>주제</label><br> <select id="select2" name="select2"
+											style="width: 100%; height: 38px;">
+											<option value="all">전체</option>
+											<option value="연애">연애</option>
+											<option value="취업/진로">취업/진로</option>
+											<option value="직장">직장</option>
+											<option value="성추행">성추행</option>
+											<option value="육아">육아</option>
+											<option value="대인관계">대인관계</option>
+											<option value="외모">외모</option>
+											<option value="가족">가족</option>
+											<option value="학업/고시">학업/고시</option>
+											<option value="금전/사업">금전/사업</option>
+											<option value="성생활">성생활</option>
+											<option value="이별/이혼">이별/이혼</option>
+											<option value="중독">중독</option>
+											<option value="성소수자">성소수자</option>
+											<option value="자아/성격">자아/성격</option>
+											<option value="해외생활">해외생활</option>
+											<option value="우울/불안">우울/불안</option>
 										</select>
 									</div>
 								</div>
@@ -167,18 +208,19 @@ h3 {
 										<label>작성일</label> <br> <input type="date" name="b_wdate"
 											id="b_wdate" class="form-control">
 									</div>
-									<div class="btndiv">
-										<button type="reset" id="clearbtn">초기화</button>
-										<button type="button" id="btnSearch">
-											검색&nbsp;<i class="fa fa-search"></i>
-										</button>
-									</div>
 								</div>
+							</div>
+							<div class="btndiv">
+								<button type="reset" id="clearbtn">초기화</button>
+								<button type="button" id="btnSearch">
+									검색&nbsp;<i class="fa fa-search"></i>
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<br>
@@ -188,7 +230,12 @@ h3 {
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
-						<p id="headerp">자유게시판 목록</p>
+						<p id="headerp">
+							자유게시판 목록
+							<button type="button" class="minusbtn" id="minusbtn2">
+								<i id="minusicon2" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -209,7 +256,7 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="boardTable">
+							<table class="table text-nowrap" id="boardTable">
 								<thead>
 									<tr>
 										<th style="width: 150px">작성자</th>
@@ -221,15 +268,16 @@ h3 {
 								</thead>
 								<tbody>
 									<c:forEach items="${board}" var="board">
-										<tr class="color"
-											onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">
+										<tr>
 											<td>${board.m_nickname}</td>
 											<td>${board.b_subject}</td>
 											<td>${board.b_title}</td>
 											<td>${board.b_wdate}</td>
 											<!-- 수정 / 삭제 부분은 클릭 안되게  -->
 											<td onclick="event.cancelBubble=true;">
-												<button type="button" name="delete" id="delete"
+												<button type="button" name="detailbtn" id="detailbtn"
+													class="button" onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">상세보기</button>
+												<button type="button" name="deletebtn" id="deletebtn"
 													class="button" onclick="deleteFnc('${board.b_no}')">삭제</button>
 											</td>
 										</tr>
@@ -339,7 +387,7 @@ h3 {
 
 		var url = "adminBoardList.do";
 		url = url + "?m_nickname=" + $('#m_nickname').val();
-		url = url + "&b_subject=" + $('#b_subject').val();
+		url = url + "&b_subject=" + $('[name=select2]').val();
 		url = url + "&b_title=" + $('#b_title').val();
 		url = url + "&b_wdate=" + $('#b_wdate').val();
 		location.href = url;
@@ -351,7 +399,7 @@ h3 {
 		
 		// 삭제 (디자인적용)
 		
-		function deleteFnc(B_no){
+		function deleteFnc(b_no){
 			Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  text: '삭제 후에는 복구가 불가능합니다.',
@@ -365,14 +413,14 @@ h3 {
 			  if (result.value) {
 	              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
 				$.ajax({
-					url : "adminBoardList.do",
+					url : "boardDelete.do",
 					type : "post",
 					data : {
-						B_no : B_no
+						b_no : b_no
 					},
 					dataType : "text",
-					success : function() {
-						location.href = "adminBoardList.do";
+					success : function(responseText) {
+						location.reload();
 					},
 					error : function() {
 						alert("삭제 실패")
@@ -386,10 +434,7 @@ h3 {
 		// select 2
 		$(document).ready(function() {
 			$("#select2").select2();
-		});
-
-		$('#replace').on('click', function() {
-			$('.subject').select2('val', '선택');
+			$('#select2').css('height', '38px');
 		});
 		
 	</script>

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 import co.maeumi.prj.todaystory.service.TodaystoryMapper;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
 import co.maeumi.prj.todaystory.service.TodaystoryVO;
@@ -26,11 +28,10 @@ public class TodaystoryServiceImpl implements TodaystoryService {
 
 
 	@Override
-	public List<TodaystoryVO> TodayStorySelectList() {
+	public List<TodaystoryVO> TodayStorySelectList(Pagination page) {
 		// TODO Auto-generated method stub
-		return map.TodayStorySelectList();
+		return map.TodayStorySelectList(page);
 	}
-
 
 
 	@Override
@@ -61,6 +62,30 @@ public class TodaystoryServiceImpl implements TodaystoryService {
 	public TodaystoryVO AdminTodaySelect(TodaystoryVO vo) {
 		// TODO Auto-generated method stub
 		return map.AdminTodaySelect(vo);
+	}
+
+
+
+	@Override
+	public int CountTodayStory() {
+		// TODO Auto-generated method stub
+		return map.CountTodayStory();
+	}
+
+
+
+	@Override
+	public int getTodayListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getTodayListCnt(svo);
+	}
+
+
+
+	@Override
+	public List<TodaystoryVO> todaySearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.todaySearchselect(svo);
 	}
 
 }

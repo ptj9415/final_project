@@ -9,13 +9,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
 }
 
 .btndiv {
 	float: right;
 	width: 150px;
 	margin-right: -8px;
+}
+
+#managebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+	width: 65px;
 }
 
 #btnSearch {
@@ -64,6 +81,25 @@ h3 {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
+
+#membertable>thead>tr>th {
+	background-color: rgb(245, 245, 245);
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -75,84 +111,88 @@ h3 {
 			<br>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
-					<div class="card">
-						<p id="headerp">검색</p>
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							검색
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-12 offset-md-0">
-				<div class="card">
-					<div class="card-header">
-						<div class="row">
-							<div class="col-6">
-								<div class="form-group">
-									<label>이름</label> <br> <input type="text"
-										class="form-control" id="c_name" placeholder="이름을 입력해주세요.">
+			<div class="row" id="maindiv1">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label>이름</label> <br> <input type="text"
+											class="form-control" id="c_name" placeholder="이름을 입력해주세요.">
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>성별</label> <select class="	status" id="c_gender">
+											<option value="all">전체</option>
+											<option value="남성">남성</option>
+											<option value="여성">여성</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>상담사 등급</label> <select class="	status" id="c_grade">
+											<option value="all">전체</option>
+											<option value="심리상담사">심리상담사</option>
+											<option value="전문상담사">전문상담사</option>
+											<option value="정신과의사">정신과의사</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>생년월일</label> <br> <input type="date"
+											class="form-control" id="c_birthdate">
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>이메일</label> <br> <input type="text"
+											class="form-control" id="c_email" placeholder="이메일을 입력해주세요.">
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>연락처</label> <br> <input type="text"
+											class="form-control" id="c_phone" placeholder="연락처를 입력해주세요.">
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>주소</label> <br> <input type="text"
+											class="form-control" id="c_address" placeholder="주소를 입력해주세요.">
+									</div>
+								</div>
+
+								<div class="col-6">
+									<div class="form-group">
+										<label>상태</label> <select class="	status" id="c_status">
+											<option value="all">전체</option>
+											<option value="가입">가입</option>
+											<option value="탈퇴">탈퇴</option>
+										</select>
+									</div>
 								</div>
 							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>성별</label> <select class="	status" id="c_gender">
-										<option value="all">전체</option>
-										<option value="남성">남성</option>
-										<option value="여성">여성</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>상담사 등급</label> <select class="	status" id="c_grade">
-										<option value="all">전체</option>
-										<option value="심리상담사">심리상담사</option>
-										<option value="전문상담사">전문상담사</option>
-										<option value="정신과의사">정신과의사</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>생년월일</label> <br> <input type="date"
-										class="form-control" id="c_birthdate">
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>이메일</label> <br> <input type="text"
-										class="form-control" id="c_email" placeholder="이메일을 입력해주세요.">
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>연락처</label> <br> <input type="text"
-										class="form-control" id="c_phone" placeholder="연락처를 입력해주세요.">
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>주소</label> <br> <input type="text"
-										class="form-control" id="c_address" placeholder="주소를 입력해주세요.">
-								</div>
-							</div>
-
-							<div class="col-6">
-								<div class="form-group">
-									<label>상태</label> <select class="	status" id="c_status">
-										<option value="all">전체</option>
-										<option value="가입">가입</option>
-										<option value="탈퇴">탈퇴</option>
-									</select>
-								</div>
-							</div>
-
 							<div class="btndiv">
 								<button type="reset" id="clearbtn">초기화</button>
 								<button type="button" id="btnSearch">
@@ -171,17 +211,31 @@ h3 {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
-					<div class="card">
-						<p id="headerp">상담사 목록</p>
+					<div class="card" id="headerdiv">
+						<p id="headerp">
+							상담사 목록
+							<button type="button" class="minusbtn" id="minusbtn2">
+								<i id="minusicon2" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<div class="card">
+					<div class="card" id="maindiv2">
 						<div class="card-body table-responsive p-00">
-							<span>(총 ${pagination.listCnt }건 중 ${pagination.start } ~
-								${pagination.end }건)</span> <select class="paging" name="searchType"
+							<c:choose>
+								<c:when test="${pagination.listCnt lt pagination.end }">
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.listCnt }건)</span>
+								</c:when>
+								<c:otherwise>
+									<span>(총 ${pagination.listCnt }건 중 ${pagination.start }
+										~ ${pagination.end }건)</span>
+								</c:otherwise>
+							</c:choose>
+							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType"
 								id="listSize" onchange="page(1)">
 								<option value="10"
 									<c:if test="${pagination.getListSize() == 10 }">selected="selected"</c:if>>10건
@@ -193,7 +247,7 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="membertable">
+							<table class="table text-nowrap" id="membertable">
 								<thead>
 									<tr>
 										<th>이름</th>
@@ -226,7 +280,7 @@ h3 {
 								</tbody>
 							</table>
 							<br>
-							<div id="paginationBox" class="pagination1">
+							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"
@@ -256,9 +310,30 @@ h3 {
 				</div>
 			</div>
 		</div>
+		<br>
 	</section>
 
 	<script>
+		$('#minusbtn1').click(function() {
+			if ($('#maindiv1').css('display') == 'none') {
+				$('#maindiv1').show();
+				$('#minusicon1').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv1').css('display') != 'none') {
+				$('#maindiv1').hide();
+				$('#minusicon1').attr('class', 'fa fa-plus');
+			}
+		});
+
+		$('#minusbtn2').click(function() {
+			if ($('#maindiv2').css('display') == 'none') {
+				$('#maindiv2').show();
+				$('#minusicon2').attr('class', 'fa fa-minus');
+			} else if ($('#maindiv2').css('display') != 'none') {
+				$('#maindiv2').hide();
+				$('#minusicon2').attr('class', 'fa fa-plus');
+			}
+		});
+
 		function fn_prev(page, range, rangeSize, listSize, c_name, c_gender,
 				c_grade, c_birthdate, c_email, c_phone, c_address, c_status) {
 

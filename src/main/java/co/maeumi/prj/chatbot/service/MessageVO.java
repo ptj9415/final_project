@@ -1,8 +1,5 @@
 package co.maeumi.prj.chatbot.service;
 
-import lombok.Data;
-
-@Data
 public class MessageVO {
 	private String text;
 	private PhotoVO photo;

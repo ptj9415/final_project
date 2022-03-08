@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 .md-stepper-horizontal {
 	display: table;
@@ -447,6 +448,7 @@ img {
 							<p style="font-size: 20px;">👨‍👩‍👧 정원 ${group.gc_min_person }명 - ${group.gc_max_person}명</p>
 						</span>
 						<button id="btn" onclick="func('${group.gc_no}')" class="btn btn--block card__btn">신청하기</button>
+						<input type="hidden" id="date" value="${group.gc_date }">
 					</div>
 				</div>
 			</li>

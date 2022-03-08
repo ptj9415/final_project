@@ -10,7 +10,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
 }
 
 .btndiv {
@@ -19,11 +24,16 @@ h3 {
 	margin-right: -8px;
 }
 
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
 #btnSearch {
 	background-color: #1E90FF;
-	color: white;
-	border: none;
-	border-radius: 4px;
 	color: white;
 	border: none;
 	border-radius: 4px;
@@ -40,21 +50,12 @@ h3 {
 	width: 70px;
 }
 
-.status {
-	display: block;
-	width: 100%;
-	height: calc(2.25rem + 1px);
-	padding: 0.375rem 0.75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #495057;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid #ced4da;
-	border-radius: 0.25rem;
-	box-shadow: inset 0 0 0 transparent;
-	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+#addbtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
 }
 
 #faqTable {
@@ -63,20 +64,25 @@ h3 {
 	border-bottom: 1px solid black;
 }
 
-.button:hover {
-	background-color: skyblue;
+#faqTable>thead>tr {
+	background-color: rgb(245, 245, 245);
+}
+
+#deletebtn {
+	background-color: #EB4646;
 	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
 }
 
-.button {
-	margin-left: 20px;
-	border: 1px solid skyblue;
-	background-color: rgba(0, 0, 0, 0);
-	color: skyblue;
-	padding: 5px;
-	border: 1px solid skyblue;
+#updatebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
 }
-
 
 /* 삭제 Swal 디자인  */
 #swal2-title {
@@ -101,7 +107,6 @@ h3 {
 .swal2-actions button {
 	height: 30px;
 	width: 80px;
-}
 }
 </style>
 </head>
@@ -137,12 +142,12 @@ h3 {
 											class="form-control" id="f_title" placeholder="제목을 입력해주세요.">
 									</div>
 								</div>
-								<div class="btndiv">
-									<button type="reset" id="clearbtn">초기화</button>
-									<button type="button" id="btnSearch">
-										검색&nbsp;<i class="fa fa-search"></i>
-									</button>
-								</div>
+							</div>
+							<div class="btndiv">
+								<button type="reset" id="clearbtn">초기화</button>
+								<button type="button" id="btnSearch">
+									검색&nbsp;<i class="fa fa-search"></i>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -150,11 +155,7 @@ h3 {
 			</div>
 		</div>
 	</section>
-		<button type="button" class="button"
-			style="float: right" onclick="location.href='adminFaqForm.do'">등록하기</button>
-		<br> <br>
 	<br>
-
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -180,8 +181,11 @@ h3 {
 								<option value="20"
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
-							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="faqTable">
+							</select>
+							<button type="button" class="button" id="addbtn"
+								style="float: right" onclick="location.href='adminFaqForm.do'">등록하기</button>
+							<br> <br>
+							<table class="table text-nowrap" id="faqTable">
 								<thead>
 									<tr>
 										<th style="width: 150px">작성자</th>
@@ -192,23 +196,22 @@ h3 {
 								</thead>
 								<tbody>
 									<c:forEach items="${faqs}" var="faq">
-										<tr class="color"
-											onclick="location.href='adminFaqRead.do?f_no=${faq.f_no}';">
+										<tr>
 											<td>${faq.c_name}</td>
 											<td>${faq.f_title}</td>
 											<td>${faq.f_wdate}</td>
 											<!-- 수정 / 삭제 부분은 클릭 안되게  -->
-											<td onclick="event.cancelBubble=true;"><button
-													type="button" name="update" id="update" class="button"
+											<td><button
+													type="button" name="update" id="updatebtn" class="button"
 													onclick="location.href='adminFaqUpdateForm.do?f_no=${faq.f_no }';">수정</button>
-												<button type="button" name="delete" id="delete" class="button"
-													onclick="deleteFnc('${faq.f_no}')">삭제</button></td>
+												<button type="button" name="delete" id="deletebtn"
+													class="button" onclick="deleteFnc('${faq.f_no}')">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 							<br>
-							<div id="paginationBox" class="pagination1">
+							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"

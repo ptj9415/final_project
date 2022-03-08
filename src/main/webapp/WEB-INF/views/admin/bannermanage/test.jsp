@@ -8,7 +8,10 @@
 <style>
 .sec_cal {
 	width: 360px;
-	margin: 0 auto;
+	margin-right:100px;
+	margin-left:100px;
+	margin-top:100px;
+	margin-bottom:100px;
 	font-family: "NotoSansR";
 }
 
@@ -104,7 +107,9 @@
 	flex-flow: wrap;
 	height: 290px;
 }
-
+.dates:hover{
+ 	cursor:pointer;
+}
 .sec_cal .cal_wrap .day:nth-child(7n -1) {
 	color: #3c6ffa;
 }
@@ -116,6 +121,15 @@
 .sec_cal .cal_wrap .day.disable {
 	color: #ddd;
 }
+
+/*시간표 생성 style*/
+.timediv{
+
+	background-color:#ffffff;
+	width:200px;
+	height:400px;
+}
+/*시간표 생성 style end*/
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
