@@ -245,7 +245,6 @@
                         <option value="">성별 선택</option>
                         <option value="남자" style="text-align: center;">남자</option>
                         <option value="여자">여자</option>
-                        <option value="기타">기타</option>
                     </select>
                     <hr color="tomato">
                 </div>

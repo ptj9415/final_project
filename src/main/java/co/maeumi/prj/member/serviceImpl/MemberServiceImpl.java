@@ -92,5 +92,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return map.memberInfoUpdate(mvo);
 	}
+
+	@Override
+	public MemberVO mypageSelectList(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.mypageSelectList(mvo);
+	}
+
 	
 }

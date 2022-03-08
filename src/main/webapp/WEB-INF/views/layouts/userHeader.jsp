@@ -163,6 +163,7 @@ span.top-nav-admin {
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="#">심리 테라피</a></li>
 						</ul></li>
+					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
 					<li class="nav-item"><a href="userMypage.do" class="nav-link">마이페이지</a></li>
 				</ul>
 			</div>
