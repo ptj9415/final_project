@@ -30,6 +30,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -854,6 +855,28 @@ public class BadaController {
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
 	
+	// 사용자 닉네임 변경
+	@ResponseBody
+	@RequestMapping("/ajaxUpdateNickname.do")
+	public String ajaxUpdateNickname(HttpServletRequest request, HttpSession session,  MemberVO mvo) {
+		
+		System.out.println("ajax로 넘어온, 변경할 닉네임 이름: " + request.getParameter("sendNickname"));
+		
+		String nickname = request.getParameter("sendNickname");
+		
+		mvo.setM_nickname(nickname);
+		mvo.setM_email( (String) session.getAttribute("email"));
+		mvo.setM_type( (String)session.getAttribute("type"));
+		
+		int n = memberDao.ajaxUpdateNickname(mvo);
+		String message = "NO";
+		if ( n != 0) {   // 정상적으로 변경된 경우
+			message = "YES";
+		} 
+		
+		return message;
+	}
+	
 	// 사용자 비밀번호 변경 팝업 
 	@RequestMapping("/passwordPopup.do")
 	public String passwordPopup(HttpServletRequest request, Model model) {
@@ -861,4 +884,68 @@ public class BadaController {
 		return "layouts/updatePassword";
 	}
 	
+
+	// 비밀번호 확인 체크
+	@ResponseBody
+	@RequestMapping("/ajaxPassChk.do")
+	public String ajaxPassChk(HttpSession session, HttpServletRequest request, MemberVO mvO) {
+		
+		mvo.setM_email( (String) session.getAttribute("email"));
+		System.out.println("현재 세션 이메일 값: " + (String) session.getAttribute("email"));
+		mvo.setM_type( (String) session.getAttribute("type")); 
+		mvo.setM_password( request.getParameter("sendPwd"));
+		
+		mvo = memberDao.ajaxPassChk(mvo);
+		String message = "NO";
+		
+		if( mvo != null) {
+			message = "YES";   // 패스워드 일치함. 
+		}
+		
+		return message;
+	}
+	
+	// 새로운 비밀번호 변경
+	@ResponseBody
+	@RequestMapping("/ajaxUpdatePassword.do")
+	public String ajaxUpdatePassword(HttpSession session, MemberVO mvo, HttpServletRequest request) {
+		
+		mvo.setM_email( (String) session.getAttribute("email"));
+		mvo.setM_type( (String) session.getAttribute("type"));
+		mvo.setM_password( request.getParameter("inputPwd"));
+		
+		int n = memberDao.ajaxUpdatePassword(mvo);
+		
+		String message = null;
+		if (n != 0) {  //정상적으로 수행된 경우. 
+			message = "YES";
+		}
+		
+		return message;
+	}
+	
+	// 연락처 인증 팝업창 호출 
+	@RequestMapping("/phoneChkPopup.do")
+	public String phoneChkPopup(HttpServletRequest request, Model model) {
+		
+		return "layouts/updatePhone";
+	}
+	
+	// 연락처 정보 db업데이트
+	@ResponseBody
+	@RequestMapping("/ajaxUpdatePhone.do")
+	public String ajaxUpdatePhone(HttpSession session, HttpServletRequest request, MemberVO mvo) {
+		
+		mvo.setM_email( (String)session.getAttribute("email"));
+		mvo.setM_type( (String) session.getAttribute("type"));
+		mvo.setM_phone( request.getParameter("inputPhoneChk"));
+		
+		int n = memberDao.ajaxUpdatePhone(mvo);
+		String message = null;
+		
+		if( n != 0) {
+			message = "YES";
+		}
+		return message;
+	}
 }

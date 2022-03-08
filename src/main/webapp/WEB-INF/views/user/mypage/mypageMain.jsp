@@ -23,12 +23,16 @@
 	width:100px;
 	float: right;
 }
-#nickname{
+.myInfoInput {
 	border: 0px solid gray;
 	width: 250px;
 }
 #changeCheck {
 	display: none;
+}
+#changePwdBtn {
+	margin: auto;
+	display: block;
 }
 </style>
 </head>
@@ -41,71 +45,32 @@
 	
 	<div class="myInfoForm">
 		<div class="myInfo Email">
-			<input type="button" disabled="disabled" value="이메일">	${member.m_email } &nbsp;&nbsp;(${member.m_type })
+			이메일&nbsp;&nbsp; <input type="text" class="myInfoInput" disabled="disabled" value="${member.m_email }">	(${member.m_type })
 			
 			<br> 	 	
 		</div>
 		
 		<div class="myInfo mynickname">
-			<input type="button" disabled="disabled" value="닉네임">
-			<input type="text" id="nickname" name="nickname" value="${member.m_nickname }" readonly="readonly"> 
+			닉네임&nbsp;&nbsp;
+			<input type="text" class="myInfoInput" id="nickname" name="nickname" value="${member.m_nickname }" readonly="readonly"> 
 			<input type="button" class="changeBtn" id="changeBtn" onclick="nicknameChanged()" value="닉네임 변경">
 			<input type="button" class="changeBtn" id="changeCheck" value="적용">
 			<br>
-			
 			<script>
-				
-				// 메소드chain 숙지하기. 동일한 것들 연달아서 적용가능.
-				var myNickname = $("#nickname").val();
-				function nicknameChanged() {
-						$("#nickname").attr("readonly", false)
-									  .attr("placeholder", "변경할 닉네임을 입력하세요.")
-									  .val('')
-									  .focus();
-						$("#changeBtn").hide();
-						$("#changeCheck").css("display", "block");
-				}
-				
-				// 닉네임 변경 시키기
-				$("#changeCheck").on("click",function(){
-					var sendNickname = $("#nickname").val();
-					
-					if( $("#nickname").val() == '' ){
-						alert("변경할 닉네임을 입력하세요");
-						$("#nickname").focus();
-					} else {
-						$.ajax({  // 닉네임 변경 호출
-							url: "ajaxUpdateNickname.do",
-							type: "POST",
-							data: {
-								sendNickname : sendNickname
-							},
-							dataType : "text",
-							
-						});		
-					}
-					
-				});
-				
-				
-								
-				
-								
 				
 			</script>
 		</div>
 		
 		<div class="myInfo myphone">
-			<input type="button" disabled="disabled" value="연락처">  ${member.m_phone }
-			<button type="button" class="changeBtn" onclick="phoneCheck()">인증하기</button>
+			연락처&nbsp;&nbsp; <input type="text" class="myInfoInput" value="${member.m_phone }">
+			<input type="button" class="changeBtn" id="phoneChkBtn" value="연락처 수정">
 			<br>
 		</div>
+		
 		<div class="myInfo mypassword">
 			<input type="button" id="changePwdBtn" value="비밀번호 변경하기" > &nbsp;&nbsp; 
-				
-			<br>
 			<script>
-					
+				
 			</script>
 		</div>
 		<input type="hidden" id="pwdvalue" value="${member.m_type }">
@@ -125,13 +90,73 @@
 <br><br><br>
 </body>
 <script>
+	 /* 가입유형이 '마으미'인 회원들만 비밀번호 변경 버튼 출력하기 */
 	 $(document).ready(function(){
 		 if ( $("#pwdvalue").val() != '마으미' ) {
 			 $("#changePwdBtn").hide();
 		 }
 	 });
- 	
-	// 비밀번호 변경 팝업창 호출
+
+	 
+	/* =========닉네임 변경============ */
+	
+	// 메소드chain 숙지하기. 동일한 것들 연달아서 적용가능.
+	var myNickname = $("#nickname").val();
+	function nicknameChanged() {
+			$("#nickname").attr("readonly", false)
+						  .attr("placeholder", "변경할 닉네임을 입력하세요.")
+						  .val('')
+						  .focus();
+			$("#changeBtn").hide();
+			$("#changeCheck").css("display", "block");
+	}
+	
+	// 닉네임 변경 시키기
+	$("#changeCheck").on("click",function(){
+		var sendNickname = $("#nickname").val();
+		
+		if( $("#nickname").val() == '' ){
+			alert("변경할 닉네임을 입력하세요");
+			$("#nickname").focus();
+		} else {
+			$.ajax({  // 닉네임 변경 호출
+				url: "ajaxUpdateNickname.do",
+				type: "POST",
+				data: {
+					sendNickname : sendNickname
+				},
+				dataType : "text",
+				success: function(responseText) {
+						if(responseText == 'YES') {
+							alert("닉네임이 변경되었습니다.");
+							$("#changeBtn").show();
+							$("#changeCheck").css("display", "none");
+						}
+				}
+			});		
+		}
+	});
+	
+	
+	/* =======휴대폰번호 등록하기========== */
+	
+	/* 연락처 인증 팝업창  호출 */
+	$("#phoneChkBtn").on("click", function() {
+		 phonePopupOpen();
+	});
+	
+	function  phonePopupOpen() {
+		var url= "phoneChkPopup.do";    //팝업창 페이지 URL
+		var winWidth = 500;    
+	    var winHeight = 400;
+	    var popupX = (window.screen.width / 2) - (800 / 2);
+	    var popupY= (window.screen.height /2) - (600 / 2);
+	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
+		window.open(url,"",popupOption);
+	};
+	
+	
+	/* =======비밀번호 변경 팝업창 호출========= */
 	$("#changePwdBtn").on("click", function() {
 		 popupOpen();
 	})
