@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | E-commerce</title>
+  <style>
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -427,7 +428,6 @@ img {
 </style>
 </head>
 <body>
-
 	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('resources/user/images/bg_1.jpg');"
 		data-stellar-background-ratio="0.5">
@@ -448,7 +448,7 @@ img {
 				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
 				<span class="subheading subheading-with-line"><small
 					class="pr-2 bg-white">MAEUMI</small></span>
-				<h2 class="mb-4">그룹상담 신청</h2>
+				<h2 class="mb-4">그룹상담 상세 페이지</h2>
 			</div>
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
@@ -493,45 +493,105 @@ img {
 		</div>
 	</div>
 
+    <!-- Main content -->
+    <section class="content">
 
-	 <div class="container mt-5">
-        <div class="row">
-          <div class="col-12">
-            <article class="blog-card">
-              <div class="blog-card__background">
-                <div class="card__background--wrapper">
-                  <div class="card__background--main" style="background-image: url('resources/user/images/sample.jpg'); border-radius:40px">
-                    <div class="card__background--layer"></div>
-                  </div>
-                </div>
+      <!-- Default box -->
+      <div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+         <div class="col-12 col-sm-1">
+         </div>
+            <div class="col-12 col-sm-5">
+              <div class="col-12">
+               		 ${userGroup.gc_infos}
               </div>
-              <div class="blog-card__head">
-                <span class="date__box">
-                  <span class="date__day">${userGroup.gc_date }</span>
-                  <span class="date__month">JAN</span>
-                </span>
+            </div>
+            <div class="col-12 col-sm-5">
+              <img alt="" style="width:600px; height:200px;" src="resources/user/images/sample.jpg">
+              <div style="width:600px; height:60px; float: left;">
+				<h4>그룹 상담 주제 : ${userGroup.gc_title }</h4>
+			  </div>
+			  <div>&nbsp;</div>
+			  <hr style="width:450px; float:left;">
+              <div style="width:200px; height:60px; float: left;">
+				<h4>상담사 이름 : </h4>
+			  </div>
+			  <div style="width:230px; height:60px; float: right;">
+				<h4>${userGroup.gc_name}</h4>
+			  </div>
+              <div style="width:200px; height:60px; float: left;">
+				<h4>참여 인원 : </h4>
+			  </div>
+			  <div style="width:250px; height:60px; float: right;">
+				<h4>최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명 </h4>
+			  </div>
+			  <div style="width:350px; height:60px; float: left;">
+				<h4>신청 인원 : </h4>
+			  </div>
+			  <div style="width:66px; height:60px; float: right;">
+				<h4>${userGroup.gc_person}명 </h4>
+			  </div>
+			  <div style="width:300px; height:60px; float: left;">
+				<h4>신청 날짜 : </h4>
+			  </div>
+			  <div style="width:150px; height:60px; float: right;">
+				<h4>${userGroup.gc_date} </h4>
+			  </div>
+			  <div style="width:330px; height:60px; float: left;">
+				<h4>상담 가격 : </h4>
+			  </div>
+			  <div style="width:130px; height:60px; float: right;">
+				<h4>${userGroup.gc_price}원</h4>
+			  </div>
+              <div style="width:450px; float: left;"></div>
+              <div class="mt-4" style="float:right;">
+                   <button id="btn" onclick="func('${userGroup.gc_no}')" class="apply-btn">신청하기</button>
               </div>
-              <div class="blog-card__info">
-                <h5 style="margin-left:40px; margin-top:15px; color:#468FB6; font-weight:bold;">${userGroup.gc_title }</h5>
-                <p>
-                  <a href="#" class="" style="font-size:18px;">${userGroup.gc_name }</a>
-                  <a href="#" class="">${userGroup.gc_price }</a>
-                </p>
-                 <div style="float:left"> ${userGroup.gc_infos}</div>
-              </div>
-            </article>
+            </div>
           </div>
-                <button id="btn" onclick="func('${userGroup.gc_no}')" class="apply-btn">신청하기</button>
+          <div class="row mt-4">
+              <div class="nav nav-tabs" id="product-tab" role="tablist">
+                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+                <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
+              </div>
+
+            <div class="tab-content p-3" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae condimentum erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed posuere, purus at efficitur hendrerit, augue elit lacinia arcu, a eleifend sem elit et nunc. Sed rutrum vestibulum est, sit amet cursus dolor fermentum vel. Suspendisse mi nibh, congue et ante et, commodo mattis lacus. Duis varius finibus purus sed venenatis. Vivamus varius metus quam, id dapibus velit mattis eu. Praesent et semper risus. Vestibulum erat erat, condimentum at elit at, bibendum placerat orci. Nullam gravida velit mauris, in pellentesque urna pellentesque viverra. Nullam non pellentesque justo, et ultricies neque. Praesent vel metus rutrum, tempus erat a, rutrum ante. Quisque interdum efficitur nunc vitae consectetur. Suspendisse venenatis, tortor non convallis interdum, urna mi molestie eros, vel tempor justo lacus ac justo. Fusce id enim a erat fringilla sollicitudin ultrices vel metus. </div>
+              <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> Vivamus rhoncus nisl sed venenatis luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum. </div>
+              <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> Cras ut ipsum ornare, aliquam ipsum non, posuere elit. In hac habitasse platea dictumst. Aenean elementum leo augue, id fermentum risus efficitur vel. Nulla iaculis malesuada scelerisque. Praesent vel ipsum felis. Ut molestie, purus aliquam placerat sollicitudin, mi ligula euismod neque, non bibendum nibh neque et erat. Etiam dignissim aliquam ligula, aliquet feugiat nibh rhoncus ut. Aliquam efficitur lacinia lacinia. Morbi ac molestie lectus, vitae hendrerit nisl. Nullam metus odio, malesuada in vehicula at, consectetur nec justo. Quisque suscipit odio velit, at accumsan urna vestibulum a. Proin dictum, urna ut varius consectetur, sapien justo porta lectus, at mollis nisi orci et nulla. Donec pellentesque tortor vel nisl commodo ullamcorper. Donec varius massa at semper posuere. Integer finibus orci vitae vehicula placerat. </div>
+            </div>
+          </div>
         </div>
+        <!-- /.card-body -->
       </div>
-      <section class="detail-page">
-        <div class="container mt-5">       
-        	에디터 들어가는 자리.
-        </div>
-      </section>
+      <!-- /.card -->
+    </section>
+    <!-- /.content -->
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="subHomeFile/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="subHomeFile/dist/js/demo.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.product-image-thumb').on('click', function () {
+      var $image_element = $(this).find('img')
+      $('.product-image').prop('src', $image_element.attr('src'))
+      $('.product-image-thumb.active').removeClass('active')
+      $(this).addClass('active')
+    })
+  })
+</script>
       <script type="text/javascript">
 		function func(gc_no){
-			console.log(gc_no);
+			alert(gc_no);
 			location.href = "usergroupinvoice.do?gc_no="+gc_no;
 		}
 	</script>
