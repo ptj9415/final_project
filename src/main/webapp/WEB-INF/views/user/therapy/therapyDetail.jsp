@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-개인상담 신청내역
+	<h3>${selectTherapy.t_subject}</h3>
 </body>
 </html>

@@ -20,7 +20,8 @@
 			gc_kakao,
 			gc_infos,
 			gc_status,
-			gc_name
+			gc_name,
+			gc_person
 			)
 			values(
 			(SELECT NVL(MAX(GC_NO),0)+1 FROM GROUP_COUNSEL N),
@@ -38,7 +39,8 @@
 			#{gc_kakao},
 			#{gc_infos},
 			0,
-			'네임값 세션 들어감'
+			'네임값 세션 들어감',
+			0
 			)
 	</insert>
 
@@ -64,8 +66,8 @@
 	</select>
 
 	<select id="countGroupCounsel" resultType="int">
-		SELECT COUNT(*)
-		FROM GROUP_COUNSEL
+			SELECT COUNT(*)
+			FROM GROUP_COUNSEL
 	</select>
 
 	<select id="pageSelectList"
@@ -76,7 +78,6 @@
 			SELECT ROWNUM RN, A.*
 			FROM (SELECT * FROM group_counsel
 			ORDER BY gc_no DESC
-	
 			) A
 			)
 			WHERE RN BETWEEN #{start} AND #{end}

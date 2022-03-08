@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.service.Search;
 import co.maeumi.prj.therapy.service.TherapyMapper;
 import co.maeumi.prj.therapy.service.TherapyService;
@@ -56,6 +57,24 @@ public class TherapyServiceImpl implements TherapyService {
 	public List<TherapyVO> therapySearchselect(Search svo) throws Exception {
 		// TODO Auto-generated method stub
 		return map.therapySearchselect(svo);
+	}
+
+	@Override
+	public List<TherapyVO> therapyLists(Pagination page) {
+		// TODO Auto-generated method stub
+		return map.therapyLists(page);
+	}
+
+	@Override
+	public TherapyVO selectTherapyDetail(TherapyVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectTherapyDetail(vo);
+	}
+
+	@Override
+	public int selectTherapyCount() {
+		// TODO Auto-generated method stub
+		return map.selectTherapyCount();
 	}
 
 }

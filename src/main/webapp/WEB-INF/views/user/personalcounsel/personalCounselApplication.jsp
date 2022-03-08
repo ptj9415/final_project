@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>invoice</title>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
 @import
@@ -54,9 +56,11 @@ p {
 }
 
 #invoiceholder {
-	width: 100%;
-	height: 1300px;
-	padding-top: 50px;
+	width: 80%;
+    height: 1300px;
+    padding-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #headerimage {
@@ -108,7 +112,7 @@ p {
 	float: left;
 	height: 60px;
 	width: 60px;
-	background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+	/* background: url(http://michaeltruong.ca/images/logo1.png) no-repeat; */
 	background-size: 60px 60px;
 }
 
@@ -116,7 +120,7 @@ p {
 	float: left;
 	height: 60px;
 	width: 60px;
-	background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+	/* background: url(http://michaeltruong.ca/images/client.jpg) no-repeat; */
 	background-size: 60px 60px;
 	border-radius: 50px;
 }
@@ -270,6 +274,14 @@ form {
 	transition: 0.3s ease-in-out;
 }
 
+
+#counselor-name{
+ 	font-weight:bold;
+}
+
+.control-btn{
+	margin-top:50px;
+}
 /*결제버튼 end*/
 </style>
 <body>
@@ -281,7 +293,7 @@ form {
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">그룹상담</h1>
+					<h1 class="mb-2 bread">개인상담</h1>
 					<p class="breadcrumbs">
 						<span class="mr-2"><a href="index.html"><i
 								class="ion-ios-arrow-forward"></i></a></span> <span><i
@@ -298,42 +310,24 @@ form {
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2">
 
-			<div id="invoice-top">
-				<div class="logo"></div>
-				<div class="info">
-					<h2>Michael Truong</h2>
-					<p>
-						hello@michaeltruong.ca <br> 289-335-6503
-					</p>
-				</div>
-				<!--End Info-->
-				<div class="title">
-					<h1>Invoice #1069</h1>
-					<p>
-						Issued: May 27, 2015<br> Payment Due: June 27, 2015
-					</p>
-				</div>
-				<!--End Title-->
-			</div>
-			<!--End InvoiceTop-->
-		<form id="invoiceForm">
-		
+			
+			<!--End InvoiceTop-->	
 			<div id="invoice-mid">
 
-				<div class="clientlogo"></div>
+				
+				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
 				<div class="info">
-
-					<h2>이소정 상담사</h2>
-
-					<input type="text" id="c_email" name="c_email"  value="${c_email}">
-						</br> 555-555-5555</br>
+					
+					<%-- <h2>${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
+					<p>${c_email}</p>
+					<p>${counselorSelect.c_phone }</p>
+					 --%>
 				</div>
 
 				<div id="project">
-					<h2>Project Description</h2>
-					<p>Proin cursus, dui non tincidunt elementum, tortor ex feugiat
-						enim, at elementum enim quam vel purus. Curabitur semper malesuada
-						urna ut suscipit.</p>
+					<h2 id="counselor-name">${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
+					<p>${c_email}</p>
+					<p>${counselorSelect.c_phone }</p>
 				</div>
 
 			</div>
@@ -349,7 +343,12 @@ form {
 							<td class="Rate"><h2></h2></td>
 							<td class="subtotal"><h2></h2></td>
 						</tr>
-
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">상담 키워드</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext">${type2}</p></td>
+						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담방식</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
@@ -361,7 +360,7 @@ form {
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">2022-03-23 수</p></td>
+							<td class="tableitem"><p class="itemtext">2022-03-23 수 ${time}</p></td>
 						</tr>
 
 						<tr class="service">
@@ -379,7 +378,7 @@ form {
 						</tr>
 
 						<tr class="service">
-							<td class="tableitem"><p class="itemtext">Animation</p></td>
+							<td class="tableitem"><p class="itemtext">상담비용</p></td>
 							<td class="tableitem"><p class="itemtext">20</p></td>
 							<td class="tableitem"><p class="itemtext">$75</p></td>
 							<td class="tableitem"><p class="itemtext">$1,500.00</p></td>
@@ -412,24 +411,39 @@ form {
 				</div>
 			</div>
 				<!--End Table 이메일,방식, 가격,시간(날짜도포함되어야하는데...)--> 
-					<input type="text" class="counsel-time" name="counsel-time" value="${counselTime}">
-					<input type="hidden" id="c_email" name="c_email" class="btn btn-primary px-4 py-3 mt-3"  value="${c_email}" >
-					<input type="text" id="oncheck" name="onecheck" value="${type4}">
-					<input type="hidden" name="cmd" value="_s-xclick"> 
-					
+<!-- 				<div class="control-btn">
+					<a href="personalCounselStep4.do"><input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
-					<input type="button" id="pay-btn" name="submit" value="결제하기">
-				
-
+				</div> -->
+				<form action="paymentComplete.do" id="frm" name="frm">
+					<input type="text" name="pr_time" value="${time}">
+					<input type="text" id="c_email" name="c_email" value="${c_email}" >
+					<input type="text" id="ccg_subname" name="ccg_subname" value="${type2}">
+					<input type="text" name="pr_price" value="${type3}">
+					<input type="text" id="or_uid" name="or_uid">
 				</form>
-
-				<div id="legalcopy">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+						target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick"> <input
+							type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+							<input type="text" id="c_email" name="c_email" value="${c_email}" >
+							<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
+				</form>
+			</div>
+			<div id="legalcopy">
 					<a href="personalCounselStep4.do"><input type="button"
 						id="back-btn" name="submit" value="뒤로가기"></a>
 				</div>
-
-			</div>
 			<!--End InvoiceBot-->
+			<div id="invoice-top">
+				<div class="logo"></div>
+				<div class="info">
+				</div>
+				<!--End Info-->
+				<div class="title">
+				</div>
+				<!--End Title-->
+			</div>
 		</div>
 		<!--End Invoice-->
 <script>
@@ -437,11 +451,79 @@ $('#previous-btn').click(function() {
 	location.href = 'personalCounselStep3.do'
 });
 
-$('#pay-btn').click(function() {
-	location.href = 'personalCounselApplication.do'
-});
 </script>
-
+<script>
+		var pr_price = $("#pr_price").val();
+        $(".check_module").click(function () {
+        var IMP = window.IMP; // 생략가능
+        IMP.init('imp71871883');
+        // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+        IMP.request_pay({
+        pg: 'inicis', // version 1.1.0부터 지원.
+        /*
+        'kakao':카카오페이,
+        html5_inicis':이니시스(웹표준결제)
+        'nice':나이스페이
+        'jtnet':제이티넷
+        'uplus':LG유플러스
+        'danal':다날
+        'payco':페이코
+        'syrup':시럽페이
+        'paypal':페이팔
+        */
+        pay_method: 'card',
+        /*
+        'samsung':삼성페이,
+        'card':신용카드,
+        'trans':실시간계좌이체,
+        'vbank':가상계좌,
+        'phone':휴대폰소액결제
+        */
+        merchant_uid: 'merchant_' + new Date().getTime(),
+        /*
+        merchant_uid에 경우
+        https://docs.iamport.kr/implementation/payment
+        위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+        참고하세요.
+        나중에 포스팅 해볼게요.
+        */
+        name: '주문명:결제테스트',
+        //결제창에서 보여질 이름
+        amount: 100,
+        //가격
+        //bank_name : null,
+        buyer_email: 'iamport@siot.do',
+        buyer_name: '구매자이름',
+        buyer_tel: '010-1234-5678',
+        buyer_addr: '서울특별시 강남구 삼성동',
+        buyer_postcode: '123-456',
+        m_redirect_url: 'https://www.yourdomain.com/payments/complete',
+        /*
+        모바일 결제시,
+        결제가 끝나고 랜딩되는 URL을 지정
+        (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+        */
+        }, function (rsp) {
+        console.log(rsp);
+        if (rsp.success) {
+        $("#or_uid").val(rsp.imp_uid);
+        $("#frm").submit();
+         var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        /* msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num; */
+        } else {
+        var msg = '결제에 실패하였습니다.';
+        /*msg += '에러내용 : ' + rsp.error_msg;
+        msg += 'ㅜㅜ' + rsp.amount;
+        msg += rsp.imp_uid; */
+        }
+        alert(msg);
+	        });
+        });
+    </script>
 
 </body>
 </html>

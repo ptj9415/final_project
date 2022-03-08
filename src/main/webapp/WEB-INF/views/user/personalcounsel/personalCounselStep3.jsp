@@ -256,6 +256,12 @@ div.counsel-type {
 	width: 150px;
 	height: 150px;
 }
+
+.row mt-5 pt-4{
+	display:grid;
+	grid-auto-rows: 50px;
+	grid-template-columns: 80px 80px;
+}
 </style>
 </head>
 <body>
@@ -341,7 +347,7 @@ div.counsel-type {
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">채팅</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }">
+				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
 
 			</div>
@@ -352,7 +358,7 @@ div.counsel-type {
 			<div type=hidden class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img type=hidden src="resources/user/images/chat.PNG" class="chat-img">
 				<h3  type=hidden class="h4">채팅</h3>
-				<input type=hidden class="chat-btn" value="${counselorSelect.p_kakaoprice }">
+				<input type=hidden class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
 
 			</div>
@@ -364,7 +370,7 @@ div.counsel-type {
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">화상</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
 
 			</div>
@@ -374,7 +380,7 @@ div.counsel-type {
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">화상</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
 
 			</div>
@@ -385,7 +391,7 @@ div.counsel-type {
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">전화</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}">
+				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
 
 			</div>
@@ -396,7 +402,7 @@ div.counsel-type {
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">전화</h3>
-				<input type=hidden class="chat-btn" value="${counselorSelect.p_phoneprice}">
+				<input type=hidden class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
 
 			</div>
@@ -410,8 +416,7 @@ div.counsel-type {
 	</div>
 	<input type="hidden" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${email}" >
 	<input type="hidden" id="onecheck" name="onecheck" value="${type }"> 
-	<input type="button" data-page="2" name="previous"
-		class="previous action-button" value="Previous" id="previous-btn" />
+	<input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
 </form>

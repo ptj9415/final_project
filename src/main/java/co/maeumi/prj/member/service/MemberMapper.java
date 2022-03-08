@@ -22,5 +22,8 @@ public interface MemberMapper {
 	int getMemberListCnt(Search svo) throws Exception;
 	public List<MemberVO> memberSearchselect(Search svo) throws Exception;
 	int memberInfoUpdate(MemberVO mvo);
+	
+	// 마이페이지 이메일과 가입유형 구분
+	MemberVO mypageSelectList(MemberVO mvo);
 
 }

@@ -205,7 +205,25 @@
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
+#detail-view{
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	background-color: #468FB6;
+	color: white;
+	border: solid 1px #468FB6;
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+}
 
+#detail-view:hover{
+	background: #fff;
+	color: #468FB6;
+	border: solid 1px #468FB6;
+	transition: 0.3s ease-in-out;
+	cursor: pointer;
+}
 #previous-btn {
 	width: 100px;
 	height: 40px;
@@ -267,6 +285,14 @@
 #p_phone_text{
 	border:0px;
 	width:50%;
+}
+
+#check-btn{
+	width: 100px;
+    height: 50px;
+    border: 1px solid #468FB6;
+    background-color: white;
+    border-radius: 20px;
 }
 </style>
 </head>
@@ -365,6 +391,7 @@
 								<input type="text" id="p_kakao_text" value="채팅">
 								<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
 								<input type="text" id="p_kakao_text" value="원">
+								
 							</c:if>
 							
 							<c:if test="${counselorList.p_kakao eq 0}">
@@ -408,12 +435,14 @@
 							<%-- <p>전화 ${counselorList.p_phoneprice}</p> --%>
 							</c:if>
 					
-						<input type="checkbox" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}" >
+						<input type="checkbox" id="check-btn" name="c_email" class="btn btn-primary px-4 py-3 mt-3" onclick="doOpenCheck(this);" value="${counselorList.c_email}" >
+						<input type="button" id="detail-view" onclick="func('${counselorList.c_email}','${type}')" value="자세히 보기">
 					</div>
 				</div>
 			</div>
 	</c:forEach>
 		</div>
+		
 	<input type="hidden" id="c_email" name="onecheck" value="${type }"> 
 	</div>
 	<input type="button" data-page="2" name="previous"
@@ -422,10 +451,13 @@
 		class="next action-button" id="next-btn" value="Next" />
 </form>
 
-	
-	
-
 	<script>
+	
+/* 	 	$('#detail-view').click(function(){
+			location.href = 'counselorDetail.do'
+			
+		});  */
+	
 		$('#previous-btn').click(function() {
 			location.href = 'userPersonalCounsel.do'
 		});
@@ -441,6 +473,19 @@
 			frm.c_email.value=str;
 			frm.submit();
 		};
+		
+		function func(c_email,type){
+			location.href = "counselorDetail.do?c_email="+c_email+"&onecheck="+type;
+		}
+		
+		function doOpenCheck(chk) {
+			var obj = document.getElementsByName("c_email");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
 		
 	
 		

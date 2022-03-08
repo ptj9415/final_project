@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
-import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.coupon.service.CouponService;
+import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.order.service.orderService;
@@ -44,11 +45,20 @@ public class YoungohController {
 
 	@Autowired
 	private orderService orderDao;
+	
+	@Autowired
+	private CouponService couponDao;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
-
-	// 이미지 보여주기 밑 이미지 업로드 아작스.
+	
+	// 상담 관리 - 그룹상담 개설 화면
+	@RequestMapping("/counselorGroupOpen.do")
+	public String counselorGroupOpen(Model model) {
+		return "counselor/groupcounselmanage/counselorGroupOpen";
+	}
+	
+	//상담사 개설 페이지 이미지 업로드 아작스.
 	@RequestMapping(value = "/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile,
@@ -89,6 +99,7 @@ public class YoungohController {
 		return a;
 	}
 
+	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
 	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
@@ -132,7 +143,8 @@ public class YoungohController {
 		}
 		return null;
 	}
-
+	
+	//상담사 관리 페이지 메인화면
 	@RequestMapping("/counselorGroupList.do")
 	public String counselorGroupList(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
@@ -245,7 +257,8 @@ public class YoungohController {
 
 		return "counselor/groupcounselmanage/counselorGroupList";
 	}
-
+	
+	//상담사 관리 페이지 신청자 관리 페이지
 	@RequestMapping("/counselorGroupApply.do")
 	public String counselorGroupApply(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		String c_email = request.getParameter("c_email");
@@ -255,7 +268,8 @@ public class YoungohController {
 
 		return "counselor/groupcounselmanage/counselorGroupApply";
 	}
-
+	
+	//상담사 관리 페이지 상세 목록 페이지
 	@RequestMapping("/counselorGroupDetail.do")
 	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		String gc_no = request.getParameter("gc_no");
@@ -280,51 +294,40 @@ public class YoungohController {
 		return "counselor/groupcounselmanage/counselorGroupDetail";
 	}
 
-	// 그룹 상담 상세 페이지 조회 모달창 띄우기 아작스입니다.
+	// 그룹 상담 신청자 목록 페이지 신청 내용 조회 가져오기 아작스.
 	@RequestMapping("/selectFunc.do")
 	@ResponseBody
 	public GroupcounselVO selectFunc(Model model, HttpServletRequest request, GroupcounselVO vo) {
 		GroupcounselVO gvo = groupCounselDao.selectgroupRserve(vo);
 		return gvo;
 	}
-
+	// 그룹 상담 신청자 목록 페이지 삭제 모달 띄우기 아작스.
 	@RequestMapping("/deleteFuncForm.do")
 	@ResponseBody
 	public String deleteForm() {
 		return "성공";
 	}
 
-	// 그룹 상담 상세 페이지 삭제 모달창 띄우기 아작스 입니다.
+	// 그룹 상담 신청자 목록 페이지 삭제 모달창 띄우기 아작스 입니다.
 	@RequestMapping("/deleteFunc.do")
 	@ResponseBody
 	public String deleteFunc(Model model, HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo) {
 		return "모달 성공";
 	}
-
+	
+	//그룹 상담 신청자 목록 페이지 삭제 페이지입니다.
 	@RequestMapping("/upDateService.do")
 	public String upDateService(HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo, Model model) {
-		String gr_no = request.getParameter("gr_no");
-		String c_email = request.getParameter("c_email");
-		String gr_refund = request.getParameter("gr_refund");
-
-		vo.setGr_no(gr_no);
-		vo.setGr_refund(gr_refund);
 		groupCounselDao.GroupUserDelete(vo);
-		jvo.setC_email(c_email);
+		jvo.setC_email(vo.getC_email());
 
 		model.addAttribute("group", groupCounselDao.joinSelectList(jvo));
-		model.addAttribute("email", c_email);
+		model.addAttribute("email", vo.getC_email());
 
 		return "counselor/groupcounselmanage/counselorGroupApply";
 	}
 
-	// 상담 관리 - 그룹상담 개설 화면
-	@RequestMapping("/counselorGroupOpen.do")
-	public String counselorGroupOpen(Model model) {
-		return "counselor/groupcounselmanage/counselorGroupOpen";
-	}
-
-	//상담 결과 등록 처리 
+	//그룹 상담 상세 페이지 상담 결과 등록 처리. 
 	@RequestMapping("/detailinsert.do")
 	public String detailinsert(Model model, HttpServletRequest request, GroupcounselVO vo, HttpServletResponse response)
 			throws IOException {
@@ -357,7 +360,8 @@ public class YoungohController {
 //
 //		return "admin/therapy/therapyList";
 //	}
-	// 써머노트 이미지 파일 띄우기 및 물리경로 다운로드 아작스 입니다.
+	
+	// 심리 테라피 등록 이미지 처리 아작스 입니다.
 	@RequestMapping(value = "/uploadSummernoteImageFileList.do", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFileList(@RequestParam("file") MultipartFile multipartFile,
@@ -376,6 +380,7 @@ public class YoungohController {
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+		System.out.println("jpg로 들어오나요 : "+extension);
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
 
 		File targetFile = new File(fileRoot + savedFileName);
@@ -398,7 +403,7 @@ public class YoungohController {
 		return a;
 	}
 
-	// 테라피 등록입니다.
+	// 테라피 등록 페이지 입니다.
 	@RequestMapping("/therapyInsert.do")
 	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) {
@@ -433,12 +438,14 @@ public class YoungohController {
 		therapyDao.InsertTherapy(vo);
 		return "redirect:/admintherapy.do";
 	}
-
+	
+	//심리 테라피 등록 폼 페이지입니다.
 	@RequestMapping("/therapyInsertForm.do")
 	public String therapyInsertForm() {
 		return "admin/therapy/therapyInsert";
 	}
 
+	//심리 테라피 수정 페이지 폼 입니다.
 	@RequestMapping("/therapyUpdateForm.do")
 	public String therapyUpdate(TherapyVO vo, HttpServletRequest request, Model model) {
 		String req = request.getParameter("t_no");
@@ -485,9 +492,7 @@ public class YoungohController {
 	@RequestMapping("/therapyDelete.do")
 	@ResponseBody
 	public String therapyDelete(HttpServletRequest request, TherapyVO vo, Model model) {
-
 		String t_no = request.getParameter("t_no");
-		System.out.println(t_no);
 		int t_nos = Integer.parseInt(t_no);
 		vo.setT_no(t_nos);
 
@@ -508,25 +513,34 @@ public class YoungohController {
 	// 그룹 상담 유저 상세 페이지입니다.
 	@RequestMapping("/userGroup.do")
 	public String userGroup(GroupcounselVO vo, Model model) {
-		System.out.println(vo.getGc_no());
 		GroupcounselVO gvo = groupCounselDao.selectUserGroup(vo);
+		String date = gvo.getGc_date();
+		date = date.substring(0, 10);
+		gvo.setGc_date(date);
+		
 		model.addAttribute("userGroup", gvo);
 		return "user/groupcounsel/userGroup";
 	}
 
+	//그룹 상담 유저 invoice 페이지입니다.
+	//유저 이메일 세션값이 들어가야 됩니다.
 	@RequestMapping("/usergroupinvoice.do")
-	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request) {
+	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
 		String gc_no = request.getParameter("gc_no");
 		System.out.println(gc_no);
 		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
 		gvo.setM_email("이메일 성공");
+		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
+		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
 		model.addAttribute("groupInvoice", gvo);
+		model.addAttribute("coupon", cplist);
 		return "user/groupcounsel/groupInvoice";
 	}
-
+	
+	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo) {
-		groupCounselDao.groupReserveInsert(vo);
+		groupCounselDao.groupReserveInsert(vo); 
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
 		int orderInsert = orderDao.orderInsert(ovo);
@@ -537,8 +551,26 @@ public class YoungohController {
 		return "user/groupcounsel/groupResult";
 	}
 	
-	@RequestMapping("/usertest.do")
-	public String usertest() {
-		return "user/groupcounsel/usertest";
+	//심리 테라피 유저 페이지 폼 입니다.
+	@RequestMapping("/userTerapy.do")
+	public String userTerapy(Model model, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+		} else {
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+		}
+		List<TherapyVO> list = therapyDao.therapyLists(page);
+		model.addAttribute("therapylist", list);
+		model.addAttribute("page", page);
+		return "user/therapy/therapyList";
+	}
+	
+	//심리 테라피 디테일 페이지 입니다.
+	@RequestMapping("/therapyDetail.do")
+	public String therapyDetail(TherapyVO vo, Model model) {
+		TherapyVO gvo = therapyDao.selectTherapyDetail(vo);
+		model.addAttribute("selectTherapy", gvo);
+		return "user/therapy/therapyDetail";
 	}
 }

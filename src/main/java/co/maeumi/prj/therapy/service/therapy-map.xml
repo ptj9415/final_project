@@ -31,13 +31,24 @@
 		select *
 		from therapy
 	</select>
-
+	
+	<select id="therapyLists" parameterType="co.maeumi.prj.service.Pagination" 
+	resultType="co.maeumi.prj.therapy.service.TherapyVO">
+		SELECT *
+			FROM (
+			SELECT ROWNUM RN, A.*
+			FROM (SELECT * FROM therapy
+			ORDER BY t_no DESC
+			) A
+			)
+			WHERE RN BETWEEN #{start} AND #{end}		
+	</select>
 	<insert id="InsertTherapy"
 		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
-		Insert into THERAPY(
+		INSERT INTO THERAPY(
 		t_no,
-		t_title
-		,t_picture,
+		t_title,
+		t_picture,
 		t_writedate,
 		t_hit,
 		t_like_it,
@@ -77,4 +88,15 @@
 		DELETE FROM THERAPY
 		WHERE t_no = #{t_no}
 	</delete>
+	
+	<select id="selectTherapyDetail" parameterType="co.maeumi.prj.therapy.service.TherapyVO" resultType="co.maeumi.prj.therapy.service.TherapyVO">
+		SELECT * 
+		FROM THERAPY 
+		WHERE T_NO =#{t_no}
+	</select>
+	
+	<select id="selectTherapyCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM THERAPY
+	</select>
 </mapper>

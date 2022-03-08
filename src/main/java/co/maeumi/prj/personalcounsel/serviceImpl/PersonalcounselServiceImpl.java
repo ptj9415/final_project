@@ -27,4 +27,16 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		return map.CounselorSelect(vo);
 	}
 
+	@Override
+	public List<PersonalcounselVO> SubnameSelectList(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.SubnameSelectList(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> PersonalCounselList(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.PersonalCounselList(vo);
+	}
+
 }
