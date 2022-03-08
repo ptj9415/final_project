@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -109,9 +110,11 @@ public class BadaController {
 		if (mvo != null) { // 멤버로 로그인 성공한 경우~
 			session.setAttribute("email", request.getParameter("email"));
 			session.setAttribute("nickname", mvo.getM_nickname());
+			session.setAttribute("type", mvo.getM_type());
 			System.out.println("로그인 성공");
-			System.out.println("로그인하면서 내가 담은 세션값 이름 : " + session.getAttribute("email"));
-			System.out.println("로그인 하면서 닉네임이 담겼나??? 확인. 제발. " + session.getAttribute("nickname"));
+			System.out.println("로그인으로 담은 세션값 이메일 : " + (String)session.getAttribute("email"));
+			System.out.println("로그인으로 담은 세션값 닉네임 : " + (String)session.getAttribute("nickname"));
+			System.out.println("로그인으로 담은 세션값 가입유형 : " + (String)session.getAttribute("type"));
 			message = "YES";
 		} else {
 			cvo.setC_email(request.getParameter("email"));
@@ -186,11 +189,12 @@ public class BadaController {
 			mvo.setM_password("");
 			mvo.setM_type("네이버");
 			int n = memberDao.memberInsert(mvo);
-			if (n != 0) {
+			if (n != 0) {  // 네이버로 로그인 성공했다면~ 
 				message = (String) response.get("email");
 				System.out.println(message + " 님 네이버 로그인 성공");
 				session.setAttribute("email", message); // 세션값 설정
 				session.setAttribute("nickname", (String) response.get("nickname"));
+				session.setAttribute("type", "네이버");
 				return "user/home/home";
 			} else {
 				message = "실패햇다.....";
@@ -201,8 +205,11 @@ public class BadaController {
 		// null이 아니었다면 바로 db에 데이터를 넣을 필요없이 바로 로그인
 		session.setAttribute("email", (String) response.get("email")); // 세션값 설정
 		session.setAttribute("nickname", (String) response.get("nickname"));
-		System.out.println("네이버 로그인으로 담은 세션값1 email: " + (String) response.get("email"));
-		System.out.println("네이버 로그인으로 담은 세션2 nickname: " + (String) response.get("nickname"));
+		session.setAttribute("type", "네이버");
+		System.out.println("네이버 로그인으로 담은 세션값1 이메일: " + (String) response.get("email"));
+		System.out.println("네이버 로그인으로 담은 세션값2 닉네임: " + (String) response.get("nickname"));
+		System.out.println("네이버 로그인으로 담은 세션값3 가입유형: " + (String)session.getAttribute("type"));
+		
 		return "user/home/home";
 	}
 
@@ -227,7 +234,8 @@ public class BadaController {
 		String k_nickname = (String) userInfo.get("nickname");
 		System.out.println("mvo값에 담을 이메일 값: " + k_email);
 		System.out.println("mvo값에 담을 닉네임 값." + k_nickname);
-
+		
+		
 		// MemberVO mvo2 = new MemberVO(); // 존재유무 체크용으로 임의의 dto인스턴스 생성.
 		mvo.setM_email(k_email);
 		mvo.setM_type("카카오");
@@ -236,7 +244,7 @@ public class BadaController {
 		mvo = memberDao.kakaoSelect(mvo); // 이메일과 가입유형 둘 다 판단 => 이메일 중복 피하기 위함.
 
 		MemberVO mvo2 = new MemberVO();
-		if (mvo == null) { // 여기까지 mvo2였음.
+		if (mvo == null) { // 기존에 db에 카카오 로그인 정보가 없었다면 db에 추가한다.
 			mvo2.setM_email(k_email);
 			mvo2.setM_nickname(k_nickname);
 			mvo2.setM_type("카카오");
@@ -254,17 +262,21 @@ public class BadaController {
 		// mvo가 null이 아닌 경우, 즉 이미 해당 아이디와 유형이 존재히면~
 		mvo2.setM_email(k_email); // 세션값을 이용하기 위함.
 		mvo2.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
+		mvo2.setM_type("카카오");
 		session.setAttribute("email", mvo2.getM_nickname());
 		session.setAttribute("nickname", mvo2.getM_nickname());
-		System.out.println("로그인 성공으로 담은 세션값 " + mvo2.getM_email());
-		System.out.println("로그인 성공으로 담은 세션값 2 : " + mvo2.getM_nickname());
+		session.setAttribute("type", mvo2.getM_type());
+		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo2.getM_email());
+		System.out.println("카카오 로그인 성공으로 담은 세션값2 닉네임 : " + mvo2.getM_nickname());
+		System.out.println("카카오 로그인 성공으로 담은 세션값3 가입유형 : " + mvo2.getM_type());
+		
 		return "user/home/home";
 	} // 카카오로그인
 
 	@RequestMapping("/findEmailPopup.do")
 	public String findEmailPopup(Model model, HttpServletRequest request) {
 
-		return "user/login/findEmail";
+		return "layouts/findEmail";
 	};
 
 	// 이메일 인증화면으로 이동
@@ -279,7 +291,7 @@ public class BadaController {
 		return "user/login/userTermsOfService";
 	}
 
-	// 이메일 중복체크
+	// 일반회원 이메일 중복체크
 	@PostMapping("/ajaxEmailCheck.do")
 	@ResponseBody
 	public String ajaxEmailCheck(HttpServletRequest request, Model model) {
@@ -291,6 +303,8 @@ public class BadaController {
 		}
 		return check;
 	}
+	
+	
 
 	// 이메일 인증
 	@RequestMapping(value = "/ajaxChkNum.do", method = RequestMethod.GET)
@@ -405,6 +419,7 @@ public class BadaController {
 		mvo = memberDao.memberFindEmail(mvo);
 
 		String responseText = null;
+		
 		if (mvo != null) {
 			String email = mvo.getM_email();
 			String type = mvo.getM_type();
@@ -437,6 +452,19 @@ public class BadaController {
 		return "user/login/counselorEmailCheck";
 	}
 	
+	// 상담사 이메일 중복체크
+		@PostMapping("/cAjaxEmailCheck.do")
+		@ResponseBody
+		public String cAjaxEmailCheck(HttpServletRequest request, Model model, CounselorVO cvo) {
+			cvo.setC_email(request.getParameter("chkEmail"));
+			boolean b = counselorDao.counselorEmailCheck(cvo);
+			String check = "0";
+			if (b) { // 중복 이메일이 존재하는 경우.
+				check = "1";
+			}
+			return check;
+		}
+	
 	// 상담사 회원가입 양식 화면
 	@RequestMapping("/counselorJoinForm.do")
 	public String counselorJoinForm(Model model, HttpServletRequest request) {
@@ -457,7 +485,7 @@ public class BadaController {
 		cvo.setC_password(request.getParameter("password"));
 		cvo.setC_address(request.getParameter("address"));
 		cvo.setC_phone(request.getParameter("phone"));
-		cvo.setC_grade(request.getParameter("grade"));
+		cvo.setC_grade("심리상담사");   // 기본값으로 심리상담사 줌.
 		cvo.setC_admin("C");
 		
 		counselorDao.counselorInsert(cvo);
@@ -814,15 +842,32 @@ public class BadaController {
 	}
 	
 	
-	
 	/* =============사용자 마이페이지============ */
 	
-	// 사용자 마이페이지 이동
+	
+	// 사용자 마이페이지 이동. 그전에 세션값이 없는 회원에겐 '마이페이지'가 노출이 되지 않도록 나중에 수정한다. 
 	@RequestMapping("/userMypage.do")
-	public String userMypage(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String userMypage(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model) {
 		
+		// 이메일, 가입유형 세션값을 통해 해당 유저의 모든 정보를 조회해서 마이페이지로 데이터를 넘긴다.
+		mvo.setM_email( (String) session.getAttribute("email") );
+		mvo.setM_type( (String) session.getAttribute("type"));
 		
+		System.out.println("세션값 이메일 담겼는지 확인: " + mvo.getM_email());
+		System.out.println("세션값 가입유형 담겼는지 확인: " + mvo.getM_type());
+		
+		model.addAttribute("member", memberDao.mypageSelectList(mvo));
+		
+		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
+		
+	}
+	
+	// 사용자 비밀번호 변경 팝업 
+	@RequestMapping("/passwordPopup.do")
+	public String passwordPopup(HttpServletRequest request, Model model) {
+		
+		return "layouts/updatePassword";
 	}
 	
 	
