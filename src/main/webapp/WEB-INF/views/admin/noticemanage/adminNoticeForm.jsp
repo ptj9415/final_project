@@ -81,6 +81,38 @@ h3 {
 #title {
 	width: 400px;
 }
+
+#submitbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
+}
+
+#backbtn {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid #EB4646;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	margin-right: 10px;
+}
+
+#n_category {
+	width: 530px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
+
+#n_title {
+	width: 530px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
 </style>
 </head>
 <body>
@@ -105,14 +137,14 @@ h3 {
 								<table class="table table-hover text-nowrap" id="noticetable">
 									<tr>
 										<th>말머리</th>
-										<td><select name="category" id="category">
+										<td><select name="n_category" id="n_category">
 												<option value="전체" selected="selected">전체</option>
 												<option value="긴급">긴급</option>
 												<option value="이벤트">이벤트</option>
 												<option value="기타">기타</option>
 										</select></td>
 										<th>제목</th>
-										<td><input type="text" name="title" id="title"></td>
+										<td><input type="text" name="n_title" id="n_title"></td>
 									</tr>
 									<tr>
 										<th>내용</th>
@@ -123,17 +155,16 @@ h3 {
 										<th>첨부파일</th>
 										<td colspan="3"><div class="filebox">
 												<input class="uploadname" value="첨부파일" placeholder="첨부파일">
-												<label for="filename">파일 찾기</label> <input type="file"
+												<label for="fileName">파일 찾기</label> <input type="file"
 													id="fileName" name="fileName">
 											</div></td>
 									</tr>
 								</table>
-								<input type="hidden" name="writer" id="writer" value="관리자">
-							<div class="btndiv">
-								<button type="submit" id="submitbtn">등록</button>
-								<button type="button" id="backbtn"
-									onclick="location.href='adminNoticeList.do'">돌아가기</button>
-							</div>
+								<div class="btndiv">
+									<button type="submit" id="submitbtn">등록</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='adminNoticeList.do'">돌아가기</button>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -143,7 +174,6 @@ h3 {
 	</section>
 </body>
 <script>
-
 	// Summernote 에디터 설정 시작.
 	$('.summernote')
 			.summernote(
