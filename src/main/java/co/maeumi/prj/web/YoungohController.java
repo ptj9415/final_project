@@ -530,7 +530,7 @@ public class YoungohController {
 
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo) {
-		groupCounselDao.groupReserveInsert(vo);
+		groupCounselDao.groupReserveInsert(vo); 
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
 		int orderInsert = orderDao.orderInsert(ovo);

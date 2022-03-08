@@ -619,6 +619,7 @@ div.asdf {
         var endDay = new Date(currentYear, currentMonth + 1, 0);
         var nextDate = endDay.getDate();
         var nextDay = endDay.getDay();
+        
 
         // console.log(prevDate, prevDay, nextDate, nextDay);
 
