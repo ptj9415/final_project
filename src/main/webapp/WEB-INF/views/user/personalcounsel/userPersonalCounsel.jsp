@@ -13,16 +13,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <title>개인상담</title>
 <style>
-/* html {
-	-webkit-font-smoothing: antialiased!important;
-	-moz-osx-font-smoothing: grayscale!important;
-	-ms-font-smoothing: antialiased!important;
-} */
-/* body {
-  font-family: 'Open Sans', sans-serif;
-  font-size:16px;
-  color:#555555; 
-} */
+
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -430,17 +421,13 @@
 				<input id="card-2" class="card-accordion-checkbox" type="checkbox">
 				<label class="card-accordion-label" for="card-2">사랑/우정</label>
 				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="연인"
-						onclick="doOpenCheck(this);"> 연인</label><br> <label><input
-						name="onecheck" type="checkbox" value="데이트폭력"
-						onclick="doOpenCheck(this);"> 데이트폭력</label><br> <label><input
-						name="onecheck" type="checkbox" value="친구관계"
-						onclick="doOpenCheck(this);"> 친구관계</label><br> <label><input
-						name="onecheck" type="checkbox" value="부부"
-						onclick="doOpenCheck(this);"> 부부</label><br> <label><input
-						name="onecheck" type="checkbox" onclick="doOpenCheck(this);">
+					<label><input name="onecheck" type="checkbox" value="연인" onclick="doOpenCheck(this);"> 연인</label><br> 
+					<label><input name="onecheck" type="checkbox" value="데이트폭력" onclick="doOpenCheck(this);"> 데이트폭력</label><br> 
+					<label><input name="onecheck" type="checkbox" value="친구관계" onclick="doOpenCheck(this);"> 친구관계</label><br> 
+					<label><input name="onecheck" type="checkbox" value="부부" onclick="doOpenCheck(this);"> 이별</label><br> 
+					<label><input name="onecheck" type="checkbox" onclick="doOpenCheck(this);">부부관계</label>
 						<!-- <input name="onecheck" class="text-field" type="text"
-				placeholder="직접입력..">  --></label>
+				placeholder="직접입력..">  -->
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 
 				</div>
@@ -449,14 +436,9 @@
 				<input id="card-3" class="card-accordion-checkbox" type="checkbox">
 				<label class="card-accordion-label" for="card-3">진로/취업</label>
 				<div class="card-accordion-content">
-					<label>
-						<input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label>
-						<br> 
-					<label>
-					<input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label><br>
+					<label><input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label><br> 
+					<label><input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label><br> 
+					<label><input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label><br>
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 
 				</div>

@@ -838,7 +838,7 @@
   content: "\f10b";
 }
 .icon-circle-o:before {
-  content: "\f10c";
+ /*  content: "\f10c"; */
 }
 .icon-quote-left:before {
   content: "\f10d";
@@ -850,7 +850,7 @@
   content: "\f110";
 }
 .icon-circle:before {
-  content: "\f111";
+ /*  content: "\f111"; */
 }
 .icon-mail-reply:before {
   content: "\f112";

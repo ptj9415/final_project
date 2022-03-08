@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Pagination;
@@ -33,6 +34,9 @@ public class EjuController {
 	@Autowired
 	private PersonalcounselService personalCounselDao;
 
+	
+	@Autowired
+	private CounselorService counselorDao;
 	Pagination page; // 전역변수로 선언해준것
 
 	/* =====사용자 화면===== */
@@ -52,7 +56,21 @@ public class EjuController {
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
 		model.addAttribute("counselorList", counselorList);
 		model.addAttribute("type", test);
+		
 		return "user/personalcounsel/personalCounselStep2";
+	}
+	// 상담사 자세히 보기 
+	@RequestMapping("/counselorDetail.do")
+	public String counselorDetail(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
+			HttpServletRequest request, HttpSession session){
+		String type = request.getParameter("onecheck");
+		vo = personalCounselDao.CounselorSelect(vo);
+		System.out.println("상담사디테일페이지왜않ㄴㅏ와 "+ c_email);
+		System.out.println(type);
+		model.addAttribute("type", type);
+		model.addAttribute("email", c_email);
+		model.addAttribute("counselorSelect", vo);
+		return "user/personalcounsel/counselorDetail";
 	}
 
 	// 개인상담 신청 step3
@@ -107,17 +125,25 @@ public class EjuController {
 		System.out.println("app주제 : " + type2);
 		System.out.println("방식,가격 : " + type3);
 		
+		
+		vo = personalCounselDao.CounselorSelect(vo);
+		System.out.println(vo.getC_picturepath());
 		model.addAttribute("time", time);
 		model.addAttribute("c_email",c_email);
 		model.addAttribute("type2",type2);
 		model.addAttribute("type3",type3);
-		
+		model.addAttribute("counselorSelect", vo);
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
 	
 	//결제완료 페이지
-	
+	@RequestMapping("/paymentComplete.do")
+	public String paymentComplete() {
+		
+		
+		return "user/personalcounsel/paymentComplete";
+	}
 
 	// css sample page
 	@RequestMapping("/samplePage.do")

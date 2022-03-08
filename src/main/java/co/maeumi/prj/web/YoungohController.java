@@ -539,7 +539,7 @@ public class YoungohController {
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo) {
-		groupCounselDao.groupReserveInsert(vo);
+		groupCounselDao.groupReserveInsert(vo); 
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
 		int orderInsert = orderDao.orderInsert(ovo);
