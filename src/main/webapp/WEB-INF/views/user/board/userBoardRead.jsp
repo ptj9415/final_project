@@ -125,9 +125,9 @@ th, td {
 					
 					<c:otherwise>
 						<br>
-						<br>
 						<p align="center">아직 댓글이 없어요 😥 댓글을 작성해 보세요 🥰</p>
 						<br>
+						<hr align="left"width: 90%>
 					</c:otherwise>
 				</c:choose>
 			</ol>
@@ -147,7 +147,6 @@ th, td {
 		</c:if>
 
 		<c:if test="${empty email}">
-			<hr align="left"width: 90%>
 			<br>
 			<br>
 			<br>
