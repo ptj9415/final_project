@@ -38,4 +38,10 @@
 		AND C_NO =
 		#{c_no}
 	</delete>
+	
+	<select id="couponMemberSelectList" parameterType="co.maeumi.prj.coupon.service.CouponVO" 
+	resultType="co.maeumi.prj.coupon.service.CouponVO">
+		SELECT * FROM COUPON
+		WHERE M_EMAIL = #{m_email}	
+	</select>
 </mapper>

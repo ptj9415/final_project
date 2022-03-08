@@ -45,5 +45,11 @@ public class CouponServiceImpl implements CouponService {
 		return map.couponSelect(cvo);
 	}
 
+	@Override
+	public List<CouponVO> couponMemberSelectList(CouponVO vo) {
+		// TODO Auto-generated method stub
+		return map.couponMemberSelectList(vo);
+	}
+
 	
 }

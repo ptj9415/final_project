@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -329,7 +330,6 @@ form {
 						enim, at elementum enim quam vel purus. Curabitur semper malesuada
 						urna ut suscipit.</p>
 				</div>
-
 			</div>
 			<!--End Invoice Mid-->
 			<div id="invoice-bot">
@@ -357,12 +357,13 @@ form {
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem">
-								<p class="itemtext"></p> <select name='coupon'>
-									<option value='' selected>-- 선택 --</option>
-									<option value='2000'>회원가입 축하쿠폰 (2000원)</option>
-									<option value='500'>상담후기 작성 쿠폰(500원)</option>
-							</select>
+							<td class="tableitem"><p class="itemtext"></p> 
+								<select name='checkbox' id="checkbox" onchange="change()">
+											<option value='' selected>-- 선택 --</option>
+										<c:forEach items="${coupon }" var="coupon">
+											<option value='${coupon.c_price}'>${coupon.c_name} (${coupon.c_price}원)</option>									
+										</c:forEach>
+								</select>
 							</td>
 						</tr>
 						<tr class="service">
@@ -375,20 +376,21 @@ form {
 							<td class="tableitem"><p class="itemtext">할인 금액</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext" id="discount" name="discount"></p></td>
 						</tr>
 						<tr class="tabletitle">
 							<td class="Rate"><h2>총 결제 금액</h2></td>
 							<td></td>
 							<td></td>
-							<td class="payment"><h2>1234</h2></td>
+							<td class="payment" id="totalPrice"></td>
 						</tr>
 					</table>
 				</div>
+				<input type="hidden" id="g_price" name="g_price" value="${groupInvoice.gc_price}">
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="gr_price" name="gr_price" value="${groupInvoice.gc_price}">
+					<input type="hidden" id="gr_price" name="gr_price" value="">
 					<input type="hidden" id="or_uid" name="or_uid">
 				</form>
 				<!--End Table-->
@@ -407,6 +409,19 @@ form {
 		</div>
 		<!--End Invoice-->
 	</div>
+	<script>
+	   function change(){
+		   var price = $("#g_price").val();
+		   var priceSelect = $("#checkbox").val();
+		   $("#discount").text(' '+'-'+priceSelect);
+		   var ddd = price-priceSelect;
+		   alert(ddd);
+		   $("#totalPrice").text(ddd);
+		   $("#gr_price").val(ddd);
+		   
+		   
+	   }	
+	</script>
 	<script>
 		var gr_price = $("#gr_price").val();
         $(".check_module").click(function () {

@@ -66,8 +66,8 @@
 	</select>
 
 	<select id="countGroupCounsel" resultType="int">
-		SELECT COUNT(*)
-		FROM GROUP_COUNSEL
+			SELECT COUNT(*)
+			FROM GROUP_COUNSEL
 	</select>
 
 	<select id="pageSelectList"
@@ -78,7 +78,6 @@
 			SELECT ROWNUM RN, A.*
 			FROM (SELECT * FROM group_counsel
 			ORDER BY gc_no DESC
-	
 			) A
 			)
 			WHERE RN BETWEEN #{start} AND #{end}

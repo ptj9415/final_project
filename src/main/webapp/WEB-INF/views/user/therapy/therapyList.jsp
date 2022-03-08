@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,15 +171,10 @@ form {
 
 .card-image > img {
 	display: block;
-	width: 100%;
+	width:300px; 
+	height:300px;
 	opacity: 0; /* visually hide the img element */
 }
-
-.card-image.is-loaded {
-	filter: none; /* remove the blur on fullres image */
-	transition: filter 1s;
-}
-
 /* Layout Styles */
 
 
@@ -278,69 +274,38 @@ form {
 		</div>
 	</div>
   <ul class="card-list">
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg.jpg)" data-image-full="resources/user/images/testimg.jpg">
-                <img src="resources/user/images/testimg.jpg" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg7.png)" data-image-full="resources/user/images/testimg7.png">
-                <img src="resources/user/images/testimg7.png" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-        
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg3.jpg)" data-image-full="resources/user/images/testimg3.jpg">
-                <img src="resources/user/images/testimg3.jpg" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-          
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-        
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg4.png)" data-image-full="resources/user/images/testimg4.png">
-                <img src="resources/user/images/testimg4.png" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-          
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-        
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg5.jpg)" data-image-full="resources/user/images/testimg5.jpg">
-                <img src="resources/user/images/testimg5.jpg" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-          
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-        
-        <li class="card">
-            <a class="card-image" href="home.do" target="_blank" style="background-image: url(resources/user/images/testimg6.jpeg)" data-image-full="resources/user/images/testimg6.jpeg">
-                <img src="resources/user/images/testimg6.jpeg" alt="Psychopomp" />
-            </a>
-            <a class="card-description" target="_blank">
-          
-                <p class="therapy-title">요동치는 마음을 어쩌면 좋지?</p>
-                <p class="sub-title">당신이 지금 당장 명상을 시작해야 하는 이유</p>
-               </a>
-        </li>
-    </ul>
+        <c:forEach items="${therapylist}" var="therapyList">
+	        <li class="card">
+	            <a href="therapyDetail.do?t_no=${therapyList.t_no}">
+	                <img style="width:300px;height:300px;" src="therapysumnail/${therapyList.t_picture }" alt="Psychopomp"
+	                onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';" />
+	            </a>
+	            <a class="card-description" target="_blank">
+	                <p class="therapy-title">${therapyList.t_title}</p>
+	                <p class="sub-title">${therapyList.t_writedate }</p>
+	                <p class="sub-title">${therapyList.t_name }</p>
+	            </a>
+	        </li>
+        </c:forEach>
+    </ul>	
+    		<div>
+			  <ul class="pagination">
+			    <li class="page-item">
+			      <a class="page-link" href="userTerapy.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+			    </li>
+			    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+					<c:if test="${status.count ne page.nowPage}">
+			    		<li class="page-item"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}</a></li>
+			   		</c:if>
+			   		<c:if test="${status.count eq page.nowPage}">
+						<li class="page-item active"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+			   		</c:if>
+			    </c:forEach>
+			    <li class="page-item">
+			      <a class="page-link" href="userTerapy.do?nowPage=${page.next}">Next</a>
+			    </li>
+			  </ul>
+			</div>
    <script>
    window.addEventListener('load', function() {
 		// setTimeout to simulate the delay from a real page load
