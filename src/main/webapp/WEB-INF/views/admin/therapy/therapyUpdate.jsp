@@ -138,14 +138,15 @@ h3 {
 									<tr>
 										<th>썸네일</th>
 										<td><div class="filebox">
-												<input class="uploadname" value="${therapy.t_picture }"
-													placeholder="첨부파일"> <label for="filename">파일
-													찾기</label> <input type="file" id="filename" name="filename">
+												<input class="uploadname"
+													placeholder="첨부파일"> <label for="filename">파일찾기</label> 
+													<input type="file" id="filename" name="filename" value="${therapy.t_picture}">
+													<div>${therapy.t_picture}</div>
 											</div></td>
 									</tr>
 								</table>
 								<div class="btndiv">
-									<button type="submit" id="submitbtn">등록</button>
+									<button type="submit" id="submitbtn">수정하기</button>
 									<button type="button" id="backbtn"
 										onclick="location.href='admintherapy.do'">돌아가기</button>
 								</div>

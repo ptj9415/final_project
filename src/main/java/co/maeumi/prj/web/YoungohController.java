@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
-import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.coupon.service.CouponService;
+import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.order.service.orderService;
@@ -44,6 +45,9 @@ public class YoungohController {
 
 	@Autowired
 	private orderService orderDao;
+	
+	@Autowired
+	private CouponService couponDao;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
@@ -376,6 +380,7 @@ public class YoungohController {
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+		System.out.println("jpg로 들어오나요 : "+extension);
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
 
 		File targetFile = new File(fileRoot + savedFileName);
@@ -490,9 +495,7 @@ public class YoungohController {
 	@RequestMapping("/therapyDelete.do")
 	@ResponseBody
 	public String therapyDelete(HttpServletRequest request, TherapyVO vo, Model model) {
-
 		String t_no = request.getParameter("t_no");
-		System.out.println(t_no);
 		int t_nos = Integer.parseInt(t_no);
 		vo.setT_no(t_nos);
 
@@ -513,10 +516,7 @@ public class YoungohController {
 	// 그룹 상담 유저 상세 페이지입니다.
 	@RequestMapping("/userGroup.do")
 	public String userGroup(GroupcounselVO vo, Model model) {
-		System.out.println(vo.getGc_no());
-		
 		GroupcounselVO gvo = groupCounselDao.selectUserGroup(vo);
-
 		String date = gvo.getGc_date();
 		date = date.substring(0, 10);
 		gvo.setGc_date(date);
@@ -526,13 +526,17 @@ public class YoungohController {
 	}
 
 	//그룹 상담 유저 invoice 페이지입니다.
+	//유저 이메일 세션값이 들어가야 됩니다.
 	@RequestMapping("/usergroupinvoice.do")
-	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request) {
+	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
 		String gc_no = request.getParameter("gc_no");
 		System.out.println(gc_no);
 		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
 		gvo.setM_email("이메일 성공");
+		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
+		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
 		model.addAttribute("groupInvoice", gvo);
+		model.addAttribute("coupon", cplist);
 		return "user/groupcounsel/groupInvoice";
 	}
 	
@@ -552,8 +556,24 @@ public class YoungohController {
 	
 	//심리 테라피 유저 페이지 폼 입니다.
 	@RequestMapping("/userTerapy.do")
-	public String userTerapy() {
-		
+	public String userTerapy(Model model, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
+		if (nowPage == null) {
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+		} else {
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+		}
+		List<TherapyVO> list = therapyDao.therapyLists(page);
+		model.addAttribute("therapylist", list);
+		model.addAttribute("page", page);
 		return "user/therapy/therapyList";
+	}
+	
+	//심리 테라피 디테일 페이지 입니다.
+	@RequestMapping("/therapyDetail.do")
+	public String therapyDetail(TherapyVO vo, Model model) {
+		TherapyVO gvo = therapyDao.selectTherapyDetail(vo);
+		model.addAttribute("selectTherapy", gvo);
+		return "user/therapy/therapyDetail";
 	}
 }

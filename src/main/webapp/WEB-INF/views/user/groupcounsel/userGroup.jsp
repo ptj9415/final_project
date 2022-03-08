@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -577,8 +578,6 @@ img {
 <script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="subHomeFile/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="subHomeFile/dist/js/demo.js"></script>
 <script>
   $(document).ready(function() {
     $('.product-image-thumb').on('click', function () {

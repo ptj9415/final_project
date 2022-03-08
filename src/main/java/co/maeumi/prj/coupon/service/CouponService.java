@@ -8,5 +8,5 @@ public interface CouponService {
 	List<CouponVO> couponSelect(CouponVO cvo);
 	int couponInsert(CouponVO cvo);
 	int couponDelete(CouponVO cvo);
-	
+	List<CouponVO> couponMemberSelectList(CouponVO vo);
 }
