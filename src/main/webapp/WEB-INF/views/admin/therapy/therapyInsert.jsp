@@ -97,6 +97,12 @@ h3 {
 	background-color: white;
 	color: red;
 }
+
+#t_title {
+	width: 530px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
 </style>
 </head>
 <body>
@@ -138,7 +144,7 @@ h3 {
 									</tr>
 								</table>
 								<div class="btndiv">
-								<input type="hidden" name="t_no" value="${therapy.t_no}">
+									<input type="hidden" name="t_no" value="${therapy.t_no}">
 									<button type="submit" id="submitbtn">등록</button>
 									<button type="button" id="backbtn"
 										onclick="location.href='admintherapy.do'">돌아가기</button>
