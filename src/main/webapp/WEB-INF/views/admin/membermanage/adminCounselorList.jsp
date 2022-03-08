@@ -247,7 +247,7 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="membertable">
+							<table class="table text-nowrap" id="membertable">
 								<thead>
 									<tr>
 										<th>이름</th>

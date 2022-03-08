@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
 }
 
 .row {
@@ -59,7 +60,8 @@ h3 {
 	box-shadow: inset 0 0 0 transparent;
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-#readTd:hover{
+
+#readTd:hover {
 	cursor: pointer;
 }
 
@@ -96,6 +98,7 @@ h3 {
 	border: none;
 	margin-right: 15px;
 }
+
 .noticeBtn {
 	float: right;
 }
@@ -138,8 +141,7 @@ $(document).ready(function(){
 								<div class="col-6">
 									<div class="form-group">
 										<label>제목</label> <br> <input type="text"
-											class="form-control" id="n_title"
-											placeholder="제목을 입력해주세요.">
+											class="form-control" id="n_title" placeholder="제목을 입력해주세요.">
 									</div>
 								</div>
 								<div class="col-6">
@@ -148,7 +150,7 @@ $(document).ready(function(){
 											<option value="all">전체</option>
 											<option value="긴급">긴급</option>
 											<option value="이벤트">이벤트</option>
-											<option value="공지">공지</option>											
+											<option value="공지">공지</option>
 										</select>
 									</div>
 								</div>
@@ -195,8 +197,8 @@ $(document).ready(function(){
 										~ ${pagination.end }건)</span>
 								</c:otherwise>
 							</c:choose>
-							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType" id="listSize"
-								onchange="page(1)">
+							&nbsp;&nbsp;&nbsp;<select class="paging" name="searchType"
+								id="listSize" onchange="page(1)">
 								<option value="10"
 									<c:if test="${pagination.getListSize() == 10 }">selected="selected"</c:if>>10건
 									보기</option>
@@ -208,14 +210,15 @@ $(document).ready(function(){
 									보기</option>
 							</select>
 							<div class="noticeBtn">
-								 <button id="allDelete" >일괄 삭제</button>
-	              			     <button onclick="location.href='adminNoticeForm.do'">공지사항 작성</button>
+								<button id="allDelete">일괄 삭제</button>
+								<button onclick="location.href='adminNoticeForm.do'">공지사항
+									작성</button>
 							</div>
-							 <br> <br>
+							<br> <br>
 							<table class="table table-hover text-nowrap" id="membertable">
 								<thead>
 									<tr>
-										<th><input type="checkbox"  id="allCheck"/></th>
+										<th><input type="checkbox" id="allCheck" /></th>
 										<th>작성자</th>
 										<th>말머리</th>
 										<th>제목</th>
@@ -228,18 +231,22 @@ $(document).ready(function(){
 								<tbody>
 									<c:forEach items="${notice }" var="notice">
 										<tr>
-										<td><input type="checkbox"  name="check" data-partNum="${notice.n_no }"></td>
-										<td>${notice.n_writer }</td>
-										<td>${notice.n_category }</td>
-										<td id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
-										<td>${notice.n_writedate }</td>
-										<td id="status">${notice.n_status }</td>
-										<td>
-											<button type="button" onclick="noticeUpdate('${notice.n_no}')">수정</button>
-											<button type="button" onclick="noticeDelete('${notice.n_no}')">삭제</button>
-										</td>											
+											<td><input type="checkbox" name="check"
+												data-partNum="${notice.n_no }"></td>
+											<td>${notice.n_writer }</td>
+											<td>${notice.n_category }</td>
+											<td id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
+											<td>${notice.n_writedate }</td>
+											<td id="status">${notice.n_status }</td>
 											<td>
-												<button type="button" class="managebtn"	id="statusBtn" onclick="statusBtn('${notice.n_no}' , '${notice.n_status }')">
+												<button type="button"
+													onclick="noticeUpdate('${notice.n_no}')">수정</button>
+												<button type="button"
+													onclick="noticeDelete('${notice.n_no}')">삭제</button>
+											</td>
+											<td>
+												<button type="button" class="managebtn" id="statusBtn"
+													onclick="statusBtn('${notice.n_no}' , '${notice.n_status }')">
 													<c:if test="${notice.n_status == '고정'}">고정 취소</c:if>
 													<c:if test="${notice.n_status != '고정'}">고정 등록</c:if>
 												</button>
@@ -249,22 +256,24 @@ $(document).ready(function(){
 								</tbody>
 							</table>
 							<!-- 공지사항 조회할 때 넘어갈 폼값. -->
-							<form action="noticeRead.do" id="frm" method="post"> 
-            					<input type="hidden" name="no" id="no">
-            				</form>
-            				<!-- 공지사항 수정할 때 넘어갈 폼값 -->
-            				<form action="noticeUpdate.do" id="frm2" method="post"> 
-            					<input type="hidden" name="updateNo" id="updateNo">
-            				</form>
+							<form action="noticeRead.do" id="frm" method="post">
+								<input type="hidden" name="no" id="no">
+							</form>
+							<!-- 공지사항 수정할 때 넘어갈 폼값 -->
+							<form action="noticeUpdate.do" id="frm2" method="post">
+								<input type="hidden" name="updateNo" id="updateNo">
+							</form>
 							<br>
 							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
-									<c:if test="${pagination.prev}"> 
-										<li class="page-item"><a class="page-link" href="#"	onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}', '${search.n_title}', '${search.n_category}')">이전</a></li>
+									<c:if test="${pagination.prev}">
+										<li class="page-item"><a class="page-link" href="#"
+											onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}', '${search.n_title}', '${search.n_category}')">이전</a></li>
 									</c:if>
-									<c:forEach begin="${pagination.startPage}" 
+									<c:forEach begin="${pagination.startPage}"
 										end="${pagination.endPage}" var="NoticeNo">
-										<li class="page-item <c:out value="${pagination.page == NoticeNo ? 'active' : ''}"/> ">
+										<li
+											class="page-item <c:out value="${pagination.page == NoticeNo ? 'active' : ''}"/> ">
 											<a class="page-link" href="#"
 											onClick="fn_pagination('${NoticeNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.n_title}', '${search.n_category}')">
 												${NoticeNo} </a>

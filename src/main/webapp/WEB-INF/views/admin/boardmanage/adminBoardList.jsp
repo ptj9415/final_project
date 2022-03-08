@@ -10,7 +10,26 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
 }
 
 .btndiv {
@@ -101,6 +120,10 @@ h3 {
 	height: 30px;
 	width: 80px;
 }
+
+.select2-container .select2-selection--single {
+	height: 38px;
+	border: 0.5px solid rgb(206, 212, 218);
 }
 </style>
 </head>
@@ -114,7 +137,12 @@ h3 {
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
-						<p id="headerp">검색</p>
+						<p id="headerp">
+							검색
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -132,7 +160,8 @@ h3 {
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label>주제</label><br> <select id="select2" name="select2">
+										<label>주제</label><br> <select id="select2" name="select2"
+											style="width: 100%; height: 38px;">
 											<option value="all">전체</option>
 											<option value="연애">연애</option>
 											<option value="취업/진로">취업/진로</option>
@@ -166,13 +195,13 @@ h3 {
 										<label>작성일</label> <br> <input type="date" name="b_wdate"
 											id="b_wdate" class="form-control">
 									</div>
-									<div class="btndiv">
-										<button type="reset" id="clearbtn">초기화</button>
-										<button type="button" id="btnSearch">
-											검색&nbsp;<i class="fa fa-search"></i>
-										</button>
-									</div>
 								</div>
+							</div>
+							<div class="btndiv">
+								<button type="reset" id="clearbtn">초기화</button>
+								<button type="button" id="btnSearch">
+									검색&nbsp;<i class="fa fa-search"></i>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -188,7 +217,12 @@ h3 {
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
-						<p id="headerp">자유게시판 목록</p>
+						<p id="headerp">
+							자유게시판 목록
+							<button type="button" class="minusbtn" id="minusbtn2">
+								<i id="minusicon2" class="fa fa-minus"></i>
+							</button>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -209,7 +243,7 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select> <br> <br>
-							<table class="table table-hover text-nowrap" id="boardTable">
+							<table class="table text-nowrap" id="boardTable">
 								<thead>
 									<tr>
 										<th style="width: 150px">작성자</th>
@@ -221,14 +255,15 @@ h3 {
 								</thead>
 								<tbody>
 									<c:forEach items="${board}" var="board">
-										<tr class="color"
-											onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">
+										<tr>
 											<td>${board.m_nickname}</td>
 											<td>${board.b_subject}</td>
 											<td>${board.b_title}</td>
 											<td>${board.b_wdate}</td>
 											<!-- 수정 / 삭제 부분은 클릭 안되게  -->
 											<td onclick="event.cancelBubble=true;">
+												<button type="button" name="detailbtn" id="detailbtn"
+													class="button" onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">상세보기</button>
 												<button type="button" name="delete" id="delete"
 													class="button" onclick="deleteFnc('${board.b_no}')">삭제</button>
 											</td>
@@ -386,6 +421,7 @@ h3 {
 		// select 2
 		$(document).ready(function() {
 			$("#select2").select2();
+			$('#select2').css('height', '38px');
 		});
 		
 	</script>
