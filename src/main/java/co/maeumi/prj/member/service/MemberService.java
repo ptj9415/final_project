@@ -21,6 +21,9 @@ public interface MemberService {
 	int getMemberListCnt(Search svo) throws Exception; // 데이터가 총 몇건인지 보여주는 숫자
 	public List<MemberVO> memberSearchselect(Search svo) throws Exception; // 검색을 위한 SELECTLIST
 	int memberInfoUpdate(MemberVO mvo);
+	
+	// 마이페이지 이메일과 가입유형 구분
+	MemberVO mypageSelectList(MemberVO mvo);
 
 	
 }

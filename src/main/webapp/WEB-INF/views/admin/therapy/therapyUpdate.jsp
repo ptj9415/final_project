@@ -103,6 +103,12 @@ h3 {
 	background-color: white;
 	color: red;
 }
+
+#t_title {
+	width: 530px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
 </style>
 </head>
 <body>

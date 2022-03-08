@@ -74,6 +74,10 @@ h3 {
 	border-bottom: 1px solid black;
 }
 
+#membertable>thead>tr {
+	background-color: rgb(245, 245, 245);
+}
+
 #managebtn {
 	background-color: #1E90FF;
 	color: white;
@@ -90,6 +94,8 @@ h3 {
 	position: relative;
 	top: 7px;
 	margin-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .minusbtn {
@@ -102,13 +108,38 @@ h3 {
 .noticeBtn {
 	float: right;
 }
+
+#deleteallbtn, #deletebtn {
+	background-color: #EB4646;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#noticeaddbtn, #updatebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#statusBtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
 </style>
 <script>
 // 검색창 항목들 초기화시킴
 $(document).ready(function(){
 	 $("#clearbtn").on("click", function() {
 		 $("#n_title").val("");
-		 $("#n_category").val("");
+		 $("#n_category").val("all");
 	 });
  
 });
@@ -210,12 +241,12 @@ $(document).ready(function(){
 									보기</option>
 							</select>
 							<div class="noticeBtn">
-								<button id="allDelete">일괄 삭제</button>
-								<button onclick="location.href='adminNoticeForm.do'">공지사항
-									작성</button>
+								<button id="deleteallbtn">일괄 삭제</button>
+								<button id="noticeaddbtn"
+									onclick="location.href='adminNoticeForm.do'">공지사항 작성</button>
 							</div>
 							<br> <br>
-							<table class="table table-hover text-nowrap" id="membertable">
+							<table class="table text-nowrap" id="membertable">
 								<thead>
 									<tr>
 										<th><input type="checkbox" id="allCheck" /></th>
@@ -239,9 +270,9 @@ $(document).ready(function(){
 											<td>${notice.n_writedate }</td>
 											<td id="status">${notice.n_status }</td>
 											<td>
-												<button type="button"
+												<button type="button" id="updatebtn"
 													onclick="noticeUpdate('${notice.n_no}')">수정</button>
-												<button type="button"
+												<button type="button" id="deletebtn"
 													onclick="noticeDelete('${notice.n_no}')">삭제</button>
 											</td>
 											<td>
@@ -337,14 +368,12 @@ $(document).ready(function(){
 		// 공지사항 조회하기 (noticeRead)
 		function noticeRead(str){
 			frm.no.value = str;
-			alert(frm.no.value);  // 값이 제대로 갔는지 체크
 			frm.submit();
 		};
 		
 		// 공지사항 수정하기 (noticeUpdate)
 		function noticeUpdate(str) {
 			frm2.updateNo.value = str;
-			alert(frm2.updateNo.value);  // 대상이 맞는지 체크.
 			frm2.submit();
 		};
 		

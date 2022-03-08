@@ -81,7 +81,7 @@ $("#emailSendBtn").click(function (){
 	}
 	setTimeout('location.reload()',600000);    //테스트용 1분뒤 페이지 새로고침. 화면설계서엔 5분으로 되어있음.
 	$.ajax({
-		url: "ajaxEmailCheck.do",
+		url: "cAjaxEmailCheck.do",
 		type: "POST",
 		data: {
 			"chkEmail" : inputEmail
