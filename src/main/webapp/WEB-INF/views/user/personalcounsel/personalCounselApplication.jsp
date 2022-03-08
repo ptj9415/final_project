@@ -315,7 +315,7 @@ form {
 			<div id="invoice-mid">
 
 				
-				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}">
+				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
 				<div class="info">
 					
 					<%-- <h2>${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
