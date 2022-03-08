@@ -10,7 +10,7 @@
 body {
 }
 input {
-	width: 250px;
+	width: 300px;
 	height: 30px;
 	text-align: center;
 }
@@ -18,101 +18,111 @@ button {
 	height: 30px;
 	margin-left: 20px;
 }
-.inputForm2 {
-	margin-right: 31px;
+#originPwd {
+	margin-left: 15px;
 }
-#selectEmailBtn {
-	margin-top: 20px;
-	width: 80px;
-	height: 30px;
+#sendPwdChk {
+	width: 100px;	
+}
+#changePwd {
+	margin-right: 90px;	
+	margin-top: 15px;
+}
+#changePwdChk {
+	margin-top: 10px;
 }
 </style>
 <body>
 	<div align="center">
 		<h2>Maeumi.</h2>
-		<div><h3>Email 찾기 서비스. 비번은 알아서~</h3></div>
+		<div><h3>비밀번호 변경</h3></div>
 		<hr>
-		<form id="frm" method="post" action="ajaxFindEmail.do">
+		<!-- 기존 비밀번호 확인 -->
 		<div class="inputForm1">
-			<input type="text" placeholder="회원님의 연락처를 '-'없이 입력해주세요." id="phone" name="phone">
-			<button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호
-				전송</button>
+			<input type="password" placeholder="현재 비밀번호를 입력하세요." id="originPwd" name="originPwd">
+			<input type="button" id="sendPwdChk" name="sendPwdChk"  value="비밀번호 확인">
 		</div><Br>
+		
+		<!-- 변경할 비밀번호 입력 -->
 		<div class="inputForm2">
-			<input type="text" placeholder="인증번호 입력" id="phoneChk"
-				disabled="disabled">
-			<button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">인증확인</button>
+			<input type="password" placeholder="영문, 숫자, 특수문자가 포함된 8~14자리" id="changePwd" name="changePwd" disabled="disabled">
+			<br>
+			<input type="password" placeholder="비밀번호 확인" id="changePwdChk" name="changePwdChk" disabled="disabled">
+			<button type="button" id="pwdChkBtn" onclick="pwdChkBtn()">변경하기</button>
 		</div>
 		<hr>
-		<button type="button" id="selectEmailBtn">조회</button>
-		</form><br>
-		<div id="result"></div>
 	</div>
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <script>
-//coolsms 사용하기 위한 스크립트문. 
-var code2 = "";   // 인증번호값 대입해서 비교용.
-function sendPhoneChk(){
-	var inputPhoneChk = $("#phone").val();
-	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-	
-	if(inputPhoneChk == "" || !regPhone.test(inputPhoneChk)){
-		alert("올바르지 않은 연락처입니다. 다시 입력해주세요.");
-		$("#phone").focus();
-		return false;
-	}
-	alert("인증번호 발송이 완료되었습니다. 휴대폰을 확인해주세요.")
-	$.ajax({
-		type: "GET",
-		url: "ajaxPhoneChk.do?inputPhoneChk=" + inputPhoneChk,
-		success: function(data){
-			console.log("data: " + data);  // 콘솔창에서 결과값 확인용. 
-			
-			if(data == "error"){
-				alert("인증 오류입니다. 다시 입력해주세요");
-			} else {
-				$("#phoneChk").attr("disabled", false);
-				code2 = data;
-			}
-		}
-	}); //ajax
-};
 
-// 휴대폰 인증번호 대조. 
-function chkPhoneBtn() {
-	if( $("#phoneChk").val() == code2) {
-	alert("휴대폰 인증이 완료되었습니다. 조회 버튼을 눌러주세요.");
-	
-} else {
-	alert("인증번호가 일치하지 않습니다. 다시 확인해주시기 바랍니다.");
-	$("#phoneChk").val("");
-	$("#phoneChk").focus();
-}
-};
-
-//ajax구문. 휴대폰 값 전송해서 조회하기.
-$("#selectEmailBtn").on("click", function() {
-	var sendPhone = $("#phone").val(); // 휴대폰 입력한 값을 변수에 담아서 ajax로 넘길 것이다. 
-	$.ajax({
-		type: "POST",
-		url: "ajaxFindEmail.do",
-	 	data: {
-	 		"sendPhoneNum" : sendPhone
-	 	},
-	 	dataType: "text",
-	 	success: function(responseText){
-	 		if(responseText == "NO"){
-	 			alert ("해당하는 이메일이 존재하지 않습니다.");
-	 			//window.close();
-	 		} else {
-	 			alert(responseText);
-	 			$("#result").html(responseText);
-	 		}
-	 	}
+	$("#sendPwdChk").on("click",function(){
 		
-	});
+		var sendPwd = $("#originPwd").val();  // 입력한 원래 비밀번호
+		alert(sendPwd);
+		$.ajax({
+			url: "ajaxPassChk.do",
+			type: "POST",
+			data: {
+				sendPwd  : sendPwd 
+			},
+			dataType : "text",
+			success: function(responseText){
+				if( responseText == "YES"){
+					alert("확인되었습니다. 변경할 비밀번호를 입력해주세요.");
+					$("#changePwd").attr("disabled", false);
+					$("#changePwdChk").attr("disabled", false);
+					$("#changePwd").focus();
+				} else {
+					alert("비밀번호를 다시 입력하세요.");
+					return false;
+				}
+				
+			}
+		})
+	});	
 	
-})
+	/* 변경할 비밀번호 일치하는지 여부. */
+	function pwdChkBtn() {
+		
+		// 먼저 정규식 체크
+		var check = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&^])[A-Za-z\d$@$!%*#?&^]{8,14}$/;
+		var inputPwd = $("#changePwd").val();
+		if (!check.test(inputPwd)) {
+		    alert("비밀번호가 조건식을 만족하지 않습니다. 영문, 숫자, 특수문자가 포함된 8~14자리");
+		    $("#changePwd").focus();
+		    return false;
+		}
+		// 새로운 비밀번호 확인 체크
+		if ($("#changePwd").val() != $("#changePwdChk").val()) {
+		    alert("비밀번호가 일치하지 않습니다.");
+		    $("#changePwd").val("");
+		    $("#changePwdChk").val("");
+		    $("#changePwd").focus();
+		    return false;
+		}
+		
+		$("#changePwd").attr("disabled", "disabled" );
+		$("#changePwdChk").attr("disabled", "disabled" );
+		
+		// 실제 db업데이트 부분.
+		
+		$.ajax({
+			url: "ajaxUpdatePassword.do",
+			data: {
+				inputPwd: inputPwd
+			},
+			dataType: "text",
+			success: function(responseText){
+				if(responseText == "YES"){
+					alert("비밀번호가 변경되었습니다.");
+					window.close();
+				} 
+			}
+		})
+		
+		
+	}
+
 
 
 </script>
