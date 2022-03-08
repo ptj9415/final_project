@@ -132,26 +132,25 @@ h3 {
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label>주제</label><br> <select id="select2"
-											style="width: 780px;"subject">
-											<option value="" disabled selected>선택</option>
-											<option>연애</option>
-											<option>취업/진로</option>
-											<option>직장</option>
-											<option>성추행</option>
-											<option>육아</option>
-											<option>대인관계</option>
-											<option>외모</option>
-											<option>가족</option>
-											<option>학업/고시</option>
-											<option>금전/사업</option>
-											<option>성생활</option>
-											<option>이별/이혼</option>
-											<option>중독</option>
-											<option>성소수자</option>
-											<option>자아/성격</option>
-											<option>해외생활</option>
-											<option>우울/불안</option>
+										<label>주제</label><br> <select id="select2" name="select2">
+											<option value="all">전체</option>
+											<option value="연애">연애</option>
+											<option value="취업/진로">취업/진로</option>
+											<option value="직장">직장</option>
+											<option value="성추행">성추행</option>
+											<option value="육아">육아</option>
+											<option value="대인관계">대인관계</option>
+											<option value="외모">외모</option>
+											<option value="가족">가족</option>
+											<option value="학업/고시">학업/고시</option>
+											<option value="금전/사업">금전/사업</option>
+											<option value="성생활">성생활</option>
+											<option value="이별/이혼">이별/이혼</option>
+											<option value="중독">중독</option>
+											<option value="성소수자">성소수자</option>
+											<option value="자아/성격">자아/성격</option>
+											<option value="해외생활">해외생활</option>
+											<option value="우울/불안">우울/불안</option>
 										</select>
 									</div>
 								</div>
@@ -179,6 +178,7 @@ h3 {
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 
 	<br>
@@ -339,7 +339,7 @@ h3 {
 
 		var url = "adminBoardList.do";
 		url = url + "?m_nickname=" + $('#m_nickname').val();
-		url = url + "&b_subject=" + $('#b_subject').val();
+		url = url + "&b_subject=" + $('[name=select2]').val();
 		url = url + "&b_title=" + $('#b_title').val();
 		url = url + "&b_wdate=" + $('#b_wdate').val();
 		location.href = url;
@@ -351,7 +351,7 @@ h3 {
 		
 		// 삭제 (디자인적용)
 		
-		function deleteFnc(B_no){
+		function deleteFnc(b_no){
 			Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  text: '삭제 후에는 복구가 불가능합니다.',
@@ -365,14 +365,14 @@ h3 {
 			  if (result.value) {
 	              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
 				$.ajax({
-					url : "adminBoardList.do",
+					url : "boardDelete.do",
 					type : "post",
 					data : {
-						B_no : B_no
+						b_no : b_no
 					},
 					dataType : "text",
-					success : function() {
-						location.href = "adminBoardList.do";
+					success : function(responseText) {
+						location.reload();
 					},
 					error : function() {
 						alert("삭제 실패")
@@ -386,10 +386,6 @@ h3 {
 		// select 2
 		$(document).ready(function() {
 			$("#select2").select2();
-		});
-
-		$('#replace').on('click', function() {
-			$('.subject').select2('val', '선택');
 		});
 		
 	</script>
