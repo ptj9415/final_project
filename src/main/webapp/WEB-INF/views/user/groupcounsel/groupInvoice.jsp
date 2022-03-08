@@ -280,23 +280,21 @@ form {
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<h1 class="mb-2 bread">그룹상담</h1>
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
+						<span class="mr-2">
+						<a href="index.html"><i class="ion-ios-arrow-forward"></i></a>
+						</span> 
+						<span><i class="ion-ios-arrow-forward"></i></span>
 					</p>
 				</div>
 			</div>
 		</div>
-
-
 	</section>
+	
 	<div id="invoiceholder">
-
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2">
 
@@ -322,13 +320,9 @@ form {
 
 				<div class="clientlogo"></div>
 				<div class="info">
-
 					<h2>${groupInvoice.c_name} 상담사</h2>
-
-					<p>
-						${groupInvoice.c_email }</br> ${groupInvoice.c_phone }</br>
+					<p>${groupInvoice.c_email }</br> ${groupInvoice.c_phone }</br></p>
 				</div>
-
 				<div id="project">
 					<h2>Project Description</h2>
 					<p>Proin cursus, dui non tincidunt elementum, tortor ex feugiat
@@ -339,7 +333,6 @@ form {
 			</div>
 			<!--End Invoice Mid-->
 			<div id="invoice-bot">
-
 				<div id="table">
 					<table>
 						<tr class="tabletitle">
@@ -348,21 +341,18 @@ form {
 							<td class="Rate"><h2></h2></td>
 							<td class="subtotal"><h2></h2></td>
 						</tr>
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담방식</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_type }</td>
 						</tr>
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_date }</p></td>
 						</tr>
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
@@ -375,28 +365,24 @@ form {
 							</select>
 							</td>
 						</tr>
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담 금액</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_price}</p></td>
 						</tr>
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인 금액</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 						</tr>
-						
 						<tr class="tabletitle">
 							<td class="Rate"><h2>총 결제 금액</h2></td>
 							<td></td>
 							<td></td>
 							<td class="payment"><h2>1234</h2></td>
 						</tr>
-
 					</table>
 				</div>
 				<form action="payment.do" id="frm" name="frm">

@@ -147,7 +147,6 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-first">
 							<li><a href="userPersonalCounsel.do">개인상담</a></li>
 							<li><a href="userGroupCounsel.do">그룹상담</a></li>
-							<li><a href="usertest.do">그룹상세페이지 테스트</a></li>
 						</ul></li>
 
 					<li class="nav-item"><a href="#" class="nav-link">심리검사</a>
@@ -162,7 +161,7 @@ span.top-nav-admin {
 							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userTodayStory.do">오늘의 한마디</a></li>
 							<li><a href="userBoardList.do">자유게시판</a></li>
-							<li><a href="#">심리 테라피</a></li>
+							<li><a href="userTerapy.do">심리 테라피</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="userMypage.do" class="nav-link">마이페이지</a></li>
 				</ul>
