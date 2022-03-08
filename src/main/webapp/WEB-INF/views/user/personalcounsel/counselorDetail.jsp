@@ -12,6 +12,77 @@
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <style>
+/*상담사 상세페이지*/
+
+.card {
+    border: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+
+
+/* .card:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #468FB6;
+ /*    transform: scaleY(0); */
+    transition: all 0.5s;
+    transform-origin: bottom
+} */
+
+.card:hover::after {
+  /*   transform: scaleY(1) */
+}
+
+.fonts {
+    font-size: 11px
+}
+
+.social-list {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0
+}
+
+.social-list li {
+    padding: 10px;
+    color: #468FB6;
+    font-size: 19px
+}
+
+/* .buttons button:nth-child(1) {
+    border: 1px solid #468FB6!important;
+    color: #468FB6;
+    height: 40px;
+    width:80px;
+}
+
+.buttons button:nth-child(1):hover {
+    border: 1px solid #468FB6!important;
+    color: #fff;
+    height: 40px;
+    width:80px;
+    background-color: #468FB6;
+}
+
+.buttons button:nth-child(2) {
+    border: 1px solid #468FB6!important;
+    background-color: #468FB6;
+    color: #fff;
+    height: 40px
+} */
+.profile-body{
+	margin-top:100px;
+}
+/*상담사 상세페이지 end*/
 #previous-btn {
 	width: 100px;
 	height: 40px;
@@ -31,6 +102,14 @@
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
+.hashtag-btn{
+  	border: 1px solid #468FB6!important;
+    color: #468FB6;
+    height: 40px;
+    width:110px;
+    background-color: white;
+    border-radius: 20px;
+}
 </style>
 </head>
 <body>
@@ -48,9 +127,43 @@
 		</div>
 
 	</section>
-<h1>상담사 상세보기 페이지</h1>
-<div>
-		<p>${counselorSelect.c_name } ${counselorSelect.c_grade }</p>
+<div class="profile-body">
+	<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card p-3 py-4">
+                <div class="text-center"> 
+                	<img src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';" width="100" class="rounded-circle"> 
+                </div>
+                <div class="text-center mt-3"> 
+                	<!-- <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span> -->
+                    <h5 class="mt-2 mb-0" style="font-weight:bold">${counselorSelect.c_name } </h5> <span>${counselorSelect.c_grade }</span>
+                                            <p class="fonts">${counselorSelect.c_phone }</p>
+                    
+                    <br>
+                      <p class="fonts" style="font-weight:bold">' ${counselorSelect.c_name } ${counselorSelect.c_grade } ' 님의 전문 상담 카테고리 </p>
+                    <div class="buttons"> 
+                    	<c:forEach items="${subNameList }" var="subnames">
+		                    <button class="hashtag-btn">#${subnames.ccg_subname }</button> 
+                    	</c:forEach>
+		                    
+	                    </div>
+                    <div class="px-4 mt-1">
+                        <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    </div>
+                    <ul class="social-list">
+                        <li><i class="fa fa-facebook"></i></li>
+                        <li><i class="fa fa-dribbble"></i></li>
+                        <li><i class="fa fa-instagram"></i></li>
+                        <li><i class="fa fa-linkedin"></i></li>
+                        <li><i class="fa fa-google"></i></li>
+                    </ul>
+	                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 

@@ -64,12 +64,15 @@ public class EjuController {
 	public String counselorDetail(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
 			HttpServletRequest request, HttpSession session){
 		String type = request.getParameter("onecheck");
-		vo = personalCounselDao.CounselorSelect(vo);
-		System.out.println("상담사디테일페이지왜않ㄴㅏ와 "+ c_email);
-		System.out.println(type);
+		vo.setCcg_subname(type);
+		PersonalcounselVO gvo = personalCounselDao.CounselorSelect(vo);  //상담 상세내용
+		List<PersonalcounselVO> subNameList = personalCounselDao.SubnameSelectList(vo);//상담사가 갖고있는 카테고리 리스트
+		model.addAttribute("subNameList",subNameList);
+		//System.out.println("상담사디테일페이지왜않ㄴㅏ와 "+ c_email);
+		//System.out.println(type);
 		model.addAttribute("type", type);
 		model.addAttribute("email", c_email);
-		model.addAttribute("counselorSelect", vo);
+		model.addAttribute("counselorSelect", gvo);
 		return "user/personalcounsel/counselorDetail";
 	}
 
@@ -78,8 +81,9 @@ public class EjuController {
 	public String personalCounselStep3(PersonalcounselVO vo, @RequestParam("c_email") String c_email, Model model,
 			HttpServletRequest request, HttpSession session) {
 		String type = request.getParameter("onecheck");
-		System.out.println("step3 : " + type);
-		System.out.println("step3 : " + c_email);
+		//System.out.println("step3 : " + type);
+		//System.out.println("step3 : " + c_email);
+		vo.setCcg_subname(type);
 		vo = personalCounselDao.CounselorSelect(vo);
 
 		model.addAttribute("type", type);
@@ -96,6 +100,7 @@ public class EjuController {
 		String type2 = request.getParameter("onecheck");
 		System.out.println("step4주제 : " + type2);
 		System.out.println("이메일 : " + c_email);
+		vo.setCcg_subname(type2);
 		vo = personalCounselDao.CounselorSelect(vo);
 
 		String type3 = request.getParameter("c-type");
@@ -125,7 +130,7 @@ public class EjuController {
 		System.out.println("app주제 : " + type2);
 		System.out.println("방식,가격 : " + type3);
 		
-		
+		vo.setCcg_subname(type2);
 		vo = personalCounselDao.CounselorSelect(vo);
 		System.out.println(vo.getC_picturepath());
 		model.addAttribute("time", time);
@@ -139,7 +144,7 @@ public class EjuController {
 	
 	//결제완료 페이지
 	@RequestMapping("/paymentComplete.do")
-	public String paymentComplete() {
+	public String paymentComplete(PersonalcounselVO vo, Model model ) {
 		
 		
 		return "user/personalcounsel/paymentComplete";
@@ -188,17 +193,12 @@ public class EjuController {
 
 	/* ===== 상담사 화면 ===== */
 
-	// 개인상담 신청내역 메인화면
-	@RequestMapping("/counselorPersonalApplyList.do")
-	public String personalCounselApplyList() {
-
-		return "counselor/personalcounselmanage/counselorPersonalApplyList";
-	}
 
 	// 개인상담 관리 메인화면
 	@RequestMapping("/counselorPersonalList.do")
-	public String counselorPersonalList() {
-
+	public String counselorPersonalList(Model model, PersonalcounselVO vo, HttpServletRequest request) {
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselList(vo);
+		model.addAttribute("PersonalCounselList",list);
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}
 

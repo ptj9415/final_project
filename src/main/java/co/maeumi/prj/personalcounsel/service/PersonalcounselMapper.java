@@ -4,6 +4,9 @@ import java.util.List;
 
 public interface PersonalcounselMapper {
 	List<PersonalcounselVO> CounselorSelectList(PersonalcounselVO vo);
-	
 	PersonalcounselVO CounselorSelect(PersonalcounselVO vo);
+	List<PersonalcounselVO> SubnameSelectList(PersonalcounselVO vo);
+	
+	List<PersonalcounselVO> PersonalCounselList(PersonalcounselVO vo);//개인상담관리 리스트
+	
 }
