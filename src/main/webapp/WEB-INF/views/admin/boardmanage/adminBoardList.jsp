@@ -82,18 +82,35 @@ h3 {
 	border-bottom: 1px solid black;
 }
 
-.button:hover {
-	background-color: skyblue;
-	color: white;
+#boardTable>thead {
+background-color: rgb(245, 245, 245);
+}
+	
+}
+#boardTable>tbody>tr>td {
+	vertical-align: middle;
+	
 }
 
-.button {
-	margin-left: 20px;
-	border: 1px solid skyblue;
-	background-color: rgba(0, 0, 0, 0);
-	color: skyblue;
-	padding: 5px;
-	border: 1px solid skyblue;
+#detailbtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+#deletebtn {
+	background-color: #EB4646;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 30px;
+}
+
+.select2-container .select2-selection--single {
+	height: 38px;
+	border: 0.5px solid rgb(206, 212, 218);
 }
 
 /* 삭제 Swal 디자인  */
@@ -121,10 +138,6 @@ h3 {
 	width: 80px;
 }
 
-.select2-container .select2-selection--single {
-	height: 38px;
-	border: 0.5px solid rgb(206, 212, 218);
-}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -264,7 +277,7 @@ h3 {
 											<td onclick="event.cancelBubble=true;">
 												<button type="button" name="detailbtn" id="detailbtn"
 													class="button" onclick="location.href='adminBoardRead.do?b_no=${board.b_no}';">상세보기</button>
-												<button type="button" name="delete" id="delete"
+												<button type="button" name="deletebtn" id="deletebtn"
 													class="button" onclick="deleteFnc('${board.b_no}')">삭제</button>
 											</td>
 										</tr>

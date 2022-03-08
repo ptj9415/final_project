@@ -485,8 +485,14 @@ public class BadaController {
 
 		svo.pageinfo(page, range, listCnt);  // 현재페이지, 현재 속한 페이지범위, 총 게시글 수를 인자로 가진다.
 
+		List<NoticeVO> list = noticeDao.noticeSearchselect(svo);
+		for(int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getN_writedate();
+			date = date.substring(0, 10);
+			list.get(i).setN_writedate(date);
+		}
 		model.addAttribute("pagination", svo);  // 페이징처리 
-		model.addAttribute("notice", noticeDao.noticeSearchselect(svo));  // 기존의 공지사항 리스트 대신
+		model.addAttribute("notice", list);  // 기존의 공지사항 리스트 대신
 
 		return "admin/noticemanage/adminNoticeList";
 	}
@@ -620,7 +626,6 @@ public class BadaController {
 		vo.setN_title(request.getParameter("title")); // 제목
 		vo.setN_content(request.getParameter("content")); // 내용
 		vo.setN_category(request.getParameter("category")); // 말머리 선택
-		vo.setN_writedate(request.getParameter("wdate")); // 작성날짜.
 		vo.setN_filename(savedName); // db에 저장될 원본파일명
 		vo.setN_pfilename(mSavedName); // db에 저장될 실제 물리파일명.
 

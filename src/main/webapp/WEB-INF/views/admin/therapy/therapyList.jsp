@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 h3 {
 	font-size: 24px;
@@ -96,6 +98,31 @@ h3 {
 	border-radius: 4px;
 	height: 30px;
 	width: 65px;
+}
+
+/* 삭제 Swal 디자인  */
+#swal2-title {
+	font-size: 25px;
+}
+
+#swal2-content {
+	font-size: 15px;
+}
+
+.swal2-header {
+	height: 200px;
+}
+
+.swal2-actions {
+	font-size: 12px;
+	height: 80px;
+	width: 300px;
+	height: 80px;
+}
+
+.swal2-actions button {
+	height: 30px;
+	width: 80px;
 }
 </style>
 </head>
@@ -190,7 +217,8 @@ h3 {
 									<c:if test="${pagination.getListSize() == 20 }">selected="selected"</c:if>>20건
 									보기</option>
 							</select>
-							<button type="button" class="insertbtn" onclick="location.href='therapyInsertForm.do'">심리테라피 등록</button>
+							<button type="button" class="insertbtn"
+								onclick="location.href='therapyInsertForm.do'">심리테라피 등록</button>
 							<br> <br>
 							<table class="table text-nowrap" id="therapytable">
 								<thead>
@@ -250,7 +278,6 @@ h3 {
 	</section>
 
 	<!-- jQuery -->
-	<script src="subHomeFile/plugins/jquery/jquery.min.js"></script>
 	<script>
 		$('#minusbtn1').click(function() {
 			if ($('#maindiv1').css('display') == 'none') {
@@ -278,7 +305,17 @@ h3 {
 		});
 
 		function delfunc(t_no) {
-			if (confirm("정말 삭제하시겠습니까?") == true) {
+			Swal.fire({
+				  title: '정말 삭제하시겠습니까?',
+				  text: '삭제 후에는 복구가 불가능합니다.',
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#1E90FF',
+				  cancelButtonColor: '#EB4646',
+				  confirmButtonText: '삭제',
+				  cancelButtonText: '취소'
+				}).then((result) => {
+				  if (result.value) {
 				$.ajax({
 					url : 'therapyDelete.do',
 					data : {
@@ -287,17 +324,14 @@ h3 {
 					dataType : 'text',
 					success : function(data) {
 						console.log(data);
-
 						location.reload();
-						alert("삭제 완료");
 					},
 					error : function() {
 						alert('error 삭제 실패');
 					}
-
 				});
-
 			}
+			});
 		}
 
 		function fn_prev(page, range, rangeSize, listSize, t_name, t_title) {
