@@ -128,7 +128,7 @@ h3 {
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
-							<form action="therapyInsert.do" enctype="multipart/form-data"
+							<form action="therapyUpdate.do" enctype="multipart/form-data"
 								method="post">
 								<table class="table text-nowrap" id="therapytable">
 									<tr>
@@ -151,6 +151,7 @@ h3 {
 									</tr>
 								</table>
 								<div class="btndiv">
+								<input type="hidden" id="t_no" name="t_no" value="${therapy.t_no }">
 									<button type="submit" id="submitbtn">등록</button>
 									<button type="button" id="backbtn"
 										onclick="location.href='admintherapy.do'">돌아가기</button>

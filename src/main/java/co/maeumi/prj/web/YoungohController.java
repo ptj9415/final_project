@@ -454,9 +454,6 @@ public class YoungohController {
 	@RequestMapping("/therapyUpdate.do")
 	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpServletRequest request) {
-		String t_no = request.getParameter("t_no");
-		int t_nos = Integer.parseInt(t_no);
-		vo.setT_no(t_nos);
 
 		// 썸네일 파일업로드
 		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";

@@ -266,12 +266,12 @@ $(document).ready(function(){
 												data-partNum="${notice.n_no }"></td>
 											<td>${notice.n_writer }</td>
 											<td>${notice.n_category }</td>
-											<td id="readTd" onclick="noticeRead(${notice.n_no})">${notice.n_title }</td>
+											<td>${notice.n_title }</td>
 											<td>${notice.n_writedate }</td>
 											<td id="status">${notice.n_status }</td>
 											<td>
 												<button type="button" id="updatebtn"
-													onclick="noticeUpdate('${notice.n_no}')">수정</button>
+													onclick="location.href='noticeUpdate.do?n_no=${notice.n_no}'">수정</button>
 												<button type="button" id="deletebtn"
 													onclick="noticeDelete('${notice.n_no}')">삭제</button>
 											</td>
@@ -286,14 +286,6 @@ $(document).ready(function(){
 									</c:forEach>
 								</tbody>
 							</table>
-							<!-- 공지사항 조회할 때 넘어갈 폼값. -->
-							<form action="noticeRead.do" id="frm" method="post">
-								<input type="hidden" name="no" id="no">
-							</form>
-							<!-- 공지사항 수정할 때 넘어갈 폼값 -->
-							<form action="noticeUpdate.do" id="frm2" method="post">
-								<input type="hidden" name="updateNo" id="updateNo">
-							</form>
 							<br>
 							<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
@@ -363,19 +355,7 @@ $(document).ready(function(){
 		$("input[name='check']").on("click", function() {
 			$("#allCheck").prop("checked", false);
 		});
-		
-		
-		// 공지사항 조회하기 (noticeRead)
-		function noticeRead(str){
-			frm.no.value = str;
-			frm.submit();
-		};
-		
-		// 공지사항 수정하기 (noticeUpdate)
-		function noticeUpdate(str) {
-			frm2.updateNo.value = str;
-			frm2.submit();
-		};
+
 		
 		// 공지사항 삭제하기. ajax로 처리
 		function noticeDelete(str) {
