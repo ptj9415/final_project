@@ -854,6 +854,7 @@ public class BadaController {
 		
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
+	}
 	
 	// 사용자 닉네임 변경
 	@ResponseBody
