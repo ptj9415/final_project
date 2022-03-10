@@ -21,4 +21,6 @@ public interface GroupcounselService {
 	GroupcounselVO selectUserGroup(GroupcounselVO vo); // 그룹상담 상세목록 보여주기
 	GroupcounselVO selectInvoice (GroupcounselVO vo); // 그룹상담 결제 페이지 조인 구문.
 	int groupReserveInsert(GroupcounselVO vo); //그룹 상담 예약에 값 넣어주기.
+	
+	int groupUpdatePerson(GroupcounselVO vo); // 그룹 상담 예약 후 예약 인원 증가
 }

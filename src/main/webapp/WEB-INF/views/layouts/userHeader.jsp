@@ -153,7 +153,7 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-second">
 							<li><a href="#">MBTI 검사</a></li>
 							<li><a href="selfEsteem.do">자존감 검사</a></li>
-							<li><a href="#">심리검사 2</a></li>
+							<li><a href="simri.do">심리검사</a></li>
 							<li><a href="#">심리검사 3</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>

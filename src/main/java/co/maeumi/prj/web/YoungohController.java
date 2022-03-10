@@ -506,6 +506,8 @@ public class YoungohController {
 	@RequestMapping("/userGroupCounsel.do")
 	public String userGroupCounsel(Model model) {
 		List<GroupcounselVO> list = groupCounselDao.groupSelectList();
+		
+		
 		model.addAttribute("groupCounselList", list);
 		return "user/groupcounsel/groupCounselApplication";
 	}
@@ -539,14 +541,17 @@ public class YoungohController {
 	
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
-	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo) {
-		groupCounselDao.groupReserveInsert(vo); 
+	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo) {
+		groupCounselDao.groupReserveInsert(vo);
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
 		int orderInsert = orderDao.orderInsert(ovo);
 		if (orderInsert == 1) {
 			order_datailVO gvo = orderDao.selectorderList(ovo);
 			model.addAttribute("result", gvo);
+			System.out.println(vo.getGc_no());
+			groupCounselDao.groupUpdatePerson(vo);
+			//couponDao.couponDelete(cvo);
 		}
 		return "user/groupcounsel/groupResult";
 	}
@@ -573,4 +578,11 @@ public class YoungohController {
 		model.addAttribute("selectTherapy", gvo);
 		return "user/therapy/therapyDetail";
 	}
+	
+	//심리검사 이동 페이지.
+	@RequestMapping("/simri.do")
+	public String simri() {
+		return "user/test/simri";
+	}
+	
 }
