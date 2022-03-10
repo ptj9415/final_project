@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.maeumi.prj.boardLike.service.boardLikeMapper">
+<mapper namespace="co.maeumi.prj.boardLike.service.BoardLikeMapper">
 
-<select id="boardLikeList" resultType="co.maeumi.prj.boardLike.service.boardLikeVO">
+<select id="boardLikeList" resultType="co.maeumi.prj.boardLike.service.BoardLikeVO">
 	SELECT * FROM BOARD_LIKE
 </select>
 
-<select id="boardLikeSelect" resultType="co.maeumi.prj.boardLike.service.boardLikeVO">
+<select id="boardLikeSelect" resultType="co.maeumi.prj.boardLike.service.BoardLikeVO">
 	SELECT * FROM BOARD_LIKE WHERE B_NO = #{b_no} AND M_EMAIL = #{m_email}
 </select>
 
@@ -17,4 +17,12 @@
 <update id="boardLikeDelete">
 	DELETE FROM BOARD_LIKE WHERE B_NO = #{b_no} AND M_EMAIL = #{m_email}
 </update>
+
+<!-- 좋아요 개수 -->
+<select id="selectLikeCount" parameterType="co.maeumi.prj.boardLike.service.BoardLikeVO" resultType="int">
+	SELECT COUNT(*)
+	FROM BOARD_LIKE
+	WHERE B_NO = #{b_no}
+</select>
+
 </mapper>

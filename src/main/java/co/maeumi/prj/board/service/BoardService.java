@@ -16,4 +16,8 @@ public interface BoardService {
 	// 검색 & 페이징 처리
 	public List<BoardVO> boardSearchSelect(Search svo) throws Exception;
 	int getBoardListCnt(Search svo) throws Exception;
+	
+	public List<BoardVO> userBoardSearchSelect(Search svo) throws Exception;
+	int getUserBoardListCnt(Search svo) throws Exception;
+	
 }
