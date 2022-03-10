@@ -9,6 +9,7 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselMapper;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 
 @Repository("groupCounselDao")
 public class GroupcounselServiceImpl implements GroupcounselService {
@@ -101,9 +102,51 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	}
 
 	@Override
+	public int getGCListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getGCListCnt(svo);
+	}
+
+	@Override
+	public List<GroupcounselVO> gcSearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.gcSearchselect(svo);
+	}
+
+	@Override
+	public List<GroupcounselVO> gcApplySearchselect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.gcApplySearchselect(svo);
+	}
+
+	@Override
+	public int getGCapplyListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getGCapplyListCnt(svo);
+	}
+
+	@Override
+	public GroupcounselVO selectGroupCounselInfo(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectGroupCounselInfo(vo);
+	}
+
+	@Override
+	public int groupCounselUpdate(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupCounselUpdate(vo);
+	}
+
+	@Override
+	public int groupCounselClose(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupCounselClose(vo);
+
+  @Override
 	public int groupUpdatePerson(GroupcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.groupUpdatePerson(vo);
+
 	}	
 
 }

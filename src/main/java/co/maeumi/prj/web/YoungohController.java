@@ -145,8 +145,8 @@ public class YoungohController {
 	}
 	
 	//상담사 관리 페이지 메인화면
-	@RequestMapping("/counselorGroupList.do")
-	public String counselorGroupList(Model model, HttpServletRequest request) {
+	@RequestMapping("/counselorGroupList1.do")
+	public String counselorGroupList1(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
 			page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 5); // 전체 수, start, end
