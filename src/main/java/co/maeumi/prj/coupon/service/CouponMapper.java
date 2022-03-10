@@ -9,4 +9,6 @@ public interface CouponMapper {
 	int couponInsert(CouponVO cvo);
 	int couponDelete(CouponVO cvo);
 	List<CouponVO> couponMemberSelectList(CouponVO vo);
+	
+	int DeleteCoupon(CouponVO vo);
 }

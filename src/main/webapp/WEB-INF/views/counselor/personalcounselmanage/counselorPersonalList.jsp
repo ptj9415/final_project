@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <style>
 h3 {
 	font-size: 19px;
@@ -66,6 +66,7 @@ h3 {
 .button:hover {
 	background-color: #1E90FF;
 	color: white;
+	transition: 300ms ease-in-out;
 }
 
 .button {
@@ -81,6 +82,10 @@ h3 {
 
 .select2-container--default .select2-selection--single{
 	/* border: 1px solid #ced4da; */
+}
+
+#select2{
+	width:200px;
 }
 </style>
 </head>
@@ -112,6 +117,24 @@ h3 {
 								</div>
 								<div class="col-6">
 									<div class="form-group">
+										<label>상담주제</label><br> 
+										<select id="select2" name="select2">
+											<option value="all">전체</option>
+											<option value="진로">진로</option>
+											<option value="취업준비">취업준비</option>
+											<option value="동료">동료</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label>닉네임</label> <br> <input type="text"
+											class="form-control" id="m_nickname"
+											placeholder="회원 닉네임 입력..">
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
 										<label>상태</label><br> <select id="select2" name="select2">
 											<option value="all">전체</option>
 											<option value="결제완료">결제완료</option>
@@ -129,8 +152,8 @@ h3 {
 
 								<div class="col-6">
 									<div class="form-group">
-										<label>작성일</label> <br> <input type="date" name="b_wdate"
-											id="b_wdate" class="form-control">
+										<label>상담일</label> <br> <input type="date" name="pr_date"
+											id="pr_date" class="form-control">
 									</div>
 									<div class="btndiv">
 										<button type="reset" id="clearbtn">초기화</button>
@@ -139,6 +162,7 @@ h3 {
 										</button>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -194,12 +218,19 @@ h3 {
 											<td>${personalCounsel.m_nickname }</td>
 											<td>${personalCounsel.pr_date }</td>
 											<td>${personalCounsel.ccg_subname }</td>
-											<td></td>
-											<td></td>
-											<!-- 수정 / 삭제 부분은 클릭 안되게  -->
-											<td onclick="event.cancelBubble=true;">
-												<button type="button" name="delete" id="delete"
-													class="button" onclick="deleteFnc('${personalCounsel.pr_no }')">상세보기</button>
+											<td>${personalCounsel.pr_type }</td>
+										<c:if test="${personalCounsel.pr_status eq 0}">
+											<td>결제완료</td>
+										</c:if>	
+										<c:if test="${personalCounsel.pr_status eq 1}">
+											<td>상담완료</td>
+										</c:if>
+										<c:if test="${personalCounsel.pr_status eq 2 }">
+											<td>취소완료</td>
+										</c:if>
+											
+											<td >
+												 <button type="button" id="button" class="button" onclick="location.href='counselorPersonalDetail.do?pr_no=${personalCounsel.pr_no }';">상세보기</button>
 											</td>
 										</tr>
 									</c:forEach>

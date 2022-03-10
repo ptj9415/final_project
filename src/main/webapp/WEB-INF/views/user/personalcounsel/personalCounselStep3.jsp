@@ -340,13 +340,14 @@ div.counsel-type {
 	</div>
 
 <form id="step3" action="personalCounselStep4.do" method="post">
+<!-- <form id="step3" action="personalCounselStep4.do" method="post"> -->
 	<div class="choice-btn">
 		<div class="row mt-5 pt-4">
 		
 		<c:if test="${counselorSelect.p_kakao eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">채팅</h3>
+				<h3 class="h4">카카오톡</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
 
@@ -357,7 +358,8 @@ div.counsel-type {
 			<div style="display:none">
 			<div type=hidden class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img type=hidden src="resources/user/images/chat.PNG" class="chat-img">
-				<h3  type=hidden class="h4">채팅</h3>
+				<h3 class="h4">카카오톡</h3>
+				
 				<input type=hidden class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
 
@@ -369,7 +371,7 @@ div.counsel-type {
 		<c:if test="${counselorSelect.p_zoom eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">화상</h3>
+				<h3 class="h4">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
 
@@ -379,7 +381,7 @@ div.counsel-type {
 			<div style="display:none">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">화상</h3>
+				<h3 class="h4">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
 
@@ -425,10 +427,11 @@ div.counsel-type {
 			location.href = 'personalCounselStep2.do'
 		});
 
-		$('#next-btn').click(function() {
+		/*  $('#next-btn').click(function() {
 			step3.submit();
+			var email = document.getElementById("email").value;
 			location.href = 'personalCounselStep4.do'
-		});
+		});  */
 		
 	</script>
 </body>

@@ -390,12 +390,11 @@ form {
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="gr_price" name="gr_price" value="">
+					<input type="hidden" id="pr_price" name="pr_price" value="">
 					<input type="hidden" id="or_uid" name="or_uid">
 				</form>
 				<!--End Table-->
-			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-					target="_top">
+			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick"> <input
 						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 					<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
@@ -413,6 +412,7 @@ form {
 	   function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
+		   
 		   $("#discount").text(' '+'-'+priceSelect);
 		   var ddd = price-priceSelect;
 		   alert(ddd);
@@ -423,7 +423,7 @@ form {
 	   }	
 	</script>
 	<script>
-		var gr_price = $("#gr_price").val();
+		var pr_price = $("#pr_price").val();
         $(".check_module").click(function () {
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');

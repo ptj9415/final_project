@@ -388,14 +388,14 @@
 							<input type="text" id="p_kakao_text" value="원"> --%>
 							
 							<c:if test="${counselorList.p_kakao eq 1}">
-								<input type="text" id="p_kakao_text" value="채팅">
+								<input type="text" id="p_kakao_text" value="카카오톡">
 								<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
 								<input type="text" id="p_kakao_text" value="원">
 								
 							</c:if>
 							
 							<c:if test="${counselorList.p_kakao eq 0}">
-								<input type="hidden" id="p_kakao_text" value="채팅">
+								<input type="hidden" id="p_kakao_text" value="카카오톡">
 								<input type="hidden" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
 								<input type="hidden" id="p_kakao_text" value="원">
 							</c:if>
@@ -406,13 +406,13 @@
 							<input type="hidden" id="p_zoom" value="${counselorList.p_zoom }">
 							
 							<c:if test="${counselorList.p_zoom eq 1}">
-								<input type="text" id="p_zoom_text" value="화상"> 
+								<input type="text" id="p_zoom_text" value="줌"> 
 								<input type="text" id="p_zoom_text" value="${counselorList.p_zoomprice}">
 								<input type="text" id="p_zoom_text" value="원">
 							</c:if>
 							
 							<c:if test="${counselorList.p_zoom eq 0}">
-								<input type="hidden" id="p_zoom_text" value="화상"> 
+								<input type="hidden" id="p_zoom_text" value="줌"> 
 								<input type="hidden" id="p_zoom_text" value="${counselorList.p_zoomprice}">
 								<input type="hidden" id="p_zoom_text" value="원">
 							</c:if>
