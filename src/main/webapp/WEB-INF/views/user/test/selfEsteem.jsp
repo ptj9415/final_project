@@ -40,6 +40,46 @@
 		</script>
 </head>
 <body>
+<section class="hero-wrap hero-wrap-2"
+		style="background-image: url('resources/user/images/todayStory.jpg');">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<h1 class="mb-2 bread">심리검사</h1>
+					<br>
+					<p class="breadcrumbs">
+						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
+				
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</section>
+		<div class="today-container">
+			<div class="container">
+				<div class="row justify-content-start mb-5 pb-2">
+					<div
+						class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+						<span class="subheading subheading-with-line"><small
+							class="pr-2 bg-white">MAEUMI</small></span>
+						<h2 class="mb-4">자존감 검사</h2>
+					</div>
+					<div
+						class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+						<div class="pl-md-4 border-line">
+							<span class="mr-2">소요시간 약 3분</span> <span style="font-weight:bold; color:black;"></span><span class="mr-2">' 입니다</span>
+							<p></p>
+							<input type="button" class="register-btn" id="submit-btn" data-toggle="modal" data-target="#modal-lg" value="글쓰기">
+	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- modal contents start -->
 
 	<div id="wrap">
 			<header id="header"></header>
@@ -57,9 +97,7 @@
 					<span class="time_logo"></span>
 					<p>소요 시간 : 3분 내외</p>
 				</div>
-				<div class="start-wrap">
-					<button class="start">검사하기</button>
-				</div>
+				
 				
 			</section>
 
