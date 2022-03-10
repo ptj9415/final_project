@@ -853,7 +853,7 @@ public class BadaController {
 		
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
-	
+	}
 	// 사용자 비밀번호 변경 팝업 
 	@RequestMapping("/passwordPopup.do")
 	public String passwordPopup(HttpServletRequest request, Model model) {

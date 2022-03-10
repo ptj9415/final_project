@@ -377,7 +377,7 @@ textarea {
 			let textarea2 = document.querySelectorAll('#sc_subject')[0];
 			
 			let subject = event.target.closest('tr').childNodes[3].innerHTML;
-			textarea2.value = subject;			
+			textarea2.value = subject; 	
 			
 			$.ajax({
 				url : 'adminTodayStoryUpdateForm.do',

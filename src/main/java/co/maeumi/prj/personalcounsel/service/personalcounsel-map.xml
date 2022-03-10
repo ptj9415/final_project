@@ -53,14 +53,74 @@
 	<!-- counselor 개인상담관리 -->
 	
 	<select id="PersonalCounselList" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-	<!-- 	select m.m_nickname , m.m_email , re.c_email ,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status
-		from personal_reserve re, member m
-		where m.m_email = re.m_email and re.c_email=#{c_email}
-		order by re.pr_no -->
+
 		
-		select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, ct.ccg_subname
-		from personal_reserve re, member m, cs_category ct
-		order by re.pr_no
+		<!-- select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname, re.pc_report, re.pc_result
+		from personal_reserve re  left outer join member m 
+		on(re.m_email = m.m_email)
+		where re.c_email = #{c_email}
+		order by re.pr_no desc; -->
+		
+		select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname, re.pc_report, re.pc_result
+		from personal_reserve re  left outer join member m 
+		on(re.m_email = m.m_email)
+		order by re.pr_no desc
 	</select>
 	
+	<select id="PersonalCounselSelect" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname, re.pc_report, re.pc_result
+		from personal_reserve re  left outer join member m 
+		on(re.m_email = m.m_email)
+        where pr_no= #{pr_no}
+		order by re.pr_no desc
+	</select>
+	
+	<!-- 상담일지 수정 -->
+	<update id="PersonalCounselUpdate" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		update personal_reserve
+		set pc_report=#{pc_report}, pc_result=#{pc_result},pr_status='1'
+		where pr_no = #{pr_no}
+	</update>
+	
+	<!-- 상담일지 삭제 -->
+	<delete id="PersonalCounselDelete" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		delete from 
+		personal_reserve
+		where pr_no=#{pr_no}
+	</delete>
+	
+	<insert id="personalCounselInsert" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		        INSERT INTO PERSONAL_RESERVE(
+                pr_no,
+                c_email,
+                m_email,
+                pr_date,
+                pr_price,
+                pr_time,
+                pr_status,
+                pr_type,
+                ccg_subname
+                )
+                VALUES(
+                (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
+                #{c_email},
+                #{m_email},
+                sysdate,
+                #{pr_price},
+                #{pr_time},
+                '0',
+                '이거 타입 ㅜㅜ',
+                #{ccg_subname}
+                )
+	</insert>
+	
+	<select id="personalMax" resultType="int">
+			 select max(pr_no) from personal_reserve
+	</select> 
+	
+	
+	<select id="counselorResultSelect" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+				 SELECT * FROM PERSONAL_RESERVE WHERE PR_NO = #{pr_no}
+	
+	</select>
 </mapper>

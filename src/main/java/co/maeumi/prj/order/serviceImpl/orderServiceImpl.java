@@ -23,5 +23,11 @@ public class orderServiceImpl implements orderService {
 		// TODO Auto-generated method stub
 		return map.selectorderList(vo);
 	}
+
+	@Override
+	public int orderPersonalInsert(order_datailVO vo) {
+		// TODO Auto-generated method stub
+		return map.orderPersonalInsert(vo);
+	}
 	
 }

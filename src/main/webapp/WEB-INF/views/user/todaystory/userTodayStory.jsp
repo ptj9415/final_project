@@ -26,6 +26,10 @@
 table {
 	border: solid 1px;
 }
+
+.form-check-input{
+	margin-left:580px;
+}
 /*modal*/
 /*modal end*/
 </style>
@@ -53,11 +57,11 @@ table {
 			
 					
 					<!-- modal btn -->
-
+	
 		<span type="button" class="btn btn-default" id="submit-btn"
-			data-toggle="modal" data-target="#modal-lg">등록&nbsp;</span>
-					<!-- modal btn -->
-
+			data-toggle="modal" data-target="#modal-lg">등록&nbsp;
+		</span>
+	
 				</div>
 			</div>
 		</div>
@@ -83,19 +87,31 @@ table {
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form id="frm" action="todayReplyInsert.do" method="post">
+						<form id="frm" method="post">
 							<div class="card-body">
 								
-									<span> 작성자 : </span>
+									<span> 작성자 : ${nickname }</span>
 									<br>
 								  <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1" style="float:right">
+                    
+                    
+    					<%--    <c:choose>
+								<c:when test="${nickname eq 0 }">
+									<p class="card-text" style="text-align: right;">${nickname}
+								</p>
+								</c:when>
+								<c:otherwise>
+									<p class="card-text" style="text-align: right;">익명</p>
+								</c:otherwise>
+							</c:choose> --%>
+							
                     <label class="form-check-label" for="exampleCheck1"  style="float:right">닉네임 비공개</label>
                   </div> 
 								<div class="form-group">
-									<label for="exampleInputPassword1">글귀</label>
+									<label for="exampleInputPassword1"></label>
 									 <input type="text" style="height:300px" class="form-control"  id="sr_subject" name="sr_subject"
-										placeholder="글귀를 입력하세요..">
+										placeholder="오늘의 한마디를 입력하세요..">
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -109,7 +125,7 @@ table {
 				</div>
 				<div class="modal-footer justify-content-between">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="submit" class="btn btn-primary" id="submit" name="submit">등록</button>
+					<button type="button" class="btn btn-primary" id="submit" name="submit">등록</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -179,6 +195,16 @@ table {
 			}
 		})
 	}
+	
+	//글 등록 제출
+	$(function() {
+		$("#submit").click(function() {
+			frm.action = "todayReplyInsert.do";
+			frm.submit();
+
+		});
+
+	});
 	/* modal start */
 	/* modal end */
 	
