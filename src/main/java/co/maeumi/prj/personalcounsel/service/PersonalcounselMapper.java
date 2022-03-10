@@ -18,4 +18,5 @@ public interface PersonalcounselMapper {
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
 
 	
+	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 집계
 }
