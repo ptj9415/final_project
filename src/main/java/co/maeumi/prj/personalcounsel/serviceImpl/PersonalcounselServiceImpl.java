@@ -39,4 +39,10 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		return map.PersonalCounselList(vo);
 	}
 
+	@Override
+	public List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.PersonalCounselCount(vo);
+	}
+
 }

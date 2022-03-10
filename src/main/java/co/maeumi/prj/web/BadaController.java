@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -30,7 +30,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import co.maeumi.prj.counselor.service.CounselorService;
@@ -48,6 +48,8 @@ import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
 import co.maeumi.prj.notice.service.NoticeService;
 import co.maeumi.prj.notice.service.NoticeVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.CoolsmsService;
 import co.maeumi.prj.service.KakaoService;
 import co.maeumi.prj.service.NaverLoginBO;
@@ -71,6 +73,8 @@ public class BadaController {
 	private KakaoService ks;
 	@Autowired
 	private NoticeService noticeDao;
+	@Autowired
+	private PersonalcounselService personalCounselDao;
 	@Resource(name = "uploadPath") // servlet-context.xml에서 정의함. 상대경로로 변경해주어야 함(현재 하드코딩 상태)
 	String uploadPath;
 
@@ -264,7 +268,7 @@ public class BadaController {
 		mvo2.setM_email(k_email); // 세션값을 이용하기 위함.
 		mvo2.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
 		mvo2.setM_type("카카오");
-		session.setAttribute("email", mvo2.getM_nickname());
+		session.setAttribute("email", mvo2.getM_email());
 		session.setAttribute("nickname", mvo2.getM_nickname());
 		session.setAttribute("type", mvo2.getM_type());
 		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo2.getM_email());
@@ -835,7 +839,6 @@ public class BadaController {
 			return "user/notice/userNoticeRead";
 	}
 	
-	
 	/* =============사용자 마이페이지============ */
 	
 	
@@ -844,6 +847,9 @@ public class BadaController {
 	public String userMypage(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model) {
 		
 		// 이메일, 가입유형 세션값을 통해 해당 유저의 모든 정보를 조회해서 마이페이지로 데이터를 넘긴다.
+		System.out.println( "내가 담은 이메일 세션값 : " + (String) session.getAttribute("email") );
+		System.out.println("내가 담은 가입유형 세션값: " + (String) session.getAttribute("type"));
+		
 		mvo.setM_email( (String) session.getAttribute("email") );
 		mvo.setM_type( (String) session.getAttribute("type"));
 		
@@ -855,6 +861,7 @@ public class BadaController {
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
 	
+	}
 	// 사용자 닉네임 변경
 	@ResponseBody
 	@RequestMapping("/ajaxUpdateNickname.do")
@@ -948,4 +955,43 @@ public class BadaController {
 		}
 		return message;
 	}
+	
+	
+	// 사이트 이용 통계로 페이지 넘어가기
+	@RequestMapping("/usingSiteChart.do")
+	public String usingSiteChart(HttpServletRequest request, HttpSession session) {
+		
+		// view에 보여질 데이터를 db에서 가져와야 한다. 
+		return "admin/chart/usingSiteChart";
+	}
+	
+	// 사이트 이용 통계 => 월별 상담건수 조회 
+	@ResponseBody
+	@RequestMapping("/personalCounselData.do")
+	public List<PersonalcounselVO> personalCounselData(Model model, PersonalcounselVO vo) {
+		
+		
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselCount(vo);
+		
+		model.addAttribute("list", list);
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

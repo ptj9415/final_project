@@ -48,6 +48,14 @@
 
 	</select>
 	
+	<select id="PersonalCounselCount" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+			SELECT PR_DATE, COUNT(*) AS prCount
+			FROM PERSONAL_RESERVE
+			GROUP BY PR_DATE
+			ORDER BY PR_DATE
+	</select>
+	
+	
 	
 	
 	<!-- counselor 개인상담관리 -->

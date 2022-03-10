@@ -44,5 +44,7 @@ public class PersonalcounselVO {
 	private String pc_result;
 	private String m_nickname;
 	
+	private int prCount;
+	
 	
 }

@@ -9,5 +9,7 @@ public interface PersonalcounselService {
 	List<PersonalcounselVO> SubnameSelectList(PersonalcounselVO vo);
 	
 	List<PersonalcounselVO> PersonalCounselList(PersonalcounselVO vo);//개인상담관리 리스트
+	
+	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 집계
 
 }
