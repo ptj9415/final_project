@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -17,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +33,13 @@ import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
+import co.maeumi.prj.groupcounsel.service.GroupcounselService;
+import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
-import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.service.Search;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
-import co.maeumi.prj.todaystory.service.TodaystoryVO;
 
 @Controller
 public class TaejoonController {
@@ -53,6 +56,8 @@ public class TaejoonController {
 	private TodaystoryService todayDao;
 	@Autowired
 	private TherapyService therapyDao;
+	@Autowired
+	private GroupcounselService groupCounselDao;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -64,6 +69,158 @@ public class TaejoonController {
 	}
 
 	/* ===== 상담사 화면 ===== */
+	
+	@RequestMapping("/counselorGroupList.do")
+	public String counselorGroupList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "") String gc_title,
+			@RequestParam(required = false, defaultValue = "all") String gc_type,
+			@RequestParam(required = false, defaultValue = "") String gc_date,
+			@RequestParam(required = false, defaultValue = "all") String gc_status, Search svo) throws Exception {
+
+		model.addAttribute("search", svo);
+		svo.setGc_title(gc_title);
+		svo.setGc_type(gc_type);
+		svo.setGc_date(gc_date);
+		svo.setGc_status(gc_status);
+
+		int listCnt = groupCounselDao.getGCListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		List<GroupcounselVO> list = groupCounselDao.gcSearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGc_date();
+			date = date.substring(0, 10);
+			list.get(i).setGc_date(date);
+			String date2 = list.get(i).getGc_startdate();
+			date2 = date.substring(0, 10);
+			list.get(i).setGc_startdate(date2);
+			String date3 = list.get(i).getGc_finaldate();
+			date3 = date.substring(0, 10);
+			list.get(i).setGc_finaldate(date3);
+
+		}
+		model.addAttribute("groupCounsel", list);
+
+		return "counselor/groupcounselmanage/counselorGroupList";
+	}
+	
+	@RequestMapping("/counselorGroupApplyList.do")
+	public String counselorGroupApplyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "") String gr_reservedate,
+			@RequestParam(required = false, defaultValue = "all") String gr_status,
+			@RequestParam(required = false, defaultValue = "") String m_nickname,
+			@RequestParam(required = false, defaultValue = "") String m_email,
+			Search svo, HttpServletRequest request) throws Exception {
+
+		String gc_no = request.getParameter("gc_no");
+		model.addAttribute("search", svo);
+		svo.setGr_status(gr_status);
+		svo.setGr_reservedate(gr_reservedate);
+		svo.setM_email(m_email);
+		svo.setM_nickname(m_nickname);
+
+		int listCnt = groupCounselDao.getGCapplyListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		List<GroupcounselVO> list = groupCounselDao.gcApplySearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGr_reservedate();
+			date = date.substring(0, 10);
+			list.get(i).setGr_reservedate(date);
+		}
+		model.addAttribute("apply", list);
+		model.addAttribute("gc_no", gc_no);
+
+		return "counselor/groupcounselmanage/counselorGroupApplyList";
+	}
+	
+	@RequestMapping("/counselorGroupInfo.do")
+	public String counselorGroupInfo(Model model, GroupcounselVO gvo) throws ParseException {
+		
+		gvo = groupCounselDao.selectGroupCounselInfo(gvo);
+		
+		String date = gvo.getGc_date();
+		date = date.substring(0, 10);
+		gvo.setGc_date(date);		
+		
+		String startdate = gvo.getGc_startdate();
+		startdate = startdate.substring(0, 10);
+		gvo.setGc_startdate(startdate);
+		
+		String finaldate = gvo.getGc_finaldate();
+		finaldate = finaldate.substring(0, 10);
+		gvo.setGc_finaldate(finaldate);
+		
+		model.addAttribute("gc", gvo);
+		
+		return "counselor/groupcounselmanage/counselorGroupInfo";
+	}
+	
+	@RequestMapping("/groupCounselUpdate.do")
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response,
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+
+		// 썸네일 파일업로드
+		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String originalFileName = mf.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		String saveFile = uuid + originalFileName;
+		vo.setGc_sumnail(saveFile);
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 서머노트 코드 원본
+		// 이미지 파일일 경우 코드 잘라서 쓰기.
+		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
+
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		vo.setGc_infos(result);
+
+		int update = groupCounselDao.groupCounselUpdate(vo);
+		
+		// vo값에 따라 성공 실패 여부 확인
+		if (update != 1) {
+			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
+			out.flush();
+		}else {
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
+			out.flush();
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/groupCounselClose.do")
+	public int groupCounselClose(GroupcounselVO gvo) {
+		int n = groupCounselDao.groupCounselClose(gvo);
+		
+		return n;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/groupCounselDetailInsert.do")
+	public int groupCounselDetailInsert(GroupcounselVO gvo) {
+		int n = groupCounselDao.groupCounselResult(gvo);
+		
+		return n;
+	}
 
 	// 상담사 마이페이지 메인화면
 	@RequestMapping("/counselorMyPageMain.do")
@@ -140,7 +297,7 @@ public class TaejoonController {
 		model.addAttribute("apply", list);
 		return "counselor/mypage/counselorMyPageInfo";
 	}
-	
+
 	@RequestMapping("/fileDownload2.do")
 	public void fileDownload2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
@@ -193,12 +350,13 @@ public class TaejoonController {
 		}
 
 	}
-	
-	//상담사 마이페이지 - 상담사 등급 변경 신청
+
+	// 상담사 마이페이지 - 상담사 등급 변경 신청
 	@ResponseBody
 	@RequestMapping(value = "/counselorUpgradeApply.do", produces = "application/text; charset=utf8")
-	public String counselorUpgradeApply(Model model, CounselorVO cvo, @RequestParam(value = "filename1") MultipartFile mf,
-			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String counselorUpgradeApply(Model model, CounselorVO cvo,
+			@RequestParam(value = "filename1") MultipartFile mf, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
 
 		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\";
 
@@ -337,7 +495,7 @@ public class TaejoonController {
 	public String counselorMyPageIntro(Model model, CounselorVO cvo) {
 		cvo.setC_email("3244509@naver.com");
 		model.addAttribute("info", counselorDao.counselorinfoList(cvo));
-		
+
 		return "counselor/mypage/counselorMyPageIntro";
 	}
 
@@ -485,22 +643,22 @@ public class TaejoonController {
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/adminCounselorGradeComfirm.do")
 	public String adminCounselorGradeComfirm(CounselorVO cvo) {
-		
+
 		counselorDao.counselorGradeUpdate(cvo);
 		counselorDao.counselorUpdate(cvo);
-		
+
 		return "OK";
 	}
-	
+
 	@RequestMapping("/adminCounselorGradeReject.do")
 	public String adminCounselorGradeReject(CounselorVO cvo, Model model, HttpServletRequest request) {
-		
+
 		counselorDao.counselorGradeUpdate(cvo);
-		
+
 		cvo.setC_email(request.getParameter("c_email"));
 		cvo = counselorDao.counselorSelect(cvo);
 
@@ -518,7 +676,7 @@ public class TaejoonController {
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
-			
+
 	@RequestMapping("/adminBannerList.do")
 	public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range, Search svo, CouponVO cvo) throws Exception {
@@ -661,11 +819,12 @@ public class TaejoonController {
 		model.addAttribute("adminTodayStoryList", todayDao.todaySearchselect(svo));
 		return "admin/todaystorymanage/adminTodayStoryList";
 	}
-	
+
 	@RequestMapping("/admintherapy.do")
 	public String admintherapyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false) String t_name, @RequestParam(required = false) String t_title, Search svo) throws Exception {
+			@RequestParam(required = false) String t_name, @RequestParam(required = false) String t_title, Search svo)
+			throws Exception {
 
 		model.addAttribute("search", svo);
 

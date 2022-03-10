@@ -3,84 +3,107 @@
 <mapper
 	namespace="co.maeumi.prj.groupcounsel.service.GroupcounselMapper">
 	<insert id="insertGroupCounsel"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			INSERT INTO GROUP_COUNSEL(
-			gc_no,
-			c_email,
-			gc_date,
-			gc_startdate,
-			gc_finaldate,
-			gc_title,
-			gc_type,
-			gc_min_person,
-			gc_max_person,
-			gc_price,
-			gc_time,
-			gc_sumnail,
-			gc_kakao,
-			gc_infos,
-			gc_status,
-			gc_name,
-			gc_person
-			)
-			values(
-			(SELECT NVL(MAX(GC_NO),0)+1 FROM GROUP_COUNSEL N),
-			'이메일 세션값 들어감',
-			#{gc_date},
-			#{gc_startdate},
-			#{gc_finaldate},
-			#{gc_title},
-			#{gc_type},
-			#{gc_min_person},
-			#{gc_max_person},
-			#{gc_price},
-			#{gc_time},
-			#{gc_sumnail},
-			#{gc_kakao},
-			#{gc_infos},
-			0,
-			'네임값 세션 들어감',
-			0
-			)
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		INSERT INTO GROUP_COUNSEL(
+		gc_no,
+		c_email,
+		gc_date,
+		gc_startdate,
+		gc_finaldate,
+		gc_title,
+		gc_type,
+		gc_min_person,
+		gc_max_person,
+		gc_price,
+		gc_time,
+		gc_sumnail,
+		gc_kakao,
+		gc_infos,
+		gc_status,
+		gc_name,
+		gc_person
+		)
+		values(
+		(SELECT NVL(MAX(GC_NO),0)+1 FROM
+		GROUP_COUNSEL N),
+		'이메일 세션값 들어감',
+		#{gc_date},
+		#{gc_startdate},
+		#{gc_finaldate},
+		#{gc_title},
+		#{gc_type},
+		#{gc_min_person},
+		#{gc_max_person},
+		#{gc_price},
+		#{gc_time},
+		#{gc_sumnail},
+		#{gc_kakao},
+		#{gc_infos},
+		0,
+		'네임값 세션 들어감',
+		0
+		)
 	</insert>
+	
+	<update id="groupCounselUpdate"
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		UPDATE GROUP_COUNSEL SET
+		GC_DATE = #{gc_date},
+		GC_STARTDATE = #{gc_startdate},
+		GC_FINALDATE = #{gc_finaldate},
+		GC_TITLE = #{gc_title},
+		GC_TYPE = #{gc_type},
+		GC_MIN_PERSON = #{gc_min_person},
+		GC_MAX_PERSON = #{gc_max_person},
+		GC_PRICE = #{gc_price},
+		GC_TIME = #{gc_time},
+		GC_SUMNAIL = #{gc_sumnail},
+		GC_KAKAO = #{gc_kakao},
+		GC_INFOS = #{gc_infos}
+		WHERE GC_NO = #{gc_no}
+	</update>
 
 	<select id="groupSelectList"
-			resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			SELECT *
-			FROM GROUP_COUNSEL
-			ORDER BY GC_NO DESC
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT *
+		FROM GROUP_COUNSEL
+		ORDER BY GC_NO DESC
 	</select>
 
 	<select id="joinSelectList"
-			resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			select m.m_nickname, m.m_email, r.gr_reservedate, r.gr_status, r.gr_subject,
-			r.gr_no
-			from member m join group_reserve r
-			on(m.m_email = r.m_email)
-			join group_counsel c
-			on(r.gc_no = c.gc_no)
-			where c.c_email = #{c_email}
-			ORDER BY r.gr_no DESC
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		select m.m_nickname, m.m_email, r.gr_reservedate,
+		r.gr_status, r.gr_subject,
+		r.gr_no
+		from member m join group_reserve r
+		on(m.m_email = r.m_email)
+		join group_counsel c
+		on(r.gc_no = c.gc_no)
+		where c.c_email = #{c_email}
+		ORDER BY r.gr_no DESC
 
 	</select>
 
 	<select id="countGroupCounsel" resultType="int">
-			SELECT COUNT(*)
-			FROM GROUP_COUNSEL
+		SELECT COUNT(*)
+		FROM
+		GROUP_COUNSEL
 	</select>
 
 	<select id="pageSelectList"
-			resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
-			parameterType="co.maeumi.prj.service.Pagination">
-			SELECT *
-			FROM (
-			SELECT ROWNUM RN, A.*
-			FROM (SELECT * FROM group_counsel
-			ORDER BY gc_no DESC
-			) A
-			)
-			WHERE RN BETWEEN #{start} AND #{end}
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		parameterType="co.maeumi.prj.service.Pagination">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (SELECT * FROM
+		group_counsel
+		ORDER BY gc_no DESC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND
+		#{end}
 	</select>
 
 	<select id="searchpageSelectList"
@@ -118,68 +141,152 @@
 	</select>
 
 	<update id="GroupUserDelete"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			UPDATE GROUP_RESERVE
-			SET GR_STATUS = 1
-			WHERE GR_NO = #{gr_no}
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		UPDATE GROUP_RESERVE
+		SET GR_STATUS = 1
+		WHERE GR_NO =
+		#{gr_no}
 	</update>
 
 	<select id="selectgroupRserve"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
-			resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			SELECT GR_SUBJECT
-			FROM GROUP_RESERVE
-			WHERE GR_NO = #{gr_no}
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT GR_SUBJECT
+		FROM GROUP_RESERVE
+		WHERE GR_NO = #{gr_no}
 	</select>
 
 	<select id="selectDetailList"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
-			resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			SELECT *
-			FROM GROUP_COUNSEL
-			WHERE GC_NO = #{gc_no}
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT *
+		FROM GROUP_COUNSEL
+		WHERE GC_NO = #{gc_no}
 	</select>
 
 	<update id="groupCounselResult"
-			parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			UPDATE GROUP_COUNSEL
-			SET GC_REPORT = #{gc_report}, 
-			GC_RESULT = #{gc_result}
-			WHERE GC_NO = #{gc_no}
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		UPDATE GROUP_COUNSEL
+		SET GC_REPORT = #{gc_report},
+		GC_RESULT = #{gc_result}
+		WHERE GC_NO = #{gc_no}
 	</update>
-	
-	<select id="selectUserGroup" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO" resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			SELECT * FROM GROUP_COUNSEL
-			WHERE GC_NO = #{gc_no}
+
+	<select id="selectUserGroup"
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT * FROM GROUP_COUNSEL
+		WHERE GC_NO = #{gc_no}
 	</select>
-	
-	<select id="selectInvoice" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO" resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			SELECT *
-			FROM GROUP_COUNSEL G JOIN COUNSELOR C
-			ON(G.C_EMAIL = C.C_EMAIL)
-			WHERE GC_NO = #{gc_no}
+
+	<select id="selectInvoice"
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT *
+		FROM GROUP_COUNSEL G JOIN COUNSELOR C
+		ON(G.C_EMAIL =
+		C.C_EMAIL)
+		WHERE GC_NO = #{gc_no}
 	</select>
-	
-	<insert id="groupReserveInsert" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-			INSERT INTO GROUP_RESERVE(
-				GR_NO,
-				M_EMAIL,
-				GC_NO,
-				GR_SUBJECT,
-				GR_RESERVEDATE,
-				GR_STATUS,
-				GR_REFUND,
-				GR_PRICE
-			)
-			VALUES(
-				(SELECT NVL(MAX(GR_NO),0)+1 FROM GROUP_RESERVE O),
-				'세션값이 들어감',
-				#{gc_no},
-				#{gr_subject},
-				sysdate,
-				'0',
-				'0',
-				#{gr_price}
-			)
+
+	<insert id="groupReserveInsert"
+		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		INSERT INTO GROUP_RESERVE(
+		GR_NO,
+		M_EMAIL,
+		GC_NO,
+		GR_SUBJECT,
+		GR_RESERVEDATE,
+		GR_STATUS,
+		GR_REFUND,
+		GR_PRICE
+		)
+		VALUES(
+		(SELECT
+		NVL(MAX(GR_NO),0)+1 FROM GROUP_RESERVE O),
+		'세션값이 들어감',
+		#{gc_no},
+		#{gr_subject},
+		sysdate,
+		'0',
+		'0',
+		#{gr_price}
+		)
 	</insert>
+
+	<select id="getGCListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM GROUP_COUNSEL
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="gc_date != ''"> AND TO_CHAR(GC_DATE, 'YYYY-MM-DD') = #{gc_date} </if>
+			<if test="gc_type != 'all'">AND gc_type like '%'||#{gc_type}||'%'</if>
+			<if test="gc_status != 'all'">AND gc_status like '%'||#{gc_status}||'%'</if>
+			<if test="gc_title != ''">AND gc_title like '%'||#{gc_title}||'%'</if>
+		</trim>
+	</select>
+
+	<select id="gcSearchselect"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM GROUP_COUNSEL
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="gc_date != ''"> AND TO_CHAR(GC_DATE, 'YYYY-MM-DD') = #{gc_date} </if>
+			<if test="gc_type != 'all'">AND gc_type like '%'||#{gc_type}||'%'</if>
+			<if test="gc_status != 'all'">AND gc_status like '%'||#{gc_status}||'%'</if>
+			<if test="gc_title != ''">AND gc_title like '%'||#{gc_title}||'%'</if>
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="gcApplySearchselect"
+		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT * FROM (SELECT ROWNUM RN, A.*
+		FROM (SELECT GR.*, M.M_NICKNAME
+		FROM
+		GROUP_RESERVE GR, MEMBER M
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="gr_reservedate != ''"> AND TO_CHAR(gr_reservedate, 'YYYY-MM-DD') =
+				#{gr_reservedate} </if>
+			<if test="gr_status != 'all'">AND gr_status like '%'||#{gr_status}||'%'</if>
+			<if test="m_email != ''">AND m_email like '%'||#{m_email}||'%'</if>
+			<if test="m_nickname != ''">AND m_nickname like '%'||#{m_nickname}||'%'</if>
+			AND M.M_EMAIL = GR.M_EMAIL
+			AND GC_NO = #{gc_no}
+		</trim>
+		) A
+		)
+		WHERE RN BETWEEN
+		#{start} AND #{end}
+	</select>
+
+	<select id="getGCapplyListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		GROUP_RESERVE GR, MEMBER M
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="gr_reservedate != ''"> AND TO_CHAR(gr_reservedate, 'YYYY-MM-DD') =
+				#{gr_reservedate} </if>
+			<if test="gr_status != 'all'">AND gr_status like '%'||#{gr_status}||'%'</if>
+			<if test="m_email != ''">AND m_email like '%'||#{m_email}||'%'</if>
+			<if test="m_nickname != ''">AND m_nickname like '%'||#{m_nickname}||'%'</if>
+			AND M.M_EMAIL = GR.M_EMAIL
+			AND GC_NO = #{gc_no}
+		</trim>
+	</select>
+	
+	<select id="selectGroupCounselInfo" resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		SELECT * FROM GROUP_COUNSEL
+		WHERE GC_NO = #{gc_no}
+	</select>
+	
+	<update id="groupCounselClose" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		UPDATE GROUP_COUNSEL SET
+		GC_STATUS = '2'
+		WHERE GC_NO = ${gc_no}
+	</update>
+
 </mapper>

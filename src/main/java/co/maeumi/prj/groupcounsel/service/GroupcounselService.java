@@ -3,6 +3,7 @@ package co.maeumi.prj.groupcounsel.service;
 import java.util.List;
 
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 
 public interface GroupcounselService {
 	int insertGroupCounsel(GroupcounselVO vo); //그룹 상담 개설 인서트
@@ -21,4 +22,13 @@ public interface GroupcounselService {
 	GroupcounselVO selectUserGroup(GroupcounselVO vo); // 그룹상담 상세목록 보여주기
 	GroupcounselVO selectInvoice (GroupcounselVO vo); // 그룹상담 결제 페이지 조인 구문.
 	int groupReserveInsert(GroupcounselVO vo); //그룹 상담 예약에 값 넣어주기.
+	
+	int getGCListCnt(Search svo) throws Exception; // 데이터가 총 몇건인지 보여주는 숫자
+	public List<GroupcounselVO> gcSearchselect(Search svo) throws Exception; // 검색을 위한 SELECTLIST
+	int getGCapplyListCnt(Search svo) throws Exception; // 데이터가 총 몇건인지 보여주는 숫자
+	public List<GroupcounselVO> gcApplySearchselect(Search svo) throws Exception;
+	
+	GroupcounselVO selectGroupCounselInfo(GroupcounselVO vo);
+	int groupCounselUpdate(GroupcounselVO vo);
+	int groupCounselClose(GroupcounselVO vo);
 }

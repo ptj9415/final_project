@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -149,6 +150,27 @@ th {
 	background-color: #1E90FF;
 	color: white;
 }
+
+#backbtn {
+	float: right;
+	width: 80px;
+	height: 35px;
+	margin-right: 10px;
+	border: 1px solid red;
+	border-radius: 5px;
+	background-color: white;
+	color: red;
+}
+
+#closebtn {
+	float: right;
+	height: 35px;
+	margin-right: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: red;
+	color: white;
+}
 </style>
 </head>
 
@@ -156,7 +178,7 @@ th {
 	<section class="content">
 		<div class="container-fluid">
 			<br>
-			<h3>그룹상담 개설</h3>
+			<h3>그룹상담 수정</h3>
 			<br>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
@@ -166,7 +188,7 @@ th {
 				</div>
 			</div>
 			<!-- 그룹 상담 개설 페이지 -->
-			<form action="summernote.do" method="post"
+			<form action="groupCounselUpdate.do" method="post"
 				enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-12">
@@ -175,34 +197,41 @@ th {
 								<br>
 								<table class="table text-nowrap" id="infotable">
 									<tr>
-										<th>상담명</th>
+										<th>상담명<input type="hidden" id="gc_no" name="gc_no"
+											value="${gc.gc_no }"></th>
 										<td><input class="inputname" type="text" id="gc_title"
-											name="gc_title"></td>
+											name="gc_title" value="${gc.gc_title }"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
-												<option value="카톡">카톡</option>
-												<option value="줌">줌</option>
+												<option value="카카오톡"
+													<c:if test="${gc.gc_type eq '카카오톡' }">selected</c:if>>카카오톡</option>
+												<option value="줌"
+													<c:if test="${gc.gc_type eq '줌' }">selected</c:if>>줌</option>
 										</select></td>
 									</tr>
 									<tr>
 										<th>모집일</th>
 										<td><input type="date" id="gc_startdate"
-											name="gc_startdate">&nbsp;~&nbsp;<input type="date"
-											id="gc_finaldate" name="gc_finaldate"></td>
+											name="gc_startdate" value="${gc.gc_startdate }">&nbsp;~&nbsp;<input
+											type="date" id="gc_finaldate" name="gc_finaldate"
+											value="${gc.gc_finaldate }"></td>
 										<th>상담일</th>
-										<td><input type="date" id="gc_date" name="gc_date">&nbsp;-&nbsp;<input
-											type="time" id="gc_time" name="gc_time" value="14:00"></td>
+										<td><input type="date" id="gc_date" name="gc_date"
+											value="${gc.gc_date }">&nbsp;-&nbsp;<input
+											type="time" id="gc_time" name="gc_time"
+											value="${gc.gc_time }"></td>
 									</tr>
 									<tr>
 										<th>모집 인원</th>
 										<td>최소&nbsp;&nbsp;<input class="pcount"
-											id="gc_min_person" name="gc_min_person" type="text">&nbsp;명
-											~ 최대&nbsp;&nbsp;<input class="pcount" type="text"
-											id="gc_max_person" name="gc_max_person">&nbsp;명
+											id="gc_min_person" name="gc_min_person" type="text"
+											value="${gc.gc_min_person }">&nbsp;명 ~ 최대&nbsp;&nbsp;<input
+											class="pcount" type="text" id="gc_max_person"
+											name="gc_max_person" value="${gc.gc_max_person }">&nbsp;명
 										</td>
 										<th>상담 비용</th>
 										<td><input class="pcount" id="gc_price" name="gc_price"
-											type="text">&nbsp;원</td>
+											type="text" value="${gc.gc_price }">&nbsp;원</td>
 									</tr>
 								</table>
 								<br>
@@ -227,27 +256,31 @@ th {
 								<table class="table text-nowrap" id="counseltable">
 									<tr>
 										<th>상담 소개</th>
-										<td><textarea class="summernote" name="summernote"></textarea>
+										<td><textarea class="summernote" name="summernote">${gc.gc_infos }</textarea>
 
 										</td>
 									</tr>
 									<tr>
 										<th>썸네일 이미지</th>
 										<td><div class="filebox">
-												<input class="uploadname"> <label for="filename">파일
-													찾기</label> <input type="file" id="filename" name="filename">
+												<input class="uploadname" value="${gc.gc_sumnail }">
+												<label for="filename">파일 찾기</label> <input type="file"
+													id="filename" name="filename">
 											</div></td>
 									</tr>
 									<tr>
 										<th>카카오톡 오픈주소</th>
 										<td><input type="text" class="inputcacao" id="gc_kakao"
-											name="gc_kakao"></td>
+											name="gc_kakao" value="${gc.gc_kakao }"></td>
 									</tr>
 								</table>
 								<br>
 								<div class="btndiv">
 									<button type="submit" class="modify2" id="modify2"
-										name="modify2">그룹 상담 개설</button>
+										name="modify2">그룹 상담 수정</button>
+										<button type="button" id="closebtn" onclick="closeFnc(${gc.gc_no})">상담 폐지</button>
+									<button type="button" id="backbtn"
+										onclick="location.href='counselorGroupList.do'">돌아가기</button>
 								</div>
 								<br> <br>
 							</div>
@@ -344,11 +377,36 @@ th {
 				}
 			});
 		}
-		
+
 		$("#filename").on('change', function() {
 			var fileName = $("#filename").val();
 			$(".uploadname").val(fileName);
 		});
+		
+		
+		function closeFnc(gc_no) {
+			console.log(gc_no)
+			if(confirm('정말 상담을 폐지하시겠습니까?') == true) {
+				$.ajax({
+					url: 'groupCounselClose.do',
+					data: {gc_no : gc_no},
+					type: 'post',
+					success: function(data) {
+						if(data == '1') {
+							console.log(data);
+						alert('상담이 폐지되었습니다.');
+						location.href="counselorGroupList.do"
+						} else {
+							console.log(data);
+							alert('오류가 발생하였습니다. 관리자에게 문의해주세요.');
+						}
+					},
+					error: function() {
+						alert('오류가 발생하였습니다. 관리자에게 문의해주세요.');
+					}
+				});				
+			}
+		}
 	</script>
 </body>
 </html>
