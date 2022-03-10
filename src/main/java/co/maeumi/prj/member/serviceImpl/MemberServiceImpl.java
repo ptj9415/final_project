@@ -99,5 +99,30 @@ public class MemberServiceImpl implements MemberService {
 		return map.mypageSelectList(mvo);
 	}
 
+	@Override
+	public int ajaxUpdateNickname(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.ajaxUpdateNickname(mvo);
+	}
+
+	@Override
+	public MemberVO ajaxPassChk(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.ajaxPassChk(mvo);
+	}
+
+	@Override
+	public int ajaxUpdatePassword(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.ajaxUpdatePassword(mvo);
+	}
+
+	@Override
+	public int ajaxUpdatePhone(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.ajaxUpdatePhone(mvo);
+	}
+
+
 	
 }

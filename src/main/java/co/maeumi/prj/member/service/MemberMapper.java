@@ -25,5 +25,17 @@ public interface MemberMapper {
 	
 	// 마이페이지 이메일과 가입유형 구분
 	MemberVO mypageSelectList(MemberVO mvo);
+	
+	// 닉네임 변경
+	int ajaxUpdateNickname(MemberVO mvo);
+	
+	// 비밀번호 조회
+	MemberVO ajaxPassChk(MemberVO mvo);
+	
+	// 비밀번호 변경 
+	int ajaxUpdatePassword(MemberVO mvo);
+
+	// 연락처 정보 수정
+	int ajaxUpdatePhone(MemberVO mvo);
 
 }
