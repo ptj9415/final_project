@@ -98,6 +98,12 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	public int groupReserveInsert(GroupcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.groupReserveInsert(vo);
+	}
+
+	@Override
+	public int groupUpdatePerson(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupUpdatePerson(vo);
 	}	
 
 }
