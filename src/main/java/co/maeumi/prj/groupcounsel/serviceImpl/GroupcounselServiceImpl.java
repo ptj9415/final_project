@@ -13,7 +13,7 @@ import co.maeumi.prj.service.Search;
 
 @Repository("groupCounselDao")
 public class GroupcounselServiceImpl implements GroupcounselService {
-	
+
 	@Autowired
 	private GroupcounselMapper map;
 
@@ -138,15 +138,16 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	}
 
 	@Override
-	public int groupCounselClose(GroupcounselVO vo) {
-		// TODO Auto-generated method stub
-		return map.groupCounselClose(vo);
-
-  @Override
 	public int groupUpdatePerson(GroupcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.groupUpdatePerson(vo);
 
-	}	
+	}
+
+	@Override
+	public int groupCounselClose(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupCounselClose(vo);
+	}
 
 }
