@@ -34,6 +34,5 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	public int selectReplyCount(BoardReplyVO vo) {
 		return map.selectReplyCount(vo);
 	}
-
-
+	
 }

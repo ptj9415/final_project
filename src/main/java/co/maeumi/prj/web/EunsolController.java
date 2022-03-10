@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
-import co.maeumi.prj.boardLike.service.boardLikeService;
-import co.maeumi.prj.boardLike.service.boardLikeVO;
+import co.maeumi.prj.boardLike.service.BoardLikeService;
+import co.maeumi.prj.boardLike.service.BoardLikeVO;
 import co.maeumi.prj.boardReply.service.BoardReplyService;
 import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.faq.service.FaqService;
@@ -43,7 +43,7 @@ public class EunsolController {
 
 	// 자유게시판 좋아요
 	@Autowired
-	private boardLikeService boardLikeDao;
+	private BoardLikeService boardLikeDao;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -51,37 +51,36 @@ public class EunsolController {
 	@PostMapping("/userFaq.do") /* == @RequestMapping의 줄임말 : Post로 RequestMapping 해줌 */
 	public String userFaq(FaqVO vo, Model model) {
 		model.addAttribute("faqs", faqDao.faqSelectList());
+		
 		return "user/faq/userFaq";
 	}
 
 	// 사용자 자유게시판 메인화면
 	@RequestMapping("/userBoardList.do")
-	public String userBoardList(BoardVO vo, Model model, @RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "1") int range, Search svo, HttpSession session)
+	public String userBoardList(BoardVO vo, Model model, 
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "") String b_title,
+			@ModelAttribute("search") Search svo)
 			throws Exception {
+				
+			model.addAttribute("search", svo);
+			svo.setB_title(b_title);
 
-		int listCnt = boardDao.getBoardListCnt(svo);
+		int listCnt = boardDao.getUserBoardListCnt(svo);
 
 		svo.pageinfo(page, range, listCnt);
 
 		model.addAttribute("pagination", svo);
-
-		List<BoardVO> list = boardDao.boardSelectList();
-
-		for (int i = 0; i < list.size(); i++) {
-			String date = list.get(i).getB_wdate();
-			date = date.substring(0, 10);
-			list.get(i).setB_wdate(date);
-		}
-
-		model.addAttribute("board", list);
+		model.addAttribute("board", boardDao.userBoardSearchSelect(svo));
+		
 		return "user/board/userBoardList";
 	}
 
 	// 자유게시판 글 상세 보기
 	@RequestMapping("/userBoardRead.do")
 	public String userBoardRead(BoardVO vo, Model model, @Param("b_no") int b_no, HttpServletRequest request,
-			BoardReplyVO rvo,boardLikeVO lvo, HttpSession session) throws Exception {
+			BoardReplyVO rvo, BoardLikeVO lvo, HttpSession session) throws Exception {
 		vo = boardDao.boardSelect(vo);
 
 		// 날짜 뒤에 시간 자르고 년-월-일 표시
@@ -103,6 +102,9 @@ public class EunsolController {
 		// 좋아요
 		lvo.setM_email((String)session.getAttribute("email"));
 		model.addAttribute("boardLike", boardLikeDao.boardLikeSelect(lvo));
+		
+		// 좋아요 개수
+		model.addAttribute("like_count", boardLikeDao.selectLikeCount(lvo));
 
 		return "user/board/userBoardRead";
 	}
@@ -124,12 +126,14 @@ public class EunsolController {
 	@RequestMapping("/boardReplyDelete.do")
 	public String boardReplyDelete(BoardReplyVO vo, HttpServletRequest request) {
 		boardReplyDao.boardReplyDelete(vo);
+		
 		return "user/board/userBoardRead";
 	}
 
 	// 자유게시판 글 작성
 	@RequestMapping("/userBoardForm.do")
 	public String userBoardForm() {
+		
 		return "user/board/userBoardForm";
 	}
 
@@ -138,6 +142,7 @@ public class EunsolController {
 	public String userBoardResister(BoardVO vo, HttpSession session) {
 		vo.setB_email((String) session.getAttribute("email")); // 로그인 정보. 작성자가 누군지 알기 위해 담는 거
 		boardDao.userBoardInsert(vo);
+		
 		return "redirect:userBoardList.do";
 	}
 
@@ -145,6 +150,7 @@ public class EunsolController {
 	@RequestMapping("/userBoardUpdateForm.do")
 	public String userBoardUpdateForm(BoardVO vo, Model model) {
 		model.addAttribute("boardSelect", boardDao.boardSelect(vo));
+		
 		return "user/board/userBoardUpdateForm";
 	}
 
@@ -152,6 +158,7 @@ public class EunsolController {
 	@RequestMapping("/userBoardUpdate.do")
 	public String userBoardUpdate(BoardVO vo) {
 		boardDao.userBoardUpdate(vo);
+		
 		return "redirect:userBoardList.do";
 	}
 
@@ -160,41 +167,48 @@ public class EunsolController {
 	@RequestMapping("/userBoardDelete.do")
 	public String userBoardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
+		
 		return "redirect:userBoardList.do";
 	}
 
 	// 자유게시판 좋아요 등록
 	@ResponseBody
 	@RequestMapping("/boardLikeInsert.do")
-	public String boardLikeInsert(boardLikeVO vo, HttpSession session, HttpServletRequest request) {
-		String a = request.getParameter("b_no");
-		String b = request.getParameter("m_email");
-		System.out.println("----------------------------");
-		System.out.println(a + " + " + b);
+	public int boardLikeInsert(BoardLikeVO vo, HttpSession session, HttpServletRequest request) {
 		boardLikeDao.boardLikeInsert(vo);
-		System.out.println("----------------------------");
-		return "OK";
+		int like = boardLikeDao.selectLikeCount(vo);
+		
+		return like;  // ajax data 값
 	}
 
 	// 자유게시판 좋아요 삭제
 	@ResponseBody
 	@RequestMapping("/boardLikeDelete.do")
-	public String boardLikeDelete(boardLikeVO vo, HttpSession session) {
-		vo.setM_email((String) session.getAttribute("email"));
+	public int boardLikeDelete(BoardLikeVO vo, HttpSession session) {
 		boardLikeDao.boardLikeDelete(vo);
-		return "OK";
+		int disLike = boardLikeDao.selectLikeCount(vo);		
+		
+		return disLike;
+	}
+	
+	// MBIT 
+	@RequestMapping("/mbti.do")
+	public String mbti() {
+		return  "user/test/mbti";
 	}
 
 	/* ===== 관리자 화면 ===== */
 
 	// 관리자 자유게시판 메인화면
 	@RequestMapping("/adminBoardList.do")
-	public String adminBoardList(BoardVO vo, Model model, @RequestParam(required = false, defaultValue = "1") int page,
+	public String adminBoardList(BoardVO vo, Model model,
+			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "") String m_nickname,
 			@RequestParam(required = false, defaultValue = "") String b_title,
 			@RequestParam(required = false, defaultValue = "all") String b_subject,
-			@RequestParam(required = false, defaultValue = "") String b_wdate, @ModelAttribute("search") Search svo)
+			@RequestParam(required = false, defaultValue = "") String b_wdate, 
+			@ModelAttribute("search") Search svo)
 			throws Exception {
 
 		model.addAttribute("search", svo);
@@ -218,6 +232,7 @@ public class EunsolController {
 		}
 
 		model.addAttribute("board", list);
+		
 		return "admin/boardmanage/adminBoardList";
 	}
 
@@ -234,7 +249,7 @@ public class EunsolController {
 		// 조회수
 		boardDao.updateCount(vo.getB_no());
 
-		model.addAttribute("boardRead", vo);
+		model.addAttribute("boardRead", vo);		
 		return "admin/boardmanage/adminBoardRead";
 	}
 
@@ -243,13 +258,16 @@ public class EunsolController {
 	@RequestMapping("/boardDelete.do")
 	public String boardDelete(Model model, BoardVO vo, HttpServletRequest request) {
 		boardDao.boardDelete(vo);
+		
 		return "OK";
 	}
 
 	// 관리자 FAQ 메인화면
 	@RequestMapping("/adminFaqList.do")
-	public String adminFaqList(FaqVO vo, Model model, @RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "1") int range, @ModelAttribute("search") Search svo)
+	public String adminFaqList(FaqVO vo, Model model, 
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range, 
+			@ModelAttribute("search") Search svo)
 			throws Exception {
 
 		model.addAttribute("search", svo);
@@ -268,6 +286,7 @@ public class EunsolController {
 			list.get(i).setF_wdate(date);
 		}
 		model.addAttribute("faqs", list);
+		
 		return "admin/faqmanage/adminFaqList";
 	}
 
@@ -277,12 +296,14 @@ public class EunsolController {
 
 		vo = faqDao.faqSelect(vo);
 		model.addAttribute("faqRead", vo);
+		
 		return "admin/faqmanage/adminFaqRead";
 	}
 
 	// FAQ 작성
 	@RequestMapping("/adminFaqForm.do")
 	public String adminFaqForm() {
+		
 		return "admin/faqmanage/adminFaqForm";
 	}
 
@@ -291,6 +312,7 @@ public class EunsolController {
 	public String faqResister(FaqVO vo, HttpSession session) {
 		vo.setF_email((String) session.getAttribute("email")); // 로그인 정보. 로그인 할 때 담는걸로 가져와야 함 !!
 		faqDao.faqInsert(vo);
+		
 		return "redirect:adminFaqList.do";
 	}
 
@@ -298,6 +320,7 @@ public class EunsolController {
 	@RequestMapping("/adminFaqUpdateForm.do")
 	public String adminFaqUpdateForm(FaqVO vo, Model model, HttpSession session) {
 		model.addAttribute("faqSelect", faqDao.faqSelect(vo));
+		
 		return "admin/faqmanage/adminFaqUpdateForm";
 	}
 
@@ -305,6 +328,7 @@ public class EunsolController {
 	@RequestMapping("/faqUpdate.do")
 	public String faqUpdate(FaqVO vo) {
 		faqDao.faqUpdate(vo);
+		
 		return "redirect:adminFaqList.do";
 	}
 
@@ -313,47 +337,8 @@ public class EunsolController {
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(Model model, FaqVO vo, HttpServletRequest request) {
 		faqDao.faqDelete(vo);
+		
 		return "redirect:adminFaqList.do";
 	}
 
-	// 챗봇
-
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping(value = "/keyboard") public KeyboardVO keyboard() { KeyboardVO
-	 * keyboard = new KeyboardVO(new String[] { "사진", "라벨", "에코메세지" });
-	 * 
-	 * return keyboard; }
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @PostMapping(value = "/message") public ResponseMessageVO
-	 * message(@RequestBody RequestMessageVO vo) { ResponseMessageVO res_vo = new
-	 * ResponseMessageVO(); MessageVO mes_vo = new MessageVO();
-	 * 
-	 * if (vo.getContent().equals("메인화면")) { mes_vo.setText("첫 화면을 호출합니다.");
-	 * 
-	 * KeyboardVO keyboard = new KeyboardVO(new String[] { "사진", "라벨", "에코메세지" });
-	 * 
-	 * res_vo.setKeyboard(keyboard); } else if (vo.getContent().equals("사진")) {
-	 * PhotoVO photo = new PhotoVO();
-	 * 
-	 * photo.setUrl("http://placehold.it/640x480.jpg"); photo.setWidth(640);
-	 * photo.setHeight(480);
-	 * 
-	 * mes_vo.setPhoto(photo); mes_vo.setText(vo.getContent()); } else if
-	 * (vo.getContent().equals("라벨")) { MessageButtonVO messageButton = new
-	 * MessageButtonVO();
-	 * 
-	 * messageButton.setLabel("GITHUB");
-	 * messageButton.setUrl("https://github.com/sjh836/Spring_KakaoBot_Sample");
-	 * 
-	 * mes_vo.setMessage_button(messageButton);
-	 * mes_vo.setText("많은 피드백부탁드립니다! STAR는 개발자를 춤추게 만들어요!"); } else // 에코메시지 {
-	 * mes_vo.setText(vo.getContent()); }
-	 * 
-	 * res_vo.setMessage(mes_vo); return res_vo; }
-	 * 
-	 */
 }
