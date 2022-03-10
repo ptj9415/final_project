@@ -568,11 +568,13 @@ h1 {
   background: #c9dff0;
 }
 #keywords thead tr th {
+font-size: 20px;
   font-weight: bold;
   padding: 12px 30px;
   padding-left: 42px;
 }
 #keywords thead tr th span {
+	font-size: 18px;
   padding-right: 20px;
   background-repeat: no-repeat;
   background-position: 100% 100%;
@@ -594,6 +596,7 @@ h1 {
   color: #555;
 }
 #keywords tbody tr td {
+	font-size: 18px;
   text-align: center;
   padding: 15px 10px;
 }
@@ -653,64 +656,45 @@ h1 {
     <div id="wrapper">
         <h3>상담신청 내역</h3>
         
-        <table id="keywords" cellspacing="0" cellpadding="0">
+        <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
           <thead>
             <tr>
-              <th><span>Keywords</span></th>
-              <th><span>Impressions</span></th>
-              <th><span>Clicks</span></th>
-              <th><span>CTR</span></th>
-              <th><span>Rank</span></th>
+              <th><span>test</span></th>
+              <th><span>test</span></th>
+              
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="lalign">silly tshirts</td>
-              <td>6,000</td>
-              <td>110</td>
-              <td>1.8%</td>
-              <td>22.2</td>
+              
+              <td>test</td>
+              <td>test</td>
+             
             </tr>
             <tr>
-              <td class="lalign">desktop workspace photos</td>
-              <td>2,200</td>
-              <td>500</td>
-              <td>22%</td>
-              <td>8.9</td>
+              <td>test</td>
+              <td>test</td>
+              
             </tr>
             <tr>
-              <td class="lalign">arrested development quotes</td>
-              <td>13,500</td>
-              <td>900</td>
-              <td>6.7%</td>
-              <td>12.0</td>
+              <td>test</td>
+              <td>test</td>
+              
             </tr>
             <tr>
-              <td class="lalign">popular web series</td>
-              <td>8,700</td>
-              <td>350</td>
-              <td>4%</td>
-              <td>7.0</td>
+              <td>test</td>
+              <td>test</td>
+              
             </tr>
-            <tr>
-              <td class="lalign">2013 webapps</td>
-              <td>9,900</td>
-              <td>460</td>
-              <td>4.6%</td>
-              <td>11.5</td>
-            </tr>
-            <tr>
-              <td class="lalign">ring bananaphone</td>
-              <td>10,500</td>
-              <td>748</td>
-              <td>7.1%</td>
-              <td>17.3</td>
-            </tr>
+            
+           
           </tbody>
         </table>
+        
        </div> 
     </div> 
       </div>
+        <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
     </div>
   </div>
     <div class="footer">
@@ -722,12 +706,7 @@ h1 {
       </div>
     </div>
  <script>
- $("button").click(function () {
-	  $(".check-icon").hide();
-	  setTimeout(function () {
-	    $(".check-icon").show();
-	  }, 10);
-	});
+
  </script>
 </body>
 </html>

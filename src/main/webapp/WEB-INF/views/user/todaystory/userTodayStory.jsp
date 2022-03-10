@@ -20,7 +20,7 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <style>
 table {
@@ -29,6 +29,27 @@ table {
 
 .form-check-input{
 	margin-left:580px;
+}
+
+.register-btn{
+	border:1px solid white;
+	width:100px;
+	height:40px;
+	color:white;
+	text-align: center;
+    border-radius: 30px;
+}
+.register-btn:hover{
+	cursor:pointer;
+}
+.btn-delete{
+	float:right;
+}
+.btn-delete:hover{
+	cursor:pointer;
+}
+.card-text{
+	float:left;
 }
 /*modal*/
 /*modal end*/
@@ -58,8 +79,8 @@ table {
 					
 					<!-- modal btn -->
 	
-		<span type="button" class="btn btn-default" id="submit-btn"
-			data-toggle="modal" data-target="#modal-lg">등록&nbsp;
+		<span type="button" class="register-btn" id="submit-btn"
+			data-toggle="modal" data-target="#modal-lg">글쓰기
 		</span>
 	
 				</div>
@@ -87,24 +108,16 @@ table {
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form id="frm" method="post">
+						<form id="frm" action="todayReplyInsert.do" method="post">
 							<div class="card-body">
 								
 									<span> 작성자 : ${nickname }</span>
 									<br>
 								  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" style="float:right">
+                    <input type="checkbox" class="form-check-input" id="anony" name="anony" style="float:right">
+                    <input type="hidden" id="sr_anony" name="sr_anony" value="F">
                     
-                    
-    					<%--    <c:choose>
-								<c:when test="${nickname eq 0 }">
-									<p class="card-text" style="text-align: right;">${nickname}
-								</p>
-								</c:when>
-								<c:otherwise>
-									<p class="card-text" style="text-align: right;">익명</p>
-								</c:otherwise>
-							</c:choose> --%>
+    					   
 							
                     <label class="form-check-label" for="exampleCheck1"  style="float:right">닉네임 비공개</label>
                   </div> 
@@ -116,16 +129,14 @@ table {
 							</div>
 							<!-- /.card-body -->
 
-							<!--  <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div> -->
+				<input type="hidden" id="sc_no" name="sc_no" value="${todaySelect.sc_no}">
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<button type="submit" class="btn btn-primary" id="submit" name="submit">등록</button>
+				</div>
 						</form>
 					</div>
 					<!-- /.card -->
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="submit" name="submit">등록</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -133,7 +144,6 @@ table {
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	<!-- modal contents end -->
 	<!-- modal contents end -->
 
 	<!-- 댓글 start -->
@@ -157,7 +167,19 @@ table {
 									</div>
 									</c:if>
 									<div class="media-body p-2 mt-3">
-										<h3 class="heading">${todayReplyList.sr_writer}</h3>
+							<c:choose>
+								<c:when test="${todayReplyList.sr_anony eq 'F' }">
+									<p class="card-text" id="sr_anony" style="text-align: right;">${todayReplyList.sr_writer}
+								</p>
+								</c:when>
+								<c:otherwise>
+									<p class="card-text"  id="sr_anony" style="text-align: right;">익명</p>
+								</c:otherwise>
+							</c:choose>
+										
+										
+										<br>
+										<br>
 										<p>${todayReplyList.sr_subject}</p>
 
 									</div>
@@ -176,6 +198,15 @@ table {
 	<!-- 댓글 end -->
 
 <script>
+/* 	function anonyFnc(){
+		$('#anonymous').click( function() {
+			var str = ${nickname};
+			str.replace(${nickname},'익명');
+			alert(str.replace(${nickname},'익명'));
+		}
+			});
+	 */
+
 	function replyDelete(sr_no) {
 		console.log(sr_no);
 		$.ajax({
@@ -196,15 +227,34 @@ table {
 		})
 	}
 	
+
+	
+	// 글쓴이 익명 체크 여부
+	$('#anony').change( function() {
+		if($('#anony').is(':checked')) {
+			$('#sr_anony').val('T');
+		} else {
+			$('#sr_anony').val('F');
+		}
+	});
+
+	
 	//글 등록 제출
-	$(function() {
-		$("#submit").click(function() {
-			frm.action = "todayReplyInsert.do";
-			frm.submit();
+	/* $(function() {
+		$("#submit").click(function(e) {
+			
+				e.preventDefault();
+				if(!confirm('정말로 등록하시겠습니까?')) 
+					return;
+				$('#submit').submit();
+				frm.action = "todayReplyInsert.do";
+			});
+			
+			/* frm.action = "todayReplyInsert.do"; 
 
 		});
-
-	});
+ */
+	
 	/* modal start */
 	/* modal end */
 	
