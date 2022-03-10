@@ -214,10 +214,13 @@ public class EjuController {
 	// 오늘의 한마디 댓글 등록
 	@RequestMapping("/todayReplyInsert.do")
 	public String todayReplyInsert(TodayreplyVO vo, Model model, HttpServletRequest request, HttpSession session) {
+		//System.out.println(request.getParameter("sc_no"));
 		vo.setSr_writer((String) session.getAttribute("nickname")); 
 		
+		todayReplyDao.todayReplyInsert(vo);
+
 		//model.addAttribute("todayReplyInsertForm", todayReplyDao.todayReplyInsert(vo));
-		return "redirect:user/todaystory/userTodayStory";
+		return "redirect:userTodayStory.do";
 	}
 
 	// 오늘의 한마디 user 댓글 삭제
@@ -225,7 +228,9 @@ public class EjuController {
 	@ResponseBody
 	public String todayReplyDelete(TodayreplyVO vo, HttpServletRequest request) {
 
-		vo.setSr_no(request.getParameter("sr_no"));
+		String sr_no = request.getParameter("sr_no");
+		int num = Integer.parseInt(sr_no);
+		vo.setSr_no(num);
 		todayReplyDao.todayReplyDelete(vo);
 
 		return "OK";
@@ -308,6 +313,7 @@ public class EjuController {
 	// 오늘의 한마디 등록
 	@RequestMapping("/adminTodayStoryRegister.do")
 	public String adminTodayStoryRegister(Model model, TodaystoryVO vo) {
+		
 		model.addAttribute("adminTodayInsertForm", todayDao.TodayInsert(vo));
 
 		return "redirect:adminTodayStoryList.do";

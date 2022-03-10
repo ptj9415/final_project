@@ -283,10 +283,40 @@
 		WHERE GC_NO = #{gc_no}
 	</select>
 	
+
 	<update id="groupCounselClose" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
 		UPDATE GROUP_COUNSEL SET
 		GC_STATUS = '2'
 		WHERE GC_NO = ${gc_no}
+	</update>
+
+	<insert id="groupReserveInsert" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+			INSERT INTO GROUP_RESERVE(
+				GR_NO,
+				M_EMAIL,
+				GC_NO,
+				GR_SUBJECT,
+				GR_RESERVEDATE,
+				GR_STATUS,
+				GR_REFUND,
+				GR_PRICE
+			)
+			VALUES(
+				(SELECT NVL(MAX(GR_NO),0)+1 FROM GROUP_RESERVE O),
+				'세션값이 들어감',
+				#{gc_no},
+				#{gr_subject},
+				sysdate,
+				'0',
+				'0',
+				#{gr_price}
+			)
+	</insert>
+	
+	<update id="groupUpdatePerson" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+			UPDATE GROUP_COUNSEL
+			SET GC_PERSON = GC_PERSON +1
+			WHERE GC_NO = #{gc_no};
 	</update>
 
 </mapper>

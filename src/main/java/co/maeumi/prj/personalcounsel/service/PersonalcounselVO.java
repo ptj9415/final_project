@@ -43,6 +43,12 @@ public class PersonalcounselVO {
 	private String pc_report;
 	private String pc_result;
 	private String m_nickname;
+
+	
+	private int prCount;
+	
+
 	private String m_email;
+
 	
 }

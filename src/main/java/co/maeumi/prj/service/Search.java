@@ -20,6 +20,12 @@ public class Search extends Paging {
 	private String b_subject;
 	private String b_wdate;
 
+
+
+	private String b_content;
+	private String b_anony;
+	
+
 	// faqVO
 	private String f_title;
 	private String f_subject;

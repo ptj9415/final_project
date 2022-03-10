@@ -55,14 +55,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> boardSearchSelect(Search svo) throws Exception {
-		// TODO Auto-generated method stub
 		return map.boardSearchSelect(svo);
 	}
 
 	@Override
 	public int getBoardListCnt(Search svo) throws Exception {
-		// TODO Auto-generated method stub
 		return map.getBoardListCnt(svo);
+	}
+
+	@Override
+	public List<BoardVO> userBoardSearchSelect(Search svo) throws Exception {
+		return map.userBoardSearchSelect(svo);
+	}
+
+	@Override
+	public int getUserBoardListCnt(Search svo) throws Exception {
+		return map.getUserBoardListCnt(svo);
 	}
 
 }
