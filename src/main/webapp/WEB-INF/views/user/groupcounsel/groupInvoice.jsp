@@ -345,13 +345,13 @@ form {
 							<td class="tableitem"><p class="itemtext">상담방식</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_type }</td>
+							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_type}</td>
 						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_date }</p></td>
+							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_date}</p></td>
 						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
@@ -361,7 +361,7 @@ form {
 								<select name='checkbox' id="checkbox" onchange="change()">
 											<option value='' selected>-- 선택 --</option>
 										<c:forEach items="${coupon }" var="coupon">
-											<option value='${coupon.c_price}'>${coupon.c_name} (${coupon.c_price}원)</option>									
+											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
 										</c:forEach>
 								</select>
 							</td>
@@ -370,7 +370,7 @@ form {
 							<td class="tableitem"><p class="itemtext">상담 금액</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_price}</p></td>
+							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_price}원</p></td>
 						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인 금액</p></td>
@@ -390,12 +390,12 @@ form {
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="gr_price" name="gr_price" value="">
+					<input type="hidden" id="pr_price" name="pr_price" value="">
 					<input type="hidden" id="or_uid" name="or_uid">
+					<input type="hidden" id="c_no" name="c_no" value="">
 				</form>
 				<!--End Table-->
-			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-					target="_top">
+			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick"> <input
 						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 					<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
@@ -413,17 +413,20 @@ form {
 	   function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
-		   $("#discount").text(' '+'-'+priceSelect);
-		   var ddd = price-priceSelect;
-		   alert(ddd);
-		   $("#totalPrice").text(ddd);
-		   $("#gr_price").val(ddd);
+		   var num = priceSelect.indexOf('/');
+		   var priceResult = priceSelect.substr(0,4);
+		   var couponNo = priceSelect.substr(num+1);
 		   
+		   $("#discount").text(' '+' '+'-'+priceSelect+'원');
+		   var ddd = price-priceSelect;
+		   $("#totalPrice").text(ddd+'원');
+		   $("#gr_price").val(ddd);
+		   $("#c_no").val(couponNo);
 		   
 	   }	
 	</script>
 	<script>
-		var gr_price = $("#gr_price").val();
+		var pr_price = $("#pr_price").val();
         $(".check_module").click(function () {
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');

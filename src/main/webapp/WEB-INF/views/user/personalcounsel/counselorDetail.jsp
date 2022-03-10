@@ -182,7 +182,6 @@ function prevfunc(c_email,type){
 	url = url + "?c_email="+c_email;
 	url = url + "&onecheck=" + type;
 	location.href = url;
-
 }
 </script>
 </body>

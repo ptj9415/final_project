@@ -13,10 +13,27 @@
 	</delete>
 	
 	<insert id="todayReplyInsert" parameterType="co.maeumi.prj.todayreply.service.TodayreplyVO">
-		<selectKey keyProperty="sr_no" resultType="int" order="BEFORE">
-		SELECT NVL(MAX(TO_NUMBER(sr_no)), 0) + 1 FROM sc_reply
+		<!-- <selectKey keyProperty="sr_no" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(sr_no), 0) + 1 FROM sc_reply
 		</selectKey>
-		INSERT INTO sc_reply
-		VALUES (#{sr_no}, #{sc_subject}, #{sc_no}, #{sr_writer})
+		INSERT INTO sc_reply (sr_no,sc_subject,sc_no,sr_writer)
+		VALUES (#{sr_no}, #{sc_subject}, #{sc_no}, #{sr_writer}) -->
+	
+		INSERT INTO SC_REPLY (
+					SR_NO,
+					SR_SUBJECT,
+					SC_NO,
+					SR_WRITER,
+					SR_ANONY
+					
+					)
+					VALUES (
+					(SELECT NVL(MAX(SR_NO), 0) + 1 FROM SC_REPLY N), 
+					#{sr_subject}, 
+					#{sc_no}, 
+					#{sr_writer},
+					#{sr_anony}
+					
+					)
 	</insert>	
 </mapper>

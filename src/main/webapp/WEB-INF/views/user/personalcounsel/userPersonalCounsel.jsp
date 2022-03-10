@@ -13,6 +13,10 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <title>개인상담</title>
 <style>
+.hero-wrap.hero-wrap-2 .slider-text .bread {
+    font-weight: 900;
+    color: #fff;
+}
 
 .md-stepper-horizontal {
 	display: table;
@@ -201,6 +205,7 @@
 }
 
 .card-accordion .card-accordion-label {
+	content: "▲";
 	display: block;
 	padding: 20px 30px;
 	color: #468FB6;
@@ -210,7 +215,7 @@
 }
 
 .card-accordion .card-accordion-label::after {
-	content: "";
+	content: "▶";
 	font-family: FontAwesome;
 	font-size: 0.75rem;
 	position: absolute;
@@ -241,7 +246,8 @@
 }
 
 .card-accordion input:checked ~ .card-accordion-label::after {
-	transform: rotate(45deg);
+	transform: rotate(90deg);
+	transition: 0.5s;
 }
 
 .mini-p {
@@ -257,7 +263,7 @@
 
 .category-detail {
 	margin-top: 60px;
-	margin-bottom: 60px;
+	margin-bottom: 100px;
 }
 /*arccordion end*/
 /*next btn*/
@@ -271,6 +277,10 @@
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-right:100px;
+	float:right;
 }
 
 #next-btn:hover {
@@ -320,6 +330,12 @@
 	font-size: 12px;
 	font-weight: 200;
 	cursor: pointer;
+}
+
+
+.next-btn{
+	float:right;
+	padding-bottom:100px;
 }
 </style>
 </head>
@@ -443,9 +459,10 @@
 
 				</div>
 			</div>
+			<input type="submit" data-page="2" name="next" class="next action-button" id="next-btn" value="Next" />
 		</div>
-			<input type="submit" data-page="2" name="next"
-		class="next action-button" id="next-btn" value="Next" />
+			
+			
 	</form>
 	<input type="hidden" data-page="2" name="previous"
 		class="previous action-button" value="Previous" />

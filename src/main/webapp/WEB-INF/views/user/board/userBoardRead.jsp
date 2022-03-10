@@ -96,11 +96,28 @@ th, td {
 			<div id="heartArea">
 				<c:if test="${not empty boardLike }">
 					<span id="Heart">💗</span>
+					<c:choose>
+						<c:when test="${like_count eq '0' }">
+							<span id="count"></span>
+						</c:when>
+						<c:otherwise>
+							<span id="count">${like_count }</span>
+						</c:otherwise>
+					</c:choose>
 				</c:if>
-				<c:if test="${empty boardLike}">
-					<span id="Heart">💔</span>
+				<c:if test="${empty boardLike }">
+					<span id="Heart">🤍</span>
+					<c:choose>
+						<c:when test="${like_count eq '0' }">
+							<span id="count"></span>
+						</c:when>
+						<c:otherwise>
+							<span id="count">${like_count }</span>
+						</c:otherwise>
+					</c:choose>
 				</c:if>
 			</div>
+
 			<input type="hidden" id="m_email" name="m_email" value="${email }">
 		</c:if>
 		<button type="button" id="button"
@@ -202,9 +219,9 @@ th, td {
 				error : function() {
 					alert("삭제 실패")
 				}
-			})
+			});
 		  }
-		})
+		});
 	}
 	
 	
@@ -250,7 +267,7 @@ th, td {
 			error : function() {
 				alret("댓글 삭제 실패")
 			}
-})
+		});
 	}
 	
 	
@@ -259,7 +276,7 @@ th, td {
 		var b_no = $("#b_no").val();
 		var m_email = $("#m_email").val();
 		console.log(b_no + " + " + m_email);
-		if($("#heartArea span").html() == "💔") {			
+		if($("#heartArea span").html() == "🤍") {	// 좋아요 x		
 			$.ajax({
 				url: "boardLikeInsert.do",
 				data: {b_no:b_no, m_email:m_email},
@@ -267,13 +284,19 @@ th, td {
 				type : "post",
 				success: function (data) {
 					alert("좋아요가 추가되었습니다.");
-					$("#heartArea span").html("💗");
+					$("#Heart").html("💗");
+					if(data == "0") {
+						$("#count").html("");						
+					} else {
+						$("#count").html(data);
+					}
+					
 				},
 				error: function() {
 					alert("에러");
 				}
 			}); 
-		} else if ($("#heartArea span").html() == "💗") {
+		} else if ($("#heartArea span").html() == "💗") { // 좋아요 o
 			$.ajax({
 				url: "boardLikeDelete.do",
 				data: {b_no:b_no, m_email:m_email},
@@ -281,7 +304,12 @@ th, td {
 				type : "post",
 				success: function (data) {
 					alert("좋아요가 취소되었습니다.");											
-					$("#heartArea span").html("💔");
+					$("#Heart").html("🤍");
+					if(data == "0") {
+						$("#count").html("");						
+					} else {
+						$("#count").html(data);
+					}
 				},				
 				error: function() {				
 					alert("에러");
@@ -289,40 +317,6 @@ th, td {
 			});			
 		}
 	});
-		
-// 		var m_email = $("#m_email").val();
-// 		var b_no = $("#b_no").val();
-// 		if($("#heartBoard").attr("class") == "icon_heart_alt"){	
-// 			$.ajax({
-// 				url: "boardLikeInsert.do",
-// 				data: {id:id, isbn: isbn},
-// 				dataType: "text",
-// 				type : "post",
-// 				success: function (data) {
-// 					if(data == 'T'){
-// 						$("#hearticon").attr("class","fa fa-heart");
-// 						alert('좋아요');															
-// 					}
-// 				}
-// 			}); 
-// 		}else{
-// 			$.ajax({
-// 				url: "boardLikeDelete.do",
-// 				data: {id:id, isbn: isbn},
-// 				dataType: "text",
-// 				type : "post",
-// 				success: function (data) {
-// 					if(data == 'T'){
-// 						$("#hearticon").attr("class","icon_heart_alt");
-// 						alert('좋아요 삭제');															
-// 					}
-// 				}
-// 			}); 
-// 		}
-		
-// 	});
-	
-	
 	
 </script>
 </body>

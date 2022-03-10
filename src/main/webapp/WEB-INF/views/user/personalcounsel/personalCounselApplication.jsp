@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -363,33 +364,35 @@ form {
 							<td class="tableitem"><p class="itemtext">2022-03-23 수 ${time}</p></td>
 						</tr>
 
+						
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">상담비용</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext">${type3 }</p></td>
+						</tr>
+						
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem">
-								<p class="itemtext"></p> <select name='coupon'>
-									<option value='' selected>-- 선택 --</option>
-									<option value='2000'>회원가입 축하쿠폰 (2000원)</option>
-									<option value='500'>상담후기 작성 쿠폰(500원)</option>
-
-							</select>
+								<p class="itemtext"></p> 
+								<select name='checkbox' id="checkbox" onchange="change()">
+											<option value='' selected>-- 선택 --</option>
+										<c:forEach items="${coupon }" var="coupon">
+											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
+										</c:forEach>
+								</select>
 							</td>
 						</tr>
-
+						
 						<tr class="service">
-							<td class="tableitem"><p class="itemtext">상담비용</p></td>
-							<td class="tableitem"><p class="itemtext">20</p></td>
-							<td class="tableitem"><p class="itemtext">$75</p></td>
-							<td class="tableitem"><p class="itemtext">$1,500.00</p></td>
-						</tr>
-
-						<tr class="service">
-							<td class="tableitem"><p class="itemtext">Animation
-									Revisions</p></td>
-							<td class="tableitem"><p class="itemtext">10</p></td>
-							<td class="tableitem"><p class="itemtext">$75</p></td>
-							<td class="tableitem"><p class="itemtext">$750.00</p></td>
+							<td class="tableitem"><p class="itemtext">할인비용</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext" id="discount"></p></td>
 						</tr>
 
 						<tr class="service">
@@ -404,7 +407,7 @@ form {
 							<td></td>
 							<td></td>
 							<td class="Rate"><h2>Total</h2></td>
-							<td class="payment"><h2>$3,644.25</h2></td>
+							<td class="payment" id="totalPrice"></td>
 						</tr>
 
 					</table>
@@ -415,25 +418,28 @@ form {
 					<a href="personalCounselStep4.do"><input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 				</div> -->
+				<input type="hidden" id="g_price" name="g_price" value="${type3}">
 				<form action="paymentComplete.do" id="frm" name="frm">
-					<input type="text" name="pr_time" value="${time}">
-					<input type="text" id="c_email" name="c_email" value="${c_email}" >
-					<input type="text" id="ccg_subname" name="ccg_subname" value="${type2}">
-					<input type="text" name="pr_price" value="${type3}">
-					<input type="text" id="or_uid" name="or_uid">
+					<input type="hidden" name="pr_time" value="${time}">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+					<input type="hidden" id="ccg_subname" name="ccg_subname" value="${type2}">
+					<input type="hidden" name="pr_price" value="">
+					<input type="hidden" id="or_uid" name="or_uid">
+					<input type="hidden" id="c_no" name="c_no" value="">
+					<!-- <input type="hidden" name="pr_date" value=""> -->
+					<!-- <input type="hidden" name="pr_type"> -->
 				</form>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-						target="_top">
-						<input type="hidden" name="cmd" value="_s-xclick"> <input
-							type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
-							<input type="text" id="c_email" name="c_email" value="${c_email}" >
-							<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
+			<div id="legalcopy">
+					<a href="personalCounselStep4.do">
+					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
+			</div>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick"> 
+						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+						<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
 				</form>
 			</div>
-			<div id="legalcopy">
-					<a href="personalCounselStep4.do"><input type="button"
-						id="back-btn" name="submit" value="뒤로가기"></a>
-				</div>
 			<!--End InvoiceBot-->
 			<div id="invoice-top">
 				<div class="logo"></div>
@@ -447,6 +453,22 @@ form {
 		</div>
 		<!--End Invoice-->
 <script>
+function change(){
+	   var price = $("#g_price").val();
+	   var priceSelect = $("#checkbox").val();
+	   var num = priceSelect.indexOf('/');
+	   var priceResult = priceSelect.substr(0,4);
+	   var couponNo = priceSelect.substr(num+1);
+	   
+	   $("#discount").text(' '+'-'+priceResult);
+	   var ddd = price-priceResult;
+	   $("#totalPrice").text(ddd);
+	   $("#pr_price").val(ddd);
+	   $("#c_no").val(couponNo);
+	   
+}
+
+
 $('#previous-btn').click(function() {
 	location.href = 'personalCounselStep3.do'
 });

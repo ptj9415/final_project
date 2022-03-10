@@ -605,7 +605,7 @@
 						</div>
 						<a href="resources/user/images/selfEsteem.jpg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span>→</span>
+							<a href="selfEsteem.do"><span>→</span></a>
 						</a>
 					</div>
 				</div>

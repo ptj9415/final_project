@@ -44,4 +44,8 @@
 		SELECT * FROM COUPON
 		WHERE M_EMAIL = #{m_email}	
 	</select>
+	
+	<delete id="DeleteCoupon" parameterType="co.maeumi.prj.coupon.service.CouponVO">
+		DELETE FROM COUPON WHERE C_NO = #{c_no}
+	</delete>
 </mapper>

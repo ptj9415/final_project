@@ -32,4 +32,29 @@
 					ON (O.GC_NO = C.GC_NO)
 		  			WHERE OR_NO = #{or_no}
 		</select>
+		
+		<insert id="orderPersonalInsert">
+					insert into order_detail(
+                       or_no,
+                       or_uid,
+                       pr_no,
+                       gc_no,
+                       or_date,
+                       or_type,
+                       or_price,
+                       m_nickname,
+                       m_email
+                )
+                values(
+                      (SELECT NVL(MAX(or_no),0)+1 FROM order_detail N),
+                      #{or_uid},
+                      #{pr_no},
+                      0,
+                      sysdate,
+                      '아직안옴',
+                      #{or_price},
+                      '세션값 이름 입니다.',
+                      '세션값 이메일 입니다'
+                )
+		</insert>
 </mapper>

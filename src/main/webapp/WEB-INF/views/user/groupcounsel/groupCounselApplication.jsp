@@ -218,6 +218,18 @@ img {
 	cursor: pointer;
 }
 
+.btns {
+	background-color: rgb(210 203 203 / 45%);
+	border: 1px solid rgb(210 203 203 / 45%);
+	color: black;
+	padding: 0.5rem;
+	text-transform: lowercase;
+	border-radius: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-right: 20px;
+}
+
 .card__doctor {
 	/* background-color: white;
     /* border: 1px solid #468FB6; */
@@ -399,7 +411,7 @@ img {
 				<span>1</span>
 			</div>
 			<div class="md-step-title">step1</div>
-			<div class="md-step-optional">상담 카테고리 선택</div>
+			<div class="md-step-optional">그룹 상담 신청</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -408,7 +420,7 @@ img {
 				<span>2</span>
 			</div>
 			<div class="md-step-title">step2</div>
-			<div class="md-step-optional">상담사 선택</div>
+			<div class="md-step-optional">그룹 상담 상세 조회</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -417,16 +429,7 @@ img {
 				<span>3</span>
 			</div>
 			<div class="md-step-title">step3</div>
-			<div class="md-step-optional">상담 방법 선택</div>
-			<div class="md-step-bar-left"></div>
-			<div class="md-step-bar-right"></div>
-		</div>
-		<div class="md-step">
-			<div class="md-step-circle">
-				<span>4</span>
-			</div>
-			<div class="md-step-title">step4</div>
-			<div class="md-step-optional">상담 날짜 선택</div>
+			<div class="md-step-optional">그룹 상담 결제</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -447,7 +450,12 @@ img {
 						<span class="card__doctor">
 							<p style="font-size: 20px;">👨‍👩‍👧 정원 ${group.gc_min_person }명 - ${group.gc_max_person}명</p>
 						</span>
+						<c:if test="${group.gc_max_person > group.gc_person }">
 						<button id="btn" onclick="func('${group.gc_no}')" class="btn btn--block card__btn">신청하기</button>
+						</c:if>
+						<c:if test="${group.gc_max_person <= group.gc_person }">
+						<button id="btn" onclick="func('${group.gc_no}')" class="btns btn--block card__btn" disabled>신청불가</button>
+						</c:if>
 						<input type="hidden" id="date" value="${group.gc_date }">
 					</div>
 				</div>
