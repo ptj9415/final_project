@@ -30,6 +30,7 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.order.service.orderService;
 import co.maeumi.prj.order.service.order_datailVO;
+import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.therapy.service.TherapyVO;
@@ -48,6 +49,9 @@ public class YoungohController {
 	
 	@Autowired
 	private CouponService couponDao;
+	
+	@Autowired
+	Aes256 aes256;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
@@ -271,7 +275,7 @@ public class YoungohController {
 	
 	//상담사 관리 페이지 상세 목록 페이지
 	@RequestMapping("/counselorGroupDetail.do")
-	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) {
+	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) throws Exception {
 		String gc_no = request.getParameter("gc_no");
 		int gc_nos = Integer.parseInt(gc_no);
 		vo.setGc_no(gc_nos);
@@ -288,6 +292,11 @@ public class YoungohController {
 		String date3 = gvo.getGc_date();
 		date3 = date3.substring(0, 10);
 		gvo.setGc_finaldate(date3);
+		
+		System.out.println(gvo.getGc_report());
+		String result = aes256.decrypt(gvo.getGc_report());
+		gvo.setGc_report(result);
+		
 
 		model.addAttribute("detail", gvo);
 
