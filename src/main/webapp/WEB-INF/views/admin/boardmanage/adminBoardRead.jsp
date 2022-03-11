@@ -17,7 +17,7 @@ h3 {
 .row {
 	margin-bottom: -10px;
 }
-
+ 
 #headerp {
 	position: relative;
 	top: 7px;
@@ -108,7 +108,7 @@ h3 {
 									<td>${boardRead.b_wdate }</td>
 								</tr>
 								<tr>
-									<th style="height: 400px;">제목</th>
+									<th style="height: 400px;">내용</th>
 									<td colspan="5">${boardRead.b_content }</td>
 								</tr>
 							</table>
