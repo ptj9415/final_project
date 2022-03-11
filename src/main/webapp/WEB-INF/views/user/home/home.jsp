@@ -14,10 +14,15 @@
 <style>
 
 /*배너*/
+#bannerimg {
+	
+	
+}
+
 .banner {
 	position: relative;
-	width: 1200px;
-	height: 216px;
+	width: 100;
+	height: 346px;
 	top: 50px;
 	margin: 0 auto;
 	padding: 0;
@@ -33,10 +38,11 @@
 
 .banner ul li {
 	float: left;
-	width: 1200px;
-	height: 216px;
-	margin: 0;
+	width: 100;
+	height: 346px; 
+	margin : 0;
 	padding: 0;
+	margin: 0;
 }
 
 /*상담 start*/
@@ -214,16 +220,16 @@
 <body data-aos-easing="slide" data-aos-duration="1000"
 	data-aos-delay="300">
 	<!-- banner start -->
-	<div class="contents">
-		<div class="banner">
-			<ul>
-				<c:forEach items="${banner }" var="banner">
-					<li><img src="img/bannerimg/${banner.bn_pfilename }"
-						width="1200px" height="216px"></li>
-				</c:forEach>
-			</ul>
-		</div>
+
+	<div class="banner">
+		<ul>
+			<c:forEach items="${banner }" var="banner" >
+				<li><img src="img/bannerimg/${banner.bn_pfilename }"
+					id="bannerimg"></li>
+			</c:forEach>
+		</ul>
 	</div>
+
 	<!-- banner end -->
 
 	<!-- 상담 tab -->

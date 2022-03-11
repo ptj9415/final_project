@@ -30,7 +30,6 @@ h3 {
 }
 
 #boardtable>tbody>tr>th {
-	width: 13%;
 	background-color: rgb(245, 245, 245);
 	text-align: center;
 	vertical-align: middle;
@@ -109,7 +108,7 @@ h3 {
 								</tr>
 								<tr>
 									<th style="height: 400px;">제목</th>
-									<td colspan="5">${boardRead.b_content }</td>
+									<td colspan="5"><pre>${boardRead.b_content }</pre></td>
 								</tr>
 							</table>
 							<br>
