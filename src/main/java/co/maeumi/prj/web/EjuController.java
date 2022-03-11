@@ -349,5 +349,5 @@ public class EjuController {
 		return "redirect:adminTodayStoryList.do";
 
 	}
-
+	//테스트입니다.
 }
