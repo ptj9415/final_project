@@ -30,7 +30,6 @@ h3 {
 }
 
 #boardtable>tbody>tr>th {
-	width: 13%;
 	background-color: rgb(245, 245, 245);
 	text-align: center;
 	vertical-align: middle;
