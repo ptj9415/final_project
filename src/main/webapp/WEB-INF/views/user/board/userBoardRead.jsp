@@ -50,9 +50,9 @@ th, td {
 		<div class="titleDiv" style="border-bottom: 1px solid black">
 			<h3 style="text-align: left; margin-left: 20px;">${boardRead.b_title}</h3>
 			<c:choose>
-				<c:when test="${board.b_anony eq 'F' }">
+				<c:when test="${boardRead.b_anony eq 'F' }">
 					<a class="card-text" style="float: right; margin-right: 20px;">
-						🕒 ${boardRead.b_wdate} &nbsp; | &nbsp; 👱‍♀️ ${board.m_nickname}
+						🕒 ${boardRead.b_wdate} &nbsp; | &nbsp; 👱‍♀️ ${boardRead.m_nickname}
 						&nbsp; | &nbsp; 💕 ${boardRead.b_hit}</a>
 					<br>
 				</c:when>
@@ -66,7 +66,7 @@ th, td {
 		</div>
 		<div>
 			<pre
-				style="border: 1px solid black; height: 400px; width: 820px; margin-top: 20px;"
+				style="border: 1px solid black; width: 820px; margin-top: 20px;"
 				id="b_content" name="b_content">${boardRead.b_content}</pre>
 			<div>
 				<input type="hidden" name="b_no" id="b_no" value="${boardRead.b_no}">
