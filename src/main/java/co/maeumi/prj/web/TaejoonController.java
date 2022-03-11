@@ -8,8 +8,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -19,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +36,7 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Search;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
@@ -58,6 +58,10 @@ public class TaejoonController {
 	private TherapyService therapyDao;
 	@Autowired
 	private GroupcounselService groupCounselDao;
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+	@Autowired
+	Aes256 aes256;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -216,7 +220,14 @@ public class TaejoonController {
 	
 	@ResponseBody
 	@RequestMapping("/groupCounselDetailInsert.do")
-	public int groupCounselDetailInsert(GroupcounselVO gvo) {
+	public int groupCounselDetailInsert(GroupcounselVO gvo, HttpServletRequest request) throws Exception {
+		System.out.println(request.getParameter("gc_report"));
+		String gc_report = aes256.encrypt(request.getParameter("gc_report"));
+		System.out.println("------------------------------");
+		System.out.println(gc_report);
+		System.out.println(aes256.decrypt(gc_report));
+		System.out.println("------------------------------");
+		gvo.setGc_report(gc_report);
 		int n = groupCounselDao.groupCounselResult(gvo);
 		
 		return n;
