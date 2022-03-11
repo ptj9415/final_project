@@ -8417,7 +8417,7 @@ supports ((position: -webkit-sticky) or (position: sticky)) { .sticky-top
 
 .mb-4, .my-4 {
 	margin-bottom: 1.5rem !important;
-	color:white;
+	color:#153e54;
 }
 
 .ml-4, .mx-4 {

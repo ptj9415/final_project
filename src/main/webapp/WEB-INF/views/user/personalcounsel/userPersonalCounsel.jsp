@@ -84,7 +84,7 @@
 }
 /*step2*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 /*step3*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
@@ -92,7 +92,7 @@
 }
 /*step4*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 
 .md-stepper-horizontal .md-step.active .md-step-circle {
@@ -183,7 +183,7 @@
 .card-accordion {
 	position: relative;
 	overflow: hidden;
-	border: 1px solid #468FB6;
+	border: 1px solid #153e54;
 	border-radius: 8px;
 	transition: 0.20s ease-in-out;
 	margin-right: auto;
@@ -208,7 +208,7 @@
 	content: "▲";
 	display: block;
 	padding: 20px 30px;
-	color: #468FB6;
+	color: #153e54;
 	position: relative;
 	cursor: pointer;
 	font-weight: bold;
@@ -221,7 +221,7 @@
 	position: absolute;
 	top: 28px;
 	right: 30px;
-	color: #468FB6;
+	color: #153e54;
 	transition: 0.30s ease-in-out;
 	transform-origin: center center;
 }
@@ -262,8 +262,11 @@
 }
 
 .category-detail {
-	margin-top: 60px;
-	margin-bottom: 100px;
+	width: 80%;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
 }
 /*arccordion end*/
 /*next btn*/
@@ -271,9 +274,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -285,8 +288,8 @@
 
 #next-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -309,8 +312,8 @@
 .steps .action-button:hover, .steps .action-button:focus, .action-button:hover,
 	.action-button:focus {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 }
 
 .steps .explanation {
