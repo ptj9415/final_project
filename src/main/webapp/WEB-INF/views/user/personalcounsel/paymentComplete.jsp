@@ -659,7 +659,7 @@ font-size: 20px;
         <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
           <thead>
             <tr>
-              <th><span>test</span></th>
+              <th><span>정보</span></th>
               <th><span>test</span></th>
               
             </tr>
@@ -667,12 +667,12 @@ font-size: 20px;
           <tbody>
             <tr>
               
-              <td>test</td>
-              <td>test</td>
+              <td>상담 카테고리</td>
+              <td>전화</td>
              
             </tr>
             <tr>
-              <td>test</td>
+              <td></td>
               <td>test</td>
               
             </tr>
@@ -694,7 +694,7 @@ font-size: 20px;
        </div> 
     </div> 
       </div>
-        <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
+       <a href="userMypage.do"> <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button></a>
     </div>
   </div>
     <div class="footer">

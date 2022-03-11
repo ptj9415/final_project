@@ -17,16 +17,7 @@
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <style>
-/* html {
-	-webkit-font-smoothing: antialiased!important;
-	-moz-osx-font-smoothing: grayscale!important;
-	-ms-font-smoothing: antialiased!important;
-} */
-/* body {
-  font-family: 'Open Sans', sans-serif;
-  font-size:16px;
-  color:#555555; 
-} */
+
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -93,7 +84,7 @@
 }
 /*step2*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 /*step3*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
@@ -101,7 +92,7 @@
 }
 /*step4*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 
 .md-stepper-horizontal .md-step.active .md-step-circle {
@@ -186,32 +177,41 @@
 	margin-top: 100px;
 }
 
+/*next-btn*/
 #next-btn {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
+	float:right;
 }
 
 #next-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
+
+.next-btn-field {
+	
+	margin-bottom: 30px;
+	padding-left: 100px;
+}
+/*next btn end*/
 #detail-view{
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -219,8 +219,8 @@
 
 #detail-view:hover{
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -228,9 +228,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -238,8 +238,8 @@
 
 #previous-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -257,7 +257,8 @@
 	margin-right: auto;
 	margin-left: auto;
 	margint-top: 50px;
-	padding-top: 100px
+	padding-top: 100px;
+	margin-bottom:100px;
 }
 
 .staff .img {
@@ -290,10 +291,102 @@
 #check-btn{
 	width: 100px;
     height: 50px;
-    border: 1px solid #468FB6;
+    border: 1px solid #153e54;
     background-color: white;
     border-radius: 20px;
 }
+/*상담사 리스트 스타일*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
+
+figure.snip1390 {
+  font-family: "Roboto", Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  margin-right:20px;
+  margin-left:20px;
+  min-width: 230px;
+  max-width: 290px;
+  width: 100%;
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+  background-color: #153e54;
+  padding: 30px;
+  background-image: linear-gradient(
+    -25deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  border-radius: 30px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+figure.snip1390 *,
+figure.snip1390 *:before,
+figure.snip1390 *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+figure.snip1390 figcaption {
+  width: 100%;
+}
+figure.snip1390 h2,
+figure.snip1390 h4,
+figure.snip1390 blockquote {
+  margin: 0;
+}
+figure.snip1390 h2,
+figure.snip1390 h4 {
+  font-weight: 300;
+}
+figure.snip1390 h2 {
+  color: #ffffff;
+}
+figure.snip1390 h4 {
+  color: #a6a6a6;
+}
+figure.snip1390 blockquote {
+  font-size: 1em;
+  padding: 30px 20px 20px;
+  margin-top: 30px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: inset -1.4px -1.4px 2px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  position: relative;
+  height:200px;
+}
+
+figure.snip1390 .profile {
+  width: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+  /* border: solid 5px #a6a57a; */
+}
+.main-container{
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+    margin-top: 100px;
+}
+
+.type-container{
+	
+    display: grid;
+    grid-template-columns: 4fr 4fr 2fr;
+    font-size: 0.6rem;
+}
+/*상담사 리스트 스타일 end*/
 </style>
 </head>
 <body>
@@ -371,6 +464,92 @@
 		</div>
 	</div>
 
+<!-- 상담사리스트  -->
+<div class="main-container">
+	<c:forEach items="${counselorList }" var="counselorList">
+        <figure class="snip1390">
+                	<img src="img/counselorpicture/${counselorList.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';" width="100" class="rounded-circle"> 
+            <figcaption>
+            	<br>
+                <h4 style="color:white;">${counselorList.c_name}</h4>
+                <p style="color:white;">${counselorList.c_grade}</p>
+                <blockquote>
+                	
+                    <input type="hidden" id="p_kakao" value="${counselorList.p_kakao }">
+                		
+							<c:if test="${counselorList.p_kakao eq 1}">
+							  	<div class="type-container">
+									<input type="text" id="p_kakao_text" value="카카오톡">
+									<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
+									<input type="text" id="p_kakao_text" value="원">
+								</div>
+							</c:if>
+							
+							<c:if test="${counselorList.p_kakao eq 0}">
+							  <div class="type-container">	
+								<input type="hidden" id="p_kakao_text" value="카카오톡">
+								<input type="hidden" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
+								<input type="hidden" id="p_kakao_text" value="원">
+							  </div>
+							</c:if>
+							
+							<br>
+							<br>
+							
+							<input type="hidden" id="p_zoom" value="${counselorList.p_zoom }">
+							
+							<c:if test="${counselorList.p_zoom eq 1}">
+								<div class="type-container">
+								<input type="text" id="p_zoom_text" value="줌"> 
+								<input type="text" id="p_zoom_text" value="${counselorList.p_zoomprice}">
+								<input type="text" id="p_zoom_text" value="원">
+								</div>
+							</c:if>
+							
+							<c:if test="${counselorList.p_zoom eq 0}">
+								<div class="type-container">
+								<input type="hidden" id="p_zoom_text" value="줌"> 
+								<input type="hidden" id="p_zoom_text" value="${counselorList.p_zoomprice}">
+								<input type="hidden" id="p_zoom_text" value="원">
+								</div>
+							</c:if>
+							
+							<br>
+							<br>
+							
+								<input type="hidden" id="p_phone" value="${counselorList.p_phone }">
+								
+							<c:if test="${counselorList.p_phone eq 0}">
+								<div class="type-container">
+								<input type="hidden" id="p_phone_text" value="전화">
+								<input type="hidden" id="p_phone_text" value="${counselorList.p_phoneprice}">
+								<input type="hidden" id="p_phone_text" value="원">
+								</div>
+							<%-- <p>전화 ${counselorList.p_phoneprice}</p> --%>
+							</c:if>
+							
+							<c:if test="${counselorList.p_phone eq 1}">
+								<div class="type-container">
+								<input type="text" id="p_phone_text" value="전화">
+								<input type="text" id="p_phone_text" value="${counselorList.p_phoneprice}">
+								<input type="text" id="p_phone_text" value="원">
+								</div>
+							<%-- <p>전화 ${counselorList.p_phoneprice}</p> --%>
+							</c:if>
+					
+						<input type="checkbox" id="check-btn" name="c_email" class="btn btn-primary px-4 py-3 mt-3" onclick="doOpenCheck(this);" value="${counselorList.c_email}" >
+						<input type="button" id="detail-view" onclick="func('${counselorList.c_email}','${type}')" value="자세히 보기">
+
+				</blockquote>
+                
+            </figcaption>
+        </figure>
+     </c:forEach>
+    </div>
+<!-- 상담사리스트 end -->
+
+
+<!-- 원래리스트 -->
 <form id="step2" action="personalCounselStep3.do" method="post">
 	<div class="counselor-list">
 		<div class="row">
@@ -383,14 +562,12 @@
 						<span class="position mb-2">${counselorList.c_grade}</span>
 						
 							<input type="hidden" id="p_kakao" value="${counselorList.p_kakao }">
-						<%-- 	<input type="text" id="p_kakao_text" value="채팅">
-							<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
-							<input type="text" id="p_kakao_text" value="원"> --%>
-							
 							<c:if test="${counselorList.p_kakao eq 1}">
+							  <div class="type-container">
 								<input type="text" id="p_kakao_text" value="카카오톡">
 								<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
 								<input type="text" id="p_kakao_text" value="원">
+							  </div>
 								
 							</c:if>
 							
@@ -444,13 +621,13 @@
 		</div>
 		
 	<input type="hidden" id="c_email" name="onecheck" value="${type }"> 
-	</div>
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="submit" data-page="2" name="next" 
 		class="next action-button" id="next-btn" value="Next" />
+	</div>
 </form>
-
+<!-- 원래리스트 end -->
 	<script>
 	
 /* 	 	$('#detail-view').click(function(){

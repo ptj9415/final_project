@@ -17,6 +17,7 @@
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
+		ORDER BY sc_no desc
 	</select>
 
 	<select id="TodayStorySelectList"
