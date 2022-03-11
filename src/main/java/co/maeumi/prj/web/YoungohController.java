@@ -556,8 +556,9 @@ public class YoungohController {
 		ovo.setOr_price(vo.getGr_price());
 		int orderInsert = orderDao.orderInsert(ovo);
 		if (orderInsert == 1) {
-			order_datailVO gvo = orderDao.selectorderList(ovo);
-			model.addAttribute("result", gvo);
+			ovo = orderDao.selectorderList(ovo);
+			model.addAttribute("result", ovo);
+			System.out.println("마음이 급해진다. : " +ovo.getOr_price());
 			System.out.println(vo.getGc_no());
 			groupCounselDao.groupUpdatePerson(vo);
 			//couponDao.couponDelete(cvo);
@@ -570,9 +571,9 @@ public class YoungohController {
 	public String userTerapy(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
-			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 8); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
 		} else {
-			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 8); // 전체 수, nowPage, 한 페이지 당 개수
 		}
 		List<TherapyVO> list = therapyDao.therapyLists(page);
 		model.addAttribute("therapylist", list);

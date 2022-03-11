@@ -410,15 +410,14 @@ form {
 		<!--End Invoice-->
 	</div>
 	<script>
-	   function change(){
+	function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
 		   var num = priceSelect.indexOf('/');
-		   var priceResult = priceSelect.substr(0,4);
+		   var priceResult = priceSelect.substr(0,num);
 		   var couponNo = priceSelect.substr(num+1);
-		   
-		   $("#discount").text(' '+' '+'-'+priceSelect+'원');
-		   var ddd = price-priceSelect;
+		   $("#discount").text(' '+' '+'-'+priceResult+'원');
+		   var ddd = price-priceResult;
 		   $("#totalPrice").text(ddd+'원');
 		   $("#gr_price").val(ddd);
 		   $("#c_no").val(couponNo);

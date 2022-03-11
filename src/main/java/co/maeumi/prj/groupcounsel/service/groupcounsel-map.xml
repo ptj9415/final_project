@@ -293,7 +293,7 @@
 	<update id="groupUpdatePerson" parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
 			UPDATE GROUP_COUNSEL
 			SET GC_PERSON = GC_PERSON +1
-			WHERE GC_NO = #{gc_no};
+			WHERE GC_NO = #{gc_no}
 	</update>
 
 </mapper>
