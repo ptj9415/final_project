@@ -17,4 +17,12 @@ public class order_datailVO {
 	private String or_price;
 	private String m_nickname;
 	private String m_email;
+	
+	//그룹 상담이랑 조인
+	private String gc_date;
+	private String gc_type;
+	private String gc_name;
+	private String gc_time;
+	private String c_email;
+	private String gc_title;
 }

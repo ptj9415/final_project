@@ -2,45 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
-		/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge; IE=9" />
-
-		<meta name="author" content="Jaewon Lee" />
-		<meta name="keywords" content="십이간지로 알아보는 연애 유형" />
-		<meta name="description" content="십이간지로 알아보는 연애 유형" />
-
-		<!--sns share-->
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="십이간지로 알아보는 연애 유형" />
-		<meta
-			property="og:description"
-			content="십이간지로 알아보는 내 연애유형! 뭐? 나이로 보는 띠는 개나 줘버리라고?"
-		/>
-		<meta property="og:image" content="img/share.png" />
-		<meta property="og:url" content="https://twelvelevetype.netlify.app/" />
-
-		<!--favicon-->
-		<link rel="shortcut icon" type="text/css" href="img/favicon.ico" />
-		<link rel="appel-touch-icon-precomposed" href="img/favicon.ico" />
-
+<head>
+<meta charset="UTF-8">
 		<title>십이간지로 알아보는 연애 유형</title>
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="resources/css/default.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/layout.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/main.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/footer.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/animation.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/qna.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/calc.css" />
-		<link rel="stylesheet" type="text/css" href="resources/css/result.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/default.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/layout.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/footer.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/animation.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/qna.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/calc.css" />
+		<link rel="stylesheet" type="text/css" href="resources/user/css/result.css" />
 		<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 		<script>
 			Kakao.init('da972007084fda5f2c305cef966b2dd4');
@@ -66,8 +40,24 @@
 
 			gtag('config', 'G-YCJN4CFTVY');
 		</script>
-	</head>
-	<body>
+</head>
+<body>
+	<section class="hero-wrap hero-wrap-2"
+		style="background-image: url('resources/user/images/todayStory.jpg');">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<h1 class="mb-2 bread">심리검사</h1>
+					<br>
+					<p class="breadcrumbs">
+						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
 		<div id="wrap">
 			<header id="header"></header>
 			<section id="main" class="container">
@@ -153,13 +143,6 @@
 			</section>
 
 			<footer id="footer">
-				<div class="foot">
-					<span class="highlight">Kusitms 22nd.</span>
-					© 2020
-					<p class="author">
-						Jaewon Lee, Minkyoung An, Chaewon Seo, Sangmin Lee, Juyeon Kang
-					</p>
-				</div>
 			</footer>
 		</div>
 		<script src="resources/js/data.js"></script>

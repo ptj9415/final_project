@@ -187,7 +187,7 @@ public class YoungohController {
 	@RequestMapping("/groupsearchmanage.do")
 	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
 			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, Model model,
-			HttpServletRequest request, HttpSession session) {// @Param("gc_type") String gc_type, @Param("gc_status")
+			HttpServletRequest request, HttpSession session) {  // @Param("gc_type") String gc_type, @Param("gc_status")
 																// String gc_status,
 		session = request.getSession();
 		String nowPage = request.getParameter("nowPage");
@@ -551,17 +551,24 @@ public class YoungohController {
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo) {
-		groupCounselDao.groupReserveInsert(vo);
+		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
-		int orderInsert = orderDao.orderInsert(ovo);
+		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
-			ovo = orderDao.selectorderList(ovo);
+			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
+			ovo.setOr_no(num);
+			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
+			System.out.println(ovo.getOr_date());
+			groupCounselDao.groupUpdatePerson(vo); //인원수 증가 메소드
+		
+			//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+			
+			String date = ovo.getGc_date();
+			date = date.substring(0, 10);
+			ovo.setGc_date(date);
+			
 			model.addAttribute("result", ovo);
-			System.out.println("마음이 급해진다. : " +ovo.getOr_price());
-			System.out.println(vo.getGc_no());
-			groupCounselDao.groupUpdatePerson(vo);
-			//couponDao.couponDelete(cvo);
 		}
 		return "user/groupcounsel/groupResult";
 	}
@@ -571,9 +578,9 @@ public class YoungohController {
 	public String userTerapy(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
-			page = new Pagination(therapyDao.selectTherapyCount(), 1, 8); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
 		} else {
-			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 8); // 전체 수, nowPage, 한 페이지 당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
 		}
 		List<TherapyVO> list = therapyDao.therapyLists(page);
 		model.addAttribute("therapylist", list);

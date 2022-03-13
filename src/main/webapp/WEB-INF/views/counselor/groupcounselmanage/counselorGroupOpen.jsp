@@ -282,7 +282,7 @@ th {
 		$('.summernote').summernote(
 				{
 					// 에디터 높이
-					height : 200,
+					height : 400,
 					weight : 500,
 					// 에디터 한글 설정
 					lang : "ko-KR",
