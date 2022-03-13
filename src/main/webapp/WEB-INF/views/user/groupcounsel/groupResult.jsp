@@ -679,7 +679,7 @@ font-size: 20px;
             </tr>
              <tr>
               <td>가격</td>
-              <td>${result.gc_price}</td>
+              <td>${result.or_price}</td>
             </tr>
              <tr>
               <td>상담사 이름</td>

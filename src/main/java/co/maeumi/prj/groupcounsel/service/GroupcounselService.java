@@ -34,5 +34,4 @@ public interface GroupcounselService {
 	int groupCounselClose(GroupcounselVO vo);
 
 	int groupUpdatePerson(GroupcounselVO vo); // 그룹 상담 예약 후 예약 인원 증가
-
 }
