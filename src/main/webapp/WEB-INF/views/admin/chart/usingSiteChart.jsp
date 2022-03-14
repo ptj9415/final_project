@@ -8,9 +8,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<body>
+상담 통계
+<br>
+<select id="month">
+    <option value="3" selected="selected">3개월</option>
+    <option value="6">6개월</option>
+    <option value="12">12개월</option>
+</select>
+<div style="width: 900px; height: 700px; margin-left: 50px;">
+	<canvas id="myChart"></canvas>
+</div>
+</body>
 
 <script>
-
 // 뷰에 들어가자마자 기본 통계가 나오도록 해보기
 $(document).ready(function() {
 	
@@ -28,7 +39,7 @@ $(document).ready(function() {
 	
 				var context = document.getElementById('myChart').getContext('2d');
 				var myChart = new Chart(context, {
-				    type: 'line', // 차트의 형태
+				    type: 'bar', // 차트의 형태
 				    data: { // 차트에 들어갈 데이터
 				        labels: chartMonths,
 				        datasets: [
@@ -73,7 +84,9 @@ $(document).ready(function() {
 				            yAxes: [
 				                {
 				                    ticks: {
-				                        beginAtZero: true
+				                        beginAtZero: true,
+				                        max: 30  // y축 범위 조절 가능. 
+				                        
 				                    }
 				                }
 				            ]
@@ -81,25 +94,9 @@ $(document).ready(function() {
 				    }
 				});  // mychart
 	
-	}});  // ajax
+		}});  // ajax
 });  // document.ready
-</script>
-<body>
 
-<div style="width: 800px; height: 800px;">
-	사이트 이용 통계 
-	<input type="button" id="selectPersonalCounsel" value="월별개인상담조회"><br>
-	<canvas id="myChart"></canvas>
-</div>
-
-
-
-</body>
-
-<script>
-// 기본적으로 출력되는 chart에 클릭이벤트를 통해 다른 차트 조회해보기 
-//$("#selectPersonalCounsel").on("click", function() {
 	
-
 </script>
 </html>

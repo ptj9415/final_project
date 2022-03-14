@@ -51,7 +51,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 <!-- filter end -->
-	
+
+<!-- 	 <listener> -->
+<!--         <listener-class>co.maeumi.prj.visitor.service.Visitor</listener-class> -->
+<!--     </listener> -->
+
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

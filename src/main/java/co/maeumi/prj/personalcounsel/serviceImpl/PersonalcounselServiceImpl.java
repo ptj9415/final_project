@@ -40,11 +40,11 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 	}
 
 	@Override
-
 	public List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.PersonalCounselCount(vo);
-
+	}
+	
 	public int personalCounselInsert(PersonalcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.personalCounselInsert(vo);
@@ -79,6 +79,18 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		// TODO Auto-generated method stub
 		return map.PersonalCounselDelete(vo);
 
+	}
+
+	@Override
+	public List<PersonalcounselVO> PersonalCounselSales(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.PersonalCounselSales(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> searchSalesData(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchSalesData(vo);
 	}
 
 }

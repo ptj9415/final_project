@@ -48,20 +48,42 @@
 
 	</select>
 	
+	<!-- 개인상담 건수 통계 -->
 	<select id="PersonalCounselCount" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-			SELECT PR_DATE, COUNT(*) AS prCount
-			FROM PERSONAL_RESERVE
-			GROUP BY PR_DATE
-			ORDER BY PR_DATE
+		SELECT substr(pr_date, 1, 7) as pr_date , COUNT(*) AS prCount
+		FROM PERSONAL_RESERVE
+           where pr_date 
+           	between to_char(add_months(sysdate, -2), 'yyyy-mm') 
+           		and to_char(add_months(sysdate, 1), 'yyyy-mm')
+		GROUP BY substr(pr_date, 1, 7)
+		ORDER BY substr(pr_date, 1, 7)
 	</select>
 	
+	<!-- 개인상담 매출 통계 기본 3개월치 출력 -->
+	<select id="PersonalCounselSales" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		select nvl(substr(pr_date, 1, 7), '합계') as pr_date, sum(pr_price) as prSum
+        from personal_reserve
+        where pr_date 
+        	between to_char(add_months(sysdate, -2), 'yyyy-mm') 
+        		and to_char(add_months(sysdate, 1), 'yyyy-mm')
+        group by rollup(substr(pr_date, 1, 7))
+        ORDER BY substr(pr_date, 1, 7)
+	</select>
 	
-	
+	<!--  개인상담 매출 search  -->
+	<select id="searchSalesData" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		select nvl(substr(pr_date, 1, 7), '합계') as pr_date, sum(pr_price) as prSum
+        from personal_reserve
+        where pr_date 
+        	between to_char(add_months(sysdate, #{sendMonth}), 'yyyy-mm') 
+        		and to_char(add_months(sysdate, 1), 'yyyy-mm')
+        group by rollup(substr(pr_date, 1, 7))
+        ORDER BY substr(pr_date, 1, 7)
+	</select>
 	
 	<!-- counselor 개인상담관리 -->
 	
 	<select id="PersonalCounselList" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-
 		
 		<!-- select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname, re.pc_report, re.pc_result
 		from personal_reserve re  left outer join member m 
