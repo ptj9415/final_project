@@ -43,6 +43,7 @@
 			)
 			WHERE RN BETWEEN #{start} AND #{end}		
 	</select>
+	
 	<insert id="InsertTherapy"
 		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
 		INSERT INTO THERAPY(
@@ -79,9 +80,9 @@
 		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
 		UPDATE THERAPY
 		<set>
-			<if test="t_subject != null or t_subject != '' ">t_subject = #{t_subject}, </if>
-			<if test="t_picture != null or t_picture != '' ">t_picture = #{t_picture},</if>
-			<if test="t_title != null or t_title != '' ">t_title = #{t_title},</if>
+			<if test="t_subject != null or t_subject != ''">t_subject = #{t_subject}, </if>
+			<if test="t_picture != null or t_picture != ''">t_picture = #{t_picture},</if>
+			<if test="t_title != null or t_title != ''">t_title = #{t_title},</if>
 		</set>
 		WHERE t_no = #{t_no}
 	</update>
