@@ -90,4 +90,15 @@ public class Search extends Paging {
 	private String gr_price;
 	private String c_picturepath;
 
+	//개인상담
+	private int pr_no;
+	private String pr_date;
+	private String pr_price;
+	private String pr_time;
+	private String pr_status;
+	private String pr_type;
+	private String pc_report;
+	private String pc_result;
+	private String ccg_subname;
+	
 }

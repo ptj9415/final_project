@@ -109,7 +109,7 @@
 }
 
 .current.today {
-	background: #468fb629;
+	background: #153e5429;
 }
 
 .sec_cal .cal_wrap .dates {
@@ -196,7 +196,7 @@
 }
 /*step2*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 /*step3*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
@@ -204,7 +204,7 @@
 }
 /*step4*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 
 .md-stepper-horizontal .md-step.active .md-step-circle {
@@ -293,9 +293,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -303,8 +303,8 @@
 
 #next-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -313,9 +313,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -323,8 +323,8 @@
 
 #previous-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -354,7 +354,7 @@ div.asdf {
 #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8 {
 	width: 80px;
 	height: 40px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	border-radius: 30px;
 	text-align: center;
 	font-size: 14px;
@@ -366,12 +366,12 @@ div.asdf {
 	#btn7:hover, #btn8:hover {
 	width: 80px;
 	height: 40px;
-	border: 1px solid #468FB6;
+	border: 1px solid #153e54;
 	background-color: white;
 	border-radius: 30px;
 	text-align: center;
 	font-size: 14px;
-	color: #468FB6;
+	color: #153e54;
 	transition: 300ms ease-in-out;
 	cursor: pointer;
 }
@@ -660,7 +660,7 @@ div.asdf {
         	        })
          }esle{
         	 
-        	 $('.day.current').css('backgroundColor','#468fb629');
+        	 $('.day.current').css('backgroundColor','#153e5429');
         	 $('.day.current').attr('dispaly',disabled);
          }
         test end   */

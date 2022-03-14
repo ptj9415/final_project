@@ -110,6 +110,7 @@
     background-color: white;
     border-radius: 20px;
 }
+
 </style>
 </head>
 <body>

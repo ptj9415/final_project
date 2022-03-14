@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselMapper;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("personalCounselDao")
 public class PersonalcounselServiceImpl implements PersonalcounselService {
@@ -101,6 +102,18 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 	public int personalCounselInsert(PersonalcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.personalCounselInsert(vo);
+	}
+
+	@Override
+	public int getPRListCnt(Search svo) {
+		// TODO Auto-generated method stub
+		return map.getPRListCnt(svo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> prSearchSelect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.prSearchSelect(svo);
 	}
 
 }
