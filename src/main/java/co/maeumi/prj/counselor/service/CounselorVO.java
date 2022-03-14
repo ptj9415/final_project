@@ -51,5 +51,7 @@ public class CounselorVO {
 	private String p_kakao;
 	private String p_zoom;
 	private String p_phone;
-	
+	private String p_kakaoprice;
+	private String p_zoomprice;
+	private String p_phoneprice;
 }

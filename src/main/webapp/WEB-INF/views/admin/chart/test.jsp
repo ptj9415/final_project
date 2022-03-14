@@ -495,20 +495,40 @@ input:checked[type="checkbox"]:before {
 
 					<div class="skills">
 						<h6 style="font-size: 12px;">상담방식</h6>
+						<ul>				          	
+				            <c:if test="${counselorList.p_kakao eq 1}">
+				            <li value="${counselorList.p_kakaoprice}">카카오톡 ${counselorList.p_kakaoprice} 원</li>
+				            </c:if>
+											
+							<c:if test="${counselorList.p_zoom eq 1}">
+							<li value="${counselorList.p_zoomprice}">줌 ${counselorList.p_zoomprice} 원</li>
+							</c:if>
+							
+							<c:if test="${counselorList.p_phone eq 1}">
+							<li value="${counselorList.p_phoneprice}">전화 ${counselorList.p_phoneprice} 원</li>
+							</c:if>		
+			          </ul>
 					</div>
-					<div class="buttons"
-						onclick="func('${counselorList.c_email}','${type}')">자세히 보기
+					<div class="buttons" onclick="func('${counselorList.c_email}','${type}')">자세히 보기
 
 					</div>
 					<input type="checkbox" id="check-btn" name="c_email"
-						class="btn btn-primary px-4 py-3 mt-3"
-						onclick="doOpenCheck(this);" value="${counselorList.c_email}">
+						class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}">
 				</div>
 			</c:forEach>
 		</div>
+		<button type="button" id="confirmbtn">선택</button>
 	</div>
 
 	<script>
+		//선택버튼
+		$('#confirmbtn').on('click', function() {
+			var c_email = $('input:checkbox[name="c_email"]:checked').val();
+			location.href='test2pg.do?c_email='+ c_email
+			console.log(c_email);
+			
+		});
+	
 		//세부검색 카테고리 div 보이기/안보이기
 		$('#detailbtn').click(function() {
 			if ($('.detail').css('display') == 'none') {
@@ -518,6 +538,7 @@ input:checked[type="checkbox"]:before {
 			}
 		});
 		
+		//검색
 		$(document).on('click', '#detailsubmitbtn', function(e) {
 			e.preventDefault();
 			var c_name = $("#c_name").val();
