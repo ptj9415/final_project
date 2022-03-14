@@ -21,6 +21,7 @@ import co.maeumi.prj.order.service.order_datailVO;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 import co.maeumi.prj.todayreply.service.TodayreplyService;
 import co.maeumi.prj.todayreply.service.TodayreplyVO;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
@@ -51,6 +52,7 @@ public class EjuController {
 	Pagination page; // 전역변수로 선언해준것
 
 	/* =====사용자 화면===== */
+	
 	//심리검사-자존감검사
 	@RequestMapping("/selfEsteem.do")
 	public String selfEsteem() {
@@ -70,10 +72,14 @@ public class EjuController {
 		String test = request.getParameter("onecheck");
 		System.out.println("step2 : " + test);
 		vo.setCcg_subname(test);
+		PersonalcounselVO gvo = personalCounselDao.CounselorSelect(vo);  //상담 상세내용
+		System.out.println(vo.getC_email());
+		List<PersonalcounselVO> subNameList = personalCounselDao.SubnameSelectList(vo);//상담사가 갖고있는 카테고리 리스트
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
+		model.addAttribute("subNameList",subNameList);
 		model.addAttribute("counselorList", counselorList);
 		model.addAttribute("type", test);
-		
+		model.addAttribute("counselorSelect", gvo);
 		return "user/personalcounsel/personalCounselStep2";
 	}
 	// 상담사 자세히 보기 
@@ -241,9 +247,35 @@ public class EjuController {
 
 	// 개인상담 관리 메인화면
 	@RequestMapping("/counselorPersonalList.do")
-	public String counselorPersonalList(Model model, PersonalcounselVO vo, HttpServletRequest request) {
-		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselList(vo);
-		model.addAttribute("PersonalCounselList",list);
+	public String counselorPersonalList(Model model, HttpServletRequest request, 
+				@RequestParam(required = false, defaultValue = "1") int page,
+				@RequestParam(required = false, defaultValue = "1") int range,
+				@RequestParam(required = false, defaultValue = "all") String pr_type,
+				@RequestParam(required = false, defaultValue = "") String pr_date,
+				@RequestParam(required = false, defaultValue = "all") String pr_status,
+				@RequestParam(required = false, defaultValue = "all") String ccg_subname,
+				@RequestParam(required = false, defaultValue = "") String m_nickname, Search svo
+			) throws Exception {
+		
+		model.addAttribute("search",svo);
+		svo.setPr_type(pr_type);
+		svo.setPr_date(pr_date);
+		svo.setPr_status(pr_status);
+		svo.setM_nickname(m_nickname);
+		svo.setCcg_subname(ccg_subname);
+		
+		int listCnt = personalCounselDao.getPRListCnt(svo);
+		System.out.println(listCnt);
+		svo.pageinfo(page, range, listCnt);
+		
+		model.addAttribute("pagination", svo);
+		List<PersonalcounselVO> list = personalCounselDao.prSearchSelect(svo);
+		for (int i = 0; i < list.size(); i++) {
+	         String date = list.get(i).getPr_date();
+	         date = date.substring(0, 10);
+	         list.get(i).setPr_date(date);
+		};
+		model.addAttribute("personalCounel", list);
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}
 
@@ -349,5 +381,5 @@ public class EjuController {
 		return "redirect:adminTodayStoryList.do";
 
 	}
-	//테스트입니다.
+	
 }

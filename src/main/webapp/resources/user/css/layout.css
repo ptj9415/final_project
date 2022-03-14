@@ -2,11 +2,13 @@
 
 #wrap {
 	position: relative;
-	overflow: hidden;
-	margin-top: 50px;
-	width: 100%;
-	max-width: 100%;
-	min-height: 100%;
+    overflow: hidden;
+    margin-top: 50px;
+    width: 55%;
+    max-width: 60%;
+    min-height: 100%;
+    margin-right: auto;
+    margin-left: auto;
 }
 .container {
 	box-sizing: border-box;

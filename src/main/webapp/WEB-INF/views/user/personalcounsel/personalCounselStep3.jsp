@@ -242,11 +242,15 @@ div.counsel-type {
 	margin-left: auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
+	padding: 50px;
+    border: 1px solid #8dacbd42;
+    border-radius: 30px;
+     box-shadow: 0px 0px 20px #00000040;
 }
 
 .chat-btn {
 	width: 100px;
-	height: 50px;
+	height: 45px;
 	border: 1px solid #153e54;
 	background-color: white;
 	border-radius: 20px;
@@ -369,8 +373,9 @@ div.counsel-type {
 			
 			
 		<c:if test="${counselorSelect.p_zoom eq 1 }">
+			
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<img src="resources/user/images/zoom.png" class="chat-img">
 				<h3 class="h4">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
@@ -380,7 +385,7 @@ div.counsel-type {
 		<c:if test="${counselorSelect.p_zoom eq 0 }">
 			<div style="display:none">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<img src="resources/user/images/zoom.png" class="chat-img">
 				<h3 class="h4">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
@@ -391,7 +396,7 @@ div.counsel-type {
 			
 		<c:if test="${counselorSelect.p_phone eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<img src="resources/user/images/phone.png" class="chat-img">
 				<h3 class="h4">전화</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
@@ -402,7 +407,7 @@ div.counsel-type {
 		<c:if test="${counselorSelect.p_phone eq 0 }">
 			<div style="display:none">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
+				<img src="resources/user/images/phone.png" class="chat-img">
 				<h3 class="h4">전화</h3>
 				<input type=hidden class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
 				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">

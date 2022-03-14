@@ -2,6 +2,8 @@ package co.maeumi.prj.personalcounsel.service;
 
 import java.util.List;
 
+import co.maeumi.prj.service.Search;
+
 public interface PersonalcounselService {
 
 	List<PersonalcounselVO> CounselorSelectList(PersonalcounselVO vo);
@@ -21,6 +23,9 @@ public interface PersonalcounselService {
 	
 	int personalCounselInsert(PersonalcounselVO vo);
 	int personalMax();
+	
+	int getPRListCnt(Search svo);
+	public List<PersonalcounselVO> prSearchSelect(Search svo) throws Exception;
 	
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
 
