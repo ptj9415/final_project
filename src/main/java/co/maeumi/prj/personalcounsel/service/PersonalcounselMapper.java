@@ -2,6 +2,8 @@ package co.maeumi.prj.personalcounsel.service;
 
 import java.util.List;
 
+import co.maeumi.prj.service.Search;
+
 public interface PersonalcounselMapper {
 	List<PersonalcounselVO> CounselorSelectList(PersonalcounselVO vo);
 	PersonalcounselVO CounselorSelect(PersonalcounselVO vo);
@@ -16,6 +18,9 @@ public interface PersonalcounselMapper {
 	int personalMax();
 	
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
+
+	int getPRListCnt(Search svo);
+	public List<PersonalcounselVO> prSearchSelect(Search svo) throws Exception;
 
 	
 	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 개인상담 건수 집계

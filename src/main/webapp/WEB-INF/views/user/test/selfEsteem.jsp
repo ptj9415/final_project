@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.pb-2, .py-2{
+	margin-top:100px;
+	margin-right:auto;
+	margin-left:auto;
+	width:80%;
+}
+.selfesteem{
+	margin-right:auto;
+	margin-left:auto;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 		<!-- CSS -->
@@ -58,27 +70,31 @@
 		</div>
 
 	</section>
-		<div class="today-container">
-			<div class="container">
-				<div class="row justify-content-start mb-5 pb-2">
-					<div
-						class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
-						<span class="subheading subheading-with-line"><small
-							class="pr-2 bg-white">MAEUMI</small></span>
-						<h2 class="mb-4">자존감 검사</h2>
-					</div>
-					<div
-						class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
-						<div class="pl-md-4 border-line">
-							<span class="mr-2">소요시간 약 3분</span> <span style="font-weight:bold; color:black;"></span><span class="mr-2">' 입니다</span>
-							<p></p>
-							<input type="button" class="register-btn" id="submit-btn" data-toggle="modal" data-target="#modal-lg" value="글쓰기">
-	
-						</div>
-					</div>
+	<div class="selfesteem">
+	<div class="container">
+		<div class="row justify-content-start mb-5 pb-2">
+			<div
+				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+				<span class="subheading subheading-with-line"><small
+					class="pr-2 bg-white">MAEUMI</small></span>
+				<h2 class="mb-4">자존감검사</h2>
+			</div>
+			<div
+				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+				<div class="pl-md-4 border-line">
+					<p> 현재 나의 자존감 상태는 어떨까?
+					<p>Far far away, behind the word mountains, far from the
+						countries Vokalia and Consonantia, there live the blind texts.
+						Separated they live in. A small river named Duden flows by their
+						place and supplies it with the necessary regelialia. It is a
+						paradisematic country, in which roasted parts of sentences fly
+						into your mouth.</p>
+					<p> 소요시간 약 3분</p>
 				</div>
 			</div>
 		</div>
+	</div>
+	</div>
 	<!-- modal contents start -->
 
 	<div id="wrap">

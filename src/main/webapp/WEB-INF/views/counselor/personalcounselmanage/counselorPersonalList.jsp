@@ -103,67 +103,65 @@ h3 {
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
 						<div class="card-header">
 							<div class="row">
 								<div class="col-6">
-									<div class="form-group">
-										<label>닉네임</label> <br> <input type="text"
+									<div class="form-group" id="form_apply">
+										<label>닉네임</label> <br> <input type="text" name="m_nickname"
 											class="form-control" id="m_nickname"
 											placeholder="회원 닉네임 입력..">
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label>상담방식</label><br> 
+										<select id="pr_type" name="pr_type" class="form-control">
+											<option value="all">전체</option>
+											<option value="카카오톡">카카오톡</option>
+											<option value="줌">줌</option>
+											<option value="전화">전화</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label>상담주제</label><br> 
-										<select id="select2" name="select2">
+										<select id="ccg_subname" name="ccg_subname"  class="form-control">
 											<option value="all">전체</option>
-											<option value="진로">진로</option>
 											<option value="취업준비">취업준비</option>
-											<option value="동료">동료</option>
+											<option value="동료관계">동료관계</option>
+											<option value="진로">진로</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-6">
-									<div class="form-group">
-										<label>닉네임</label> <br> <input type="text"
-											class="form-control" id="m_nickname"
-											placeholder="회원 닉네임 입력..">
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="form-group">
-										<label>상태</label><br> <select id="select2" name="select2">
-											<option value="all">전체</option>
-											<option value="결제완료">결제완료</option>
-											<option value="상담완료">상담완료</option>
-											<option value="환불완료">환불완료</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="form-group">
-										<label>제목</label> <br> <input type="text"
-											class="form-control" id="b_title" placeholder="제목을 입력해주세요.">
-									</div>
-								</div>
-
 								<div class="col-6">
 									<div class="form-group">
 										<label>상담일</label> <br> <input type="date" name="pr_date"
 											id="pr_date" class="form-control">
 									</div>
+								</div>
+								
+								<div class="col-6">
+									<div class="form-group">
+										<label>상태</label><br> <select id="pr_status" name="pr_status"  class="form-control">
+											<option value="all">전체</option>
+											<option value="0">결제완료</option>
+											<option value="1">상담완료</option>
+											<option value="2">환불완료</option>
+										</select>
+									</div>
+								</div>
+							</div>
 									<div class="btndiv">
-										<button type="reset" id="clearbtn">초기화</button>
+										<button type="reset" id="clearbtn" onclick="form_reset();">초기화</button>
 										<button type="button" id="btnSearch">
 											검색&nbsp;<i class="fa fa-search"></i>
 										</button>
 									</div>
-								</div>
 								
-							</div>
 						</div>
 					</div>
 				</div>
@@ -212,7 +210,7 @@ h3 {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${PersonalCounselList }" var="personalCounsel">
+									<c:forEach items="${personalCounel }" var="personalCounsel">
 										<tr>
 											<td>${personalCounsel.pr_no }</td>
 											<td>${personalCounsel.m_nickname }</td>
@@ -242,23 +240,23 @@ h3 {
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"
 											onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
-					,'${search.m_nickname}', '${search.b_subject}', '${search.b_title}','${search.b_wdate}')">이전</a></li>
+					,'${search.m_nickname}', '${search.pr_date}', '${search.pr_status}','${search.pr_type}', '${search.ccg_subname}' )">이전</a></li>
 									</c:if>
 									<c:forEach begin="${pagination.startPage}"
-										end="${pagination.endPage}" var="boardNo">
+										end="${pagination.endPage}" var="personalCounselNo">
 
 										<li
-											class="page-item <c:out value="${pagination.page == boardNo ? 'active' : ''}"/> ">
+											class="page-item <c:out value="${pagination.page == personalCounselNo ? 'active' : ''}"/> ">
 											<a class="page-link" href="#"
-											onClick="fn_pagination('${boardNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.m_nickname}', '${search.b_subject}', '${search.b_title}', '${search.b_wdate}')">
-												${boardNo} </a>
+											onClick="fn_pagination('${personalCounselNo}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.m_nickname}', '${search.pr_date}', '${search.pr_status}', '${search.pr_type}','${search.ccg_subname}')">
+												${personalCounselNo} </a>
 										</li>
 									</c:forEach>
 									<c:if test="${pagination.next}">
 
 										<li class="page-item"><a class="page-link" href="#"
 											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
-					,'${search.m_nickname}', '${search.b_subject}', '${search.b_title}', '${search.b_wdate}')">다음</a></li>
+					,'${search.m_nickname}', '${search.pr_date}', '${search.pr_status}', '${search.pr_type}','${search.ccg_subname}')">다음</a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -271,49 +269,60 @@ h3 {
 
 	<script>
 	
+		//검색 초기화 처리 안할래
+		function form_reset() {
+		 	$("#form_apply").reset();
+   			 //document.getElementById("form_apply").reset();
+
+				}
+	
 	
 		// 페이징 처리
 		
-		function fn_prev(page, range, rangeSize, listSize, m_nickname, b_subject, b_title, b_wdate) {
+		function fn_prev(page, range, rangeSize, listSize, m_nickname, pr_date, pr_status, pr_type, ccg_subname) {
 
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 
-		var url = "adminBoardList.do";
+		var url = "counselorPersonalList.do";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		url = url + "&listSize=" + listSize;
 		url = url + "&m_nickname=" + m_nickname;
-		url = url + "&b_subject=" + b_subject;
-		url = url + "&b_title=" + b_title;
-		url = url + "&b_wdate=" + b_wdate;
+		url = url + "&pr_date=" + pr_date;
+		url = url + "&pr_status=" + pr_status;
+		url = url + "&pr_type=" + pr_type;
+		url = url + "&ccg_subname=" + ccg_subname;
 		location.href = url;
 	}
 
-		function fn_pagination(page, range, rangeSize, listSize, m_nickname, b_subject, b_title, b_wdate) {
+		function fn_pagination(page, range, rangeSize, listSize, m_nickname, pr_date, pr_status, pr_type,ccg_subname) {
 
-		var url = "adminBoardList.do";
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&listSize=" + listSize;
-		url = url + "&m_nickname=" + m_nickname;
-		url = url + "&b_subject=" + b_subject;
-		url = url + "&b_title=" + b_title;
-		url = url + "&b_wdate=" + b_wdate;
-		location.href = url;
+			var url = "counselorPersonalList.do";
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+			url = url + "&listSize=" + listSize;
+			url = url + "&m_nickname=" + m_nickname;
+			url = url + "&pr_date=" + pr_date;
+			url = url + "&pr_status=" + pr_status;
+			url = url + "&pr_type=" + pr_type;
+			url = url + "&ccg_subname=" + ccg_subname;
+			location.href = url;
 	}
 
-		function fn_next(page, range, rangeSize, listSize, m_nickname, b_subject, b_title, b_wdate) {
+		function fn_next(page, range, rangeSize, listSize, m_nickname, pr_date, pr_status, pr_type, ccg_subname) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
-		var url = "adminBoardList.do";
+
+		var url = "counselorPersonalList.do";
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		url = url + "&listSize=" + listSize;
 		url = url + "&m_nickname=" + m_nickname;
-		url = url + "&b_subject=" + b_subject;
-		url = url + "&b_title=" + b_title;
-		url = url + "&b_wdate=" + b_wdate;
+		url = url + "&pr_date=" + pr_date;
+		url = url + "&pr_status=" + pr_status;
+		url = url + "&pr_type=" + pr_type;
+		url = url + "&ccg_subname=" + ccg_subname;
 		location.href = url;
 	}
 
@@ -322,13 +331,13 @@ h3 {
 		var listSize = $("#listSize option:selected").val();
 
 		if (listSize == 10) {
-			var url = "adminBoardList.do?startPage=" + startPage
+			var url = "counselorPersonalList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		} else if (listSize == 15) {
-			var url = "adminBoardList.do?startPage=" + startPage
+			var url = "counselorPersonalList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		} else if (listSize == 20) {
-			var url = "adminBoardList.do?startPage=" + startPage
+			var url = "counselorPersonalList.do?startPage=" + startPage
 					+ "&listSize=" + listSize
 		}
 		location.href = url;
@@ -337,51 +346,19 @@ h3 {
 		$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 
-		var url = "adminBoardList.do";
+		var url = "counselorPersonalList.do";
 		url = url + "?m_nickname=" + $('#m_nickname').val();
-		url = url + "&b_subject=" + $('[name=select2]').val();
-		url = url + "&b_title=" + $('#b_title').val();
-		url = url + "&b_wdate=" + $('#b_wdate').val();
+		url = url + "&pr_date=" + $('[name=pr_date]').val();
+		url = url + "&pr_status=" + $('#pr_status').val();
+		url = url + "&pr_type=" + $('#pr_type').val();
+		url = url + "&ccg_subname=" + $('#ccg_subname').val();
 		location.href = url;
 		console.log(url);
 
 	});
 		
 		
-		
-		// 삭제 (디자인적용)
-		
-		function deleteFnc(b_no){
-			Swal.fire({
-			  title: '정말 삭제하시겠습니까?',
-			  text: '삭제 후에는 복구가 불가능합니다.',
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#1E90FF',
-			  cancelButtonColor: '#EB4646',
-			  confirmButtonText: '삭제',
-			  cancelButtonText: '취소'
-			}).then((result) => {
-			  if (result.value) {
-	              //"삭제" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
-				$.ajax({
-					url : "boardDelete.do",
-					type : "post",
-					data : {
-						b_no : b_no
-					},
-					dataType : "text",
-					success : function(responseText) {
-						location.reload();
-					},
-					error : function() {
-						alert("삭제 실패")
-					}
-				})
-			  }
-			})
-		}
-		
+	
 		
 		// select 2
 		$(document).ready(function() {

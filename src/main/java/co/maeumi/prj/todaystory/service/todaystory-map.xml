@@ -14,10 +14,10 @@
 		FROM (SELECT ROWNUM RN, A.*
 		FROM (SELECT *
 		FROM SHORT_COMMENT
+		ORDER BY SC_NO DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
-		ORDER BY sc_no desc
 	</select>
 
 	<select id="TodayStorySelectList"
