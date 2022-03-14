@@ -33,6 +33,7 @@ public class Search extends Paging {
 	private String f_wdate;
 	private String c_name;
 
+	//상담사
 	private String c_gender;
 	private String c_grade;
 	private String c_birthdate;
@@ -40,6 +41,16 @@ public class Search extends Paging {
 	private String c_phone;
 	private String c_address;
 	private String c_status;
+	private String c_category;
+	private String c_type1;
+	private String c_type2;
+	private String c_type3;
+	private String c_type4;
+	private String c_type5;
+	private String c_type6;
+	private String p_kakao;
+	private String p_zoom;
+	private String p_phone;
 
 	// 공지사항
 	private String n_title;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.counselor.service.CounselorMapper;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Search;
 
 @Repository("counselorDao")
@@ -180,6 +181,17 @@ public class CounselorServiceImpl implements CounselorService {
 	}
 
 	@Override
+
+	public int getUserCounselorListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getUserCounselorListCnt(svo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.userCounselorSearchList(svo);
+
 	public CounselorVO counselorFindPassword(CounselorVO cvo) {
 		// TODO Auto-generated method stub
 		return map.counselorFindPassword(cvo);
@@ -189,6 +201,7 @@ public class CounselorServiceImpl implements CounselorService {
 	public int cPasswordUpdate(CounselorVO cvo) {
 		// TODO Auto-generated method stub
 		return map.cPasswordUpdate(cvo);
+
 	}
 
 

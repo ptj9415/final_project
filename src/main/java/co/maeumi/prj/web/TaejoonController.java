@@ -36,6 +36,8 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.salary.service.SalaryService;
+import co.maeumi.prj.salary.service.SalaryVO;
 import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Search;
 import co.maeumi.prj.therapy.service.TherapyService;
@@ -62,6 +64,8 @@ public class TaejoonController {
 	BCryptPasswordEncoder pwdEncoder;
 	@Autowired
 	Aes256 aes256;
+	@Autowired
+	private SalaryService salaryDao;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -73,7 +77,7 @@ public class TaejoonController {
 	}
 
 	/* ===== 상담사 화면 ===== */
-	
+
 	@RequestMapping("/counselorGroupList.do")
 	public String counselorGroupList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
@@ -110,15 +114,15 @@ public class TaejoonController {
 
 		return "counselor/groupcounselmanage/counselorGroupList";
 	}
-	
+
 	@RequestMapping("/counselorGroupApplyList.do")
 	public String counselorGroupApplyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "") String gr_reservedate,
 			@RequestParam(required = false, defaultValue = "all") String gr_status,
 			@RequestParam(required = false, defaultValue = "") String m_nickname,
-			@RequestParam(required = false, defaultValue = "") String m_email,
-			Search svo, HttpServletRequest request) throws Exception {
+			@RequestParam(required = false, defaultValue = "") String m_email, Search svo, HttpServletRequest request)
+			throws Exception {
 
 		String gc_no = request.getParameter("gc_no");
 		model.addAttribute("search", svo);
@@ -143,35 +147,34 @@ public class TaejoonController {
 
 		return "counselor/groupcounselmanage/counselorGroupApplyList";
 	}
-	
+
 	@RequestMapping("/counselorGroupInfo.do")
 	public String counselorGroupInfo(Model model, GroupcounselVO gvo) throws ParseException {
-		
+
 		gvo = groupCounselDao.selectGroupCounselInfo(gvo);
-		
+
 		String date = gvo.getGc_date();
 		date = date.substring(0, 10);
-		gvo.setGc_date(date);		
-		
+		gvo.setGc_date(date);
+
 		String startdate = gvo.getGc_startdate();
 		startdate = startdate.substring(0, 10);
 		gvo.setGc_startdate(startdate);
-		
+
 		String finaldate = gvo.getGc_finaldate();
 		finaldate = finaldate.substring(0, 10);
 		gvo.setGc_finaldate(finaldate);
-		
+
 		model.addAttribute("gc", gvo);
-		
+
 		return "counselor/groupcounselmanage/counselorGroupInfo";
 	}
-	
+
 	@RequestMapping("/groupCounselUpdate.do")
 	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
 
 		// 썸네일 파일업로드
 		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\editorsumnail\\";
@@ -198,26 +201,26 @@ public class TaejoonController {
 		vo.setGc_infos(result);
 
 		int update = groupCounselDao.groupCounselUpdate(vo);
-		
+
 		// vo값에 따라 성공 실패 여부 확인
 		if (update != 1) {
 			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
 			out.flush();
-		}else {
+		} else {
 			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
 			out.flush();
 		}
 		return null;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/groupCounselClose.do")
 	public int groupCounselClose(GroupcounselVO gvo) {
 		int n = groupCounselDao.groupCounselClose(gvo);
-		
+
 		return n;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/groupCounselDetailInsert.do")
 	public int groupCounselDetailInsert(GroupcounselVO gvo, HttpServletRequest request) throws Exception {
@@ -229,7 +232,7 @@ public class TaejoonController {
 		System.out.println("------------------------------");
 		gvo.setGc_report(gc_report);
 		int n = groupCounselDao.groupCounselResult(gvo);
-		
+
 		return n;
 	}
 
@@ -847,5 +850,34 @@ public class TaejoonController {
 		model.addAttribute("therapy", therapyDao.therapySearchselect(svo));
 
 		return "admin/therapy/therapyList";
+	}
+
+	@RequestMapping("/adminSalesChart.do")
+	public String adminSalesChart(Model model) {
+
+		return "admin/chart/adminSalesChart";
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminSalaryData.do")
+	public List<SalaryVO> adminSalaryData(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList();
+
+		return salary;
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminSalarySearch.do")
+	public List<SalaryVO> adminSalarySearch(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salarySearch(vo);
+		for (int i = 0; i < salary.size(); i++) {
+			if (salary.get(i).getS_sdate() != null) {
+				String date = salary.get(i).getS_sdate();
+				date = date.substring(0, 10);
+				salary.get(i).setS_sdate(date);
+			}
+		}
+
+		return salary;
 	}
 }

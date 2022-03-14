@@ -229,7 +229,8 @@
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
 		UPDATE COUNSELOR SET
 		C_GRADE=#{c_grade}
-		WHERE C_EMAIL=#{c_email}
+		WHERE
+		C_EMAIL=#{c_email}
 	</update>
 
 	<select id="counselorGradeList"
@@ -237,6 +238,55 @@
 		SELECT * FROM CS_UPGRADEAPPLY
 		WHERE C_EMAIL=#{c_email}
 	</select>
+
+
+	<select id="getUserCounselorListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		COUNSELOR C, PRICE P
+			<trim prefix="where" prefixOverrides="and | or">
+			<if test="c_name != ''"> AND c_name LIKE '%' || #{c_name} || '%' </if>
+			<if test="c_type1 != ''"> AND c_type1 LIKE '%' || #{c_type1} || '%' </if>
+			<if test="c_type2 != ''"> AND c_type2 LIKE '%' || #{c_type2} || '%' </if>
+			<if test="c_type3 != ''"> AND c_type3 LIKE '%' || #{c_type3} || '%' </if>
+			<if test="c_type4 != ''"> AND c_type4 LIKE '%' || #{c_type4} || '%' </if>
+			<if test="c_type5 != ''"> AND c_type5 LIKE '%' || #{c_type5} || '%' </if>
+			<if test="c_type6 != ''"> AND c_type6 LIKE '%' || #{c_type6} || '%' </if>
+			<if test="p_kakao != ''"> AND p_kakao LIKE '%' || #{p_kakao} || '%' </if>
+			<if test="p_zoom != ''"> AND p_zoom LIKE '%' || #{p_zoom} || '%' </if>
+			<if test="p_phone != ''"> AND p_phone LIKE '%' || #{p_phone} || '%' </if>
+			<if test="c_gender != 'all'"> AND c_gender LIKE '%' || #{c_gender} || '%' </if>
+			and c.c_email = p.c_email
+		</trim>
+	</select>
+
+	<select id="userCounselorSearchList"
+		resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		SELECT *
+		FROM(SELECT ROWNUM RN, A.*
+		FROM(SELECT C.*, P.P_KAKAO,
+		P.P_KAKAOPRICE, P.P_ZOOM, P.P_ZOOMPRICE, P.P_PHONE, P.P_PHONEPRICE
+		FROM
+		COUNSELOR C, PRICE P
+			<trim prefix="where" prefixOverrides="and | or">
+			<if test="c_name != ''"> AND c_name LIKE '%' || #{c_name} || '%' </if>
+			<if test="c_type1 != ''"> AND c_type1 LIKE '%' || #{c_type1} || '%' </if>
+			<if test="c_type2 != ''"> AND c_type2 LIKE '%' || #{c_type2} || '%' </if>
+			<if test="c_type3 != ''"> AND c_type3 LIKE '%' || #{c_type3} || '%' </if>
+			<if test="c_type4 != ''"> AND c_type4 LIKE '%' || #{c_type4} || '%' </if>
+			<if test="c_type5 != ''"> AND c_type5 LIKE '%' || #{c_type5} || '%' </if>
+			<if test="c_type6 != ''"> AND c_type6 LIKE '%' || #{c_type6} || '%' </if>
+			<if test="p_kakao != ''"> AND p_kakao LIKE '%' || #{p_kakao} || '%' </if>
+			<if test="p_zoom != ''"> AND p_zoom LIKE '%' || #{p_zoom} || '%' </if>
+			<if test="p_phone != ''"> AND p_phone LIKE '%' || #{p_phone} || '%' </if>
+			<if test="c_gender != 'all'"> AND c_gender LIKE '%' || #{c_gender} || '%' </if>
+			and c.c_email = p.c_email
+		</trim>
+		)A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
 	
 	<select id="counselorFindPassword" resultType="co.maeumi.prj.counselor.service.CounselorVO">
 		select * from counselor 
@@ -251,4 +301,5 @@
 		and c_phone = #{c_phone}
 	</update>
 	
+
 </mapper>

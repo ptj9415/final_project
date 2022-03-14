@@ -2,6 +2,7 @@ package co.maeumi.prj.counselor.service;
 
 import java.util.List;
 
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Search;
 
 public interface CounselorService {
@@ -48,5 +49,9 @@ public interface CounselorService {
 	int counselorGradeInsert(CounselorVO cvo);
 	int counselorGradeUpdate(CounselorVO cvo);
 	int counselorUpdate(CounselorVO cvo);
+	
+	//사용자화면 조회
+	int getUserCounselorListCnt(Search svo) throws Exception;
+	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception;
 
 }
