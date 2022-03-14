@@ -53,5 +53,6 @@ public interface CounselorService {
 	//사용자화면 조회
 	int getUserCounselorListCnt(Search svo) throws Exception;
 	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception;
+	CounselorVO userCounselorSelect(CounselorVO cvo);
 
 }

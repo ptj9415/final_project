@@ -158,8 +158,7 @@
                 pr_price,
                 pr_time,
                 pr_status,
-                pr_type,
-                ccg_subname
+                pr_type
                 )
                 VALUES(
                 (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
@@ -169,8 +168,7 @@
                 #{pr_price},
                 #{pr_time},
                 '0',
-                #{pr_type},
-                #{ccg_subname}
+                #{pr_type}
                 )
 	</insert>
 

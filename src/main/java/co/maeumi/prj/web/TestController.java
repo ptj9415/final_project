@@ -2,6 +2,9 @@ package co.maeumi.prj.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,7 @@ import co.maeumi.prj.banner.service.BannerService;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.coupon.service.CouponService;
+import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.service.Search;
 
@@ -26,7 +30,7 @@ public class TestController {
 	@Autowired
 	private BannerService bannerDao;
 	@Autowired
-	private CouponService couponDao;
+	private CouponService couponDao;	
 
 	@RequestMapping("/test.do")
 	public String test(Model model) {
@@ -57,17 +61,17 @@ public class TestController {
 	@RequestMapping("/testpg.do")
 	public String testpg(Model model, Search svo, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false, defaultValue = "") String c_name,
-			@RequestParam(required = false, defaultValue = "") String c_type1,
-			@RequestParam(required = false, defaultValue = "") String c_type2,
-			@RequestParam(required = false, defaultValue = "") String c_type3,
-			@RequestParam(required = false, defaultValue = "") String c_type4,
-			@RequestParam(required = false, defaultValue = "") String c_type5,
-			@RequestParam(required = false, defaultValue = "") String c_type6,
-			@RequestParam(required = false, defaultValue = "") String p_kakao,
-			@RequestParam(required = false, defaultValue = "") String p_zoom,
-			@RequestParam(required = false, defaultValue = "") String p_phone,
-			@RequestParam(required = false, defaultValue = "") String c_gender) throws Exception {
+			@RequestParam(required = false, defaultValue = "undefined") String c_name,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type1,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type2,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type3,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type4,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type5,
+			@RequestParam(required = false, defaultValue = "undefined") String c_type6,
+			@RequestParam(required = false, defaultValue = "undefined") String p_kakao,
+			@RequestParam(required = false, defaultValue = "undefined") String p_zoom,
+			@RequestParam(required = false, defaultValue = "undefined") String p_phone,
+			@RequestParam(required = false, defaultValue = "all") String c_gender) throws Exception {
 		
 		System.out.println("-----------------------------");
 		System.out.println(c_type6);
@@ -95,6 +99,52 @@ public class TestController {
 		model.addAttribute("pagination", svo);
 		model.addAttribute("counselorList", counselorDao.userCounselorSearchList(svo));
 		return "admin/chart/test";
+	}
+	
+	@RequestMapping("/test2pg.do")
+	public String test2pg(Model model, CounselorVO cvo) {
+		
+		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
+		return "admin/chart/test2";
+	}
+	
+	@RequestMapping("/test3pg.do")
+	public String test3pg(Model model, CounselorVO cvo, HttpServletRequest request) {
+		String type = request.getParameter("type");
+		String price = request.getParameter("price");
+		String c_email = request.getParameter("c_email");
+		System.out.println(type);
+		System.out.println(price);
+		System.out.println(c_email);
+		
+		model.addAttribute("type", type);
+		model.addAttribute("price", price);
+		model.addAttribute("c_email", c_email);
+		
+		
+		return "admin/chart/test3";
+	}
+	
+	@RequestMapping("/test4pg.do")
+	public String test4pg(Model model, CounselorVO cvo, HttpServletRequest request, CouponVO cpvo, HttpSession session) {
+		String type = request.getParameter("pr_type");
+		String price = request.getParameter("pr_price");
+		String c_email = request.getParameter("c_email");
+		String pr_date = request.getParameter("pr_date");
+		String pr_time = request.getParameter("pr_time");
+		
+		model.addAttribute("pr_type", type);
+		model.addAttribute("pr_price", price);
+		model.addAttribute("c_email", c_email);
+		model.addAttribute("pr_date", pr_date);
+		model.addAttribute("pr_time", pr_time);		
+		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
+		
+		cpvo.setM_email("gnjqtpfl@naver.com");
+		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
+		model.addAttribute("coupon", list);
+		
+		return "admin/chart/test4";
 	}
 	
 
