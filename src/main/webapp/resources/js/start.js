@@ -9,7 +9,7 @@ const tabletMQL = window.matchMedia('all and (min-width: 768px)');
 const pcMQL = window.matchMedia('all and (min-width: 1024px)');
 
 //12개의 질문
-const ENDPOINT = 20;
+const ENDPOINT = 12;
 //선택한 배열
 const select = [];
 let qIdx = -1;
@@ -65,17 +65,6 @@ const goResult = () => {
 	const pTitle = document.querySelector('.p');
 	pTitle.innerHTML = '당신의 결과는?!';
 
-	//이미지 이름을 image-`point`.png로 저장할 것
-	const img_url = 'img/image-' + point + '.png';
-	//https://www.w3schools.com/jsref/met_document_createelement.asp
-	const res_img = document.createElement('img');
-	res_img.src = img_url; //img.src
-	res_img.alt = point; //img.alt
-	res_img.title = infoList[point].name; //img.title = img.name
-
-	//https://developer.mozilla.org/ko/docs/Web/API/Node/appendChild
-	const res_img_div = document.querySelector('.art');
-	res_img_div.appendChild(res_img);
 
 	const animal = document.querySelector('.result');
 	animal.innerHTML = infoList[point].name;

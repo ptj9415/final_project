@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-		<title>십이간지로 알아보는 연애 유형</title>
+		<title>우울증 검사</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="resources/user/css/default.css" />
@@ -114,15 +114,10 @@
 					</div>
 					<!-- 이후에 추가할 것, 공유하기(혹은 복사), copyright에 대한 설명 등 -->
 					<div class="hash">#심리테스트</div>
+					<div class="hash">#마으미 #심리검사 #우울증테스트</div>
 					<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show-->
 					<div id="copyright" style="display: none;">
 						<p>
-							나를 알아보는 10가지 질문 by
-							<a href="https://github.com/dev-dain/10-things-test">Dain Kim</a><br />
-							Copyright (c) 2020 by Jaewon Lee (<a
-								href="https://github.com/nani6765/ImpressionTest"
-							>https://github.com/nani6765/ImpressionTest</a>)<br />
-							이 사이트에 나오는 그림을 포함한 모든 컨텐츠의 상업적 이용을 금지합니다.
 						</p>
 					</div>
 				</div>
