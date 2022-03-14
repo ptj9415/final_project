@@ -229,6 +229,7 @@
 			</c:forEach>
 		</ul>
 	</div>
+	
 
 	<!-- banner end -->
 
@@ -669,7 +670,7 @@
 
 					rollingId = setInterval(function() {
 						rollingStart();
-					}, 3000);
+					}, 5000);
 
 					function rollingStart() {
 						$banner.css("width", $bannerWidth * $length + "px");
