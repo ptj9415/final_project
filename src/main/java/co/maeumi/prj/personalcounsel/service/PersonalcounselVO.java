@@ -46,6 +46,8 @@ public class PersonalcounselVO {
 
 	
 	private int prCount;
+	private int prSum;
+	private int sendMonth;
 	
 
 	private String m_email;

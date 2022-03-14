@@ -10,10 +10,6 @@ public interface PersonalcounselService {
 	
 	List<PersonalcounselVO> PersonalCounselList(PersonalcounselVO vo);//개인상담관리 리스트
 
-	
-	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 집계
-
-
 	PersonalcounselVO PersonalCounselSelect(PersonalcounselVO vo); //개인상담 관리 디테일
 	int PersonalCounselUpdate(PersonalcounselVO vo); //개인상담 관리 상담일지 업데이트
 	int PersonalCounselDelete(PersonalcounselVO vo); //개인상담 관리삭제
@@ -24,4 +20,8 @@ public interface PersonalcounselService {
 	
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
 
+	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 개인상담 건수 집계
+	List<PersonalcounselVO> PersonalCounselSales(PersonalcounselVO vo); // 개인상담 매출 통계
+	
+	List<PersonalcounselVO>  searchSalesData(PersonalcounselVO vo); // 개인상담 매출 통계 search
 }

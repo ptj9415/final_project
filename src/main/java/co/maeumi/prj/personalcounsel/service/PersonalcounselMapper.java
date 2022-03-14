@@ -18,5 +18,8 @@ public interface PersonalcounselMapper {
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
 
 	
-	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 집계
+	List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo); // 개인상담 건수 집계
+	List<PersonalcounselVO> PersonalCounselSales(PersonalcounselVO vo); // 개인상담 매출 통계
+	
+	List<PersonalcounselVO>  searchSalesData(PersonalcounselVO vo); // 개인상담 매출 통계 search
 }

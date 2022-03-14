@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -39,7 +38,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import co.maeumi.prj.counselor.service.CounselorService;
@@ -546,7 +544,7 @@ public class BadaController {
 
 		return "admin/noticemanage/adminNoticeRead";
 	}
-
+	
 	// 공지사항 삭제
 	@ResponseBody
 	@PostMapping("/noticeDelete.do")
@@ -969,22 +967,61 @@ public class BadaController {
 		return "admin/chart/usingSiteChart";
 	}
 	
-	// 사이트 이용 통계 => 월별 상담건수 조회 
+	// 사이트 이용 통계 페이지 => 월별 상담건수 조회 
 	@ResponseBody
 	@RequestMapping("/personalCounselData.do")
-	public List<PersonalcounselVO> personalCounselData(Model model, PersonalcounselVO vo) {
+	public List<PersonalcounselVO> personalCounselData(Model model, PersonalcounselVO vo, HttpServletRequest request) {
 		
-		
+		//System.out.println("ajax를 통해서 넘어온 값" + request.getParameter("sendMonth"));
+		//vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth")));
 		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselCount(vo);
+		model.addAttribute("list", list);
+		
+		return list;
+	}
+	
+	// 매출 통계 페이지로 이동
+	@RequestMapping("/salesChart.do")
+	public String salesChart(HttpServletRequest request, PersonalcounselVO vo, Model model) {
+		
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselSales(vo);
+		
+		model.addAttribute("list", list);
+		return "admin/chart/salesChart";
+	}
+	
+	
+	// 디폴트로 보여줄 매출 통계 ajax 
+	@ResponseBody
+	@RequestMapping("/salesData.do")
+	public List<PersonalcounselVO>  salesData(Model model, PersonalcounselVO vo, HttpServletRequest request){
+		
+		//System.out.println( request.getParameter("sendMonth"));
+		//vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth"))); 
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselSales(vo);
 		
 		model.addAttribute("list", list);
 		
+		return list;	
+	}
+	
+	// 디폴트 결과에서 select 선택 결과 ajax
+	@ResponseBody
+	@RequestMapping("/searchSalesData.do")
+	public List<PersonalcounselVO> searchSalesData(Model model, HttpServletRequest request, PersonalcounselVO vo){
+		
+		System.out.println( request.getParameter("sendMonth"));
+		vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth"))); 
+		List<PersonalcounselVO> list = personalCounselDao.searchSalesData(vo);
+		System.out.println("list넘어오는 갯수." + list);
 		return list;
 	}
 	
 	
 	
 	
+	
+
 	
 	
 	
