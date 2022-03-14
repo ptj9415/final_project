@@ -164,6 +164,7 @@ textarea {
 							<table class="table text-nowrap" id="todaystorytable">
 								<thead>
 									<tr>
+										<th>no</th>
 										<th>주제</th>
 										<th>글귀</th>
 										<th style="width: 150px;">관리</th>
@@ -173,6 +174,7 @@ textarea {
 									<c:forEach items="${adminTodayStoryList }"
 										var="adminTodayStoryList">
 										<tr>
+											<td style="vertical-align: middle;">${adminTodayStoryList.sc_no }</td>
 											<td style="vertical-align: middle;">${adminTodayStoryList.sc_title }</td>
 											<td style="vertical-align: middle;">${adminTodayStoryList.sc_subject }</td>
 											<td><span type="button" class="btn btn-default"
@@ -235,7 +237,9 @@ textarea {
 							</div>
 							<!-- 수정 모달 끝 -->
 							<br>
-							<div id="paginationBox" class="pagination1" style="float: right;">
+							
+						<!-- 페이징 -->
+						<div id="paginationBox" class="pagination1" style="float: right;">
 								<ul class="pagination">
 									<c:if test="${pagination.prev}">
 										<li class="page-item"><a class="page-link" href="#"
@@ -256,6 +260,7 @@ textarea {
 									</c:if>
 								</ul>
 							</div>
+						<!-- 페이징 end -->
 						</div>
 					</div>
 				</div>

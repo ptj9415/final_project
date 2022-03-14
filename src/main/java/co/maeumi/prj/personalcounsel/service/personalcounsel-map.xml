@@ -135,11 +135,11 @@
                 (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
                 #{c_email},
                 #{m_email},
-                sysdate,
+                #{pr_date},
                 #{pr_price},
                 #{pr_time},
                 '0',
-                '이거 타입 ㅜㅜ',
+                #{pr_type},
                 #{ccg_subname}
                 )
 	</insert>
@@ -153,4 +153,37 @@
 				 SELECT * FROM PERSONAL_RESERVE WHERE PR_NO = #{pr_no}
 	
 	</select>
+	
+	<select id="getPRListCnt" resultType="int">
+			SELECT COUNT(*)
+      		FROM personal_reserve re, member m 
+     	 <trim prefix="where" prefixOverrides="and | or">
+	         	<if test="pr_date != ''"> AND TO_CHAR(pr_date, 'YYYY-MM-DD') = #{pr_date} </if>
+		         <if test="m_nickname != ''">AND m_nickname like '%'||#{m_nickname}||'%'</if>
+		         <if test="pr_type != 'all'">AND pr_type like '%'||#{pr_type}||'%'</if>
+		         <if test="pr_status != 'all'">AND pr_status like '%'||#{pr_status}||'%'</if>
+		          <if test="ccg_subname != 'all'">AND ccg_subname like '%'||#{ccg_subname}||'%'</if>
+	         AND M.M_EMAIL = RE.M_EMAIL
+        </trim>
+	</select>
+	
+	<select id="prSearchSelect" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		      SELECT * FROM (SELECT ROWNUM RN, A.*
+      		  FROM (select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date, re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname, re.pc_report, re.pc_result
+              from personal_reserve re, member m
+      <trim prefix="where" prefixOverrides="and | or">
+         		<if test="pr_date != ''"> AND TO_CHAR(pr_date, 'YYYY-MM-DD') = #{pr_date} </if>
+		         <if test="m_nickname != ''">AND m_nickname like '%'||#{m_nickname}||'%'</if>
+		         <if test="pr_type != 'all'">AND pr_type like '%'||#{pr_type}||'%'</if>
+		         <if test="pr_status != 'all'">AND pr_status like '%'||#{pr_status}||'%'</if>
+		          <if test="ccg_subname != 'all'">AND ccg_subname like '%'||#{ccg_subname}||'%'</if>
+         		AND M.M_EMAIL = re.m_email
+      </trim>
+      ) A
+      )
+      WHERE RN BETWEEN
+      #{start} AND #{end}
+	</select>
+	
+	
 </mapper>
