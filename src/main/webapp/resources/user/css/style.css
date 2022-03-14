@@ -9121,7 +9121,7 @@ supports ((position: -webkit-sticky) or (position: sticky)) { .sticky-top
 		padding-bottom: 1.5rem !important;
 	}
 	.pl-md-4, .px-md-4 {
-		padding-left: 1.5rem !important;
+		padding-left: 5rem !important;
 	}
 	.p-md-5 {
 		padding: 3rem !important;

@@ -1,5 +1,5 @@
 const url = 'https://twelvelevetype.netlify.app/';
-const title = '십이간지로 알아보는 연애 유형';
+const title = '지금 나의 자존감 상태는?';
 
 var art = document.querySelector('.art')
 
@@ -62,29 +62,9 @@ function createDescription(){
 		case 4:
 			var shareDescription = infoList[4].name;
 			break;
-		case 5:
-			var shareDescription = infoList[5].name;
-			break;
-		case 6:
-			var shareDescription = infoList[6].name;
-			break;
-		case 7:
-			var shareDescription = infoList[7].name;
-			break;
-		case 8:
-			var shareDescription = infoList[8].name;
-			break;
-		case 9:
-			var shareDescription = infoList[9].name;
-			break;
-		case 10:
-			var shareDescription = infoList[10].name;
-			break;
-		case 11:
-			var shareDescription = infoList[11].name;
-			break;		
+		
 	}
-	var shareTitle = '십이간지 연예유형 결과'
+	var shareTitle = '나의 자존감 테스트 결과'
 	const shareImageUrl = url + 'resources/user/img/image/' + imageNumber + '.png';
 	sendKakaoLink(shareTitle, shareDescription, shareImageUrl);
 }
