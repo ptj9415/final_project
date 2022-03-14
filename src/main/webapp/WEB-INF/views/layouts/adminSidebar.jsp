@@ -185,13 +185,13 @@
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>상담 통계</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"
+						<li class="nav-item"><a href="testpg.do" class="nav-link"
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>상담사 통계</p>
 						</a></li>
-						<li class="nav-item"><a href="usingSiteChart.do" class="nav-link"
+						<li class="nav-item"><a href="adminSalesChart.do" class="nav-link"
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>사이트 이용 통계</p>
+								<p>매출 통계</p>
 						</a></li>
 						<li class="nav-item"><a href="salesChart.do" class="nav-link"
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
