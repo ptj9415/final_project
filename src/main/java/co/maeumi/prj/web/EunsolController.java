@@ -48,7 +48,7 @@ public class EunsolController {
 	/* ===== 사용자 화면 ===== */
 
 	// 사용자 FAQ 메인화면
-	@PostMapping("/userFaq.do") /* == @RequestMapping의 줄임말 : Post로 RequestMapping 해줌 */
+	@RequestMapping("/userFaq.do")
 	public String userFaq(FaqVO vo, Model model) {
 		model.addAttribute("faqs", faqDao.faqSelectList());
 		

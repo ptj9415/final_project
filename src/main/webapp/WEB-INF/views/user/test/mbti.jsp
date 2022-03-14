@@ -285,7 +285,7 @@ img {
   <div id="all">
     <article class="start">
     <img alt=""  src="img/mbti/a.png" style="width: 500px; height: 400px;">
-      <h1 class="mt-5 text-center">나는 회사에서 어떤 벌레인가?</h1>
+      <h1 class="mt-5 text-center">미니 MBTI 검사</h1>
       <button
         type="button"
         style="background-color: #00bfff; color: white; border: #00bfff; font-size: 30px;"
