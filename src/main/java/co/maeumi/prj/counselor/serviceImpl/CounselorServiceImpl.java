@@ -179,6 +179,18 @@ public class CounselorServiceImpl implements CounselorService {
 		return map.counselorUpdate(cvo);
 	}
 
+	@Override
+	public CounselorVO counselorFindPassword(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorFindPassword(cvo);
+	}
+
+	@Override
+	public int cPasswordUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.cPasswordUpdate(cvo);
+	}
+
 
 	
 }

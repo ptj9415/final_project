@@ -13,6 +13,8 @@ public interface MemberMapper {
 	int memberInsert(MemberVO mvo);
 	
 	MemberVO memberFindEmail(MemberVO mvo); // 연락처로 이메일 찾기. 
+	MemberVO memberFindPassword(MemberVO mvo);  // 이메일, 연락처로 패스워드 조회
+	
 	List<MemberVO> findEmailList();   // 회원테이블은 동일 연락처, 여러 계정 존재 가능.
 	
 	MemberVO kakaoSelect(MemberVO mvo);  // 카카오 로그인 조회용 이메일과 가입유형으로 판단.
@@ -37,5 +39,7 @@ public interface MemberMapper {
 
 	// 연락처 정보 수정
 	int ajaxUpdatePhone(MemberVO mvo);
-
+	
+	// 새로운 비밀번호 수정
+	int passwordUpdate(MemberVO mvo);
 }

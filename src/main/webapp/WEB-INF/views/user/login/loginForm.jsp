@@ -166,7 +166,7 @@ button:hover {
 	
 	// 이메일 찾기 팝업창 호출
 	$("#findEmail").on("click", function() {
-	    alert("휴대폰 인증을 완료한 계정만 이메일 찾기 가능~~~");
+	    alert("휴대폰 인증을 완료한 계정만 이메일 찾기가 가능합니다.");
 		 popupOpen();
 	})
 	
@@ -180,6 +180,21 @@ button:hover {
 		window.open(url,"",popupOption);
 	}
 	
+	// 비밀번호 찾기 팝업창 호출
+	$("#findPassword").on("click", function() {
+		alert("휴대폰 인증을 완료한 계정만 비밀번호 찾기가 가능합니다.");
+		findPasswordPopupOpen();
+	});
+	
+	function findPasswordPopupOpen() {
+		var url= "findPasswordPopup.do";    //팝업창 페이지 URL
+		var winWidth = 500;    
+	    var winHeight = 400;
+	    var popupX = (window.screen.width / 2) - (800 / 2);
+	    var popupY= (window.screen.height /2) - (600 / 2);
+	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
+		window.open(url,"",popupOption);
+	}
 	
 
 </script>

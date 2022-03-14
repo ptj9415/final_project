@@ -30,7 +30,7 @@ button {
 <body>
 	<div align="center">
 		<h2>Maeumi.</h2>
-		<div><h3>Email 찾기 서비스. 비번은 알아서~</h3></div>
+		<div><h3>Maeumi. Email 찾기!</h3></div>
 		<hr>
 		<form id="frm" method="post" action="ajaxFindEmail.do">
 		<div class="inputForm1">
