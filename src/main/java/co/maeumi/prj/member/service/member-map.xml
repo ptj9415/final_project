@@ -148,5 +148,20 @@
 		where m_email = #{m_email}
 		and m_type = #{m_type}
 	</update>
+	
+	<!-- 비밀번호 찾기용으로 이메일/연락처  인증여부 조회. -->
+	<select id="memberFindPassword" resultType="co.maeumi.prj.member.service.MemberVO"> 
+		select * from member 
+		where m_email = #{m_email} 
+		and m_phone = #{m_phone}
+		and m_type = #{m_type}	
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="passwordUpdate" parameterType="co.maeumi.prj.member.service.MemberVO">
+		update member set m_password = #{m_password}
+		where m_email = #{m_email}
+		and m_phone = #{m_phone}
+	</update>
 
 </mapper>

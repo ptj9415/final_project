@@ -275,12 +275,21 @@ public class BadaController {
 		
 		return "user/home/home";
 	} // 카카오로그인
-
+	
+	// 이메일 찾기 페이지로 이동
 	@RequestMapping("/findEmailPopup.do")
 	public String findEmailPopup(Model model, HttpServletRequest request) {
 
 		return "layouts/findEmail";
 	};
+	
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/findPasswordPopup.do")
+	public String findPasswordPopup(HttpServletRequest request, Model model) {
+		
+		return "layouts/findPassword";
+	}
+	
 
 	// 이메일 인증화면으로 이동
 	@RequestMapping("/userEmailCheck.do")
@@ -418,7 +427,7 @@ public class BadaController {
 		String checkPhone = request.getParameter("sendPhoneNum");
 		System.out.println("폼에서 넘어온 휴대폰 번호" + checkPhone);
 		mvo.setM_phone(checkPhone);
-		mvo.setM_type("MAEUMI");
+		mvo.setM_type("마으미");
 		mvo = memberDao.memberFindEmail(mvo);
 
 		String responseText = null;
@@ -426,7 +435,7 @@ public class BadaController {
 		if (mvo != null) {
 			String email = mvo.getM_email();
 			String type = mvo.getM_type();
-			responseText = "조회된 Email은 " + email + ", 가입경로는 " + type;
+			responseText = "조회된 Email은 " + email + " 입니다.";
 			System.out.println("멤버에 존재: " + responseText);
 		} else {
 			cvo.setC_phone(checkPhone);
@@ -440,8 +449,69 @@ public class BadaController {
 			}
 		}
 		return responseText;
-
 	}
+	
+	// 비밀번호 찾기
+	@ResponseBody
+	@RequestMapping("/ajaxFindPassword.do")
+	public String ajaxFindPassword(Model model, HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
+		
+		System.out.println("넘어온 email값: " + request.getParameter("sendEmail"));
+		System.out.println("넘어온 연락처 : " + request.getParameter("sendPhone"));
+		
+		String sendEamil = request.getParameter("sendEmail");
+		String sendPhone = request.getParameter("sendPhone");
+		mvo.setM_email(sendEamil);
+		mvo.setM_phone(sendPhone);
+		mvo.setM_type("마으미");
+		mvo = memberDao.memberFindPassword(mvo);
+		
+		String responseText = "NO";
+		if(mvo != null) { // 멤버였다면 
+			responseText = "MYES";
+		} else {  // member가 아니었다면 상담사로 조회
+			cvo.setC_email(sendEamil);
+			cvo.setC_phone(sendPhone);
+			cvo = counselorDao.counselorFindPassword(cvo);
+			if (cvo != null ) {
+				responseText = "CYES";
+			}
+		}
+		return responseText;  // "회원이라면 MYES, 상담사라면 CYES 둘 다 아니라면 NO" 
+	}
+	
+	// ajax 비밀번호 찾기 업데이트 
+	@ResponseBody
+	@RequestMapping("/passwordUpdate.do")
+	public String sendPassword(HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
+		
+		String sendEmail = request.getParameter("sendEmail");
+		String sendPhone = request.getParameter("sendPhone");
+		String sendPassword = request.getParameter("sendPassword");
+		System.out.println("넘어온 값 : " + sendEmail + "||" + sendPhone + "||" + sendPassword);
+		
+		String responseText = null;
+		
+		mvo.setM_email(sendEmail);
+		mvo.setM_phone(sendPhone);
+		mvo.setM_type("마으미");
+		mvo = memberDao.memberFindPassword(mvo);
+		if(mvo !=null) {
+			mvo.setM_password(sendPassword);
+			int n = memberDao.passwordUpdate(mvo);
+			System.out.println("업데이트 n의 값: " + n);
+			responseText = "YES";
+		} else {
+			cvo.setC_email(sendEmail);
+			cvo.setC_phone(sendPhone);
+			cvo.setC_password(sendPassword);
+			counselorDao.cPasswordUpdate(cvo);
+			responseText = "YES";
+		}
+		
+		return responseText;
+	}
+	
 
 	// 상담사 약관동의 화면
 	@RequestMapping("/counselorTermsOfService.do")
