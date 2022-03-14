@@ -363,6 +363,7 @@ form {
 										<c:forEach items="${coupon }" var="coupon">
 											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
 										</c:forEach>
+											<option value='' selected>쿠폰선택안함</option>
 								</select>
 							</td>
 						</tr>
@@ -382,7 +383,7 @@ form {
 							<td class="Rate"><h2>총 결제 금액</h2></td>
 							<td></td>
 							<td></td>
-							<td class="payment" id="totalPrice"></td>
+							<td class="payment" id="totalPrice">${groupInvoice.gc_price}원</td>
 						</tr>
 					</table>
 				</div>
@@ -390,7 +391,7 @@ form {
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="pr_price" name="pr_price" value="">
+					<input type="hidden" id="pr_price" name="pr_price" value="${groupInvoice.gc_price}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="">
 				</form>
@@ -410,23 +411,26 @@ form {
 		<!--End Invoice-->
 	</div>
 	<script>
-	   function change(){
+	function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
 		   var num = priceSelect.indexOf('/');
-		   var priceResult = priceSelect.substr(0,4);
+		   var priceResult = priceSelect.substr(0,num);
 		   var couponNo = priceSelect.substr(num+1);
-		   
-		   $("#discount").text(' '+' '+'-'+priceSelect+'원');
-		   var ddd = price-priceSelect;
+		   if (priceResult ==' '|| priceResult == null || priceResult =='') {
+		   		$("#discount").text('');
+		   }else{
+			    $("#discount").text(' '+' '+'-'+priceResult+'원');
+		   }
+		   var ddd = price-priceResult;
 		   $("#totalPrice").text(ddd+'원');
-		   $("#gr_price").val(ddd);
+		   $("#pr_price").val(ddd);
 		   $("#c_no").val(couponNo);
 		   
 	   }	
 	</script>
 	<script>
-		var pr_price = $("#pr_price").val();
+		var g_price = $("#g_price").val();
         $(".check_module").click(function () {
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');

@@ -33,9 +33,9 @@ public class ScheduleTasks{
 	 * 
 	 * @RequestMapping("/todayStory.do") public String todayStory(Model model,
 	 * TodayVO vo) throws Exception {
-	 * 
-	 * vo = todayDao.TodaySelect(vo); todayDao.TodaySelect(vo);
-	 * model.addAttribute("todaySelect", vo); System.out.println(vo);
+	 * ct(vo);
+	 * model.addAttribute("todaySelect
+	 * vo = todayDao.TodaySelect(vo); todayDao.TodaySelect", vo); System.out.println(vo);
 	 * List<TodayReplyVO> todayReplyList
 	 * =todayReplyDao.readTodayReply(vo.getSc_no());
 	 * model.addAttribute("todayReplyList", todayReplyList);
@@ -43,5 +43,13 @@ public class ScheduleTasks{
 	 * 
 	 * return "user/todayStory"; }
 	 */
+//	public void test() {
+//		System.out.println("cron 테스트 : 5초에 1번씩 console 찍기"); 
+//		} 
+//	@Scheduled(cron="0/5 * * * * *") public void test2() { 
+//		System.out.println("@Scheduled annotation : 10초에 1번씩 console 찍기"); 
+//		}
+//
+//	
 }
 

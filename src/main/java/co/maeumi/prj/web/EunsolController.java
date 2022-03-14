@@ -57,7 +57,7 @@ public class EunsolController {
 
 	// 사용자 자유게시판 메인화면
 	@RequestMapping("/userBoardList.do")
-	public String userBoardList(BoardVO vo, Model model, 
+	public String userBoardList(BoardVO vo, Model model, HttpSession session,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "") String b_title,
@@ -70,7 +70,8 @@ public class EunsolController {
 		int listCnt = boardDao.getUserBoardListCnt(svo);
 
 		svo.pageinfo(page, range, listCnt);
-
+		
+		vo.setB_email((String)session.getAttribute("email"));
 		model.addAttribute("pagination", svo);
 		model.addAttribute("board", boardDao.userBoardSearchSelect(svo));
 		

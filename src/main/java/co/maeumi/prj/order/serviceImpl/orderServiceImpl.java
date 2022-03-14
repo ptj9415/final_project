@@ -29,5 +29,11 @@ public class orderServiceImpl implements orderService {
 		// TODO Auto-generated method stub
 		return map.orderPersonalInsert(vo);
 	}
+
+	@Override
+	public int MaxGroupOrder() {
+		// TODO Auto-generated method stub
+		return map.MaxGroupOrder();
+	}
 	
 }

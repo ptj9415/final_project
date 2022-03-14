@@ -98,7 +98,9 @@
 					<p>소요 시간 : 3분 내외</p>
 				</div>
 				
-				
+				<div class="start-wrap">
+					<button class="start">검사하기</button>
+				</div>
 			</section>
 
 			<section id="qna" class="container">
@@ -164,10 +166,10 @@
 				
 				<footer id="footer">
 				<div class="foot">
-					<span class="highlight">Kusitms 22nd.</span>
+					<span class="highlight">마으미 22nd.</span>
 					© 2020
 					<p class="author">
-						Jaewon Lee, Minkyoung An, Chaewon Seo, Sangmin Lee, Juyeon Kang
+						
 					</p>
 				</div>
 			</footer>

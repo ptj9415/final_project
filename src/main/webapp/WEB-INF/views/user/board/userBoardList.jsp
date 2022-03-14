@@ -7,9 +7,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>자유게시판 목록</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -121,9 +120,23 @@
 #insertbtn {
 	width: 70px;
 	height: 30px;
-	margin-left: 980px;
+	margin-left: 400px;
 	margin-bottom: 20px;
 }
+
+#content {
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2; 
+-webkit-box-orient: vertical;
+} 
+
+.card-title {
+	font-weight: 
+}
+
+
 </style>
 
 </head>
@@ -144,6 +157,12 @@
 									</button>
 								</div>
 							</div>
+							<c:if test="${not empty email}">
+							<div class="insertbtndiv">
+								<button type="button" class="button" id="insertbtn"
+									name="insertbtn" onclick="location.href='userBoardForm.do'">글쓰기</button>
+							</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -158,10 +177,6 @@
 			<div class="col-12">
 					<div class="card-body table-responsive p-00">
 						<div class="m-4">
-							<div class="insertbtndiv">
-								<button type="button" class="button" id="insertbtn"
-									name="insertbtn" onclick="location.href='userBoardForm.do'">글쓰기</button>
-							</div>
 							<div class="row">
 								<c:forEach items="${board}" var="board">
 									<div class="col-6"
@@ -170,7 +185,7 @@
 											<div class="card-body text-primary">
 												<p class="card-text">${board.b_subject}</p>
 												<h5 class="card-title">${board.b_title}</h5>
-												<p class="card-text">${board.b_content}</p>
+												<p class="card-text" id="content">${board.b_content}</p>
 												<c:choose>
 													<c:when test="${board.b_anony eq 'F' }">
 														<p class="card-text" style="text-align: right;">${board.m_nickname}</p>

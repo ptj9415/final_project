@@ -321,7 +321,7 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</section>
-
+<br>
 	<!-- 모달시작 -->
 	<div class="modal fade" id="modal-lg">
 		<div class="modal-dialog modal-lg">
@@ -360,7 +360,7 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</div>
-
+<br>
 </body>
 
 <script>

@@ -30,6 +30,7 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.order.service.orderService;
 import co.maeumi.prj.order.service.order_datailVO;
+import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.therapy.service.TherapyVO;
@@ -48,6 +49,9 @@ public class YoungohController {
 	
 	@Autowired
 	private CouponService couponDao;
+	
+	@Autowired
+	Aes256 aes256;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
@@ -145,8 +149,8 @@ public class YoungohController {
 	}
 	
 	//상담사 관리 페이지 메인화면
-	@RequestMapping("/counselorGroupList.do")
-	public String counselorGroupList(Model model, HttpServletRequest request) {
+	@RequestMapping("/counselorGroupList1.do")
+	public String counselorGroupList1(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
 			page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 5); // 전체 수, start, end
@@ -183,7 +187,7 @@ public class YoungohController {
 	@RequestMapping("/groupsearchmanage.do")
 	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
 			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, Model model,
-			HttpServletRequest request, HttpSession session) {// @Param("gc_type") String gc_type, @Param("gc_status")
+			HttpServletRequest request, HttpSession session) {  // @Param("gc_type") String gc_type, @Param("gc_status")
 																// String gc_status,
 		session = request.getSession();
 		String nowPage = request.getParameter("nowPage");
@@ -271,7 +275,7 @@ public class YoungohController {
 	
 	//상담사 관리 페이지 상세 목록 페이지
 	@RequestMapping("/counselorGroupDetail.do")
-	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) {
+	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) throws Exception {
 		String gc_no = request.getParameter("gc_no");
 		int gc_nos = Integer.parseInt(gc_no);
 		vo.setGc_no(gc_nos);
@@ -288,6 +292,11 @@ public class YoungohController {
 		String date3 = gvo.getGc_date();
 		date3 = date3.substring(0, 10);
 		gvo.setGc_finaldate(date3);
+		
+		System.out.println(gvo.getGc_report());
+		String result = aes256.decrypt(gvo.getGc_report());
+		gvo.setGc_report(result);
+		
 
 		model.addAttribute("detail", gvo);
 
@@ -542,16 +551,24 @@ public class YoungohController {
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo) {
-		groupCounselDao.groupReserveInsert(vo);
+		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
-		int orderInsert = orderDao.orderInsert(ovo);
+		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
-			order_datailVO gvo = orderDao.selectorderList(ovo);
-			model.addAttribute("result", gvo);
-			System.out.println(vo.getGc_no());
-			groupCounselDao.groupUpdatePerson(vo);
-			//couponDao.couponDelete(cvo);
+			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
+			ovo.setOr_no(num);
+			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
+			System.out.println(ovo.getOr_date());
+			groupCounselDao.groupUpdatePerson(vo); //인원수 증가 메소드
+		
+			//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+			
+			String date = ovo.getGc_date();
+			date = date.substring(0, 10);
+			ovo.setGc_date(date);
+			
+			model.addAttribute("result", ovo);
 		}
 		return "user/groupcounsel/groupResult";
 	}

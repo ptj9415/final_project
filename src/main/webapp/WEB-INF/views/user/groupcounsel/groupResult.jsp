@@ -679,7 +679,7 @@ font-size: 20px;
             </tr>
              <tr>
               <td>가격</td>
-              <td>${result.gc_price}</td>
+              <td>${result.or_price}</td>
             </tr>
              <tr>
               <td>상담사 이름</td>
@@ -690,7 +690,7 @@ font-size: 20px;
        </div> 
     </div> 
       </div>
-        <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='userMypage.do'" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
     </div>
   </div>
 </body>

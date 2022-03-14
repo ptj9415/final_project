@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -510,7 +509,15 @@ img {
             </div>
             <div class="col-12 col-sm-5">
               <img alt="" style="width:600px; height:200px;" src="resources/user/images/sample.jpg">
-              <div style="width:600px; height:60px; float: left;">
+		              <h3 class="my-3">그룹 상담 주제 : <span style="float:right">${userGroup.gc_title }</span></h3>
+              		  <h3 class="my-3">상담사 이름 : <span style="float:right">${userGroup.gc_name}</span></h3>
+              		  <h3 class="my-3">참여 인원 : <span style="float:right">최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명</span></h3>
+              		  <h3 class="my-3">신청 인원 : <span style="float:right">${userGroup.gc_person}명</span></h3>
+              		  <h3 class="my-3">신청 날짜 : <span style="float:right">${userGroup.gc_date}</span></h3>
+              		  <h3 class="my-3">상담 가격 : <span style="float:right">${userGroup.gc_price}원</span></h3>
+              		  
+              
+              <%-- <div style="width:600px; height:60px; float: left;">
 				<h4>그룹 상담 주제 : &nbsp;&nbsp;${userGroup.gc_title }</h4>
 			  </div>
 			  <div>&nbsp;&nbsp;&nbsp;</div>
@@ -524,29 +531,29 @@ img {
               <div style="width:310px; height:60px; float: left;">
 				<h4>참여 인원 : </h4>
 			  </div>
-			  <div style="width:370px; height:60px; float: right;">
+			  <div style="width:225px; height:60px; float: right;">
 				<h4>최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명 </h4>
 			  </div>
 			  <div style="width:400px; height:60px; float: left;">
 				<h4>신청 인원 : </h4>
 			  </div>
-			  <div style="width:190px; height:60px; float: right;">
+			  <div style="width:40px; height:60px; float: right;">
 				<h4>${userGroup.gc_person}명 </h4>
 			  </div>
 			  <div style="width:300px; height:60px; float: left;">
 				<h4>신청 날짜 : </h4>
 			  </div>
-			  <div style="width:280px; height:60px; float: right;">
+			  <div style="width:130px; height:60px; float: right;">
 				<h4>${userGroup.gc_date} </h4>
 			  </div>
 			  <div style="width:330px; height:60px; float: left;">
 				<h4>상담 가격 : </h4>
 			  </div>
-			  <div style="width:240px; height:60px; float: right;">
+			  <div style="width:95px; height:60px; float: right;">
 				<h4>${userGroup.gc_price}원</h4>
-			  </div>
-              <div style="width:400px; float: left;"></div>
-              <div style="width:240px; height:60px; float: right;" class="mt-4">
+			  </div> --%>
+              <div style="width:500px; float: left;"></div>
+              <div style="width:100px; height:60px; float: right;" class="mt-4">
 				 <button id="btn" onclick="func('${userGroup.gc_no}')" class="apply-btn">신청하기</button>
 			  </div>
             </div>

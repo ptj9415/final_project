@@ -27,7 +27,7 @@
 		</insert>
 		
 		<select id="selectorderList" parameterType="co.maeumi.prj.order.service.order_datailVO" resultType="co.maeumi.prj.order.service.order_datailVO">
-		  			SELECT O.OR_UID, C.GC_DATE, C.GC_TYPE, O.OR_DATE, O.OR_PRICE
+		  			SELECT O.OR_UID, C.GC_DATE, C.GC_TYPE, O.OR_DATE, O.OR_PRICE, C.GC_NAME, C.C_EMAIL, C.GC_TITLE,C.GC_TIME
 		  			FROM ORDER_DETAIL O JOIN GROUP_COUNSEL C
 					ON (O.GC_NO = C.GC_NO)
 		  			WHERE OR_NO = #{or_no}
@@ -57,4 +57,9 @@
                       '세션값 이메일 입니다'
                 )
 		</insert>
+		
+		<select id="MaxGroupOrder" resultType="int">
+		 		SELECT MAX(PR_NO) 
+		 		FROM ORDER_DETAIL
+		</select>
 </mapper>

@@ -1,7 +1,9 @@
 package co.maeumi.prj.faq.service;
 
-import lombok.Data;
-@Data
+import lombok.Getter;
+import lombok.Setter;
+@Setter
+@Getter
 public class FaqVO {
 	private int f_no;
 	private String f_title;

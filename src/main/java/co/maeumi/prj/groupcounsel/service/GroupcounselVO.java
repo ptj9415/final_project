@@ -1,7 +1,5 @@
 package co.maeumi.prj.groupcounsel.service;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +30,7 @@ public class GroupcounselVO {
 	private String gr_no;
 	private String m_email;
 	private String gr_subject;
-	private Date gr_reservedate;
+	private String gr_reservedate;
 	private String gr_status;
 	private String gr_refund;
 	private String gr_price;
