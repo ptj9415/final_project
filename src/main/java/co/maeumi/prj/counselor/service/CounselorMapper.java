@@ -12,6 +12,8 @@ public interface CounselorMapper {
 	int counselorPictureUpdate(CounselorVO cvo);
 	boolean counselorEmailCheck(CounselorVO cvo); // 상담사 이메일 중복체크.
 	int counselorInsert(CounselorVO cvo);
+	CounselorVO counselorFindPassword(CounselorVO cvo); // 상담사 이메일/연락처로 인증유무
+	int cPasswordUpdate(CounselorVO cvo);   // 비밀번호 찾아서 수정
 	
 	int getCounselorListCnt(Search svo) throws Exception;
 	public List<CounselorVO> counselorSearchselect(Search svo) throws Exception;

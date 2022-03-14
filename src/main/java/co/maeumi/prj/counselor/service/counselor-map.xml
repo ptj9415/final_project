@@ -239,6 +239,7 @@
 		WHERE C_EMAIL=#{c_email}
 	</select>
 
+
 	<select id="getUserCounselorListCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM
@@ -285,4 +286,20 @@
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+
+	
+	<select id="counselorFindPassword" resultType="co.maeumi.prj.counselor.service.CounselorVO">
+		select * from counselor 
+		where c_email = #{c_email}
+		and c_phone = #{c_phone}
+	</select>
+	
+	<!-- 비밀번호 찾아서 수정 -->
+	<update id="cPasswordUpdate" parameterType="co.maeumi.prj.counselor.service.CounselorVO">
+		update counselor set c_password = #{c_password} 
+		where c_email = #{c_email}
+		and c_phone = #{c_phone}
+	</update>
+	
+
 </mapper>

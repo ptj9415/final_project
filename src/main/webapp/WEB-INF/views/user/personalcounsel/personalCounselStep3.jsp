@@ -353,72 +353,28 @@ div.counsel-type {
 				<img src="resources/user/images/chat.PNG" class="chat-img">
 				<h3 class="h4">카카오톡</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
-
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice}/카카오톡">
 			</div>
-		</c:if>
-		
-		<c:if test="${counselorSelect.p_kakao eq 0 }">
-			<div style="display:none">
-			<div type=hidden class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img type=hidden src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">카카오톡</h3>
-				
-				<input type=hidden class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_kakaoprice }">
-
-			</div>
-			</div>
-		</c:if>
-			
-			
+		</c:if>		
 		<c:if test="${counselorSelect.p_zoom eq 1 }">
 			
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/zoom.png" class="chat-img">
 				<h3 class="h4">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}/줌">
 
 			</div>
-		</c:if>	
-		<c:if test="${counselorSelect.p_zoom eq 0 }">
-			<div style="display:none">
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/zoom.png" class="chat-img">
-				<h3 class="h4">줌</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_zoomprice}">
-
-			</div>
-			</div>
-		</c:if>	
-			
+		</c:if>			
 		<c:if test="${counselorSelect.p_phone eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
 				<img src="resources/user/images/phone.png" class="chat-img">
 				<h3 class="h4">전화</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
+				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}/전화">
 
 			</div>
 		</c:if>	
-		
-		<c:if test="${counselorSelect.p_phone eq 0 }">
-			<div style="display:none">
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated">
-				<img src="resources/user/images/phone.png" class="chat-img">
-				<h3 class="h4">전화</h3>
-				<input type=hidden class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
-				<input type=checkbox class="chat-btn" name="c-type" value="${counselorSelect.p_phoneprice}">
-
-			</div>
-			</div>
-		</c:if>	
-		
-		
-		
-			
 		</div>
 	</div>
 	<input type="hidden" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${email}" >

@@ -94,7 +94,6 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		return map.searchSalesData(vo);
 
 	}
-
 	@Override
 	public int getPRListCnt(Search svo) {
 		// TODO Auto-generated method stub
@@ -106,5 +105,4 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		// TODO Auto-generated method stub
 		return map.prSearchSelect(svo);
 	}
-
 }

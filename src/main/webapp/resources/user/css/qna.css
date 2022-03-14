@@ -34,7 +34,7 @@
 .status {
 	height: 100%;
 	border-radius: 20px;
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 .box {
 	margin: 0 auto;
@@ -73,7 +73,7 @@
 
 .a:hover,
 .a:focus {
-	background: #96969637;
+	background: #8dacbd42;
 	transition: 500ms ease-in-out;
 	
 }

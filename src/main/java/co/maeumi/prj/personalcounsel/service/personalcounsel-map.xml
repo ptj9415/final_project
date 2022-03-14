@@ -148,31 +148,30 @@
 		personal_reserve
 		where pr_no=#{pr_no}
 	</delete>
-
-	<insert id="personalCounselInsert"
-		parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-		INSERT INTO PERSONAL_RESERVE(
-		pr_no,
-		c_email,
-		m_email,
-		pr_date,
-		pr_price,
-		pr_time,
-		pr_status,
-		pr_type,
-		ccg_subname
-		)
-		VALUES(
-		(SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
-		#{c_email},
-		#{m_email},
-		sysdate,
-		#{pr_price},
-		#{pr_time},
-		'0',
-		'이거 타입 ㅜㅜ',
-		#{ccg_subname}
-		)
+  
+	<insert id="personalCounselInsert" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		        INSERT INTO PERSONAL_RESERVE(
+                pr_no,
+                c_email,
+                m_email,
+                pr_date,
+                pr_price,
+                pr_time,
+                pr_status,
+                pr_type,
+                ccg_subname
+                )
+                VALUES(
+                (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
+                #{c_email},
+                #{m_email},
+                #{pr_date},
+                #{pr_price},
+                #{pr_time},
+                '0',
+                #{pr_type},
+                #{ccg_subname}
+                )
 	</insert>
 
 	<select id="personalMax" resultType="int">

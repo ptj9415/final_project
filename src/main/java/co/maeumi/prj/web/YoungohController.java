@@ -184,83 +184,83 @@ public class YoungohController {
 	// 페이징을 하기 위해선 pagination 이라는 VO 클래스에 담아야 하기 때문에 따로 requestparam 으로 불러와줘서 담아줘야
 	// 함.
 	// 페이징을 하려면 pagination이라는 클래스 안에 검색 조건을 걸어줄 변수들을 생성하고 넣어줘야함.
-	@RequestMapping("/groupsearchmanage.do")
-	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
-			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, Model model,
-			HttpServletRequest request, HttpSession session) {  // @Param("gc_type") String gc_type, @Param("gc_status")
-																// String gc_status,
-		session = request.getSession();
-		String nowPage = request.getParameter("nowPage");
-		// 검색 기능에서 가지고 있는 세션값 지워주기
-		System.out.println(nowPage);
-		System.out.println(gc_title);
-		System.out.println(gc_startdate);
-		System.out.println(gc_finaldate);
-		System.out.println(gc_date);
-		// get 방식으로 가져오기 때문에 nowPage는 jsp 페이지에서 가져온다.
-		// 세션값 넣어주기.
-
-		if (gc_title != null && gc_startdate != null && gc_finaldate != null && gc_date != null) {
-			session.setAttribute("gc_title", gc_title);
-			session.setAttribute("gc_date", gc_date);
-			session.setAttribute("gc_startdate", gc_startdate);
-			session.setAttribute("gc_finaldate", gc_finaldate);
-		} else {
-			if ((String) session.getAttribute("gc_title") == null && (String) session.getAttribute("gc_date") == null
-					&& (String) session.getAttribute("gc_startdate") == null
-					&& (String) session.getAttribute("gc_finaldate") == null) {
-				session.setAttribute("gc_title", gc_title);
-				session.setAttribute("gc_date", gc_date);
-				session.setAttribute("gc_startdate", gc_startdate);
-				session.setAttribute("gc_finaldate", gc_finaldate);
-			}
-		}
-
-		// pagination 객체에 담아줄 setter 선언
-		page.setGc_title((String) session.getAttribute("gc_title"));
-		page.setGc_date((String) session.getAttribute("gc_date"));
-		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
-		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
-		page.setGc_type((String) session.getAttribute("gc_type"));
-		page.setGc_status((String) session.getAttribute("gc_type"));
-
-		if (nowPage == null) {
-			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), 1, 2); // 전체 수, start, end
-		} else {
-			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); // 전체 수,
-																												// start,
-																												// end
-		}
-
-		page.setGc_title((String) session.getAttribute("gc_title"));
-		page.setGc_date((String) session.getAttribute("gc_date"));
-		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
-		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
-		page.setGc_type((String) session.getAttribute("gc_type"));
-		page.setGc_status((String) session.getAttribute("gc_type"));
-
-		List<GroupcounselVO> list = groupCounselDao.searchpageSelectList(page);
-
-		for (int i = 0; i < list.size(); i++) {
-			String date = list.get(i).getGc_date();
-			date = date.substring(0, 10);
-			list.get(i).setGc_date(date);
-
-			String date2 = list.get(i).getGc_startdate();
-			date2 = date.substring(0, 10);
-			list.get(i).setGc_date(date2);
-
-			String date3 = list.get(i).getGc_finaldate();
-			date = date.substring(0, 10);
-			list.get(i).setGc_date(date3);
-
-		}
-
-		request.setAttribute("groupCounsel", list);
-		request.setAttribute("page", page);
-
-		return "counselor/groupcounselmanage/counselorGroupList";
-	}
+//	@RequestMapping("/groupsearchmanage.do")
+//	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
+//			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, Model model,
+//			HttpServletRequest request, HttpSession session) {  // @Param("gc_type") String gc_type, @Param("gc_status")
+//																// String gc_status,
+//		session = request.getSession();
+//		String nowPage = request.getParameter("nowPage");
+//		// 검색 기능에서 가지고 있는 세션값 지워주기
+//		System.out.println(nowPage);
+//		System.out.println(gc_title);
+//		System.out.println(gc_startdate);
+//		System.out.println(gc_finaldate);
+//		System.out.println(gc_date);
+//		// get 방식으로 가져오기 때문에 nowPage는 jsp 페이지에서 가져온다.
+//		// 세션값 넣어주기.
+//
+//		if (gc_title != null && gc_startdate != null && gc_finaldate != null && gc_date != null) {
+//			session.setAttribute("gc_title", gc_title);
+//			session.setAttribute("gc_date", gc_date);
+//			session.setAttribute("gc_startdate", gc_startdate);
+//			session.setAttribute("gc_finaldate", gc_finaldate);
+//		} else {
+//			if ((String) session.getAttribute("gc_title") == null && (String) session.getAttribute("gc_date") == null
+//					&& (String) session.getAttribute("gc_startdate") == null
+//					&& (String) session.getAttribute("gc_finaldate") == null) {
+//				session.setAttribute("gc_title", gc_title);
+//				session.setAttribute("gc_date", gc_date);
+//				session.setAttribute("gc_startdate", gc_startdate);
+//				session.setAttribute("gc_finaldate", gc_finaldate);
+//			}
+//		}
+//
+//		// pagination 객체에 담아줄 setter 선언
+//		page.setGc_title((String) session.getAttribute("gc_title"));
+//		page.setGc_date((String) session.getAttribute("gc_date"));
+//		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
+//		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
+//		page.setGc_type((String) session.getAttribute("gc_type"));
+//		page.setGc_status((String) session.getAttribute("gc_type"));
+//
+//		if (nowPage == null) {
+//			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), 1, 2); // 전체 수, start, end
+//		} else {
+//			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); // 전체 수,
+//																												// start,
+//																												// end
+//		}
+//
+//		page.setGc_title((String) session.getAttribute("gc_title"));
+//		page.setGc_date((String) session.getAttribute("gc_date"));
+//		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
+//		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
+//		page.setGc_type((String) session.getAttribute("gc_type"));
+//		page.setGc_status((String) session.getAttribute("gc_type"));
+//
+//		List<GroupcounselVO> list = groupCounselDao.searchpageSelectList(page);
+//
+//		for (int i = 0; i < list.size(); i++) {
+//			String date = list.get(i).getGc_date();
+//			date = date.substring(0, 10);
+//			list.get(i).setGc_date(date);
+//
+//			String date2 = list.get(i).getGc_startdate();
+//			date2 = date.substring(0, 10);
+//			list.get(i).setGc_date(date2);
+//
+//			String date3 = list.get(i).getGc_finaldate();
+//			date = date.substring(0, 10);
+//			list.get(i).setGc_date(date3);
+//
+//		}
+//
+//		request.setAttribute("groupCounsel", list);
+//		request.setAttribute("page", page);
+//
+//		return "counselor/groupcounselmanage/counselorGroupList";
+//	}
 	
 	//상담사 관리 페이지 신청자 관리 페이지
 	@RequestMapping("/counselorGroupApply.do")
@@ -474,13 +474,18 @@ public class YoungohController {
 		// 썸네일 파일업로드
 		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
 		String originalFileName = mf.getOriginalFilename();
-
+		
+		System.out.println(originalFileName);
+		if (originalFileName == "") {
+			return "redirect:admintherapy.do";
+		}
+			System.out.println("일로 들어감.");
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
 		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
 		String saveFile = uuid + originalFileName;
-		vo.setT_picture(saveFile);
 
 		try {
+			vo.setT_picture(saveFile);
 			mf.transferTo(new File(msaveFile));
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -493,7 +498,7 @@ public class YoungohController {
 		vo.setT_subject(result);
 
 		therapyDao.UpdateTherapy(vo);
-
+		
 		return "redirect:admintherapy.do";
 	}
 
@@ -578,9 +583,9 @@ public class YoungohController {
 	public String userTerapy(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
-			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 8); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
 		} else {
-			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 8); // 전체 수, nowPage, 한 페이지 당 개수
 		}
 		List<TherapyVO> list = therapyDao.therapyLists(page);
 		model.addAttribute("therapylist", list);

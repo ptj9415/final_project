@@ -62,7 +62,7 @@
 					<h1 class="mb-2 bread">심리검사</h1>
 					<br>
 					<p class="breadcrumbs">
-						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
+						<span class="mr-2"></span>
 				
 					</p>
 				</div>
@@ -82,14 +82,11 @@
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p> 현재 나의 자존감 상태는 어떨까?
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
-					<p> 소요시간 약 3분</p>
+					<p style="font-weight:bold;"> 현재 나의 자존감 상태는 어떨까?
+					<p style="font-size:0.7rem">소요시간 약 3분</p>
+					<br>
+					<p>"넌 오늘 정말 잘했다. 실수하지 않아서가 아니라 포기하지 않아서.</p>
+					<p>뒤처지지 않아서가 아니라 멈춰 서지 않아서"</p>
 				</div>
 			</div>
 		</div>
@@ -108,7 +105,7 @@
 						<p>나의 자존감 상태는 어떨까?</p>
 					</h3>
 					<div>
-						<img src="resources/user/img/main.png" class="main_img" />
+						<img src="resources/user/images/selfEsteemMain.png" class="main_img" />
 					</div>
 					<span class="time_logo"></span>
 					<p>소요 시간 : 3분 내외</p>
@@ -152,7 +149,7 @@
 						></script>
 					</div>
 					<!-- 이후에 추가할 것, 공유하기(혹은 복사), copyright에 대한 설명 등 -->
-					<div class="hash">#심리테스트 #연애테스트 #십이간지로 알아보는 연애 유형</div>
+					<div class="hash">#마으미 #심리검사 #자존감테스트</div>
 
 					<button class="btn Urlcopy" onclick="javascript:copy()">
 						사이트 링크 복사하기
@@ -182,8 +179,8 @@
 				
 				<footer id="footer">
 				<div class="foot">
-					<span class="highlight">마으미 22nd.</span>
-					© 2020
+					<span class="highlight"></span>
+					
 					<p class="author">
 						
 					</p>

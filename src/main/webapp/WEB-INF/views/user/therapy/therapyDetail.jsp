@@ -282,9 +282,26 @@ article img {
   display: block;
   transition: opacity .3s;
 }
+
+#next-btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 50px;
+	background-color: #153e54;
+	color: white;
+	border: solid 1px #153e54;
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-right:100px;
+	float:right;
+}
+
 </style>
 <body>
-		<section class="hero-wrap hero-wrap-2"
+	<section class="hero-wrap hero-wrap-2"
 		style="background-image: url('resources/user/images/bg_1.jpg');"
 		data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
@@ -324,11 +341,29 @@ article img {
 			</div>
 		</div>
 	</div>
+	<h1 style="text-align: center">${selectTherapy.t_title}</h1>
+	  <br>
+	     <div style="text-align: center">by 마으미 전문 칼럼</div>
+	  <br>
+	  <hr>
 	<article>
        ${selectTherapy.t_subject}
-     </article>
-     <div class="bg"></div>
+    </article>
+   	<div>
+    	<button type="button" id="next-btn" name="btn" class="next action-button" onclick="func('${selectTherapy.t_no}')">돌아가기</button>        	
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+   	</div>
 <script>
+function func(t_no){
+	var url = "userTerapy.do";
+	url = url + "?t_no="+t_no;
+	location.href = url;
+	
+}
+
 const { fromEvent } = rxjs;
 const images = document.querySelectorAll('article img');
 const detailModal = document.querySelector('#detail-modal');

@@ -127,11 +127,16 @@ public class EjuController {
 		vo = personalCounselDao.CounselorSelect(vo);
 
 		String type3 = request.getParameter("c-type");
-		System.out.println("방식,가격 : " + type3);
-		model.addAttribute("type3", type3); //방식,가격
-		model.addAttribute("type2",type2); //주제
+		int num = type3.indexOf("/");
+		String pr_type = type3.substring(num+1);
+		type3 = type3.substring(0,num);
+		
+		System.out.println("가격 : " + type3);
+		System.out.println("방식 : " + pr_type);
+		model.addAttribute("type3", type3); //가격
+		model.addAttribute("type2", type2); //주제
 		model.addAttribute("c_email", c_email); //회원이메일
-
+		model.addAttribute("pr_type", pr_type); //방식
 		return "user/personalcounsel/personalCounselStep4";
 	}
 
@@ -146,7 +151,11 @@ public class EjuController {
 		times = times +1;
 		String timess = String.valueOf(times);
 		time = time + timess;
-		
+		if (time.length() == 3) {
+			time = "0"+time;
+		}
+		String pr_type = vo.getPr_type();
+		String pr_date = vo.getPr_date();
 		System.out.println("==========================");
 		System.out.println(time);
 		System.out.println("application"+ c_email);
@@ -166,7 +175,8 @@ public class EjuController {
 		model.addAttribute("type3",type3);
 		model.addAttribute("counselorSelect", vo);
 		model.addAttribute("coupon",list);
-		
+		model.addAttribute("pr_type", pr_type);
+		model.addAttribute("pr_date", pr_date);
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
@@ -188,7 +198,6 @@ public class EjuController {
 			System.out.println(cvo.getC_no());
 			//쿠폰 적용 후 삭제하는 메소드
 			//couponDao.couponDelete(cvo);
-			
 		}
 		
 		return "user/personalcounsel/paymentComplete";

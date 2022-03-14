@@ -9,65 +9,162 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <style type="text/css">
 .wrap2 {
-	border: 1px solid black;
-	padding-top: 20px;
-	padding-bottom: 30px;
-	width: 1400px;
+	border-style: none;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 80px;
+	margin-bottom: 400px;
 }
 
-th, td {
-	border: 1px solid #3C3C8C;
-	height: 30px;
+.br_content {
+	font-size: 13px;
 }
 
-#button, #replySubmit {
+.br_contentBox {
+	height: 70px;
+	width: 1420px;
+	font-size: 13px;
+}
+
+.br_contentBoxDiv {
+	margin-top: 70px;
+	float: left;
+}
+
+textarea {
+    width: 100%;
+    height: 6.25em;
+    resize: none;
+    border: 1px solid #E5E5E5;
+}
+  
+textarea:focus {
+    outline: none;
+}
+
+textarea::placeholder {
+ 	font-size: 13px;
+ 	color: #dededf;
+}
+
+.subject {
+	text-align: left;
+	font-weight: bold;
+	color: #0975ad;
+}
+
+.topDiv {
+	text-align: right;
+}
+
+.title {
+	text-align : left;
+	margin-top: 35px;
+	margin-bottom: 0px;
+	height: 70px;
+}
+
+#b_content {
+	margin-top: 40px;
+	height: 700px;
+	text-align: left;
+}
+
+.user_btn {
+	margin-top: 13px;
+	float: right;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+
+button {
+	height : 30px;
+	width : 80px;
 	margin-left: 20px;
-	border: 1px solid skyblue;
-	background-color: rgba(0, 0, 0, 0);
-	color: skyblue;
-	padding: 5px;
-	border: 1px solid skyblue;
+	border: 1px solid black;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	margin-top: 60px;
+	font-size: 13px;
 }
 
-#button:hover, replySubmit:hover {
-	background-color: skyblue;
+button:hover {
+	background-color: black;
 	color: white;
 }
 
-#br_content {
-	height: 70px;
-	width: 1280px;
-	margin-bottom: 30px;
+/* 삭제 Swal 디자인  */
+#swal2-title {
+	font-size: 25px;
 }
+
+#swal2-content {
+	font-size: 15px;
+}
+
+.swal2-header {
+	height: 200px;
+}
+
+.swal2-actions {
+	font-size: 12px;
+	height: 80px;
+	width: 300px;
+	height: 80px;
+}
+
+.swal2-actions button {
+	height: 30px;
+	width: 80px;
+	padding: 5px;
+}
+
 </style>
 </head>
 <body>
+	<section class="hero-wrap hero-wrap-2"
+		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
+		data-stellar-background-ratio="0.5"></section>
+		
 	<div class="wrap2" align="center">
-		<div class="titleDiv" style="border-bottom: 1px solid black">
-			<h3 style="text-align: left; margin-left: 20px;">${boardRead.b_title}</h3>
-			<c:choose>
-				<c:when test="${boardRead.b_anony eq 'F' }">
-					<a class="card-text" style="float: right; margin-right: 20px;">
-						🕒 ${boardRead.b_wdate} &nbsp; | &nbsp; 👱‍♀️ ${boardRead.m_nickname}
-						&nbsp; | &nbsp; 💕 ${boardRead.b_hit}</a>
-					<br>
-				</c:when>
-				<c:otherwise>
-					<a class="card-text" style="float: right; margin-right: 20px;">
-						🕒 ${boardRead.b_wdate} &nbsp; | &nbsp; 👱‍♀️ 익명 &nbsp; | &nbsp;
-						💕 ${boardRead.b_hit}</a>
-					<br>
-				</c:otherwise>
-			</c:choose>
-		</div>
+		<p class="subject">${boardRead.b_subject }</p>
+			<hr align="left"width: 90%>
+			<h4 class="title">${boardRead.b_title}</h4>
+			<div class="topDiv">
+				<c:choose>
+					<c:when test="${boardRead.b_anony eq 'F' }">
+						<small><a class="card-text">
+							${boardRead.b_wdate} <b>${boardRead.m_nickname}</b> &nbsp; ${boardRead.b_hit}</a></small>
+						<br>
+					</c:when>
+					<c:otherwise>
+						<small><a class="card-text">
+								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="https://cdn-icons.flaticon.com/png/512/3239/premium/3239945.png?token=exp=1647226187~hmac=8afb5e0a4b7b80736013692d952239de" alt=""> 
+								${boardRead.b_wdate} &nbsp; <b>익명</b> &nbsp;
+								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="https://cdn-icons-png.flaticon.com/512/633/633633.png" alt="">  
+								 ${boardRead.b_hit}</a></small>
+						<br>
+					</c:otherwise>
+				</c:choose>
+			</div>	
+			<hr align="left"width: 90%>
+			<c:if test="${boardRead.b_email eq email}">
+				<div class="user_btn">
+					<a	style="margin-right: 8px;"
+						onclick="location.href='userBoardUpdateForm.do?b_no=${boardRead.b_no}';">수정</a>
+					<a
+						onclick="deleteFnc('${boardRead.b_no}');">삭제</a>
+				</div>
+				<br>
+				<br>
+			</c:if>
 		<div>
-			<pre
-				style="border: 1px solid black; width: 820px; margin-top: 20px;"
-				id="b_content" name="b_content">${boardRead.b_content}</pre>
+			<pre id="b_content" name="b_content">${boardRead.b_content}</pre>
 			<div>
 				<input type="hidden" name="b_no" id="b_no" value="${boardRead.b_no}">
 			</div>
@@ -76,24 +173,26 @@ th, td {
 				<br>
 				<br>
 			</c:if>
-			<c:if test="${boardRead.b_email eq email}">
-				<div class="button_div">
-					<button id="button" type="button"
-						onclick="location.href='userBoardUpdateForm.do?b_no=${boardRead.b_no}';">수정</button>
-					<button id="button" name="button" type="button"
-						onclick="deleteFnc('${boardRead.b_no}');">삭제</button>
-				</div>
-				<br>
-				<br>
-			</c:if>
 		</div>
 		<c:if test="${not empty email }">
-			<button type="button" id="button"
-				style="float: right; margin-right: 200px; margin-top: 20px"
+			<button style="margin-right: 5px;"
 				onclick="location.href='userBoardForm.do'">글쓰기</button>
 
+			<input type="hidden" id="m_email" name="m_email" value="${email }">
+		</c:if>
+		<button
+			onclick="location.href='userBoardList.do'">돌아가기</button>
+		<br> <br> <br>
+		
+		<!-- 댓글 목록 -->
+		<div div align="left">
+			<ol class="replyList">
+				<c:set var="replyContent" value="${boardReplyList }" />
+				<p>
+					 <small><b>댓글&nbsp;${br_count}개&nbsp;&nbsp;</small></b>
+			
 			<!-- 좋아요 -->
-			<div id="heartArea">
+			<small><b id="heartArea">
 				<c:if test="${not empty boardLike }">
 					<span id="Heart">💗</span>
 					<c:choose>
@@ -101,7 +200,7 @@ th, td {
 							<span id="count"></span>
 						</c:when>
 						<c:otherwise>
-							<span id="count">${like_count }</span>
+							<span id="count"> ${like_count }명이 공감</span>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -112,44 +211,32 @@ th, td {
 							<span id="count"></span>
 						</c:when>
 						<c:otherwise>
-							<span id="count">${like_count }</span>
+							<span id="count"> ${like_count }명이 공감</span>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-			</div>
-
-			<input type="hidden" id="m_email" name="m_email" value="${email }">
-		</c:if>
-		<button type="button" id="button"
-			style="float: right; margin-right: 10px; margin-top: 20px"
-			onclick="location.href='userBoardList.do'">돌아가기</button>
-
-		<br> <br> <br>
-		<!-- 댓글 목록 -->
-		<div div align="left">
-			<ol class="replyList">
-				<c:set var="replyContent" value="${boardReplyList }" />
-				<p style="text-align: left; margin-left: 40px;">
-					💌 댓글 <small><b>&nbsp;💕 ${br_count}&nbsp;</b></small>
+			</b></small>
 				</p>
-
 				<hr align="left"width: 90%>
 				<c:choose>
 					<c:when test="${not empty replyContent}">
 						<c:forEach var="boardReply" items="${boardReplyList}">
-							<div style="text-align: left; margin-left: 40px;">
-								<p>
-									👱‍♀️ ${boardReply.br_name} &emsp; <a>🕒 <fmt:parseDate
+							<div>
+								<small><p>
+									<a><b>${boardReply.br_name}&nbsp; </b></a> <a>
+									<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="https://cdn-icons.flaticon.com/png/512/3239/premium/3239945.png?token=exp=1647226187~hmac=8afb5e0a4b7b80736013692d952239de" alt="">  
+									<fmt:parseDate
 											value="${boardReply.br_wdate}" var="replyDate"
-											pattern="yyyy-MM-dd" /> <fmt:formatDate value="${replyDate}"
-											pattern="yyyy-MM-dd" /></a> &emsp; &emsp; &emsp; &emsp;
+											pattern="yyyy-MM-dd" /><fmt:formatDate value="${replyDate}"
+											pattern="yyyy-MM-dd" /></a> &emsp;&emsp;
 									<c:if test="${boardReply.br_email eq email}">
-										<button id="button" name="button" type="button"
-											onclick="delReply('${boardReply.br_no}');">삭제</button>
+									<img style="height: 15px; width: 15px; margin-bottom: 2.5px" 
+									src="https://cdn-icons.flaticon.com/png/512/484/premium/484560.png?token=exp=1647227596~hmac=f38ade7a3f633e02a7601315f7f69a25" alt=""
+									onclick="delReply('${boardReply.br_no}');">  
 									</c:if>
-								<p>${boardReply.br_content}
+								</small></p>	
+								<pre class="br_content">${boardReply.br_content}</pre>
 								<hr align="left"width: 90%>
-								</p>
 								<br>
 
 							</div>
@@ -158,7 +245,7 @@ th, td {
 
 					<c:otherwise>
 						<br>
-						<p align="center">아직 댓글이 없어요 😥 댓글을 작성해 보세요 🥰</p>
+						<p align="center" style="font-size: 14px;">아직 댓글이 없어요. &nbsp; 댓글을 작성해 보세요 ! </p>
 						<br>
 						<hr align="left"width: 90%>
 					</c:otherwise>
@@ -167,12 +254,14 @@ th, td {
 		</div>
 		<!-- 댓글 작성 -->
 		<c:if test="${not empty email}">
-			<div>
-				<p style="text-align: left; margin-left: 60px;">👱‍♀️ 작성자 :
-					${nickname}</p>
-				<input type="text" id="br_content" name="br_content"
-					placeholder="댓글 내용을 작성하세요." /> <span><br>
-					<button type="button" id="replySubmit" name="replySubmit">등록</button>
+			<div class="br_contentBoxDiv">
+				<small><p style="text-align:left; font-weight: bold;">${nickname}</p></small>
+				<textarea type="text" id="br_content" name="br_content" class="br_contentBox"
+					placeholder="따뜻한 관심을 보여주세요."></textarea>
+				<span><img style="height: 87px; width: 87px; margin-bottom: 63px"
+				id="replySubmit" name="replySubmit"  
+				src="https://cdn-icons.flaticon.com/png/512/4302/premium/4302267.png?token=exp=1647239423~hmac=3338194f8570c727a4d25037755bdf19">
+				</span>
 			</div>
 			<br>
 		</c:if>
@@ -181,7 +270,7 @@ th, td {
 			<br>
 			<br>
 			<br>
-			<p align="center">사용자만 댓글 등록이 가능합니다 😥</p>
+			<p align="center">사용자만 댓글 등록이 가능합니다.</p>
 			<br>
 			<br>
 		</c:if>
@@ -190,7 +279,7 @@ th, td {
 	<br>
 	<br>
 
-	<script type="text/javascript">
+<script>
 	
 	// 삭제 (디자인적용)
 	function deleteFnc(b_no){
@@ -225,7 +314,6 @@ th, td {
 	}
 	
 	
-	
 	// 댓글 등록
 	$('#replySubmit').on('click', function() {
 		var b_no = $('#b_no').val();
@@ -249,7 +337,6 @@ th, td {
 		});
 	});
 
-	
 	
 	// 댓글 삭제
 	function delReply(br_no) {
@@ -288,7 +375,7 @@ th, td {
 					if(data == "0") {
 						$("#count").html("");						
 					} else {
-						$("#count").html(data);
+						$("#count").html(data + "명이 공감");
 					}
 					
 				},
@@ -308,7 +395,7 @@ th, td {
 					if(data == "0") {
 						$("#count").html("");						
 					} else {
-						$("#count").html(data);
+						$("#count").html(data + "명이 공감");
 					}
 				},				
 				error: function() {				

@@ -25,11 +25,11 @@
       crossorigin="anonymous"
     />
     <!-- 폰트 추가 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+ <!--    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     
     <style>
 article {
@@ -37,15 +37,15 @@ article {
   flex-direction: column;
 }
 
-.start {
+/* .start {
   font-family: "Nanum Pen Script", cursive;
-}
+} */
 .progress-bar {
   background-color: black;
 }
 .btn {
-  background-color: #808080;
-  border-color: #808080;
+  background-color: #153e54;
+  border-color: #153e54;
 }
 .question {
   display: none;
@@ -103,7 +103,7 @@ img {
 .arrow_downbox {
   position: relative;
   background: #ffffff;
-  border: 2px solid #0c0e0f;
+  border: 2px solid #153e54;
   border-radius: 20px 20px 20px 20px;
 }
 .arrow_box:after,
@@ -126,7 +126,7 @@ img {
 }
 .arrow_box:before {
   border-color: rgba(12, 14, 15, 0);
-  border-top-color: #0c0e0f;
+  border-top-color: #153e54;
   border-width: 13px;
   margin-left: -13px;
 }
@@ -134,7 +134,7 @@ img {
 .arrow_downbox {
   position: relative;
   background: #ffffff;
-  border: 2px solid #0c0e0f;
+  border: 2px solid #153e54;
   border-radius: 20px 20px 20px 20px;
 }
 .arrow_downbox:after,
@@ -157,13 +157,13 @@ img {
 }
 .arrow_downbox:before {
   border-color: rgba(12, 14, 15, 0);
-  border-top-color: #0c0e0f;
+  border-top-color: #153e54;
   border-width: 13px;
   margin-left: -13px;
 }
 
 /* 버튼 이쁘게  */
-@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+/* @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 .back {
   height: 200px;
   float: left;
@@ -240,7 +240,7 @@ img {
 }
 
 .b03_skewed_slide_in div:nth-child(2) {
-  background-color: #00bfff;
+  background-color: #153e54;
   width: 230px;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
@@ -273,7 +273,7 @@ img {
   -webkit-transition: left 0.30000000000000004s ease;
   -moz-transition: left 0.30000000000000004s ease;
 }
-
+ */
 #all {
 	margin-top: 200px;
 	margin-bottom: 400px;
@@ -285,10 +285,10 @@ img {
   <div id="all">
     <article class="start">
     <img alt=""  src="img/mbti/a.png" style="width: 500px; height: 400px;">
-      <h1 class="mt-5 text-center">나는 회사에서 어떤 벌레인가?</h1>
+      <h1 class="mt-5 text-center">미니 MBTI 검사</h1>
       <button
         type="button"
-        style="background-color: #00bfff; color: white; border: #00bfff; font-size: 30px;"
+        style="color: white;  font-size: 30px;"
         class="btn btn-primary mt-5"
         onclick="start();"
       >
