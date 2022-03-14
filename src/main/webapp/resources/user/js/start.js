@@ -16,18 +16,12 @@ let qIdx = -1;
 
 const calcScore = () => {
 	var pointArray = [
-		{ name: 'mouse', value: 0, key: 0 },
-		{ name: 'cow', value: 0, key: 1 },
-		{ name: 'tiger', value: 0, key: 2 },
-		{ name: 'rabbit', value: 0, key: 3 },
-		{ name: 'dragon', value: 0, key: 4 },
-		{ name: 'snake', value: 0, key: 5 },
-		{ name: 'horse', value: 0, key: 6 },
-		{ name: 'sheep', value: 0, key: 7 },
-		{ name: 'monkey', value: 0, key: 8 },
-		{ name: 'chick', value: 0, key: 9 },
-		{ name: 'dog', value: 0, key: 10 },
-		{ name: 'pig', value: 0, key: 11 },
+		{ name: 'A', value: 0, key: 0 },
+		{ name: 'B', value: 0, key: 1 },
+		{ name: 'C', value: 0, key: 2 },
+		{ name: 'D', value: 0, key: 3 },
+		{ name: 'E', value: 0, key: 4 },
+		
 	];
 
 	for (let i = 0; i < ENDPOINT; i++) {
@@ -70,7 +64,7 @@ const goResult = () => {
 	const point = calcScore(); //return point
 
 	const pTitle = document.querySelector('.p');
-	pTitle.innerHTML = '당신의 결과는?!';
+	pTitle.innerHTML = '당신의 자존감 상태는..?';
 
 	//이미지 이름을 image-`point`.png로 저장할 것
 	const img_url = 'img/image-' + point + '.png';
