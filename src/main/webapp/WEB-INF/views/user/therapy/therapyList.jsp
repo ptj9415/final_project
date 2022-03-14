@@ -288,8 +288,8 @@ form {
 	        </li>
         </c:forEach>
     </ul>	
-    		<div>
-			  <ul class="pagination">
+    		<div style=" width:1200px; margin:0 auto;">
+			  <ul class="pagination" style="padding-left: 470px;">
 			    <li class="page-item">
 			      <a class="page-link" href="userTerapy.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
 			    </li>
