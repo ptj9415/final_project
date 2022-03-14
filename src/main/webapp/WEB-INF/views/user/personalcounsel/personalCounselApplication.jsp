@@ -423,11 +423,11 @@ form {
 					<input type="hidden" name="pr_time" value="${time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
 					<input type="hidden" id="ccg_subname" name="ccg_subname" value="${type2}">
-					<input type="hidden" name="pr_price" value="">
+					<input type="hidden" id="pr_price" name="pr_price">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="">
-					<!-- <input type="hidden" name="pr_date" value=""> -->
-					<!-- <input type="hidden" name="pr_type"> -->
+					<input type="hidden" name="pr_type" value="${pr_type}">
+					<input type="hidden" name="pr_date" value="${pr_date}">
 				</form>
 			<div id="legalcopy">
 					<a href="personalCounselStep4.do">
@@ -529,6 +529,7 @@ $('#previous-btn').click(function() {
         }, function (rsp) {
         console.log(rsp);
         if (rsp.success) {
+        //$("#pr_price").val(rsp.paid_amount);
         $("#or_uid").val(rsp.imp_uid);
         $("#frm").submit();
          var msg = '결제가 완료되었습니다.';

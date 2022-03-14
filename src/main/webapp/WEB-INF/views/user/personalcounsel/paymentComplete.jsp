@@ -660,7 +660,7 @@ font-size: 20px;
           <thead>
             <tr>
               <th><span>정보</span></th>
-              <th><span>test</span></th>
+              <th><span>${result.ccg_subname}</span></th>
               
             </tr>
           </thead>
