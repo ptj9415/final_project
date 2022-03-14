@@ -135,11 +135,11 @@
                 (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
                 #{c_email},
                 #{m_email},
-                sysdate,
+                #{pr_date},
                 #{pr_price},
                 #{pr_time},
                 '0',
-                '이거 타입 ㅜㅜ',
+                #{pr_type},
                 #{ccg_subname}
                 )
 	</insert>

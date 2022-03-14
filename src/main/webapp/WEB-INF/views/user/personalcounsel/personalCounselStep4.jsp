@@ -544,6 +544,8 @@ div.asdf {
 			<input type="hidden" id="c_email" name="c_email" class="btn btn-primary px-4 py-3 mt-3" value="${c_email}">
 			<input type="hidden" id="oncheck" name="onecheck" value="${type2}">
 			<input type="hidden" id="c-type" name="c-type" value="${type3}">
+			<input type="hidden" id="pr_type" name="pr_type" value="${pr_type}">
+			<input type="text" id="pr_date" name="pr_date" value="">
 			<input type="hidden" id="time" name="time" value="">
 			<input type="button" data-page="2" name="previous"
 				class="previous action-button" value="Previous" id="previous-btn" />
@@ -551,11 +553,7 @@ div.asdf {
 				class="next action-button" id="next-btn" value="신청하기" />
 		</form>
 	</div>
-
-
 	<script>
-	
-	 
 		$('#previous-btn').click(function() {
 			location.href = 'personalCounselStep3.do'
 		});
@@ -563,7 +561,6 @@ div.asdf {
 		$('#next-btn').click(function() {
 			location.href = 'personalCounselApplication.do'
 		});
-		
 		
 		//calendar start
 		
@@ -669,7 +666,7 @@ div.asdf {
         $('.day.current').on('click', function () {
           var val = $(this).html();
           var c_email = $("#c_email").val();
-        /*   alert('05 그만 놀리자.'); */
+          alert('05 그만 놀리자.');
           makediv(val,c_email);
         })
       }
@@ -700,6 +697,7 @@ div.asdf {
     	}
     	var week = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     	var pr_date = year + '-' + month + '-' + val;
+    	$("#pr_date").val(pr_date);
     	var cd_day = week[new Date(pr_date).getDay()];
     	var c_email = c_email;
     	$.ajax({
