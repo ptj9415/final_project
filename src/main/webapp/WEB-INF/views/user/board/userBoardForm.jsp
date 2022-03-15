@@ -21,8 +21,8 @@
 	width: 100%;
 	resize: none;
 	border: none;
-	font-size: 30px;
-	margin-bottom: 0px;
+	font-size: 25px;
+	height: 50px;
 }
 
 #b_content {
@@ -43,7 +43,7 @@ textarea:focus {
 }
 
 #b_title::placeholder {
-	font-size: 30px;
+	font-size: 25px;
 	color: #dededf;
 }
 

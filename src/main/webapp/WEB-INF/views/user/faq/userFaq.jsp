@@ -84,7 +84,7 @@ p {
 		data-stellar-background-ratio="0.5"></section>
 		
 	<div class="faq-container">
-		<h1 class="page-title">&nbsp;FAQ</h1>
+		<h1 class="page-title">FAQ</h1>
 
 		<c:forEach items="${faqs}" var="faq">
 			<button class="accordion">${faq.f_title}</button>

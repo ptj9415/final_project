@@ -136,11 +136,32 @@ display: -webkit-box;
 	font-weight: 
 }
 
+button {
+	height : 30px;
+	width : 80px;
+	margin-left: 20px;
+	border: 1px solid black;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	margin-top: 30px;
+	font-size: 13px;
+}
+
+button:hover {
+	background-color: black;
+	color: white;
+}
+
 
 </style>
 
 </head>
 <body class="hold-transition sidebar-mini">
+<section class="hero-wrap hero-wrap-2"
+		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
+		data-stellar-background-ratio="0.5"></section>
+		
 	<!-- Main content -->
 	<section class="content">
 		<div class="container-fluid">
