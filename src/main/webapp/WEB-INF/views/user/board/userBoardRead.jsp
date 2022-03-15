@@ -193,8 +193,8 @@ button:hover {
 					 <small><b>댓글&nbsp;${br_count}개&nbsp;&nbsp;</small></b>
 			
 			
-			<c:if test="${not empty email}">
 			<!-- 좋아요 -->
+			<c:if test="${not empty email}">
 			<small><b id="heartArea">
 				<c:if test="${not empty boardLike }">
 					<span id="Heart">💗</span>
@@ -222,7 +222,7 @@ button:hover {
 			</c:if>
 			
 			<c:if test="${empty email}">
-				<small><span id="count">💗 ${like_count }명이 공감</span></small>
+				<small><span id="count" onclick="javascript:btn()">💗 ${like_count }명이 공감</span></small>
 			</c:if>
 			
 				</p>
@@ -279,7 +279,7 @@ button:hover {
 			<br>
 			<br>
 			<br>
-			<p align="center">사용자만 댓글 등록이 가능합니다.</p>
+			<p align="center" style="font-size: 14px;">사용자만 댓글 등록이 가능합니다.</p>
 			<br>
 			<br>
 		</c:if>
@@ -413,6 +413,11 @@ button:hover {
 			});			
 		}
 	});
+	
+	
+	// 로그인 x 좋아요 눌렀을 때
+	function btn(){ alert('로그인 후 이용 가능합니다.'); }
+
 	
 </script>
 </body>
