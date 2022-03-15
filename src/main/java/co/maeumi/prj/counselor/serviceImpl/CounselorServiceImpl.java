@@ -211,6 +211,24 @@ public class CounselorServiceImpl implements CounselorService {
 		return map.userCounselorSelect(cvo);
 	}
 
+	@Override
+	public int counselorCateUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCateUpdate(cvo);
+	}
+
+	@Override
+	public int counselorPriceUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorPriceUpdate(cvo);
+	}
+
+	@Override
+	public CounselorVO counselorPriceSelect(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorPriceSelect(cvo);
+	}
+
 
 	
 }
