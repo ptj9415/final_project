@@ -107,6 +107,7 @@ public class BadaController {
 
 		mvo.setM_email(request.getParameter("email"));
 		mvo.setM_password(request.getParameter("password"));
+		mvo.setM_status("T");
 		mvo = memberDao.memberLogin(mvo);
 
 		String message = "";
@@ -509,6 +510,26 @@ public class BadaController {
 			responseText = "YES";
 		}
 		
+		return responseText;
+	}
+	
+	
+	// 회원탈퇴 처리 
+	@ResponseBody
+	@RequestMapping("/ajaxMemberLeave.do")
+	public String ajaxMemberLeave(HttpServletRequest request, MemberVO mvo, HttpSession session) {
+		
+		String sendEmail = request.getParameter("sendEmail");
+		String responseText = null;
+		mvo.setM_email(sendEmail);
+		mvo.setM_status("F");
+		int n = memberDao.memberLeave(mvo);
+		
+		
+		if(n != 0) {
+			responseText = "YES";
+			session.invalidate();  // 탈퇴성공하면 세션삭제하고, 상태값만 F로 변경. update처리.
+		}
 		return responseText;
 	}
 	

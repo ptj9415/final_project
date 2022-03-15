@@ -11,9 +11,11 @@ public interface MemberMapper {
 	boolean memberNicknameCheck(MemberVO mvo); // 닉네임 중복체크
 	boolean memberEmailCheck(MemberVO mvo); // 이메일 중복체크
 	int memberInsert(MemberVO mvo);
+	int memberLeave(MemberVO mvo);  // 회원탈퇴 처리
 	
 	MemberVO memberFindEmail(MemberVO mvo); // 연락처로 이메일 찾기. 
 	MemberVO memberFindPassword(MemberVO mvo);  // 이메일, 연락처로 패스워드 조회
+	
 	
 	List<MemberVO> findEmailList();   // 회원테이블은 동일 연락처, 여러 계정 존재 가능.
 	

@@ -30,10 +30,6 @@
 #changeCheck {
 	display: none;
 }
-#changePwdBtn {
-	margin: auto;
-	display: block;
-}
 </style>
 </head>
 <body>
@@ -45,7 +41,7 @@
 	
 	<div class="myInfoForm">
 		<div class="myInfo Email">
-			이메일&nbsp;&nbsp; <input type="text" class="myInfoInput" disabled="disabled" value="${member.m_email }">	(${member.m_type })
+			이메일&nbsp;&nbsp; <input type="text" id="email" class="myInfoInput" disabled="disabled" value="${member.m_email }">	(${member.m_type })
 			
 			<br> 	 	
 		</div>
@@ -68,10 +64,8 @@
 		</div>
 		
 		<div class="myInfo mypassword">
-			<input type="button" id="changePwdBtn" value="비밀번호 변경하기" > &nbsp;&nbsp; 
-			<script>
-				
-			</script>
+			<input type="button" id="changePwdBtn" value="비밀번호 변경" > &nbsp;&nbsp; 
+			<input type="button" id="memberLeave" value="회원탈퇴">
 		</div>
 		<input type="hidden" id="pwdvalue" value="${member.m_type }">
 	</div>
@@ -94,6 +88,7 @@
 	 $(document).ready(function(){
 		 if ( $("#pwdvalue").val() != '마으미' ) {
 			 $("#changePwdBtn").hide();
+			 $("#memberLeave").hide();
 		 }
 	 });
 
@@ -170,5 +165,28 @@
 	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
 		window.open(url,"",popupOption);
 	}
+	
+	// 회원탈퇴 처리 => 상태값 F로 변경, session만료시키고, home.do로 이동시키기
+	$("#memberLeave").on("click", function() {
+		var memberLeaveCheck = confirm("정말 Maeumi.를 떠나시겠습니까..? \n탈퇴하면 1달 동안은 재가입이 어렵습니다.");
+		if(memberLeaveCheck) {
+			var sendEmail = $("#email").val(); 
+			$.ajax({
+				type: "POST",
+				url: "ajaxMemberLeave.do",
+				data: {
+					sendEmail : sendEmail
+				},
+				success: function(responseText){
+					if(responseText == "YES") {
+						alert("탈퇴처리 되었습니다.");
+						location.href='home.do';
+					}
+				}
+			})
+		}
+		
+	});
+	
 </script>
 </html>
