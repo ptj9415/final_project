@@ -380,13 +380,14 @@ div.counsel-type {
 	</div>
 	<input type="hidden" name="type" id="type">
 	<input type="hidden" name="price" id="price">
+	<input type="hidden" name="ccg_subname" id="ccg_subname">
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
 	<input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
 	<script>
-		
+	
 		//div 클릭 이벤트
 		
 		function kakaoselect(price) {

@@ -50,6 +50,11 @@ public interface CounselorService {
 	int counselorGradeUpdate(CounselorVO cvo);
 	int counselorUpdate(CounselorVO cvo);
 	
+	//상담사 카테고리 수정
+	int counselorCateUpdate(CounselorVO cvo);
+	int counselorPriceUpdate(CounselorVO cvo);
+	CounselorVO counselorPriceSelect(CounselorVO cvo);
+	
 	//사용자화면 조회
 	int getUserCounselorListCnt(Search svo) throws Exception;
 	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception;
