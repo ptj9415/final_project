@@ -309,7 +309,7 @@ div.counsel-type {
 		</div>
 	</div>
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
@@ -318,7 +318,7 @@ div.counsel-type {
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active editable">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
@@ -327,7 +327,7 @@ div.counsel-type {
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active">
+		<div class="md-step">
 			<div class="md-step-circle">
 				<span>3</span>
 			</div>
