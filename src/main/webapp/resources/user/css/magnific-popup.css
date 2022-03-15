@@ -141,9 +141,10 @@ button::-moz-focus-inner {
   }
    :hover,
    :focus {
-    opacity: 1; 
-    }
-  
+    opacity: 1; }
+    
+  /*  :active {
+    top: 1px; } */
 
  -btn-in   {
   color: #333; }

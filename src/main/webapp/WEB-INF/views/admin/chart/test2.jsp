@@ -309,7 +309,7 @@ div.counsel-type {
 		</div>
 	</div>
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
@@ -318,7 +318,7 @@ div.counsel-type {
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active editable">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
@@ -327,7 +327,7 @@ div.counsel-type {
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active">
+		<div class="md-step">
 			<div class="md-step-circle">
 				<span>3</span>
 			</div>
@@ -380,13 +380,14 @@ div.counsel-type {
 	</div>
 	<input type="hidden" name="type" id="type">
 	<input type="hidden" name="price" id="price">
+	<input type="hidden" name="ccg_subname" id="ccg_subname">
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
 	<input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
 	<script>
-		
+	
 		//div 클릭 이벤트
 		
 		function kakaoselect(price) {

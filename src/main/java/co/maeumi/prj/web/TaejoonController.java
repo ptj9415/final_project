@@ -309,6 +309,7 @@ public class TaejoonController {
 			list.get(i).setCu_applydate(date);
 		}
 		model.addAttribute("apply", list);
+		model.addAttribute("price", counselorDao.counselorPriceSelect(cvo));
 		return "counselor/mypage/counselorMyPageInfo";
 	}
 
@@ -363,6 +364,13 @@ public class TaejoonController {
 			System.out.println("FileNotFoundException : " + e);
 		}
 
+	}
+	
+	@RequestMapping("/catesubmit.do")
+	public String catesubmit(Model model, CounselorVO cvo) {
+		counselorDao.counselorCateUpdate(cvo);
+		counselorDao.counselorPriceUpdate(cvo);
+		return "redirect:counselorMyPageInfo.do";
 	}
 
 	// 상담사 마이페이지 - 상담사 등급 변경 신청

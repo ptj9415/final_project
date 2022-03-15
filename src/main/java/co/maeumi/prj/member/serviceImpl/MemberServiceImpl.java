@@ -135,6 +135,12 @@ public class MemberServiceImpl implements MemberService {
 		return map.passwordUpdate(mvo);
 	}
 
+	@Override
+	public int memberLeave(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.memberLeave(mvo);
+	}
+
 
 	
 }

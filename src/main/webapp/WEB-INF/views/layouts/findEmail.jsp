@@ -43,11 +43,6 @@ button:hover{
 </style>
 <body>
 	<div align="center">
-
-		<h2>Maeumi.</h2>
-		<div><h3>Maeumi. Email 찾기!</h3></div>
-		<hr>
-
 		<img src="resources/user/images/MaeumiLogo.png" style="width:100px; margin-top:50px;">
 		<div><h3 style="margin-top:20px;">Email 찾기 서비스. 비번은 알아서~</h3></div>
 		<hr style="margin-top:30px;">

@@ -90,7 +90,7 @@ th {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$("#beforeBtn").on("click", function() {
-		history.back();
+		location.href='userNoticeList.do';
 	});
 
 </script>

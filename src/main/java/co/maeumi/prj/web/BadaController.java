@@ -107,6 +107,7 @@ public class BadaController {
 
 		mvo.setM_email(request.getParameter("email"));
 		mvo.setM_password(request.getParameter("password"));
+		mvo.setM_status("가입");
 		mvo = memberDao.memberLogin(mvo);
 
 		String message = "";
@@ -336,11 +337,11 @@ public class BadaController {
 					String toMail = inputEmail;					// 수신받을 이메일. view로부터 받은 이메일 주소인 변수 email을 사용
 					String title = "회원가입 인증 이메일 입니다.";  // 자신이 보낼 이메일 제목
 					String content = 						// 자신이 보낼 이메일 내용
-							"Maeumi 에 방문해주셔서 감사ㅎㅎ" +
+							"Maeumi 에 방문해주셔서 감사합니다." +
 							"<br><br>" +
-							"인증번호는 " + checkNum + " << 이거. " +
+							"인증번호는 " + checkNum + " 입니다." +
 							"<br>" +
-							"해당 인증번호를 인증번호 확인란에 입력하슈~ ";
+							"해당 인증번호를 인증번호 확인란에 입력해주세요.";
 					
 					try  {
 						MimeMessage message = mailSender.createMimeMessage();
@@ -392,7 +393,7 @@ public class BadaController {
 		mvo.setM_password(request.getParameter("password"));
 		mvo.setM_phone(request.getParameter("phone"));
 		mvo.setM_type(request.getParameter("type"));
-		mvo.setM_status("T");
+		mvo.setM_status("가입");
 
 		String joinMessage = null;
 		int n = memberDao.memberInsert(mvo);
@@ -512,6 +513,26 @@ public class BadaController {
 		return responseText;
 	}
 	
+	
+	// 회원탈퇴 처리 
+	@ResponseBody
+	@RequestMapping("/ajaxMemberLeave.do")
+	public String ajaxMemberLeave(HttpServletRequest request, MemberVO mvo, HttpSession session) {
+		
+		String sendEmail = request.getParameter("sendEmail");
+		String responseText = null;
+		mvo.setM_email(sendEmail);
+		mvo.setM_status("탈퇴");
+		int n = memberDao.memberLeave(mvo);
+		
+		
+		if(n != 0) {
+			responseText = "YES";
+			session.invalidate();  // 탈퇴성공하면 세션삭제하고, 상태값만 F로 변경. update처리.
+		}
+		return responseText;
+	}
+	
 
 	// 상담사 약관동의 화면
 	@RequestMapping("/counselorTermsOfService.do")
@@ -559,7 +580,7 @@ public class BadaController {
 		cvo.setC_address(request.getParameter("address"));
 		cvo.setC_phone(request.getParameter("phone"));
 		cvo.setC_grade("심리상담사");   // 기본값으로 심리상담사 줌.
-		cvo.setC_admin("C");
+		cvo.setC_status("가입");
 		
 		counselorDao.counselorInsert(cvo);
 		
@@ -967,9 +988,9 @@ public class BadaController {
 	// 비밀번호 확인 체크
 	@ResponseBody
 	@RequestMapping("/ajaxPassChk.do")
-	public String ajaxPassChk(HttpSession session, HttpServletRequest request, MemberVO mvO) {
+	public String ajaxPassChk(HttpSession session, HttpServletRequest request, MemberVO mvo) {
 		
-		mvo.setM_email( (String) session.getAttribute("email"));
+		mvo.setM_email( (String) session.getAttribute("email")); 
 		System.out.println("현재 세션 이메일 값: " + (String) session.getAttribute("email"));
 		mvo.setM_type( (String) session.getAttribute("type")); 
 		mvo.setM_password( request.getParameter("sendPwd"));

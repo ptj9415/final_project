@@ -48,8 +48,9 @@
 
 	<select id="memberLogin"
 		resultType="co.maeumi.prj.member.service.MemberVO">
-		SELECT * FROM MEMBER WHERE M_EMAIL = #{m_email} AND
-		M_PASSWORD = #{m_password}
+		SELECT * FROM MEMBER WHERE M_EMAIL = #{m_email} 
+		AND 	M_PASSWORD = #{m_password}
+		AND 	M_STATUS = #{m_status}
 	</select>
 
 	<!-- 회원 닉네임 중복체크 -->
@@ -162,6 +163,12 @@
 		update member set m_password = #{m_password}
 		where m_email = #{m_email}
 		and m_phone = #{m_phone}
+	</update>
+	
+	<!-- 회원탈퇴. 탈퇴지만, 업데이트 처리한다. 상태값 F로.  -->
+	<update id="memberLeave" parameterType="co.maeumi.prj.member.service.MemberVO">
+		update member set m_status = #{m_status} 
+		where m_email = #{m_email} 
 	</update>
 
 </mapper>
