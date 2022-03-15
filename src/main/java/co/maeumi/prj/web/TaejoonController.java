@@ -36,6 +36,8 @@ import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.salary.service.SalaryService;
 import co.maeumi.prj.salary.service.SalaryVO;
 import co.maeumi.prj.service.Aes256;
@@ -66,6 +68,8 @@ public class TaejoonController {
 	Aes256 aes256;
 	@Autowired
 	private SalaryService salaryDao;
+	@Autowired
+	private PersonalcounselService personalCounselDao;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -541,6 +545,31 @@ public class TaejoonController {
 		}
 
 		return "OK";
+	}
+	
+	//상담사 통계
+	@RequestMapping("/counselorStatistics.do")
+	public String counselorStatistics(Model model, HttpSession session, PersonalcounselVO pcvo) {
+		
+		return "counselor/statistics/counselorStatistics";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/counselorStatisticData.do")
+	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo) {
+		pcvo.setC_email("3244509@naver.com");
+		List<PersonalcounselVO> data = personalCounselDao.searchCounselData(pcvo);
+		
+		return data;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/counselorDataSearch.do")
+	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo) {
+		pcvo.setC_email("3244509@naver.com");
+		List<PersonalcounselVO> data = personalCounselDao.searchCounselData2(pcvo);
+		
+		return data;
 	}
 
 	/* ===== 관리자 화면 ===== */

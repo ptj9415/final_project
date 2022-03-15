@@ -105,4 +105,16 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		// TODO Auto-generated method stub
 		return map.prSearchSelect(svo);
 	}
+
+	@Override
+	public List<PersonalcounselVO> searchCounselData(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchCounselData(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> searchCounselData2(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchCounselData2(vo);
+	}
 }

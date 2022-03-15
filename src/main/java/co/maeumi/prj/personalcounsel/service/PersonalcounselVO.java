@@ -51,6 +51,7 @@ public class PersonalcounselVO {
 	
 
 	private String m_email;
+	private String pr_count;
 
 	
 }
