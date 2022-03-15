@@ -56,7 +56,7 @@ button {
 <script>
 
 	$("#sendPwdChk").on("click",function(){
-		
+			
 		var sendPwd = $("#originPwd").val();  // 입력한 원래 비밀번호
 		alert(sendPwd);
 		$.ajax({
@@ -74,6 +74,7 @@ button {
 					$("#changePwd").focus();
 				} else {
 					alert("비밀번호를 다시 입력하세요.");
+					location.reload();
 					return false;
 				}
 				

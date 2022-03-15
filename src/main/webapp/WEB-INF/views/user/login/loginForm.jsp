@@ -647,7 +647,7 @@ button:hover {
 	
 	function findPasswordPopupOpen() {
 		var url= "findPasswordPopup.do";    //팝업창 페이지 URL
-		var winWidth = 500;    
+		var winWidth = 550;    
 	    var winHeight = 400;
 	    var popupX = (window.screen.width / 2) - (800 / 2);
 	    var popupY= (window.screen.height /2) - (600 / 2);

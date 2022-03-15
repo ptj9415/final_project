@@ -25,6 +25,12 @@ button {
 	width: 350px;
 	font-size: 13px;
 }
+.inputEmail{
+	margin-left: 5px;
+}
+.inputPhoneCheck {
+	margin-right: 30px;
+}
 </style>
 <body>
 <div align="center" class="mainForm">

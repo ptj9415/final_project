@@ -149,7 +149,7 @@ h3 {
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label>상태</label> <select class="	status" id="m_type">
+										<label>상태</label> <select class="status" id="m_type">
 											<option value="all">전체</option>
 											<option value="가입">가입</option>
 											<option value="탈퇴">탈퇴</option>
@@ -218,6 +218,7 @@ h3 {
 										<th>이메일</th>
 										<th>연락처</th>
 										<th>상태</th>
+										<th>가입유형</th>
 										<th>관리</th>
 									</tr>
 								</thead>
@@ -227,6 +228,7 @@ h3 {
 											<td>${member.m_nickname }</td>
 											<td>${member.m_email }</td>
 											<td>${member.m_phone }</td>
+											<td>${member.m_status }</td>
 											<td>${member.m_type }</td>
 											<td><button type="button" class="managebtn"
 													id="managebtn" name="${member.m_nickname }"
