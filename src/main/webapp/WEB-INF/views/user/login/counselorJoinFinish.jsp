@@ -54,5 +54,6 @@ button {
 			<button class="login" onclick="location.href='loginForm.do'">Maeumi. 로그인!</button>
 		</div>
 	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>
