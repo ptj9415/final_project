@@ -191,6 +191,7 @@ public class CounselorServiceImpl implements CounselorService {
 	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception {
 		// TODO Auto-generated method stub
 		return map.userCounselorSearchList(svo);
+	}
 
 	public CounselorVO counselorFindPassword(CounselorVO cvo) {
 		// TODO Auto-generated method stub

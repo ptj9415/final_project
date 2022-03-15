@@ -4,7 +4,20 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+
 		<title>우울증 검사</title>
+<style>
+.pb-2, .py-2{
+	margin-top:100px;
+	margin-right:auto;
+	margin-left:auto;
+	width:80%;
+}
+.selfesteem{
+	margin-right:auto;
+	margin-left:auto;
+}
+		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="resources/user/css/default.css" />
@@ -52,12 +65,40 @@
 					<h1 class="mb-2 bread">심리검사</h1>
 					<br>
 					<p class="breadcrumbs">
-						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
+						<span class="mr-2"></span>
+				
 					</p>
 				</div>
 			</div>
 		</div>
+
 	</section>
+	<div class="selfesteem">
+	<div class="container">
+		<div class="row justify-content-start mb-5 pb-2">
+			<div
+				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+				<span class="subheading subheading-with-line"><small
+					class="pr-2 bg-white">MAEUMI</small></span>
+				<h2 class="mb-4">우울증검사</h2>
+			</div>
+			<div
+				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+				<div class="pl-md-4 border-line">
+					<p style="font-weight:bold;"> 현재 나의 우울증 상태는 어떨까?
+					<p style="font-size:0.7rem">소요시간 약 5분</p>
+					<br>
+					<p>당신의 삶에서 태풍이 지나갔을 때 당신은 당신이 그 태풍을 어떻게 이겨냈는지도, 어떻게 생존할 수 있었는지도
+					기억하지 못할 것이다.</p>
+					<p>그리고, 심지어는 그 태풍이 지나간 것인지도 확실치 않을 것이다. 하지만 한가지 확실한 것이 있다.</p>
+					<p>그것은 바로 당신이 그 태풍에서 벗어났을 때, 당신은 이전과는 다른 사람이 될 것이라는 것이다.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
 		<div id="wrap">
 			<header id="header"></header>
 			<section id="main" class="container">

@@ -217,6 +217,9 @@ h3 {
 											<td>${personalCounsel.pr_date }</td>
 											<td>${personalCounsel.ccg_subname }</td>
 											<td>${personalCounsel.pr_type }</td>
+										<c:if test="${empty personalCounsel.pr_status}">
+											<td></td>
+										</c:if>
 										<c:if test="${personalCounsel.pr_status eq 0}">
 											<td>결제완료</td>
 										</c:if>	
