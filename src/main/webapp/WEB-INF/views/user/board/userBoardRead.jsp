@@ -27,6 +27,7 @@
 	height: 70px;
 	width: 1420px;
 	font-size: 13px;
+	overflow:hidden;
 }
 
 .br_contentBoxDiv {
@@ -62,14 +63,14 @@ textarea::placeholder {
 
 .title {
 	text-align : left;
-	margin-top: 35px;
+	margin-top: 40px;
 	margin-bottom: 0px;
-	height: 70px;
+	height: 50px;
 }
 
 #b_content {
-	margin-top: 40px;
-	height: 700px;
+	overflow:hidden;
+	height:auto;
 	text-align: left;
 }
 
@@ -89,7 +90,7 @@ button {
 	background-color: white;
 	color: black;
 	border: 1px solid black;
-	margin-top: 60px;
+	margin-top: 80px;
 	font-size: 13px;
 }
 
@@ -144,9 +145,9 @@ button:hover {
 					</c:when>
 					<c:otherwise>
 						<small><a class="card-text">
-								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="https://cdn-icons.flaticon.com/png/512/3239/premium/3239945.png?token=exp=1647226187~hmac=8afb5e0a4b7b80736013692d952239de" alt=""> 
+								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt=""> 
 								${boardRead.b_wdate} &nbsp; <b>익명</b> &nbsp;
-								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="https://cdn-icons-png.flaticon.com/512/633/633633.png" alt="">  
+								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="img/board/visibility.png" alt="">  
 								 ${boardRead.b_hit}</a></small>
 						<br>
 					</c:otherwise>
@@ -191,6 +192,8 @@ button:hover {
 				<p>
 					 <small><b>댓글&nbsp;${br_count}개&nbsp;&nbsp;</small></b>
 			
+			
+			<c:if test="${not empty email}">
 			<!-- 좋아요 -->
 			<small><b id="heartArea">
 				<c:if test="${not empty boardLike }">
@@ -216,6 +219,12 @@ button:hover {
 					</c:choose>
 				</c:if>
 			</b></small>
+			</c:if>
+			
+			<c:if test="${empty email}">
+				<small><span id="count">💗 ${like_count }명이 공감</span></small>
+			</c:if>
+			
 				</p>
 				<hr align="left"width: 90%>
 				<c:choose>
@@ -224,14 +233,14 @@ button:hover {
 							<div>
 								<small><p>
 									<a><b>${boardReply.br_name}&nbsp; </b></a> <a>
-									<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="https://cdn-icons.flaticon.com/png/512/3239/premium/3239945.png?token=exp=1647226187~hmac=8afb5e0a4b7b80736013692d952239de" alt="">  
+									<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt="">  
 									<fmt:parseDate
 											value="${boardReply.br_wdate}" var="replyDate"
 											pattern="yyyy-MM-dd" /><fmt:formatDate value="${replyDate}"
 											pattern="yyyy-MM-dd" /></a> &emsp;&emsp;
 									<c:if test="${boardReply.br_email eq email}">
 									<img style="height: 15px; width: 15px; margin-bottom: 2.5px" 
-									src="https://cdn-icons.flaticon.com/png/512/484/premium/484560.png?token=exp=1647227596~hmac=f38ade7a3f633e02a7601315f7f69a25" alt=""
+									src="img/board/bin.png" alt=""
 									onclick="delReply('${boardReply.br_no}');">  
 									</c:if>
 								</small></p>	
@@ -260,7 +269,7 @@ button:hover {
 					placeholder="따뜻한 관심을 보여주세요."></textarea>
 				<span><img style="height: 87px; width: 87px; margin-bottom: 63px"
 				id="replySubmit" name="replySubmit"  
-				src="https://cdn-icons.flaticon.com/png/512/4302/premium/4302267.png?token=exp=1647239423~hmac=3338194f8570c727a4d25037755bdf19">
+				src="img/board/checkbox.png">
 				</span>
 			</div>
 			<br>

@@ -21,14 +21,15 @@
     width: 100%;
     resize: none;
     border: none;
-    font-size: 30px;
+   	font-size: 25px;
     margin-bottom: 0px;
-    height: 70px;
+    height: 50px;
 }
   
 #b_content {
   	width: 100%;
-  	height : 700px;
+	height : 700px;
+	overflow: hidden;
     resize: none;
     border: none;
     font-size: 13px;
@@ -68,6 +69,7 @@ button:hover {
 }
 
 .topDiv {
+	margin-top: 13px;
 	float:right;
 }
 </style>
@@ -80,7 +82,7 @@ button:hover {
 	<form id="frm" action="userBoardUpdate.do" method="post">
 		<div class="wrap2" align="center">
 				<textarea id="b_title" name="b_title">${boardSelect.b_title}</textarea>
-					<hr align="left"width: 90%>
+					<hr align="left" width: 90%>
 					<div class="topDiv">
 					<!-- vo에 담긴 거 가지고 오려면 칼럼이랑 name이랑 같아야 함ㅋ -->
 					<select style="width: 100px" id="select2" class="subject"
@@ -112,10 +114,8 @@ button:hover {
 					id="anony" name="anony" checked></c:if> 닉네임 비공개 &nbsp; </label>
 					<input type="hidden" id="b_anony" name="b_anony">
 			</div>
-			<div>
 				<textarea
 					id="b_content" name="b_content"> ${boardSelect.b_content}</textarea>
-			</div>
 			<div>
 				<input type="hidden" name="b_no" id="b_no"
 					value="${boardSelect.b_no}">
