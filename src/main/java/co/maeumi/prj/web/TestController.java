@@ -30,7 +30,7 @@ public class TestController {
 	@Autowired
 	private BannerService bannerDao;
 	@Autowired
-	private CouponService couponDao;	
+	private CouponService couponDao;
 
 	@RequestMapping("/test.do")
 	public String test(Model model) {
@@ -49,11 +49,7 @@ public class TestController {
 	@ResponseBody
 	@RequestMapping("/testTimeselect.do")
 	public List<CounselorVO> testTimeselect(CounselorVO cvo) {
-		List<CounselorVO> list = counselorDao.reservedCounsel(cvo);
-		for (int i = 0; i < list.size(); i++) {
-			String a = list.get(i).getPr_time();
-			System.out.println(a);
-		}
+		List<CounselorVO> list = counselorDao.reservedCounsel(cvo);	
 
 		return list;
 	}
@@ -72,7 +68,7 @@ public class TestController {
 			@RequestParam(required = false, defaultValue = "undefined") String p_zoom,
 			@RequestParam(required = false, defaultValue = "undefined") String p_phone,
 			@RequestParam(required = false, defaultValue = "all") String c_gender) throws Exception {
-		
+
 		System.out.println("-----------------------------");
 		System.out.println(c_type6);
 		model.addAttribute("search", svo);
@@ -87,10 +83,9 @@ public class TestController {
 		svo.setP_zoom(p_zoom);
 		svo.setP_phone(p_phone);
 		svo.setC_gender(c_gender);
-		
+
 		System.out.println("-----------------------------");
 		System.out.println(c_type6);
-		
 
 		int listCnt = counselorDao.getUserCounselorListCnt(svo);
 
@@ -100,52 +95,53 @@ public class TestController {
 		model.addAttribute("counselorList", counselorDao.userCounselorSearchList(svo));
 		return "admin/chart/test";
 	}
-	
+
 	@RequestMapping("/test2pg.do")
-	public String test2pg(Model model, CounselorVO cvo) {
+	public String test2pg(Model model, CounselorVO cvo, HttpSession session, HttpServletRequest request) {
+		String c_email = request.getParameter("c_email");
+		session.setAttribute("c_email", c_email);
 		
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
 		return "admin/chart/test2";
 	}
-	
+
 	@RequestMapping("/test3pg.do")
-	public String test3pg(Model model, CounselorVO cvo, HttpServletRequest request) {
+	public String test3pg(Model model, CounselorVO cvo, HttpServletRequest request, HttpSession session) {
 		String type = request.getParameter("type");
 		String price = request.getParameter("price");
-		String c_email = request.getParameter("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		System.out.println(type);
 		System.out.println(price);
 		System.out.println(c_email);
-		
+
 		model.addAttribute("type", type);
 		model.addAttribute("price", price);
 		model.addAttribute("c_email", c_email);
-		
-		
+
 		return "admin/chart/test3";
 	}
-	
+
 	@RequestMapping("/test4pg.do")
-	public String test4pg(Model model, CounselorVO cvo, HttpServletRequest request, CouponVO cpvo, HttpSession session) {
+	public String test4pg(Model model, CounselorVO cvo, HttpServletRequest request, CouponVO cpvo,
+			HttpSession session) {
 		String type = request.getParameter("pr_type");
 		String price = request.getParameter("pr_price");
-		String c_email = request.getParameter("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		String pr_date = request.getParameter("pr_date");
 		String pr_time = request.getParameter("pr_time");
-		
+
 		model.addAttribute("pr_type", type);
 		model.addAttribute("pr_price", price);
 		model.addAttribute("c_email", c_email);
 		model.addAttribute("pr_date", pr_date);
-		model.addAttribute("pr_time", pr_time);		
+		model.addAttribute("pr_time", pr_time);
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
-		
+
 		cpvo.setM_email("gnjqtpfl@naver.com");
 		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
 		model.addAttribute("coupon", list);
-		
+
 		return "admin/chart/test4";
 	}
-	
 
 }
