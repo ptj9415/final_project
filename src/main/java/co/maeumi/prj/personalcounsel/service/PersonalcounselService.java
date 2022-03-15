@@ -30,5 +30,8 @@ public interface PersonalcounselService {
 	
 	List<PersonalcounselVO>  searchSalesData(PersonalcounselVO vo); // 개인상담 매출 통계 search
 	
+	List<PersonalcounselVO> searchCounselData(PersonalcounselVO vo); // 개인상담 통계
+	List<PersonalcounselVO> searchCounselData2(PersonalcounselVO vo);
+	
 
 }

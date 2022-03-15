@@ -12,6 +12,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 <style>
 #headerp {
 	position: relative;
@@ -26,7 +30,6 @@
 	border: none;
 	margin-right: 15px;
 }
-
 
 .status {
 	display: block;
@@ -60,7 +63,6 @@
 	vertical-align: middle;
 }
 
-
 /* 부트스트랩 */
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -76,14 +78,13 @@
 	}
 }
 
-
 #content {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2; 
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-} 
+}
 
 .subject {
 	text-align: left;
@@ -92,15 +93,15 @@
 }
 
 .title {
-	text-align : left;
+	text-align: left;
 	font-weight: bold;
 }
 
 .anony {
 	font-size: 13px;
 	position: absolute;
-    top: 180px;
-    left: 560px;
+	top: 180px;
+	left: 560px;
 }
 
 .content {
@@ -111,8 +112,8 @@
 }
 
 button {
-	height : 30px;
-	width : 80px;
+	height: 30px;
+	width: 80px;
 	margin-left: 10px;
 	border: 1px solid black;
 	background-color: white;
@@ -127,7 +128,7 @@ button:hover {
 }
 
 #insertbtn {
-	float:right;
+	float: right;
 }
 
 .topTitle {
@@ -149,6 +150,40 @@ button:hover {
 	margin-bottom: 120px;
 }
 
+#wrap {
+	display: grid;
+	place-items: center;
+}
+
+.page-item.active .page-link {
+	border: 0.5px solid rgb(235, 235, 235);
+	border-radius: 0px;
+	background-color: white;
+	color: rgb(74, 127, 223);
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: -1px;
+}
+
+.page-link {
+	border: 0px;
+	font-size: 14px;
+	color: #666666;
+	margin-left: 10px;
+}
+
+#pagination>li {
+	margin-right: 10px;
+}
+
+.searchdiv {
+	height: 100px;
+}
+
+#btnSearch {
+	display: inline-block;
+	margin-bottom: -2px;
+}
 </style>
 </head>
 <body>
@@ -237,56 +272,49 @@ button:hover {
 		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
 		data-stellar-background-ratio="0.5"></section>
 
-<div class="topTitle">
-	<a style="font-weight: bold;">당신의 이야기를 들려주세요!</a>
-	<br>
-	<a style="font-size: 12px; color: #0975ad;">마음을 털어놓는 것만으로도 한결 가벼워질 거예요.</a>
+	<div class="topTitle">
+		<a style="font-weight: bold;">당신의 이야기를 들려주세요!</a> <br> <a
+			style="font-size: 12px; color: #0975ad;">마음을 털어놓는 것만으로도 한결 가벼워질
+			거예요.</a>
 		<c:if test="${not empty email}">
-				<button type="button" class="button" id="insertbtn"
-					name="insertbtn" onclick="location.href='userBoardForm.do'">글쓰기</button>
+			<button type="button" class="button" id="insertbtn" name="insertbtn"
+				onclick="location.href='userBoardForm.do'">글쓰기</button>
 		</c:if>
-</div>
-	
+	</div>
+
 	<!-- bootstrap start -->
-	
-	<div class="container px-4 py-5" id="featured-3" 
-	style="
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 60px;
-	row-gap: 60px;
-	width: 80%;
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: 80px;
-	margin-bottom: 300px;">
-	
+
+	<div class="container px-4 py-5" id="featured-3"
+		style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; row-gap: 60px; width: 80%; margin-right: auto; margin-left: auto; margin-top: 80px; margin-bottom: 50px;">
+
 		<c:forEach items="${board}" var="board">
-		<div class="row g-4 py-5 row-cols-1 row-cols-lg-3" onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
-			<div class="feature col" style="height: 90px;">
-			<hr align="left"width: 90%>
-				<small class="subject">${board.b_subject}</small>
-				<p class="title">${board.b_title}</p>
-				<small id="content">${board.b_content}</small>
-				<c:choose>
-					<c:when test="${board.b_anony eq 'F' }">
-						<p class="anony">${board.m_nickname}</p>
-					</c:when>
-					<c:otherwise>
-						<p class="anony">익명</p>
-					</c:otherwise>
-				</c:choose>
+			<div class="row g-4 py-5 row-cols-1 row-cols-lg-3"
+				onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
+				<div class="feature col" style="height: 90px;">
+					<hr align="left"width: 90%>
+					<small class="subject">${board.b_subject}</small>
+					<p class="title">${board.b_title}</p>
+					<small id="content">${board.b_content}</small>
+					<c:choose>
+						<c:when test="${board.b_anony eq 'F' }">
+							<p class="anony">${board.m_nickname}</p>
+						</c:when>
+						<c:otherwise>
+							<p class="anony">익명</p>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
-			</div>
-			</c:forEach>
-			</div>
-			
+		</c:forEach>
+	</div>
+<br>
 	<!-- end -->
 
 
-		<!-- 페이징 -->
+	<!-- 페이징 -->
+	<div id="wrap">
 		<div id="paginationBox" class="pagination1">
-			<ul class="pagination">
+			<ul class="pagination" id="pageul">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
@@ -307,39 +335,17 @@ button:hover {
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}','${search.b_title }'
 	)">다음</a></li>
-							</c:if>
-						</ul>
-					</div>
-				</div>
-			</div>
+				</c:if>
+			</ul>
 		</div>
+		<br>
+		<div class="searchdiv">
+			<input type="text" class="filterinput" id="b_title"
+				placeholder="  제목을 입력하세요." style="width: 600px; height: 45px;">
+			<button type="button" id="btnSearch" style="height: 55px;">검색</button>
 		</div>
-		</div>
-	</section>
-
-	<!-- 검색 -->
-	<section class="content">
-		<div class="container-fluid">
-			<div class="col-md-12 offset-md-0">
-				<div class="col-6">
-					<div class="form-group">
-						<input type="text" class="filterinput" id="b_title"
-							placeholder="제목을 입력하세요.">
-						<button type="reset" id="clearbtn">초기화</button>
-						<button type="button" id="btnSearch">검색</button>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		</div>
-		</div>
-		</div>
-	</section>
-
-
+	</div>
 	<script>
-	
 	
 		// 페이징 처리
 		
@@ -385,9 +391,7 @@ button:hover {
 		location.href = url;
 		console.log(url);
 
-	});
-		
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	});		
 	</script>
 </body>
 </html>

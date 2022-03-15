@@ -181,6 +181,10 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview" id="treeview">
+						<li class="nav-item"><a href="counselorStatistics.do" class="nav-link"
+							id="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>상담사 상담 통계</p>
+						</a></li>
 						<li class="nav-item"><a href="test.do" class="nav-link"
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>상담 통계</p>
@@ -189,8 +193,9 @@
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>상담사 통계</p>
 						</a></li>
-						<li class="nav-item"><a href="adminSalesChart.do" class="nav-link"
-							id="nav-link"> <i class="far fa-circle nav-icon"></i>
+						<li class="nav-item"><a href="adminSalesChart.do"
+							class="nav-link" id="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
 								<p>매출 통계</p>
 						</a></li>
 						<li class="nav-item"><a href="salesChart.do" class="nav-link"
