@@ -24,10 +24,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.board.service.BoardService;
+import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
+import co.maeumi.prj.member.service.MemberService;
+import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.mypage.service.myPageService;
+import co.maeumi.prj.mypage.service.myPageVO;
 import co.maeumi.prj.order.service.orderService;
 import co.maeumi.prj.order.service.order_datailVO;
 import co.maeumi.prj.service.Aes256;
@@ -52,6 +58,15 @@ public class YoungohController {
 	
 	@Autowired
 	Aes256 aes256;
+	
+	@Autowired
+	private myPageService myPageDao;
+	
+	@Autowired
+	private MemberService memberDao;
+	
+	@Autowired
+	private BoardService boardDao;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
@@ -417,12 +432,14 @@ public class YoungohController {
 
 	// 그룹 상담 유저 상세 페이지입니다.
 	@RequestMapping("/userGroup.do")
-	public String userGroup(GroupcounselVO vo, Model model) {
+	public String userGroup(GroupcounselVO vo, Model model, HttpServletRequest request ) {
 		GroupcounselVO gvo = groupCounselDao.selectUserGroup(vo);
 		String date = gvo.getGc_date();
 		date = date.substring(0, 10);
 		gvo.setGc_date(date);
-		
+		String c_email = request.getParameter("c_email");
+		System.out.println(c_email);
+		model.addAttribute("c_email",c_email);
 		model.addAttribute("userGroup", gvo);
 		return "user/groupcounsel/userGroup";
 	}
@@ -431,6 +448,7 @@ public class YoungohController {
 	//유저 이메일 세션값이 들어가야 됩니다.
 	@RequestMapping("/usergroupinvoice.do")
 	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
+		String c_email = request.getParameter("c_email");
 		String gc_no = request.getParameter("gc_no");
 		System.out.println(gc_no);
 		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
@@ -439,15 +457,19 @@ public class YoungohController {
 		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
 		model.addAttribute("groupInvoice", gvo);
 		model.addAttribute("coupon", cplist);
+		model.addAttribute("c_email", c_email);
 		return "user/groupcounsel/groupInvoice";
 	}
 	
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
-	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo) {
+	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo, HttpServletRequest request) {
 		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
+		String c_email = request.getParameter("c_email");
+		System.out.println(c_email);
 		ovo.setGc_no(vo.getGc_no());
 		ovo.setOr_price(vo.getGr_price());
+		ovo.setC_email(c_email);
 		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
 			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
@@ -494,6 +516,49 @@ public class YoungohController {
 	@RequestMapping("/simri.do")
 	public String simri() {
 		return "user/test/simri";
+	}
+	
+	@RequestMapping("/userMypages.do")
+	public String userMypages(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model, myPageVO vo, BoardVO bvo) {
+		
+		mvo.setM_email( (String) session.getAttribute("email") );
+		mvo.setM_type( (String) session.getAttribute("type"));
+		
+		vo.setM_email( (String) session.getAttribute("email") );
+		bvo.setB_email((String) session.getAttribute("email") );
+		List<myPageVO> list = myPageDao.selectOrder(vo);
+		System.out.println("세션값 이메일 담겼는지 확인: " + mvo.getM_email());
+		System.out.println("세션값 가입유형 담겼는지 확인: " + mvo.getM_type());
+		
+		List<BoardVO> blist = myPageDao.selectBoard(bvo);
+		for (int i = 0; i < blist.size(); i++) {
+			String date = blist.get(i).getB_wdate();
+			date = date.substring(0, 10);
+			blist.get(i).setB_wdate(date);
+		}
+		
+		List<myPageVO> plist = myPageDao.selectPersonal(vo);
+		for (int i = 0; i < plist.size(); i++) {
+			String date = plist.get(i).getPr_date();
+			date = date.substring(0, 10);
+			plist.get(i).setPr_date(date);
+		}
+		
+		List<myPageVO> glist = myPageDao.selectGroup(vo);
+		for (int i = 0; i < glist.size(); i++) {
+			String date = glist.get(i).getGr_reservedate();
+			date = date.substring(0, 10);
+			glist.get(i).setGr_reservedate(date);
+		}
+		
+		
+		model.addAttribute("member", memberDao.mypageSelectList(mvo));
+		model.addAttribute("list",list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("plist",plist);
+		model.addAttribute("glist",glist);
+		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
+		return "user/mypage/mypageMain";
 	}
 	
 }

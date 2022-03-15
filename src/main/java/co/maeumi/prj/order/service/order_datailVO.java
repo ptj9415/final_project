@@ -17,6 +17,7 @@ public class order_datailVO {
 	private String or_price;
 	private String m_nickname;
 	private String m_email;
+	private String or_status;
 	
 	//그룹 상담이랑 조인
 	private String gc_date;

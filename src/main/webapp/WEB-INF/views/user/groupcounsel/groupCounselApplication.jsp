@@ -451,7 +451,7 @@ img {
 							<p style="font-size: 20px;">👨‍👩‍👧 정원 ${group.gc_min_person }명 - ${group.gc_max_person}명</p>
 						</span>
 						<c:if test="${group.gc_max_person > group.gc_person }">
-						<button id="btn" onclick="func('${group.gc_no}')" class="btn btn--block card__btn">조회하기</button>
+						<button id="btn" onclick="func('${group.gc_no}','${group.c_email}')" class="btn btn--block card__btn">조회하기</button>
 						</c:if>
 						<c:if test="${group.gc_max_person <= group.gc_person }">
 						<button id="btn" onclick="func('${group.gc_no}')" class="btns btn--block card__btn" disabled>신청불가</button>
@@ -464,9 +464,9 @@ img {
 		</ul>
 	</div>
 	<script type="text/javascript">
-		function func(gc_no){
+		function func(gc_no, c_email){
 			console.log(gc_no);
-			location.href = "userGroup.do?gc_no="+gc_no;
+			location.href = "userGroup.do?gc_no="+gc_no+"&c_email="+c_email;
 		}
 	</script>
 </body>

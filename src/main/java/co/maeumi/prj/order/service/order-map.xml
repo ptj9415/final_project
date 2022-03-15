@@ -11,7 +11,9 @@
 					OR_TYPE,
 					OR_PRICE,
 					M_NICKNAME,
-					M_EMAIL
+					M_EMAIL,
+					OR_STATUS,
+					c_email
 				)
 				VALUES(
 					(SELECT NVL(MAX(OR_NO),0)+1 FROM ORDER_DETAIL O),
@@ -22,7 +24,9 @@
 					'0',
 					#{or_price},
 					'닉네임 세션값이 들어감',
-					'이메일 세션값이 들어감'						
+					'이메일 세션값이 들어감',
+					'0',
+					#{c_email}						
 				)
 		</insert>
 		
@@ -43,7 +47,8 @@
                        or_type,
                        or_price,
                        m_nickname,
-                       m_email
+                       m_email,
+                       or_status
                 )
                 values(
                       (SELECT NVL(MAX(or_no),0)+1 FROM order_detail N),
@@ -54,7 +59,8 @@
                       '아직안옴',
                       #{or_price},
                       '세션값 이름 입니다.',
-                      '세션값 이메일 입니다'
+                      '세션값 이메일 입니다',
+                      '0'
                 )
 		</insert>
 		
