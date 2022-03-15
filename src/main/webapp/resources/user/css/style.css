@@ -51,7 +51,7 @@ html {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav,
+article, aside, figcaption, footer, header, hgroup, main, nav,
 	section {
 	display: block;
 }
@@ -189,7 +189,7 @@ pre {
 }
 
 figure {
-	margin: 0 0 1rem;
+	/* margin: 0 0 1rem; */
 }
 
 img {
@@ -463,12 +463,12 @@ mark, .mark {
 }
 
 .figure {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .figure-img {
-	margin-bottom: 0.5rem;
-	line-height: 1;
+	/* margin-bottom: 0.5rem;
+	line-height: 1; */
 }
 
 .figure-caption {
@@ -11975,7 +11975,7 @@ rgba(
 }
 
 .mfp-with-zoom.mfp-ready .mfp-container {
-	opacity: 1;
+	opacity: 0;
 }
 
 .mfp-with-zoom.mfp-ready.mfp-bg {

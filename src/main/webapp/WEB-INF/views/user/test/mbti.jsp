@@ -18,12 +18,12 @@
       content="https://minggmbti.netlify.app/ESFJ.png"
     />
     <meta property="og:url" content="https://minggmbti.netlify.app/" />
-    <link
+   <!--  <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
-    />
+    /> -->
     <!-- 폰트 추가 -->
  <!--    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -40,6 +40,20 @@ article {
 /* .start {
   font-family: "Nanum Pen Script", cursive;
 } */
+
+
+.progress{
+	display: flex;
+    height: 1.1rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 30px;
+    border: 3px solid #e4e4e4;
+}
+
+
+
 .progress-bar {
   background-color: black;
 }
@@ -51,37 +65,40 @@ article {
   display: none;
 }
 .questionMain {
-  font-family: "Nanum Pen Script", cursive;
-  font-size: 30px;
+  font-size: 20px;
   margin-top: 20px;
   text-align: center;
+  color: rgb(58, 58, 58);
+
 }
 .result {
   display: none;
 }
 
 .subtitle {
-  font-family: "Nanum Pen Script", cursive;
+  
   font-weight: bolder;
   text-align: center;
-  font-size: 50px;
+  font-size: 27px;
   margin-bottom: 50px;
 }
 .resulttitle {
-  font-family: "Nanum Pen Script", cursive;
+ 
   font-weight: bolder;
-  font-size: 30px;
+  font-size: 18px;
+  font-weight:bold;
   margin-bottom: 50px;
 }
 .resultcontent {
-  font-family: "Nanum Pen Script", cursive;
-  font-size: 30px;
+  
+  font-size: 14px;
   margin-bottom: 100px;
 }
 
 img {
  display : block;
  margin : auto;
+ width:250px;
 }
 
 .share {
@@ -103,20 +120,25 @@ img {
 .arrow_downbox {
   position: relative;
   background: #ffffff;
-  border: 2px solid #153e54;
-  border-radius: 20px 20px 20px 20px;
+ /*  border: 2px solid #153e54; */
+  border:1px solid rgb(167, 167, 167);
+  margin-top:20px;
+  padding: 10px;
+  border-radius: 30px;
+  outline:0;
 }
-.arrow_box:after,
-.arrow_box:before {
-  top: 100%;
-  left: 90%;
-  border: solid transparent;
-  content: "";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
+.arrow_box:focus{
+	border:1px solid rgb(167, 167, 167);
+	outline:0;
 }
+
+
+.arrow_box:hover{
+	background-color:#8dacbd42;
+	transition:200ms ease-in-out;
+	cursor:pointer;
+}
+
 
 .arrow_box:after {
   border-color: rgba(255, 255, 255, 0);
@@ -134,20 +156,22 @@ img {
 .arrow_downbox {
   position: relative;
   background: #ffffff;
-  border: 2px solid #153e54;
-  border-radius: 20px 20px 20px 20px;
+  border:1px solid rgb(167, 167, 167);
+  padding: 10px;
+  border-radius: 30px;
 }
-.arrow_downbox:after,
-.arrow_downbox:before {
-  top: 100%;
-  left: 10%;
-  border: solid transparent;
-  content: "";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
+
+.arrow_downbox:focus{
+	border:1px solid rgb(167, 167, 167);
+	outline:0;
 }
+
+.arrow_downbox:hover{
+	background-color:#8dacbd42;
+	transition:200ms ease-in-out;
+	cursor:pointer;
+}
+
 
 .arrow_downbox:after {
   border-color: rgba(255, 255, 255, 0);
@@ -163,7 +187,7 @@ img {
 }
 
 /* 버튼 이쁘게  */
-/* @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+ @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 .back {
   height: 200px;
   float: left;
@@ -182,17 +206,7 @@ img {
   padding: 10px;
 }
 
-@media screen and (max-width: 1260px) {
-  .back {
-    width: 50%;
-  }
-}
 
-@media screen and (max-width: 840px) {
-  .back {
-    width: 100%;
-  }
-}
 
 .button_base {
   margin: 0;
@@ -218,9 +232,9 @@ img {
 }
 
 .b03_skewed_slide_in {
-  border-radius: 10px;
+  border-radius: 50px;
   overflow: hidden;
-  border: #000000 solid 1px;
+  border: #153e54 solid 1px;
 }
 
 .b03_skewed_slide_in div {
@@ -232,6 +246,13 @@ img {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   padding: 10px;
+}
+
+.b03_skewed_slide_in div:hover{
+  background-color:#153e54;
+  color:white;
+  transtion:300ms ease-in-out;
+  cursor:pointer;
 }
 
 .b03_skewed_slide_in div:nth-child(1) {
@@ -273,25 +294,89 @@ img {
   -webkit-transition: left 0.30000000000000004s ease;
   -moz-transition: left 0.30000000000000004s ease;
 }
- */
-#all {
-	margin-top: 200px;
-	margin-bottom: 400px;
-}
  
+#all {
+	margin-top: 100px;
+    margin-bottom: 200px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.start-btn{
+	width:330px;
+	margin-right:auto;
+	margin-left:auto;
+	border-radius:30px;
+	background-color:#153e54;
+	color:white;
+	margin-top:50px;
+}
+.start-btn:hover{
+	cursor:pointer;
+	background-color:white;
+	border: 1px solid #153e54;
+	color: #153e54;
+	transition:300ms ease-in-out;
+}
+.pb-2, .py-2{
+	margin-top:100px;
+	margin-right:auto;
+	margin-left:auto;
+	width:80%;
+}
+.selfesteem{
+	margin-right:auto;
+	margin-left:auto;
+}
+
 </style>
   </head>
-  <body class="container">
+  <!-- banner start -->
+  <section class="hero-wrap hero-wrap-2"
+		style="background-image: url('resources/user/images/todayStory.jpg');">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+					<h1 class="mb-2 bread">심리검사</h1>
+					<br>
+					<p class="breadcrumbs">
+						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="container">
+		<div class="row justify-content-start mb-5 pb-2">
+			<div
+				class="col-md-4 heading-section  ftco-animated">
+				<span class="subheading subheading-with-line"><small
+					class="pr-2 bg-white">MAEUMI</small></span>
+				<h2 class="mb-4">MINI MBTI 검사</h2>
+			</div>
+			<div
+				class="col-md-8 pl-md-5 heading-section  ftco-animated">
+				<div class="pl-md-4 border-line">
+					<p style="font-weight:bold;"> 나는 어떤 성향의 사람일까?
+					<p style="font-size:0.7rem">소요시간 약 2분</p>
+					<br>
+					<p>"넌 오늘 정말 잘했다. 실수하지 않아서가 아니라 포기하지 않아서.</p>
+					<p>뒤처지지 않아서가 아니라 멈춰 서지 않아서"</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- banner end -->
+  <body class="mbti-container">
   <div id="all">
     <article class="start">
     <img alt=""  src="img/mbti/a.png" style="width: 500px; height: 400px;">
       <h1 class="mt-5 text-center">미니 MBTI 검사</h1>
-      <button
-        type="button"
-        style="color: white;  font-size: 30px;"
-        class="btn btn-primary mt-5"
-        onclick="start();"
-      >
+      <button type="button" class="start-btn" style="font-size: 30px;" class="btn btn-primary mt-5" onclick="start();">
         테스트 시작하기
       </button>
     </article>
@@ -311,12 +396,7 @@ img {
       <button id="up" type="button" class="arrow_box mt-5" style="float: right">
         Primary
       </button>
-      <button
-        id="down"
-        type="button"
-        class="arrow_downbox mt-5"
-        style="float: left"
-      >
+      <button id="down" type="button" class="arrow_downbox mt-5" style="float: left">
         Primary
       </button>
     </article>
@@ -339,9 +419,7 @@ img {
 
       <div class="back">
         <div class="button_base b03_skewed_slide_in">
-          <div>다시 테스트 하기!</div>
-          <div></div>
-          <div onclick="reset();">다시 테스트 하기!</div>
+          <div class="reset-btn" onclick="reset();">다시 테스트 하기!</div>
         </div>
       </div>
 
