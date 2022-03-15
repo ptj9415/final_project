@@ -261,7 +261,7 @@
 	font-family: Montserrat, sans-serif;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
 	flex-direction: column;
 	min-height: 100vh;
 	margin: 0;
@@ -282,7 +282,7 @@ p {
 }
 
 .card-container {
-	background-color: #231e39;
+	/* background-color: #231e39; */
 	border-radius: 30px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #b3b8cd;
@@ -307,14 +307,15 @@ p {
 }
 
 .card-container .round {
-	border: 1px solid #8dacbd42;
+	border: 1px solid #153e54;
 	border-radius: 50%;
 	padding: 7px;
+	margin-right: 40px;
 }
 
 div.buttons {
-	margin-bottom: 15px;
-	margin-top: 15px;
+	/* margin-bottom: 15px;
+	margin-top: 15px; */
 	border: 1px solid #8dacbd42;
 	width: 200px;
 	margin-right: auto;
@@ -352,9 +353,11 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #1f1a36;
+/* 	background-color: #1f1a36; */
 	text-align: left;
-	padding: 15px;
+	padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 2px;
 	margin-top: 5px;
 }
 
@@ -365,12 +368,13 @@ button.primary.ghost {
 }
 
 .skills ul li {
-	border: 1px solid #8dacbd42;
-	border-radius: 20px;
-	display: inline-block;
-	font-size: 12px;
-	margin: 0 7px 7px 0;
-	padding: 7px;
+	border: 1px solid #153e54;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 11px;
+    margin: 0 7px 7px 0;
+    padding: 7px;
+    color: #153e54;
 }
 
 .grid-container {
@@ -378,8 +382,8 @@ button.primary.ghost {
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-input[type="checkbox"] {
-	position: relative;
+/*input[type="checkbox"] {
+ 	position: relative;
 	width: 40px;
 	height: 20px;
 	-webkit-appearance: none;
@@ -387,7 +391,7 @@ input[type="checkbox"] {
 	outline: none;
 	border-radius: 20px;
 	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-	/* transition: .5%; */
+	transition: .5%; 
 }
 
 input:checked[type="checkbox"] {
@@ -410,15 +414,147 @@ input[type="checkbox"]:before {
 
 input:checked[type="checkbox"]:before {
 	left: 20px;
-}
+} */
 
 /*상담사 리스트 스타일 end*/
 
-/* 검색 */
+/* 검색 div */
 .detail {
-	border: 0.5px solid black;
-	display: none;
+	border: 0.5px solid #e2e2e2;
+    display: none;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    animation: fadein 1s;
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    padding: 50px;
+    background-color: #d3e0e742;
+    border-radius: 5px 5px 30px 30px;
+     box-shadow: 0 4px 4px -4px black;
+     margin-bottom:30px;
+     
 }
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0.1;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.searchdiv{
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:50px;
+	width: 90%;
+}
+input#c_name:focus{
+	border:1px solid #8dacbd42;
+	outline:0;
+	}
+input#c_name{
+	height: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 80%;
+    border: 1px solid #8dacbd42;
+    margin-right: 5px;
+    margin-left: 40px;
+    border-radius: 30px 5px 5px 30px;
+}
+#detailbtn{
+	
+	border-radius:5px 5px 5px 5px;
+	border:1px solid #8dacbd42;
+	border: 1px solid #8dacbd42;
+    background-color: #8dacbd42;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 30px
+}
+#detailbtn:focus{
+	border:1px solid #8dacbd42;
+	outline:0;
+}
+#detailbtn:hover{
+	cursor:pointer;
+	
+}
+.search-btn{
+	border-radius: 5px 30px 30px 5px;
+	border:1px solid #153e54;
+	background-color:#153e54;
+	width: 90px;
+	padding:18px;
+    text-align: center;
+    color:white;
+}
+.category-box{
+	padding:20px;
+}
+.choice-btn{
+	margin-right:auto;
+	margin-left:auto;
+	padding: 20px;
+    padding-left: 45%;
+}
+.category{
+	padding-bottom:20px;
+}
+.counseltype{
+	padding-bottom:20px;
+}
+.gender{
+	padding-bottom:20px;
+}
+
+#detailsubmitbtn{
+	margin-right:auto;
+	margin-left:auto;
+	width:100px;
+	height:40px;
+	border-radius:30px;
+	background-color:#153e54;
+	border:1px solid #153e54;
+	color:white;
+	float:right;
+}
+.detail-hover:hover{
+	cursor:pointer;
+}
+#confirmbtn{
+	width: 130px;
+    margin: 50px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #153e54;
+    color: white;
+}
+#confirmbtn:hover{
+	background-color:white;
+	border:1px solid #153e54;
+	color:#153e54;
+	transition:300ms ease-in-out;
+}
+#confirmbtn:focus{
+	border:1px solid #153e54;
+	outline:0;
+}
+
+/*검색 div end*/
+
 </style>
 </head>
 <body>
@@ -441,40 +577,93 @@ input:checked[type="checkbox"]:before {
 	<br>
 
 	<section>
-		<div class="searchdiv">
-			<input type="text" id="c_name" placeholder="상담사 이름을 입력해주세요.">
-			<button type="button" id="detailbtn">카테고리 선택</button>
-			<button type="button" onclick="submitbtn();">검색</button>
+	<div class="md-stepper-horizontal orange">
+		<div class="md-step active done">
+			<div class="md-step-circle">
+				<span>1</span>
+			</div>
+			<div class="md-step-title">step1</div>
+			<div class="md-step-optional">카테고리 및 상담사 검색</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
 		</div>
+		<div class="md-step">
+			<div class="md-step-circle">
+				<span>2</span>
+			</div>
+			<div class="md-step-title">step2</div>
+			<div class="md-step-optional">상담사 선택</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
+		</div>
+		<div class="md-step">
+			<div class="md-step-circle">
+				<span>3</span>
+			</div>
+			<div class="md-step-title">step3</div>
+			<div class="md-step-optional">상담 방법 선택</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
+		</div>
+		<div class="md-step">
+			<div class="md-step-circle">
+				<span>4</span>
+			</div>
+			<div class="md-step-title">step4</div>
+			<div class="md-step-optional">상담 날짜 선택</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
+		</div>
+	</div>
+	
+		<div class="searchdiv">
+			<p style="font-size:11px; margin-left:80px;">＊ 나에게 꼭 맞는 전문 심리상담사를 찾아보세요</p>
+			<input type="text" id="c_name" style="padding:31px;" placeholder="상담사 이름을 입력해주세요..">
+			<button type="button"  class="search-btn"  onclick="submitbtn();">검색</button>
+		</div>
+		 <div class="choice-btn">
+			<button type="button" id="detailbtn">카테고리별 검색</button>
+		 </div>	
 
 		<div class="detail">
 			<div class="category">
-				<span> <input type="checkbox" name="c_type1" value="1">분노/우울
-				</span> <span> <input type="checkbox" name="c_type2"
-					value="1">연애/우정
-				</span> <span> <input type="checkbox" name="c_type3"
-					value="1">진로/취업
-				</span> <span> <input type="checkbox" name="c_type4"
-					value="1">결혼/육아
-				</span> <span> <input type="checkbox" name="c_type5" value="1">청소년
-				</span> <span> <input type="checkbox" name="c_type6" value="1">가정
+			  <p style="font-weight:bold;">상담 카테고리</p>
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" class="input-check" name="c_type1" value="1"  >분노/우울
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="c_type2" value="1">연애/우정
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="c_type3" value="1">진로/취업
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="c_type4" value="1">결혼/육아
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="c_type5" value="1">청소년
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="c_type6" value="1">가정
 				</span>
 			</div>
 			<div class="counseltype">
-				<p>상담유형</p>
-				<span> <input type="checkbox" name="p_kakao" value="1">메신저
-					상담
-				</span> <span> <input type="checkbox" name="p_zoom" value="1">화상
-					상담
-				</span> <span> <input type="checkbox" name="p_phone" value="1">전화
-					상담
+				<p style="font-weight:bold;">상담유형</p>
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;"  type="checkbox" name="p_kakao" value="1">카카오톡 채팅상담
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="p_zoom" value="1">zoom 화상 상담
+				</span> 
+				<span class="category-box"> 
+					<input style="margin-right:10px; zoom:1.3;" type="checkbox" name="p_phone" value="1">전화 상담
 				</span>
 			</div>
 			<div class="gender">
-				<p>성별</p>
-				<input type="radio" name="c_gender" id="c_gender" value="all" checked="checked">전체
-				<input type="radio" name="c_gender" id="c_gender" value="남성">남성
-				<input type="radio" name="c_gender" id="c_gender" value="여성">여성
+				<p style="font-weight:bold;" >성별</p>
+				<input style="margin-left:20px; zoom:1.2;" type="radio" name="c_gender" id="c_gender" value="all" checked="checked">전체
+				<input style="margin-right:10px; zoom:1.2;" type="radio" name="c_gender" id="c_gender" value="남성">남성
+				<input style="margin-right:10px; zoom:1.2;" type="radio" name="c_gender" id="c_gender" value="여성">여성
 			</div>
 			<button type="button" id="detailsubmitbtn">검색</button>
 		</div>
@@ -484,17 +673,21 @@ input:checked[type="checkbox"]:before {
 	<div class="body-container">
 		<div class="grid-container">
 			<c:forEach items="${counselorList }" var="counselorList">
-				<div class="card-container">
-					<span class="pro">전문의</span> <img class="round"
-						src="img/counselorpicture/asdf.png}"
+				<div class="card-container" >
+					<div class="detail-hover" onclick="func('${counselorList.c_email}','${type}')">
+					<!-- <span class="pro">전문의</span>  -->
+					<img class="round" src="img/counselorpicture/asdf.png}"
 						onerror="this.src='resources/user/images/errorprofile.jpg';"
-						style="width: 150px" alt="user">
+						style="width: 120px" alt="user">
 
-					<h3 style="color: white;">${counselorList.c_name}</h3>
-					<h6>${counselorList.c_grade}</h6>
+					<span style="display:inline-grid;">
+					<h4 style="color:#153e54;">${counselorList.c_name}</h4>
+					<h6 style="color:#153e54;">${counselorList.c_grade}</h6>					
+					</span>
+					
 
 					<div class="skills">
-						<h6 style="font-size: 12px;">상담방식</h6>
+						<h6 style="font-size: 12px; margin-left:10px; color:#153e54;">상담방식</h6>
 						<ul>				          	
 				            <c:if test="${counselorList.p_kakao eq 1}">
 				            <li value="${counselorList.p_kakaoprice}">카카오톡 ${counselorList.p_kakaoprice} 원</li>
@@ -509,15 +702,16 @@ input:checked[type="checkbox"]:before {
 							</c:if>		
 			          </ul>
 					</div>
-					<div class="buttons" onclick="func('${counselorList.c_email}','${type}')">자세히 보기
-
 					</div>
-					<input type="checkbox" id="check-btn" name="c_email"
-						class="btn btn-primary px-4 py-3 mt-3" value="${counselorList.c_email}">
+					<%-- <div class="buttons" onclick="func('${counselorList.c_email}','${type}')">자세히 보기
+
+					</div> --%>
+					<input type="checkbox" id="check-btn" name="c_email" onclick="doOpenCheck(this);"
+						class="btn btn-primary px-4 py-3 mt-3" style="zoom:2.0; margin-bottom:10px;" value="${counselorList.c_email}">
 				</div>
 			</c:forEach>
 		</div>
-		<button type="button" id="confirmbtn">선택</button>
+		<button type="button" id="confirmbtn" >선택</button>
 	</div>
 
 	<script>
@@ -534,7 +728,7 @@ input:checked[type="checkbox"]:before {
 			if ($('.detail').css('display') == 'none') {
 				$('.detail').show();
 			} else if ($('.detail').css('display') != 'none') {
-				$('.detail').hide();
+				$('.detail').fadeOut();
 			}
 		});
 		
@@ -603,6 +797,16 @@ input:checked[type="checkbox"]:before {
 		$(".hover").mouseleave(function() {
 			$(this).removeClass("hover");
 		});
+		
+		
+		function doOpenCheck(chk) {
+			var obj = document.getElementsByName("c_email");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
 	</script>
 </body>
 </html>
