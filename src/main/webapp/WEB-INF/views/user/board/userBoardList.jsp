@@ -291,7 +291,7 @@ button:hover {
 			<div class="row g-4 py-5 row-cols-1 row-cols-lg-3"
 				onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
 				<div class="feature col" style="height: 90px;">
-					<hr align="left"width: 90%>
+					<hr align="left" width: 90%>
 					<small class="subject">${board.b_subject}</small>
 					<p class="title">${board.b_title}</p>
 					<small id="content">${board.b_content}</small>
