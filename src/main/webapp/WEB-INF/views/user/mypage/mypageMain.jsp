@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -631,6 +631,7 @@ textarea {
 	<div class="container-fluid">
 		<br>
 			<div class="row">
+				<div class="col-md-1 offset-md-0"></div>
 				<div class="col-md-10 offset-md-0">
 					<div class="card">
 						<p id="headerp">개인 정보</p>
@@ -638,6 +639,7 @@ textarea {
 				</div>
 			</div>
 			<div class="row">
+			<div class="col-1"></div>
 				<div class="col-10">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
@@ -683,6 +685,7 @@ textarea {
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
+				<div class="col-md-1 offset-md-0"></div>
 				<div class="col-md-10 offset-md-0">
 					<div class="card" id="headerdiv">
 						<p id="headerp">
@@ -695,6 +698,7 @@ textarea {
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-1"></div>
 				<div class="col-10">
 					<div class="card" id="maindiv2">
 						<div class="card-body table-responsive p-00">
@@ -723,7 +727,7 @@ textarea {
 											<td>${list.or_date}</td>
 											<td>${list.or_price}</td>
 											<c:if test="${list.or_status eq 0 }">
-												<td> <button type="button">환불</button></td>
+												<td> <button type="button" onclick="refundFunc('${list.or_no}')">환불</button></td>
 											</c:if>
 											<c:if test="${list.or_status eq 1 }">
 												<td>-</td>
@@ -743,6 +747,7 @@ textarea {
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
+				<div class="col-md-1 offset-md-0"></div>
 				<div class="col-md-10 offset-md-0">
 					<div class="card" id="headerdiv">
 						<p id="headerp">
@@ -755,6 +760,7 @@ textarea {
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-1"></div>
 				<div class="col-10">
 					<div class="card" id="maindiv2">
 						<div class="card-body table-responsive p-00">
@@ -773,7 +779,7 @@ textarea {
 										<td colspan="2">${blist.b_wdate}</td>
 										<td colspan="2">${blist.b_subject}</td>
 										<td>${blist.b_title}</td>
-										<td><button type="button">관리</button> </td>
+										<td><button type="button" onclick="boardDetail('${blist.b_no}')">관리</button> </td>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -789,6 +795,7 @@ textarea {
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
+				<div class="col-md-1 offset-md-0"></div>
 				<div class="col-md-10 offset-md-0">
 					<div class="card" id="headerdiv">
 						<p id="headerp">
@@ -801,6 +808,7 @@ textarea {
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-1"></div>
 				<div class="col-10">
 					<div class="card" id="maindiv2">
 						<div class="card-body table-responsive p-00">
@@ -825,7 +833,7 @@ textarea {
 											</c:if>
 											<td>${plist.c_name} 상담사 ${plist.pr_type} 개인상담</td>
 											<td>${plist.pr_type}</td>
-											<td> <button type="button">조회</button> </td> 
+											<td> <button type="button" onclick="personalsangDam('${plist.pr_no}')">조회</button> </td> 
 										</tr>
 									</c:forEach>
 									<c:forEach  items="${glist}" var="glist">
@@ -837,7 +845,7 @@ textarea {
 											</c:if>
 											<td>${glist.gc_title}</td>
 											<td>${glist.gc_type }</td>
-											<td> <button type="button">조회</button> </td> 
+											<td> <button type="button" onclick="GroupsangDam('${glist.gc_no}')">조회</button> </td> 
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -849,58 +857,12 @@ textarea {
 		</div>
 		<br>
 	</section>
-
-
 <!-- 결국 이메일이랑, 가입유형으로 구분해야 한다.  
 	카카오로 로그인을 하든, 네이버로 로그인을 하든, 일반회원으로 로그인을 하든 
 	기본적으로 세션값을 부여해서 이메일일과 가입유형에 대한 세션값을 준다.
 	그리고 컨트롤러를 통해서 그 세션값을 가져와서 쿼리를 날려 해당 유저의 모든 정보를 추출해서
 	그 정보를 mypage로 전달한다. 
 	-->
-
-<%-- <!-- 개인정보 수정영역  -->
-<section>		
-<div class="mainForm">
-	<h3>개인 정보</h3>
-	
-	<div class="myInfoForm">
-		<div class="myInfo Email">
-			이메일&nbsp;&nbsp; <input type="text" id="email" class="myInfoInput" disabled="disabled" value="${member.m_email }">	(${member.m_type })
-			
-			<br> 	 	
-		</div>
-		
-		<div class="myInfo mynickname">
-			닉네임&nbsp;&nbsp;
-			<input type="text" class="myInfoInput" id="nickname" name="nickname" value="${member.m_nickname }" readonly="readonly"> 
-			<input type="button" class="changeBtn" id="changeBtn" onclick="nicknameChanged()" value="닉네임 변경">
-			<input type="button" class="changeBtn" id="changeCheck" value="적용">
-			<br>
-			<script>
-				
-			</script>
-		</div>
-		
-		<div class="myInfo myphone">
-			연락처&nbsp;&nbsp; <input type="text" class="myInfoInput" value="${member.m_phone }">
-			<input type="button" class="changeBtn" id="phoneChkBtn" value="연락처 수정">
-			<br>
-		</div>
-		
-		<div class="myInfo mypassword">
-			<input type="button" id="changePwdBtn" value="비밀번호 변경" > &nbsp;&nbsp; 
-			<input type="button" id="memberLeave" value="회원탈퇴">
-
-		</div>
-	</div>
-</div>
-	<!-- 결국 이메일이랑, 가입유형으로 구분해야 한다.  
-	카카오로 로그인을 하든, 네이버로 로그인을 하든, 일반회원으로 로그인을 하든 
-	기본적으로 세션값을 부여해서 이메일일과 가입유형에 대한 세션값을 준다.
-	그리고 컨트롤러를 통해서 그 세션값을 가져와서 쿼리를 날려 해당 유저의 모든 정보를 추출해서
-	그 정보를 mypage로 전달한다. 
-	-->
-</section> --%>
 <br><br><br>
 </body>
 <script>
@@ -1009,6 +971,35 @@ textarea {
 		
 	});
 	
+	function refundFunc(or_no){
+		if(confirm('정말 환불하시겠습니까?')) {
+			url = "mypageRefund.do";
+			url = url + "?or_no="+or_no;
+			location.href = url;
+		}
+	}
+	
+	function boardDetail(b_no){
+		url = "myPageboardDetail.do";
+		url = url +"?b_no="+b_no;
+		location.href = url;
+	}
+	
+	function GroupsangDam(gc_no){
+		alert(gc_no);
+		url = "userGroupsangDam.do";
+		url = url + "?gc_no="+gc_no;
+		location.href = url;
+			
+	}
+	
+	function personalsangDam(pr_no){
+		url = "userPersonalsangDam.do";
+		url = url + "?pr_no="+pr_no;
+		location.href = url;
+			
+	}
+
 </script>
 <!-- Bootstrap 4 -->
 <script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

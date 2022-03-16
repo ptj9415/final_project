@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,7 @@ import com.google.gson.JsonObject;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
+import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
@@ -518,6 +520,7 @@ public class YoungohController {
 		return "user/test/simri";
 	}
 	
+	//유저 마이페이지 관리.
 	@RequestMapping("/userMypages.do")
 	public String userMypages(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model, myPageVO vo, BoardVO bvo) {
 		
@@ -561,4 +564,84 @@ public class YoungohController {
 		return "user/mypage/mypageMain";
 	}
 	
+	@RequestMapping("/mypageRefund.do")
+	public String mypageRefund(HttpServletRequest request, myPageVO vo) {
+		String or_no = request.getParameter("or_no");
+		int num = Integer.parseInt(or_no);
+		vo.setOr_no(num);
+		vo = myPageDao.findNo(vo);
+		vo.setOr_no(num);
+		System.out.println(vo.getPr_no());
+		System.out.println(vo.getGc_no());
+		int success = myPageDao.myPageRefund(vo);
+		if (success == 1) {
+			//그룹 상담일 경우
+			if (vo.getPr_no() == 0) {
+				System.out.println("그룹 상담으로 들어옴");
+				myPageDao.myPageGroupRefund(vo);
+			}
+			//개인 상담일 경우
+			if (vo.getGc_no() == 0) {
+				System.out.println("개인 상담으로 들어옴");
+				myPageDao.myPagePersonalRefund(vo);
+			}
+		}
+		return "redirect:userMypages.do";
+	}
+	
+	@RequestMapping("/myPageboardDetail.do")
+	public String myPageboardDetail(HttpServletRequest request,BoardVO vo,Model model, BoardReplyVO bvo) {
+		String b_no = request.getParameter("b_no");
+		int num = Integer.parseInt(b_no);
+		vo.setB_no(num);
+		
+		vo =  myPageDao.boardDetail(vo);
+		String date = vo.getB_wdate();
+		date = date.substring(0, 10);
+		vo.setB_wdate(date);
+
+		model.addAttribute("board",vo);
+
+		List<BoardReplyVO> blist = myPageDao.boardReplyDetail(bvo);
+		for (int i = 0; i < blist.size(); i++) {
+			String brdate = blist.get(i).getBr_wdate();
+			brdate = brdate.substring(0, 10);
+			blist.get(i).setBr_wdate(brdate);
+		}
+		
+		model.addAttribute("brboard", blist);
+		
+		return "user/mypage/mypageBoard";
+	}
+	
+	@RequestMapping("/userPersonalsangDam.do")
+	public String userPersonalsangDam(HttpServletRequest request, myPageVO vo, Model model ) {
+		String pr_no = request.getParameter("pr_no");
+		int num = Integer.parseInt(pr_no);
+		vo.setPr_no(num);
+		vo = myPageDao.mypagePersonal(vo);
+		model.addAttribute("personal",vo);
+		return "user/mypage/mypagePersonalDetail"; 
+	}
+	
+	@RequestMapping("/userGroupsangDam.do")
+	public String userGroupsangDam(HttpServletRequest request, myPageVO vo, Model model) {
+		String gc_no = request.getParameter("gc_no");
+		int num = Integer.parseInt(gc_no);
+		vo.setGc_no(num);
+		vo = myPageDao.mypageGroup(vo);
+		
+		String date = vo.getGc_date();
+		date = date.substring(0, 10);
+		vo.setGc_date(date);
+		String date2 = vo.getGc_startdate();
+		date2 = date2.substring(0, 10);
+		vo.setGc_startdate(date2);
+		String date3 = vo.getGc_finaldate();
+		date3 = date3.substring(0, 10);
+		vo.setGc_finaldate(date3);
+		
+		model.addAttribute("glist", vo);
+		return "user/mypage/mypageGroupDetail"; 
+	}
 }
