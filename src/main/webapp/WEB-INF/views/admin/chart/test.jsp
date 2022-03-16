@@ -310,7 +310,7 @@ p {
 	border: 1px solid #153e54;
 	border-radius: 50%;
 	padding: 7px;
-	margin-right: 40px;
+	margin-right: 60px;
 }
 
 div.buttons {
@@ -368,7 +368,7 @@ button.primary.ghost {
 }
 
 .skills ul li {
-	border: 1px solid #153e54;
+	/* border: 1px solid #153e54; */
     border-radius: 20px;
     display: inline-block;
     font-size: 11px;
@@ -575,10 +575,26 @@ input#c_name{
 	</section>
 	<br>
 	<br>
-
+<div class="container">
+		<div class="row justify-content-start mb-5 pb-2">
+			<div
+				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+				<span class="subheading subheading-with-line"><small
+					class="pr-2 bg-white">MAEUMI</small></span>
+				<h2 class="mb-4">개인상담 신청</h2>
+			</div>
+			<div
+				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+				<div class="pl-md-4 border-line">
+					<p>언제 어디서나 전문 상담사와 1대 1, 익명 상담이 가능한 서비스</p>
+					<p>정신건강에 대한 체계적 진단과 심리상담 및 치료를 다루는 개인상담</p>
+				</div>
+			</div>
+		</div>
+	</div>
 	<section>
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
@@ -678,7 +694,7 @@ input#c_name{
 					<!-- <span class="pro">전문의</span>  -->
 					<img class="round" src="img/counselorpicture/asdf.png}"
 						onerror="this.src='resources/user/images/errorprofile.jpg';"
-						style="width: 120px" alt="user">
+						style="width: 90px" alt="user">
 
 					<span style="display:inline-grid;">
 					<h4 style="color:#153e54;">${counselorList.c_name}</h4>
@@ -687,18 +703,19 @@ input#c_name{
 					
 
 					<div class="skills">
-						<h6 style="font-size: 12px; margin-left:10px; color:#153e54;">상담방식</h6>
+						<!-- <h6 style="font-size: 12px; margin-left:10px; color:#153e54;">상담방식</h6> -->
+						<hr style="border:1px solid #d3e0e742">
 						<ul>				          	
 				            <c:if test="${counselorList.p_kakao eq 1}">
-				            <li value="${counselorList.p_kakaoprice}">카카오톡 ${counselorList.p_kakaoprice} 원</li>
+				            <li value="${counselorList.p_kakaoprice}"><img src="resources/user/images/chat1.png" style="width:30px;"> ${counselorList.p_kakaoprice} 원</li>
 				            </c:if>
 											
 							<c:if test="${counselorList.p_zoom eq 1}">
-							<li value="${counselorList.p_zoomprice}">줌 ${counselorList.p_zoomprice} 원</li>
+							<li value="${counselorList.p_zoomprice}"><img src="resources/user/images/laptop1.png" style="width:30px;"> ${counselorList.p_zoomprice} 원</li>
 							</c:if>
 							
 							<c:if test="${counselorList.p_phone eq 1}">
-							<li value="${counselorList.p_phoneprice}">전화 ${counselorList.p_phoneprice} 원</li>
+							<li value="${counselorList.p_phoneprice}"><img src="resources/user/images/telephone.png" style="width:30px;"> ${counselorList.p_phoneprice} 원</li>
 							</c:if>		
 			          </ul>
 					</div>
@@ -707,7 +724,7 @@ input#c_name{
 
 					</div> --%>
 					<input type="checkbox" id="check-btn" name="c_email" onclick="doOpenCheck(this);"
-						class="btn btn-primary px-4 py-3 mt-3" style="zoom:2.0; margin-bottom:10px;" value="${counselorList.c_email}">
+						class="btn btn-primary px-4 py-3 mt-3" style="zoom:2.0; margin-bottom:4px;" value="${counselorList.c_email}">
 				</div>
 			</c:forEach>
 		</div>

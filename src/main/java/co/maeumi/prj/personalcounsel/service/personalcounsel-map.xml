@@ -19,9 +19,11 @@
 		p.p_zoom, p.p_zoomprice, p.p_phone ,p.p_phoneprice
 
 		from cs_category
-		cs join counselor c on(cs.c_email = c.c_email) join price
+		cs
+		join counselor c on(cs.c_email = c.c_email) join price
 		p
-		on(cs.c_email = p.c_email)
+		on(cs.c_email =
+		p.c_email)
 		where cs.ccg_subname = #{ccg_subname}
 	</select>
 
@@ -66,8 +68,10 @@
 		prCount
 		FROM PERSONAL_RESERVE
 		where pr_date
-		between to_char(add_months(sysdate, -2), 'yyyy-mm')
-		and to_char(add_months(sysdate, 1), 'yyyy-mm')
+		between
+		to_char(add_months(sysdate, -2), 'yyyy-mm')
+		and
+		to_char(add_months(sysdate, 1), 'yyyy-mm')
 		GROUP BY substr(pr_date, 1,
 		7)
 		ORDER BY substr(pr_date, 1, 7)
@@ -80,9 +84,12 @@
 		sum(pr_price) as prSum
 		from personal_reserve
 		where pr_date
-		between to_char(add_months(sysdate, -2), 'yyyy-mm')
-		and to_char(add_months(sysdate, 1), 'yyyy-mm')
-		group by rollup(substr(pr_date, 1, 7))
+		between
+		to_char(add_months(sysdate, -2), 'yyyy-mm')
+		and
+		to_char(add_months(sysdate, 1), 'yyyy-mm')
+		group by
+		rollup(substr(pr_date, 1, 7))
 		ORDER BY substr(pr_date, 1, 7)
 	</select>
 
@@ -93,9 +100,12 @@
 		sum(pr_price) as prSum
 		from personal_reserve
 		where pr_date
-		between to_char(add_months(sysdate, #{sendMonth}), 'yyyy-mm')
-		and to_char(add_months(sysdate, 1), 'yyyy-mm')
-		group by rollup(substr(pr_date, 1, 7))
+		between
+		to_char(add_months(sysdate, #{sendMonth}), 'yyyy-mm')
+		and
+		to_char(add_months(sysdate, 1), 'yyyy-mm')
+		group by
+		rollup(substr(pr_date, 1, 7))
 		ORDER BY substr(pr_date, 1, 7)
 	</select>
 
@@ -128,7 +138,8 @@
 		from personal_reserve re
 		left outer join member m
 		on(re.m_email = m.m_email)
-		where pr_no= #{pr_no}
+		where pr_no=
+		#{pr_no}
 		order by re.pr_no desc
 	</select>
 
@@ -148,32 +159,35 @@
 		personal_reserve
 		where pr_no=#{pr_no}
 	</delete>
-  
-	<insert id="personalCounselInsert" parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-		        INSERT INTO PERSONAL_RESERVE(
-                pr_no,
-                c_email,
-                m_email,
-                pr_date,
-                pr_price,
-                pr_time,
-                pr_status,
-                pr_type
-                )
-                VALUES(
-                (SELECT NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
-                #{c_email},
-                #{m_email},
-                #{pr_date},
-                #{pr_price},
-                #{pr_time},
-                '0',
-                #{pr_type}
-                )
+
+	<insert id="personalCounselInsert"
+		parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		INSERT INTO PERSONAL_RESERVE(
+		pr_no,
+		c_email,
+		m_email,
+		pr_date,
+		pr_price,
+		pr_time,
+		pr_status,
+		pr_type
+		)
+		VALUES(
+		(SELECT
+		NVL(MAX(pr_no),0)+1 FROM personal_reserve N),
+		#{c_email},
+		#{m_email},
+		#{pr_date},
+		#{pr_price},
+		#{pr_time},
+		'0',
+		#{pr_type}
+		)
 	</insert>
 
 	<select id="personalMax" resultType="int">
-		select max(pr_no) from personal_reserve
+		select max(pr_no) from
+		personal_reserve
 	</select>
 
 
@@ -200,8 +214,10 @@
 	<select id="prSearchSelect"
 		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
 		SELECT * FROM (SELECT ROWNUM RN, A.*
-		FROM (select m.m_nickname, m.m_email, re.c_email,re.pr_no, re.pr_date,
-		re.pr_price, re.pr_time, re.pr_status,re.pr_type, re.ccg_subname,
+		FROM (select m.m_nickname,
+		m.m_email, re.c_email,re.pr_no, re.pr_date,
+		re.pr_price, re.pr_time,
+		re.pr_status,re.pr_type, re.ccg_subname,
 		re.pc_report, re.pc_result
 		from personal_reserve re, member m
 		<trim prefix="where" prefixOverrides="and | or">
@@ -218,7 +234,34 @@
 		#{start} AND #{end}
 	</select>
 
-	<!-- 사용자화면 상담사 List 출력 -->
-
-
+	<select id="searchCounselData"
+		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+		SELECT
+		SUBSTR(PR_DATE, 1, 7) AS pr_date
+		, COUNT(PR_NO) AS pr_count
+		FROM
+		PERSONAL_RESERVE
+		WHERE C_EMAIL = #{c_email}
+		GROUP BY SUBSTR(PR_DATE,1, 7)
+	</select>
+	
+	<select id="searchCounselData2" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
+	SELECT
+		SUBSTR(PR_DATE, 1, 7) AS pr_date
+		, COUNT(PR_NO) AS pr_count
+		FROM
+		PERSONAL_RESERVE
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="pr_type != 'all'">AND pr_type like '%'||#{pr_type}||'%'</if>
+			<if test="ccg_subname != 'all'">AND ccg_subname like '%'||#{ccg_subname}||'%'</if>
+			AND C_EMAIL = #{c_email}
+		</trim>
+		GROUP BY SUBSTR(PR_DATE,1, 7)
+	</select>
+	
+	<!-- 메인화면 상담사리스트 -->
+	<select id="CounselorList" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" >
+		select * from counselor
+		order by c_name desc
+	</select>
 </mapper>
