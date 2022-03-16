@@ -237,38 +237,57 @@ div.counsel-type {
 
 /*step 3end*/
 .choice-btn {
-	width: 70%;
+	width: 90%;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 100px;
 	margin-bottom: 100px;
-	padding: 50px;
+	padding: 30px;
     border: 1px solid #8dacbd42;
     border-radius: 30px;
      box-shadow: 0px 0px 20px #00000040;
 }
 
 .chat-btn {
-	width: 100px;
-	height: 45px;
-	border: 1px solid #153e54;
-	background-color: white;
-	border-radius: 20px;
+	width: 50px;
+
+	background-color: #ffffff00;
+	border:0;
 }
 
 .chat-img {
-	width: 150px;
-	height: 150px;
+	width: 60px;
+	height: 60px;
+	margin-right:auto;
+	margin-left:auto;
 }
 
 .row mt-5 pt-4{
 	display:grid;
 	grid-auto-rows: 50px;
 	grid-template-columns: 80px 80px;
+	align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
 }
 
 #confirmdiv:hover {
 	cursor: pointer;
+}
+.h4, h4{
+	font-size:12px;
+}
+
+.category-choice{
+	display:flex;
+	margin-top:50px;
+}
+
+.sub-category-btn{
+	display:block;
+	min-width: 33%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }
 </style>
 </head>
@@ -298,12 +317,8 @@ div.counsel-type {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>언제 어디서나 전문 상담사와 1대 1, 익명 상담이 가능한 서비스</p>
+					<p>정신건강에 대한 체계적 진단과 심리상담 및 치료를 다루는 개인상담</p>
 				</div>
 			</div>
 		</div>
@@ -314,7 +329,7 @@ div.counsel-type {
 				<span>1</span>
 			</div>
 			<div class="md-step-title">step1</div>
-			<div class="md-step-optional">상담 카테고리 선택</div>
+			<div class="md-step-optional">카테고리 및 상담사 검색</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -323,7 +338,7 @@ div.counsel-type {
 				<span>2</span>
 			</div>
 			<div class="md-step-title">step2</div>
-			<div class="md-step-optional">상담사 선택</div>
+			<div class="md-step-optional">상담 카테고리 및 상담방식 선택</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -332,7 +347,7 @@ div.counsel-type {
 				<span>3</span>
 			</div>
 			<div class="md-step-title">step3</div>
-			<div class="md-step-optional">상담 방법 선택</div>
+			<div class="md-step-optional">상담 날짜/시간 선택</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -341,7 +356,7 @@ div.counsel-type {
 				<span>4</span>
 			</div>
 			<div class="md-step-title">step4</div>
-			<div class="md-step-optional">상담 날짜 선택</div>
+			<div class="md-step-optional">상담신청 내역 확인</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -349,13 +364,16 @@ div.counsel-type {
 
 <form id="step2" action="test3pg.do" method="post">
 <!-- <form id="step3" action="personalCounselStep4.do" method="post"> -->
+
+	
 	<div class="choice-btn">
-		<div class="row mt-5 pt-4">
-		
+		<p>상담 카테고리 선택</p>
+		<hr style="border:1px solid #d3e0e742">
+		<div class="row mt-4 pt-4">
 		<c:if test="${counselorSelect.p_kakao eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
-				<img src="resources/user/images/chat.PNG" class="chat-img">
-				<h3 class="h4">카카오톡</h3>
+				<img src="resources/user/images/pngegg.png" style="border-radius:50px;" class="chat-img">
+				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
 			</div>
 		</c:if>		
@@ -363,7 +381,7 @@ div.counsel-type {
 			
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');">
 				<img src="resources/user/images/zoom.png" class="chat-img">
-				<h3 class="h4">줌</h3>
+				<h3 class="h4" style="margin-top:15px;">줌</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
 
 			</div>
@@ -371,8 +389,37 @@ div.counsel-type {
 		<c:if test="${counselorSelect.p_phone eq 1 }">
 			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="phoneselect('${counselorSelect.p_phoneprice}');">
 				<img src="resources/user/images/phone.png" class="chat-img">
-				<h3 class="h4">전화</h3>
+				<h3 class="h4" style="margin-top:15px;">전화</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
+
+			</div>
+		</c:if>	
+		</div>
+		
+		<p style="margin-top:30px;">상담 방법 선택</p>
+		<hr style="border:1px solid #d3e0e742">
+		<div class="category-choice">
+		<c:if test="${counselorSelect.p_kakao eq 1 }">
+			<div class="sub-category-btn" id="confirmdiv"  onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
+				<img src="resources/user/images/chat.png"  class="chat-img">
+				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
+				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }">원<br><br>
+			</div>
+		</c:if>		
+		<c:if test="${counselorSelect.p_zoom eq 1 }">
+			
+			<div class="sub-category-btn" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');">
+				<img src="resources/user/images/laptop.png" class="chat-img">
+				<h3 class="h4" style="margin-top:15px;">줌</h3>
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">원<br><br>
+
+			</div>
+		</c:if>			
+		<c:if test="${counselorSelect.p_phone eq 1 }">
+			<div class="sub-category-btn" id="confirmdiv" onclick="phoneselect('${counselorSelect.p_phoneprice}');">
+				<img src="resources/user/images/telephone.png" class="chat-img">
+				<h3 class="h4" style="margin-top:15px;">전화</h3>
+				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}">원<br><br>
 
 			</div>
 		</c:if>	
@@ -382,7 +429,7 @@ div.counsel-type {
 	<input type="hidden" name="price" id="price">
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
-	<input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" />
+	<!-- <input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" /> -->
 	<input type="submit" data-page="2" name="next"
 		class="next action-button" id="next-btn" value="Next" />
 	<script>
