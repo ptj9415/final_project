@@ -77,13 +77,17 @@
 
 	<insert id="counselorInsert"
 		parameterType="co.maeumi.prj.counselor.service.CounselorVO">
-		INSERT INTO
+		INSERT ALL
+		INTO
 		COUNSELOR( C_EMAIL, C_NAME, C_GENDER,
 		C_PHONE, C_PASSWORD, C_ADDRESS,
 		C_BIRTHDATE, C_GRADE, C_STATUS )
 		VALUES(#{c_email}, #{c_name}, #{c_gender},
 		#{c_phone}, #{c_password},
 		#{c_address},#{c_birthdate}, #{c_grade} , #{c_status})
+		INTO PRICE( P_NO, C_EMAIL, P_KAKAO, P_KAKAOPRICE, P_ZOOM, P_ZOOMPRICE, P_PHONE, P_PHONEPRICE )
+		VALUES ( (select nvl(max(p_no),0)+1 from price ) , #{c_email}, 0,0,0,0,0,0)
+		SELECT * FROM DUAL
 	</insert>
 
 	<update id="counselorPictureUpdate"
