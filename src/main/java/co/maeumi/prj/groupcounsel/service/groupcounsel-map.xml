@@ -295,5 +295,19 @@
 			SET GC_PERSON = GC_PERSON +1
 			WHERE GC_NO = #{gc_no}
 	</update>
+	
+	<select id="groupList" resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO"  parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
+		<![CDATA[
+		select * from(
+		SELECT c.c_name,g.gc_no,g.c_email, g.gc_date, g.gc_title, g.gc_type, g.gc_min_person, g.gc_max_person, g.gc_price, g.gc_time, g.gc_sumnail,
+		RANK() OVER ( ORDER BY TO_CHAR(gc_date, 'YYYY-MM-DD') DESC) AS RNK
+		FROM group_counsel g
+		join counselor c 
+		on(g.c_email=c.c_email))
+		where RNK<=4
+ ]]>
+		
+	</select>
+	<!-- 메인화면 그룹상담리스트 -->
 
 </mapper>
