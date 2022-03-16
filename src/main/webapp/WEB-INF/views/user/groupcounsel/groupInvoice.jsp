@@ -394,6 +394,7 @@ form {
 					<input type="hidden" id="pr_price" name="pr_price" value="${groupInvoice.gc_price}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 				</form>
 				<!--End Table-->
 			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">

@@ -492,7 +492,6 @@ img {
 			<div class="md-step-bar-right"></div>
 		</div>
 	</div>
-
     <!-- Main content -->
     <section class="content">
 
@@ -538,6 +537,7 @@ img {
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <input type="hidden" name="c_email" id="c_email" value="${c_email}">
     </section>
     <!-- /.content -->
 <!-- ./wrapper -->
@@ -560,7 +560,8 @@ img {
 </script>
       <script type="text/javascript">
 		function func(gc_no){
-			location.href = "usergroupinvoice.do?gc_no="+gc_no;
+			var c_email = $("#c_email").val();
+			location.href = "usergroupinvoice.do?gc_no="+gc_no+"&c_email="+c_email;
 		}
 	</script>
 </body>

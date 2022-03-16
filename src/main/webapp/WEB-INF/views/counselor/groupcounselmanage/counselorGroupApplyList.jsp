@@ -225,12 +225,17 @@ h3 {
 											<td>${apply.m_nickname }</td>
 											<td>${apply.m_email }</td>
 											<td>${apply.gr_reservedate }</td>
-											<td>${apply.gr_status }</td>
+											<c:if test="${apply.gr_status eq 0 }">
+												<td>신청 완료</td>
+											</c:if>
+											<c:if test="${apply.gr_status eq 1 }">
+												<td>신청 취소</td>
+											</c:if>
 											<td><button type="button" id="subjectbtn" data-toggle="modal" data-target="#modal-lg" data-reason="${apply.gr_subject }">신청내용</button>											
 											</td>
 											<td><button type="button" class="managebtn"
 													id="managebtn" name="${apply.m_nickname }"
-													onclick="#">관리</button></td>
+													onclick="delfunc('${apply.gr_no}')">신청취소</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -300,7 +305,6 @@ h3 {
 	</section>
 
 	<script>
-	
 	$(document).on('click', '#subjectbtn', function() {
 		var gr_subject = $(this).data('reason');
 		$('#gr_subject').val(gr_subject);
@@ -404,6 +408,22 @@ h3 {
 			location.href = url;
 
 		});
+		
+		function delfunc(gr_no){
+			if (confirm("신청 취소를 하시겠습니까??") == true) { 
+				$.ajax({
+					type :"post",
+					url : "upDateService.do",
+					data : { gr_no : gr_no },
+					success : function(){
+						alert("신청을 취소했습니다.");
+						location.reload();
+					},error : function (){
+						alert("신청 취소가 실패 되었습니다.");
+					}
+				});
+			}
+		}
 	</script>
 </body>
 </html>

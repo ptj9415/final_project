@@ -92,7 +92,7 @@
 		</div>
 	</div>
 	</div>
-	<!-- modal contents start -->
+
 
 	<div id="wrap">
 			<header id="header"></header>

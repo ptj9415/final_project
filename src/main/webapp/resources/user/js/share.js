@@ -65,7 +65,7 @@ function createDescription(){
 		
 	}
 	var shareTitle = '나의 자존감 테스트 결과'
-	const shareImageUrl = url + 'resources/user/img/image/' + imageNumber + '.png';
+	const shareImageUrl = url + '/img/image/' + imageNumber + '.png';
 	sendKakaoLink(shareTitle, shareDescription, shareImageUrl);
 }
 

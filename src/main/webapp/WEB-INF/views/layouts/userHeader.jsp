@@ -58,7 +58,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-	background: rgba(0, 0, 0, 0.10);
+	background: rgba(236, 236, 236, 0.329);
 }
 
 nav ul li:hover>ul {
@@ -158,13 +158,18 @@ span.top-nav-admin {
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="drop-down-menu" id="drop-third">
-							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userTodayStory.do">오늘의 한마디</a></li>
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="userTerapy.do">심리 테라피</a></li>
 						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link">고객센터</a>
+						<ul class="drop-down-menu" id="drop-third">
+							<li><a href="userNoticeList.do">공지사항</a></li>
+							<li><a href="userFaq.do">FAQ</a></li>
+							<li><a href="#">1:1문의</a></li>
+						</ul></li>
 					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
-					<li class="nav-item"><a href="userMypage.do" class="nav-link">마이페이지</a></li>
+					<li class="nav-item"><a href="userMypages.do" class="nav-link">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

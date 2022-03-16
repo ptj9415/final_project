@@ -214,6 +214,13 @@
 .hide-space {
 	padding: 100px;
 }
+
+.glist-container{
+	display:flex;
+}
+.btn btn-primary px-4 py-3 mt-3:hover{
+	color:#153e54;
+}
 </style>
 </head>
 <body>
@@ -286,76 +293,35 @@
 								<span class="subheading subheading-with-line"><small
 									class="pr-2 bg-light">MAEUMI</small></span>
 								<h2 class="mb-4">마으미 회원들이 가장 많이 찾는 상담사들을 만나보세요</h2>
-								<p>Far far away, behind the word mountains, far from the
-									countries Vokalia and Consonantia, there live the blind texts.
-									Separated they live in</p>
+								<p>전문 인력으로 구성된 마으미의 심리상담사와 1대1 맞춤 심리상담을 진행해보세요.</p>
 							</div>
 						</div>
 						<div class="row ftco-animate">
 							<div class="col-md-12">
 								<div class="carousel-testimony owl-carousel">
+							<c:forEach items="${clist }" var="clist">
+							
 									<div class="item">
 										<div class="testimony-wrap p-4 pb-5">
-											<div class="user-img mb-5"
-												style="background-image: url(resources/user/images/kitty.jpg)">
+											<div class="user-img mb-5"  onerror="this.src='resources/user/images/errorprofile.jpg';"
+												style="background-image: url(resources/user/images/errorprofile.jpg)">
 												<span
 													class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
+													<i class="">♥</i>
 												</span>
 											</div>
 											<div class="text">
-												<p class="mb-5 pl-4 line">Far far away, behind the word
-													mountains, far from the countries Vokalia and Consonantia,
-													there live the blind texts.</p>
+												<p class="mb-5 pl-4 line">상담사 소개 멘트</p>
 												<div class="pl-5">
-													<p class="name">상담사명</p>
-													<span class="position">CEO Founder of Commercial
-														Building</span>
+													<p class="name">${clist.c_name }</p>
+													<span class="position">${clist.c_grade }</span>
 												</div>
 											</div>
 										</div>
 									</div>
-
-									<div class="item">
-										<div class="testimony-wrap p-4 pb-5">
-											<div class="user-img mb-5"
-												style="background-image: url(resources/user/images/mymelody.jpg)">
-												<span
-													class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
-												</span>
-											</div>
-											<div class="text">
-												<p class="mb-5 pl-4 line">Far far away, behind the word
-													mountains, far from the countries Vokalia and Consonantia,
-													there live the blind texts.</p>
-												<div class="pl-5">
-													<p class="name">Garreth Smith</p>
-													<span class="position">Exterior Designer</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="testimony-wrap p-4 pb-5">
-											<div class="user-img mb-5"
-												style="background-image: url(resources/user/images/kuromi.jpg)">
-												<span
-													class="quote d-flex align-items-center justify-content-center">
-													<i class="icon-quote-left"></i>
-												</span>
-											</div>
-											<div class="text">
-												<p class="mb-5 pl-4 line">Far far away, behind the word
-													mountains, far from the countries Vokalia and Consonantia,
-													there live the blind texts.</p>
-												<div class="pl-5">
-													<p class="name">Garreth Smith</p>
-													<span class="position">Landscape Designer</span>
-												</div>
-											</div>
-										</div>
-									</div>
+							</c:forEach>	
+								
+								
 
 								</div>
 							</div>
@@ -374,81 +340,28 @@
 								<span class="subheading subheading-with-line"><small
 									class="pr-2 bg-white">MEUMI</small></span>
 								<h2 class="mb-4">마음맞는 사람들과 함께, 그룹상담</h2>
-								<p>Far far away, behind the word mountains, far from the
-									countries Vokalia and Consonantia, there live the blind texts.
-									Separated they live in</p>
+								<p>혼자서 심리상담을 받는게 아직 어색한가요? 마음맞는 사람들과 함께, 또는 처음보는사람들과 함께
+								여러 주제로 진행되는 마으미의 그룹상담 프로그램에 참여해보세요.</p>
 							</div>
 						</div>
-						<div class="row">
+					
+							<div class="glist-container">
+							<c:forEach items="${glist }" var="glist">
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="staff">
 									<div class="img"
-										style="background-image: url(resources/user/images/sea.png);"></div>
+										style="background-image: url(resources/user/images/selfEsteemMain.png);"></div>
+									<%-- <div class="img">
+									<img src="editorsumnail/${glist.gc_sumnail }"></div> --%>
 									<div class="text px-4 pt-4">
-										<h3>John Wilson</h3>
-										<span class="position mb-2">Co-Founder / CEO</span>
+										<h3>${glist.gc_title }</h3>
+										<span class="position mb-2">${glist.gc_date } ${glist.gc_time }</span>
 										<div class="faded">
-											<p>I am an ambitious workaholic, but apart from that,
-												pretty simple person.</p>
-											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+											<p>${glist.c_name }</p>
+											<P style="font-size: 12px">인원 ${glist.gc_min_person }명 - ${glist.gc_max_person }명</P>
 
-											<ul class="ftco-social d-flex">
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="col-md-6 col-lg-3 ftco-animate">
-								<div class="staff">
-									<div class="img"
-										style="background-image: url(resources/user/images/sea.png);"></div>
-									<div class="text px-4 pt-4">
-										<h3>David Smith</h3>
-										<span class="position mb-2">Achitect</span>
-										<div class="faded">
-											<p>I am an ambitious workaholic, but apart from that,
-												pretty simple person.</p>
-											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
-
-											<ul class="ftco-social d-flex">
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-lg-3 ftco-animate">
-								<div class="staff">
-									<div class="img"
-										style="background-image: url(resources/user/images/picture.png);"></div>
-									<div class="text px-4 pt-4">
-										<h3>그림 테라피</h3>
-										<span class="position mb-2">그림으로 알아보는 나의 스트레스 상태</span>
-										<div class="faded">
-											<p>전문의 상담사 이소정</p>
-											<P style="font-size: 12px">인원 2-6명</P>
-											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
-
-											<ul class="ftco-social d-flex">
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-6 col-lg-3 ftco-animate">
-								<div class="staff">
-									<div class="img"
-										style="background-image: url(resources/user/images/sea.png);"></div>
-									<div class="text px-4 pt-4">
-										<h3>마인드 컨트롤 테라피</h3>
-										<span class="position mb-2">휘몰아치는 감정을 잠재울 마인드컨트롤 그룹테라피</span>
-										<div class="faded">
-											<p>전문의 상담사 정아람</p>
-											<P style="font-size: 12px">인원 2-4명</P>
-
-											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+											<a 
+											onclick="func('${glist.gc_no}')" style="color:white;" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
 											<ul class="ftco-social d-flex">
 
 											</ul>
@@ -456,7 +369,8 @@
 									</div>
 								</div>
 							</div>
-
+							</c:forEach>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -576,29 +490,14 @@
 						<img src="resources/user/images/mbtiTest.jpeg" class="img-fluid"
 							alt="Colorlib Template">
 						<div class="text">
-							<span>⏱ 소요시간 약 25분</span>
+							<span>⏱ 소요시간 약 2분</span>
 							<h3>
 								<a href="project.html">MBTI 검사</a>
 							</h3>
 						</div>
 						<a href="resources/user/images/mbtiTest.jpeg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span>→</span>
-
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="project">
-						<img src="resources/user/images/personality.jpg" class="img-fluid"
-							alt="Colorlib Template">
-						<div class="text">
-							<span>⏱ 소요시간 약 25분</span>
-							<h3>성격검사</h3>
-						</div>
-						<a href="resources/user/images/personality.jpg"
-							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span>→</span>
+							<span onclick="location.href='mbti.do'">→</span>
 						</a>
 					</div>
 				</div>
@@ -607,12 +506,26 @@
 						<img src="resources/user/images/selfEsteem.jpg" class="img-fluid"
 							alt="Colorlib Template">
 						<div class="text">
-							<span>⏱ 소요시간 약 25분</span>
+							<span>⏱ 소요시간 약 3분</span>
 							<h3>자존감 검사</h3>
 						</div>
-						<a href="resources/user/images/selfEsteem.jpg"
+						<a href="resources/user/images/personality.jpg"
 							class="icon image-popup d-flex justify-content-center align-items-center">
-							<a href="selfEsteem.do"><span>→</span></a>
+							<span onclick="location.href='selfEsteem.do'">→</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="project">
+						<img src="resources/user/images/personality.jpg" class="img-fluid"
+							alt="Colorlib Template">
+						<div class="text">
+							<span>⏱ 소요시간 약 5분</span>
+							<h3>우울증 검사</h3>
+						</div>
+						<a href="resources/user/images/personality.jpg"
+							class="icon image-popup d-flex justify-content-center align-items-center">
+							<span onclick="location.href='simri.do'">→</span>
 						</a>
 					</div>
 				</div>
@@ -623,7 +536,7 @@
 							alt="Colorlib Template">
 						<div class="text">
 							<span>⏱ 소요시간 약 25분</span>
-							<h3>우울증 검사</h3>
+							<h3>심리검사3</h3>
 						</div>
 						<a href="resources/user/images/wowool.png"
 							class="icon image-popup d-flex justify-content-center align-items-center">
@@ -686,6 +599,11 @@
 						});
 					}
 				});
+		
+		function func(gc_no, c_email){
+			console.log(gc_no);
+			location.href = "userGroup.do?gc_no="+gc_no+"&c_email="+c_email;
+		}
 	</script>
 
 </body>

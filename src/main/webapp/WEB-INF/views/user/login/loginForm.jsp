@@ -246,6 +246,10 @@ input {
   color: #cfcfcf;
 }
 
+.forgot-pass:hover{
+  color:gray;
+}
+
 .submit-btn {
  /*  margin-top: 40px; */
   /* margin-bottom: 20px; */
@@ -434,7 +438,7 @@ button:hover {
 	    </label>
 	</form>
 	<div class="find-container">
-	    <p class="forgot-pass" class="findbtn" id="findEmail">아이디</p> 
+	    <p class="forgot-pass" class="findbtn" id="findEmail">아이디 찾기</p> 
 	    <p class="forgot-pass" class="findbtn" id="findPassword">비밀번호 찾기</p>
 	    
 	</div>
@@ -447,6 +451,11 @@ button:hover {
     <a href="https://kauth.kakao.com/oauth/authorize?client_id=7ce89df312e5bede8d638ca4846b8ed2&redirect_uri=http://localhost:8000/prj/kakaoLogin.do&response_type=code">
     <button type="button" class="kakao-btn"><span>kakaoTalk으로 로그인 하기</span></button>
     </a>
+  <p style="font-size: 10px; margin-top: 10px; text-align: center; margin-bottom:10px;" >
+			Maeumi가 처음이신가요?<a href="userTermsOfService.do"
+				style="text-decoration-line: none; font-size:11px; font-weight:bold; color:#0086e5;"> 회원가입&nbsp;</a>하기
+		</p>
+  
   </div>
   <div class="sub-cont">
     <div class="img">

@@ -10,10 +10,20 @@
 .test {
             display: flex;
             justify-content: center;
+            animation: fadein 1s;
+			-webkit-animation: fadein 1s; /* Safari and Chrome */
         }
+    @-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
         .mainForm {
-            width: 30%;
+            width: 40%;
             margin-top: 50px;
 
         }
@@ -36,31 +46,39 @@
         }
 
         button {
-            background-color: white;
+            background-color: #153e54;
             width: 100px;
             height: 50px;
-            border: 1px solid lightgray;
+            border: 1px solid #153e54;
 
         }
 
         button:hover {
-            background-color: #FFD2D2;
-            border-color: white;
+            background-color: white;
+            border: 1px solid #153e54;
+            transition:200ms ease-in-out;
         }
 
         .subCheck {
-            border: 1px solid gray;
+            border: 1px solid #8dacbd42;
+            margin-bottom:5px;
+            border-radius: 10px;
+    		padding: 10px
 
         }
 
         textarea {
-            border-color: gray;
+            border-color: #8dacbd42;
             resize: none;
+            font-size:12px;
         }
 
         .info {
             width: 100%;
             height: 100%;
+            border-radius: 10px;
+    		padding: 10px;
+    		border: 0;
         }
 
         .allCheck>input {
@@ -71,10 +89,20 @@
         	margin-left: 5px;
         }
         .btn {
-      	  border: 1px solid lightgray;
+      	  border: 1px solid #153e54;
+      	  background-color:#153e54;
+      	  color:white;
         }
         .allCheck>input {
         	margin-left: 5px;
+        }
+        .next-btn{
+        	
+        	width: 25%;
+    		margin-bottom: 50px;
+    		margin-top: 30px;
+    		margin-right: auto;
+    		margin-left: auto;
         }
     </style>
     <script src="resources/js/jquery-3.6.0.min.js"></script>
@@ -99,7 +127,7 @@
     	if($("#agree1").prop("checked") && $("#agree2").prop("checked")){
     		location.href='counselorEmailCheck.do';
     	} else {
-    		alert("필수항목은 반드시 체크해주셔야 해요~");
+    		alert("필수항목은 반드시 체크하셔야 합니다.");
     		return false;
     	}
     	
@@ -113,7 +141,7 @@
    <div class="test">
         <div class="mainForm">
             <div class="title" align="center">
-                <h4>매우미 약관 동의</h4>
+                <h4>마으미 상담사 가입 약관 동의</h4>
                 <hr>
             </div>
             <div class="comment">
@@ -121,7 +149,7 @@
                     <input type="checkbox" name="agree_all" id="agree_all" class="checkbox">
                     <label for="agree_all">
                         <h6>Maeumi. 서비스 이용약관, 개인정보 수집 및 이용,<br>
-                            유효기간 3년(선택), 프로모션 정보 수신(선택)에 <span style="font-size: larger; color: red;">모두
+                            유효기간 3년(선택), 프로모션 정보 수신(선택)에 <span style="font-size:15px; font-weight:bold; color: red;">모두
                                 동의</span>합니다</h6>
                     </label>
                 </div>
@@ -206,12 +234,12 @@
                     <input type="checkbox" name="agree" value="4" id="agree4" class="subInput">
                     <label for="agree4">
                         <span> (선택) 프로모션 정보 수신 동의</span><br>
-                        <span style="font-size: small; color:darkgray;">예담에서 제공하는 각종 이벤트, 안내 등의 정보를
+                        <span style="font-size: small; color:darkgray;">마으미에서 제공하는 각종 이벤트, 안내 등의 정보를
                             수신합니다</span>
                     </label>
                 </div>
             </div>
-            <div style="float: right;">
+            <div class="next-btn">
                         <button type="button" class="btn" onclick="formCheck()">가입 계속</button>
 			</div>
         </div>

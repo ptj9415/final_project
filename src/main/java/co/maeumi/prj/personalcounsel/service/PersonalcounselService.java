@@ -2,6 +2,7 @@ package co.maeumi.prj.personalcounsel.service;
 
 import java.util.List;
 
+import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.service.Search;
 
 public interface PersonalcounselService {
@@ -20,6 +21,8 @@ public interface PersonalcounselService {
 	int personalCounselInsert(PersonalcounselVO vo);
 	int personalMax();
 	
+	List<PersonalcounselVO> CounselorList(PersonalcounselVO vo); //메인화면 상담사리스트
+	
 	int getPRListCnt(Search svo);
 	public List<PersonalcounselVO> prSearchSelect(Search svo) throws Exception;
 	
@@ -29,4 +32,9 @@ public interface PersonalcounselService {
 	List<PersonalcounselVO> PersonalCounselSales(PersonalcounselVO vo); // 개인상담 매출 통계
 	
 	List<PersonalcounselVO>  searchSalesData(PersonalcounselVO vo); // 개인상담 매출 통계 search
+	
+	List<PersonalcounselVO> searchCounselData(PersonalcounselVO vo); // 개인상담 통계
+	List<PersonalcounselVO> searchCounselData2(PersonalcounselVO vo);
+	
+	
 }

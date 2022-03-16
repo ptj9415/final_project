@@ -10,9 +10,19 @@
 	display: flex;
 	justify-content: center;
 	padding-top: 80px;
+	animation: fadein 1s;
+	-webkit-animation: fadein 1s; /* Safari and Chrome */
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 .mainForm {
-    width: 30%;
+    width: 40%;
 }
 
 .comment {
@@ -39,9 +49,9 @@ input {
 }
 
 #nextBtn {
-	float:right;
-	width: 30%;
-	height: 40px;
+	      border: 1px solid #153e54;
+      	  background-color:#153e54;
+      	  color:white;
 }
 .correct {   <!--correct, incorrect 모두 인증번호 일치여부에 따라 경고색깔을 달리 표시하기 위함 --> 
 	color: green;
@@ -65,6 +75,14 @@ button:hover {
 	background-color: #FFD2D2;
 	border-color: white;
 }
+
+.emailCheck{
+	border: 1px solid #d3e0e742;
+	border-radius:10px;
+	display:grid;
+	grid-template-columns:3fr 1fr;
+}
+
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -152,7 +170,7 @@ $(document).ready(function() {
                 <h4>고객님의 본인확인을 진행해주세요.</h4>
                 <h6>Maeumi. 의 다양한 서비스 이용을 위해 본인확인이 필요합니다.</h6>
             </div>
-            <div class="emailCheck" style="border: 1px solid gray;">
+            <div class="emailCheck">
             	<form id="frm" action="userJoinForm.do" method="POST">
 	                <input type="email" placeholder="이메일을 입력해주세요" id="inputEmail" name="inputEmail" class="inputEmail">
 	                <button type="button" id="emailSendBtn" >인증하기</button><br>
@@ -161,7 +179,7 @@ $(document).ready(function() {
                 <div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span> <!-- 인증번호의 일치여부를 알려주는 경고글 역할. -->
 			<br>
-                <h5 style="margin-left: 10px">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </h5>
+                <h5 style="margin-left: 10px; font-size:11px;">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </h5>
             </div>
             <br>
             <button type="button" id="nextBtn" name="nextBtn">다음</button>
