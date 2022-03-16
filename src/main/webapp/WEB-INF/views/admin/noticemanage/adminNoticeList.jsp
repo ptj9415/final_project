@@ -377,7 +377,7 @@ $(document).ready(function(){
 		};
 		
 		//선택삭제 구현
-		$("#allDelete").on("click", function() {
+		$("#deleteallbtn").on("click", function() {
 			var confirmCheck = confirm("선택하신 것을 모두 삭제하시겠습니까?");
 			
 			if(confirmCheck){
