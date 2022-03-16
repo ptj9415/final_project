@@ -155,7 +155,7 @@ h3 {
 								</div>
 							</div>
 							<div class="btndiv">
-								<button type="reset" id="clearbtn">초기화</button>
+								<button type="reset" id="clearbtn" onclick="resetbtn()">초기화</button>
 								<button type="button" id="btnSearch">
 									검색&nbsp;<i class="fa fa-search"></i>
 								</button>
@@ -233,9 +233,14 @@ h3 {
 											</c:if>
 											<td><button type="button" id="subjectbtn" data-toggle="modal" data-target="#modal-lg" data-reason="${apply.gr_subject }">신청내용</button>											
 											</td>
+											<c:if test="${apply.gr_status eq 0 }">
 											<td><button type="button" class="managebtn"
 													id="managebtn" name="${apply.m_nickname }"
 													onclick="delfunc('${apply.gr_no}')">신청취소</button></td>
+											</c:if>
+											<c:if test="${apply.gr_status eq 1 }">
+											<td>-</td>
+											</c:if>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -424,6 +429,14 @@ h3 {
 				});
 			}
 		}
+		
+		function resetbtn(){
+			$("#m_nickname").val('');
+			$("#m_email").val('');
+			$("#gr_reservedate").val('');
+			$("#gr_status option:eq(0)").prop("selected",true);
+		}
+		
 	</script>
 </body>
 </html>

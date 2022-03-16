@@ -187,8 +187,8 @@ th {
 					</div>
 				</div>
 			</div>
-			<!-- 그룹 상담 개설 페이지 -->
-			<form action="groupCounselUpdate.do" method="post"
+			<!-- 그룹 상담 수정 페이지 -->
+			<form action="groupCounselUpdates.do" method="post"
 				enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-12">
@@ -263,9 +263,10 @@ th {
 									<tr>
 										<th>썸네일 이미지</th>
 										<td><div class="filebox">
-												<input class="uploadname" value="${gc.gc_sumnail }">
+												<input class="uploadname">
 												<label for="filename">파일 찾기</label> <input type="file"
 													id="filename" name="filename">
+													<div>${gc.gc_sumnail}</div>
 											</div></td>
 									</tr>
 									<tr>
