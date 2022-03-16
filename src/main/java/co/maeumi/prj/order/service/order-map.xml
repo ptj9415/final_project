@@ -65,7 +65,7 @@
 		</insert>
 		
 		<select id="MaxGroupOrder" resultType="int">
-		 		SELECT MAX(PR_NO) 
+		 		SELECT MAX(OR_NO) 
 		 		FROM ORDER_DETAIL
 		</select>
 </mapper>

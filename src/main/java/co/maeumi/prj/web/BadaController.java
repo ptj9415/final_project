@@ -148,7 +148,7 @@ public class BadaController {
 
 		System.out.println("로그아웃 하면서 내가 지울 세션값 이름: " + session);
 		session.invalidate();
-		return "user/home/home";
+		return "redirect:home.do";
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드

@@ -475,6 +475,7 @@ public class YoungohController {
 		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
 			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
+			System.out.println(num);
 			ovo.setOr_no(num);
 			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
 			System.out.println(ovo.getOr_date());

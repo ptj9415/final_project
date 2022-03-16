@@ -440,7 +440,7 @@
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="staff">
 									<div class="img"
-										style="background-image: url(resources/user/images/sea.png);"></div>
+										style="background-image: url(resources/user/images/09ab8a84-387d-4ba4-9a0c-a4729481b584코스타리카 따라주.jpg);"></div>
 									<div class="text px-4 pt-4">
 										<h3>마인드 컨트롤 테라피</h3>
 										<span class="position mb-2">휘몰아치는 감정을 잠재울 마인드컨트롤 그룹테라피</span>
