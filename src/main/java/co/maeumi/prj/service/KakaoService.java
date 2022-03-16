@@ -37,7 +37,7 @@ public class KakaoService {
 			sb.append("grant_type=authorization_code");
 			
 			sb.append("&client_id=7ce89df312e5bede8d638ca4846b8ed2");
-			sb.append("&redirect_uri=http://3.34.230.68:8080/prj/kakaoLogin.do");
+			sb.append("&redirect_uri=http://3.34.230.68:8080/maeumi/kakaoLogin.do");
 			
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
