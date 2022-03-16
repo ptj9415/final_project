@@ -19,10 +19,15 @@
 /*calendar start*/
 .sec_cal {
 	width: 500px;
-	margin-top: 100px;
-	margin-left: 300px;
-	font-family: "NotoSansR";
-	height: 600px;
+    /* margin-top: 100px; */
+    /* margin-left: 300px; */
+    font-family: "NotoSansR";
+    height: 600px;
+    border: 1px solid #d3e0e742;
+    padding: 50px;
+    margin-top: 100px;
+    border-radius: 30px;
+    background-color: #d3e0e742;
 }
 
 .sec_cal .cal_nav {
@@ -338,12 +343,17 @@
 
 /*시간표 생성 style*/
 .timediv {
-	height: 400px;
-	display: grid;
-	grid-auto-rows: 50px;
-	grid-template-columns: 120px 120px;
-	margin-top:300px;
-	margin-left:900px;
+	height: 300px;
+    display: grid;
+    grid-auto-rows: 50px;
+    grid-template-columns: 120px 120px;
+    margin-top: 300px;
+    margin-left: 500px;
+    padding: 30px;
+    border: 1px solid #d3e0e742;
+    border-radius:30px;
+    width: 300px;
+    text-align: center;
 }
 
 }
@@ -433,12 +443,18 @@ div.asdf {
 }
 
 .total {
-	width:80%;
+	width:70%;
 	height: 1000px;
 	display: grid;
 	grid-auto-rows: 50px;
 	grid-template-columns: 120px 120px;
 	
+}
+.body-container{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
 }
 </style>
 </head>
@@ -478,6 +494,7 @@ div.asdf {
 			</div>
 		</div>
 	</div>
+
 	<div class="md-stepper-horizontal orange">
 		<div class="md-step active done">
 			<div class="md-step-circle">
@@ -517,6 +534,8 @@ div.asdf {
 		</div>
 	</div>
 
+<div class="body-container">
+
 	<div class="total">
 		<div class="sec_cal">
 			<div class="cal_nav">
@@ -543,14 +562,15 @@ div.asdf {
 			<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 			<input type="hidden" id="pr_type" name="pr_type" value="${type}">
 			<input type="hidden" id="pr_price" name="pr_price" value="${price }">
-			<input type="text" id="pr_date" name="pr_date" value="">
+			<input type="hidden" id="pr_date" name="pr_date" value="">
 			<input type="hidden" id="pr_time" name="pr_time" value="">
-			<input type="button" data-page="2" name="previous"
-				class="previous action-button" value="Previous" id="previous-btn" />
+			<!-- <input type="button" data-page="2" name="previous"
+				class="previous action-button" value="Previous" id="previous-btn" /> -->
 			<input type="submit" data-page="2" name="next"
 				class="next action-button" id="next-btn" value="신청하기" />
 		</form>
 	</div>
+</div>
 	<script>
 		$('#previous-btn').click(function() {
 			location.href = 'personalCounselStep3.do'

@@ -118,15 +118,15 @@ span.top-nav-admin {
 	<nav class="navbar top" id="top-nav">
 
 		<c:if test="${email ==null }">
-			<span class="top-nav-admin"><a href="loginForm.do">login</a></span>
+			<span class="top-nav-admin"><a href="loginForm.do" style="margin-right:10px; font-size:11px; color:#153e54">로그인</a></span>
 		</c:if>
 		<c:if test="${email !=null }">
-			<span class="top-nav-admin"><a href="logout.do">logout</a></span>
+			<span class="top-nav-admin" style="font-size:12px; color:#153e54">${nickname } 님 환영합니다<a href="logout.do" style="margin-left:10px; font-size:11px; color:#153e54">로그아웃</a></span>
 		</c:if>
 
-		<span class="top-nav-admin"><a href="counselormypage.do">counselor
+		<!-- <span class="top-nav-admin"><a href="counselormypage.do">counselor
 				👨‍⚕️</a></span> <span class="top-nav-admin"><a href="adminbootstrap.do">admin
-				⚙</a></span>
+				⚙</a></span> -->
 	</nav>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
