@@ -11125,7 +11125,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .staff .text .faded {
-	opacity: 0;
+	opacity: 1;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	-webkit-transition: all 0.3s ease;
@@ -11847,6 +11847,11 @@ rgba(
 
 .testimony-section .owl-dots, .ftco-client .owl-dots {
 	text-align: center;
+	display:inline-flex;
+	margin-right:auto;
+	margin-left:auto;
+	width:50%;
+	float:right;
 }
 
 .testimony-section .owl-dots .owl-dot, .ftco-client .owl-dots .owl-dot {

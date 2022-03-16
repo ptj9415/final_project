@@ -17,6 +17,9 @@ public interface PersonalcounselMapper {
 	int personalCounselInsert(PersonalcounselVO vo);
 	int personalMax();
 	
+	List<PersonalcounselVO> CounselorList(PersonalcounselVO vo); //메인화면 상담사리스트
+	
+	
 	PersonalcounselVO counselorResultSelect(PersonalcounselVO vo);
 
 	int getPRListCnt(Search svo);

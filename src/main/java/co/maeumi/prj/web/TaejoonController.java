@@ -74,9 +74,16 @@ public class TaejoonController {
 	/* ===== 사용자 화면 ===== */
 
 	@RequestMapping("/home.do")
-	public String home(Model model, BannerVO bvo) {
+	public String home(Model model, BannerVO bvo, PersonalcounselVO vo, GroupcounselVO gvo) {
 		List<BannerVO> list = bannerDao.bannerList(bvo);
 		model.addAttribute("banner", list);
+		
+		List<PersonalcounselVO> clist = personalCounselDao.CounselorList(vo);
+		//System.out.println(clist);
+		model.addAttribute("clist",clist);
+		
+		List<GroupcounselVO> glist = groupCounselDao.groupList(gvo);
+		model.addAttribute("glist",glist);
 		return "user/home/home";
 	}
 
