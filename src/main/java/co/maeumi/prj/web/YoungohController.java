@@ -645,4 +645,54 @@ public class YoungohController {
 		model.addAttribute("glist", vo);
 		return "user/mypage/mypageGroupDetail"; 
 	}
+	//그룹 상담 수정 필요해서 최종적으로 수정했습니다. 2022/03/16
+	@RequestMapping("/groupCounselUpdates.do")
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response,
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		// 썸네일 파일업로드
+		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String originalFileName = mf.getOriginalFilename();
+			System.out.println(originalFileName);
+		if (originalFileName != "") {
+			
+		}else {
+			
+		}
+		
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		String saveFile = uuid + originalFileName;
+		
+		vo.setGc_sumnail(saveFile);
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 서머노트 코드 원본
+		// 이미지 파일일 경우 코드 잘라서 쓰기.
+		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
+
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		vo.setGc_infos(result);
+
+		int update = groupCounselDao.groupCounselUpdate(vo);
+
+		// vo값에 따라 성공 실패 여부 확인
+		if (update != 1) {
+			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
+			out.flush();
+		}
+		return null;
+	}
 }

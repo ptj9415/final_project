@@ -137,7 +137,8 @@ h3 {
 
 								<div class="col-6">
 									<div class="form-group">
-										<label>상태</label> <br> <select name="gc_status"
+										<label>상태</label> <br> 
+										<select name="gc_status"
 											class="form-control" id="gc_status">
 											<option value="all">전체</option>
 											<option value="0">모집 중</option>
@@ -148,7 +149,7 @@ h3 {
 								</div>
 							</div>
 							<div class="btndiv">
-								<button type="reset" id="clearbtn">초기화</button>
+								<button type="reset" id="clearbtn" onclick="resetbtn()">초기화</button>
 								<button type="button" id="btnSearch">
 									검색&nbsp;<i class="fa fa-search"></i>
 								</button>
@@ -375,6 +376,13 @@ h3 {
 			url = url + "&gc_title=" + $('#gc_title').val();
 			location.href = url;
 		});
+
+		function resetbtn(){
+			$("#gc_title").val('');
+			$("#gc_type option:eq(0)").prop("selected",true);
+			$("#gc_date").val('');
+			$("#gc_status option:eq(0)").prop("selected",true);
+		}
 	</script>
 </body>
 </html>
