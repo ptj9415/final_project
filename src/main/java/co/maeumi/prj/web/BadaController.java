@@ -897,7 +897,8 @@ public class BadaController {
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int range
 			, @RequestParam(required = false, defaultValue = "all") String n_category
-			, @RequestParam(required = false) String n_title, Search svo) throws Exception {
+			, @RequestParam(required = false) String n_title, Search svo
+			) throws Exception {
 		
 		model.addAttribute("search", svo);  // '제목'과 '말머리' 요소로 서칭하기 위함.
 		svo.setN_category(n_category);	
@@ -913,6 +914,7 @@ public class BadaController {
 		return "user/notice/userNoticeList";
 	}
 	
+
 	// 사용자단에서 공지사항 조회하기. 조회수 올라가는 작업해야 함
 	@RequestMapping("/userNoticeRead.do")
 	public String userNoticeRead(Model model, HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {
