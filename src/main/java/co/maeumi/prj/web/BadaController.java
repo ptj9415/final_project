@@ -192,6 +192,7 @@ public class BadaController {
 			mvo.setM_phone(realPhone);
 			mvo.setM_password("");
 			mvo.setM_type("네이버");
+			mvo.setM_status("가입");
 			int n = memberDao.memberInsert(mvo);
 			if (n != 0) {  // 네이버로 로그인 성공했다면~ 
 				message = (String) response.get("email");
@@ -254,6 +255,7 @@ public class BadaController {
 			mvo2.setM_type("카카오");
 			mvo2.setM_password("");
 			mvo2.setM_phone("");
+			mvo2.setM_status("가입");
 			int n = memberDao.memberInsert(mvo2);
 			if (n != 0) { // insert 결과 성공이면,
 				session.setAttribute("email", mvo2.getM_nickname()); // 세션값 담아주고 홈으로.
