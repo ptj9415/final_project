@@ -279,11 +279,11 @@ public class EjuController {
 		
 		model.addAttribute("pagination", svo);
 		List<PersonalcounselVO> list = personalCounselDao.prSearchSelect(svo);
-		for (int i = 0; i < list.size(); i++) {
-	         String date = list.get(i).getPr_date();
-	         date = date.substring(0, 10);
-	         list.get(i).setPr_date(date);
-		};
+		/*
+		 * for (int i = 0; i < list.size(); i++) { String date =
+		 * list.get(i).getPr_date(); date = date.substring(0, 10);
+		 * list.get(i).setPr_date(date); };
+		 */
 		model.addAttribute("personalCounel", list);
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}

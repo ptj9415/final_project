@@ -176,15 +176,12 @@
 }
 
 #next-btn {
-	width: 100px;
-	height: 40px;
-	border-radius: 50px;
-	background-color: #153e54;
-	color: white;
-	border: solid 1px #153e54;
-	font-size: 14px;
-	cursor: pointer;
-	position: relative;
+	width: 130px;
+    margin: 50px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #153e54;
+    color: white;
 }
 
 #next-btn:hover {
@@ -240,9 +237,9 @@ div.counsel-type {
 	width: 90%;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	padding: 30px;
+	margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
     border: 1px solid #8dacbd42;
     border-radius: 30px;
      box-shadow: 0px 0px 20px #00000040;
@@ -250,7 +247,7 @@ div.counsel-type {
 
 .chat-btn {
 	width: 50px;
-
+	font-size:11px;
 	background-color: #ffffff00;
 	border:0;
 }
@@ -279,15 +276,43 @@ div.counsel-type {
 
 .category-choice{
 	display:flex;
-	margin-top:50px;
+	
+}
+.category-choice2{
+	display:flex;
+	height:200px;
 }
 
 .sub-category-btn{
 	display:block;
-	min-width: 33%;
+	width: 160px;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+    padding-top: 10px;
+}
+.sub-category-btn:hover{
+	/* border: 1px solid #d3e0e742; */
+    width: 160px;
+    padding-top: 10px;
+    border-radius: 30px;
+    background-color:#d3e0e742;
+    transition:100ms ease-in-out;
+}
+.sub-category-btn:focus{
+	border: 1px solid #d3e0e742;
+	outline:0;
+}
+
+
+.chat-btn{
+	zoom:1.4;
+}
+.body-container{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
 }
 </style>
 </head>
@@ -362,48 +387,59 @@ div.counsel-type {
 		</div>
 	</div>
 
+<div class="body-container">
 <form id="step2" action="test3pg.do" method="post">
 <!-- <form id="step3" action="personalCounselStep4.do" method="post"> -->
 
 	
 	<div class="choice-btn">
-		<p>상담 카테고리 선택</p>
-		<hr style="border:1px solid #d3e0e742">
-		<div class="row mt-4 pt-4">
-		<c:if test="${counselorSelect.p_kakao eq 1 }">
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
-				<img src="resources/user/images/pngegg.png" style="border-radius:50px;" class="chat-img">
-				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }"><br><br>
-			</div>
-		</c:if>		
-		<c:if test="${counselorSelect.p_zoom eq 1 }">
-			
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');">
-				<img src="resources/user/images/zoom.png" class="chat-img">
-				<h3 class="h4" style="margin-top:15px;">줌</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }"><br><br>
-
-			</div>
-		</c:if>			
-		<c:if test="${counselorSelect.p_phone eq 1 }">
-			<div class="col-md-4 ftco-animate fadeInUp ftco-animated" id="confirmdiv" onclick="phoneselect('${counselorSelect.p_phoneprice}');">
-				<img src="resources/user/images/phone.png" class="chat-img">
-				<h3 class="h4" style="margin-top:15px;">전화</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}"><br><br>
-
-			</div>
-		</c:if>	
-		</div>
-		
-		<p style="margin-top:30px;">상담 방법 선택</p>
+		<p style="margin-top:30px;">상담 카테고리 선택</p>
 		<hr style="border:1px solid #d3e0e742">
 		<div class="category-choice">
+			<%-- <c:if test="${counselorSelect.ccg_name eq 1 }">	 --%>
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/mad.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">분노/우울</h3>
+						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+				</div>
+			<%-- </c:if> --%>
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/love.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">연애/우정</h3>
+						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+				</div>
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/way.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">진로/취업</h3>
+						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+				</div>
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/marriage.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">결혼/육아</h3>
+						<input type="checkbox" class="chat-btn" name="onecheck"  onclick="doOpenCheck(this);"><br><br>
+				</div>
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/student.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">청소년</h3>
+						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+				</div>	
+				<div class="sub-category-btn" id="confirmdiv" >
+						<img src="resources/user/counselCategory/family.png"  class="chat-img">
+						<h3 class="h4" style="margin-top:15px;">가정</h3>
+						<input type="checkbox" class="chat-btn"  name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+				</div>				
+		</div>
+	</div>
+	<div class="choice-btn">	
+		<p style="margin-top:30px;">상담 방법 선택</p>
+		<hr style="border:1px solid #d3e0e742">
+		<div class="category-choice2">
 		<c:if test="${counselorSelect.p_kakao eq 1 }">
 			<div class="sub-category-btn" id="confirmdiv"  onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
 				<img src="resources/user/images/chat.png"  class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice }">원<br><br>
+				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice}">원<br><br>
+				<input type="checkbox" class="chat-btn"  name="onecheck" onclick="doOpenCheck(this);" ><br><br>
 			</div>
 		</c:if>		
 		<c:if test="${counselorSelect.p_zoom eq 1 }">
@@ -411,8 +447,8 @@ div.counsel-type {
 			<div class="sub-category-btn" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');">
 				<img src="resources/user/images/laptop.png" class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">줌</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice }">원<br><br>
-
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice}" >원<br><br>
+				<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
 			</div>
 		</c:if>			
 		<c:if test="${counselorSelect.p_phone eq 1 }">
@@ -420,6 +456,7 @@ div.counsel-type {
 				<img src="resources/user/images/telephone.png" class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">전화</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}">원<br><br>
+				<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
 
 			</div>
 		</c:if>	
@@ -431,8 +468,11 @@ div.counsel-type {
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
 	<!-- <input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" /> -->
+	<div style="align-items:center;">
 	<input type="submit" data-page="2" name="next"
-		class="next action-button" id="next-btn" value="Next" />
+		class="next action-button" id="next-btn" value="다음" />
+	</div>
+</div>
 	<script>
 	
 		//div 클릭 이벤트
@@ -465,6 +505,14 @@ div.counsel-type {
 			location.href = 'personalCounselStep4.do'
 		});  */
 		
+		function doOpenCheck(chk) {
+			var obj = document.getElementsByName("onecheck");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+		}
 	</script>
 </body>
 </html>
