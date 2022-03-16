@@ -147,8 +147,8 @@ h3 {
 									<div class="form-group">
 										<label>상태</label> <select class="	status" id="gr_status">
 											<option value="all">전체</option>
-											<option value="가입">가입</option>
-											<option value="탈퇴">탈퇴</option>
+											<option value="0">신청완료</option>
+											<option value="1">신청취소</option>
 										</select>								
 										<input type="hidden" id="gc_no" name="gc_no" value="${gc_no }">		
 									</div>

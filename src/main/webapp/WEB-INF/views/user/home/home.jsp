@@ -369,6 +369,43 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6 col-lg-3 ftco-animate">
+								<div class="staff">
+									<div class="img"
+										style="background-image: url(resources/user/images/picture.png);"></div>
+									<div class="text px-4 pt-4">
+										<h3>그림 테라피</h3>
+										<span class="position mb-2">그림으로 알아보는 나의 스트레스 상태</span>
+										<div class="faded">
+											<p>전문의 상담사 이소정</p>
+											<P style="font-size: 12px">인원 2-6명</P>
+											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+
+											<ul class="ftco-social d-flex">
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-6 col-lg-3 ftco-animate">
+								<div class="staff">
+									<div class="img"
+										style="background-image: url(resources/user/images/09ab8a84-387d-4ba4-9a0c-a4729481b584코스타리카 따라주.jpg);"></div>
+									<div class="text px-4 pt-4">
+										<h3>마인드 컨트롤 테라피</h3>
+										<span class="position mb-2">휘몰아치는 감정을 잠재울 마인드컨트롤 그룹테라피</span>
+										<div class="faded">
+											<p>전문의 상담사 정아람</p>
+											<P style="font-size: 12px">인원 2-4명</P>
+
+											<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+											<ul class="ftco-social d-flex">
+
+											</ul>
+										</div>
+									</div>
+								</div>
 							</c:forEach>
 							</div>
 						</div>
