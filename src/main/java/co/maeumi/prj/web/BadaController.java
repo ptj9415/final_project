@@ -201,7 +201,7 @@ public class BadaController {
 				session.setAttribute("email", message); // 세션값 설정
 				session.setAttribute("nickname", (String) response.get("nickname"));
 				session.setAttribute("type", "네이버");
-				return "user/home/home";
+				return "redirect:home.do";
 			} else {
 				message = "실패햇다.....";
 				System.out.println(message);
@@ -216,7 +216,7 @@ public class BadaController {
 		System.out.println("네이버 로그인으로 담은 세션값2 닉네임: " + (String) response.get("nickname"));
 		System.out.println("네이버 로그인으로 담은 세션값3 가입유형: " + (String)session.getAttribute("type"));
 		
-		return "user/home/home";
+		return "redirect:home.do";
 	}
 
 	// 카카오 로그인 컨트롤러. code를 받을 메서드.
@@ -235,7 +235,6 @@ public class BadaController {
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
 
-		// 밑에서부터 실행이 안 됨. 따로 kakao dtd객체와 member-map.xml을 추가해야하는지 고민해보기.
 		String k_email = (String) userInfo.get("email");
 		String k_nickname = (String) userInfo.get("nickname");
 		System.out.println("mvo값에 담을 이메일 값: " + k_email);
@@ -259,25 +258,27 @@ public class BadaController {
 			mvo2.setM_status("가입");
 			int n = memberDao.memberInsert(mvo2);
 			if (n != 0) { // insert 결과 성공이면,
-				session.setAttribute("email", mvo2.getM_nickname()); // 세션값 담아주고 홈으로.
-				return "user/home/home";
+				session.setAttribute("email", mvo2.getM_email()); // 세션값 담아주고 홈으로.
+				session.setAttribute("nickname", mvo2.getM_nickname());
+				session.setAttribute("type", mvo2.getM_type());
+				return "redirect:home.do";
 			} else { // insert가 실패한 경우.
 				System.out.println("에러발생"); // 에러발생하면 로그인화면으로 다시.
 				return "user/login/loginForm";
 			}
 		}
 		// mvo가 null이 아닌 경우, 즉 이미 해당 아이디와 유형이 존재히면~
-		mvo2.setM_email(k_email); // 세션값을 이용하기 위함.
-		mvo2.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
-		mvo2.setM_type("카카오");
-		session.setAttribute("email", mvo2.getM_email());
-		session.setAttribute("nickname", mvo2.getM_nickname());
-		session.setAttribute("type", mvo2.getM_type());
-		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo2.getM_email());
-		System.out.println("카카오 로그인 성공으로 담은 세션값2 닉네임 : " + mvo2.getM_nickname());
-		System.out.println("카카오 로그인 성공으로 담은 세션값3 가입유형 : " + mvo2.getM_type());
+		mvo.setM_email(k_email); // 세션값을 이용하기 위함.
+		mvo.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
+		mvo.setM_type("카카오");
+		session.setAttribute("email", mvo.getM_email());
+		session.setAttribute("nickname", mvo.getM_nickname());
+		session.setAttribute("type", mvo.getM_type());
+		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo.getM_email());
+		System.out.println("카카오 로그인 성공으로 담은 세션값2 닉네임 : " + mvo.getM_nickname());
+		System.out.println("카카오 로그인 성공으로 담은 세션값3 가입유형 : " + mvo.getM_type());
 		
-		return "user/home/home";
+		return "redirect:home.do";
 	} // 카카오로그인
 	
 	// 이메일 찾기 페이지로 이동
@@ -724,7 +725,7 @@ public class BadaController {
 
 		// 파일 업로드 처리
 		String savedName = file.getOriginalFilename();
-		System.out.println("첨부파일 한 게 없는데, 뭐지? " + savedName);
+		System.out.println("첨부파일 이름 확인: " + savedName);
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
 		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
@@ -811,6 +812,8 @@ public class BadaController {
 	// 첨부파일 다운로드 * 밑에 경로를 작성하는 부분은 모두 상대경로로 수정해야 함
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		 String SAVE_PATH = request.getServletContext().getRealPath("resources/attachFile/");
+		
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
 		System.out.println("1. filename: " + filename);
@@ -831,7 +834,8 @@ public class BadaController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = uploadPath + filename;  
+		realFilename = SAVE_PATH + filename;  
+		
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {

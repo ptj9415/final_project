@@ -448,7 +448,7 @@ button:hover {
 	<a href="${url }">     
     <button type="button" class="nv-btn"><span>Naver로 로그인 하기</span></button>
     </a>
-    <a href="https://kauth.kakao.com/oauth/authorize?client_id=7ce89df312e5bede8d638ca4846b8ed2&redirect_uri=http://3.34.230.68:8080/maeumi/kakaoLogin.do&response_type=code">
+    <a href="https://kauth.kakao.com/oauth/authorize?client_id=7ce89df312e5bede8d638ca4846b8ed2&redirect_uri=http://3.34.230.68:8080/kakaoLogin.do&response_type=code">
     <button type="button" class="kakao-btn"><span>kakaoTalk으로 로그인 하기</span></button>
     </a>
   <p style="font-size: 10px; margin-top: 10px; text-align: center; margin-bottom:10px;" >
