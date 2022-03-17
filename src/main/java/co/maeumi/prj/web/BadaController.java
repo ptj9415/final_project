@@ -778,8 +778,8 @@ public class BadaController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		// String SAVE_PATH =
 		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
-		
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+		String SAVE_PATH = request.getServletContext().getRealPath("resources/noticeimage/");
 		
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/image/";
