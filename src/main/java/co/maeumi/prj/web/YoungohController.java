@@ -39,6 +39,7 @@ import co.maeumi.prj.mypage.service.myPageService;
 import co.maeumi.prj.mypage.service.myPageVO;
 import co.maeumi.prj.order.service.orderService;
 import co.maeumi.prj.order.service.order_datailVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
@@ -475,9 +476,10 @@ public class YoungohController {
 	@RequestMapping("/payment.do")
 	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo, HttpServletRequest request) {
 		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
+		int maxnum = groupCounselDao.maxGroupGrno();
 		String c_email = request.getParameter("c_email");
 		System.out.println(c_email);
-		ovo.setGc_no(vo.getGc_no());
+		ovo.setGr_no(maxnum);
 		ovo.setOr_price(vo.getGr_price());
 		ovo.setC_email(c_email);
 		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
@@ -563,7 +565,6 @@ public class YoungohController {
 			glist.get(i).setGr_reservedate(date);
 		}
 		
-		
 		model.addAttribute("member", memberDao.mypageSelectList(mvo));
 		model.addAttribute("list",list);
 		model.addAttribute("blist", blist);
@@ -581,17 +582,16 @@ public class YoungohController {
 		vo = myPageDao.findNo(vo);
 		vo.setOr_no(num);
 		System.out.println(vo.getPr_no());
-		System.out.println(vo.getGc_no());
+		System.out.println(vo.getGr_no());
 		int success = myPageDao.myPageRefund(vo);
 		if (success == 1) {
 			//그룹 상담일 경우
 			if (vo.getPr_no() == 0) {
 				System.out.println("그룹 상담으로 들어옴");
 				myPageDao.myPageGroupRefund(vo);
-			}
-			//개인 상담일 경우
-			if (vo.getGc_no() == 0) {
+			}else {
 				System.out.println("개인 상담으로 들어옴");
+				System.out.println(vo.getGr_no());
 				myPageDao.myPagePersonalRefund(vo);
 			}
 		}
@@ -722,21 +722,37 @@ public class YoungohController {
 	}
 	// 마이페이지 그룹 상담 환불 버튼
 	@RequestMapping("/mypageGroupDetailRefund.do")
-	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model) {
+	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model, GroupcounselVO gvo) {
 		String gc_no = request.getParameter("gc_no");
 		int num = Integer.parseInt(gc_no);
 		vo.setGc_no(num);
 		vo = myPageDao.mypageGroup(vo);
 		
 		vo = myPageDao.GroupdetailRefund(vo);
+		
 		System.out.println(vo.getOr_no());
 		System.out.println(vo.getGr_no());
 		
+		//일단 환불 되는지 기다려보자.
+		myPageDao.mypageOrderDelete(vo);
+		gvo.setGr_no(vo.getGr_no());
+		groupCounselDao.GroupUserDelete(gvo);
+		return "redirect:userMypages.do";
+	}
+	//개인 상담 환불
+	@RequestMapping("/mypagePersonalDetailRefund.do")
+	public String mypagePersonalDetailRefund(HttpServletRequest request, myPageVO vo, PersonalcounselVO pvo) {
+		String pr_no = request.getParameter("pr_no");
+		int num = Integer.parseInt(pr_no);
+		vo.setPr_no(num);
+		myPageDao.mypagePersonalOrderRefund(vo);
 		
+		System.out.println(vo.getOr_no());
+		System.out.println(vo.getPr_no());
+		//환불 되는지 보자.
+		myPageDao.mypageOrderDelete(vo);
+		myPageDao.myPagePersonalRefund(vo);
 		
 		return "redirect:userMypages.do";
 	}
-	
-	
-	
 }

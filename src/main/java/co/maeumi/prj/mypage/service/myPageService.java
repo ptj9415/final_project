@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.maeumi.prj.board.service.BoardVO;
 import co.maeumi.prj.boardReply.service.BoardReplyVO;
+import co.maeumi.prj.order.service.order_datailVO;
 
 public interface myPageService {
 	List<myPageVO> selectOrder(myPageVO vo);
@@ -23,4 +24,9 @@ public interface myPageService {
 	myPageVO mypageGroup(myPageVO vo);
 	
 	myPageVO GroupdetailRefund(myPageVO vo); //그룹상담 환불
+	
+	int mypageOrderDelete(myPageVO vo);
+	
+	myPageVO mypagePersonalOrderRefund(myPageVO vo);
+	
 }

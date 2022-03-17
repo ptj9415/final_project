@@ -156,4 +156,10 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 		return map.groupList(vo);
 	}
 
+	@Override
+	public int maxGroupGrno() {
+		// TODO Auto-generated method stub
+		return map.maxGroupGrno();
+	}
+
 }
