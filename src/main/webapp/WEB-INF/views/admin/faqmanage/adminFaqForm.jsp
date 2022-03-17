@@ -89,12 +89,11 @@ textarea {
 								<table class="table text-nowrap" id="faqtable">
 									<tr>
 										<th>제목</th>
-										<td><input type="text" id="f_title" name="f_title"></td>
+										<td><input type="text" id="f_title" name="f_title" style="width: 1200px;"></td>
 									</tr>
 									<tr>
 										<th>내용</th>
-										<td><textarea rows="11" cols="100" id="f_subject"
-												name="f_subject"></textarea></td>
+										<td><textarea rows="11"  id="f_subject" name="f_subject" style="width: 1200px;" ></textarea></td>
 									</tr>
 								</table>
 								<div class="btndiv">

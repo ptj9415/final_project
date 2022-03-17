@@ -86,19 +86,21 @@ textarea {
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
-							<form id="frm" action="adminFaqResister.do" method="post">
+							<form id="frm" action="faqUpdate.do" method="post">
 								<table class="table text-nowrap" id="faqtable">
 									<tr>
 										<th>제목</th>
-										<td><input type="text" id="f_title" name="f_title"
+										<td><input type="text" id="f_title" name="f_title" style="width: 1200px;"
 											value="${faqSelect.f_title }"></td>
 									</tr>
 									<tr>
 										<th>내용</th>
-										<td><textarea rows="11" cols="100" id="f_subject"
+										<td><textarea rows="11" cols="100" id="f_subject" style="width: 1200px;"
 												name="f_subject">${faqSelect.f_subject }</textarea></td>
 									</tr>
 								</table>
+								<input type="hidden" id="f_no" name="f_no" value="${faqSelect.f_no }">
+								
 								<div class="btndiv">
 									<button type="submit" id="submitbtn">등록</button>
 									<button type="button" id="backbtn"

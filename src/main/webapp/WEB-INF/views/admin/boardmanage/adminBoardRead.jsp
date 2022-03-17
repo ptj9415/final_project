@@ -108,7 +108,7 @@ h3 {
 								</tr>
 								<tr>
 									<th style="height: 400px;">내용</th>
-									<td colspan="5">${boardRead.b_content }</td>
+									<td><pre colspan="5">${boardRead.b_content }</pre></td>
 								</tr>
 							</table>
 							<br>
