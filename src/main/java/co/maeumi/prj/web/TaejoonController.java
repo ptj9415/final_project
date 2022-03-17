@@ -274,7 +274,7 @@ public class TaejoonController {
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
-		String SAVE_PATH = request.getServletContext().getRealPath("img/bannerimg");
+		String SAVE_PATH = request.getServletContext().getRealPath("/img/bannerimg");
 //		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
