@@ -716,6 +716,7 @@ textarea {
 		</div>
 		<br>
 	</section>
+	<button type="button" onclick="boardfunc('${board.b_no}')">삭제</button>
 <br><br><br>
 <button type="button" onclick="location.href='userMypages.do'">돌아가기</button>
 <!-- Bootstrap 4 -->
@@ -724,5 +725,12 @@ textarea {
 <script src="subHomeFile/plugins/select2/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->
 <script src="subHomeFile/dist/js/adminlte.min.js"></script>
+	<script>
+		function boardfunc(b_no){
+			 url = "deleteBoard.do";
+			 url = url + "?b_no"+b_no;
+			 location.href = url;
+		}
+	</script>
 </body>
 </html>
