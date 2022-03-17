@@ -94,8 +94,8 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editor/");
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -126,14 +126,15 @@ public class YoungohController {
 
 	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
-	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,
+	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editor/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -568,7 +569,7 @@ public class YoungohController {
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
 	}
-	
+	//마이페이지 유저 환불
 	@RequestMapping("/mypageRefund.do")
 	public String mypageRefund(HttpServletRequest request, myPageVO vo) {
 		String or_no = request.getParameter("or_no");
@@ -593,7 +594,7 @@ public class YoungohController {
 		}
 		return "redirect:userMypages.do";
 	}
-	
+	//마이페이지 유저 자유게시글 디테일 페이지
 	@RequestMapping("/myPageboardDetail.do")
 	public String myPageboardDetail(HttpServletRequest request,BoardVO vo,Model model, BoardReplyVO bvo) {
 		String b_no = request.getParameter("b_no");
@@ -618,7 +619,7 @@ public class YoungohController {
 		
 		return "user/mypage/mypageBoard";
 	}
-	
+	//유저 마이페이지 개인 상담 디테일 페이지
 	@RequestMapping("/userPersonalsangDam.do")
 	public String userPersonalsangDam(HttpServletRequest request, myPageVO vo, Model model ) {
 		String pr_no = request.getParameter("pr_no");
@@ -628,7 +629,7 @@ public class YoungohController {
 		model.addAttribute("personal",vo);
 		return "user/mypage/mypagePersonalDetail"; 
 	}
-	
+	//유저 마이페이지 그룹 상담 디테일 페이지
 	@RequestMapping("/userGroupsangDam.do")
 	public String userGroupsangDam(HttpServletRequest request, myPageVO vo, Model model) {
 		String gc_no = request.getParameter("gc_no");
@@ -697,16 +698,39 @@ public class YoungohController {
 		}
 		return null;
 	}
-	
+	// 마이페이지 자유 게시글 삭제
 	@RequestMapping("/deleteBoard.do")
 	public String deleteBoard(BoardVO vo, HttpServletRequest request, BoardReplyVO bvo) {
 		 String b_no = request.getParameter("b_no");
+		 System.out.println(b_no);
 		 int num = Integer.parseInt(b_no);
+		
 		 vo.setB_no(num);
-		 boardDao.boardDelete(vo);
-		 bvo.setB_no(num);
-		 boardreplyDao.boardReplyDelete(bvo);
+		 int n = boardDao.boardDelete(vo);
+		 System.out.println(n);
+		 if (n == 1) {
+			 bvo.setB_no(num);
+			int d = boardreplyDao.boardReplyDelete(bvo);
+			System.out.println(d);
+		 }
+		 
 		return "redirect:userMypages.do";
 	}
+	// 마이페이지 그룹 상담 환불 버튼
+	@RequestMapping("/mypageGroupDetailRefund.do")
+	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model) {
+		String gc_no = request.getParameter("gc_no");
+		int num = Integer.parseInt(gc_no);
+		vo.setGc_no(num);
+		vo = myPageDao.mypageGroup(vo);
+		
+		vo = myPageDao.GroupdetailRefund(vo);
+		System.out.println(vo.getOr_no());
+		System.out.println(vo.getGr_no());
+		
+		return "redirect:userMypages.do";
+	}
+	
+	
 	
 }
