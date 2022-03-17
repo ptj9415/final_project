@@ -399,9 +399,9 @@ h3 {
 
 		});
 		function resetbtn(){
-	         $("#t_title").val('');
-	         $("#t_name").val('');
-	      }
+			$("#t_title").val('');
+			$("#t_name").val('');
+		}
 	</script>
 </body>
 </html>

@@ -73,4 +73,10 @@ public class BoardServiceImpl implements BoardService {
 		return map.getUserBoardListCnt(svo);
 	}
 
+	@Override
+	public int mypageDeleteBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return map.boardDelete(vo);
+	}
+
 }

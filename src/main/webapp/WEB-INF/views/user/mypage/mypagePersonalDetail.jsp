@@ -727,6 +727,7 @@ textarea {
 	</div>
 </section>
 <br><br><br>
+<button type="button" onclick="location.href='userMypages.do'">돌아가기</button>
 <!-- Bootstrap 4 -->
 <script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->

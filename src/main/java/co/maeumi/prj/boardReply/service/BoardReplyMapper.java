@@ -7,4 +7,5 @@ public interface BoardReplyMapper {
 	int boardReplyInsert(BoardReplyVO vo);
 	int boardReplyDelete(BoardReplyVO vo);
 	int selectReplyCount(BoardReplyVO vo); // 댓글 수 
+	int mypageBoardDelete(BoardReplyVO vo);
 }
