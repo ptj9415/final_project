@@ -149,10 +149,10 @@ table>tbody>tr>th {
 						<form method="post" id="form">
 							<div class="card-body table-responsive p-00">
 								<div class="headshotdiv">
-									<img src="img/counselorpicture/${counselor.c_picturepath }"
+									<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
 										class="preImage" id="preImage" name="preImage"
 										style="height: 197px; width: 148px;"
-										onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';">
+										onerror="this.src='img/counselorpicture/errorprofile.jpg';">
 									<br>
 									<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
 								</div>

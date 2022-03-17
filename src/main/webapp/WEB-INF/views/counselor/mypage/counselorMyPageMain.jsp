@@ -107,10 +107,10 @@ h3 {
 					<div class="card">
 						<div class="card-body table-responsive p-00">
 							<div class="headshotdiv">
-								<img src="img/counselorpicture/${counselor.c_picturepath }"
+								<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
 									class="preImage" id="preImage" name="preImage"
 									style="height: 150px; width: 112.5px;"
-									onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';">
+									onerror="this.src='img/counselorpicture/errorprofile.jpg';">
 								<br>
 							</div>
 							<table class="table text-nowrap" id="thtable" style="width: 90%;">
