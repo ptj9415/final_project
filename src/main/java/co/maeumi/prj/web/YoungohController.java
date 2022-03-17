@@ -710,6 +710,7 @@ public class YoungohController {
 			out.println("<script>alert('상담 페이지 수정 성공'); location.href='counselorGroupList.do'</script>");
 			out.flush();
 		}
+		System.out.println("테스트");
 		return null;
 	}
 	// 마이페이지 자유 게시글 삭제
