@@ -11,7 +11,7 @@
 		<select id="salarySecondList"
 		parameterType="co.maeumi.prj.salary.service.SalaryVO"
 		resultType="co.maeumi.prj.salary.service.SalaryVO">
-		SELECT * FROM SALARY WHERE S_SDATE LIKE '%'||#{month}||'%'
+		SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE '%'||#{month}||'%';
 	</select>
 
 	<select id="salarySearch"
@@ -23,7 +23,7 @@
 				SELECT * FROM MONTHSALARY WHERE SDATE LIKE '%'||#{year}||'%'
 			</when>
 			<otherwise>
-				SELECT * FROM SALARY WHERE S_SDATE LIKE '%'||#{month}||'%'
+				SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE '%'||${month}||'%';
 			</otherwise>
 		</choose>
 	</select>
