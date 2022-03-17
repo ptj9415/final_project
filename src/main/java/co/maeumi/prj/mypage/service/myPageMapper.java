@@ -21,4 +21,6 @@ public interface myPageMapper {
 	List<BoardReplyVO> boardReplyDetail(BoardReplyVO vo);
 	myPageVO mypagePersonal(myPageVO vo);
 	myPageVO mypageGroup(myPageVO vo);
+	
+	myPageVO GroupdetailRefund(myPageVO vo); //그룹상담 환불
 }

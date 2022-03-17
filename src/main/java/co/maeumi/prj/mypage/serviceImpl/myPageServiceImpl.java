@@ -90,4 +90,10 @@ public class myPageServiceImpl implements myPageService {
 		return map.mypageGroup(vo);
 	}
 
+	@Override
+	public myPageVO GroupdetailRefund(myPageVO vo) {
+		// TODO Auto-generated method stub
+		return map.GroupdetailRefund(vo);
+	}
+
 }

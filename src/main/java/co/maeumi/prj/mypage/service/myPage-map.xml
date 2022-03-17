@@ -78,4 +78,12 @@
 		    ON(G.GC_NO = R.GC_NO)
 		    WHERE G.GC_NO = #{gc_no}
 	</select>
+	
+	<select id="GroupdetailRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+			ORDER_DETAIL O JOIN GROUP_COUNSEL G
+            ON(G.GC_NO = O.GC_NO)
+            JOIN GROUP_RESERVE R
+            ON(R.GC_NO = O.GC_NO)
+            WHERE G.GC_NO = #{gc_no} AND R.GR_NO = #{gr_no}
+	</select>
 </mapper>
