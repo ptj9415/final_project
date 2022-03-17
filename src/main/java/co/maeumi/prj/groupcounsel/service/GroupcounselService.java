@@ -36,4 +36,6 @@ public interface GroupcounselService {
 	int groupUpdatePerson(GroupcounselVO vo); // 그룹 상담 예약 후 예약 인원 증가
 	
 	List<GroupcounselVO> groupList(GroupcounselVO vo);//메인화면 그룹상담 탭
+	
+	int maxGroupGrno();
 }

@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="findNo" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
-			select pr_no, gc_no
+			select pr_no, gr_no
 			from order_detail
 			where or_no = #{or_no}
 	</select>
@@ -41,9 +41,9 @@
 	</update>
 	
 	<update id="myPageGroupRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
-		    UPDATE GROUP_COUNSEL
-		    SET GC_STATUS = 2
-		    WHERE GC_NO = #{gc_no}
+		    UPDATE GROUP_RESERVE
+		    SET GR_STATUS = 1
+		    WHERE GR_NO = #{gr_no}
 	</update>
 	
 	<update id="myPagePersonalRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
@@ -79,11 +79,25 @@
 		    WHERE G.GC_NO = #{gc_no}
 	</select>
 	
-	<select id="GroupdetailRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+	<select id="GroupdetailRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM
 			ORDER_DETAIL O JOIN GROUP_COUNSEL G
             ON(G.GC_NO = O.GC_NO)
             JOIN GROUP_RESERVE R
             ON(R.GC_NO = O.GC_NO)
             WHERE G.GC_NO = #{gc_no} AND R.GR_NO = #{gr_no}
+	</select>
+	
+	<update id="mypageOrderDelete" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+			UPDATE ORDER_DETAIL
+			SET OR_STATUS = 1	
+			WHERE OR_NO = #{or_no}
+	</update>
+	
+	<select id="mypagePersonalOrderRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM
+		    PERSONAL_RESERVE P JOIN ORDER_DETAIL O
+		    ON(P.PR_NO = O.PR_NO)
+		    WHERE O.PR_NO = #{pr_no};
 	</select>
 </mapper>

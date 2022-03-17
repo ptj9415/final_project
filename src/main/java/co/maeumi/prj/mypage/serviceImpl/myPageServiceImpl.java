@@ -11,6 +11,7 @@ import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.mypage.service.myPageMapper;
 import co.maeumi.prj.mypage.service.myPageService;
 import co.maeumi.prj.mypage.service.myPageVO;
+import co.maeumi.prj.order.service.order_datailVO;
 
 @Primary
 @Repository
@@ -94,6 +95,18 @@ public class myPageServiceImpl implements myPageService {
 	public myPageVO GroupdetailRefund(myPageVO vo) {
 		// TODO Auto-generated method stub
 		return map.GroupdetailRefund(vo);
+	}
+
+	@Override
+	public int mypageOrderDelete(myPageVO vo) {
+		// TODO Auto-generated method stub
+		return map.mypageOrderDelete(vo);
+	}
+
+	@Override
+	public myPageVO mypagePersonalOrderRefund(myPageVO vo) {
+		// TODO Auto-generated method stub
+		return map.mypagePersonalOrderRefund(vo);
 	}
 
 }

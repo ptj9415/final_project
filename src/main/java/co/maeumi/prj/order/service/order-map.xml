@@ -6,7 +6,7 @@
 					OR_NO,
 					OR_UID,
 					PR_NO,
-					GC_NO,
+					GR_NO,
 					OR_DATE,
 					OR_TYPE,
 					OR_PRICE,
@@ -19,7 +19,7 @@
 					(SELECT NVL(MAX(OR_NO),0)+1 FROM ORDER_DETAIL O),
 					#{or_uid},
 					0,
-					#{gc_no},
+					#{gr_no},
 					sysdate,
 					'0',
 					#{or_price},
@@ -31,9 +31,9 @@
 		</insert>
 		
 		<select id="selectorderList" parameterType="co.maeumi.prj.order.service.order_datailVO" resultType="co.maeumi.prj.order.service.order_datailVO">
-		  			SELECT O.OR_UID, C.GC_DATE, C.GC_TYPE, O.OR_DATE, O.OR_PRICE, C.GC_NAME, C.C_EMAIL, C.GC_TITLE,C.GC_TIME
-		  			FROM ORDER_DETAIL O JOIN GROUP_COUNSEL C
-					ON (O.GC_NO = C.GC_NO)
+		  			SELECT O.OR_UID, C.GR_DATE, C.GR_TYPE, O.OR_DATE, O.OR_PRICE
+		  			FROM ORDER_DETAIL O JOIN GROUP_RESERVE C
+					ON (O.GR_NO = C.GR_NO)
 		  			WHERE OR_NO = #{or_no}
 		</select>
 		
@@ -42,7 +42,7 @@
                        or_no,
                        or_uid,
                        pr_no,
-                       gc_no,
+                       gr_no,
                        or_date,
                        or_type,
                        or_price,

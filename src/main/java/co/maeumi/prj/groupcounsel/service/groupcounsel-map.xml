@@ -311,5 +311,10 @@
 		
 	</select>
 	<!-- 메인화면 그룹상담리스트 -->
+	
+	<select id="maxGroupGrno" resultType="int">
+			    SELECT MAX(GR_NO)
+   				FROM GROUP_RESERVE
+	</select>
 
 </mapper>
