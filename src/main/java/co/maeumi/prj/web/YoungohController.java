@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +46,7 @@ import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.therapy.service.TherapyVO;
 
+
 @Controller
 public class YoungohController {
 
@@ -74,8 +76,12 @@ public class YoungohController {
 	
 	@Autowired
 	private BoardReplyService boardreplyDao;
-
+	
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
+	
 	Pagination page;
+	
 	/* ===== 상담사 화면 ===== */
 	
 	// 상담 관리 - 그룹상담 개설 화면
@@ -96,7 +102,8 @@ public class YoungohController {
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("editor/");
+		//String SAVE_PATH = request.getServletContext().getRealPath("editor/");
+		String SAVE_PATH = uploadpath + "/gceditor/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -135,7 +142,7 @@ public class YoungohController {
 
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
+		String SAVE_PATH = uploadpath + "/gcsumnail/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -155,7 +162,7 @@ public class YoungohController {
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/",uploadpath+"/gceditor/");
 		vo.setGc_infos(result);
 
 		int insert = groupCounselDao.insertGroupCounsel(vo);
@@ -294,8 +301,9 @@ public class YoungohController {
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
-
+		//String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
+		String SAVE_PATH = uploadpath + "/therapy/";
+		
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -332,7 +340,8 @@ public class YoungohController {
 
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
+		//String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
+		String SAVE_PATH = uploadpath + "/therapysumnail/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -355,7 +364,7 @@ public class YoungohController {
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"/therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
@@ -409,7 +418,8 @@ public class YoungohController {
 		}
 
 		String origincode = request.getParameter("summernote");
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"/therapy/");
+		System.out.println(result);
 		vo.setT_subject(result);
 
 		therapyDao.UpdateTherapy(vo);
@@ -687,7 +697,7 @@ public class YoungohController {
 		}
 		
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", uploadpath+"/gceditor/");
 		vo.setGc_infos(result);
 
 		int update = groupCounselDao.groupCounselUpdate(vo);
@@ -700,6 +710,7 @@ public class YoungohController {
 			out.println("<script>alert('상담 페이지 수정 성공'); location.href='counselorGroupList.do'</script>");
 			out.flush();
 		}
+		System.out.println("테스트");
 		return null;
 	}
 	// 마이페이지 자유 게시글 삭제

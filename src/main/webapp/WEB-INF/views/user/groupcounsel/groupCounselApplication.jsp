@@ -440,7 +440,7 @@ img {
 		<c:forEach items="${groupCounselList }" var="group">
 			<li class="cards__item">
 				<div class="card">
-					<img id="imgfix" alt="asdf" src="editorsumnail/${group.gc_sumnail }">
+					<img id="imgfix" alt="asdf" src="../fileupload/gcsumnail/${group.gc_sumnail}">
 					<div class="card__content">
 						<div class="card__title">${group.gc_title}</div>
 						<p class="card__text">${group.gc_name }</p>
