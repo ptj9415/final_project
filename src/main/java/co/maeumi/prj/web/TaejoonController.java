@@ -418,6 +418,8 @@ public class TaejoonController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		String c_email = (String)session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselorGradeInsert(cvo);
 
 		return "img/" + saveFile;
