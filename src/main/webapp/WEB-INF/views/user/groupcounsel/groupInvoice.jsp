@@ -548,11 +548,11 @@ form {
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p> 
 								<select name='checkbox' id="checkbox" onchange="change()">
-											<option value='' selected>-- 선택 --</option>
+											<option value='0' selected>-- 선택 --</option>
 										<c:forEach items="${coupon }" var="coupon">
 											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
 										</c:forEach>
-											<option value='' selected>쿠폰선택안함</option>
+											<option value='0' selected>쿠폰선택안함</option>
 								</select>
 							</td>
 						</tr>
@@ -580,9 +580,9 @@ form {
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="pr_price" name="pr_price" value="${groupInvoice.gc_price}">
+					<input type="hidden" id="gr_price" name="gr_price" value="${groupInvoice.gc_price}">
 					<input type="hidden" id="or_uid" name="or_uid">
-					<input type="hidden" id="c_no" name="c_no" value="">
+					<input type="text" id="c_no" name="c_no" value="0">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 				</form>
 				<!--End Table-->
@@ -607,6 +607,7 @@ form {
 		   var num = priceSelect.indexOf('/');
 		   var priceResult = priceSelect.substr(0,num);
 		   var couponNo = priceSelect.substr(num+1);
+		   couponNo = Number(couponNo);
 		   if (priceResult ==' '|| priceResult == null || priceResult =='') {
 		   		$("#discount").text('');
 		   }else{
@@ -614,7 +615,7 @@ form {
 		   }
 		   var ddd = price-priceResult;
 		   $("#totalPrice").text(ddd+'원');
-		   $("#pr_price").val(ddd);
+		   $("#gr_price").val(ddd);
 		   $("#c_no").val(couponNo);
 		   
 	   }	

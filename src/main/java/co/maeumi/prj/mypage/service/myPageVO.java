@@ -77,7 +77,7 @@ public class myPageVO {
 	private String gc_status;      //그룹 상담 진행인지 아닌지
 	
 	//그룹 상담 예약
-	private String gr_no;
+	private int gr_no;
 	private String gr_subject;
 	private String gr_reservedate;
 	private String gr_status;
