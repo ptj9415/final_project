@@ -25,9 +25,12 @@
     height: 600px;
     border: 1px solid #d3e0e742;
     padding: 50px;
-    margin-top: 100px;
+   /*  margin-top: 100px; */
     border-radius: 30px;
     background-color: #d3e0e742;
+}
+.sec_cal:hover{
+	cursor:pointer;
 }
 
 .sec_cal .cal_nav {
@@ -66,7 +69,7 @@
 	display: block;
 	width: 20px;
 	height: 20px;
-	border: 3px solid #000;
+	border: 3px solid #153e54;
 	border-width: 3px 3px 0 0;
 	transition: border 0.1s;
 }
@@ -304,6 +307,8 @@
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
+	margin-top: 180px;
+    margin-left: 350px;
 }
 
 #next-btn:hover {
@@ -343,16 +348,16 @@
 
 /*시간표 생성 style*/
 .timediv {
-	height: 300px;
+	height: 360px;
     display: grid;
     grid-auto-rows: 50px;
     grid-template-columns: 120px 120px;
-    margin-top: 300px;
-    margin-left: 500px;
-    padding: 30px;
-    border: 1px solid #d3e0e742;
-    border-radius:30px;
-    width: 300px;
+    margin-top: 220px;
+    margin-left: 380px;
+    /* padding: 30px; */
+    /* border: 1px solid #8dacbd0f;*/
+    border-radius:20px;
+    width: 330px;
     text-align: center;
 }
 
@@ -370,6 +375,10 @@ div.asdf {
 	font-size: 14px;
 	color: white;
 	border: 0px;
+}
+#btn1:focus, #btn2:focus, #btn3:focus, #btn4:focus, #btn5:focus, #btn6:focus, #btn7:focus, #btn8:focus {
+	border: 2px solid #153e54;
+	
 }
 
 #btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover, #btn5:hover, #btn6:hover,
@@ -443,11 +452,11 @@ div.asdf {
 }
 
 .total {
-	width:70%;
+	width:50%;
 	height: 1000px;
 	display: grid;
 	grid-auto-rows: 50px;
-	grid-template-columns: 120px 120px;
+	grid-template-columns: 150px 150px;
 	
 }
 .body-container{
@@ -456,6 +465,28 @@ div.asdf {
     flex-direction: column;
     min-height: 100vh;
 }
+.text{
+	width:300px;
+	margin-top:10px;
+}
+.frame{
+	border: 1px solid #d3e0e742;
+    padding: 60px;
+    width: 1200px;
+    height: 700px;
+    background-color: #d3e0e742;
+    margin-top: 90px;
+    border-radius: 30px;
+}
+.h5-text{
+	float:right;
+	margin-right: 200px;
+    margin-top: 100px;
+    font-weight:bold;
+    border-bottom: 1px solid #8dacbd42;
+    padding-bottom: 30px;
+}
+
 </style>
 </head>
 <body>
@@ -496,46 +527,48 @@ div.asdf {
 	</div>
 
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
 			<div class="md-step-title">step1</div>
-			<div class="md-step-optional">상담 카테고리 선택</div>
+			<div class="md-step-optional">상담사 검색</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active editable">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
 			<div class="md-step-title">step2</div>
-			<div class="md-step-optional">상담사 선택</div>
+			<div class="md-step-optional">상담카테고리 및 상담방법 선택</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>3</span>
 			</div>
 			<div class="md-step-title">step3</div>
-			<div class="md-step-optional">상담 방법 선택</div>
+			<div class="md-step-optional">상담 날짜/시간 선택</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active done">
+		<div class="md-step">
 			<div class="md-step-circle">
 				<span>4</span>
 			</div>
 			<div class="md-step-title">step4</div>
-			<div class="md-step-optional">상담 날짜 선택</div>
+			<div class="md-step-optional">상담 신청내역 확인</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
 	</div>
 
 <div class="body-container">
-
+	<div class="frame">
+		<h5 class="h5-text">${counselorSelect.c_name } 상담사님의 상담시간표입니다.</h5>
+		
 	<div class="total">
 		<div class="sec_cal">
 			<div class="cal_nav">
@@ -569,6 +602,7 @@ div.asdf {
 			<input type="submit" data-page="2" name="next"
 				class="next action-button" id="next-btn" value="신청하기" />
 		</form>
+	</div>
 	</div>
 </div>
 	<script>
@@ -642,7 +676,8 @@ div.asdf {
         calendar.innerHTML = '';
 
         // 지난달
-        for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+        for (var i = prevDate - prevDay + 1; 
+        	i <= prevDate; i++) {
           calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
         }
         // 이번달
@@ -660,6 +695,14 @@ div.asdf {
           var currentMonthDate = document.querySelectorAll('.dates .current');
           currentMonthDate[todayDate - 1].classList.add('today');
         }
+        
+        //오늘 이전 날짜 표시안되게 하고시푼딩
+       
+        
+        
+        
+        
+        
         /*   test
          if(어쩌구....){
         	 
@@ -675,6 +718,9 @@ div.asdf {
         	 $('.day.current').attr('dispaly',disabled);
          }
         test end   */
+        
+	
+
         
         
         $('.day.current').on('click', function () {
@@ -721,11 +767,16 @@ div.asdf {
     		dataType: 'json',
     		success: function(data) {
 				$('.asdf').remove();
+				$('.text').remove();
 				var timediv = $('.timediv');
 				for (var i = 1; i < 9; i++) {
-				let button1 = $('<div class="asdf">'+'<button id='+"btn"+ i + ' type="button" value='+(i+8) +' disabled="disabled">'+ (i+8)+'~'+(i+9)+'시' +'</button>'+'</div>');
+				let button1 = $('<div class="asdf">'+'<button id='+"btn"+ i + ' type="button" value='+(i+8) +' disabled="disabled">'+ (i+8)+'~'+(i+9)+'시' +'</button>'+'</div>' 
+						);
+			
 				timediv.append(button1);
 				}
+				let info = $('<div class="text">'+'* 원하는 상담시간을 선택해주세요. '+'</div>');
+				timediv.append(info);
 				for (datas of data) {
 					var time = datas.cd_time.substring(0,2);
 					time = Number(time);

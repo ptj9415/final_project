@@ -182,7 +182,7 @@ ol li,ul li{
 	}
 .header{
 	padding-bottom:0;
-	border-top:solid 1.7px #696969;
+	border-top: solid 1.7px #8dacbd42;
 	}
 .header h1{
 	margin:0;
@@ -315,7 +315,7 @@ p.x-small a{
 	margin-right:auto;
 	margin-left:auto;
 	width:80%;
-	margin-bottom:100px;sss
+	margin-bottom:100px;zddddddddd
 }
 
 /*check-sign*/
@@ -324,7 +324,8 @@ p.x-small a{
  * Modified by: Istiak Tridip
  */
 .success-checkmark {
-  margin-top:100px;
+  margin-top:150px;
+  margin-bottom:40px;
   width: 80px;
   height: 115px;
   margin-right:auto;
@@ -336,7 +337,7 @@ p.x-small a{
   position: relative;
   border-radius: 50%;
   box-sizing: content-box;
-  border: 4px solid #4CAF50;
+  border: 4px solid #153e54;
 }
 .success-checkmark .check-icon::before {
   top: 3px;
@@ -362,7 +363,7 @@ p.x-small a{
 }
 .success-checkmark .check-icon .icon-line {
   height: 5px;
-  background-color: #4CAF50;
+  background-color: #153e54;
   display: block;
   border-radius: 2px;
   position: absolute;
@@ -391,7 +392,7 @@ p.x-small a{
   border-radius: 50%;
   position: absolute;
   box-sizing: content-box;
-  border: 4px solid rgba(76, 175, 80, 0.5);
+  border: 4px solid #153e54;
 }
 .success-checkmark .check-icon .icon-fix {
   top: 8px;
@@ -554,18 +555,21 @@ h1 {
   background: #fff;
   margin: 0 auto;
   padding: 10px 17px;
-  -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 2px 2px 3px 1px rgb(0 0 0 / 38%);
+  border-radius: 20px;
+  padding-top: 80px;
 }
 
 #keywords {
   margin: 0 auto;
   font-size: 1.2em;
   margin-bottom: 15px;
+  width: 90%;
 }
 
 #keywords thead {
   cursor: pointer;
-  background: #c9dff0;
+  background: #8dacbd42;
 }
 #keywords thead tr th {
 font-size: 20px;
@@ -594,11 +598,13 @@ font-size: 20px;
 
 #keywords tbody tr {
   color: #555;
+  text-align:left;
 }
 #keywords tbody tr td {
-	font-size: 18px;
-  text-align: center;
+  font-size: 14px;
+  text-align: left;
   padding: 15px 10px;
+  border-bottom: 0.6px solid #d3e0e742;
 }
 #keywords tbody tr td.lalign {
   text-align: left;
@@ -640,27 +646,27 @@ font-size: 20px;
 </div>
 
 	<div class="complete-body">
-	  <div class="header">
       <div class="container">
         <h1>
             <img src="resources/user/images/MaeumiLogo.png"  style="width: 120px;"></h1>
       </div>
+        <h3 style="text-align:center; margin-bottom:30px;">상담신청이 성공적으로 완료되었습니다.</h3>
+	  <div class="header">
     </div>
   
     <div class="pay-body">
       <div class="container">
-        <h1 style="text-align:center">상담신청이 성공적으로 완료되었습니다.</h1>
   
        
   	    <div class="table-body">
     <div id="wrapper">
-        <h3>상담신청 내역</h3>
+      <!--   <h6 style="padding:20px;">상담신청 내역</h6> -->
         
         <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
           <thead>
             <tr>
-              <th><span>정보</span></th>
-              <th><span>${result.ccg_subname}</span></th>
+              <th><span>개인상담 신청내역</span></th>
+              <th><span></span></th>
               
             </tr>
           </thead>
@@ -668,22 +674,27 @@ font-size: 20px;
             <tr>
               
               <td>상담 카테고리</td>
-              <td>전화</td>
+              <td style="text-align: right;">진로/취업 ${result.ccg_subname}</td>
              
             </tr>
             <tr>
-              <td></td>
-              <td>test</td>
+              <td>상담사 명</td>
+              <td style="text-align: right;">이소정</td>
               
             </tr>
             <tr>
-              <td>test</td>
-              <td>test</td>
+              <td>상담 일시</td>
+              <td style="text-align: right;">2022-04-04 13시</td>
               
             </tr>
             <tr>
-              <td>test</td>
-              <td>test</td>
+              <td>상담 방식</td>
+              <td style="text-align: right;">카카오톡</td>
+              
+            </tr>
+            <tr>
+              <td>상담 비용</td>
+              <td style="text-align: right;">18,000원</td>
               
             </tr>
             
@@ -698,12 +709,12 @@ font-size: 20px;
     </div>
   </div>
     <div class="footer">
-      <div class="container">
+     <!--  <div class="container">
         <a href="https://niice.co/" target="_blank">
             <img src="resources/user/images/MaeumiLogo.png"  style="width: 100px;"></a>
        
         <p>Copyright © 2022 2022 All rights reserved 마으미</p>
-      </div>
+      </div> -->
     </div>
  <script>
 

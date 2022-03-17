@@ -234,7 +234,7 @@ div.counsel-type {
 
 /*step 3end*/
 .choice-btn {
-	width: 90%;
+	width: 1200px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 50px;
@@ -393,45 +393,57 @@ div.counsel-type {
 
 	
 	<div class="choice-btn">
-		<p style="margin-top:30px;">상담 카테고리 선택</p>
+		<p style="margin-top:30px;">'${counselorSelect.c_name } 상담사' 님의 상담 카테고리 선택</p>
 		<hr style="border:1px solid #d3e0e742">
 		<div class="category-choice">
 			<%-- <c:if test="${counselorSelect.ccg_name eq 1 }">	 --%>
+			<c:if test="${counselorSelect.c_type1 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/mad.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">분노/우울</h3>
 						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
 				</div>
+			</c:if>
 			<%-- </c:if> --%>
+			<c:if test="${counselorSelect.c_type2 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/love.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">연애/우정</h3>
 						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
 				</div>
+			</c:if>
+			<c:if test="${counselorSelect.c_type3 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/way.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">진로/취업</h3>
 						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
 				</div>
+			</c:if>
+			<c:if test="${counselorSelect.c_type4 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/marriage.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">결혼/육아</h3>
 						<input type="checkbox" class="chat-btn" name="onecheck"  onclick="doOpenCheck(this);"><br><br>
 				</div>
+			</c:if>
+			<c:if test="${counselorSelect.c_type5 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/student.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">청소년</h3>
 						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
-				</div>	
+				</div>
+			</c:if>
+			<c:if test="${counselorSelect.c_type6 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/family.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">가정</h3>
 						<input type="checkbox" class="chat-btn"  name="onecheck" onclick="doOpenCheck(this);" ><br><br>
-				</div>				
+				</div>
+			</c:if>				
 		</div>
 	</div>
 	<div class="choice-btn">	
-		<p style="margin-top:30px;">상담 방법 선택</p>
+		<p style="margin-top:30px;">'${counselorSelect.c_name } 상담사님' 의 상담 방법 선택</p>
 		<hr style="border:1px solid #d3e0e742">
 		<div class="category-choice2">
 		<c:if test="${counselorSelect.p_kakao eq 1 }">

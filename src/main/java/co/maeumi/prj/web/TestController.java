@@ -113,7 +113,7 @@ public class TestController {
 		System.out.println(type);
 		System.out.println(price);
 		System.out.println(c_email);
-
+		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
 		model.addAttribute("type", type);
 		model.addAttribute("price", price);
 		model.addAttribute("c_email", c_email);
