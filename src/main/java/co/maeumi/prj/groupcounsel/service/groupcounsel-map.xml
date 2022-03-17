@@ -49,9 +49,9 @@
 		parameterType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
 		UPDATE GROUP_COUNSEL
 		<set>
-			GC_DATE = #{gc_date},
-			GC_STARTDATE = #{gc_startdate},
-			GC_FINALDATE = #{gc_finaldate},
+			GC_DATE = to_date(#{gc_date},'yyyy/mm/dd'),
+			GC_STARTDATE = to_date(#{gc_startdate},'yyyy/mm/dd'),
+			GC_FINALDATE = to_date(#{gc_finaldate},'yyyy/mm/dd'),
 			GC_TITLE = #{gc_title},
 			GC_TYPE = #{gc_type},
 			GC_MIN_PERSON = #{gc_min_person},

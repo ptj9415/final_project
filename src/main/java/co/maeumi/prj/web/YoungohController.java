@@ -160,9 +160,10 @@ public class YoungohController {
 		// 서머노트 코드 원본
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-
+		System.out.println("tomcat path");
+		System.out.println(req.getContextPath());
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/",uploadpath+"/gceditor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/",uploadpath + "gceditor/");
 		vo.setGc_infos(result);
 
 		int insert = groupCounselDao.insertGroupCounsel(vo);
@@ -364,7 +365,7 @@ public class YoungohController {
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"/therapy/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
@@ -418,7 +419,7 @@ public class YoungohController {
 		}
 
 		String origincode = request.getParameter("summernote");
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"/therapy/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 
@@ -697,7 +698,7 @@ public class YoungohController {
 		}
 		
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", uploadpath+"/gceditor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", uploadpath+"gceditor/");
 		vo.setGc_infos(result);
 
 		int update = groupCounselDao.groupCounselUpdate(vo);
