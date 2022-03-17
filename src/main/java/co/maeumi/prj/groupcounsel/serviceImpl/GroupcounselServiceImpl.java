@@ -24,9 +24,9 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	}
 
 	@Override
-	public List<GroupcounselVO> groupSelectList() {
+	public List<GroupcounselVO> groupSelectList(Pagination page) {
 		// TODO Auto-generated method stub
-		return map.groupSelectList();
+		return map.groupSelectList(page);
 	}
 
 	@Override
@@ -160,6 +160,12 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 	public int maxGroupGrno() {
 		// TODO Auto-generated method stub
 		return map.maxGroupGrno();
+	}
+
+	@Override
+	public int groupSelectListCount() {
+		// TODO Auto-generated method stub
+		return map.groupSelectListCount();
 	}
 
 }

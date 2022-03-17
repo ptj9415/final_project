@@ -67,9 +67,19 @@
 
 	<select id="groupSelectList"
 		resultType="co.maeumi.prj.groupcounsel.service.GroupcounselVO">
-		SELECT *
-		FROM GROUP_COUNSEL
-		ORDER BY GC_NO DESC
+			<!-- SELECT *
+			FROM GROUP_COUNSEL
+			ORDER BY GC_NO DESC -->
+			SELECT *
+			FROM (
+			SELECT ROWNUM RN, A.*
+			FROM (
+			SELECT *
+			FROM GROUP_COUNSEL
+			ORDER BY GC_NO DESC
+			) A
+			)
+			WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="joinSelectList"
@@ -316,5 +326,9 @@
 			    SELECT MAX(GR_NO)
    				FROM GROUP_RESERVE
 	</select>
-
+	
+	<select id="groupSelectListCount" resultType="int">
+			select count(*)
+			from group_counsel
+	</select>
 </mapper>

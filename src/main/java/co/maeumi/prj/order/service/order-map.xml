@@ -31,10 +31,12 @@
 		</insert>
 		
 		<select id="selectorderList" parameterType="co.maeumi.prj.order.service.order_datailVO" resultType="co.maeumi.prj.order.service.order_datailVO">
-		  			SELECT O.OR_UID, C.GR_DATE, C.GR_TYPE, O.OR_DATE, O.OR_PRICE
+		  			SELECT *
 		  			FROM ORDER_DETAIL O JOIN GROUP_RESERVE C
 					ON (O.GR_NO = C.GR_NO)
-		  			WHERE OR_NO = #{or_no}
+                    JOIN GROUP_COUNSEL D
+                    ON (C.GC_NO = D.GC_NO)
+                    WHERE OR_NO = #{or_no}
 		</select>
 		
 		<insert id="orderPersonalInsert">
@@ -48,7 +50,8 @@
                        or_price,
                        m_nickname,
                        m_email,
-                       or_status
+                       or_status,
+                       c_email
                 )
                 values(
                       (SELECT NVL(MAX(or_no),0)+1 FROM order_detail N),
@@ -60,7 +63,8 @@
                       #{or_price},
                       '세션값 이름 입니다.',
                       '세션값 이메일 입니다',
-                      '0'
+                      '0',
+                      #{c_email}
                 )
 		</insert>
 		

@@ -436,9 +436,10 @@ img {
 	</div>
 
 	<div class="group-menu">
+	<div>왜 안되냐/...</div>
 		<ul class="cards">
-		<c:forEach items="${groupCounselList }" var="group">
-			<li class="cards__item">
+		<c:forEach items="${groupCounselList}" var="group">
+			 <li class="cards__item">
 				<div class="card">
 					<img id="imgfix" alt="asdf" src="../fileupload/gcsumnail/${group.gc_sumnail}">
 					<div class="card__content">
@@ -463,6 +464,26 @@ img {
 		</c:forEach>
 		</ul>
 	</div>
+	
+	<div style=" width:1200px; margin:0 auto;">
+		  <ul class="pagination" style="padding-left: 470px;">
+		    <li class="page-item">
+		      <a class="page-link" href="userGroupCounsel.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
+		    </li>
+		    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
+				<c:if test="${status.count ne page.nowPage}">
+		    		<li class="page-item"><a class="page-link" href="userGroupCounsel.do?nowPage=${status.count}">${status.count}</a></li>
+		   		</c:if>
+		   		<c:if test="${status.count eq page.nowPage}">
+					<li class="page-item active"><a class="page-link" href="userGroupCounsel.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
+		   		</c:if>
+		    </c:forEach>
+		    <li class="page-item">
+		      <a class="page-link" href="userGroupCounsel.do?nowPage=${page.next}">Next</a>
+		    </li>
+		  </ul>
+	</div>
+	
 	<script type="text/javascript">
 		function func(gc_no, c_email){
 			console.log(gc_no);

@@ -7,7 +7,7 @@ import co.maeumi.prj.service.Search;
 
 public interface GroupcounselService {
 	int insertGroupCounsel(GroupcounselVO vo); //그룹 상담 개설 인서트
-	List<GroupcounselVO> groupSelectList();    //그룹 상담 전체 목록 조회
+	List<GroupcounselVO> groupSelectList(Pagination page);    //그룹 상담 전체 목록 조회
 	int countGroupCounsel();					//그룹 상담 전체 수 조회
 	int searchcountGroupCounsel(Pagination page);  //검색 및 페이지 네이션 된 리스트 수 조회
 	List<GroupcounselVO> pageSelectList(Pagination page);  //페이지 네이션 된 리스트 조회하기.
@@ -37,5 +37,7 @@ public interface GroupcounselService {
 	
 	List<GroupcounselVO> groupList(GroupcounselVO vo);//메인화면 그룹상담 탭
 	
-	int maxGroupGrno();
+	int maxGroupGrno();  //gr_no max값 가져오기.
+	
+	int groupSelectListCount(); 
 }

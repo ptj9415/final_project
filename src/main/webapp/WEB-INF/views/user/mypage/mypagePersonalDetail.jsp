@@ -727,7 +727,7 @@ textarea {
 	</div>
 </section>
 <br><br><br>
-<button type="button" onclick="personalDetail('${personal.pr_no}')">환불하기</button>
+<%-- <button type="button" onclick="personalDetail('${personal.pr_no}')">환불하기</button> --%>
 <button type="button" onclick="location.href='userMypages.do'">돌아가기</button>
 <script type="text/javascript">
 		function personalDetail(){

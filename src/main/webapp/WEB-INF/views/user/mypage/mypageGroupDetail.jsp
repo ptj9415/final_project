@@ -727,7 +727,7 @@ textarea {
 	</div>
 </section>
 <br><br><br>
-<button type="button" onclick="groupDetail('${glist.gc_no}','${glist.gr_no }')">환불하기</button>
+<%-- <button type="button" onclick="groupDetail('${glist.gc_no}','${glist.gr_no }')">환불하기</button> --%>
 <button type="button" onclick="location.href='userMypages.do'">돌아가기</button>
 <script>
 		function groupDetail(gc_no, gr_no){

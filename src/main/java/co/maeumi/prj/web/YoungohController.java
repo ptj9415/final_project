@@ -443,11 +443,19 @@ public class YoungohController {
 
 	// 그룹 상담 유저 페이지 시작입니다.
 	@RequestMapping("/userGroupCounsel.do")
-	public String userGroupCounsel(Model model) {
-		List<GroupcounselVO> list = groupCounselDao.groupSelectList();
+	public String userGroupCounsel(Model model, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
 		
+		if (nowPage == null) {
+			page = new Pagination(groupCounselDao.groupSelectListCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+		} else {
+			page = new Pagination(groupCounselDao.groupSelectListCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+		}
+		
+		List<GroupcounselVO> list = groupCounselDao.groupSelectList(page);
 		
 		model.addAttribute("groupCounselList", list);
+		model.addAttribute("page", page);
 		return "user/groupcounsel/groupCounselApplication";
 	}
 
@@ -488,6 +496,7 @@ public class YoungohController {
 		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
 		int maxnum = groupCounselDao.maxGroupGrno();
 		String c_email = request.getParameter("c_email");
+		System.out.println("이거 maxnum 들어옴?? : "+maxnum);
 		System.out.println(c_email);
 		ovo.setGr_no(maxnum);
 		ovo.setOr_price(vo.getGr_price());
@@ -500,12 +509,12 @@ public class YoungohController {
 			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
 			System.out.println(ovo.getOr_date());
 			groupCounselDao.groupUpdatePerson(vo); //인원수 증가 메소드
-		
-			//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
-			
-			String date = ovo.getGc_date();
-			date = date.substring(0, 10);
-			ovo.setGc_date(date);
+			String c_no = request.getParameter("c_no");
+			int c_nos = Integer.parseInt(c_no);
+			System.out.println(c_nos);
+			if (c_nos != 0) {
+				//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+			}
 			
 			model.addAttribute("result", ovo);
 		}
@@ -599,7 +608,7 @@ public class YoungohController {
 			if (vo.getPr_no() == 0) {
 				System.out.println("그룹 상담으로 들어옴");
 				myPageDao.myPageGroupRefund(vo);
-			}else {
+			}else if (vo.getGr_no() == 0) {
 				System.out.println("개인 상담으로 들어옴");
 				System.out.println(vo.getGr_no());
 				myPageDao.myPagePersonalRefund(vo);
@@ -731,39 +740,39 @@ public class YoungohController {
 		 
 		return "redirect:userMypages.do";
 	}
-	// 마이페이지 그룹 상담 환불 버튼
-	@RequestMapping("/mypageGroupDetailRefund.do")
-	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model, GroupcounselVO gvo) {
-		String gc_no = request.getParameter("gc_no");
-		int num = Integer.parseInt(gc_no);
-		vo.setGc_no(num);
-		vo = myPageDao.mypageGroup(vo);
-		
-		vo = myPageDao.GroupdetailRefund(vo);
-		
-		System.out.println(vo.getOr_no());
-		System.out.println(vo.getGr_no());
-		
-		//일단 환불 되는지 기다려보자.
-		myPageDao.mypageOrderDelete(vo);
-		gvo.setGr_no(vo.getGr_no());
-		groupCounselDao.GroupUserDelete(gvo);
-		return "redirect:userMypages.do";
-	}
-	//개인 상담 환불
-	@RequestMapping("/mypagePersonalDetailRefund.do")
-	public String mypagePersonalDetailRefund(HttpServletRequest request, myPageVO vo, PersonalcounselVO pvo) {
-		String pr_no = request.getParameter("pr_no");
-		int num = Integer.parseInt(pr_no);
-		vo.setPr_no(num);
-		myPageDao.mypagePersonalOrderRefund(vo);
-		
-		System.out.println(vo.getOr_no());
-		System.out.println(vo.getPr_no());
-		//환불 되는지 보자.
-		myPageDao.mypageOrderDelete(vo);
-		myPageDao.myPagePersonalRefund(vo);
-		
-		return "redirect:userMypages.do";
-	}
+//	// 마이페이지 그룹 상담 환불 버튼
+//	@RequestMapping("/mypageGroupDetailRefund.do")
+//	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model, GroupcounselVO gvo) {
+//		String gc_no = request.getParameter("gc_no");
+//		int num = Integer.parseInt(gc_no);
+//		vo.setGc_no(num);
+//		vo = myPageDao.mypageGroup(vo);
+//		
+//		vo = myPageDao.GroupdetailRefund(vo);
+//		
+//		System.out.println(vo.getOr_no());
+//		System.out.println(vo.getGr_no());
+//		
+//		//일단 환불 되는지 기다려보자.
+//		myPageDao.mypageOrderDelete(vo);
+//		gvo.setGr_no(vo.getGr_no());
+//		groupCounselDao.GroupUserDelete(gvo);
+//		return "redirect:userMypages.do";
+//	}
+//	//개인 상담 환불
+//	@RequestMapping("/mypagePersonalDetailRefund.do")
+//	public String mypagePersonalDetailRefund(HttpServletRequest request, myPageVO vo, PersonalcounselVO pvo) {
+//		String pr_no = request.getParameter("pr_no");
+//		int num = Integer.parseInt(pr_no);
+//		vo.setPr_no(num);
+//		myPageDao.mypagePersonalOrderRefund(vo);
+//		
+//		System.out.println(vo.getOr_no());
+//		System.out.println(vo.getPr_no());
+//		//환불 되는지 보자.
+//		myPageDao.mypageOrderDelete(vo);
+//		myPageDao.myPagePersonalRefund(vo);
+//		
+//		return "redirect:userMypages.do";
+//	}
 }
