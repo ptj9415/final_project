@@ -62,6 +62,8 @@ p {
     padding-top: 50px;
     margin-right: auto;
     margin-left: auto;
+    
+    
 }
 
 #headerimage {
@@ -88,6 +90,7 @@ p {
 	margin: 0 auto;
 	width: 85%;
 	background: #fff;
+	border-radius: 30px;
 }
 
 [id*="invoice-"] {
@@ -119,8 +122,8 @@ p {
 
 .clientlogo {
 	float: left;
-	height: 60px;
-	width: 60px;
+	height: 100px;
+	width: 100px;
 	/* background: url(http://michaeltruong.ca/images/client.jpg) no-repeat; */
 	background-size: 60px 60px;
 	border-radius: 50px;
@@ -151,7 +154,7 @@ table {
 
 td {
 	padding: 5px 0 5px 15px;
-	border: 1px solid #eee;
+	/* border: 1px solid #eee; */
 }
 
 .tabletitle {
@@ -169,6 +172,11 @@ td {
 
 .itemtext {
 	font-size: 0.9em;
+}
+.itemtext1 {
+	font-size: 0.9em;
+	float:right;
+	margin-right: 15px;
 }
 
 td.subtotal {
@@ -244,16 +252,16 @@ form {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 }
 
 #pay-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 }
 
@@ -261,17 +269,17 @@ form {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	float: left;
 }
 
 #back-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 }
 
@@ -348,20 +356,20 @@ form {
 							<td class="tableitem"><p class="itemtext">상담 키워드</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">[상담키워드값]</p></td>
+							<td class="tableitem"><p class="itemtext1">[상담키워드값]</p></td>
 						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담방식</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${pr_type }</td>
+							<td class="tableitem"><p class="itemtext1">${pr_type }</td>
 						</tr>
 
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${pr_date} ${pr_time}</p></td>
+							<td class="tableitem"><p class="itemtext1">${pr_date} ${pr_time}시</p></td>
 						</tr>
 
 						
@@ -370,13 +378,13 @@ form {
 							<td class="tableitem"><p class="itemtext">상담비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${pr_price }</p></td>
+							<td class="tableitem"><p class="itemtext1">${pr_price }</p></td>
 						</tr>
 						
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext1"></p></td>
 							<td class="tableitem">
 								<p class="itemtext"></p> 
 								<select name='checkbox' id="checkbox" onchange="change()">
@@ -392,14 +400,14 @@ form {
 							<td class="tableitem"><p class="itemtext">할인비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext" id="discount"></p></td>
+							<td class="tableitem"><p class="itemtext1" id="discount"></p></td>
 						</tr>
 
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext1"></p></td>
 						</tr>
 
 

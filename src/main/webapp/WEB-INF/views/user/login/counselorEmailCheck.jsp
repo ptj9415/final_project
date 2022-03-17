@@ -8,8 +8,9 @@
 <style type="text/css">
 .test {
 	display: flex;
-	justify-content: center;
-	padding-top: 80px;
+    justify-content: center;
+    animation: fadein 1s;
+    -webkit-animation: fadein 1s;
 }
 .mainForm {
     width: 30%;
@@ -29,6 +30,9 @@ input {
 	width: 60%;
 	font-size: 17px;
 	text-align: center;
+	border: 1px solid #8dacbd42;
+    border-radius: 30px;
+}
 }
 
 #emailSendBtn {
@@ -64,6 +68,10 @@ button {
 button:hover {
 	background-color: #FFD2D2;
 	border-color: white;
+}
+.emailCheck{
+	border:1px solid #8dacbd42;
+	border-radius:20px;
 }
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
@@ -150,7 +158,7 @@ $("#nextBtn").click(function(){
                 <h4>상담사님의 본인확인을 진행해주세요.</h4>
                 <h6>Maeumi. 의 다양한 서비스 이용을 위해 본인확인이 필요합니다.</h6>
             </div>
-            <div class="emailCheck" style="border: 1px solid gray;">
+            <div class="emailCheck" >
             	<form id="frm" action="counselorJoinForm.do" method="POST">
 	                <input type="email" placeholder="이메일을 입력해주세요" id="inputEmail" name="inputEmail" class="inputEmail">
 	                <button type="button" id="emailSendBtn" >인증하기</button><br>

@@ -110,7 +110,7 @@
 						<p>자신의 마음을 검사 해보세요</p>
 					</h3>
 					<div>
-						<img src="resources/img/main.png" class="main_img" />
+						<img src="resources/user/images/depression.png" class="main_img" />
 					</div>
 					<span class="time_logo"></span>
 					<p>소요 시간 : 3분 내외</p>

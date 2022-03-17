@@ -587,6 +587,11 @@ textarea {
 #changeCheck {
 	display: none;
 }
+.manage-btn{
+	width:50%; 
+	margin-left:auto; 
+	margin-right:auto;
+}
 </style>
 </head>
 <body>
@@ -779,8 +784,8 @@ textarea {
 									<tr>
 										<td colspan="2">${blist.b_wdate}</td>
 										<td colspan="2">${blist.b_subject}</td>
-										<td>${blist.b_title}</td>
-										<td><button type="button" onclick="boardDetail('${blist.b_no}')">관리</button> </td>
+										<td colspan="5">${blist.b_title}</td>
+										<td><button class="manage-btn" onclick="boardDetail('${blist.b_no}')">관리</button> </td>
 									</tr>
 									</c:forEach>
 								</tbody>
