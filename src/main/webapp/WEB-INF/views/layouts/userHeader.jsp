@@ -129,7 +129,7 @@ span.top-nav-admin {
 				⚙</a></span>
 	</nav>
 	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
 			<a href="home.do"><img src="resources/user/images/MaeumiLogo.png"
