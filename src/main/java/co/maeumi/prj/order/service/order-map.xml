@@ -23,8 +23,8 @@
 					sysdate,
 					'0',
 					#{or_price},
-					'닉네임 세션값이 들어감',
-					'이메일 세션값이 들어감',
+					#{nickname},
+					#{m_email},
 					'0',
 					#{c_email}						
 				)
