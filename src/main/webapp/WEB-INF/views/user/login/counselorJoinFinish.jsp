@@ -42,16 +42,19 @@ button {
 <body>
 	<div class="mainForm" align="center">
 		<div class="title">
-			<h1>Maeumi.</h1>
+			<img src="resources/user/images/doctor.png" style="width:100px;">
+			<h1>WELCOME!</h1>
 		</div>
 		<div class="comment">
 			<h4>${counselor }</h4>
 			<h4>
-				<span class="maeumi">Maeumi.</span> 마이페이지에서 증빙서류를 첨부하시기 바랍니다.
+				<span class="maeumi">Maeumi.</span> 
+				
+				마이페이지에서 증빙서류를 첨부하시기 바랍니다.
 			</h4>
 		</div>
 		<div class="loginBtn">
-			<button class="login" onclick="location.href='loginForm.do'">Maeumi. 로그인!</button>
+			<button class="login" onclick="location.href='loginForm.do'">로그인 하러 가기</button>
 		</div>
 	</div>
 <br><br><br><br><br><br><br><br><br><br><br><br>

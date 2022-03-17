@@ -18,14 +18,14 @@
 
 /*calendar start*/
 .sec_cal {
-	width: 500px;
+	width: 520px;
     /* margin-top: 100px; */
     /* margin-left: 300px; */
     font-family: "NotoSansR";
-    height: 600px;
+    height: 570px;
     border: 1px solid #d3e0e742;
-    padding: 50px;
-   /*  margin-top: 100px; */
+    padding: 80px;
+    /* margin-top: 100px; */
     border-radius: 30px;
     background-color: #d3e0e742;
 }
@@ -353,7 +353,7 @@
     grid-auto-rows: 50px;
     grid-template-columns: 120px 120px;
     margin-top: 220px;
-    margin-left: 380px;
+    margin-left: 400px;
     /* padding: 30px; */
     /* border: 1px solid #8dacbd0f;*/
     border-radius:20px;
