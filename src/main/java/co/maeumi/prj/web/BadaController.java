@@ -25,6 +25,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -78,6 +79,8 @@ public class BadaController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -719,7 +722,7 @@ public class BadaController {
 	@RequestMapping("/noticeRegister.do")
 	public ModelAndView noticeRegister(ModelAndView mav, NoticeVO vo, HttpServletRequest request,
 			HttpServletResponse response, @RequestParam("fileName") MultipartFile file) throws Exception {
-
+		
 		// 파일 업로드 처리
 		String savedName = file.getOriginalFilename();
 		System.out.println("첨부파일 이름 확인: " + savedName);
@@ -755,7 +758,7 @@ public class BadaController {
 		
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
-		String SAVE_PATH = request.getServletContext().getRealPath("resources/attachfile/"); //webapp 아래부터 경로를 작성
+		String SAVE_PATH = uploadpath + "/noticeattach/"; //webapp 아래부터 경로를 작성
 		// 랜덤생성 + 파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
 		File target = new File(SAVE_PATH, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
@@ -777,7 +780,7 @@ public class BadaController {
 		// String SAVE_PATH =
 		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
-		String SAVE_PATH = request.getServletContext().getRealPath("resources/noticeimage/");
+		String SAVE_PATH = uploadpath + "/noticesummer/";
 		
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/image/";
@@ -785,7 +788,7 @@ public class BadaController {
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-
+		
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
 		try {
@@ -809,8 +812,8 @@ public class BadaController {
 	// 첨부파일 다운로드 * 밑에 경로를 작성하는 부분은 모두 상대경로로 수정해야 함
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 String SAVE_PATH = request.getServletContext().getRealPath("resources/attachFile/");
-		
+		// String SAVE_PATH = request.getServletContext().getRealPath("resources/attachFile/");
+		String SAVE_PATH = uploadpath + "/noticeattach/";   
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
 		System.out.println("1. filename: " + filename);
@@ -831,7 +834,7 @@ public class BadaController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = request.getServletContext().getRealPath("resources/noticeimage/") + filename;  
+		realFilename = SAVE_PATH + filename;  
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
