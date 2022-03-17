@@ -74,9 +74,6 @@ public class BadaController {
 	private NoticeService noticeDao;
 	@Autowired
 	private PersonalcounselService personalCounselDao;
-	@Resource(name = "uploadPath") // servlet-context.xml에서 정의함. 상대경로로 변경해주어야 함(현재 하드코딩 상태)
-	String uploadPath;
-
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
@@ -834,8 +831,7 @@ public class BadaController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = SAVE_PATH + filename;  
-		
+		realFilename = request.getServletContext().getRealPath("resources/noticeimage/") + filename;  
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {

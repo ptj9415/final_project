@@ -156,7 +156,7 @@ h3 {
 								</div>
 							</div>
 									<div class="btndiv">
-										<button type="reset" id="clearbtn" onclick="form_reset();">초기화</button>
+										<button type="reset" id="clearbtn" onclick="resetbtn()">초기화</button>
 										<button type="button" id="btnSearch">
 											검색&nbsp;<i class="fa fa-search"></i>
 										</button>
@@ -272,13 +272,7 @@ h3 {
 
 	<script>
 	
-		//검색 초기화 처리 안할래
-		function form_reset() {
-		 	$("#form_apply").reset();
-   			 //document.getElementById("form_apply").reset();
-
-				}
-	
+		
 	
 		// 페이징 처리
 		
@@ -359,7 +353,14 @@ h3 {
 		console.log(url);
 
 	});
-		
+		//초기화
+		function resetbtn(){
+	         $("#m_nickname").val('');
+	         $("#pr_type option:eq(0)").prop("selected",true);
+	         $("#ccg_subname option:eq(0)").prop("selected",true);
+	         $("#pr_date").val('');
+	         $("#pr_status option:eq(0)").prop("selected",true);
+	      }
 		
 	
 		

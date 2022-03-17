@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +71,8 @@ public class TaejoonController {
 	private SalaryService salaryDao;
 	@Autowired
 	private PersonalcounselService personalCounselDao;
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -77,13 +80,13 @@ public class TaejoonController {
 	public String home(Model model, BannerVO bvo, PersonalcounselVO vo, GroupcounselVO gvo) {
 		List<BannerVO> list = bannerDao.bannerList(bvo);
 		model.addAttribute("banner", list);
-		
+
 		List<PersonalcounselVO> clist = personalCounselDao.CounselorList(vo);
-		//System.out.println(clist);
-		model.addAttribute("clist",clist);
-		
+		// System.out.println(clist);
+		model.addAttribute("clist", clist);
+
 		List<GroupcounselVO> glist = groupCounselDao.groupList(gvo);
-		model.addAttribute("glist",glist);
+		model.addAttribute("glist", glist);
 		return "user/home/home";
 	}
 
@@ -186,9 +189,9 @@ public class TaejoonController {
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
 		// 썸네일 파일업로드
-		String SAVE_PATH = req.getServletContext().getRealPath("editorsumnail/");
+		String SAVE_PATH = uploadpath;
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -218,7 +221,7 @@ public class TaejoonController {
 			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
 			out.flush();
 		} else {
-			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList1.do'</script>");
 			out.flush();
 		}
 		return null;
@@ -280,8 +283,8 @@ public class TaejoonController {
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		
-		String SAVE_PATH = request.getServletContext().getRealPath("/img/counselorpicture");
+
+		String SAVE_PATH = uploadpath;
 //		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
@@ -346,7 +349,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = request.getServletContext().getRealPath("counselorcert/") + filename;
+		realFilename = uploadpath + filename;
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -376,7 +379,7 @@ public class TaejoonController {
 		}
 
 	}
-	
+
 	@RequestMapping("/catesubmit.do")
 	public String catesubmit(Model model, CounselorVO cvo) {
 		counselorDao.counselorCateUpdate(cvo);
@@ -391,7 +394,7 @@ public class TaejoonController {
 			@RequestParam(value = "filename1") MultipartFile mf, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		String SAVE_PATH = request.getServletContext().getRealPath("counselorcert/");
+		String SAVE_PATH = uploadpath;
 
 		String originalFileName = mf.getOriginalFilename();
 
@@ -553,29 +556,29 @@ public class TaejoonController {
 
 		return "OK";
 	}
-	
-	//상담사 통계
+
+	// 상담사 통계
 	@RequestMapping("/counselorStatistics.do")
 	public String counselorStatistics(Model model, HttpSession session, PersonalcounselVO pcvo) {
-		
+
 		return "counselor/statistics/counselorStatistics";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/counselorStatisticData.do")
 	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo) {
 		pcvo.setC_email("3244509@naver.com");
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData(pcvo);
-		
+
 		return data;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/counselorDataSearch.do")
 	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo) {
 		pcvo.setC_email("3244509@naver.com");
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData2(pcvo);
-		
+
 		return data;
 	}
 
@@ -776,7 +779,7 @@ public class TaejoonController {
 	public String adminBannerInsert(Model model, BannerVO bvo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		String SAVE_PATH = request.getServletContext().getRealPath("img/bannerimg/");
+		String SAVE_PATH = uploadpath + "/bannerimg/";
 		System.out.println(SAVE_PATH);
 
 		String originalFileName = mf.getOriginalFilename();
@@ -829,7 +832,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = request.getServletContext().getRealPath("img/bannerimg/") + filename;
+		realFilename = uploadpath + filename;
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
 			return;
