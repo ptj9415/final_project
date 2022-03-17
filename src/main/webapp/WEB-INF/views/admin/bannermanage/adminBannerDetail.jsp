@@ -130,15 +130,13 @@ textarea {
 									<tr>
 										<th>파일첨부</th>
 										<td><div class="filebox">
-												<img src="img/bannerimg/${banner.bn_pfilename }" id="bannerimg">
+												<img src="../fileupload/bannerimg/${banner.bn_pfilename }" id="bannerimg">
 												<p>※배너 크기는 1200p x 216p 로 조절하시기 바랍니다.
 												</p>
 													<input class="uploadname" value="${banner.bn_filename }">
 													<label for="filename">파일 찾기</label> <input type="file"
 														id="filename" name="filename"
-														onchange="setThumbnail(event);" >
-														<a href="fileDownload1.do?fileName=${banner.bn_pfilename }&downName=${banner.bn_filename}">${banner.bn_filename }</a>
-														
+														onchange="setThumbnail(event);" >		
 											</div>
 									</tr>
 									
