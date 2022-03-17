@@ -27,9 +27,9 @@
 		(SELECT NVL(MAX(GC_NO),0)+1 FROM
 		GROUP_COUNSEL N),
 		'이메일 세션값 들어감',
-		#{gc_date},
-		#{gc_startdate},
-		#{gc_finaldate},
+		to_date(#{gc_date},'yyyy/mm/dd'),
+		to_date(gc_startdate,'yyyy/mm/dd'),
+		to_date(gc_finaldate,'yyyy/mm/dd'),
 		#{gc_title},
 		#{gc_type},
 		#{gc_min_person},
