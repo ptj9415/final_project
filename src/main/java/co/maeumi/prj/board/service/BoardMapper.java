@@ -20,4 +20,6 @@ public interface BoardMapper {
 	
 	public List<BoardVO> userBoardSearchSelect(Search svo) throws Exception;
 	int getUserBoardListCnt(Search svo) throws Exception;
+	
+	int mypageDeleteBoard(BoardVO vo);
 }
