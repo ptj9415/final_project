@@ -229,7 +229,7 @@
 	<div class="banner">
 		<ul>
 			<c:forEach items="${banner }" var="banner" >
-				<li><img src="img/bannerimg/${banner.bn_pfilename }"
+				<li><img src="../fileupload/${banner.bn_pfilename }"
 					id="bannerimg"></li>
 			</c:forEach>
 		</ul>
