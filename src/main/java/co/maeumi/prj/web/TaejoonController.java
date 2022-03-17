@@ -181,7 +181,7 @@ public class TaejoonController {
 		PrintWriter out = response.getWriter();
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = req.getServletContext().getRealPath("editorsumnail/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -274,7 +274,7 @@ public class TaejoonController {
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
-		String SAVE_PATH = request.getServletContext().getRealPath("/img/bannerimg");
+		String SAVE_PATH = request.getServletContext().getRealPath("/img/counselorpicture");
 //		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
@@ -339,7 +339,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\" + filename;
+		realFilename = request.getServletContext().getRealPath("counselorcert/") + filename;
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -384,7 +384,7 @@ public class TaejoonController {
 			@RequestParam(value = "filename1") MultipartFile mf, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("counselorcert/");
 
 		String originalFileName = mf.getOriginalFilename();
 
@@ -822,7 +822,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;
+		realFilename = request.getServletContext().getRealPath("img/bannerimg/") + filename;
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
 			return;
