@@ -8,67 +8,89 @@
     <title>Insert title here</title>
     <style type="text/css">
         .joinForm {
-            width: 550px;
+            width: 40%;
             padding: 50px 0px;
         }
 
         input {
             border-style: none;
-            height: 25px;
-            width: 60%;
-            border: 0 solid black;
-            background: transparent;
+    		height: 25px;
+    		width: 60%;
+   			border: 0 solid black;
+    		background: transparent;
+    		font-size: 13px;
+    		margin-left:10px;
         }
 		input:focus {
-			outline: none;
-			border: 1px solid #FFE6E6;
+			outline: 0;
+			
+		}
+		input#name{
+			background-color:white;;
 		}
 
-        input:hover {
-            background-color: #FFF0F5;
-        }
 
         button {
-            height: 30px;
-            width: 30%;
+            height: 50px;
+            width: 100px;
             background-color: white;
-            border: 1px solid #FFDCE1;
+            border: 1px solid #8dacbd42;
             border-radius: 50px;
             margin-bottom: 5px;
+            font-size:13px;
+            margin-left: 40px;
+        }
+        button:focus{
+        	outline:0;
         }
 
         .inputForm {
             margin-bottom: 25px;
         }
 
-        hr {
-            color: tomato;
-        }
+       
 
         .nonBtn {
             width: 90%;
         }
 
         .joinbtn {
-            width: 40%;
+            width: 120px;
+             background-color: #153e54;
+             color:white;
+             margin-right: auto;
+   			 margin-left: auto;
+}
+             
+        }
+        .joinbtn:hover{
+        	background-color:white;
+        	border:1px solid #153e54;
+        	color:#153e54;
         }
 
         button:hover {
-            background-color: #FFD2D2;
-            border-color: white;
-
+            background-color: #153e54;
+            color:white;
+			transition: 200ms ease-in-out;
         }
 
         #gender {
             background-color: white;
-            border: 1px solid #FFDCE1;
+    		border: 1px solid #8dacbd42;
+    		color: #666666;
+    		font-size: 13px;
         }
 
-        #gender:hover {
-            background-color: #FFD2D2;
+     /*    #gender:hover {
+            background-color: #8dacbd42;
             border-color: white;
         }
-
+        
+ */
+ 		#gender:focus{
+ 			outline:0;
+ 		}
         option {
             text-align: center;
         }
@@ -76,7 +98,7 @@
         .address_Input_1 {
             float: left;
             margin-left: 15px;
-            border-bottom: 1px solid #FFDCE1;
+            border-bottom: 1px solid #8dacbd42;
         }
 
         .address_Input_2,
@@ -84,16 +106,37 @@
             margin-right: 15px;
             margin-bottom: 5px;
             width: 90%;
-            border-bottom: 1px solid #FFDCE1;
+            border-bottom: 1px solid #8dacbd42;
         }
 
         #addrWrap>input {
-            border-bottom: 1px solid #FFDCE1;
+            border-bottom: 1px solid #8dacbd42;
             margin-bottom: 5px;
         }
        #pwGuide1 {
-       	font-size: 15px;
+       	font-size: 13px;
        }
+       .zip-container{
+       		display:flex;
+       		margin-left: 15px;
+       		
+       }
+       
+       .joinForm{
+       	 animation: fadein 1s;
+			-webkit-animation: fadein 1s; /* Safari and Chrome */
+       }
+        @-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+	.check-container{
+		display:flex;
+	}
     </style>
     <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -227,59 +270,67 @@
     <!-- 회원가입 하는 양식 만들기-->
     <div class="mainForm" align="center">
         <div class="joinForm">
-            <h1>Maeumi.</h1>
+            <h3>Maeumi.</h3>
             <br>
-            <hr color="tomato">
-            <h4>본인확인이 완료되었습니다.<br> 모든 항목에 기입해주셔야 합니다.</h4>
+            <hr>
+            <h5>본인확인이 완료되었습니다.<br> 모든 항목에 기입해주셔야 합니다.</h5>
             <br>
             <form id="frm" action="counselorJoin.do" method="post">
                 <div class="inputForm">
                     <input type="text" id="email" name="email" value="${c_email }" readonly class="nonBtn"
                         style="text-align: left; width: 60%;">
-                    <input type="text" placeholder="이름" id="name" name="name" style="width: 30%;" required="required"><hr color="tomato">
+                    <input type="text" placeholder="이름" id="name" name="name" style="width: 30%;" required="required"><hr>
                 </div>
                 <div class="inputForm">
+                	<div class="check-container">
                     <input type="text" placeholder="생년월일을 입력하세요 ex) 1992-08-03 " maxlength="10" id="birthdate" name="birthdate"
-                        style="width: 60%;" required="required">
-                    <select id="gender" name="gender" style="height: 30px; border-radius: 50px; width: 30%;" required="required">
+                        style="width: 60%; margin-right:30px;" required="required">
+                    <select id="gender" name="gender" style="height: 50px; border-radius: 50px; width: 90px;" required="required">
                         <option value="">성별 선택</option>
                         <option value="남자" style="text-align: center;">남자</option>
                         <option value="여자">여자</option>
                     </select>
-                    <hr color="tomato">
+                	</div>
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="password" placeholder="비밀번호    (비밀번호는 영문, 숫자, 특수문자가 포함된 8~14자리)" 
                     	id="password" name="password" class="nonBtn" required="required">
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="password" placeholder="비밀번호 확인" id="passwordChk" class="nonBtn" required="required">
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm" id="addrWrap">
+                 <div class="zip-container">
                     <input type="text" id="postcode" placeholder="우편번호" required="required" readonly="readonly">
                     <button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br>
+                 </div>
                     <input type="text" id="roadAddress" placeholder="도로명주소" style="width: 45%;" required="required" readonly="readonly">
                     <input type="text" id="jibunAddress" placeholder="지번주소" style="width: 45%;" readonly="readonly">
-                    <span id="guide" style="color:#999;display:none; font-size: 15px;"></span>
+                    <span id="guide" style="color:#999;display:none; font-size: 13px;"></span>
                     <input type="text" id="detailAddress" placeholder="상세주소" style="width: 45%;">
                     <input type="text" id="extraAddress" placeholder="참고항목" style="width: 40%; margin-right: 25px;">
                     <input type="hidden" id="address" name="address">
-                    <hr color="tomato">
+                    <hr>
+                </div>
+	                <div class="inputForm">
+                <div class="check-container">
+	                    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." style="margin-top:15px;" id="phone" name="phone" required="required">
+	                    <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
+	            </div>
+	                    <hr>
                 </div>
                 <div class="inputForm">
-                    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." id="phone" name="phone" required="required">
-                    <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
-                    <hr color="tomato">
-                </div>
-                <div class="inputForm">
-                    <input type="text" placeholder="인증번호 입력" id="phoneChk" disabled="disabled" required="required">
+                  <div class="check-container">
+                    <input type="text" placeholder="인증번호 입력" id="phoneChk"  style="margin-top:15px;" disabled="disabled" required="required">
                     <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
-                    <hr color="tomato">
+                   <hr>
+                    </div>
                 </div>
             </form>
-            <button class='joinbtn' onclick="formCheck()" type="button">Maeumi.&nbsp;가입!</button>
+            <button class='joinbtn' onclick="formCheck()" type="button">가입완료</button>
 
 
 

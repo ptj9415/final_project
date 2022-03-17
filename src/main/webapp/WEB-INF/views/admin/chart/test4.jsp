@@ -91,12 +91,15 @@ p {
 	width: 85%;
 	background: #fff;
 	border-radius: 30px;
+	height: 750px;
 }
 
 [id*="invoice-"] {
 	/* Targets all id with 'col-' */
-	border-bottom: 1px solid #eee;
-	padding: 30px;
+	/* border-bottom: 1px solid #8dacbd42; */
+	border-bottom: 1px solid #8dacbd42;
+    padding: 40px;
+    height: 150px;
 }
 
 #invoice-top {
@@ -122,8 +125,8 @@ p {
 
 .clientlogo {
 	float: left;
-	height: 100px;
-	width: 100px;
+	height: 70px;
+	width: 70px;
 	/* background: url(http://michaeltruong.ca/images/client.jpg) no-repeat; */
 	background-size: 60px 60px;
 	border-radius: 50px;
@@ -144,7 +147,8 @@ p {
 }
 
 #project {
-	margin-left: 52%;
+	float:right;
+	text-align: end;
 }
 
 table {
@@ -154,16 +158,16 @@ table {
 
 td {
 	padding: 5px 0 5px 15px;
-	/* border: 1px solid #eee; */
+	/* border: 1px solid #8dacbd42; */
 }
 
 .tabletitle {
 	padding: 5px;
-	background: #eee;
+	background: #8dacbd42;
 }
 
 .service {
-	border: 1px solid #eee;
+	/* border: 1px solid #8dacbd42; */
 }
 
 .item {
@@ -174,7 +178,7 @@ td {
 	font-size: 0.9em;
 }
 .itemtext1 {
-	font-size: 0.9em;
+	font-size: 0.9em; 
 	float:right;
 	margin-right: 15px;
 }
@@ -291,6 +295,28 @@ form {
 .control-btn{
 	margin-top:50px;
 }
+
+#checkbox{
+	float: right;
+    margin-right: 10px;
+    border: 1px solid #8dacbd42;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #153e54;
+    padding: 5px
+}
+#checkbox:focus{
+	 border: 1px solid #8dacbd42;
+	 outline:0;
+	 
+}
+p.itemtext1{
+	margin-top:16px;
+}
+p.itemtext{
+	margin-top:16px;
+}	
+
 /*결제버튼 end*/
 </style>
 <body>
@@ -314,16 +340,13 @@ form {
 
 
 	</section>
+	
 	<div id="invoiceholder">
 
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2">
-
-			
 			<!--End InvoiceTop-->	
 			<div id="invoice-mid">
-
-				
 				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
 				<div class="info">
 					
@@ -378,7 +401,7 @@ form {
 							<td class="tableitem"><p class="itemtext">상담비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext1">${pr_price }</p></td>
+							<td class="tableitem"><p class="itemtext1">${pr_price } 원</p></td>
 						</tr>
 						
 						<tr class="service">
@@ -403,19 +426,14 @@ form {
 							<td class="tableitem"><p class="itemtext1" id="discount"></p></td>
 						</tr>
 
-						<tr class="service">
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext1"></p></td>
-						</tr>
-
+	
 
 						<tr class="tabletitle">
-							<td></td>
-							<td></td>
-							<td class="Rate"><h2>Total</h2></td>
-							<td class="payment" id="totalPrice">${pr_price }</td>
+							<td class="tableitem"><p class="itemtext">합계</p></td>
+							<td> </td>
+							<td> </td>
+							<%-- <td class="itemtext1" id="totalPrice" >${pr_price } 원</td> --%>
+							<td class="tableitem"><p class="itemtext1" id="totalPrice">${pr_price } 원</p></td>
 						</tr>
 
 					</table>
@@ -438,13 +456,15 @@ form {
 				</form>
 			<div id="legalcopy">
 					<a href="personalCounselStep4.do">
-					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
+					<!-- <input type="button" id="back-btn" name="submit" value="뒤로가기"></a> -->
 			</div>
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick"> 
 						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-						<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
+					<div>
+						<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
+					</div>
 				</form>
 			</div>
 			<!--End InvoiceBot-->
@@ -467,7 +487,8 @@ function change(){
 	   var priceResult = priceSelect.substr(0,4);
 	   var couponNo = priceSelect.substr(num+1);
 	   
-	   $("#discount").text(' '+'-'+priceResult);
+	   $("#discount").text(' '+'-'+priceResult +' 원');
+	   
 	   var ddd = price-priceResult;
 	   $("#totalPrice").text(ddd);
 	   $("#pr_price").val(ddd);
