@@ -134,7 +134,7 @@ public class YoungohController {
 
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("editor/");
+		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
