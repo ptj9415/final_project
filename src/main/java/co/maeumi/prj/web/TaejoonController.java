@@ -769,7 +769,7 @@ public class TaejoonController {
 	public String adminBannerInsert(Model model, BannerVO bvo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		String SAVE_PATH = request.getServletContext().getRealPath("../fileupload/");
+		String SAVE_PATH = request.getServletContext().getRealPath("img/../../fileupload/");
 		System.out.println(SAVE_PATH);
 
 		String originalFileName = mf.getOriginalFilename();
