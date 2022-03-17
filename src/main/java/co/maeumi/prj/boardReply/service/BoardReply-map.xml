@@ -28,4 +28,10 @@
 		WHERE B_NO = #{b_no}
 	</select>
 	
+	<delete id="mypageBoardDelete" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO">
+		DELETE FROM BOARD_REPLY
+		WHERE B_NO = #{b_no}
+		
+	</delete>
+	
 </mapper>

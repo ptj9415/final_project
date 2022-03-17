@@ -690,7 +690,7 @@ font-size: 20px;
        </div> 
     </div> 
       </div>
-        <button type="button" class="btn btn-primary" onclick="location.href='userMypage.do'" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='userMypages.do'" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
     </div>
   </div>
 </body>

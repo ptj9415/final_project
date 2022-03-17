@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselMapper;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
@@ -117,4 +118,12 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 		// TODO Auto-generated method stub
 		return map.searchCounselData2(vo);
 	}
+
+	@Override
+	public List<PersonalcounselVO> CounselorList(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.CounselorList(vo);
+	}
+
+	
 }

@@ -258,4 +258,10 @@
 		</trim>
 		GROUP BY SUBSTR(PR_DATE,1, 7)
 	</select>
+	
+	<!-- 메인화면 상담사리스트 -->
+	<select id="CounselorList" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" >
+		select * from counselor
+		order by c_name desc
+	</select>
 </mapper>

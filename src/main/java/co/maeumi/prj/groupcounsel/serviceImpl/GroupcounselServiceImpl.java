@@ -150,4 +150,10 @@ public class GroupcounselServiceImpl implements GroupcounselService {
 		return map.groupCounselClose(vo);
 	}
 
+	@Override
+	public List<GroupcounselVO> groupList(GroupcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.groupList(vo);
+	}
+
 }

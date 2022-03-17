@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -148,7 +149,7 @@ public class BadaController {
 
 		System.out.println("로그아웃 하면서 내가 지울 세션값 이름: " + session);
 		session.invalidate();
-		return "user/home/home";
+		return "redirect:home.do";
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드
@@ -192,6 +193,7 @@ public class BadaController {
 			mvo.setM_phone(realPhone);
 			mvo.setM_password("");
 			mvo.setM_type("네이버");
+			mvo.setM_status("가입");
 			int n = memberDao.memberInsert(mvo);
 			if (n != 0) {  // 네이버로 로그인 성공했다면~ 
 				message = (String) response.get("email");
@@ -254,6 +256,7 @@ public class BadaController {
 			mvo2.setM_type("카카오");
 			mvo2.setM_password("");
 			mvo2.setM_phone("");
+			mvo2.setM_status("가입");
 			int n = memberDao.memberInsert(mvo2);
 			if (n != 0) { // insert 결과 성공이면,
 				session.setAttribute("email", mvo2.getM_nickname()); // 세션값 담아주고 홈으로.
@@ -676,7 +679,7 @@ public class BadaController {
 		String savedName = file.getOriginalFilename();
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
 		mav.setViewName("redirect:adminNoticeList.do");
@@ -724,7 +727,7 @@ public class BadaController {
 		System.out.println("첨부파일 한 게 없는데, 뭐지? " + savedName);
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 
 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
@@ -750,12 +753,14 @@ public class BadaController {
 	}
 
 	// 위 공지사항 등록 커멘드 내부 첨부파일명 랜덤생성
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
+	private String uploadFile(String originalName, byte[] fileData, HttpServletRequest request) throws Exception {
+		
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
+		String SAVE_PATH = request.getServletContext().getRealPath("resources/attachfile/"); //webapp 아래부터 경로를 작성
 		// 랜덤생성 + 파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
-		File target = new File(uploadPath, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
+		File target = new File(SAVE_PATH, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사. 실제 프로젝트 시연할 때는 uploadPath 의 경로를 변경해야 함(
 		// servlet-context.xml)
 		FileCopyUtils.copy(fileData, target);
@@ -773,8 +778,8 @@ public class BadaController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		// String SAVE_PATH =
 		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
-		
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+		String SAVE_PATH = request.getServletContext().getRealPath("resources/noticeimage/");
 		
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/image/";
@@ -897,7 +902,8 @@ public class BadaController {
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int range
 			, @RequestParam(required = false, defaultValue = "all") String n_category
-			, @RequestParam(required = false) String n_title, Search svo) throws Exception {
+			, @RequestParam(required = false) String n_title, Search svo
+			) throws Exception {
 		
 		model.addAttribute("search", svo);  // '제목'과 '말머리' 요소로 서칭하기 위함.
 		svo.setN_category(n_category);	
@@ -913,6 +919,7 @@ public class BadaController {
 		return "user/notice/userNoticeList";
 	}
 	
+
 	// 사용자단에서 공지사항 조회하기. 조회수 올라가는 작업해야 함
 	@RequestMapping("/userNoticeRead.do")
 	public String userNoticeRead(Model model, HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {

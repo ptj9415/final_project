@@ -361,10 +361,11 @@ img {
 				class="col-md-8 pl-md-5 heading-section  ftco-animated">
 				<div class="pl-md-4 border-line">
 					<p style="font-weight:bold;"> 나는 어떤 성향의 사람일까?
-					<p style="font-size:0.7rem">소요시간 약 2분</p>
+					<p style="font-size:0.7rem">소요시간 약 10분</p>
 					<br>
-					<p>"넌 오늘 정말 잘했다. 실수하지 않아서가 아니라 포기하지 않아서.</p>
-					<p>뒤처지지 않아서가 아니라 멈춰 서지 않아서"</p>
+					<p>MBTI는 개인마다 태도와 인식, 판단 기능에서 각자 선호하는 방식의 차이를 나타내는 4가지 선호 지표로 구성되어 있습니다.</p>
+					<p>외향과 내향(E/I), 감각과 직관(S/N), 사고와 감정(T/F), 판단과 인식(J/P) &emsp; &emsp;
+					4가지 선호 지표를 조합하여 16가지의 성격 유형을 제시합니다</p>
 				</div>
 			</div>
 		</div>

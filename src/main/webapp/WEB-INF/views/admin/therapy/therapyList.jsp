@@ -164,7 +164,7 @@ h3 {
 								</div>
 							</div>
 							<div class="btndiv">
-								<button type="reset" id="clearbtn">초기화</button>
+								<button type="reset" id="clearbtn" onclick="resetbtn()">초기화</button>
 								<button type="button" id="btnSearch">
 									검색&nbsp;<i class="fa fa-search"></i>
 								</button>
@@ -398,6 +398,10 @@ h3 {
 			location.href = url;
 
 		});
+		function resetbtn(){
+			$("#t_title").val('');
+			$("#t_name").val('');
+		}
 	</script>
 </body>
 </html>

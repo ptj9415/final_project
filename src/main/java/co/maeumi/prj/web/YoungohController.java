@@ -27,6 +27,7 @@ import com.google.gson.JsonObject;
 
 import co.maeumi.prj.board.service.BoardService;
 import co.maeumi.prj.board.service.BoardVO;
+import co.maeumi.prj.boardReply.service.BoardReplyService;
 import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
@@ -69,6 +70,9 @@ public class YoungohController {
 	
 	@Autowired
 	private BoardService boardDao;
+	
+	@Autowired
+	private BoardReplyService boardreplyDao;
 
 	Pagination page;
 	/* ===== 상담사 화면 ===== */
@@ -90,8 +94,8 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editor/");
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -122,14 +126,15 @@ public class YoungohController {
 
 	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
-	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,
+	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -266,7 +271,7 @@ public class YoungohController {
 			groupCounselDao.groupCounselResult(vo);
 		}
 
-		return "redirect:counselorGroupList.do";
+		return "redirect:counselorGroupList1.do";
 	}
 
 	/* ===== 관리자 화면 ===== */
@@ -287,7 +292,8 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
 
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
@@ -321,10 +327,11 @@ public class YoungohController {
 	// 테라피 등록 페이지 입니다.
 	@RequestMapping("/therapyInsert.do")
 	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) {
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest request) {
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -341,13 +348,13 @@ public class YoungohController {
 		}
 
 		// 서머노트 코드 원본
-		String origincode = req.getParameter("summernote");
+		String origincode = request.getParameter("summernote");
 		System.out.println(origincode);
 
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
@@ -378,7 +385,8 @@ public class YoungohController {
 			HttpServletRequest request) {
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
 		
 		System.out.println(originalFileName);
@@ -475,6 +483,7 @@ public class YoungohController {
 		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
 			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
+			System.out.println(num);
 			ovo.setOr_no(num);
 			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
 			System.out.println(ovo.getOr_date());
@@ -563,7 +572,7 @@ public class YoungohController {
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
 	}
-	
+	//마이페이지 유저 환불
 	@RequestMapping("/mypageRefund.do")
 	public String mypageRefund(HttpServletRequest request, myPageVO vo) {
 		String or_no = request.getParameter("or_no");
@@ -588,7 +597,7 @@ public class YoungohController {
 		}
 		return "redirect:userMypages.do";
 	}
-	
+	//마이페이지 유저 자유게시글 디테일 페이지
 	@RequestMapping("/myPageboardDetail.do")
 	public String myPageboardDetail(HttpServletRequest request,BoardVO vo,Model model, BoardReplyVO bvo) {
 		String b_no = request.getParameter("b_no");
@@ -613,7 +622,7 @@ public class YoungohController {
 		
 		return "user/mypage/mypageBoard";
 	}
-	
+	//유저 마이페이지 개인 상담 디테일 페이지
 	@RequestMapping("/userPersonalsangDam.do")
 	public String userPersonalsangDam(HttpServletRequest request, myPageVO vo, Model model ) {
 		String pr_no = request.getParameter("pr_no");
@@ -623,7 +632,7 @@ public class YoungohController {
 		model.addAttribute("personal",vo);
 		return "user/mypage/mypagePersonalDetail"; 
 	}
-	
+	//유저 마이페이지 그룹 상담 디테일 페이지
 	@RequestMapping("/userGroupsangDam.do")
 	public String userGroupsangDam(HttpServletRequest request, myPageVO vo, Model model) {
 		String gc_no = request.getParameter("gc_no");
@@ -644,4 +653,90 @@ public class YoungohController {
 		model.addAttribute("glist", vo);
 		return "user/mypage/mypageGroupDetail"; 
 	}
+	//그룹 상담 수정 필요해서 최종적으로 수정했습니다. 2022/03/16
+	@RequestMapping("/groupCounselUpdates.do")
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response, HttpServletRequest request,
+		@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		// 썸네일 파일업로드
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
+		String originalFileName = mf.getOriginalFilename();
+			System.out.println(originalFileName);
+		if (originalFileName !="") {
+			System.out.println("널값 아님");
+			
+			String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+			String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+			String saveFile = uuid + originalFileName;
+			
+			vo.setGc_sumnail(saveFile);
+			
+			try {
+				mf.transferTo(new File(msaveFile));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("널 값");
+			vo.setGc_sumnail("");
+		}
+		
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		vo.setGc_infos(result);
+
+		int update = groupCounselDao.groupCounselUpdate(vo);
+
+		// vo값에 따라 성공 실패 여부 확인
+		if (update != 1) {
+			out.println("<script>alert('상담 페이지 수정 실패'); history.back(); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 페이지 수정 성공'); location.href='counselorGroupList.do'</script>");
+			out.flush();
+		}
+		return null;
+	}
+	// 마이페이지 자유 게시글 삭제
+	@RequestMapping("/deleteBoard.do")
+	public String deleteBoard(BoardVO vo, HttpServletRequest request, BoardReplyVO bvo) {
+		 String b_no = request.getParameter("b_no");
+		 System.out.println(b_no);
+		 int num = Integer.parseInt(b_no);
+		
+		 vo.setB_no(num);
+		 int n = boardDao.boardDelete(vo);
+		 System.out.println(n);
+		 if (n == 1) {
+			 bvo.setB_no(num);
+			int d = boardreplyDao.boardReplyDelete(bvo);
+			System.out.println(d);
+		 }
+		 
+		return "redirect:userMypages.do";
+	}
+	// 마이페이지 그룹 상담 환불 버튼
+	@RequestMapping("/mypageGroupDetailRefund.do")
+	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model) {
+		String gc_no = request.getParameter("gc_no");
+		int num = Integer.parseInt(gc_no);
+		vo.setGc_no(num);
+		vo = myPageDao.mypageGroup(vo);
+		
+		vo = myPageDao.GroupdetailRefund(vo);
+		System.out.println(vo.getOr_no());
+		System.out.println(vo.getGr_no());
+		
+		
+		
+		return "redirect:userMypages.do";
+	}
+	
+	
+	
 }

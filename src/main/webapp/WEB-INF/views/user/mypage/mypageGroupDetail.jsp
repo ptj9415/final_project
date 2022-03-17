@@ -727,6 +727,18 @@ textarea {
 	</div>
 </section>
 <br><br><br>
+<button type="button" onclick="groupDetail('${glist.gc_no}','${glist.gr_no }')">환불하기</button>
+<button type="button" onclick="location.href='userMypages.do'">돌아가기</button>
+<script>
+		function groupDetail(gc_no, gr_no){
+			if (confirm("환불 하시겠습니까??") == true) { 
+					url = "mypageGroupDetailRefund.do";
+					url = url + "?gc_no="+gc_no;
+					url = url + "&gr_no="+gr_no;
+					location.href = url;
+			}
+		}
+</script>
 <!-- Bootstrap 4 -->
 <script src="subHomeFile/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->

@@ -58,7 +58,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-	background: rgba(0, 0, 0, 0.10);
+	background: rgba(236, 236, 236, 0.329);
 }
 
 nav ul li:hover>ul {
@@ -118,18 +118,18 @@ span.top-nav-admin {
 	<nav class="navbar top" id="top-nav">
 
 		<c:if test="${email ==null }">
-			<span class="top-nav-admin"><a href="loginForm.do">login</a></span>
+			<span class="top-nav-admin"><a href="loginForm.do" style="margin-right:10px; font-size:11px; color:#153e54">로그인</a></span>
 		</c:if>
 		<c:if test="${email !=null }">
-			<span class="top-nav-admin"><a href="logout.do">logout</a></span>
+			<span class="top-nav-admin" style="font-size:12px; color:#153e54">${nickname } 님 환영합니다<a href="logout.do" style="margin-left:10px; font-size:11px; color:#153e54">로그아웃</a></span>
 		</c:if>
 
-		<span class="top-nav-admin"><a href="counselormypage.do">counselor
+		<!-- <span class="top-nav-admin"><a href="counselormypage.do">counselor
 				👨‍⚕️</a></span> <span class="top-nav-admin"><a href="adminbootstrap.do">admin
-				⚙</a></span>
+				⚙</a></span> -->
 	</nav>
 	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
 			<a href="home.do"><img src="resources/user/images/MaeumiLogo.png"
@@ -158,10 +158,15 @@ span.top-nav-admin {
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="drop-down-menu" id="drop-third">
-							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userTodayStory.do">오늘의 한마디</a></li>
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="userTerapy.do">심리 테라피</a></li>
+						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link">고객센터</a>
+						<ul class="drop-down-menu" id="drop-third">
+							<li><a href="userNoticeList.do">공지사항</a></li>
+							<li><a href="userFaq.do">FAQ</a></li>
+							<li><a href="#">1:1문의</a></li>
 						</ul></li>
 					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
 					<li class="nav-item"><a href="userMypages.do" class="nav-link">마이페이지</a></li>

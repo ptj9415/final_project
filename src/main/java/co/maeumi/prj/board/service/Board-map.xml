@@ -114,5 +114,9 @@
 		WHERE B_NO
 		= #{b_no}
 	</update>
-
+	
+	<delete id="mypageDeleteBoard" parameterType="co.maeumi.prj.board.service.BoardVO">
+		DELETE FROM BOARD 
+		WHERE B_NO = #{b_no}
+	</delete>
 </mapper>

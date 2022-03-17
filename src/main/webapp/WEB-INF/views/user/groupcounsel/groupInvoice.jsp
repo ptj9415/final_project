@@ -10,6 +10,7 @@
  <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
+
 @import
 	url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,900,700,500,300,100)
 	;
@@ -274,6 +275,194 @@ form {
 }
 
 /*결제버튼 end*/
+
+/*detail start*/
+.row{
+	margin-bottom:100px;
+}
+.container mt-5 {
+   
+    width: 80%;
+    margin-right:auto;
+    margin-left:auto;
+    border-radius:40px;
+    margin-bottom:100px;
+  }
+  
+  .date__box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    border: 4px solid;
+    font-weight: bold;
+    padding: 5px 10px;
+  }
+  .date__box .date__day {
+    font-size: 22px;
+  }
+  
+  .blog-card {
+    padding: 30px;
+    position: relative;
+  }
+  .blog-card .date__box {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 500ms ease-in-out;
+  }
+  .blog-card .blog-card__background,
+  .blog-card .card__background--layer {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .blog-card .blog-card__background {
+    padding: 15px;
+    background: white;
+  }
+  .blog-card .card__background--wrapper {
+    height: 80%;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 80%);
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-card .card__background--main {
+    height: 100%;
+    position: relative;
+    transition: 300ms ease-in-out;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .blog-card .card__background--layer {
+    z-index: 0;
+    opacity: 0;
+    background: rgba(51, 51, 51, 0.9);
+    transition: 300ms ease-in-out;
+  }
+  .blog-card .blog-card__head {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blog-card .blog-card__info {
+    z-index: 10;
+    background: white;
+    padding: 20px 15px;
+    border-radius:40px;
+  }
+  .blog-card .blog-card__info h5 {
+    transition: 300ms ease-in-out;
+  }
+  /* .blog-card:hover .date__box {
+    opacity: 1;
+    transform: scale(1); 
+  }
+  .blog-card:hover .card__background--main {
+    transform: scale(1.2) rotate(5deg);
+  }
+  .blog-card:hover .card__background--layer {
+    opacity: 1;
+  }
+  .blog-card:hover .blog-card__info h5 {
+    color: #468FB6;
+  } */
+  
+  a.icon-link {
+    color: #363738;
+    transition: 200ms ease-in-out;
+  }
+  a.icon-link i {
+    color: #468FB6;
+  }
+  a.icon-link:hover {
+    color: #468FB6;
+    text-decoration: none;
+  }
+  
+  .btn {
+    background: white;
+    color: #363738;
+    font-weight: bold;
+    outline: none;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border-radius: 0;
+    height: 50px;
+    line-height: 50px;
+    display: inline-block;
+    padding: 0;
+    border: none;
+  }
+  .btn:focus {
+    box-shadow: none;
+  }
+  .btn:hover {
+    background: #468FB6;
+    color: #fff;
+  }
+  .btn.btn--with-icon {
+    padding-right: 20px;
+  }
+  .btn.btn--with-icon i {
+    padding: 0px 30px 0px 15px;
+    margin-right: 10px;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: bottom;
+    color: white;
+    background: #468FB6;
+    clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
+  }
+  .btn.btn--only-icon {
+    width: 50px;
+  }
+  
+
+/*detail end*/
+
+/*button start*/
+.btn--block {
+    display: block;
+    width: 30%;
+}
+.apply-btn {
+   background-color: #468FB6;
+    border: 0px solid white;
+    color: white;
+    text-transform: lowercase;
+    border-radius: 30px;
+    /* margin-right: auto; */
+    margin-left: auto;
+    margin-right: 80px;
+    padding: 0.5rem;
+    width: 100px;
+}
+.apply-btn:hover {
+   background-color: white;
+    border: 1px solid #468FB6;
+    color: #468FB6;
+    text-transform: lowercase;
+    border-radius: 30px;
+    /* margin-right: auto; */
+    margin-left: auto;
+    margin-right: 80px;
+    padding: 0.5rem;
+    width: 100px;
+    transition: 300ms ease-in-out;
+   
+}
+
+.apply-btn:after{
+	border: 0px;
+}
+
 </style>
 <body>
 	<section class="hero-wrap hero-wrap-2"
