@@ -271,7 +271,7 @@ public class YoungohController {
 			groupCounselDao.groupCounselResult(vo);
 		}
 
-		return "redirect:counselorGroupList.do";
+		return "redirect:counselorGroupList1.do";
 	}
 
 	/* ===== 관리자 화면 ===== */
@@ -292,7 +292,8 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
 
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
@@ -326,10 +327,11 @@ public class YoungohController {
 	// 테라피 등록 페이지 입니다.
 	@RequestMapping("/therapyInsert.do")
 	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) {
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest request) {
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -346,13 +348,13 @@ public class YoungohController {
 		}
 
 		// 서머노트 코드 원본
-		String origincode = req.getParameter("summernote");
+		String origincode = request.getParameter("summernote");
 		System.out.println(origincode);
 
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
@@ -383,7 +385,8 @@ public class YoungohController {
 			HttpServletRequest request) {
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
 		
 		System.out.println(originalFileName);
@@ -652,13 +655,14 @@ public class YoungohController {
 	}
 	//그룹 상담 수정 필요해서 최종적으로 수정했습니다. 2022/03/16
 	@RequestMapping("/groupCounselUpdates.do")
-	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response,
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response, HttpServletRequest request,
 		@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
 		String originalFileName = mf.getOriginalFilename();
 			System.out.println(originalFileName);
 		if (originalFileName !="") {
@@ -727,6 +731,8 @@ public class YoungohController {
 		vo = myPageDao.GroupdetailRefund(vo);
 		System.out.println(vo.getOr_no());
 		System.out.println(vo.getGr_no());
+		
+		
 		
 		return "redirect:userMypages.do";
 	}
