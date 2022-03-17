@@ -134,7 +134,7 @@ h3 {
 						<div class="card-body table-responsive p-00">
 							<form action="noticeRegister.do" method="post" id="frm"
 								enctype="multipart/form-data">
-								<table class="table table-hover text-nowrap" id="noticetable">
+								<table class="table text-nowrap" id="noticetable">
 									<tr>
 										<th>말머리</th>
 										<td><select name="n_category" id="n_category">
