@@ -798,7 +798,7 @@ public class BadaController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
 			//multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", "/prj/resources/image/" + savedFileName);
+			jsonObject.addProperty("url", SAVE_PATH + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 
