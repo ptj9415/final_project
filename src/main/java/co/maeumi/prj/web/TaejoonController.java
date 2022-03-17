@@ -191,7 +191,7 @@ public class TaejoonController {
 		PrintWriter out = response.getWriter();
 		
 		// 썸네일 파일업로드
-		String SAVE_PATH = uploadpath;
+		String SAVE_PATH = uploadpath + "/counselorpicture/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -284,7 +284,7 @@ public class TaejoonController {
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		String SAVE_PATH = uploadpath;
+		String SAVE_PATH = uploadpath + "/counselorpicture/";
 //		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
@@ -349,7 +349,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = uploadpath + filename;
+		realFilename = uploadpath + "/counselorgrade/" + filename;
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -394,7 +394,7 @@ public class TaejoonController {
 			@RequestParam(value = "filename1") MultipartFile mf, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		String SAVE_PATH = uploadpath;
+		String SAVE_PATH = uploadpath + "/counselorgrade/";
 
 		String originalFileName = mf.getOriginalFilename();
 
@@ -832,7 +832,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = uploadpath + filename;
+		realFilename = uploadpath + "/counselorgrade/" + filename;
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
 			return;
