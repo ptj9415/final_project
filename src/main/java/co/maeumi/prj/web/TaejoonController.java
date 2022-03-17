@@ -211,7 +211,7 @@ public class TaejoonController {
 			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
 			out.flush();
 		} else {
-			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList1.do'</script>");
 			out.flush();
 		}
 		return null;
