@@ -73,6 +73,8 @@ public class TaejoonController {
 	private PersonalcounselService personalCounselDao;
 	@Value("#{uploadpath['upload']}")
 	private String uploadpath;
+	
+	
 
 	/* ===== 사용자 화면 ===== */
 
@@ -251,10 +253,9 @@ public class TaejoonController {
 	// 상담사 마이페이지 메인화면
 	@RequestMapping("/counselorMyPageMain.do")
 	public String counselorMyPageMain(Model model, CounselorVO cvo, HttpSession session) {
-//            String c_email = (String)session.getAttribute("email");
-		String c_email = "3244509@naver.com";
-		session.setAttribute("email", c_email);
-		session.setAttribute("name", "상담사");
+		
+		String c_email = (String)session.getAttribute("c_email");
+		
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -284,8 +285,8 @@ public class TaejoonController {
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
+		String c_email = (String)session.getAttribute("c_email");
 		String SAVE_PATH = uploadpath + "/counselorpicture/";
-//		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
 
@@ -298,7 +299,7 @@ public class TaejoonController {
 		System.out.println(msaveFile);
 		vo.setC_picture(originalFileName);
 		vo.setC_picturepath(saveFile);
-		vo.setC_email("3244509@naver.com");
+		vo.setC_email(c_email);
 		try {
 			mf.transferTo(new File(msaveFile));
 		} catch (IllegalStateException e) {
@@ -312,9 +313,11 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 내 정보 수정 / 상담사 등급 변경 신청 화면
 	@RequestMapping("/counselorMyPageInfo.do")
-	public String counselorMyPageInfo(Model model, CounselorVO cvo) {
+	public String counselorMyPageInfo(Model model, CounselorVO cvo, HttpSession session) {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String)session.getAttribute("c_email");
+
+		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 		List<CounselorVO> list = counselorDao.counselorGradeList(cvo);
 		for (int i = 0; i < list.size(); i++) {
@@ -422,8 +425,10 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 상담 경력 수정 화면
 	@RequestMapping("/counselorMyPageCareer.do")
-	public String counselorMyPageCareer(Model model, CounselorVO cvo) {
-		String c_email = "3244509@naver.com";
+	public String counselorMyPageCareer(Model model, CounselorVO cvo, HttpSession session) {
+		
+		String c_email = (String)session.getAttribute("c_email");
+		
 		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
 		model.addAttribute("career", list);
@@ -434,10 +439,12 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담 경력 수정
 	@ResponseBody
 	@RequestMapping("/careerupdate.do")
-	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
+	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
 			throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String)session.getAttribute("c_email");
+		
+		cvo.setC_email(c_email);
 		counselorDao.counselorCareerDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -454,8 +461,8 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 자격사항 수정 화면
 	@RequestMapping("/counselorMyPageCert.do")
-	public String counselorMyPageCert(Model model, CounselorVO cvo) {
-		String c_email = "3244509@naver.com";
+	public String counselorMyPageCert(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String)session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -473,10 +480,12 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 자격사항 수정
 	@ResponseBody
 	@RequestMapping("/certificationupdate.do")
-	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
+	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
 			throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String)session.getAttribute("c_email");
+		
+		cvo.setC_email(c_email);
 		counselorDao.counselorCertificationDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -496,8 +505,9 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 내 상담시간 수정 화면
 	@RequestMapping("/counselorMyPageTime.do")
-	public String counselorMyPageTime(Model model, CounselorVO cvo) {
-		cvo.setC_email("3244509@naver.com");
+	public String counselorMyPageTime(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String)session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselortimeList(cvo);
 
 		model.addAttribute("time", list);
@@ -508,10 +518,11 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담시간 수정
 	@ResponseBody
 	@RequestMapping("/counseltimeupdate.do")
-	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
+	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
 			throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String)session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselortimeDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -528,8 +539,9 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 상담사 소개 수정 화면
 	@RequestMapping("/counselorMyPageIntro.do")
-	public String counselorMyPageIntro(Model model, CounselorVO cvo) {
-		cvo.setC_email("3244509@naver.com");
+	public String counselorMyPageIntro(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String)session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		model.addAttribute("info", counselorDao.counselorinfoList(cvo));
 
 		return "counselor/mypage/counselorMyPageIntro";
@@ -538,10 +550,11 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담사 소개 수정
 	@ResponseBody
 	@RequestMapping("/infoupdate.do")
-	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
+	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
 			throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String)session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselorinfoDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -566,8 +579,10 @@ public class TaejoonController {
 
 	@ResponseBody
 	@RequestMapping("/counselorStatisticData.do")
-	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo) {
-		pcvo.setC_email("3244509@naver.com");
+	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo, HttpSession session) {
+		String c_email = (String)session.getAttribute("c_email");
+		
+		pcvo.setC_email(c_email);
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData(pcvo);
 
 		return data;
@@ -575,8 +590,10 @@ public class TaejoonController {
 
 	@ResponseBody
 	@RequestMapping("/counselorDataSearch.do")
-	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo) {
-		pcvo.setC_email("3244509@naver.com");
+	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo, HttpSession session) {
+		String c_email = (String)session.getAttribute("c_email");
+		
+		pcvo.setC_email(c_email);
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData2(pcvo);
 
 		return data;

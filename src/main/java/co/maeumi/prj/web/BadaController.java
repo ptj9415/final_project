@@ -127,7 +127,9 @@ public class BadaController {
 			cvo = counselorDao.counselorLogin(cvo);
 
 			if (cvo != null) { // 상담사로 로그인 성공한 경우.
-				session.setAttribute("email", request.getParameter("email"));
+				session.setAttribute("c_email", request.getParameter("email"));
+				session.setAttribute("c_name", cvo.getC_name());
+				session.setAttribute("c_admin", cvo.getC_admin());
 				System.out.println("세션에 이메일이 담겼나? " + session.getAttribute("email"));
 				message = "YES";
 			} else { // 일반회원, 상담사 둘 다 로그인 실패한 경우.
@@ -585,6 +587,7 @@ public class BadaController {
 		cvo.setC_phone(request.getParameter("phone"));
 		cvo.setC_grade("심리상담사");   // 기본값으로 심리상담사 줌.
 		cvo.setC_status("가입");
+		cvo.setC_admin("C");
 		
 		counselorDao.counselorInsert(cvo);
 		
