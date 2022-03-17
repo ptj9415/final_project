@@ -195,9 +195,12 @@ public class EunsolController {
 	// MBIT 
 	@RequestMapping("/mbti.do")
 	public String mbti() {
+		
 		return  "user/test/mbti";
 	}
-
+	
+	
+	
 	/* ===== 관리자 화면 ===== */
 
 	// 관리자 자유게시판 메인화면
@@ -311,7 +314,8 @@ public class EunsolController {
 	// FAQ 등록
 	@RequestMapping("/adminFaqResister.do")
 	public String faqResister(FaqVO vo, HttpSession session) {
-		vo.setF_email((String) session.getAttribute("email")); // 로그인 정보. 로그인 할 때 담는걸로 가져와야 함 !!
+		String c_email = (String)session.getAttribute("c_email");
+		vo.setF_email(c_email); // 로그인 정보. 로그인 할 때 담는걸로 가져와야 함 !!
 		faqDao.faqInsert(vo);
 		
 		return "redirect:adminFaqList.do";

@@ -16,7 +16,7 @@
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 80px;
-	margin-bottom: 400px;
+	margin-bottom: 350px;
 }
 
 .br_content {
@@ -24,7 +24,7 @@
 }
 
 .br_contentBox {
-	height: 70px;
+	height: 65px;
 	width: 1420px;
 	font-size: 13px;
 	overflow:hidden;
@@ -83,8 +83,9 @@ textarea::placeholder {
 
 
 button {
-	height : 30px;
-	width : 80px;
+	height: 35px;
+	width: 80px;
+	padding: 5px;
 	margin-left: 20px;
 	border: 1px solid black;
 	background-color: white;
@@ -92,6 +93,7 @@ button {
 	border: 1px solid black;
 	margin-top: 80px;
 	font-size: 13px;
+	margin-bottom: 70px;
 }
 
 button:hover {
@@ -140,16 +142,19 @@ button:hover {
 				<c:choose>
 					<c:when test="${boardRead.b_anony eq 'F' }">
 						<small><a class="card-text">
-							${boardRead.b_wdate} <b>${boardRead.m_nickname}</b> &nbsp; ${boardRead.b_hit}</a></small>
-						<br>
+								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt=""> 
+									${boardRead.b_wdate} &nbsp; <b>${boardRead.m_nickname}</b> &nbsp;
+								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="img/board/visibility.png" alt="">  
+								 	${boardRead.b_hit}</a></small>
+							<br>
 					</c:when>
 					<c:otherwise>
 						<small><a class="card-text">
 								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt=""> 
-								${boardRead.b_wdate} &nbsp; <b>익명</b> &nbsp;
+									${boardRead.b_wdate} &nbsp; <b>익명</b> &nbsp;
 								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="img/board/visibility.png" alt="">  
-								 ${boardRead.b_hit}</a></small>
-						<br>
+								 	${boardRead.b_hit}</a></small>
+							<br>	
 					</c:otherwise>
 				</c:choose>
 			</div>	
@@ -175,15 +180,17 @@ button:hover {
 				<br>
 			</c:if>
 		</div>
-		<c:if test="${not empty email }">
-			<button style="margin-right: 5px;"
-				onclick="location.href='userBoardForm.do'">글쓰기</button>
-
-			<input type="hidden" id="m_email" name="m_email" value="${email }">
-		</c:if>
-		<button
-			onclick="location.href='userBoardList.do'">돌아가기</button>
-		<br> <br> <br>
+		<span style="display: inline-block;">
+			<c:if test="${not empty email }">
+				<button style="margin-right: 5px;"
+						onclick="location.href='userBoardForm.do'">글쓰기</button>
+				<input type="hidden" id="m_email" name="m_email" value="${email }">
+			</c:if>
+		</span>
+		<span style="display: inline-block;">
+				<button
+					onclick="location.href='userBoardList.do'">돌아가기</button>
+		</span>	
 		
 		<!-- 댓글 목록 -->
 		<div div align="left">
@@ -267,7 +274,7 @@ button:hover {
 				<small><p style="text-align:left; font-weight: bold;">${nickname}</p></small>
 				<textarea type="text" id="br_content" name="br_content" class="br_contentBox"
 					placeholder="따뜻한 관심을 보여주세요."></textarea>
-				<span><img style="height: 87px; width: 87px; margin-bottom: 63px"
+				<span><img style="height: 65px; width: 65px; margin-bottom: 60px"
 				id="replySubmit" name="replySubmit"  
 				src="img/board/checkbox.png">
 				</span>
@@ -284,10 +291,6 @@ button:hover {
 			<br>
 		</c:if>
 	</div>
-
-	<br>
-	<br>
-
 <script>
 	
 	// 삭제 (디자인적용)

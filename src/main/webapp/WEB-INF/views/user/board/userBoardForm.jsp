@@ -14,7 +14,7 @@
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 80px;
-	margin-bottom: 100px;
+	margin-bottom: 250px;
 }
 
 #b_title {
@@ -27,7 +27,7 @@
 
 #b_content {
 	width: 100%;
-	height: 700px;
+	height: 500px;
 	resize: none;
 	border: none;
 	font-size: 13px;
@@ -123,18 +123,15 @@ button:hover {
 				<textarea id="b_content" name="b_content"
 					placeholder="당신의 이야기를 들려주세요!">${boardSelect.b_content}</textarea>
 			</div>
-
-			<button type="submit" id="submit" style="margin-right: 5px;">등록하기</button>
-			<button type="button" id="button"
+			<span style="display: inline-block;">	
+				<button type="submit" id="submit" style="margin-right: 5px;">등록하기</button>
+			</span>
+			<span style="display: inline-block;">
+				<button
 				onclick="location.href='userBoardList.do'">돌아가기</button>
-
+			</span>
 		</div>
 	</form>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
 	<script>
 		// 글쓴이 익명, 댓글 상담사 체크 여부
