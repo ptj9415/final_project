@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -678,7 +679,7 @@ public class BadaController {
 		String savedName = file.getOriginalFilename();
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
 		mav.setViewName("redirect:adminNoticeList.do");
@@ -726,7 +727,7 @@ public class BadaController {
 		System.out.println("첨부파일 한 게 없는데, 뭐지? " + savedName);
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 
 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
@@ -752,12 +753,14 @@ public class BadaController {
 	}
 
 	// 위 공지사항 등록 커멘드 내부 첨부파일명 랜덤생성
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
+	private String uploadFile(String originalName, byte[] fileData, HttpServletRequest request) throws Exception {
+		
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
+		String SAVE_PATH = request.getServletContext().getRealPath("resources/attachfile/"); //webapp 아래부터 경로를 작성
 		// 랜덤생성 + 파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
-		File target = new File(uploadPath, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
+		File target = new File(SAVE_PATH, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사. 실제 프로젝트 시연할 때는 uploadPath 의 경로를 변경해야 함(
 		// servlet-context.xml)
 		FileCopyUtils.copy(fileData, target);
