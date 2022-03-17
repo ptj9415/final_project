@@ -26,7 +26,7 @@
 		values(
 		(SELECT NVL(MAX(GC_NO),0)+1 FROM
 		GROUP_COUNSEL N),
-		'이메일 세션값 들어감',
+		#{c_email},
 		to_date(#{gc_date},'yyyy/mm/dd'),
 		to_date(#{gc_startdate},'yyyy/mm/dd'),
 		to_date(#{gc_finaldate},'yyyy/mm/dd'),
@@ -40,7 +40,7 @@
 		#{gc_kakao},
 		#{gc_infos},
 		0,
-		'네임값 세션 들어감',
+		#{gc_name},
 		0
 		)
 	</insert>
@@ -216,7 +216,7 @@
 		VALUES(
 		(SELECT
 		NVL(MAX(GR_NO),0)+1 FROM GROUP_RESERVE O),
-		'세션값이 들어감',
+		#{m_email},
 		#{gc_no},
 		#{gr_subject},
 		sysdate,

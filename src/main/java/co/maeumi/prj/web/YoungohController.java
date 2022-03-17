@@ -135,7 +135,7 @@ public class YoungohController {
 	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
 	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,HttpServletRequest request,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req, HttpSession session) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
@@ -165,7 +165,8 @@ public class YoungohController {
 		String origincode = req.getParameter("summernote");
 		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/",uploadpath + "gceditor/");
 		vo.setGc_infos(result);
-
+		vo.setC_email((String)session.getAttribute("c_email"));
+		vo.setGc_name((String)session.getAttribute("c_name"));
 		int insert = groupCounselDao.insertGroupCounsel(vo);
 		
 		// vo값에 따라 성공 실패 여부 확인
@@ -493,7 +494,8 @@ public class YoungohController {
 	
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
-	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo, HttpServletRequest request) {
+	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo, HttpServletRequest request, HttpSession session) {
+		vo.setM_email((String)session.getAttribute("email"));
 		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
 		int maxnum = groupCounselDao.maxGroupGrno();
 		String c_email = request.getParameter("c_email");
@@ -502,6 +504,8 @@ public class YoungohController {
 		ovo.setGr_no(maxnum);
 		ovo.setOr_price(vo.getGr_price());
 		ovo.setC_email(c_email);
+		ovo.setM_email((String)session.getAttribute("email"));
+		ovo.setM_nickname((String)session.getAttribute("nickname"));
 		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
 			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
