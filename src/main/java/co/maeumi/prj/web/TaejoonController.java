@@ -273,7 +273,8 @@ public class TaejoonController {
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String SAVE_PATH = "\\home\\ubuntu\\apache-tomcat-9.0.59\\webapps\\maeumi\\img\\bannerimg\\";
+		
+		String SAVE_PATH = request.getServletContext().getRealPath("img/bannerimg");
 //		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
