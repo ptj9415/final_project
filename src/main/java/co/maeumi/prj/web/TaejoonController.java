@@ -237,10 +237,8 @@ public class TaejoonController {
 	public int groupCounselDetailInsert(GroupcounselVO gvo, HttpServletRequest request) throws Exception {
 		System.out.println(request.getParameter("gc_report"));
 		String gc_report = aes256.encrypt(request.getParameter("gc_report"));
-		System.out.println("------------------------------");
 		System.out.println(gc_report);
 		System.out.println(aes256.decrypt(gc_report));
-		System.out.println("------------------------------");
 		gvo.setGc_report(gc_report);
 		int n = groupCounselDao.groupCounselResult(gvo);
 
@@ -282,7 +280,8 @@ public class TaejoonController {
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
+		String SAVE_PATH = "\\home\\ubuntu\\apache-tomcat-9.0.59\\webapps\\maeumi\\img\\bannerimg\\";
+//		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
 
@@ -813,20 +812,15 @@ public class TaejoonController {
 
 	@RequestMapping("/fileDownload1.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
+		String filename = request.getParameter("fileName"); // get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
-		System.out.println("1. filename: " + filename);
 		String realFilename = "";
-
 		String downName = request.getParameter("downName");
-		System.out.println("downName 확인 : " + downName);
-
 		try {
 			String browser = request.getHeader("User-Agent");
 			// 파일 인코딩
 			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
 				encodingFilename = URLEncoder.encode(downName, "UTF-8").replaceAll("\\+", "%20");
-				System.out.println("2. filename: " + downName);
 			} else {
 				encodingFilename = new String(downName.getBytes("UTF-8"), "ISO-8859-1");
 			}
@@ -834,10 +828,8 @@ public class TaejoonController {
 			System.out.println("UnsupportedEncodingException");
 		}
 		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;
-		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
-			System.out.println("존재유무 확인 ~=================");
 			return;
 		}
 		// 파일명 지정
