@@ -782,19 +782,19 @@ public class BadaController {
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
 		String SAVE_PATH = uploadpath + "/noticesummer/";
 		
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot + "resources/image/";
+		//String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		//String fileRoot = contextRoot + "resources/image/";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
 		
-		File targetFile = new File(fileRoot + savedFileName);
-		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		File targetFile = new File(SAVE_PATH + savedFileName);
+		//File mtargetFile = new File(SAVE_PATH + savedFileName);
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			//multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
 			jsonObject.addProperty("url", "/prj/resources/image/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
