@@ -19,31 +19,17 @@ public class Paging {
 		this.page = page;
 		this.range = range;
 		this.listCnt = listCnt;
-		
-		// 전체 페이지수
-		this.pageCnt = (int) Math.ceil((double) listCnt / listSize);
-		
-		// 시작 페이지
-		this.startPage = (range - 1) * rangeSize + 1;
-
-		// 끝 페이지
-		this.endPage = range * rangeSize;
-
-		// 게시판 시작번호
-		this.startList = (page - 1) * listSize;
-
-		// 이전 버튼 상태
-		this.prev = range == 1 ? false : true;
-
-		// 다음 버튼 상태
-		this.next = endPage > pageCnt ? false : true;
+		this.pageCnt = (int) Math.ceil((double) listCnt / listSize);// 전체 페이지수
+		this.startPage = (range - 1) * rangeSize + 1;// 시작 페이지
+		this.endPage = range * rangeSize;// 끝 페이지
+		this.startList = (page - 1) * listSize;// 게시판 시작번호
+		this.prev = range == 1 ? false : true;// 이전 버튼 상태
+		this.next = endPage > pageCnt ? false : true;// 다음 버튼 상태
 		if (this.endPage > this.pageCnt) {
 			this.endPage = this.pageCnt;
 			this.next = false;
-		}
-		
+		}		
 		this.end = page * listSize;
-		
 		this.start = getEnd() - listSize + 1;
 	}
 	
