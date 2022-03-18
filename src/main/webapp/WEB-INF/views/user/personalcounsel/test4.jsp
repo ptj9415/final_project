@@ -487,7 +487,7 @@ function change(){
 	   var num = priceSelect.indexOf('/');
 	   var priceResult = priceSelect.substr(0,num);
 	   var couponNo = priceSelect.substr(num+1);
-	   alert(couponNo);
+	  /*  alert(couponNo); */
 	   $("#discount").text(' '+'-'+priceResult +' 원');
 	   
 	   var ddd = price-priceResult;

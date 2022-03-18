@@ -674,27 +674,27 @@ font-size: 20px;
             <tr>
               
               <td>상담 카테고리</td>
-              <td style="text-align: right;">진로/취업${result.c_email}</td>
+              <td style="text-align: right;">아직</td>
              
             </tr>
             <tr>
               <td>상담사 명</td>
-              <td style="text-align: right;">이소정</td>
+              <td style="text-align: right;">${result.c_name }</td>
               
             </tr>
             <tr>
               <td>상담 일시</td>
-              <td style="text-align: right;">2022-04-04 13시</td>
+              <td style="text-align: right;">${result.pr_date} ${result.pr_time} 시</td>
               
             </tr>
             <tr>
               <td>상담 방식</td>
-              <td style="text-align: right;">카카오톡</td>
+              <td style="text-align: right;">${result.pr_type }</td>
               
             </tr>
             <tr>
               <td>상담 비용</td>
-              <td style="text-align: right;">18,000원</td>
+              <td style="text-align: right;">${result.pr_price }원</td>
               
             </tr>
             
@@ -705,6 +705,15 @@ font-size: 20px;
        </div> 
     </div> 
       </div>
+     <input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+     		<input type="hidden" name="pr_time" value="${pr_time}">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
+					<input type="hidden" id="or_uid" name="or_uid">
+					<input type="hidden" id="c_no" name="c_no" value="0">
+					<input type="hidden" name="pr_type" value="${pr_type}">
+					<input type="hidden" name="pr_date" value="${pr_date}">
        <a href="userMypage.do"> <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button></a>
     </div>
   </div>
