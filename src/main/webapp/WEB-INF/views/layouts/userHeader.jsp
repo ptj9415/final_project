@@ -160,7 +160,6 @@ span.top-nav-admin {
 							<li><a href="mbti.do">미니 MBTI 검사</a></li>
 							<li><a href="selfEsteem.do">자존감 검사</a></li>
 							<li><a href="simri.do">우울증 검사</a></li>
-							<li><a href="#">심리검사 3</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="drop-down-menu" id="drop-third">
@@ -172,7 +171,6 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-third">
 							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userFaq.do">FAQ</a></li>
-							
 						</ul></li>
 					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
 					<li class="nav-item"><a href="userMypages.do" class="nav-link">마이페이지</a></li>

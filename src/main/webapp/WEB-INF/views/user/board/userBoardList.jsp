@@ -112,9 +112,9 @@
 }
 
 button {
-	height: 30px;
+	height: 35px;
 	width: 80px;
-	margin-left: 10px;
+	padding: 5px;
 	border: 1px solid black;
 	background-color: white;
 	color: black;
@@ -134,15 +134,10 @@ button:hover {
 .topTitle {
 	font-size: 20px;
 	color: #757a76;
-	width: 65%;
+	width: 64%;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 100px;
-}
-
-.filterinput {
-	width: 45%;
-	height: 30px;
 }
 
 .form-group {
@@ -159,7 +154,7 @@ button:hover {
 	border: 0.5px solid rgb(235, 235, 235);
 	border-radius: 0px;
 	background-color: white;
-	color: rgb(74, 127, 223);
+	color: #4b5b73;
 	font-weight: bold;
 	font-size: 14px;
 	margin-top: -1px;
@@ -176,14 +171,52 @@ button:hover {
 	margin-right: 10px;
 }
 
-.searchdiv {
+.searchDiv {
 	height: 100px;
+	margin-top: 30px;
+	margin-bottom: 150px;
 }
 
 #btnSearch {
 	display: inline-block;
 	margin-bottom: -2px;
 }
+
+input::placeholder {
+	font-size: 15px;
+	color: #dededf;
+}
+
+/* 퀵 메뉴 start */
+.quickmenu {
+	position: absolute;
+	width: 90px;
+	top: 70%;
+	margin-top: -30px;
+	right: 10px;
+	margin-right: 2%;
+}
+
+.quickmenu ul {
+	position: relative;
+	float: left;
+	width: 100%;
+	display: inline-block;
+	*display: inline;
+}
+
+.quickmenu ul li {
+	float: left;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	*display: inline;
+}
+
+.quickmenu ul li:last-child {
+	border-bottom: 0;
+}
+/* 퀵 메뉴 end */
 </style>
 </head>
 <body>
@@ -291,7 +324,7 @@ button:hover {
 			<div class="row g-4 py-5 row-cols-1 row-cols-lg-3"
 				onclick="location.href='userBoardRead.do?b_no=${board.b_no}';">
 				<div class="feature col" style="height: 90px;">
-					<hr align="left" width: 90%>
+					<hr align="left"width: 90%>
 					<small class="subject">${board.b_subject}</small>
 					<p class="title">${board.b_title}</p>
 					<small id="content">${board.b_content}</small>
@@ -307,13 +340,13 @@ button:hover {
 			</div>
 		</c:forEach>
 	</div>
-<br>
+	<br>
 	<!-- end -->
 
 
 	<!-- 페이징 -->
 	<div id="wrap">
-		<div id="paginationBox" class="pagination1">
+		<div id="paginationBox" class="pagination1" style="margin-top: 110px;">
 			<ul class="pagination" id="pageul">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
@@ -339,12 +372,23 @@ button:hover {
 			</ul>
 		</div>
 		<br>
-		<div class="searchdiv">
+		<div class="searchDiv">
 			<input type="text" class="filterinput" id="b_title"
-				placeholder="  제목을 입력하세요." style="width: 600px; height: 45px;">
-			<button type="button" id="btnSearch" style="height: 55px;">검색</button>
+				style="width: 600px; height: 34px;" placeholder="  제목을 입력하세요.">
+			<button type="button" id="btnSearch">검색</button>
 		</div>
 	</div>
+
+	<!-- 퀵 메뉴 start -->
+
+	<div class="quickmenu">
+		<ul>
+			<li><a href="http://pf.kakao.com/_exlxkFb/chat" target='_blank'><img src="img/kakao/channel-chat-button.png" alt=""></a></li>
+		</ul>
+	</div>
+
+	<!-- 퀵 메뉴 end -->
+
 	<script>
 	
 		// 페이징 처리
@@ -392,6 +436,17 @@ button:hover {
 		console.log(url);
 
 	});		
+		
+		// 퀵 메뉴
+
+		$(document).ready(function(){
+	  		var currentPosition = parseInt($(".quickmenu").css("top"));
+	  		$(window).scroll(function() {
+	    	var position = $(window).scrollTop(); 
+	    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+	  });
+	});
+
 	</script>
 </body>
 </html>

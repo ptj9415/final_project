@@ -5,7 +5,7 @@
 
 	<select id="salaryList"
 		resultType="co.maeumi.prj.salary.service.SalaryVO">
-		SELECT * FROM MONTHSALARY WHERE SDATE LIKE '%'||2022||'%'
+		SELECT * FROM MONTHSALARYS WHERE SDATE LIKE '%'||2022||'%'
 	</select>
 	
 		<select id="salarySecondList"
@@ -20,7 +20,7 @@
 
 		<choose>
 			<when test="month == 'all'">
-				SELECT * FROM MONTHSALARY WHERE SDATE LIKE '%'||#{year}||'%'
+				SELECT * FROM MONTHSALARYS WHERE SDATE LIKE '%'||#{year}||'%'
 			</when>
 			<otherwise>
 				SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE '%'||${month}||'%'
