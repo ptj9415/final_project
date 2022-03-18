@@ -10,10 +10,20 @@
 .test {
             display: flex;
             justify-content: center;
+            animation: fadein 1s;
+			-webkit-animation: fadein 1s; /* Safari and Chrome */
         }
+            @-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
         .mainForm {
-            width: 30%;
+            width: 40%;
             margin-top: 50px;
 
         }
@@ -35,32 +45,40 @@
             margin-right: 10px;
         }
 
-        button {
-            background-color: white;
+         button {
+            background-color: #153e54;
             width: 100px;
             height: 50px;
-            border: 1px solid lightgray;
+            border: 1px solid #153e54;
 
         }
 
-        button:hover {
-            background-color: #FFD2D2;
-            border-color: white;
+       button:hover {
+            background-color: white;
+            border: 1px solid #153e54;
+            transition:200ms ease-in-out;
         }
 
         .subCheck {
-            border: 1px solid gray;
+            border: 1px solid #8dacbd42;
+            margin-bottom:5px;
+            border-radius: 10px;
+    		padding: 10px
 
         }
 
         textarea {
             border-color: gray;
             resize: none;
+            font-size:12px;
         }
 
         .info {
             width: 100%;
             height: 100%;
+            border-radius: 10px;
+    		padding: 10px;
+    		border: 0;
         }
 
         .allCheck>input {
@@ -71,10 +89,20 @@
         	margin-left: 5px;
         }
         .btn {
-      	  border: 1px solid lightgray;
+      	  border: 1px solid #153e54;
+      	  background-color:#153e54;
+      	  color:white;
         }
         .allCheck>input {
         	margin-left: 5px;
+        }
+         .next-btn{
+        	
+        	width: 25%;
+    		margin-bottom: 50px;
+    		margin-top: 30px;
+    		margin-right: auto;
+    		margin-left: auto;
         }
     </style>
     <script src="resources/js/jquery-3.6.0.min.js"></script>
@@ -113,7 +141,7 @@
    <div class="test">
         <div class="mainForm">
             <div class="title" align="center">
-                <h4>매우미 약관 동의</h4>
+                <h4>마으미 약관 동의</h4>
                 <hr>
             </div>
             <div class="comment">
@@ -211,7 +239,7 @@
                     </label>
                 </div>
             </div>
-            <div style="float: right;">
+            <div class="next-btn">
                         <button type="button" class="btn" onclick="formCheck()">가입 계속</button>
 			</div>
         </div>

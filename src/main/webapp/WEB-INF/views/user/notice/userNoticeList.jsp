@@ -114,14 +114,23 @@ input::placeholder {
  	font-size: 15px;
  	color: #dededf;
 }
+#noticeTitle:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini">
 
 	<!-- 배너 -->
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
-		data-stellar-background-ratio="0.5"></section>
+	<section class="hero-wrap hero-wrap-2" style="background-image: url('resources/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate text-center">
+				</div>
+			</div>
+		</div>
+</section>
 
 	<div class="topTitle">
 		<a>공지사항</a>
@@ -133,8 +142,8 @@ input::placeholder {
 				<tr>
 					<th width="100">글 번호</th>
 					<th width="100">말머리</th>
-					<th width="300">제 목</th>
-					<th width="100">작성자</th>
+					<th width="300">작성자</th>
+					<th width="100">제 목</th>
 					<th width="200">작성일자</th>
 					<th width="100">조회수</th>
 					<th width="100">첨부파일</th>
@@ -145,7 +154,7 @@ input::placeholder {
 							value="${notice.n_status }"></td>
 						<td>${notice.n_category }</td>
 						<td>${notice.n_writer }</td>
-						<td>${notice.n_title }</td>
+						<td id="noticeTitle">${notice.n_title }</td>
 						<td><fmt:parseDate value="${notice.n_writedate}"
 								var="noticeDate" pattern="yyyy-MM-dd" /> <fmt:formatDate
 								value="${noticeDate}" pattern="yyyy-MM-dd" /></td>
@@ -247,7 +256,7 @@ input::placeholder {
 			url = url + "&n_title=" + n_title;
 			url = url + "&n_category=" + n_category;
 			location.href = url;
-		}
+		};
 
 		function fn_pagination(page, range, rangeSize, listSize, n_title,
 				n_category) {
@@ -259,7 +268,7 @@ input::placeholder {
 			url = url + "&n_title=" + n_title;
 			url = url + "&n_category=" + n_category;
 			location.href = url;
-		}
+		};
 
 		function fn_next(page, range, rangeSize, listSize, n_title, n_category) {
 			var page = parseInt((range * rangeSize)) + 1;
@@ -271,7 +280,7 @@ input::placeholder {
 			url = url + "&n_title=" + n_title;
 			url = url + "&n_category=" + n_category;
 			location.href = url;
-		}
+		};
 
 		
 		$(document).on('click', '#btnSearch', function(e) {

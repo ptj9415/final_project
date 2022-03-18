@@ -60,7 +60,7 @@
              color:white;
              margin-right: auto;
    			 margin-left: auto;
-}
+		}
              
         }
         .joinbtn:hover{
@@ -136,6 +136,12 @@
 }
 	.check-container{
 		display:flex;
+	}
+	#email {
+		font-size: 18px;
+	}
+	#emailInputForm {
+	
 	}
     </style>
     <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
@@ -276,7 +282,7 @@
             <h5>본인확인이 완료되었습니다.<br> 모든 항목에 기입해주셔야 합니다.</h5>
             <br>
             <form id="frm" action="counselorJoin.do" method="post">
-                <div class="inputForm">
+                <div class="inputForm" id="emailInputForm">
                     <input type="text" id="email" name="email" value="${c_email }" readonly class="nonBtn"
                         style="text-align: left; width: 60%;">
                     <input type="text" placeholder="이름" id="name" name="name" style="width: 30%;" required="required"><hr>

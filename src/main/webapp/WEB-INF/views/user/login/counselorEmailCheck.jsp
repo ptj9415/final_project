@@ -221,7 +221,7 @@ $("#nextBtn").click(function(){
                 <div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span> <!-- 인증번호의 일치여부를 알려주는 경고글 역할. -->
 			<br>
-                <p style="font-size:10px; margin-left: 30px;">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </p>
+                <p style="font-size:15px; margin-left: 30px;">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </p>
             </div>
             <br>
             <button type="button" id="nextBtn" name="nextBtn">다음</button>

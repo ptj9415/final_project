@@ -9,16 +9,7 @@
 <meta charset="UTF-8">
 <title>마이 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Google Font: Source Sans Pro -->
-		  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-		  <!-- Font Awesome -->
-		  <link rel="stylesheet" href="subHomeFile/plugins/fontawesome-free/css/all.min.css">
-		  <!-- fullCalendar -->
-		  <link rel="stylesheet" href="subHomeFile/plugins/fullcalendar/main.css">
-		  <!-- Theme style -->
-		  <link rel="stylesheet" href="subHomeFile/dist/css/adminlte.min.css">
-		  <!-- Select2 -->
- 		  <link rel="stylesheet" href="subHomeFile/plugins/select2/css/select2.min.css">
+
 <style>
 
 .md-stepper-horizontal {
@@ -601,7 +592,6 @@ textarea {
 		<div class="container">
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 style="color: white">그룹상담</h1>
 				</div>
 			</div>
 		</div>

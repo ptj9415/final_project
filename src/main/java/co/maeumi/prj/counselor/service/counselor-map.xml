@@ -85,7 +85,7 @@
 		)
 		VALUES(#{c_email}, #{c_name}, #{c_gender},
 		#{c_phone}, #{c_password},
-		#{c_address},#{c_birthdate}, #{c_grade}, #{c_admin}, #{c_status})
+		#{c_address}, to_date(#{c_birthdate}, 'yy-mm-dd'), #{c_grade}, #{c_admin}, #{c_status})
 		INTO PRICE( P_NO, C_EMAIL, P_KAKAO, P_KAKAOPRICE, P_ZOOM, P_ZOOMPRICE, P_PHONE, P_PHONEPRICE )
 		VALUES ( (select nvl(max(p_no),0)+1 from price ) , #{c_email}, 0,0,0,0,0,0)
 		SELECT * FROM DUAL
