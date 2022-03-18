@@ -643,7 +643,7 @@ font-size: 20px;
 			    <div class="icon-circle"></div>
 			    <div class="icon-fix"></div>
 		  </div>
-</div>
+	</div>
 
 	<div class="complete-body">
       <div class="container">
@@ -674,7 +674,7 @@ font-size: 20px;
             <tr>
               
               <td>상담 카테고리</td>
-              <td style="text-align: right;">진로/취업 ${result.ccg_subname}</td>
+              <td style="text-align: right;">진로/취업${result.c_email}</td>
              
             </tr>
             <tr>

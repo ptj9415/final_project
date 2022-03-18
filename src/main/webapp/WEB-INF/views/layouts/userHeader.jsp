@@ -94,6 +94,7 @@ nav ul ul {
 nav ul ul li {
 	float: none;
 	position: relative;
+	width:150px;
 }
 
 nav ul ul li a {
@@ -121,8 +122,14 @@ span.top-nav-admin {
 			<span class="top-nav-admin"><a href="loginForm.do" style="margin-right:10px; font-size:11px; color:#153e54">로그인</a></span>
 		</c:if>
 		<c:if test="${email !=null }">
-			<span class="top-nav-admin" style="font-size:12px; color:#153e54">${nickname } 님 환영합니다<a href="logout.do" style="margin-left:10px; font-size:11px; color:#153e54">로그아웃</a></span>
+			<span class="top-nav-admin" style="font-size:12px; color:#153e54">
+				<i class="fa fa-user">
+				</i>
+				${nickname } 님 환영합니다
+				
+				<a href="logout.do" style="margin-left:10px; font-size:11px; color:#153e54">로그아웃</a></span>
 		</c:if>
+		<span class="top-nav-admin" style="font-size:11px;"> <a href="adminHome.do">🅰️관리자</a></span>
 
 		<!-- <span class="top-nav-admin"><a href="counselormypage.do">counselor
 				👨‍⚕️</a></span> <span class="top-nav-admin"><a href="adminbootstrap.do">admin
@@ -139,13 +146,12 @@ span.top-nav-admin {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			<span class="top-nav-admin"> <a href="adminHome.do">관리자
-					화면으로 이동</a></span>
+			
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
 						<ul class="drop-down-menu" id="drop-first">
-							<li><a href="userPersonalCounsel.do">개인상담</a></li>
+							<li><a href="testpg.do">개인상담</a></li>
 							<li><a href="userGroupCounsel.do">그룹상담</a></li>
 						</ul></li>
 
@@ -166,7 +172,7 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-third">
 							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userFaq.do">FAQ</a></li>
-							<li><a href="#">1:1문의</a></li>
+							
 						</ul></li>
 					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
 					<li class="nav-item"><a href="userMypages.do" class="nav-link">마이페이지</a></li>
