@@ -23,7 +23,7 @@
 					sysdate,
 					'0',
 					#{or_price},
-					#{nickname},
+					#{m_nickname},
 					#{m_email},
 					'0',
 					#{c_email}						

@@ -180,7 +180,7 @@ th {
 											name="gc_title"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
-												<option value="카톡">카톡</option>
+												<option value="카카오톡">카카오톡</option>
 												<option value="줌">줌</option>
 										</select></td>
 									</tr>

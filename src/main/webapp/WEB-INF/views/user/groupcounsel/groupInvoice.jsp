@@ -560,7 +560,7 @@ form {
 							<td class="tableitem"><p class="itemtext">상담 금액</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_price}원</p></td>
+							<td class="tableitem"><p class="itemtext" id="total">${groupInvoice.gc_price}원</p></td>
 						</tr>
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인 금액</p></td>
@@ -582,14 +582,14 @@ form {
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
 					<input type="hidden" id="gr_price" name="gr_price" value="${groupInvoice.gc_price}">
 					<input type="hidden" id="or_uid" name="or_uid">
-					<input type="text" id="c_no" name="c_no" value="0">
+					<input type="hidden" id="c_no" name="c_no" value="0">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 				</form>
 				<!--End Table-->
 			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 					<input type="hidden" name="cmd" value="_s-xclick"> <input
 						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
-					<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
+					<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
 				</form>
 				<div id="legalcopy">
 					<a href="personalCounselStep4.do"><input type="button"
@@ -601,20 +601,35 @@ form {
 		<!--End Invoice-->
 	</div>
 	<script>
+	$(document).ready(function(){
+		var n1 = $("#total").html();
+		const cn1 = n1.toString()
+		  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$("#total").html(cn1);
+		$("#totalPrice").html(cn1);
+		
+		});
+	
+	
 	function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
 		   var num = priceSelect.indexOf('/');
 		   var priceResult = priceSelect.substr(0,num);
+		   const cn1 = priceResult.toString()
+			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		   
 		   var couponNo = priceSelect.substr(num+1);
 		   couponNo = Number(couponNo);
 		   if (priceResult ==' '|| priceResult == null || priceResult =='') {
 		   		$("#discount").text('');
 		   }else{
-			    $("#discount").text(' '+' '+'-'+priceResult+'원');
+			    $("#discount").text(' '+' '+'-'+cn1+'원');
 		   }
 		   var ddd = price-priceResult;
-		   $("#totalPrice").text(ddd+'원');
+		   const cn2 = ddd.toString()
+			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		   $("#totalPrice").text(cn2+'원');
 		   $("#gr_price").val(ddd);
 		   $("#c_no").val(couponNo);
 		   

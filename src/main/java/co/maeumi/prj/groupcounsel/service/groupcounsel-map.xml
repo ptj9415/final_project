@@ -114,8 +114,7 @@
 		ORDER BY gc_no DESC
 		) A
 		)
-		WHERE RN BETWEEN #{start} AND
-		#{end}
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 
 	<select id="searchpageSelectList"
@@ -125,7 +124,7 @@
 		FROM (
 		SELECT ROWNUM RN, A.*
 		FROM (SELECT * FROM group_counsel
-		ORDER BY gc_no DESC
+		ORDER BY GC_NO DESC
 		) A
 		)
 		<where>
