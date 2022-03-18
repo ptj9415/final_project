@@ -21,6 +21,7 @@
 			<if test="t_name != ''">AND t_name like '%'||#{t_name}||'%'</if>
 			<if test="t_title != ''">AND t_title like '%'||#{t_title}||'%'</if>
 		</trim>
+		ORDER BY T_NO DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}

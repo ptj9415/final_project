@@ -230,6 +230,28 @@ form {
 	margin-right:auto;
 	margin-left:auto;
 }
+
+.page-item.active .page-link {
+	border: 0.5px solid rgb(235, 235, 235);
+	border-radius: 0px;
+	background-color: white;
+	color: #4b5b73;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: -1px;
+}
+
+.page-link {
+	border: 0px;
+	font-size: 14px;
+	color: #666666;
+	margin-left: 10px;
+}
+
+#pagination>li {
+	margin-right: 10px;
+}
+
 /*심리테라피 리스트 end*/
 </style>
 <body>
@@ -288,11 +310,12 @@ form {
 	        </li>
         </c:forEach>
     </ul>	
+    <br>
     		<div style=" width:1200px; margin:0 auto;">
-			  <ul class="pagination" style="padding-left: 470px;">
-			    <li class="page-item">
+			  <ul class="pagination" style="padding-left: 560px;">
+			  <%--   <li class="page-item">
 			      <a class="page-link" href="userTerapy.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
-			    </li>
+			    </li> --%>
 			    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
 					<c:if test="${status.count ne page.nowPage}">
 			    		<li class="page-item"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}</a></li>
@@ -301,11 +324,13 @@ form {
 						<li class="page-item active"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
 			   		</c:if>
 			    </c:forEach>
-			    <li class="page-item">
+			    <%-- <li class="page-item">
 			      <a class="page-link" href="userTerapy.do?nowPage=${page.next}">Next</a>
-			    </li>
+			    </li> --%>
 			  </ul>
 			</div>
+			
+	<br><br><br><br><br>
    <script>
    window.addEventListener('load', function() {
 		// setTimeout to simulate the delay from a real page load
