@@ -153,9 +153,6 @@
 							async
 						></script>
 					</div>
-					<!-- 이후에 추가할 것, 공유하기(혹은 복사), copyright에 대한 설명 등 -->
-					<div class="hash">#심리테스트</div>
-					<div class="hash">#마으미 #심리검사 #우울증테스트</div>
 					<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show-->
 					<div id="copyright" style="display: none;">
 						<p>

@@ -123,7 +123,6 @@ h3 {
 											<option value="all">전체</option>
 											<option value="카카오톡">카카오톡</option>
 											<option value="줌">줌</option>
-											<option value="전화">전화</option>
 										</select>
 									</div>
 								</div>
@@ -225,7 +224,7 @@ h3 {
 											<td><button id="sel1" name="sel1"
 													onclick="location.href='counselorGroupApplyList.do?gc_no=${group.gc_no}'">관리</button></td>
 											<c:if test="${group.gc_status eq 0 }">
-												<td>진행 중</td>
+												<td>모집 중</td>
 											</c:if>
 											<c:if test="${group.gc_status eq 1 }">
 												<td>상담 완료</td>

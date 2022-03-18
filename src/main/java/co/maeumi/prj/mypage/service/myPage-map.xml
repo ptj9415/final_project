@@ -76,7 +76,7 @@
 		    ON(G.C_EMAIL = C.C_EMAIL)
 		    JOIN GROUP_RESERVE R
 		    ON(G.GC_NO = R.GC_NO)
-		    WHERE G.GC_NO = #{gc_no}
+		    WHERE G.GC_NO = #{gc_no} and R.GR_NO = #{gr_no}
 	</select>
 	
 	<select id="GroupdetailRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">

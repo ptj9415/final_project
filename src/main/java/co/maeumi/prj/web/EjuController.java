@@ -183,21 +183,30 @@ public class EjuController {
 	
 	//결제완료 페이지
 	@RequestMapping("/paymentComplete.do")
-	public String paymentComplete(PersonalcounselVO vo, Model model,order_datailVO ovo, CouponVO cvo) {
-		vo.setM_email("3244509a@gmail.com");
+	public String paymentComplete(PersonalcounselVO vo, Model model,order_datailVO ovo, CouponVO cvo,HttpServletRequest request, HttpSession session) {
+		vo.setM_email((String)session.getAttribute("email"));
 		int num = personalCounselDao.personalCounselInsert(vo);
+		System.out.println(vo.getC_email());
 		if (num == 1) {
 			int max = personalCounselDao.personalMax();
 			System.out.println(max);
 			ovo.setPr_no(max);
 			ovo.setOr_price(vo.getPr_price());
+			ovo.setC_email(vo.getC_email());
+			ovo.setM_email((String)session.getAttribute("email"));
+			ovo.setM_nickname((String)session.getAttribute("nickname"));
 			orderDao.orderPersonalInsert(ovo);
 			vo.setPr_no(max);
 			PersonalcounselVO result = personalCounselDao.counselorResultSelect(vo);
 			model.addAttribute("result",result);
 			System.out.println(cvo.getC_no());
 			//쿠폰 적용 후 삭제하는 메소드
-			//couponDao.couponDelete(cvo);
+			String c_no = request.getParameter("c_no");
+	         int c_nos = Integer.parseInt(c_no);
+	         System.out.println(c_nos);
+	         if (c_nos != 0) {
+	            //couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+	         }
 		}
 		
 		return "user/personalcounsel/paymentComplete";

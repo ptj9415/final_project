@@ -142,7 +142,7 @@ button:hover {
 				<c:choose>
 					<c:when test="${boardRead.b_anony eq 'F' }">
 						<small><a class="card-text">
-								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt=""> 
+								<img style="height: 10px; width: 10px; margin-bottom: 2px" src="img/board/wall-clock.png" alt=""> 
 									${boardRead.b_wdate} &nbsp; <b>${boardRead.m_nickname}</b> &nbsp;
 								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="img/board/visibility.png" alt="">  
 								 	${boardRead.b_hit}</a></small>
@@ -150,7 +150,7 @@ button:hover {
 					</c:when>
 					<c:otherwise>
 						<small><a class="card-text">
-								<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt=""> 
+								<img style="height: 10px; width: 10px; margin-bottom: 2px" src="img/board/wall-clock.png" alt=""> 
 									${boardRead.b_wdate} &nbsp; <b>익명</b> &nbsp;
 								<img style="height: 15px; width: 15px; margin-bottom: 3px" src="img/board/visibility.png" alt="">  
 								 	${boardRead.b_hit}</a></small>
@@ -229,7 +229,7 @@ button:hover {
 			</c:if>
 			
 			<c:if test="${empty email}">
-				<small><span id="count" onclick="javascript:btn()">💗 ${like_count }명이 공감</span></small>
+				<small><span id="count" onclick="javascript:btn()">🤍 ${like_count }명이 공감</span></small>
 			</c:if>
 			
 				</p>
@@ -240,13 +240,13 @@ button:hover {
 							<div>
 								<small><p>
 									<a><b>${boardReply.br_name}&nbsp; </b></a> <a>
-									<img style="height: 10px; width: 10px; margin-bottom: 2.5px" src="img/board/wall-clock.png" alt="">  
+									<img style="height: 10px; width: 10px; margin-bottom: 2px" src="img/board/wall-clock.png" alt="">  
 									<fmt:parseDate
 											value="${boardReply.br_wdate}" var="replyDate"
 											pattern="yyyy-MM-dd" /><fmt:formatDate value="${replyDate}"
 											pattern="yyyy-MM-dd" /></a> &emsp;&emsp;
 									<c:if test="${boardReply.br_email eq email}">
-									<img style="height: 15px; width: 15px; margin-bottom: 2.5px" 
+									<img style="height: 13px; width: 13px; margin-bottom: 4px" 
 									src="img/board/bin.png" alt=""
 									onclick="delReply('${boardReply.br_no}');">  
 									</c:if>

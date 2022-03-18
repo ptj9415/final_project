@@ -762,7 +762,7 @@ textarea {
 										<th colspan="2">작 성 일</th>
 										<th colspan="2">구분</th>
 										<th colspan="5">제목</th>
-										<th style="text-align:center">관리</th>
+										<th style="text-align:center">게시글가기</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -771,7 +771,7 @@ textarea {
 										<td colspan="2">${blist.b_wdate}</td>
 										<td colspan="2">${blist.b_subject}</td>
 										<td colspan="5">${blist.b_title}</td>
-										<td><button class="manage-btn" onclick="boardDetail('${blist.b_no}')">관리</button> </td>
+										<td><button class="manage-btn" onclick="boardDetail('${blist.b_no}')">게시글가기</button> </td>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -812,6 +812,7 @@ textarea {
 										<th>구분</th>
 										<th>상담주제</th>
 										<th>상담타입</th>
+										<th>상담상태</th>
 										<th>관리</th>
 									</tr>
 								</thead>
@@ -825,6 +826,15 @@ textarea {
 											</c:if>
 											<td>${plist.c_name} 상담사 ${plist.pr_type} 개인상담</td>
 											<td>${plist.pr_type}</td>
+											<c:if test="${plist.pr_status eq 0 }">
+												<td>상담 중</td>
+											</c:if>
+											<c:if test="${plist.pr_status eq 1 }">
+												<td>상담 완료</td>
+											</c:if>
+											<c:if test="${plist.pr_status eq 2 }">
+												<td>환불</td>
+											</c:if>
 											<td> <button type="button" onclick="personalsangDam('${plist.pr_no}')">조회</button> </td> 
 										</tr>
 									</c:forEach>
@@ -837,7 +847,13 @@ textarea {
 											</c:if>
 											<td>${glist.gc_title}</td>
 											<td>${glist.gc_type }</td>
-											<td> <button type="button" onclick="GroupsangDam('${glist.gc_no}')">조회</button> </td> 
+											<c:if test="${glist.gr_status eq 0 }">
+												<td>상담 중</td>
+											</c:if>
+											<c:if test="${glist.gr_status eq 1 }">
+												<td>상담 완료</td>
+											</c:if>
+											<td> <button type="button" onclick="GroupsangDam('${glist.gc_no}','${glist.gr_no}')">조회</button> </td> 
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -972,15 +988,16 @@ textarea {
 	}
 	
 	function boardDetail(b_no){
-		url = "myPageboardDetail.do";
+		url = "userBoardRead.do";
 		url = url +"?b_no="+b_no;
 		location.href = url;
 	}
 	
-	function GroupsangDam(gc_no){
+	function GroupsangDam(gc_no, gr_no){
 		alert(gc_no);
 		url = "userGroupsangDam.do";
 		url = url + "?gc_no="+gc_no;
+		url = url + "&gr_no="+gr_no;
 		location.href = url;
 			
 	}

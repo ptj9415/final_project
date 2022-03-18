@@ -10,9 +10,12 @@
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <style>
 input {
-	width: 250px;
-	height: 30px;
-	text-align: center;
+	font-size: 12px;
+    border-radius: 30px;
+    border: 1px solid #d8d8d8;
+    width: 250px;
+    height: 30px;
+    text-align: center;
 }
 #email {
 	margin-left: 60px;
@@ -49,8 +52,11 @@ button:hover{
 #selectPasswordBtn{
 	width: 20%;
 }
-
-
+  
+#findEmail{
+	font-size:11px;
+	color:#8dacbd42;
+}
 </style>
 <body>
 <div align="center" class="mainForm">

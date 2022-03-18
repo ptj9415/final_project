@@ -307,7 +307,7 @@
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
-	margin-top: 180px;
+	/* margin-top: 180px; */
     margin-left: 350px;
 }
 

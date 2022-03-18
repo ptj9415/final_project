@@ -174,7 +174,7 @@ public class YoungohController {
 			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
 			out.flush();
 		}else {
-			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList1.do'</script>");
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList.do'</script>");
 			out.flush();
 		}
 		return null;
@@ -395,28 +395,29 @@ public class YoungohController {
 	@RequestMapping("/therapyUpdate.do")
 	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpServletRequest request) {
-
+		String fileback = request.getParameter("fileback");
+		vo.setT_picture(fileback);
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
 		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
 		
-		System.out.println(originalFileName);
-		if (originalFileName == "") {
-			return "redirect:admintherapy.do";
-		}
-			System.out.println("일로 들어감.");
-		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
-		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
-		String saveFile = uuid + originalFileName;
+		System.out.println(originalFileName);	
+		if (originalFileName != "") {
+			System.out.println("일로 당연히 들어옴");
+			
+			String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+			String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+			String saveFile = uuid + originalFileName;
 
-		try {
-			vo.setT_picture(saveFile);
-			mf.transferTo(new File(msaveFile));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				vo.setT_picture(saveFile);
+				mf.transferTo(new File(msaveFile));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		String origincode = request.getParameter("summernote");
@@ -512,6 +513,11 @@ public class YoungohController {
 			System.out.println(num);
 			ovo.setOr_no(num);
 			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
+			
+			String date = ovo.getGc_date();
+			date = date.substring(0,10);
+			ovo.setGc_date(date);
+			
 			System.out.println(ovo.getOr_date());
 			groupCounselDao.groupUpdatePerson(vo); //인원수 증가 메소드
 			String c_no = request.getParameter("c_no");
@@ -727,24 +733,7 @@ public class YoungohController {
 		System.out.println("테스트");
 		return null;
 	}
-	// 마이페이지 자유 게시글 삭제
-	@RequestMapping("/deleteBoard.do")
-	public String deleteBoard(BoardVO vo, HttpServletRequest request, BoardReplyVO bvo) {
-		 String b_no = request.getParameter("b_no");
-		 System.out.println(b_no);
-		 int num = Integer.parseInt(b_no);
-		
-		 vo.setB_no(num);
-		 int n = boardDao.boardDelete(vo);
-		 System.out.println(n);
-		 if (n == 1) {
-			 bvo.setB_no(num);
-			int d = boardreplyDao.boardReplyDelete(bvo);
-			System.out.println(d);
-		 }
-		 
-		return "redirect:userMypages.do";
-	}
+	
 //	// 마이페이지 그룹 상담 환불 버튼
 //	@RequestMapping("/mypageGroupDetailRefund.do")
 //	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model, GroupcounselVO gvo) {

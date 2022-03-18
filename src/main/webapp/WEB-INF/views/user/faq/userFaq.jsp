@@ -13,7 +13,13 @@
 
 
 <style>
-/*new faq*/
+/*faq*/
+
+body {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+}
 .accordion {
 	color: #153E54;
 	background-color: white;
@@ -74,7 +80,7 @@ p {
 	font-weight: bold;
 	margin-bottom: 35px;
 }
-/* new faqend*/
+/*faq end*/
 </style>
 
 </head>
@@ -89,7 +95,7 @@ p {
 		<c:forEach items="${faqs}" var="faq">
 			<button class="accordion">${faq.f_title}</button>
 			<div class="panel">
-				<p>${faq.f_subject}</p>
+				<pre>${faq.f_subject}</pre>
 			</div>
 		</c:forEach>
 	</div>

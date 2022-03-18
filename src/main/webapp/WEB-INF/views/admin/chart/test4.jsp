@@ -411,7 +411,7 @@ p.itemtext{
 							<td class="tableitem">
 								<p class="itemtext"></p> 
 								<select name='checkbox' id="checkbox" onchange="change()">
-											<option value='' selected>-- 선택 --</option>
+											<option value='0' selected>-- 선택 --</option>
 										<c:forEach items="${coupon }" var="coupon">
 											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
 										</c:forEach>
@@ -444,20 +444,21 @@ p.itemtext{
 					<a href="personalCounselStep4.do"><input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 				</div> -->
+				<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
 				<form action="paymentComplete.do" id="frm" name="frm">
-					<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
-					<input type="hidden" name="pr_time" value="${time}">
+					<input type="hidden" name="pr_time" value="${pr_time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<input type="hidden" id="pr_price" name="pr_price">
+					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
-					<input type="hidden" id="c_no" name="c_no" value="">
+					<input type="hidden" id="c_no" name="c_no" value="0">
 					<input type="hidden" name="pr_type" value="${pr_type}">
 					<input type="hidden" name="pr_date" value="${pr_date}">
 				</form>
-			<div id="legalcopy">
+			<!-- <div id="legalcopy">
 					<a href="personalCounselStep4.do">
-					<!-- <input type="button" id="back-btn" name="submit" value="뒤로가기"></a> -->
-			</div>
+					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
+			</div> -->
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick"> 
 						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
@@ -484,13 +485,13 @@ function change(){
 	   var price = $("#g_price").val();
 	   var priceSelect = $("#checkbox").val();
 	   var num = priceSelect.indexOf('/');
-	   var priceResult = priceSelect.substr(0,4);
+	   var priceResult = priceSelect.substr(0,num);
 	   var couponNo = priceSelect.substr(num+1);
-	   
+	   alert(couponNo);
 	   $("#discount").text(' '+'-'+priceResult +' 원');
 	   
 	   var ddd = price-priceResult;
-	   $("#totalPrice").text(ddd);
+	   $("#totalPrice").text(ddd+"원");
 	   $("#pr_price").val(ddd);
 	   $("#c_no").val(couponNo);
 	   

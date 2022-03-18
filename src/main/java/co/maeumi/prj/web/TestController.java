@@ -93,7 +93,7 @@ public class TestController {
 
 		model.addAttribute("pagination", svo);
 		model.addAttribute("counselorList", counselorDao.userCounselorSearchList(svo));
-		return "admin/chart/test";
+		return "user/personalcounsel/test";
 	}
 
 	@RequestMapping("/test2pg.do")
@@ -102,46 +102,51 @@ public class TestController {
 		session.setAttribute("c_email", c_email);
 		
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
-		return "admin/chart/test2";
+		return "user/personalcounsel/test2";
 	}
 
 	@RequestMapping("/test3pg.do")
 	public String test3pg(Model model, CounselorVO cvo, HttpServletRequest request, HttpSession session) {
-		String type = request.getParameter("type");
-		String price = request.getParameter("price");
-		String c_email = (String) session.getAttribute("c_email");
+		String type = request.getParameter("c_type1");
+		String price = request.getParameter("pr_price");
+		String c_value = request.getParameter("c_value");
+		String c_email = request.getParameter("c_email");
 		System.out.println(type);
 		System.out.println(price);
 		System.out.println(c_email);
+		System.out.println(c_value);
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
-		model.addAttribute("type", type);
-		model.addAttribute("price", price);
+		model.addAttribute("c_type1", type);
+		model.addAttribute("pr_price", price);
+		model.addAttribute("c_value", c_value);
 		model.addAttribute("c_email", c_email);
 
-		return "admin/chart/test3";
+		return "user/personalcounsel/test3";
 	}
 
 	@RequestMapping("/test4pg.do")
 	public String test4pg(Model model, CounselorVO cvo, HttpServletRequest request, CouponVO cpvo,
 			HttpSession session) {
-		String type = request.getParameter("pr_type");
+		String pr_type = request.getParameter("pr_type");
 		String price = request.getParameter("pr_price");
-		String c_email = (String) session.getAttribute("c_email");
+		String c_email = request.getParameter("c_email");
+		String c_value = request.getParameter("c_value");
 		String pr_date = request.getParameter("pr_date");
 		String pr_time = request.getParameter("pr_time");
 
-		model.addAttribute("pr_type", type);
-		model.addAttribute("pr_price", price);
-		model.addAttribute("c_email", c_email);
-		model.addAttribute("pr_date", pr_date);
-		model.addAttribute("pr_time", pr_time);
+		model.addAttribute("pr_type", pr_type);//
+		model.addAttribute("pr_price", price);//
+		model.addAttribute("c_email", c_email);//
+		model.addAttribute("c_value",c_value);
+		model.addAttribute("pr_date", pr_date);//
+		model.addAttribute("pr_time", pr_time);//
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
 
 		cpvo.setM_email("gnjqtpfl@naver.com");
 		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
 		model.addAttribute("coupon", list);
 
-		return "admin/chart/test4";
+		return "user/personalcounsel/test4";
 	}
 
 }
