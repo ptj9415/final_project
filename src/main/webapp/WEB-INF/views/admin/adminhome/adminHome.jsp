@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="module"
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -57,7 +58,7 @@ h3 {
 }
 
 .small-box .icon:hover {
-color: rgba(0, 0, 0, 0.15);
+	color: rgba(0, 0, 0, 0.15);
 }
 </style>
 </head>
@@ -74,7 +75,7 @@ color: rgba(0, 0, 0, 0.15);
 						<div class="inner">
 							<h4>회원 관리</h4>
 							<div class="icon">
-								<ion-icon name="cellular" ></ion-icon>
+								<ion-icon name="cellular"></ion-icon>
 							</div>
 						</div>
 						<a href="adminMemberList.do" class="small-box-footer">바로가기&nbsp;<i
@@ -126,20 +127,30 @@ color: rgba(0, 0, 0, 0.15);
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">상담 통계</p>
+						<p id="headerp">올해의 매출 통계</p>
 					</div>
 					<div class="card" id="maindiv" align="center">
 						<div class="article" style="height: 350px;">
-							
+							<div class="card" id="chartcard">
+								<div id=chart style="height: 350px">
+									<canvas id="myChart"></canvas>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">상담사 통계</p>
+						<p id="headerp">이번달 매출 통계</p>
 					</div>
 					<div class="card" id="maindiv">
-						<div class="article" style="height: 350px;"></div>
+						<div class="article" style="height: 350px;">
+							<div class="card" id="chartcard">
+								<div id=chart style="height: 350px">
+									<canvas id="myChart2"></canvas>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -147,29 +158,29 @@ color: rgba(0, 0, 0, 0.15);
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">사이트 이용 통계</p>
+						<p id="headerp">카테고리별 개인상담 이용률</p>
 					</div>
 					<div class="card" id="maindiv">
 						<div class="article" style="height: 350px;">
-							<!-- START 사이트 이용 통계 들어가는 부분 -->
-							<div style="width: 700px; height: 250px;">
-								<canvas id="myChart"></canvas>
+							<div class="card" id="chartcard">
+								<div id=chart style="height: 350px">
+									<canvas id="myChart3"></canvas>
+								</div>
 							</div>
-							<!-- END 상담 통계에 해당하는 부분 -->
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">심리검사 통계</p>
+						<p id="headerp">회원 MBTI 유형 통계</p>
 					</div>
 					<div class="card" id="maindiv">
 						<div class="article" style="height: 350px;">
-							<!-- START 매출 통계-->
-							<div style="width: 700px; height: 250px;">
-								<canvas id="myChart2"></canvas>
+							<div class="card" id="chartcard">
+								<div id=chart style="height: 350px">
+									<canvas id="myChart4"></canvas>
+								</div>
 							</div>
-							<!-- END 매출 통계 -->
 						</div>
 					</div>
 				</div>
@@ -181,148 +192,245 @@ color: rgba(0, 0, 0, 0.15);
 <script>
 // 사이트 이용 통계 그래프
 $(document).ready(function() {
-	
 	$.ajax({
-		url: "personalCounselData.do",
-		success: function(list) {
-				var chartMonths= [];
-				var chartData = [];
-				
-				for(lists of list) {
-	
-					chartMonths.push(lists.pr_date);  // 가로축 데이터 
-					chartData.push(lists.prCount);
-				}
-	
-				var context = document.getElementById('myChart').getContext('2d');
-				var myChart = new Chart(context, {
-				    type: 'line', // 차트의 형태
-				    data: { // 차트에 들어갈 데이터
-				        labels: chartMonths,
-				        datasets: [
-				            { //데이터
-				                label: '최근 3개월 개인상담 건수', //차트 제목 & 메인페이지에선 디폴트 3개월
-				                fill: true, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-				                data: chartData,  // 세로축 데이터
-				                backgroundColor: [
-				                	//색상
-				                    'rgba(255, 99, 132, 0.2)',
-				                    'rgba(54, 162, 235, 0.2)',
-				                    'rgba(255, 206, 86, 0.2)',
-				                    'rgba(75, 192, 192, 0.2)',
-				                    'rgba(153, 102, 255, 0.2)',
-				                    'rgba(255, 159, 64, 0.2)'
-				                ],
-				                borderColor: [
-				                    //경계선 색상
-				                    'rgba(255, 99, 132, 1)',
-				                    'rgba(54, 162, 235, 1)',
-				                    'rgba(255, 206, 86, 1)',
-				                    'rgba(75, 192, 192, 1)',
-				                    'rgba(153, 102, 255, 1)',
-				                    'rgba(255, 159, 64, 1)'
-				                ],
-				                borderWidth: 1 //경계선 굵기
-				            }
-				            /* ,
-				            {
-				                label: 'test2',
-				                fill: false,
-				                data: [
-				                    8, 34, 12, 24
-				                ],
-				                backgroundColor: 'rgb(157, 109, 12)',
-				                borderColor: 'rgb(157, 109, 12)'
-				            } */
-				        ]
-				    },
-				    options: {
-				        scales: {
-				            yAxes: [
-				                {
-				                    ticks: {
-				                        beginAtZero: true,
-				                        max: 30 // y축 범위조정 가능.
-				                    }
-				                }
-				            ]
-				        }
-				    }
-				});  // mychart
-	
-	}});  // ajax
-});  // document.ready
-</script>
-<script>
-$.ajax({
-	url: "salesData.do",
-	success: function(list) {
-			var chartMonths= [];
-			var chartData = [];
+		url: 'adminHomeData1.do',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data);
 			
-			for(lists of list) {
-
-				chartMonths.push(lists.pr_date);  // 가로축 데이터 
-				chartData.push(lists.prSum);	// 세로축 데이터
+			var mylabel = [];
+			var mydata = [];
+			for(datas of data) {
+				mylabel.push(datas.sdate);
+				mydata.push(datas.salary);
 			}
-					
-			var context = document.getElementById('myChart2').getContext('2d');
-			var myChart = new Chart(context, {
-			    type: 'bar', // 차트의 형태
-			    data: { // 차트에 들어갈 데이터
-			        labels: chartMonths,
-			        datasets: [
-			            { //데이터
-			                label: '월별 매출 통계', //차트 제목
-			                fill: true, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-			                data: chartData,  // 세로축 데이터
-			                backgroundColor: [
-			                	//색상
-			                    'rgba(255, 99, 132, 0.2)',
-			                    'rgba(54, 162, 235, 0.2)',
-			                    'rgba(255, 206, 86, 0.2)',
-			                    'rgba(75, 192, 192, 0.2)',
-			                    'rgba(153, 102, 255, 0.2)',
-			                    'rgba(255, 159, 64, 0.2)'
-			                ],
-			                borderColor: [
-			                    //경계선 색상
-			                    'rgba(255, 99, 132, 1)',
-			                    'rgba(54, 162, 235, 1)',
-			                    'rgba(255, 206, 86, 1)',
-			                    'rgba(75, 192, 192, 1)',
-			                    'rgba(153, 102, 255, 1)',
-			                    'rgba(255, 159, 64, 1)'
-			                ],
-			                borderWidth: 1 //경계선 굵기
-			            }
-			            /* ,
-			            {
-			                label: 'test2',
-			                fill: false,
-			                data: [
-			                    8, 34, 12, 24
-			                ],
-			                backgroundColor: 'rgb(157, 109, 12)',
-			                borderColor: 'rgb(157, 109, 12)'
-			            } */
-			        ]
-			    },
-			    options: {
-			        scales: {
-			            yAxes: [
-			                {
-			                    ticks: {
-			                        beginAtZero: true,
-			                        max: 500000
-			                        
+				 const ctx = document.getElementById('myChart').getContext('2d');
+			        const myChart = new Chart(ctx, {
+			            type: 'bar',
+			            data: {
+			                labels: mylabel,
+			                datasets: [{
+			                	lineTension:0,
+			                	label: '올해의 매출액',
+			                    data: mydata,
+			                    backgroundColor: [
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)'
+			                    ],
+			                    borderColor: [
+			                        'rgb(150, 178, 251)',
+			                        'rgb(150, 178, 251)',
+			                        'rgb(150, 178, 251)'
+			                    ],
+			                    borderWidth: 2
+			                }]
+			            },
+			            options: {
+			            	plugins:{
+			            		legend: {
+			                		display: false
+			            		}
+			                },
+			            	maintainAspectRatio: false,
+			            	scales: {
+			                    y: {
+			                        beginAtZero: true
 			                    }
 			                }
-			            ]
-			        }
-			    }
-			});  // mychart
+			            }
+			        });
+		},
+		error: function() {
+			console.log('error');
+		}
+	});
+});
 
-	}});  // ajax
+$(document).ready(function() {
+	$.ajax({
+		url: 'adminHomeData2.do',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data);
+			
+			var mylabel = [];
+			var mydata = [];
+			for(datas of data) {
+				mylabel.push(datas.s_sdate);
+				mydata.push(datas.s_salary);
+			}
+				 const ctx = document.getElementById('myChart2').getContext('2d');
+			        const myChart = new Chart(ctx, {
+			            type: 'bar',
+			            data: {
+			                labels: mylabel,
+			                datasets: [{
+			                	lineTension:0,
+			                	label: '이번달 매출액',
+			                    data: mydata,
+			                    backgroundColor: [
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)'
+			                    ],
+			                    borderColor: [
+			                        'rgb(150, 178, 251)',
+			                        'rgb(150, 178, 251)',
+			                        'rgb(150, 178, 251)',
+			                        'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)',
+			                    	'rgb(150, 178, 251)'
+			                    ],
+			                    borderWidth: 2
+			                }]
+			            },
+			            options: {
+			            	plugins:{
+			            		legend: {
+			                		display: false
+			            		}
+			                },
+			            	maintainAspectRatio: false,
+			            	scales: {
+			                    y: {
+			                        beginAtZero: true
+			                    }
+			                }
+			            }
+			        });
+		},
+		error: function() {
+			console.log('error');
+		}
+	});
+	
+	$(document).ready(function() {		
+		const ctx = document.getElementById('myChart3').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+			labels: [
+				'분노/우울',
+				'연애/우정',
+				'진로/취업',
+				'결혼/육아',
+				'청소년',
+				'가정'
+			],
+			datasets: [{
+				lineTension:0,
+				label: '카테고리별 개인상담 이용률',
+				data: [18.4, 21.1, 19.5, 12.4, 16.3, 12.3],
+				backgroundColor: [
+					'rgb(150, 178, 251)',
+					'rgb(153, 17, 224)',
+					'rgb(117, 121, 15)',
+					'rgb(165, 31, 31)',
+					'rgb(212, 2, 144)',
+					'rgb(153, 112, 16)'
+				],
+				borderColor: [
+					'rgb(150, 178, 251)',
+					'rgb(153, 17, 224)',
+					'rgb(117, 121, 15)',
+					'rgb(165, 31, 31)',
+					'rgb(212, 2, 144)',
+					'rgb(153, 112, 16)'				                    	
+				],
+				borderWidth: 2
+			}]
+			},
+				options: {
+					plugins:{
+						legend: {
+							display: false
+						},
+					},
+				cutoutPercentage: 60,
+				            	maintainAspectRatio: false,
+				            	scales: {
+				                    y: {
+				                        beginAtZero: true
+				                    }
+				                }
+				            }
+				        });
+			});
+	
+	$(document).ready(function() {		
+		const ctx = document.getElementById('myChart4').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+			labels: [
+				'분노/우울',
+				'연애/우정',
+				'진로/취업',
+				'결혼/육아',
+				'청소년',
+				'가정'
+			],
+			datasets: [{
+				lineTension:0,
+				label: '카테고리별 개인상담 이용률',
+				data: [18.4, 21.1, 19.5, 12.4, 16.3, 12.3],
+				backgroundColor: [
+					'rgb(150, 178, 251)',
+					'rgb(153, 17, 224)',
+					'rgb(117, 121, 15)',
+					'rgb(165, 31, 31)',
+					'rgb(212, 2, 144)',
+					'rgb(153, 112, 16)'
+				],
+				borderColor: [
+					'rgb(150, 178, 251)',
+					'rgb(153, 17, 224)',
+					'rgb(117, 121, 15)',
+					'rgb(165, 31, 31)',
+					'rgb(212, 2, 144)',
+					'rgb(153, 112, 16)'				                    	
+				],
+				borderWidth: 2
+			}]
+			},
+				options: {
+					plugins:{
+						legend: {
+							display: false
+						},
+					},
+				cutoutPercentage: 60,
+				            	maintainAspectRatio: false,
+				            	scales: {
+				                    y: {
+				                        beginAtZero: true
+				                    }
+				                }
+				            }
+				        });
+			});
+});
 </script>
 </html>
