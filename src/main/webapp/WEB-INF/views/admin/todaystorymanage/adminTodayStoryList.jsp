@@ -378,7 +378,7 @@ textarea {
 			let textarea = document.querySelectorAll('#sc_title')[2];
 			let title = event.target.closest('tr').childNodes[3].innerHTML;
 			textarea.value = title;
-			alert(title)
+			/* alert(title) */
 			
 			let textarea2 = document.querySelectorAll('#sc_subject')[0];
 			

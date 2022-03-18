@@ -381,7 +381,17 @@ div.asdf {
 	
 }
 
-#btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover, #btn5:hover, #btn6:hover,
+#btn1:active, #btn2:active, #btn3:active, #btn4:active, #btn5:active, #btn6:active, #btn7:active, #btn8:active {
+	border : 2px solid #d3e0e742;
+	background-color:#d3e0e742;
+	color:#153e54;
+}
+
+div.asdf:active, div.asdf:focus{
+	
+}
+
+/* #btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover, #btn5:hover, #btn6:hover,
 	#btn7:hover, #btn8:hover {
 	width: 80px;
 	height: 40px;
@@ -394,7 +404,7 @@ div.asdf {
 	transition: 300ms ease-in-out;
 	cursor: pointer;
 }
-
+ */
 #btn1:disabled, #btn1[disabled] {
 	border: 0px solid #999999;
 	background-color: #d6d6d6;
@@ -727,7 +737,7 @@ div.asdf {
         $('.day.current').on('click', function () {
           var val = $(this).html();
           var c_email = $("#c_email").val();
-          alert(c_email);
+        /*   alert(c_email); */
           makediv(val,c_email);
         });
       }
@@ -848,6 +858,15 @@ S						if($(this).html() == datas.pr_time) {
 			$("#pr_time").val(counselTime);				
 			}
 		})
+		
+		//시간 선택 색상변화
+		
+		function handleClick(){
+			 btn1.style.backgroundColor = 'blue';
+			
+		}
+		
+		document.getElementById("btn1").addEventListener('click',handleClick);
 	</script>
 </body>
 </html>

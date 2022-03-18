@@ -261,7 +261,12 @@
 	
 	<!-- 메인화면 상담사리스트 -->
 	<select id="CounselorList" resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO" >
-		select * from counselor
-		order by c_name desc
+			<![CDATA[ 
+		 select * from (
+        select * from counselor
+        
+		order by c_name desc)
+        where rownum<=6
+        ]]>
 	</select>
 </mapper>

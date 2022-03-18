@@ -144,9 +144,9 @@
                     <br>
                       <p class="fonts" style="font-weight:bold">' ${counselorSelect.c_name } ${counselorSelect.c_grade } ' 님의 전문 상담 카테고리 </p>
                     <div class="buttons"> 
-                    	<c:forEach items="${subNameList }" var="subnames">
+                    <%-- 	<c:forEach items="${subNameList }" var="subnames">
 		                    <button class="hashtag-btn">#${subnames.ccg_subname }</button> 
-                    	</c:forEach>
+                    	</c:forEach> --%>
 		                    
 	                    </div>
                     <div class="px-4 mt-1">

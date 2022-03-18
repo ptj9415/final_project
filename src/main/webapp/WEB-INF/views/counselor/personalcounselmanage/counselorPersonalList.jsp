@@ -10,8 +10,190 @@
 
 <style>
 h3 {
-	font-size: 19px;
+	font-size: 24px;
+	font-weight: 600;
 }
+
+.row {
+	margin-bottom: -10px;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
+#boardtable>tbody>tr {
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+}
+
+#boardtable>tbody>tr>th {
+	width: 13%;
+	background-color: rgb(245, 245, 245);
+	text-align: center;
+	vertical-align: middle;
+}
+
+#deletebtn {
+	background-color: #EB4646;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+}
+
+#deletebtn:hover {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid #EB4646;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	transition: 300ms ease-in-out;
+}
+
+#updatebtn {
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	width: 120px;
+	margin-right: 10px;
+}
+
+#updatebtn:hover {
+	background-color: white;
+	color: #1E90FF;
+	border: 1px solid #1E90FF;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	transition: 300ms ease-in-out;
+	width: 120px;
+	margin-right: 10px;
+}
+
+#backbtn {
+	background-color: white;
+	color: #EB4646;
+	border: 1px solid #EB4646;
+	border-radius: 4px;
+	height: 35px;
+	float: left;
+	margin-right: 10px;
+}
+
+#backbtn:hover {
+	background-color: #EB4646;
+	color: white;
+	border-radius: 4px;
+	height: 35px;
+	float: left;
+	margin-right: 10px;
+	transition: 300ms ease-in-out;
+}
+
+#updatesubmit-btn{
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	width: 124px;
+	margin-right: 10px;
+}
+
+#updatesubmit-btn:hover{
+	background-color: white;
+	color: #1E90FF;
+	border: 1px solid #1E90FF;
+	border-radius: 4px;
+	height: 35px;
+	float: right;
+	transition: 300ms ease-in-out;
+	width: 124px;
+	margin-right: 10px;
+}
+
+h3 {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
+.minusbtn {
+	float: right;
+	background-color: transparent;
+	border: none;
+	margin-right: 15px;
+}
+
+table>tbody>tr>th {
+	text-align: center;
+}
+
+#coupontable>tbody>tr>td {
+	text-align: center;
+}
+
+#infotable>tbody>tr {
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+}
+
+#infotable>tbody>tr>th, #coupontable>tbody>tr>th, #counseltable>tbody>tr>th
+	{
+	width: 15%;
+	background-color: rgb(245, 245, 245);
+}
+
+#infotable>tbody>tr>td {
+	width: 35%;
+}
+
+#infosubmitbtn {
+	float: right;
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
+
+#siteback {
+	float: right;
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	background-color: #1E90FF;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
+
+.infotext {
+	width: 200px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
+
 
 .btndiv {
 	float: right;
@@ -86,6 +268,9 @@ h3 {
 
 #select2{
 	width:200px;
+}
+.pagination{
+	float:right;
 }
 </style>
 </head>
@@ -168,8 +353,10 @@ h3 {
 			</div>
 		</div>
 	</section>
+	
 
 	<br>
+
 
 	<section class="content">
 		<div class="container-fluid">
