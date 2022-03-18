@@ -940,4 +940,25 @@ public class TaejoonController {
 
 		return salary;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/adminHomeData1.do")
+	public List<SalaryVO> adminHomeData1(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList();
+		
+		return salary;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/adminHomeData2.do")
+	public List<SalaryVO> adminHomeData2(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList2();
+		for(int i = 0; i < salary.size(); i++) {
+			String date = salary.get(i).getS_sdate();
+			date = date.substring(5, 10);
+			salary.get(i).setS_sdate(date);
+		}
+		
+		return salary;
+	}
 }

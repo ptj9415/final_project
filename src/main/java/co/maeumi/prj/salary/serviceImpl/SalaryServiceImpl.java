@@ -28,5 +28,10 @@ public class SalaryServiceImpl implements SalaryService {
 		// TODO Auto-generated method stub
 		return map.salarySecondList(vo);
 	}
+	@Override
+	public List<SalaryVO> salaryList2() {
+		// TODO Auto-generated method stub
+		return map.salaryList2();
+	}
 
 }
