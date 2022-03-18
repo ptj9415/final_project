@@ -103,7 +103,7 @@ public class YoungohController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("editor/");
-		String SAVE_PATH = uploadpath + "/gceditor/";
+		String SAVE_PATH = "/fileupload/gceditor/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -304,7 +304,7 @@ public class YoungohController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
-		String SAVE_PATH = uploadpath + "/therapy/";
+		String SAVE_PATH = "/fileupload/therapy/";
 		
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
