@@ -401,7 +401,7 @@ div.counsel-type {
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/mad.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">분노/우울</h3>
-						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+						<input type="checkbox" class="chat-btn" id="onecheck" value="분노/우울" name="onecheck" onclick="doOpenCheck(this);"><br><br>
 				</div>
 			</c:if>
 			<%-- </c:if> --%>
@@ -409,35 +409,35 @@ div.counsel-type {
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/love.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">연애/우정</h3>
-						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+						<input type="checkbox" class="chat-btn" name="onecheck" value="연애/우정" onclick="doOpenCheck(this);"><br><br>
 				</div>
 			</c:if>
 			<c:if test="${counselorSelect.c_type3 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/way.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">진로/취업</h3>
-						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);"><br><br>
+						<input type="checkbox" class="chat-btn" name="onecheck" value="진로/취업" onclick="doOpenCheck(this);"><br><br>
 				</div>
 			</c:if>
 			<c:if test="${counselorSelect.c_type4 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/marriage.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">결혼/육아</h3>
-						<input type="checkbox" class="chat-btn" name="onecheck"  onclick="doOpenCheck(this);"><br><br>
+						<input type="checkbox" class="chat-btn" name="onecheck" value="결혼/육아" onclick="doOpenCheck(this);"><br><br>
 				</div>
 			</c:if>
 			<c:if test="${counselorSelect.c_type5 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/student.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">청소년</h3>
-						<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+						<input type="checkbox" class="chat-btn" name="onecheck" value="청소년" onclick="doOpenCheck(this);" ><br><br>
 				</div>
 			</c:if>
 			<c:if test="${counselorSelect.c_type6 eq 1 }">
 				<div class="sub-category-btn" id="confirmdiv" >
 						<img src="resources/user/counselCategory/family.png"  class="chat-img">
 						<h3 class="h4" style="margin-top:15px;">가정</h3>
-						<input type="checkbox" class="chat-btn"  name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+						<input type="checkbox" class="chat-btn"  name="onecheck" value="가정" onclick="doOpenCheck(this);" ><br><br>
 				</div>
 			</c:if>				
 		</div>
@@ -447,76 +447,46 @@ div.counsel-type {
 		<hr style="border:1px solid #d3e0e742">
 		<div class="category-choice2">
 		<c:if test="${counselorSelect.p_kakao eq 1 }">
-			<div class="sub-category-btn" id="confirmdiv"  onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
+			<div class="sub-category-btn" id="confirmdiv" onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
 				<img src="resources/user/images/chat.png"  class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice}">원<br><br>
-				<input type="checkbox" class="chat-btn"  name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+				<input type="checkbox" class="chat-btn"  name="onecheck2" value="카카오톡"  onclick="doOpenCheck2(this);"><br><br>
 			</div>
 		</c:if>		
 		<c:if test="${counselorSelect.p_zoom eq 1 }">
 			
-			<div class="sub-category-btn" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');">
+			<div class="sub-category-btn" id="confirmdiv" onclick="zoomselect('${counselorSelect.p_zoomprice}');" >
 				<img src="resources/user/images/laptop.png" class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">줌</h3>
-				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice}" >원<br><br>
-				<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+				<input type=button class="chat-btn" value="${counselorSelect.p_zoomprice}">원<br><br>
+				<input type="checkbox" class="chat-btn" name="onecheck2" value="줌"  onclick="doOpenCheck2(this);" ><br><br>
 			</div>
 		</c:if>			
 		<c:if test="${counselorSelect.p_phone eq 1 }">
-			<div class="sub-category-btn" id="confirmdiv" onclick="phoneselect('${counselorSelect.p_phoneprice}');">
+			<div class="sub-category-btn" id="confirmdiv" onclick="phoneselect('${counselorSelect.p_phoneprice}');"> <!-- onclick="phoneselect('${counselorSelect.p_phoneprice}');" -->
 				<img src="resources/user/images/telephone.png" class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">전화</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_phoneprice}">원<br><br>
-				<input type="checkbox" class="chat-btn" name="onecheck" onclick="doOpenCheck(this);" ><br><br>
+				<input type="checkbox" class="chat-btn" name="onecheck2" value="전화" onclick="doOpenCheck2(this);" ><br><br>
 
 			</div>
 		</c:if>	
 		</div>
 	</div>
-	<input type="hidden" name="type" id="type">
-	<input type="hidden" name="price" id="price">
-	<input type="hidden" name="ccg_subname" id="ccg_subname">
+	<input type="hidden" id="c_type1" name="c_type1">
+	<input type="hidden" id="pr_price" name="pr_price" value="">
+	<input type="hidden" id="c_value" name="c_value" value=""> 
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
 	<!-- <input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" /> -->
 	<div style="align-items:center;">
-	<input type="submit" data-page="2" name="next"
-		class="next action-button" id="next-btn" value="다음" />
+	<input type="submit" data-page="2" name="next" class="next action-button" id="next-btn" onclick="submit()" value="다음" />
 	</div>
 </div>
 	<script>
 	
 		//div 클릭 이벤트
-		
-		function kakaoselect(price) {
-			$('#type').val('kakao');
-			$('#price').val(price);
-			$('#step2').submit();
-		}
-		
-		function zoomselect(price) {
-			$('#type').val('zoom');
-			$('#price').val(price);
-			$('#step2').submit();
-		}
-		
-		function phoneselect(price) {
-			$('#type').val('phone');
-			$('#price').val(price);
-			$('#step2').submit();
-		}
-	
-		$('#previous-btn').click(function() {
-			location.href = 'personalCounselStep2.do'
-		});
-
-		/*  $('#next-btn').click(function() {
-			step3.submit();
-			var email = document.getElementById("email").value;
-			location.href = 'personalCounselStep4.do'
-		});  */
-		
 		function doOpenCheck(chk) {
 			var obj = document.getElementsByName("onecheck");
 			for (var i = 0; i < obj.length; i++) {
@@ -524,6 +494,33 @@ div.counsel-type {
 					obj[i].checked = false;
 				}
 			}
+			
+			$("#c_type1").val($(chk).val());
+			
+		}
+		
+		function doOpenCheck2(chk) {
+			var obj = document.getElementsByName("onecheck2");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
+			$("#c_value").val($(chk).val());
+		}
+		
+		function phoneselect(price){
+			$("#pr_price").val(price);
+		}
+		
+		function kakaoselect(price){
+			$("#pr_price").val(price);
+		}
+		function zoomselect(price){
+			$("#pr_price").val(price);	
+		}
+		function submit(){
+			$("#step2").submit();
 		}
 	</script>
 </body>
