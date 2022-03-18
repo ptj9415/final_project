@@ -7,46 +7,67 @@
 <title>Insert title here</title>
 <style type="text/css">
 .joinForm {
-        width: 550px;
+        width: 30%;
         padding: 50px 0px;
     }
 
 input {
-    border-style: none;
-    height: 25px;
-    width: 60%;
-    border: 0 solid black;
-    background: transparent;
+            border-style: none;
+    		height: 25px;
+    		width: 60%;
+   			border: 0 solid black;
+    		background: transparent;
+    		font-size: 13px;
+    		margin-left:10px;
+        }
+input:focus {
+	outline: 0;
+	
 }
 
-button {
-    height: 35px;
-    width: 20%;
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 50px;
-    margin-bottom: 5px;
-}
+ button {
+            height: 50px;
+            width: 100px;
+            background-color: white;
+            border: 1px solid #8dacbd42;
+            border-radius: 50px;
+            margin-bottom: 5px;
+            font-size:13px;
+            margin-left: 40px;
+        }
+        button:focus{
+        	outline:0;
+        }
 
 .inputForm {
     margin-bottom: 25px;
 }
 
-hr {
-    color: tomato;
-}
 
 .nonBtn {
-    width: 80%;
+    width: 90%;
 }
-.joinbtn{
-	margin-top: 20px;
-	height: 40px;
-	width:40%;
-}
+.joinbtn {
+            width: 120px;
+             background-color: #153e54;
+             color:white;
+             margin-right: auto;
+   			 margin-left: auto;
+		}
 button:hover {
-	background-color: #FFD2D2;
-	border-color: white;
+            background-color: #153e54;
+            color:white;
+			transition: 200ms ease-in-out;
+        }
+        
+#nicknameBtn, #sendPhoneBtn, #phoneChkBtn {
+	display: inline-block;
+}
+#nicknameBtn {
+}
+
+#email {
+	font-size: 18px;
 }
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
@@ -162,39 +183,39 @@ button:hover {
 <!-- 회원가입 하는 양식 만들기-->
   <div class="mainForm" align="center">
         <div class="joinForm">
-            <h1>Maeumi.</h1>
-            <br><br>
-            <hr color="tomato">
-            <h5>본인확인이 완료되었습니다. 회원가입을 계속 진행해주세요.</h5>
+            <h3>Maeumi.</h3>
+            <br>
+            <hr>
+            <h5>본인확인이 완료되었습니다.<br> 회원가입을 계속 진행해주세요.</h5>
             <br>
             <form id="frm" action="memberJoin.do" method="post">
 
                 <div class="inputForm">
                     <input type="text" id="email" name="email" value="${m_email }" readonly class="nonBtn" style="text-align: center">
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="text" placeholder="닉네임은 2~7자리를 입력해주세요" id="nickname" name="nickname" maxlength="7">
-                    <button type="button" onclick="nicknameCheck()" id="nicknameBtn">중복확인</button>
-                    <hr color="tomato">
+                    <button type="button" onclick="nicknameCheck()" id="nicknameBtn" style="">중복확인</button>
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="password" placeholder="비밀번호" id="password" name="password" class="nonBtn">
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="password" placeholder="비밀번호 확인" id="passwordChk" class="nonBtn">
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="text" placeholder="인증받으실 번호를 '-'없이 입력해주세요." id="phone">
                     <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <div class="inputForm">
                     <input type="text" placeholder="인증번호 입력" id="phoneChk" disabled="disabled">
                     <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
-                    <hr color="tomato">
+                    <hr>
                 </div>
                 <input type="hidden" id="type" name="type" value="마으미">
                 <input type="hidden" id="mphone" name="phone" value="-">

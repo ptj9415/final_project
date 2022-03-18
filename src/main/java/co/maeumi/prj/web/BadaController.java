@@ -761,6 +761,7 @@ public class BadaController {
 		
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
+		
 		String SAVE_PATH = uploadpath + "/noticeattach/"; //webapp 아래부터 경로를 작성
 		// 랜덤생성 + 파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
@@ -780,26 +781,24 @@ public class BadaController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		// String SAVE_PATH =
-		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
-		String SAVE_PATH = uploadpath + "/noticesummer/";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+//		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+			//테스트용 경로1 
 		
-		//String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		//String fileRoot = contextRoot + "resources/image/";
-
+		String SAVE_PATH = uploadpath + "noticesummer/";  // 서버에 올렸을 때 사용할 경로
+		System.out.println("저장경로 확인: " + SAVE_PATH);
+		//String contextRoot = request.getSession().getServletContext().getRealPath("/");   // 테스트용경로2
+		//String fileRoot = contextRoot + "resources\\image\\";							// 테스트용경로3 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-		
-		File targetFile = new File(SAVE_PATH + savedFileName);
-		//File mtargetFile = new File(SAVE_PATH + savedFileName);
+		File targetFile = new File(SAVE_PATH + savedFileName);   // 원래 save_path였지만 fileRoot로 임시테스트용으로 고침
+//		File mtargetFile = new File(SAVE_PATH + savedFileName);   // 테스트용 경로4
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			//multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", SAVE_PATH + savedFileName);
-			// contextroot + resources + 저장할 내부 폴더명
+//			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			jsonObject.addProperty("url", SAVE_PATH + savedFileName);   // 여기도 save_path에서 fileRoot로 수정
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {

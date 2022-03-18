@@ -8,6 +8,7 @@
 <style type="text/css">
 .mainForm {
 	margin-top: 200px;
+	margin-bottom: 200px;
 }
 
 .title {
@@ -23,11 +24,16 @@
 button {
 	margin-top: 50px;
 	background-color: white;
-	border: 1px solid #d2d2d2;
+	border: 1px solid #8dacbd42;
 	border-radius: 50px;
-	width: 35%;
-	height: 40px;
+	width: 15%;
+	height: 50px;
 }
+button:hover {
+            background-color: #153e54;
+            color:white;
+			transition: 200ms ease-in-out;
+        }
 
 .login:hover {
 	background-color: #FFD2D2;
@@ -54,5 +60,6 @@ button {
 			<button class="login" onclick="location.href='loginForm.do'">Maeumi. 로그인!</button>
 		</div>
 	</div>
+	<br><Br><Br><Br><br>
 </body>
 </html>

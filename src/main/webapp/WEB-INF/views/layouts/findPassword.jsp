@@ -18,7 +18,7 @@ input {
     text-align: center;
 }
 #email {
-	margin-left: 40px;
+	margin-left: 60px;
 }
 button {
 	height: 30px;
@@ -34,7 +34,25 @@ button {
 .inputPhoneCheck {
 	margin-right: 30px;
 }
-
+button {
+	font-size: 12px;
+	border-radius:30px;
+	height: 30px;
+	margin-left: 20px;
+	background-color: #153e54;
+	border:1px solid #153e54;
+	color:white;
+}
+button:hover{
+	border:1px solid #153e54;
+	color:#153e54;
+	background-color:white;
+	transition:300ms ease-in-out;
+}
+#selectPasswordBtn{
+	width: 20%;
+}
+  
 #findEmail{
 	font-size:11px;
 	color:#8dacbd42;

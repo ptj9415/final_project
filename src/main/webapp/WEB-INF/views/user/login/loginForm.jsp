@@ -429,12 +429,12 @@ button:hover {
     <form id="frm" action="login.do" method="post">
 	    <label>
 	      <span>Email</span>
-				<input type="text" id="email" name="email" placeholder="이메일을 입력하세요" style="font-size:9px; padding-bottom:10px; padding-top:10px;">
+				<input type="text" id="email" name="email" placeholder="이메일을 입력하세요" style="font-size:15px; padding-bottom:10px; padding-top:10px;">
 	    </label>
 	    <label>
 	      <span>Password</span>
 				<input type='password' id='password' name="password"
-					placeholder='비밀번호를 입력하세요' onkeyup="enterLogin()" style="font-size:9px; padding-bottom:10px; padding-top:10px;">
+					placeholder='비밀번호를 입력하세요' onkeyup="enterLogin()" style="font-size:15px; padding-bottom:10px; padding-top:10px;">
 	    </label>
 	</form>
 	<div class="find-container">
@@ -451,9 +451,9 @@ button:hover {
     <a href="https://kauth.kakao.com/oauth/authorize?client_id=7ce89df312e5bede8d638ca4846b8ed2&redirect_uri=http://3.34.230.68:8080/maeumi/kakaoLogin.do&response_type=code">
     <button type="button" class="kakao-btn"><span>kakaoTalk으로 로그인 하기</span></button>
     </a>
-  <p style="font-size: 10px; margin-top: 10px; text-align: center; margin-bottom:10px;" >
+  <p style="font-size: 18px; margin-top: 5px; text-align: center; margin-bottom:10px;" >
 			Maeumi가 처음이신가요?<a href="userTermsOfService.do"
-				style="text-decoration-line: none; font-size:11px; font-weight:bold; color:#0086e5;"> 회원가입&nbsp;</a>하기
+				style="text-decoration-line: none; font-size:18px; font-weight:bold; color:#0086e5;"> 회원가입&nbsp;</a>하기
 		</p>
   
   </div>

@@ -54,7 +54,7 @@ h3 {
 .filebox label {
 	display: inline-block;
 	padding: 7px 20px;
-	color: #fff;
+ 	color: #fff; 
 	vertical-align: middle;
 	background-color: #999999;
 	cursor: pointer;
@@ -153,11 +153,13 @@ h3 {
 									</tr>
 									<tr>
 										<th>첨부파일</th>
-										<td colspan="3"><div class="filebox">
+										<td colspan="3">
+											<div class="filebox">
 												<input class="uploadname" value="첨부파일" placeholder="첨부파일">
-												<label for="fileName">파일 찾기</label> <input type="file"
-													id="fileName" name="fileName">
-											</div></td>
+												<label for="fileName">파일 찾기</label> 
+												<input type="file" id="fileName" name="fileName">
+											</div>
+										</td>
 									</tr>
 								</table>
 								<div class="btndiv">
@@ -242,5 +244,10 @@ h3 {
 			}
 		});
 	}
+	
+	$("#fileName").on('change', function() {
+		var fileName = $("#fileName").val();
+		$(".uploadname").val(fileName);
+	});
 </script>
 </html>
