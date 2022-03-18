@@ -466,7 +466,7 @@ input#c_name{
 	height: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
-    width: 70%;
+    width: 80%;
     border: 1px solid #8dacbd42;
     margin-right: 5px;
     margin-left: 40px;
@@ -508,7 +508,7 @@ input#c_name{
 	margin-right:auto;
 	margin-left:auto;
 	padding: 20px;
-    /* padding-left: 45%; */
+    padding-left: 45%;
 }
 .category{
 	padding-bottom:20px;
@@ -551,9 +551,6 @@ input#c_name{
 #confirmbtn:focus{
 	border:1px solid #153e54;
 	outline:0;
-}
-.ff{
-	display:flex;
 }
 
 /*검색 div end*/
@@ -637,10 +634,8 @@ input#c_name{
 	
 		<div class="searchdiv">
 			<p style="font-size:11px; margin-left:80px;">＊ 나에게 꼭 맞는 전문 심리상담사를 찾아보세요</p>
-			<div class="ff">
 			<input type="text" id="c_name" style="padding:31px;" placeholder="상담사 이름을 입력해주세요..">
 			<button type="button"  class="search-btn"  onclick="submitbtn();">검색</button>
-			</div>
 		</div>
 		 <div class="choice-btn">
 			<button type="button" id="detailbtn">카테고리별 검색</button>
