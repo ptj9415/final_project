@@ -219,6 +219,37 @@
 .btn btn-primary px-4 py-3 mt-3:hover{
 	color:#153e54;
 }
+
+/* 퀵 메뉴 start */
+.quickmenu {
+	position: absolute;
+	width: 90px;
+	top: 70%;
+	margin-top: -30px;
+	right: 10px;
+	margin-right: 2%;
+}
+
+.quickmenu ul {
+	position: relative;
+	float: left;
+	width: 100%;
+	display: inline-block;
+	*display: inline;
+}
+
+.quickmenu ul li {
+	float: left;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	*display: inline;
+}
+
+.quickmenu ul li:last-child {
+	border-bottom: 0;
+}
+/* 퀵 메뉴 end */
 </style>
 </head>
 <body>
@@ -547,7 +578,16 @@
 		</div>
 	</section>
 	<!-- 심리검사 끝 -->
+	
+	<!-- 퀵 메뉴 start -->
 
+	<div class="quickmenu">
+		<ul>
+			<li><a href="http://pf.kakao.com/_exlxkFb/chat" target='_blank'><img src="img/kakao/channel-chat-button.png" alt=""></a></li>
+		</ul>
+	</div>
+
+	<!-- 퀵 메뉴 end -->
 
 	<script src="resources/user/js/jquery.min.js"></script>
 	<script src="resources/user/js/jquery-migrate-3.0.1.min.js"></script>
@@ -602,6 +642,19 @@
 			console.log(gc_no);
 			location.href = "userGroup.do?gc_no="+gc_no+"&c_email="+c_email;
 		}
+		
+		
+		
+		// 퀵 메뉴
+
+		$(document).ready(function(){
+	  		var currentPosition = parseInt($(".quickmenu").css("top"));
+	  		$(window).scroll(function() {
+	    	var position = $(window).scrollTop(); 
+	    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+	  });
+	});
+
 	</script>
 
 </body>
