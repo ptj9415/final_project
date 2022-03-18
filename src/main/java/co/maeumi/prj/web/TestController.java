@@ -93,7 +93,7 @@ public class TestController {
 
 		model.addAttribute("pagination", svo);
 		model.addAttribute("counselorList", counselorDao.userCounselorSearchList(svo));
-		return "admin/chart/test";
+		return "user/personalcounsel/test";
 	}
 
 	@RequestMapping("/test2pg.do")
@@ -102,7 +102,7 @@ public class TestController {
 		session.setAttribute("c_email", c_email);
 		
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
-		return "admin/chart/test2";
+		return "user/personalcounsel/test2";
 	}
 
 	@RequestMapping("/test3pg.do")
@@ -121,7 +121,7 @@ public class TestController {
 		model.addAttribute("c_value", c_value);
 		model.addAttribute("c_email", c_email);
 
-		return "admin/chart/test3";
+		return "user/personalcounsel/test3";
 	}
 
 	@RequestMapping("/test4pg.do")
@@ -146,7 +146,7 @@ public class TestController {
 		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
 		model.addAttribute("coupon", list);
 
-		return "admin/chart/test4";
+		return "user/personalcounsel/test4";
 	}
 
 }

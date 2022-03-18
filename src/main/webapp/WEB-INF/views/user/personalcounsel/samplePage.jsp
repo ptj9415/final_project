@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>심리검사 test</title>
+<title>CSS 양식 만드는 곳</title>
 </head>
 <style>
 
