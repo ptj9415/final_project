@@ -225,7 +225,7 @@
 	position: absolute;
 	width: 90px;
 	top: 70%;
-	margin-top: -30px;
+	margin-top: -35px;
 	right: 10px;
 	margin-right: 2%;
 }
