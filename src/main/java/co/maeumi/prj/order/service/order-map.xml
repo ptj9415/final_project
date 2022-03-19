@@ -59,10 +59,10 @@
                       #{pr_no},
                       0,
                       sysdate,
-                      '아직안옴',
+                      #{or_type},
                       #{or_price},
-                      '세션값 이름 입니다.',
-                      '세션값 이메일 입니다',
+                      #{m_nickname},
+					  #{m_email},
                       '0',
                       #{c_email}
                 )

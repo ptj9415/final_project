@@ -170,7 +170,8 @@
 		pr_price,
 		pr_time,
 		pr_status,
-		pr_type
+		pr_type,
+		ccg_subname
 		)
 		VALUES(
 		(SELECT
@@ -181,7 +182,8 @@
 		#{pr_price},
 		#{pr_time},
 		'0',
-		#{pr_type}
+		#{pr_type},
+		#{ccg_subname}
 		)
 	</insert>
 
@@ -194,8 +196,10 @@
 	<select id="counselorResultSelect"
 		parameterType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO"
 		resultType="co.maeumi.prj.personalcounsel.service.PersonalcounselVO">
-		SELECT * FROM PERSONAL_RESERVE WHERE PR_NO = #{pr_no}
-
+		SELECT *
+		FROM PERSONAL_RESERVE RE JOIN COUNSELOR C
+		ON(RE.C_EMAIL = C.C_EMAIL)
+		WHERE PR_NO = #{pr_no}
 	</select>
 
 	<select id="getPRListCnt" resultType="int">
