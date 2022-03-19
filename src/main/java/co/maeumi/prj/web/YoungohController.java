@@ -317,6 +317,25 @@ public class YoungohController {
 
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		// 서버의 현재 경로 upload = /home/ubuntu/apache-tomcat-9.0.59/webapps/fileupload/ 서버의 탐캣 경로
+		// 지금 로컬의 에디터로 이미지를 띄웠을 경우 탐캣 경로 prj/resources/fileupload/
+		// 실제 로컬 탐캣안에 들어가는 경로 C:\Dev\apache-tomcat-9.0.55\wtpwebapps\final_project\resources\fileupload
+		
+		// 문제 1.
+		// 얘가 로컬에서는 request.getContextPath()를 써서 prj를 찾아 줬는데 서버에서는 지금 잡아주는지 모르겟음
+		
+		// 문제 1 의문점. 
+		// 지금 로컬의 에디터로 이미지를 띄웠을 경우 탐캣 경로 prj/resources/fileupload/
+		// 젠킨스에서 이미지 뜰때는 위에 경로에서 prj 대신 maeumi라고 떳었던거 같은데 지금은 아예 안뜸....
+		// 만약에 maeumi가 맞다면 request.getContextPath() 대신 maeumi를 써 넣어야 될거 같음...
+		
+		// 문제 2.
+		// 지금 338줄 "url" 뒤에 있는 탐캣 경로는 탐캣에다가 이미지를 미리보기 형식으로 띄워줘서 얘가 뜨는 형식인데 안뜸... 얘가 뜨면 지금 경로는 제대로 해놔서 이미지는 뜨는데... 
+		// 그래서 request.getContextPath() 뒤에 /resources/fileupload 경로가 맞는지 모르겠음...
+		// 로컬에서는 /resources/fileupload 에서 fileupload가 없으면 fileupload를 만들어주고 안에 이미지를 넣어줬는데 젠킨스도 그런지 모르겠음....
+		
+		System.out.println(request.getContextPath()); //이걸로 뭐가 뜨는지 확인해봐야 될거 같음...
+		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
@@ -324,7 +343,7 @@ public class YoungohController {
 			jsonObject.addProperty("url", request.getContextPath() + "/resources/fileupload/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
-
+			
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
