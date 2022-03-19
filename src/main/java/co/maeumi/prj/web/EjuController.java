@@ -192,6 +192,7 @@ public class EjuController {
 			System.out.println(max);
 			ovo.setPr_no(max);
 			ovo.setOr_price(vo.getPr_price());
+			ovo.setOr_type(vo.getPr_type());
 			ovo.setC_email(vo.getC_email());
 			ovo.setM_email((String)session.getAttribute("email"));
 			ovo.setM_nickname((String)session.getAttribute("nickname"));

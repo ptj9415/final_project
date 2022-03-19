@@ -568,9 +568,25 @@ textarea {
 	margin-top: 15px;
 }
 .changeBtn {
-	width:100px;
+	width:110px;
+	height:45px;
 	float: right;
+	border-radius: 30px;
+    border: 1px solid #8dacbd42;
+    background-color: #8dacbd42;
 }
+.changeBtn:hover{
+	color:white;
+	border:1px solid #153e54;
+	background-color:#153e54;
+	transition:200ms ease-in-out;
+}
+.changeBtn:focus{
+	outline:0;
+}
+
+
+
 .myInfoInput {
 	border: 0px solid gray;
 	width: 250px;

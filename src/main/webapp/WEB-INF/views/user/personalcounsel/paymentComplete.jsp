@@ -674,7 +674,7 @@ font-size: 20px;
             <tr>
               
               <td>상담 카테고리</td>
-              <td style="text-align: right;">아직</td>
+              <td style="text-align: right;">${result.ccg_subname }</td>
              
             </tr>
             <tr>
@@ -709,12 +709,12 @@ font-size: 20px;
      		<input type="hidden" name="pr_time" value="${pr_time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
 					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
-					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
+					<input type="text" id="c_value" name="c_value" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
 					<input type="hidden" name="pr_type" value="${pr_type}">
 					<input type="hidden" name="pr_date" value="${pr_date}">
-       <a href="userMypage.do"> <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button></a>
+       <a href="userMypages.do"> <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button></a>
     </div>
   </div>
     <div class="footer">

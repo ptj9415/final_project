@@ -737,13 +737,32 @@ input#c_name{
 	</div>
 
 	<script>
-		//선택버튼
+/* 		//선택버튼
 		$('#confirmbtn').on('click', function() {
 			var c_email = $('input:checkbox[name="c_email"]:checked').val();
 			location.href='test2pg.do?c_email='+ c_email
 			console.log(c_email);
 			
+		}); */
+		
+		//선택버튼
+		$('#confirmbtn').on('click', function() {
+			
+			var email = '<%=(String)session.getAttribute("email")%>';
+			var c_email = $('input:checkbox[name="c_email"]:checked').val();
+			
+		  if(email == "null"){
+			  alert("예약신청은 마으미 회원만 이용가능합니다.로그인 또는 회원가입을 해주세요.");
+			  location.href='loginForm.do';
+			  
+		  }	else{
+			  
+			location.href='test2pg.do?c_email='+ c_email
+			console.log(c_email);
+		  }
+			
 		});
+	
 	
 		//세부검색 카테고리 div 보이기/안보이기
 		$('#detailbtn').click(function() {
