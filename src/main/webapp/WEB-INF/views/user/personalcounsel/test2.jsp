@@ -463,9 +463,9 @@ div.counsel-type {
 		</c:if>	
 		</div>
 	</div>
-	<input type="text" id="c_type1" name="c_type1">
+	<input type="hidden" id="c_type1" name="c_type1">
 	<input type="hidden" id="pr_price" name="pr_price" value="">
-	<input type="text" id="c_value" name="c_value" value=""> 
+	<input type="hidden" id="c_value" name="c_value" value=""> 
 	<input type="hidden" name="c_email" value="${counselorSelect.c_email }">
 </form>
 	<!-- <input type="button" data-page="2" name="previous"class="previous action-button" value="Previous" id="previous-btn" /> -->

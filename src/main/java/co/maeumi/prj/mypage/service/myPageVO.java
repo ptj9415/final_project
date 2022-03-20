@@ -65,14 +65,14 @@ public class myPageVO {
 	private String gc_title;
 	private String gc_startdate;  //그룹 상담 시작일
 	private String gc_finaldate;  //그룹 상담 마감일
-	private String gc_min_person; //그룹 상담 최소 인원
-	private String gc_max_person; //그룹 상담 최대 인원
+	private int gc_min_person; //그룹 상담 최소 인원
+	private int gc_max_person; //그룹 상담 최대 인원
 	private String gc_price;	  //그룹 상담 가격
 	private String gc_sumnail;	  //그룹 상담 썸네일
 	private String gc_kakao;	  //그룹 상담 주소
 	private String gc_report; 	  //그룹 상담 후 내용
 	private String gc_result; 	  //그룹 상담 결과
-	private String gc_person; 	  //현재 인원
+	private int gc_person; 	  //현재 인원
 	private String gc_infos;      //그룹 상담 개설 내용 (에디터 들어감).
 	private String gc_status;      //그룹 상담 진행인지 아닌지
 	
