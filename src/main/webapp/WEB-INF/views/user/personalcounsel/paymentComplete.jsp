@@ -692,7 +692,7 @@ font-size: 20px;
      		<input type="hidden" name="pr_time" value="${pr_time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
 					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
-					<input type="text" id="c_value" name="c_value" value="${c_value}">
+					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
 					<input type="hidden" name="pr_type" value="${pr_type}">

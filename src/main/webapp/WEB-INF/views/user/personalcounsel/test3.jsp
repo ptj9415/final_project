@@ -605,9 +605,9 @@ div.asdf:active, div.asdf:focus{
 			<div class="timediv"></div>
 
 			<input type="hidden" id="c_email" name="c_email" value="${c_email}">
-			<input type="text" id="pr_type" name="pr_type" value="${c_type1}">
+			<input type="hidden" id="pr_type" name="pr_type" value="${c_type1}">
 			<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}">
-			<input type="text" id="c_value" name="c_value" value="${c_value}">
+			<input type="hidden" id="c_value" name="c_value" value="${c_value}">
 			<input type="hidden" id="pr_date" name="pr_date" value="">
 			<input type="hidden" id="pr_time" name="pr_time" value="">
 			<!-- <input type="button" data-page="2" name="previous"
