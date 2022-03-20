@@ -52,23 +52,8 @@
 		</script>
 </head>
 <body>
-<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/todayStory.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">심리검사</h1>
-					<br>
-					<p class="breadcrumbs">
-						<span class="mr-2"></span>
-				
-					</p>
-				</div>
-			</div>
-		</div>
-
+		<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/test.png" id="bannerimg">
 	</section>
 	<div class="selfesteem">
 	<div class="container">

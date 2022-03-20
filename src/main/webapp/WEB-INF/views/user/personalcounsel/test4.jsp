@@ -320,25 +320,8 @@ p.itemtext{
 /*결제버튼 end*/
 </style>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">개인상담</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
-
-
+		<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
 	
 	<div id="invoiceholder">
@@ -446,14 +429,14 @@ p.itemtext{
 				</div> -->
 				<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
 				<form action="paymentComplete.do" id="frm" name="frm">
-					<input type="hidden" name="pr_time" value="${pr_time}">
-					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
-					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
+					<input type="text" name="pr_time" value="${pr_time}">
+					<input type="text" id="c_email" name="c_email" value="${c_email}" >
+					<input type="text" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="text" id="pr_type" name="pr_type" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
-					<input type="hidden" name="pr_type" value="${pr_type}">
-					<input type="hidden" name="pr_date" value="${pr_date}">
+					<input type="text" name="ccg_subname" value="${pr_type}">
+					<input type="text" name="pr_date" value="${pr_date}">
 				</form>
 			<!-- <div id="legalcopy">
 					<a href="personalCounselStep4.do">

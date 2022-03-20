@@ -625,6 +625,9 @@ font-size: 20px;
 			</div>
 		</div>
 </section>
+<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/groupcounsel.png" id="bannerimg">
+</section>
 <!-- 결제완료페이지 -->
 <div class="success-checkmark">
 	  <div class="check-icon">

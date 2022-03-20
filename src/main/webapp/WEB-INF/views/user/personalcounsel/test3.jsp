@@ -376,8 +376,21 @@ div.asdf {
 	color: white;
 	border: 0px;
 }
+#btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8 {
+	width: 80px;
+	height: 40px;
+	background-color: #153e54;
+	border-radius: 30px;
+	text-align: center;
+	font-size: 14px;
+	color: white;
+	border: 0px;
+}
 #btn1:focus, #btn2:focus, #btn3:focus, #btn4:focus, #btn5:focus, #btn6:focus, #btn7:focus, #btn8:focus {
 	border: 2px solid #153e54;
+	background-color:#d3e0e742;
+	color:#153e54;
+	transtion:100ms ease-in-out;
 	
 }
 
@@ -500,19 +513,8 @@ div.asdf:active, div.asdf:focus{
 </style>
 </head>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 style="color: white">개인상담</h1>
-				</div>
-			</div>
-		</div>
-
+		<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
 	<div class="container">
 		<div class="row justify-content-start mb-5 pb-2">
@@ -603,9 +605,9 @@ div.asdf:active, div.asdf:focus{
 			<div class="timediv"></div>
 
 			<input type="hidden" id="c_email" name="c_email" value="${c_email}">
-			<input type="hidden" id="pr_type" name="pr_type" value="${c_type1}">
+			<input type="text" id="pr_type" name="pr_type" value="${c_type1}">
 			<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}">
-			<input type="hidden" id="c_value" name="c_value" value="${c_value}">
+			<input type="text" id="c_value" name="c_value" value="${c_value}">
 			<input type="hidden" id="pr_date" name="pr_date" value="">
 			<input type="hidden" id="pr_time" name="pr_time" value="">
 			<!-- <input type="button" data-page="2" name="previous"

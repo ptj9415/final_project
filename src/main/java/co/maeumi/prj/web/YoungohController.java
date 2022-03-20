@@ -103,7 +103,8 @@ public class YoungohController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("editor/");
-		String SAVE_PATH = "/fileupload/gceditor/";
+		//String SAVE_PATH = "/fileupload/gceditor/";
+		String SAVE_PATH = uploadpath + "/gceditor/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -114,6 +115,7 @@ public class YoungohController {
 
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
@@ -163,7 +165,7 @@ public class YoungohController {
 		System.out.println("tomcat path");
 		System.out.println(req.getContextPath());
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/",uploadpath + "gceditor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/","/fileupload/gceditor/");
 		vo.setGc_infos(result);
 		vo.setC_email((String)session.getAttribute("c_email"));
 		vo.setGc_name((String)session.getAttribute("c_name"));
@@ -304,8 +306,8 @@ public class YoungohController {
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
-		String SAVE_PATH = "/fileupload/therapy/";
-		
+		//String SAVE_PATH = "/fileupload/therapy/";
+		String SAVE_PATH = uploadpath + "/therapy/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -333,8 +335,6 @@ public class YoungohController {
 		// 지금 338줄 "url" 뒤에 있는 탐캣 경로는 탐캣에다가 이미지를 미리보기 형식으로 띄워줘서 얘가 뜨는 형식인데 안뜸... 얘가 뜨면 지금 경로는 제대로 해놔서 이미지는 뜨는데... 
 		// 그래서 request.getContextPath() 뒤에 /resources/fileupload 경로가 맞는지 모르겠음...
 		// 로컬에서는 /resources/fileupload 에서 fileupload가 없으면 fileupload를 만들어주고 안에 이미지를 넣어줬는데 젠킨스도 그런지 모르겠음....
-		
-		System.out.println(request.getContextPath()); //이걸로 뭐가 뜨는지 확인해봐야 될거 같음...
 		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
@@ -385,7 +385,7 @@ public class YoungohController {
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"therapy/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "/fileupload/therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);

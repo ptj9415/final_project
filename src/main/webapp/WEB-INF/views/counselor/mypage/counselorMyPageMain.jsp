@@ -82,6 +82,26 @@ h3 {
 	background-color: rgb(245, 245, 245);
 }
 
+#introtable {
+	text-align: center;
+	border-top: 0.5px solid rgb(222, 226, 230);
+	border-bottom: 0.5px solid rgb(222, 226, 230);
+	width: 100%;
+	word-wrap: break-word;
+	word-break: keep-all;
+	vertical-align: middle;
+}
+
+#introtable>tbody>tr>th {
+	background-color: rgb(245, 245, 245);
+}
+
+#introtable>tbody>tr>td {
+	vertical-align: middle;
+	word-wrap: break-word;
+	word-break: keep-all;
+	
+}
 </style>
 </head>
 <body>
@@ -107,7 +127,8 @@ h3 {
 					<div class="card">
 						<div class="card-body table-responsive p-00">
 							<div class="headshotdiv">
-								<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
+								<img
+									src="../fileupload/counselorpicture/${counselor.c_picturepath }"
 									class="preImage" id="preImage" name="preImage"
 									style="height: 150px; width: 112.5px;"
 									onerror="this.src='img/counselorpicture/errorprofile.jpg';">
@@ -387,7 +408,7 @@ h3 {
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body table-responsive p-00">
-							<table class="table text-nowrap" id="nothtable">
+							<table class="table text-nowrap" id="introtable">
 								<tr>
 									<th>제목</th>
 									<th>내용</th>
@@ -395,7 +416,7 @@ h3 {
 								<c:forEach items="${info }" var="info">
 									<tr>
 										<td>${info.ci_title }</td>
-										<td>${info.ci_subject }</td>
+										<td style="text-align: left;">${info.ci_subject }</td>
 									</tr>
 								</c:forEach>
 							</table>

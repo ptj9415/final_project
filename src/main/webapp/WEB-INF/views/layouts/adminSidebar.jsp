@@ -164,10 +164,6 @@
 									class="far fa-circle nav-icon"></i>
 									<p>FAQ 관리</p>
 							</a></li>
-							<li class="nav-item"><a href="#" class="nav-link"
-								id="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>챗봇 관리</p>
-							</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link"
 						id="nav-link"> <i class="nav-icon fas fa-book"></i>

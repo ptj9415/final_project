@@ -568,9 +568,25 @@ textarea {
 	margin-top: 15px;
 }
 .changeBtn {
-	width:100px;
+	width:110px;
+	height:45px;
 	float: right;
+	border-radius: 30px;
+    border: 1px solid #8dacbd42;
+    background-color: #8dacbd42;
 }
+.changeBtn:hover{
+	color:white;
+	border:1px solid #153e54;
+	background-color:#153e54;
+	transition:200ms ease-in-out;
+}
+.changeBtn:focus{
+	outline:0;
+}
+
+
+
 .myInfoInput {
 	border: 0px solid gray;
 	width: 250px;
@@ -587,15 +603,10 @@ textarea {
 </head>
 <body>
 	
-<section class="hero-wrap hero-wrap-2" style="background-image: url('resources/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-				</div>
-			</div>
-		</div>
-</section>
+				<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/mypage.png" id="bannerimg">
+	</section>
+
 
 <div class="container">
 		<div class="row justify-content-start mb-5 pb-2">

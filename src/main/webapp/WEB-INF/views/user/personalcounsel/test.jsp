@@ -561,23 +561,9 @@ input#c_name{
 </style>
 </head>
 <body>
-	<br>
-	<br>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 style="color: white">개인상담</h1>
-				</div>
-			</div>
-		</div>
+	<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
-	<br>
-	<br>
 <div class="container">
 		<div class="row justify-content-start mb-5 pb-2">
 			<div
@@ -737,13 +723,32 @@ input#c_name{
 	</div>
 
 	<script>
-		//선택버튼
+/* 		//선택버튼
 		$('#confirmbtn').on('click', function() {
 			var c_email = $('input:checkbox[name="c_email"]:checked').val();
 			location.href='test2pg.do?c_email='+ c_email
 			console.log(c_email);
 			
+		}); */
+		
+		//선택버튼
+		$('#confirmbtn').on('click', function() {
+			
+			var email = '<%=(String)session.getAttribute("email")%>';
+			var c_email = $('input:checkbox[name="c_email"]:checked').val();
+			
+		  if(email == "null"){
+			  alert("예약신청은 마으미 회원만 이용가능합니다.로그인 또는 회원가입을 해주세요.");
+			  location.href='loginForm.do';
+			  
+		  }	else{
+			  
+			location.href='test2pg.do?c_email='+ c_email
+			console.log(c_email);
+		  }
+			
 		});
+	
 	
 		//세부검색 카테고리 div 보이기/안보이기
 		$('#detailbtn').click(function() {
