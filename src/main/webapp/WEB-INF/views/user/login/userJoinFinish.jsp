@@ -36,7 +36,7 @@ button:hover {
         }
 
 .login:hover {
-	background-color: #FFD2D2;
+	background-color: #153e54;
 }
 
 .maeumi {
@@ -48,7 +48,7 @@ button:hover {
 <body>
 	<div class="mainForm" align="center">
 		<div class="title">
-			<h1>Maeumi.</h1>
+			<img src="resources/user/images/MaeumiLogo.png" style="width:300px; margin-top:10px;">
 		</div>
 		<div class="comment">
 			<h4>회원가입을 환영합니다!</h4>

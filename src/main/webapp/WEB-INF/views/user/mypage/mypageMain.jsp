@@ -599,6 +599,10 @@ textarea {
 	margin-left:auto; 
 	margin-right:auto;
 }
+#sendEmail {
+	border: 0 solid black;
+	
+}
 </style>
 </head>
 <body>
@@ -649,7 +653,7 @@ textarea {
 							<table class="table text-nowrap" id="infotable">
 								<tr>
 									<th>이메일</th>
-									<td>${member.m_email } (${member.m_type })</td>
+									<td><input type="text" value="${member.m_email }" id="sendEmail" readonly="readonly"> (${member.m_type })</td>
 									<th>닉네임</th>
 									<td>
 										<input type="text" class="myInfoInput" id="nickname" name="nickname" value="${member.m_nickname }" readonly="readonly"> 
@@ -669,13 +673,14 @@ textarea {
 								<tr>
 									<th>비밀번호</th>
 									<td>******
-										<input type="button" id="changePwdBtn" value="비밀번호 변경하기" >
-										<input type="button" id="memberLeave" value="회원탈퇴">
+										<input type="button" id="changePwdBtn" class="changeBtn"  value="비밀번호 변경" >
 									</td>
 									<th>가입 유형</th>
 									<td>${member.m_type}</td>
 								</tr>
 							</table>
+							<br>
+							<input type="button" id="memberLeave"  class="changeBtn"  value="Maeumi 탈퇴" style="margin:auto; float: right; display: flow-root;">
 							<br>
 						</div>
 					</div>
@@ -959,8 +964,8 @@ textarea {
 	
 	function  popupOpen() {
 		var url= "passwordPopup.do";    //팝업창 페이지 URL
-		var winWidth = 500;    
-	    var winHeight = 400;
+		var winWidth = 550;    
+	    var winHeight = 500;
 	    var popupX = (window.screen.width / 2) - (800 / 2);
 	    var popupY= (window.screen.height /2) - (600 / 2);
 	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
@@ -972,7 +977,7 @@ textarea {
 	$("#memberLeave").on("click", function() {
 		var memberLeaveCheck = confirm("정말 Maeumi.를 떠나시겠습니까..? \n탈퇴하면 1달 동안은 재가입이 어렵습니다.");
 		if(memberLeaveCheck) {
-			var sendEmail = $("#email").val(); 
+			var sendEmail = $("#sendEmail").val(); 
 			$.ajax({
 				type: "POST",
 				url: "ajaxMemberLeave.do",
@@ -981,7 +986,7 @@ textarea {
 				},
 				success: function(responseText){
 					if(responseText == "YES") {
-						alert("탈퇴처리 되었습니다.");
+						alert("Maeumi를 떠나셨습니다...");
 						location.href='home.do';
 					}
 				}

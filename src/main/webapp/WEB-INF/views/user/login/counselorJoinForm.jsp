@@ -80,14 +80,15 @@
     		border: 1px solid #8dacbd42;
     		color: #666666;
     		font-size: 13px;
+    		margin-left: 40px;
         }
 
-     /*    #gender:hover {
-            background-color: #8dacbd42;
-            border-color: white;
+         #gender:hover {
+            background-color: #153e54;
+            color:white;
         }
         
- */
+ 
  		#gender:focus{
  			outline:0;
  		}
@@ -143,6 +144,7 @@
 	#emailInputForm {
 	
 	}
+		   
     </style>
     <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
@@ -237,7 +239,7 @@
                 $("#phone").focus();
                 return false;
             }
-            alert("인증번호 발송이 완료되었습니다. 휴대폰에서 인증번호 확인을 해주세요.");
+            alert("인증번호 발송이 완료되었습니다. 인증번호 확인을 해주세요.");
             $.ajax({
                 type: "GET",
                 url: "ajaxPhoneChk.do?inputPhoneChk=" + inputPhoneChk,
@@ -276,21 +278,20 @@
     <!-- 회원가입 하는 양식 만들기-->
     <div class="mainForm" align="center">
         <div class="joinForm">
-            <h3>Maeumi.</h3>
-            <br>
+			<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">            
             <hr>
             <h5>본인확인이 완료되었습니다.<br> 모든 항목에 기입해주셔야 합니다.</h5>
             <br>
             <form id="frm" action="counselorJoin.do" method="post">
                 <div class="inputForm" id="emailInputForm">
                     <input type="text" id="email" name="email" value="${c_email }" readonly class="nonBtn"
-                        style="text-align: left; width: 60%;">
+                        style="text-align: left; width: 60%; margin-left: 18px;">
                     <input type="text" placeholder="이름" id="name" name="name" style="width: 30%;" required="required"><hr>
                 </div>
                 <div class="inputForm">
                 	<div class="check-container">
                     <input type="text" placeholder="생년월일을 입력하세요 ex) 1992-08-03 " maxlength="10" id="birthdate" name="birthdate"
-                        style="width: 60%; margin-right:30px;" required="required">
+                        style="width: 60%; margin-top: 20px; margin-left: 40px;" required="required">
                     <select id="gender" name="gender" style="height: 50px; border-radius: 50px; width: 90px;" required="required">
                         <option value="">성별 선택</option>
                         <option value="남자" style="text-align: center;">남자</option>
@@ -310,10 +311,10 @@
                 </div>
                 <div class="inputForm" id="addrWrap">
                  <div class="zip-container">
-                    <input type="text" id="postcode" placeholder="우편번호" required="required" readonly="readonly">
+                    <input type="text" id="postcode" placeholder="우편번호"  style="margin-left: 30px;" required="required" readonly="readonly">
                     <button type="button" onclick="execDaumPostcode()">우편번호 찾기</button><br>
                  </div>
-                    <input type="text" id="roadAddress" placeholder="도로명주소" style="width: 45%;" required="required" readonly="readonly">
+                    <input type="text" id="roadAddress" placeholder="도로명주소" style="width: 45%; margin-left: 25px;" required="required" readonly="readonly">
                     <input type="text" id="jibunAddress" placeholder="지번주소" style="width: 45%;" readonly="readonly">
                     <span id="guide" style="color:#999;display:none; font-size: 13px;"></span>
                     <input type="text" id="detailAddress" placeholder="상세주소" style="width: 45%;">
@@ -323,14 +324,14 @@
                 </div>
 	                <div class="inputForm">
                 <div class="check-container">
-	                    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." style="margin-top:15px;" id="phone" name="phone" required="required">
+	                    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." style="margin-top:15px; margin-left: 40px;" id="phone" name="phone" required="required">
 	                    <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
 	            </div>
 	                    <hr>
                 </div>
                 <div class="inputForm">
                   <div class="check-container">
-                    <input type="text" placeholder="인증번호 입력" id="phoneChk"  style="margin-top:15px;" disabled="disabled" required="required">
+                    <input type="text" placeholder="인증번호 입력" id="phoneChk"  style="margin-top:15px; margin-left: 40px;" disabled="disabled" required="required">
                     <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
                    <hr>
                     </div>

@@ -323,7 +323,6 @@ public class BadaController {
 		return check;
 	}
 	
-	
 
 	// 이메일 인증
 	@RequestMapping(value = "/ajaxChkNum.do", method = RequestMethod.GET)
@@ -442,7 +441,7 @@ public class BadaController {
 		if (mvo != null) {
 			String email = mvo.getM_email();
 			String type = mvo.getM_type();
-			responseText = "조회된 Email은 " + email + " 입니다.";
+			responseText = "회원님의 Email은 " + email + " 입니다.";
 			System.out.println("멤버에 존재: " + responseText);
 		} else {
 			cvo.setC_phone(checkPhone);
@@ -782,13 +781,14 @@ public class BadaController {
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-//		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+	//	String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\attachfile\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
 			//테스트용 경로1 
-		
-		String SAVE_PATH = uploadpath + "noticesummer/";  // 서버에 올렸을 때 사용할 경로
-		System.out.println("저장경로 확인: " + SAVE_PATH);
-		//String contextRoot = request.getSession().getServletContext().getRealPath("/");   // 테스트용경로2
-		//String fileRoot = contextRoot + "resources\\image\\";							// 테스트용경로3 
+		String SAVE_PATH = uploadpath + "/noticesummer/";  // 실제 서버에 올렸을 때 사용할 경로
+//		System.out.println("저장경로 확인: " + SAVE_PATH);
+//		String contextRoot = request.getSession().getServletContext().getRealPath("/");   // 테스트용경로3 밑에랑 한 묶음.
+//		String SAVE_PATH = contextRoot + "resources\\attachfile\\";							// 테스트용경로3 
+//		String SAVE_PATH = request.getServletContext().getRealPath("resources/attachfile/");       //  테스트용 경로5
+//		System.out.println("테스트용경로3 경로확인: " +  SAVE_PATH);
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
@@ -800,6 +800,7 @@ public class BadaController {
 //			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
 			jsonObject.addProperty("url", SAVE_PATH + savedFileName);   // 여기도 save_path에서 fileRoot로 수정
 			jsonObject.addProperty("responseCode", "success");
+			jsonObject.addProperty("fileName", savedFileName);   // 테스트로 넣은 코드
 
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제

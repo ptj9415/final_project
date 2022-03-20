@@ -14,12 +14,9 @@ input {
 	height: 30px;
 	text-align: center;
 }
-button {
-	height: 30px;
-	margin-left: 20px;
-}
+
 #originPwd {
-	margin-left: 15px;
+	margin-left: 30px;
 }
 #sendPwdChk {
 	width: 100px;	
@@ -31,16 +28,31 @@ button {
 #changePwdChk {
 	margin-top: 10px;
 }
+button {
+	font-size: 12px;
+	border-radius:30px;
+	height: 30px;
+	margin-left: 20px;
+	background-color: #153e54;
+	border:1px solid #153e54;
+	color:white;
+}
+button:hover{
+	border:1px solid #153e54;
+	color:#153e54;
+	background-color:white;
+	transition:300ms ease-in-out;
+}
 </style>
 <body>
 	<div align="center">
-		<h2>Maeumi.</h2>
-		<div><h3>비밀번호 변경</h3></div>
+		<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">
+		<div><h3>- 비밀번호 변경 -</h3></div>
 		<hr>
 		<!-- 기존 비밀번호 확인 -->
 		<div class="inputForm1">
 			<input type="password" placeholder="현재 비밀번호를 입력하세요." id="originPwd" name="originPwd">
-			<input type="button" id="sendPwdChk" name="sendPwdChk"  value="비밀번호 확인">
+			<button type="button" id="sendPwdChk" name="sendPwdChk" >비밀번호 확인</button>
 		</div><Br>
 		
 		<!-- 변경할 비밀번호 입력 -->
@@ -58,7 +70,6 @@ button {
 	$("#sendPwdChk").on("click",function(){
 			
 		var sendPwd = $("#originPwd").val();  // 입력한 원래 비밀번호
-		alert(sendPwd);
 		$.ajax({
 			url: "ajaxPassChk.do",
 			type: "POST",

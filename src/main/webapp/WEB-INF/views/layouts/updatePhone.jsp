@@ -12,35 +12,48 @@ input {
 	width: 50%;
 	height: 30px;
 }
-button {
-	margin-left: 30px;
-	height: 30px;
-	width: 100px;
-}
+
 #phoneChk {
 	margin-left: 25px;
 }
 #phoneChkBtn {
 	margin-right: 30px;
+	width: 80px;
 }
 #phoneUpdateBtn {
 	width: 130px;
+}
+button {
+	font-size: 12px;
+	border-radius:30px;
+	height: 30px;
+	margin-left: 20px;
+	background-color: #153e54;
+	border:1px solid #153e54;
+	color:white;
+}
+button:hover{
+	border:1px solid #153e54;
+	color:#153e54;
+	background-color:white;
+	transition:300ms ease-in-out;
 }
 </style>
 <body>
 
 <div align="center">
-	<div><h2>연락처 정보 변경하기</h2></div>
+<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">	
+	<div><h3>- 연락처 정보 변경하기 -</h3></div>
 	<div class="inputForm">
 	    <input type="text" placeholder="인증받으실 번호를 '-' 없이 입력해주세요." id="phone" name="phone" required="required">
 	    <button type="button" id="sendPhoneBtn" onclick="sendPhoneChk()">인증번호 전송</button>
-	    <hr color="#FFE6E6">
+	    <hr>
 	</div>
 	<br>
 	<div class="inputForm second">
 	    <input type="text" placeholder="인증번호 입력" id="phoneChk" disabled="disabled" required="required">
 	    <button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">확인</button>
-	    <hr color="#FFE6E6">
+	    <hr>
 	</div>
 	<Br>
 	<button id="phoneUpdateBtn">연락처 수정 완료</button>
@@ -80,7 +93,7 @@ button {
 	// 휴대폰 인증번호 대조. 
 	function chkPhoneBtn() {
 		if( $("#phoneChk").val() == code) {
-		alert("휴대폰 인증 성공. 변경확인 버튼을 눌러주세요.");
+		alert("휴대폰 인증 성공. 수정 완료 버튼을 눌러주세요.");
 		$("#phone").attr("disabled", "disabled");
 		$("#phoneChk").attr("disabled", "disabled");
 		

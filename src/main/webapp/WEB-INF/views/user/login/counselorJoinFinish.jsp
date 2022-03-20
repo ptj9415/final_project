@@ -25,12 +25,14 @@ button {
 	background-color: white;
 	border: 1px solid #d2d2d2;
 	border-radius: 50px;
-	width: 35%;
+	width: 15%;
 	height: 40px;
 }
 
 .login:hover {
-	background-color: #FFD2D2;
+	background-color: #153e54;
+	color:white;
+	transition: 200ms ease-in-out;
 }
 
 .maeumi {
