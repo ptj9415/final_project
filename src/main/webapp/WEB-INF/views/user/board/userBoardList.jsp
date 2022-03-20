@@ -112,19 +112,28 @@
 }
 
 button {
-	height: 35px;
-	width: 80px;
-	padding: 5px;
-	border: 1px solid black;
-	background-color: white;
-	color: black;
-	border: 1px solid black;
-	font-size: 13px;
+	height: 40px;
+    width: 80px;
+    /* padding: 5px; */
+    border: 1px solid #153e54;
+    background-color: #153e54;
+    color: white;
+    border: 1px solid black;
+    font-size: 13px;
+    border-radius: 3px 20px 20px 3px;
+    border: 1px solid #8dacbd42;
 }
 
 button:hover {
-	background-color: black;
-	color: white;
+	background-color: white;
+	color:  #153e54;
+	transition:200ms ease-in-out
+}
+button:active{
+	outline:0;
+}
+filterinput:active{
+	outline:0;
 }
 
 #insertbtn {
@@ -151,13 +160,14 @@ button:hover {
 }
 
 .page-item.active .page-link {
-	border: 0.5px solid rgb(235, 235, 235);
+	border: 0.5px solid #8dacbd42;
 	border-radius: 0px;
 	background-color: white;
 	color: #4b5b73;
 	font-weight: bold;
 	font-size: 14px;
 	margin-top: -1px;
+	border-radius:20px;
 }
 
 .page-link {
@@ -179,7 +189,9 @@ button:hover {
 
 #btnSearch {
 	display: inline-block;
-	margin-bottom: -2px;
+	margin-bottom: 2px;
+	padding-top: 3px;
+}
 }
 
 input::placeholder {
@@ -374,7 +386,7 @@ input::placeholder {
 		<br>
 		<div class="searchDiv">
 			<input type="text" class="filterinput" id="b_title"
-				style="width: 600px; height: 34px;" placeholder="  제목을 입력하세요.">
+				style="border-radius: 20px 3px 3px 20px; border:1px solid #8dacbd42; width: 600px; height: 40px;" placeholder="  제목을 입력하세요.">
 			<button type="button" id="btnSearch">검색</button>
 		</div>
 	</div>

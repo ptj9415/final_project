@@ -289,12 +289,10 @@
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p style="font-weight:bold;">감정데이터에 기반한 전문 심리상담</p>
+					<p>01 상담, 심리, 임상 전공 석사 졸업 이상의 학력</p>
+					<p>02 공인된 상담학회의 자격증 보유</p>
+					<p>03 상담진행 횟수, 후기로 검증된 상담사</p>
 				</div>
 			</div>
 		</div>
@@ -418,7 +416,7 @@
 
 	<!-- 마이페이지 start -->
 
-	<section class="ftco-services">
+	<!-- <section class="ftco-services">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-5"></div>
 			<div class="row"></div>
@@ -491,7 +489,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 	<!-- 마이페이지 end -->
 
 
@@ -507,12 +505,8 @@
 				</div>
 				<div class="col-md-8 pl-md-5 heading-section ftco-animate">
 					<div class="pl-md-4 border-line">
-						<p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia, there live the blind texts.
-							Separated they live in. A small river named Duden flows by their
-							place and supplies it with the necessary regelialia. It is a
-							paradisematic country, in which roasted parts of sentences fly
-							into your mouth.</p>
+						<p style="font-weight:bold;">간단한 심리검사로 나의 마음상태를 확인해보세요.</p>
+						<p style="font-weight:bold;">나의 기분이나, 상태를 기준으로 현재의 심리상태를 진단해보세요.</p>
 					</div>
 				</div>
 			</div>
