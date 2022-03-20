@@ -83,21 +83,26 @@ textarea::placeholder {
 
 button {
 	height: 35px;
-	width: 80px;
-	padding: 5px;
-	margin-left: 20px;
-	border: 1px solid black;
-	background-color: white;
-	color: black;
-	border: 1px solid black;
-	margin-top: 80px;
-	font-size: 13px;
-	margin-bottom: 70px;
+    width: 80px;
+    padding: 5px;
+    margin-left: 20px;
+    border: 1px solid black;
+    background-color: #153e54;
+    color: white;
+    border: 1px solid black;
+    margin-top: 80px;
+    font-size: 13px;
+    margin-bottom: 70px;
+    border-radius: 30px;
 }
 
 button:hover {
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: #153e54;
+	transition:200ms ease-in-out;
+}
+button:focus{
+	outline:0;
 }
 
 /* 삭제 Swal 디자인  */

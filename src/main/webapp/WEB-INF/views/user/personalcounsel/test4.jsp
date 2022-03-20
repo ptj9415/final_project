@@ -8,8 +8,32 @@
 <title>invoice</title>
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
  <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  <script>
+
+ google.load( "webfont", "1" );
+
+ google.setOnLoadCallback(function() {
+
+  WebFont.load({ custom: {
+
+   families: [ "NanumGothic" ],
+
+   urls: [ "http://fontface.kr/NanumGothic/css" ]
+
+  }});
+
+ });
+
+</script>
 </head>
 <style>
+
+body, header ul li a, header h1, header h2{
+
+font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+font-size: 20px;
+}
+
 @import
 	url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,900,700,500,300,100)
 	;
@@ -18,13 +42,7 @@
 	margin: 0;
 	box-sizing: border-box;
 }
-/* body {
-  background: #e0e0e0;
-  font-family: "Roboto", sans-serif;
-  background-image: url("");
-  background-repeat: repeat-y;
-  background-size: 100%;
-} */
+
 ::selection {
 	background: #f31544;
 	color: #fff;
@@ -321,14 +339,12 @@ p.itemtext{
 /*결제버튼 end*/
 </style>
 <body>
-		<section class="hero-wrap hero-wrap-2">
-	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
+	<section class="hero-wrap hero-wrap-2">
+		<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
-	
 	<div id="invoiceholder">
-
 		<div id="headerimage"></div>
-		<div id="invoice" class="effect2">
+		<div id="invoice" class="effect2" style="height:800px;">
 			<!--End InvoiceTop-->	
 			<div id="invoice-mid">
 				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
@@ -345,12 +361,9 @@ p.itemtext{
 					<p>${c_email}</p>
 					<p>${counselorSelect.c_phone }</p>
 				</div>
-
 			</div>
 			<!--End Invoice Mid-->
-	
-			<div id="invoice-bot">
-
+			<div id="invoice-bot" style="height:560px;">
 				<div id="table">
 					<table>
 						<tr class="tabletitle">
@@ -414,7 +427,6 @@ p.itemtext{
 							<%-- <td class="itemtext1" id="totalPrice" >${pr_price } 원</td> --%>
 							<td class="tableitem"><p class="itemtext1" id="totalPrice">${pr_price } 원</p></td>
 						</tr>
-
 					</table>
 				</div>
 			</div>
@@ -427,7 +439,7 @@ p.itemtext{
 				<form action="paymentComplete.do" id="frm" name="frm">
 					<input type="hidden" name="pr_time" value="${pr_time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<input type="text" id="pr_price" name="pr_price" value="${pr_price}">
+					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}">
 					<input type="hidden" id="pr_type" name="pr_type" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
@@ -438,11 +450,12 @@ p.itemtext{
 					<a href="personalCounselStep4.do">
 					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 			</div> -->
+				
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick"> 
 						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<div style="width:150px;">
+					<div style="width:150px; height:100px;">
 						<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
 					</div>
 				</form>

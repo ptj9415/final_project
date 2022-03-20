@@ -6,7 +6,21 @@
 <meta charset="UTF-8">
 
 <title>우울증 검사</title>
+    <script>
+        google.load( "webfont", "1" );
+        google.setOnLoadCallback(function() {
+         WebFont.load({ custom: {
+          families: [ "NanumGothic" ],
+          urls: [ "http://fontface.kr/NanumGothic/css" ]
+         }});
+        });
+    </script>
 <style>
+body, header ul li a, header h1, header h2{
+
+font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+font-size: 16px;
+}
 .pb-2, .py-2 {
 	margin-top: 100px;
 	margin-right: auto;
@@ -86,17 +100,15 @@
 						<p style="font-weight: bold;">현재 나의 우울증 상태는 어떨까?
 						<p style="font-size: 0.7rem">소요시간 약 5분</p>
 						<br>
-						<p>당신의 삶에서 태풍이 지나갔을 때 당신은 당신이 그 태풍을 어떻게 이겨냈는지도, 어떻게 생존할 수
-							있었는지도 기억하지 못할 것이다.</p>
-						<p>그리고, 심지어는 그 태풍이 지나간 것인지도 확실치 않을 것이다. 하지만 한가지 확실한 것이 있다.</p>
+						<p>당신의 삶에서 태풍이 지나갔을 때 당신은 당신이 그 태풍을 어떻게 이겨냈는지도, 어떻게 생존할<br> 
+						수 있었는지도 기억하지 못할 것이다.</p>
+						<p>그리고 심지어 그 태풍이 지나간 것인지도 확실치 않을 것이다. 하지만 한가지 확실한 것이 있다.</p>
 						<p>그것은 바로 당신이 그 태풍에서 벗어났을 때, 당신은 이전과는 다른 사람이 될 것이라는 것이다.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 	<div id="wrap">
 		<header id="header"></header>
 		<section id="main" class="container">

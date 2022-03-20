@@ -13,6 +13,15 @@
 <meta property="og:image"
 	content="https://minggmbti.netlify.app/ESFJ.png" />
 <meta property="og:url" content="https://minggmbti.netlify.app/" />
+    <script>
+        google.load( "webfont", "1" );
+        google.setOnLoadCallback(function() {
+         WebFont.load({ custom: {
+          families: [ "NanumGothic" ],
+          urls: [ "http://fontface.kr/NanumGothic/css" ]
+         }});
+        });
+    </script>
 <!--  <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -27,6 +36,12 @@
     /> -->
 
 <style>
+ body, header ul li a, header h1, header h2{
+
+font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+font-size: 16px;
+}
+
 article {
 	display: flex;
 	flex-direction: column;
@@ -349,8 +364,8 @@ img {
 				<br>
 				<p>MBTI는 개인마다 태도와 인식, 판단 기능에서 각자 선호하는 방식의 차이를 나타내는 4가지 선호 지표로
 					구성되어 있습니다.</p>
-				<p>외향과 내향(E/I), 감각과 직관(S/N), 사고와 감정(T/F), 판단과 인식(J/P) &emsp;
-					&emsp; 4가지 선호 지표를 조합하여 16가지의 성격 유형을 제시합니다</p>
+				<p>외향과 내향(E/I), 감각과 직관(S/N), 사고와 감정(T/F), 판단과 인식(J/P)
+				 4가지 선호 지표를 조합하여 16가지의 성격 유형을 제시합니다</p>
 			</div>
 		</div>
 	</div>

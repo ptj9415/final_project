@@ -455,9 +455,7 @@ height: 510px;
 	<div class="main4">
 		<img src="img/main/main4.png">
 	</div>
-
 	<!--  심리검사 -->
-
 	<div class="main5">
 		<img src="img/main/main5.png">
 	</div>
