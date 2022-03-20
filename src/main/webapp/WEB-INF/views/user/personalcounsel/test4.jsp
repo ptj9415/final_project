@@ -379,13 +379,11 @@ p.itemtext{
 							<td class="tableitem"><p class="itemtext1">${pr_date} ${pr_time}시</p></td>
 						</tr>
 
-						
-
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext1">${pr_price } 원</p></td>
+							<td class="tableitem"><p class="itemtext1" id="total">${pr_price } 원</p></td>
 						</tr>
 						
 						<tr class="service">
@@ -402,15 +400,12 @@ p.itemtext{
 								</select>
 							</td>
 						</tr>
-						
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext1" id="discount"></p></td>
 						</tr>
-
-	
 
 						<tr class="tabletitle">
 							<td class="tableitem"><p class="itemtext">합계</p></td>
@@ -432,7 +427,7 @@ p.itemtext{
 				<form action="paymentComplete.do" id="frm" name="frm">
 					<input type="hidden" name="pr_time" value="${pr_time}">
 					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="text" id="pr_price" name="pr_price" value="${pr_price}">
 					<input type="hidden" id="pr_type" name="pr_type" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
@@ -447,7 +442,7 @@ p.itemtext{
 						<input type="hidden" name="cmd" value="_s-xclick"> 
 						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<div>
+					<div style="width:150px;">
 						<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
 					</div>
 				</form>
@@ -465,17 +460,35 @@ p.itemtext{
 		</div>
 		<!--End Invoice-->
 <script>
+$(document).ready(function(){
+	var n1 = $("#total").html();
+	const cn1 = n1.toString()
+	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	$("#total").html(cn1);
+	$("#totalPrice").html(cn1);
+	
+	});
+
 function change(){
 	   var price = $("#g_price").val();
 	   var priceSelect = $("#checkbox").val();
 	   var num = priceSelect.indexOf('/');
 	   var priceResult = priceSelect.substr(0,num);
+	   const cn1 = priceResult.toString()
+		  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	   
 	   var couponNo = priceSelect.substr(num+1);
-	  /*  alert(couponNo); */
-	   $("#discount").text(' '+'-'+priceResult +' 원');
+	   couponNo = Number(couponNo);
+	   if (priceResult ==' '|| priceResult == null || priceResult =='') {
+	   		$("#discount").text('');
+	   }else{
+		    $("#discount").text(' '+' '+'-'+cn1+'원');
+	   }
 	   
 	   var ddd = price-priceResult;
-	   $("#totalPrice").text(ddd+"원");
+	   const cn2 = ddd.toString()
+		  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	   $("#totalPrice").text(cn2+"원");
 	   $("#pr_price").val(ddd);
 	   $("#c_no").val(couponNo);
 	   
@@ -488,8 +501,8 @@ $('#previous-btn').click(function() {
 
 </script>
 <script>
-		var pr_price = $("#pr_price").val();
         $(".check_module").click(function () {
+		var price = $("#pr_price").val();
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');
         // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -525,7 +538,7 @@ $('#previous-btn').click(function() {
         */
         name: '주문명:결제테스트',
         //결제창에서 보여질 이름
-        amount: 100,
+        amount: price,
         //가격
         //bank_name : null,
         buyer_email: 'iamport@siot.do',
@@ -542,11 +555,11 @@ $('#previous-btn').click(function() {
         }, function (rsp) {
         console.log(rsp);
         if (rsp.success) {
-        //$("#pr_price").val(rsp.paid_amount);
+        $("#pr_price").val(rsp.paid_amount);
         $("#or_uid").val(rsp.imp_uid);
         $("#frm").submit();
          var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
+        //msg += '고유ID : ' + rsp.imp_uid;
         /* msg += '상점 거래ID : ' + rsp.merchant_uid;
         msg += '결제 금액 : ' + rsp.paid_amount;
         msg += '카드 승인번호 : ' + rsp.apply_num; */
