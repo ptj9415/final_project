@@ -68,7 +68,7 @@
 	transition: 0.5s opacity ease-in, 0.8s transform ease;
 	position: relative;
 	top: 0;
-	z-index: 100;
+	z-index: 0;
 	transform: translateY(0px);
 	text-shadow: 0 0 0;
 }
@@ -78,7 +78,7 @@
 	transition: 0.5s opacity ease-in, 0.8s transform ease;
 	position: relative;
 	top: 0;
-	z-index: 100;
+	z-index: 0;
 	transform: translateY(0px);
 	text-shadow: 0 0 0;
 }
@@ -88,7 +88,7 @@
 	transition: 0.5s opacity ease-in, 0.8s transform ease;
 	position: relative;
 	top: 0;
-	z-index: 100;
+	z-index: 0;
 	transform: translateY(0px);
 	text-shadow: 0 0 0;
 }
@@ -98,7 +98,7 @@
 	transition: 0.5s opacity ease-in, 0.8s transform ease;
 	position: relative;
 	top: 0;
-	z-index: 100;
+	z-index: 0;
 	transform: translateY(0px);
 	text-shadow: 0 0 0;
 }
@@ -108,7 +108,7 @@
 	transition: 0.5s opacity ease-in, 0.8s transform ease;
 	position: relative;
 	top: 0;
-	z-index: 100;
+	z-index: 0;
 	transform: translateY(0px);
 	text-shadow: 0 0 0;
 }
