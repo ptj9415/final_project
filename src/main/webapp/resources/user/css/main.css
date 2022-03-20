@@ -100,7 +100,7 @@ h3,
 	line-height: 60px;
 	border-radius: 50px;
 	text-align: center;
-	background-color: #468FB6;
+	background-color: #153e54;
 	border: 0;
 	color: #ffffff;
 	font-weight: 600;
@@ -115,8 +115,8 @@ h3,
 .start:focus {
 	animation-play-state: paused;
 	background-color: white;
-	border: 1px solid #468FB6;
-	color:#468FB6;
+	border: 1px solid #153e54;
+	color:#153e54;
 	transition: 400ms ease-in-out;
 	outline: none;
 }

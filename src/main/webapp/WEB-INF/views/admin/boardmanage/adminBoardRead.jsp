@@ -17,7 +17,7 @@ h3 {
 .row {
 	margin-bottom: -10px;
 }
-
+ 
 #headerp {
 	position: relative;
 	top: 7px;
@@ -30,7 +30,6 @@ h3 {
 }
 
 #boardtable>tbody>tr>th {
-	width: 13%;
 	background-color: rgb(245, 245, 245);
 	text-align: center;
 	vertical-align: middle;
@@ -108,8 +107,8 @@ h3 {
 									<td>${boardRead.b_wdate }</td>
 								</tr>
 								<tr>
-									<th style="height: 400px;">제목</th>
-									<td colspan="5">${boardRead.b_content }</td>
+									<th style="height: 400px;">내용</th>
+									<td><pre colspan="5">${boardRead.b_content }</pre></td>
 								</tr>
 							</table>
 							<br>

@@ -25,8 +25,28 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 <style>
+h3 {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.row {
+	margin-bottom: -10px;
+}
+
+#headerp {
+	position: relative;
+	top: 7px;
+	margin-left: 15px;
+	font-weight: 600;
+}
+
 tr, th, td {
 	border: 1px solid #dee2e6;
+}
+
+th {
+	background-color: rgb(245, 245, 245);
 }
 
 #infotable {
@@ -45,27 +65,38 @@ tr, th, td {
 
 #gc_title {
 	width: 57%;
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 }
 
 #gc_startdate, #gc_finaldate {
 	widgh: 100%;
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 }
 
 #gc_date, #gc_time {
 	widgh: 50%;
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 }
 
 #gc_min_person, #gc_max_person {
 	width: 17%;
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+}
+
+#gc_type {
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
+	width: 40%;
 }
 
 #gc_price {
 	width: 45%;
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 }
 
 #counseltable>tbody>tr>th {
@@ -74,8 +105,49 @@ tr, th, td {
 }
 
 #gc_kakao {
-	height: 25px;
+	height: 30px;
+	border: 0.5px solid rgb(210, 210, 210);
 	width: 40%;
+}
+
+.filebox .uploadname, .filebox .uploadname1 {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 31%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 8px;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+#modify2 {
+	float: right;
+	height: 35px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1E90FF;
+	color: white;
 }
 </style>
 </head>
@@ -108,7 +180,7 @@ tr, th, td {
 											name="gc_title"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
-												<option value="카톡">카톡</option>
+												<option value="카카오톡">카카오톡</option>
 												<option value="줌">줌</option>
 										</select></td>
 									</tr>
@@ -123,10 +195,11 @@ tr, th, td {
 									</tr>
 									<tr>
 										<th>모집 인원</th>
-										<td>최소&nbsp;&nbsp;<input class="pcount" id="gc_min_person"
-											name="gc_min_person" type="text">&nbsp;명 ~ 최대&nbsp;&nbsp;<input
-											class="pcount" type="text" id="gc_max_person"
-											name="gc_max_person">&nbsp;명</td>
+										<td>최소&nbsp;&nbsp;<input class="pcount"
+											id="gc_min_person" name="gc_min_person" type="text">&nbsp;명
+											~ 최대&nbsp;&nbsp;<input class="pcount" type="text"
+											id="gc_max_person" name="gc_max_person">&nbsp;명
+										</td>
 										<th>상담 비용</th>
 										<td><input class="pcount" id="gc_price" name="gc_price"
 											type="text">&nbsp;원</td>
@@ -137,6 +210,7 @@ tr, th, td {
 						</div>
 					</div>
 				</div>
+				<br>
 				<div class="row">
 					<div class="col-md-12 offset-md-0">
 						<div class="card">
@@ -153,16 +227,16 @@ tr, th, td {
 								<table class="table text-nowrap" id="counseltable">
 									<tr>
 										<th>상담 소개</th>
-										<td>
-											
-												<textarea class="summernote" name="summernote"></textarea>
-											
+										<td><textarea class="summernote" name="summernote"></textarea>
+
 										</td>
 									</tr>
 									<tr>
 										<th>썸네일 이미지</th>
-										<td><input multiple="multiple" type="file" id="filename"
-											name="filename" style="margin-bottom: 20px;" required></td>
+										<td><div class="filebox">
+												<input class="uploadname"> <label for="filename">파일
+													찾기</label> <input type="file" id="filename" name="filename">
+											</div></td>
 									</tr>
 									<tr>
 										<th>카카오톡 오픈주소</th>
@@ -171,9 +245,11 @@ tr, th, td {
 									</tr>
 								</table>
 								<br>
-								<button type="submit" class="modify2" id="modify2"
-									name="modify2">그룹 상담 개설</button>
-								<br> <br> <br>
+								<div class="btndiv">
+									<button type="submit" class="modify2" id="modify2"
+										name="modify2">그룹 상담 개설</button>
+								</div>
+								<br> <br>
 							</div>
 						</div>
 					</div>
@@ -206,7 +282,7 @@ tr, th, td {
 		$('.summernote').summernote(
 				{
 					// 에디터 높이
-					height : 200,
+					height : 400,
 					weight : 500,
 					// 에디터 한글 설정
 					lang : "ko-KR",
@@ -268,6 +344,11 @@ tr, th, td {
 				}
 			});
 		}
+		
+		$("#filename").on('change', function() {
+			var fileName = $("#filename").val();
+			$(".uploadname").val(fileName);
+		});
 	</script>
 </body>
 </html>

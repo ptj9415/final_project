@@ -10,13 +10,27 @@
 body {
 }
 input {
+	font-size: 12px;
+	border-radius:30px;
+	border:1px solid #d8d8d8;
 	width: 250px;
 	height: 30px;
 	text-align: center;
 }
 button {
+	font-size: 12px;
+	border-radius:30px;
 	height: 30px;
 	margin-left: 20px;
+	background-color: #153e54;
+	border:1px solid #153e54;
+	color:white;
+}
+button:hover{
+	border:1px solid #153e54;
+	color:#153e54;
+	background-color:white;
+	transition:300ms ease-in-out;
 }
 .inputForm2 {
 	margin-right: 31px;
@@ -29,9 +43,10 @@ button {
 </style>
 <body>
 	<div align="center">
-		<h2>Maeumi.</h2>
-		<div><h3>Email 찾기 서비스. 비번은 알아서~</h3></div>
-		<hr>
+		<img src="resources/user/images/MaeumiLogo.png" style="width:100px; margin-top:50px;">
+		<div><h3 style="margin-top:20px;">Email 찾기</h3></div>
+		<hr style="margin-top:30px;">
+
 		<form id="frm" method="post" action="ajaxFindEmail.do">
 		<div class="inputForm1">
 			<input type="text" placeholder="회원님의 연락처를 '-'없이 입력해주세요." id="phone" name="phone">
@@ -43,7 +58,7 @@ button {
 				disabled="disabled">
 			<button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">인증확인</button>
 		</div>
-		<hr>
+		<hr style="margin-top:30px;">
 		<button type="button" id="selectEmailBtn">조회</button>
 		</form><br>
 		<div id="result"></div>

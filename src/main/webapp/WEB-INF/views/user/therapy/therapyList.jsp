@@ -199,7 +199,7 @@ form {
 	overflow: hidden;
 	box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
 	transition: transform 0.1s ease-in-out, box-shadow 0.1s;
-	height: 480px;
+	height: 530px;
 }
 
 .card:hover {
@@ -209,7 +209,10 @@ form {
 
 .card-description {
 	display: block;
-	padding: 2em 0.5em;
+	padding-bottom: 1px;
+    padding-top: 10px;
+	padding-right : 10px;
+	padding-left : 10px;
 	color: #515151;
 	text-decoration: none;
 }
@@ -230,26 +233,33 @@ form {
 	margin-right:auto;
 	margin-left:auto;
 }
+
+.page-item.active .page-link {
+	border: 0.5px solid rgb(235, 235, 235);
+	border-radius: 0px;
+	background-color: white;
+	color: #4b5b73;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: -1px;
+}
+
+.page-link {
+	border: 0px;
+	font-size: 14px;
+	color: #666666;
+	margin-left: 10px;
+}
+
+#pagination>li {
+	margin-right: 10px;
+}
+
 /*심리테라피 리스트 end*/
 </style>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">심리테라피</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
+			<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/therapy.png" id="bannerimg">
 	</section>
 	
 	<div class="container">
@@ -263,12 +273,8 @@ form {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>삶과 미래를 긍정적으로 접근할 수 있다면 인생에 있어 더할 나위 없는 행복을 누릴 수 있고<br> 
+					   행복해지기 위한 계획을 세울 수 있습니다. 심리테라피를 보면서 마음을 치유해보세요.</p>
 				</div>
 			</div>
 		</div>
@@ -277,7 +283,7 @@ form {
         <c:forEach items="${therapylist}" var="therapyList">
 	        <li class="card">
 	            <a href="therapyDetail.do?t_no=${therapyList.t_no}">
-	                <img style="width:300px;height:300px;" src="therapysumnail/${therapyList.t_picture }" alt="Psychopomp"
+	                <img style="width:300px;height:300px;" src="../fileupload/therapysumnail/${therapyList.t_picture}" alt="Psychopomp"
 	                onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';" />
 	            </a>
 	            <a class="card-description" target="_blank">
@@ -288,11 +294,12 @@ form {
 	        </li>
         </c:forEach>
     </ul>	
-    		<div>
-			  <ul class="pagination">
-			    <li class="page-item">
+    <br>
+    		<div style=" width:1200px; margin:0 auto;">
+			  <ul class="pagination" style="padding-left: 560px;">
+			  <%--   <li class="page-item">
 			      <a class="page-link" href="userTerapy.do?nowPage=${page.prev }" tabindex="-1">Previous</a>
-			    </li>
+			    </li> --%>
 			    <c:forEach begin="1" end="${page.lastPage}" varStatus="status">
 					<c:if test="${status.count ne page.nowPage}">
 			    		<li class="page-item"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}</a></li>
@@ -301,11 +308,13 @@ form {
 						<li class="page-item active"><a class="page-link" href="userTerapy.do?nowPage=${status.count}">${status.count}<span class="sr-only">(current)</span></a></li>
 			   		</c:if>
 			    </c:forEach>
-			    <li class="page-item">
+			    <%-- <li class="page-item">
 			      <a class="page-link" href="userTerapy.do?nowPage=${page.next}">Next</a>
-			    </li>
+			    </li> --%>
 			  </ul>
 			</div>
+			
+	<br><br><br><br><br>
    <script>
    window.addEventListener('load', function() {
 		// setTimeout to simulate the delay from a real page load

@@ -10,6 +10,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/root-context.xml
+            /WEB-INF/spring/appServlet/spring-security.xml
+        </param-value>
+    </context-param>
+	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -51,7 +59,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 <!-- filter end -->
-	
+
+<!-- 	 <listener> -->
+<!--         <listener-class>co.maeumi.prj.visitor.service.Visitor</listener-class> -->
+<!--     </listener> -->
+
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

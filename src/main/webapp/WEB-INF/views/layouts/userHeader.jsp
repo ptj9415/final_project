@@ -58,7 +58,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-	background: rgba(0, 0, 0, 0.10);
+	background: rgba(236, 236, 236, 0.329);
 }
 
 nav ul li:hover>ul {
@@ -94,6 +94,7 @@ nav ul ul {
 nav ul ul li {
 	float: none;
 	position: relative;
+	width: 200px;
 }
 
 nav ul ul li a {
@@ -117,19 +118,36 @@ span.top-nav-admin {
 
 	<nav class="navbar top" id="top-nav">
 
-		<c:if test="${email ==null }">
-			<span class="top-nav-admin"><a href="loginForm.do">login</a></span>
+		<c:if test="${empty c_email && empty email}">
+			<span class="top-nav-admin"><a href="loginForm.do"
+				style="margin-right: 10px; font-size: 11px; color: #153e54">로그인</a></span>
 		</c:if>
-		<c:if test="${email !=null }">
-			<span class="top-nav-admin"><a href="logout.do">logout</a></span>
+		<c:if test="${not empty email}">
+			<span class="top-nav-admin" style="font-size: 12px; color: #153e54">
+				<i class="fa fa-user"> </i> ${nickname } 님 환영합니다 <a href="logout.do"
+				style="margin-left: 10px; font-size: 11px; color: #153e54">로그아웃</a>
+			</span>
 		</c:if>
-
-		<span class="top-nav-admin"><a href="counselormypage.do">counselor
+				<c:if test="${not empty c_email}">
+			<span class="top-nav-admin" style="font-size: 12px; color: #153e54">
+				<i class="fa fa-user"> </i> ${c_name } 님 환영합니다 <a href="logout.do"
+				style="margin-left: 10px; font-size: 11px; color: #153e54">로그아웃</a>
+			</span>
+		</c:if>
+		<c:if test="${c_admin eq 'A' }">
+			<span class="top-nav-admin" style="font-size: 11px;"> <a
+				href="adminHome.do">🅰️관리자 화면 바로가기</a></span>
+		</c:if>
+				<c:if test="${c_admin eq 'C' }">
+			<span class="top-nav-admin" style="font-size: 11px;"> <a
+				href="counselorMyPageMain.do">🅰️상담사 화면 바로가기</a></span>
+		</c:if>
+		<!-- <span class="top-nav-admin"><a href="counselormypage.do">counselor
 				👨‍⚕️</a></span> <span class="top-nav-admin"><a href="adminbootstrap.do">admin
-				⚙</a></span>
+				⚙</a></span> -->
 	</nav>
 	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
 			<a href="home.do"><img src="resources/user/images/MaeumiLogo.png"
@@ -139,13 +157,12 @@ span.top-nav-admin {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			<span class="top-nav-admin"> <a href="adminHome.do">관리자
-					화면으로 이동</a></span>
+
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
 						<ul class="drop-down-menu" id="drop-first">
-							<li><a href="userPersonalCounsel.do">개인상담</a></li>
+							<li><a href="testpg.do">개인상담</a></li>
 							<li><a href="userGroupCounsel.do">그룹상담</a></li>
 						</ul></li>
 
@@ -153,18 +170,21 @@ span.top-nav-admin {
 						<ul class="drop-down-menu" id="drop-second">
 							<li><a href="mbti.do">미니 MBTI 검사</a></li>
 							<li><a href="selfEsteem.do">자존감 검사</a></li>
-							<li><a href="simri.do">심리검사</a></li>
-							<li><a href="#">심리검사 3</a></li>
+							<li><a href="simri.do">우울증 검사</a></li>
 						</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="drop-down-menu" id="drop-third">
-							<li><a href="userNoticeList.do">공지사항</a></li>
 							<li><a href="userTodayStory.do">오늘의 한마디</a></li>
 							<li><a href="userBoardList.do">자유게시판</a></li>
 							<li><a href="userTerapy.do">심리 테라피</a></li>
 						</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link">고객센터</a>
+						<ul class="drop-down-menu" id="drop-third">
+							<li><a href="userNoticeList.do">공지사항</a></li>
+							<li><a href="userFaq.do">FAQ</a></li>
+						</ul></li>
 					<!-- 마이페이지 영역은 세션값 가지고 있는 사람에게만 보이도록 추후 수정해야 함. -->
-					<li class="nav-item"><a href="userMypage.do" class="nav-link">마이페이지</a></li>
+					<li class="nav-item"><a href="userMypages.do" class="nav-link">마이페이지</a></li>
 				</ul>
 			</div>
 		</div>

@@ -123,6 +123,24 @@ public class MemberServiceImpl implements MemberService {
 		return map.ajaxUpdatePhone(mvo);
 	}
 
+	@Override
+	public MemberVO memberFindPassword(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.memberFindPassword(mvo);
+	}
+
+	@Override
+	public int passwordUpdate(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.passwordUpdate(mvo);
+	}
+
+	@Override
+	public int memberLeave(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return map.memberLeave(mvo);
+	}
+
 
 	
 }

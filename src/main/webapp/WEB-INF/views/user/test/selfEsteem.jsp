@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.pb-2, .py-2{
+	margin-top:100px;
+	margin-right:auto;
+	margin-left:auto;
+	width:80%;
+}
+.selfesteem{
+	margin-right:auto;
+	margin-left:auto;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 		<!-- CSS -->
@@ -40,24 +52,10 @@
 		</script>
 </head>
 <body>
-<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/todayStory.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">심리검사</h1>
-					<br>
-					<p class="breadcrumbs">
-						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
-				
-					</p>
-				</div>
-			</div>
-		</div>
-
+		<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/test.png" id="bannerimg">
 	</section>
+<<<<<<< HEAD
 		<div class="today-container">
 			<div class="container">
 				<div class="row justify-content-start mb-5 pb-2">
@@ -74,10 +72,31 @@
 							
 						</div>
 					</div>
+=======
+	<div class="selfesteem">
+	<div class="container">
+		<div class="row justify-content-start mb-5 pb-2">
+			<div
+				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
+				<span class="subheading subheading-with-line"><small
+					class="pr-2 bg-white">MAEUMI</small></span>
+				<h2 class="mb-4">자존감검사</h2>
+			</div>
+			<div
+				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
+				<div class="pl-md-4 border-line">
+					<p style="font-weight:bold;"> 현재 나의 자존감 상태는 어떨까?
+					<p style="font-size:0.7rem">소요시간 약 3분</p>
+					<br>
+					<p>"넌 오늘 정말 잘했다. 실수하지 않아서가 아니라 포기하지 않아서.</p>
+					<p>뒤처지지 않아서가 아니라 멈춰 서지 않아서"</p>
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 				</div>
 			</div>
 		</div>
-	<!-- modal contents start -->
+	</div>
+	</div>
+
 
 	<div id="wrap">
 			<header id="header"></header>
@@ -90,7 +109,7 @@
 						<p>나의 자존감 상태는 어떨까?</p>
 					</h3>
 					<div>
-						<img src="resources/user/img/main.png" class="main_img" />
+						<img src="resources/user/images/selfEsteemMain.png" class="main_img" />
 					</div>
 					<span class="time_logo"></span>
 					<p>소요 시간 : 3분 내외</p>
@@ -99,7 +118,9 @@
 					<button class="start">검사하기</button>
 				</div>
 				
-				
+				<div class="start-wrap">
+					<button class="start">검사하기</button>
+				</div>
 			</section>
 
 			<section id="qna" class="container">
@@ -135,7 +156,11 @@
 						></script>
 					</div>
 					<!-- 이후에 추가할 것, 공유하기(혹은 복사), copyright에 대한 설명 등 -->
+<<<<<<< HEAD
 					<div class="hash">#심리테스트 #자존감테스트</div>
+=======
+					<div class="hash">#마으미 #심리검사 #자존감테스트</div>
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 
 					<button class="btn Urlcopy" onclick="javascript:copy()">
 						사이트 링크 복사하기
@@ -163,10 +188,19 @@
 				
 				<footer id="footer">
 				<div class="foot">
+<<<<<<< HEAD
 					<span class="highlight">Kusitms 22nd.</span>
 					© 2022
+=======
+					<span class="highlight"></span>
+					
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 					<p class="author">
+<<<<<<< HEAD
 						final project maeumi
+=======
+						
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 					</p>
 				</div>
 			</footer>

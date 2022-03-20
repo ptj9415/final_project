@@ -21,6 +21,7 @@ import co.maeumi.prj.order.service.order_datailVO;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.service.Search;
 import co.maeumi.prj.todayreply.service.TodayreplyService;
 import co.maeumi.prj.todayreply.service.TodayreplyVO;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
@@ -51,6 +52,7 @@ public class EjuController {
 	Pagination page; // 전역변수로 선언해준것
 
 	/* =====사용자 화면===== */
+	
 	//심리검사-자존감검사
 	@RequestMapping("/selfEsteem.do")
 	public String selfEsteem() {
@@ -70,10 +72,14 @@ public class EjuController {
 		String test = request.getParameter("onecheck");
 		System.out.println("step2 : " + test);
 		vo.setCcg_subname(test);
+		PersonalcounselVO gvo = personalCounselDao.CounselorSelect(vo);  //상담 상세내용
+		System.out.println(vo.getC_email());
+		List<PersonalcounselVO> subNameList = personalCounselDao.SubnameSelectList(vo);//상담사가 갖고있는 카테고리 리스트
 		List<PersonalcounselVO> counselorList = personalCounselDao.CounselorSelectList(vo);
+		model.addAttribute("subNameList",subNameList);
 		model.addAttribute("counselorList", counselorList);
 		model.addAttribute("type", test);
-		
+		model.addAttribute("counselorSelect", gvo);
 		return "user/personalcounsel/personalCounselStep2";
 	}
 	// 상담사 자세히 보기 
@@ -121,11 +127,16 @@ public class EjuController {
 		vo = personalCounselDao.CounselorSelect(vo);
 
 		String type3 = request.getParameter("c-type");
-		System.out.println("방식,가격 : " + type3);
-		model.addAttribute("type3", type3); //방식,가격
-		model.addAttribute("type2",type2); //주제
+		int num = type3.indexOf("/");
+		String pr_type = type3.substring(num+1);
+		type3 = type3.substring(0,num);
+		
+		System.out.println("가격 : " + type3);
+		System.out.println("방식 : " + pr_type);
+		model.addAttribute("type3", type3); //가격
+		model.addAttribute("type2", type2); //주제
 		model.addAttribute("c_email", c_email); //회원이메일
-
+		model.addAttribute("pr_type", pr_type); //방식
 		return "user/personalcounsel/personalCounselStep4";
 	}
 
@@ -140,7 +151,11 @@ public class EjuController {
 		times = times +1;
 		String timess = String.valueOf(times);
 		time = time + timess;
-		
+		if (time.length() == 3) {
+			time = "0"+time;
+		}
+		String pr_type = vo.getPr_type();
+		String pr_date = vo.getPr_date();
 		System.out.println("==========================");
 		System.out.println(time);
 		System.out.println("application"+ c_email);
@@ -160,29 +175,39 @@ public class EjuController {
 		model.addAttribute("type3",type3);
 		model.addAttribute("counselorSelect", vo);
 		model.addAttribute("coupon",list);
-		
+		model.addAttribute("pr_type", pr_type);
+		model.addAttribute("pr_date", pr_date);
 		return "user/personalcounsel/personalCounselApplication";
 
 	}
 	
 	//결제완료 페이지
 	@RequestMapping("/paymentComplete.do")
-	public String paymentComplete(PersonalcounselVO vo, Model model,order_datailVO ovo, CouponVO cvo) {
-		vo.setM_email("3244509a@gmail.com");
+	public String paymentComplete(PersonalcounselVO vo, Model model,order_datailVO ovo, CouponVO cvo,HttpServletRequest request, HttpSession session) {
+		vo.setM_email((String)session.getAttribute("email"));
 		int num = personalCounselDao.personalCounselInsert(vo);
+		System.out.println(vo.getC_email());
 		if (num == 1) {
 			int max = personalCounselDao.personalMax();
 			System.out.println(max);
 			ovo.setPr_no(max);
 			ovo.setOr_price(vo.getPr_price());
+			ovo.setOr_type(vo.getPr_type());
+			ovo.setC_email(vo.getC_email());
+			ovo.setM_email((String)session.getAttribute("email"));
+			ovo.setM_nickname((String)session.getAttribute("nickname"));
 			orderDao.orderPersonalInsert(ovo);
 			vo.setPr_no(max);
 			PersonalcounselVO result = personalCounselDao.counselorResultSelect(vo);
 			model.addAttribute("result",result);
 			System.out.println(cvo.getC_no());
 			//쿠폰 적용 후 삭제하는 메소드
-			//couponDao.couponDelete(cvo);
-			
+			String c_no = request.getParameter("c_no");
+	         int c_nos = Integer.parseInt(c_no);
+	         System.out.println(c_nos);
+	         if (c_nos != 0) {
+	            //couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+	         }
 		}
 		
 		return "user/personalcounsel/paymentComplete";
@@ -241,9 +266,35 @@ public class EjuController {
 
 	// 개인상담 관리 메인화면
 	@RequestMapping("/counselorPersonalList.do")
-	public String counselorPersonalList(Model model, PersonalcounselVO vo, HttpServletRequest request) {
-		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselList(vo);
-		model.addAttribute("PersonalCounselList",list);
+	public String counselorPersonalList(Model model, HttpServletRequest request, 
+				@RequestParam(required = false, defaultValue = "1") int page,
+				@RequestParam(required = false, defaultValue = "1") int range,
+				@RequestParam(required = false, defaultValue = "all") String pr_type,
+				@RequestParam(required = false, defaultValue = "") String pr_date,
+				@RequestParam(required = false, defaultValue = "all") String pr_status,
+				@RequestParam(required = false, defaultValue = "all") String ccg_subname,
+				@RequestParam(required = false, defaultValue = "") String m_nickname, Search svo
+			) throws Exception {
+		
+		model.addAttribute("search",svo);
+		svo.setPr_type(pr_type);
+		svo.setPr_date(pr_date);
+		svo.setPr_status(pr_status);
+		svo.setM_nickname(m_nickname);
+		svo.setCcg_subname(ccg_subname);
+		
+		int listCnt = personalCounselDao.getPRListCnt(svo);
+		System.out.println(listCnt);
+		svo.pageinfo(page, range, listCnt);
+		
+		model.addAttribute("pagination", svo);
+		List<PersonalcounselVO> list = personalCounselDao.prSearchSelect(svo);
+		/*
+		 * for (int i = 0; i < list.size(); i++) { String date =
+		 * list.get(i).getPr_date(); date = date.substring(0, 10);
+		 * list.get(i).setPr_date(date); };
+		 */
+		model.addAttribute("personalCounel", list);
 		return "counselor/personalcounselmanage/counselorPersonalList";
 	}
 
@@ -349,5 +400,5 @@ public class EjuController {
 		return "redirect:adminTodayStoryList.do";
 
 	}
-
+	
 }

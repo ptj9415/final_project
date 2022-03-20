@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -234,11 +233,6 @@ img {
 	width: 30%;
 }
 
-
-
-
-
-
 /*detail start*/
 .row{
 	margin-bottom:100px;
@@ -429,19 +423,8 @@ img {
 </style>
 </head>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 style="color: white">그룹상담</h1>
-				</div>
-			</div>
-		</div>
-
+		<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/groupcounsel.png" id="bannerimg">
 	</section>
 	<div class="container">
 		<div class="row justify-content-start mb-5 pb-2">
@@ -454,32 +437,29 @@ img {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>다치기 쉬운 것이 사람의 마음이지요.오랫동안 익명의 상담을<br>
+					   통해 고통 가운데 있는 사람들이 정말 많음을 보게 됩니다.<br>
+					   마으미 그룹 상담을 통해서 여러분의 마음을 치유해 드립니다. </p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
 			<div class="md-step-title">step1</div>
-			<div class="md-step-optional">그룹 상담 프로그램 선택</div>
+			<div class="md-step-optional">카테고리 및 상담사 검색</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active editable">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
 			<div class="md-step-title">step2</div>
-			<div class="md-step-optional">그룹 상담 상세 목록</div>
+			<div class="md-step-optional">상담 디테일</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -488,12 +468,20 @@ img {
 				<span>3</span>
 			</div>
 			<div class="md-step-title">step3</div>
-			<div class="md-step-optional">그룹 상담 결제</div>
+			<div class="md-step-optional">결제 정보</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
+		</div>
+		<div class="md-step">
+			<div class="md-step-circle">
+				<span>4</span>
+			</div>
+			<div class="md-step-title">step4</div>
+			<div class="md-step-optional">결제 완료</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
 	</div>
-
     <!-- Main content -->
     <section class="content">
 
@@ -508,66 +496,25 @@ img {
                		 ${userGroup.gc_infos}
               </div>
             </div>
-            <div class="col-12 col-sm-5">
+            <div class="col-12 col-sm-4">
               <img alt="" style="width:600px; height:200px;" src="resources/user/images/sample.jpg">
-              <div style="width:600px; height:60px; float: left;">
-				<h4>그룹 상담 주제 : &nbsp;&nbsp;${userGroup.gc_title }</h4>
-			  </div>
-			  <div>&nbsp;&nbsp;&nbsp;</div>
-			  <hr style="width:600px; float:left;">
-              <div style="width:300px; height:60px; float: left;">
-				<h4>상담사 이름 : </h4>
-			  </div>
-			  <div style="width:220px; height:60px; float: right;">
-				<h4>${userGroup.gc_name}</h4>
-			  </div>
-              <div style="width:310px; height:60px; float: left;">
-				<h4>참여 인원 : </h4>
-			  </div>
-			  <div style="width:370px; height:60px; float: right;">
-				<h4>최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명 </h4>
-			  </div>
-			  <div style="width:400px; height:60px; float: left;">
-				<h4>신청 인원 : </h4>
-			  </div>
-			  <div style="width:190px; height:60px; float: right;">
-				<h4>${userGroup.gc_person}명 </h4>
-			  </div>
-			  <div style="width:300px; height:60px; float: left;">
-				<h4>신청 날짜 : </h4>
-			  </div>
-			  <div style="width:280px; height:60px; float: right;">
-				<h4>${userGroup.gc_date} </h4>
-			  </div>
-			  <div style="width:330px; height:60px; float: left;">
-				<h4>상담 가격 : </h4>
-			  </div>
-			  <div style="width:240px; height:60px; float: right;">
-				<h4>${userGroup.gc_price}원</h4>
-			  </div>
-              <div style="width:400px; float: left;"></div>
-              <div style="width:240px; height:60px; float: right;" class="mt-4">
+		              <h3 class="my-3">그룹 상담 주제 : <span style="float:right">${userGroup.gc_title }</span></h3>
+              		  <h3 class="my-3">상담사 이름 : <span style="float:right">${userGroup.gc_name}</span></h3>
+              		  <h3 class="my-3">참여 인원 : <span style="float:right">최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명</span></h3>
+              		  <h3 class="my-3">신청 인원 : <span style="float:right">${userGroup.gc_person}명</span></h3>
+              		  <h3 class="my-3">신청 날짜 : <span style="float:right">${userGroup.gc_date}</span></h3>
+              		  <h3 class="my-3">상담 가격 : <span style="float:right">${userGroup.gc_price}원</span></h3>
+              <div style="width:500px; float: left;"></div>
+              <div style="width:100px; height:60px; float: right;" class="mt-4">
 				 <button id="btn" onclick="func('${userGroup.gc_no}')" class="apply-btn">신청하기</button>
 			  </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-              <div class="nav nav-tabs" id="product-tab" role="tablist">
-                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
-                <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
-                <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
-              </div>
-
-            <div class="tab-content p-3" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vitae condimentum erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed posuere, purus at efficitur hendrerit, augue elit lacinia arcu, a eleifend sem elit et nunc. Sed rutrum vestibulum est, sit amet cursus dolor fermentum vel. Suspendisse mi nibh, congue et ante et, commodo mattis lacus. Duis varius finibus purus sed venenatis. Vivamus varius metus quam, id dapibus velit mattis eu. Praesent et semper risus. Vestibulum erat erat, condimentum at elit at, bibendum placerat orci. Nullam gravida velit mauris, in pellentesque urna pellentesque viverra. Nullam non pellentesque justo, et ultricies neque. Praesent vel metus rutrum, tempus erat a, rutrum ante. Quisque interdum efficitur nunc vitae consectetur. Suspendisse venenatis, tortor non convallis interdum, urna mi molestie eros, vel tempor justo lacus ac justo. Fusce id enim a erat fringilla sollicitudin ultrices vel metus. </div>
-              <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> Vivamus rhoncus nisl sed venenatis luctus. Sed condimentum risus ut tortor feugiat laoreet. Suspendisse potenti. Donec et finibus sem, ut commodo lectus. Cras eget neque dignissim, placerat orci interdum, venenatis odio. Nulla turpis elit, consequat eu eros ac, consectetur fringilla urna. Duis gravida ex pulvinar mauris ornare, eget porttitor enim vulputate. Mauris hendrerit, massa nec aliquam cursus, ex elit euismod lorem, vehicula rhoncus nisl dui sit amet eros. Nulla turpis lorem, dignissim a sapien eget, ultrices venenatis dolor. Curabitur vel turpis at magna elementum hendrerit vel id dui. Curabitur a ex ullamcorper, ornare velit vel, tincidunt ipsum. </div>
-              <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> Cras ut ipsum ornare, aliquam ipsum non, posuere elit. In hac habitasse platea dictumst. Aenean elementum leo augue, id fermentum risus efficitur vel. Nulla iaculis malesuada scelerisque. Praesent vel ipsum felis. Ut molestie, purus aliquam placerat sollicitudin, mi ligula euismod neque, non bibendum nibh neque et erat. Etiam dignissim aliquam ligula, aliquet feugiat nibh rhoncus ut. Aliquam efficitur lacinia lacinia. Morbi ac molestie lectus, vitae hendrerit nisl. Nullam metus odio, malesuada in vehicula at, consectetur nec justo. Quisque suscipit odio velit, at accumsan urna vestibulum a. Proin dictum, urna ut varius consectetur, sapien justo porta lectus, at mollis nisi orci et nulla. Donec pellentesque tortor vel nisl commodo ullamcorper. Donec varius massa at semper posuere. Integer finibus orci vitae vehicula placerat. </div>
             </div>
           </div>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <input type="hidden" name="c_email" id="c_email" value="${c_email}">
     </section>
     <!-- /.content -->
 <!-- ./wrapper -->
@@ -590,7 +537,8 @@ img {
 </script>
       <script type="text/javascript">
 		function func(gc_no){
-			location.href = "usergroupinvoice.do?gc_no="+gc_no;
+			var c_email = $("#c_email").val();
+			location.href = "usergroupinvoice.do?gc_no="+gc_no+"&c_email="+c_email;
 		}
 	</script>
 </body>

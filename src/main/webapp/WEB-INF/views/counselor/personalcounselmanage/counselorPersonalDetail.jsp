@@ -193,6 +193,18 @@ table>tbody>tr>th {
 	height: 30px;
 	border: 0.5px solid rgb(210, 210, 210);
 }
+.text-area{
+	height: 214px;
+    width: 600px;
+    border: none;
+    resize: none;
+}
+.text-area:focus{
+	outline:0;
+}
+.table td, .table th{
+	vertical-align:inherit;
+}
 </style>
 </head>
 <body>
@@ -269,7 +281,62 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</section>
-	<section>
+	<section class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">
+							상담 일지
+							<button type="button" class="minusbtn" id="minusbtn1">
+								<i id="minusicon1" class="fa fa-minus"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="maindiv1">
+				<div class="col-12">
+					<div class="card">
+						<form method="post" id="form">
+							<div class="card-body table-responsive p-00">
+								<table class="table text-nowrap" id="infotable">
+									<tr>
+										<th>상담일지</th>
+										<td style="width:80%;"><textarea readonly class="text-area">${counselDetail.pc_report}</textarea></td>
+
+										
+									</tr>
+									<tr>
+
+										<th>진단내용</th>
+										<td style="width:80%;"><textarea readonly class="text-area">${counselDetail.pc_result }</textarea></td>
+
+										
+									</tr>
+								
+								</table>
+								
+								<br>
+							<div class="btndiv">
+								<button type="button"
+									onclick="deleteFnc('${counselDetail.pr_no}')" id="deletebtn">삭제</button>
+								<span type="button" class="btn btn-default"
+									id="updatesubmit-btn" data-toggle="modal"
+									onclick="updateFnc(${counselDetail.pr_no})">상담일지수정</span>
+								<button type="button" id="backbtn"
+									onclick="location.href='counselorPersonalList.do'">돌아가기</button>
+							</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<%-- <section>
 		<div>
 			<div class="row">
 				<div class="col-md-12 offset-md-0">
@@ -286,11 +353,11 @@ table>tbody>tr>th {
 
 								<tr>
 									<th style="height: 250px;">상담일지</th>
-									<td colspan="5">${counselDetail.pc_report}</td>
+									<td colspan="5"><textarea readonly class="text-area">${counselDetail.pc_report}</textarea></td>
 								</tr>
 								<tr>
 									<th style="height: 250px;">진단내용</th>
-									<td colspan="5">${counselDetail.pc_result }</td>
+									<td colspan="5"><textarea readonly class="text-area">${counselDetail.pc_result }</textarea></td>
 								</tr>
 							</table>
 							<br>
@@ -310,7 +377,7 @@ table>tbody>tr>th {
 		</div>
 	</section>
 
-
+ --%>
 	<!-- 수정 모달 시작 -->
 	<div class="modal fade" id="updatemodal-lg" style="display: none">
 		<div class="modal-dialog modal-lg">

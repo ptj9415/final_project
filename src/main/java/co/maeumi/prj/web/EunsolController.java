@@ -48,7 +48,7 @@ public class EunsolController {
 	/* ===== 사용자 화면 ===== */
 
 	// 사용자 FAQ 메인화면
-	@PostMapping("/userFaq.do") /* == @RequestMapping의 줄임말 : Post로 RequestMapping 해줌 */
+	@RequestMapping("/userFaq.do")
 	public String userFaq(FaqVO vo, Model model) {
 		model.addAttribute("faqs", faqDao.faqSelectList());
 		
@@ -57,7 +57,7 @@ public class EunsolController {
 
 	// 사용자 자유게시판 메인화면
 	@RequestMapping("/userBoardList.do")
-	public String userBoardList(BoardVO vo, Model model, 
+	public String userBoardList(BoardVO vo, Model model, HttpSession session,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			@RequestParam(required = false, defaultValue = "") String b_title,
@@ -70,7 +70,8 @@ public class EunsolController {
 		int listCnt = boardDao.getUserBoardListCnt(svo);
 
 		svo.pageinfo(page, range, listCnt);
-
+		
+		vo.setB_email((String)session.getAttribute("email"));
 		model.addAttribute("pagination", svo);
 		model.addAttribute("board", boardDao.userBoardSearchSelect(svo));
 		
@@ -194,9 +195,12 @@ public class EunsolController {
 	// MBIT 
 	@RequestMapping("/mbti.do")
 	public String mbti() {
+		
 		return  "user/test/mbti";
 	}
-
+	
+	
+	
 	/* ===== 관리자 화면 ===== */
 
 	// 관리자 자유게시판 메인화면
@@ -310,7 +314,8 @@ public class EunsolController {
 	// FAQ 등록
 	@RequestMapping("/adminFaqResister.do")
 	public String faqResister(FaqVO vo, HttpSession session) {
-		vo.setF_email((String) session.getAttribute("email")); // 로그인 정보. 로그인 할 때 담는걸로 가져와야 함 !!
+		String c_email = (String)session.getAttribute("c_email");
+		vo.setF_email(c_email); // 로그인 정보. 로그인 할 때 담는걸로 가져와야 함 !!
 		faqDao.faqInsert(vo);
 		
 		return "redirect:adminFaqList.do";

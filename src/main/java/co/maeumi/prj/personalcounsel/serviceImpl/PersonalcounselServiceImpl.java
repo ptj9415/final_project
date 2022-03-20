@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselMapper;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
 import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
+import co.maeumi.prj.service.Search;
 
 @Repository("personalCounselDao")
 public class PersonalcounselServiceImpl implements PersonalcounselService {
@@ -40,6 +42,11 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 	}
 
 	@Override
+	public List<PersonalcounselVO> PersonalCounselCount(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.PersonalCounselCount(vo);
+	}
+	
 	public int personalCounselInsert(PersonalcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.personalCounselInsert(vo);
@@ -73,6 +80,50 @@ public class PersonalcounselServiceImpl implements PersonalcounselService {
 	public int PersonalCounselDelete(PersonalcounselVO vo) {
 		// TODO Auto-generated method stub
 		return map.PersonalCounselDelete(vo);
+
 	}
 
+	@Override
+	public List<PersonalcounselVO> PersonalCounselSales(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.PersonalCounselSales(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> searchSalesData(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchSalesData(vo);
+
+	}
+	@Override
+	public int getPRListCnt(Search svo) {
+		// TODO Auto-generated method stub
+		return map.getPRListCnt(svo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> prSearchSelect(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.prSearchSelect(svo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> searchCounselData(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchCounselData(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> searchCounselData2(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.searchCounselData2(vo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> CounselorList(PersonalcounselVO vo) {
+		// TODO Auto-generated method stub
+		return map.CounselorList(vo);
+	}
+
+	
 }

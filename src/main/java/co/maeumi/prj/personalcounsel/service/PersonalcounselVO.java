@@ -38,11 +38,20 @@ public class PersonalcounselVO {
 	private String pr_date;
 	private String pr_price;
 	private String pr_time;
-	private int pr_status;
+	private String pr_status;
 	private String pr_type;
 	private String pc_report;
 	private String pc_result;
 	private String m_nickname;
+
+	
+	private int prCount;
+	private int prSum;
+	private int sendMonth;
+	
+
 	private String m_email;
+	private String pr_count;
+
 	
 }

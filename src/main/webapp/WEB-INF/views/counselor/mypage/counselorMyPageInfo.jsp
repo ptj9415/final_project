@@ -115,6 +115,42 @@ h3 {
 	background-color: #EB4646;
 	color: white;
 }
+
+#method {
+	float: left;
+	margin-right: 25px;
+}
+
+#category {
+	float: left;
+	width: 80px;
+	margin-right: 25px;
+	border: 1px solid rgb(222, 226, 230);
+	border-radius: 5px;
+	color: rgb(222, 226, 230);
+	cursor: pointer;
+}
+
+#categoryselected {
+	float: left;
+	width: 80px;
+	margin-right: 25px;
+	border: 1px solid #1E90FF;
+	border-radius: 5px;
+	color: white;
+	background-color: #1E90FF;
+	cursor: pointer;
+}
+
+#kakao, #zoom, #phone, #won1, #won2, #won3 {
+	color: rgb(222, 226, 230);
+}
+
+#kakaoprice, #zoomprice, #phoneprice {
+	border: 1px solid rgb(222, 226, 230);
+	width: 90px;
+	text-align: right;
+}
 </style>
 </head>
 <body>
@@ -136,10 +172,10 @@ h3 {
 						<div class="card-body table-responsive p-00">
 							<form method="post" enctype="multipart/form-data" id="form">
 								<div class="headshotdiv">
-									<img src="img/counselorpicture/${counselor.c_picturepath }"
+									<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
 										class="preImage" id="preImage" name="preImage"
 										style="height: 228px; width: 171px;"
-										onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';">
+										onerror="this.src='img/counselorpicture/errorprofile.jpg';">
 									<br>
 									<!-- 파일 업로드 부분 추가됐습니다. 사이드바 컨텐츠 밑에 <div class="card-body box-profile">  -->
 								</div>
@@ -178,6 +214,61 @@ h3 {
 								</div>
 							</form>
 							<br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<br>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 offset-md-0">
+					<div class="card">
+						<p id="headerp">상담 방식</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body table-responsive p-00">
+							<table class="table text-nowrap" id="gradetable">
+								<tr>
+									<th>상담 방법</th>
+									<td><div id="method"><input type="checkbox" id="kakaochk" onclick="checkMethod();"<c:if test="${price.p_kakao eq '1'}"> checked</c:if>>&nbsp;&nbsp;<span id="kakao">카카오톡(텍스트)</span>&nbsp;&nbsp;<input type="text" id="kakaoprice" <c:if test="${price.p_kakaoprice ne '0'}"> value="${price.p_kakaoprice }"</c:if> disabled><span id="won1">원</span></div>
+										<div id="method"><input type="checkbox" id="zoomchk"" onclick="checkMethod();"<c:if test="${price.p_zoom eq '1'}"> checked</c:if>>&nbsp;&nbsp;<span id="zoom">Zoom(화상)</span>&nbsp;&nbsp;<input type="text" id="zoomprice" <c:if test="${price.p_zoomprice ne '0'}"> value="${price.p_zoomprice }"</c:if> disabled><span id="won2">원</span></div>
+										<div id="method"><input type="checkbox" id="phonechk" onclick="checkMethod();"<c:if test="${price.p_phone eq '1'}"> checked</c:if>>&nbsp;&nbsp;<span id="phone">전화</span>&nbsp;&nbsp;<input type="text" id="phoneprice" <c:if test="${price.p_phoneprice ne '0'}"> value="${price.p_phoneprice }"</c:if> disabled><span id="won3">원</span></div></td>
+								</tr>
+								<tr>
+									<th>상담 카테고리</th>
+									<td><div class="category" id="category" name="type1">분노/우울</div>
+										<div class="category" id="category" name="type2">연애/우정</div>
+										<div class="category" id="category" name="type3">진로/취업</div>
+										<div class="category" id="category" name="type4">결혼/육아</div>
+										<div class="category" id="category" name="type5">청소년</div>
+										<div class="category" id="category" name="type6">가정</div></td>
+								</tr>
+							</table>
+							<form id="cateform" method="post" action="catesubmit.do">
+								<input type="hidden" name="c_email" id="c_email" value="${counselor.c_email }">
+								<input type="hidden" name="p_kakao" id="p_kakao" value="${price.p_kakao }">
+								<input type="hidden" name="p_kakaoprice" id="p_kakaoprice" value="${price.p_kakaoprice }">
+								<input type="hidden" name="p_zoom" id="p_zoom" value="${price.p_zoom }">
+								<input type="hidden" name="p_zoomprice" id="p_zoomprice" value="${price.p_zoomprice }">
+								<input type="hidden" name="p_phone" id="p_phone" value="${price.p_phone }">
+								<input type="hidden" name="p_phoneprice" id="p_phoneprice" value="${price.p_phoneprice }">
+								<input type="hidden" name="c_type1" id="c_type1" value="${counselor.c_type1 }">
+								<input type="hidden" name="c_type2" id="c_type2" value="${counselor.c_type2 }">
+								<input type="hidden" name="c_type3" id="c_type3" value="${counselor.c_type3 }">
+								<input type="hidden" name="c_type4" id="c_type4" value="${counselor.c_type4 }">
+								<input type="hidden" name="c_type5" id="c_type5" value="${counselor.c_type5 }">
+								<input type="hidden" name="c_type6" id="c_type6" value="${counselor.c_type6 }">
+								<div class="btndiv">
+									<button type="button" onclick="catesubmit()" id="submitbtn">등록</button>
+								</div>							
+							</form>
 						</div>
 					</div>
 				</div>
@@ -237,7 +328,8 @@ h3 {
 												</c:if>
 												<c:if test="${apply.cu_status eq '반려' }">
 													<td><button type="button" id="rejectbtn"
-															data-toggle="modal" data-target="#modal-lg" data-reason="${apply.cu_rejection }">반려사유</button></td>
+															data-toggle="modal" data-target="#modal-lg"
+															data-reason="${apply.cu_rejection }">반려사유</button></td>
 												</c:if>
 											</tr>
 										</c:forEach>
@@ -333,7 +425,7 @@ h3 {
 								<input type="text" style="height: 100px" class="form-control"
 									id="cu_rejections" name="cu_rejection" value="">
 							</div>
-						</div>						
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer justify-content-between">
@@ -343,11 +435,188 @@ h3 {
 		</div>
 	</div>
 	<script>
+	$(document).ready(function() {
+		if($('#p_kakao').val() == '1' ) {
+			$('#kakao').css('color','black');
+			$('#won1').css('color','black');
+			$('#kakaoprice').removeAttr('disabled');
+		}
+		
+		if($('#p_zoom').val() == '1' ) {
+			$('#zoom').css('color','black');
+			$('#won2').css('color','black');
+			$('#zoomprice').removeAttr('disabled');
+		}
+		
+		if($('#p_phone').val() == '1' ) {
+			$('#phone').css('color','black');
+			$('#won3').css('color','black');
+			$('#phoneprice').removeAttr('disabled');
+		}
+		
+		if($('#c_type1').val() == '1') {
+			$('div[name=type1]').attr('id', 'categoryselected');
+		}
+		
+		if($('#c_type2').val() == '1') {
+			$('div[name=type2]').attr('id', 'categoryselected');
+		}
+		
+		if($('#c_type3').val() == '1') {
+			$('div[name=type3]').attr('id', 'categoryselected');
+		}
+		
+		if($('#c_type4').val() == '1') {
+			$('div[name=type4]').attr('id', 'categoryselected');
+		}
+		
+		if($('#c_type5').val() == '1') {
+			$('div[name=type5]').attr('id', 'categoryselected');
+		}
+		
+		if($('#c_type6').val() == '1') {
+			$('div[name=type6]').attr('id', 'categoryselected');
+		}
+		
+		
+	});
+	
+		function catesubmit() {
+			var p_kakaoprice = $('#kakaoprice').val();
+			var p_zoomprice = $('#zoomprice').val();
+			var p_phoneprice = $('#phoneprice').val();
+			
+			if (p_kakaoprice != '') {
+				$('#p_kakaoprice').val(p_kakaoprice);
+				$('#p_kakao').val('1');
+			} else {
+				$('#p_kakao').val('0');
+			}
+			if(p_zoomprice != '') {
+				$('#p_zoomprice').val(p_zoomprice);
+				$('#p_zoom').val('1');
+			} else {
+				$('#p_zoom').val('0');
+			}
+			if(p_phoneprice != '') {
+				$('#p_phoneprice').val(p_phoneprice);
+				$('#p_phone').val('1');
+			} else {
+				$('#p_phone').val('0');
+			}
+			
+			$('#cateform').submit();
+			
+		}
+	
+		function checkMethod() {			
+			if($('#kakaochk').is(':checked') == true) {
+				$('#kakao').css('color', 'black');
+				$('#won1').css('color','black');
+				$('#kakaoprice').removeAttr('disabled');
+			} else {
+				$('#kakao').css('color', 'rgb(222, 226, 230)');
+				$('#won1').css('color','rgb(222, 226, 230)');
+				$('#kakaoprice').attr('disabled', true);
+				$('#kakaoprice').val('');
+				$('#p_kakaoprice').val('0');
+				$('#p_kakao').val('0');
+			}
+			
+			if($('#zoomchk').is(':checked') == true) {
+				$('#zoom').css('color', 'black');
+				$('#won2').css('color','black');
+				$('#zoomprice').removeAttr('disabled');	
+			} else {
+				$('#zoom').css('color', 'rgb(222, 226, 230)');
+				$('#won2').css('color','rgb(222, 226, 230)');
+				$('#zoomprice').attr('disabled', true);
+				$('#zoomprice').val('');
+				$('#p_zoomprice').val('0');
+				$('#p_zoom').val('0');
+			}
+			
+			if($('#phonechk').is(':checked') == true) {
+				$('#phone').css('color', 'black');
+				
+				$('#won3').css('color','black');
+				$('#phoneprice').removeAttr('disabled');	
+			} else {
+				$('#phone').css('color', 'rgb(222, 226, 230)');
+				$('#won3').css('color','rgb(222, 226, 230)');
+				$('#phoneprice').attr('disabled', true);
+				$('#phoneprice').val('');
+				$('#p_phoneprice').val('0');
+				$('#p_phone').val('0');
+			}
+		}
+		
+	
+		$('div[name=type1]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type1').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type1').val('0');
+			}
+		});
+		
+		$('div[name=type2]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type2').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type2').val('0');
+			}
+		});
+		
+		$('div[name=type3]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type3').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type3').val('0');
+			}
+		});
+		
+		$('div[name=type4]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type4').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type4').val('0');
+			}
+		});
+		
+		$('div[name=type5]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type5').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type5').val('0');
+			}
+		});
+		
+		$('div[name=type6]').on('click', function() {
+			if ($(this).attr('id') == 'category') {
+				$(this).attr('id', 'categoryselected');
+				$('#c_type6').val('1');
+			} else {
+				$(this).attr('id', 'category');
+				$('#c_type6').val('0');
+			}
+		});
+		
 		$(document).on('click', '#rejectbtn', function() {
 			var cu_rejection = $(this).data('reason');
 			$('#cu_rejections').val(cu_rejection);
 		});
-		
+
 		$('#minusbtn1').click(function() {
 			if ($('#maindiv1').css('display') == 'none') {
 				$('#maindiv1').show();

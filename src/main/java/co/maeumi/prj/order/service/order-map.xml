@@ -6,31 +6,37 @@
 					OR_NO,
 					OR_UID,
 					PR_NO,
-					GC_NO,
+					GR_NO,
 					OR_DATE,
 					OR_TYPE,
 					OR_PRICE,
 					M_NICKNAME,
-					M_EMAIL
+					M_EMAIL,
+					OR_STATUS,
+					c_email
 				)
 				VALUES(
 					(SELECT NVL(MAX(OR_NO),0)+1 FROM ORDER_DETAIL O),
 					#{or_uid},
 					0,
-					#{gc_no},
+					#{gr_no},
 					sysdate,
 					'0',
 					#{or_price},
-					'닉네임 세션값이 들어감',
-					'이메일 세션값이 들어감'						
+					#{m_nickname},
+					#{m_email},
+					'0',
+					#{c_email}						
 				)
 		</insert>
 		
 		<select id="selectorderList" parameterType="co.maeumi.prj.order.service.order_datailVO" resultType="co.maeumi.prj.order.service.order_datailVO">
-		  			SELECT O.OR_UID, C.GC_DATE, C.GC_TYPE, O.OR_DATE, O.OR_PRICE
-		  			FROM ORDER_DETAIL O JOIN GROUP_COUNSEL C
-					ON (O.GC_NO = C.GC_NO)
-		  			WHERE OR_NO = #{or_no}
+		  			SELECT *
+		  			FROM ORDER_DETAIL O JOIN GROUP_RESERVE C
+					ON (O.GR_NO = C.GR_NO)
+                    JOIN GROUP_COUNSEL D
+                    ON (C.GC_NO = D.GC_NO)
+                    WHERE OR_NO = #{or_no}
 		</select>
 		
 		<insert id="orderPersonalInsert">
@@ -38,12 +44,14 @@
                        or_no,
                        or_uid,
                        pr_no,
-                       gc_no,
+                       gr_no,
                        or_date,
                        or_type,
                        or_price,
                        m_nickname,
-                       m_email
+                       m_email,
+                       or_status,
+                       c_email
                 )
                 values(
                       (SELECT NVL(MAX(or_no),0)+1 FROM order_detail N),
@@ -51,10 +59,17 @@
                       #{pr_no},
                       0,
                       sysdate,
-                      '아직안옴',
+                      #{or_type},
                       #{or_price},
-                      '세션값 이름 입니다.',
-                      '세션값 이메일 입니다'
+                      #{m_nickname},
+					  #{m_email},
+                      '0',
+                      #{c_email}
                 )
 		</insert>
+		
+		<select id="MaxGroupOrder" resultType="int">
+		 		SELECT MAX(OR_NO) 
+		 		FROM ORDER_DETAIL
+		</select>
 </mapper>

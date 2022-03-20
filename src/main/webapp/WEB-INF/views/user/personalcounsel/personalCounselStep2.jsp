@@ -17,16 +17,7 @@
 <script
 	src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
 <style>
-/* html {
-	-webkit-font-smoothing: antialiased!important;
-	-moz-osx-font-smoothing: grayscale!important;
-	-ms-font-smoothing: antialiased!important;
-} */
-/* body {
-  font-family: 'Open Sans', sans-serif;
-  font-size:16px;
-  color:#555555; 
-} */
+
 .md-stepper-horizontal {
 	display: table;
 	width: 100%;
@@ -93,7 +84,7 @@
 }
 /*step2*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 /*step3*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
@@ -101,7 +92,7 @@
 }
 /*step4*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 
 .md-stepper-horizontal .md-step.active .md-step-circle {
@@ -186,32 +177,41 @@
 	margin-top: 100px;
 }
 
+/*next-btn*/
 #next-btn {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
+	float:right;
 }
 
 #next-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
+
+.next-btn-field {
+	
+	margin-bottom: 30px;
+	padding-left: 100px;
+}
+/*next btn end*/
 #detail-view{
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -219,8 +219,8 @@
 
 #detail-view:hover{
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -228,9 +228,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -238,8 +238,8 @@
 
 #previous-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -252,48 +252,167 @@
 /*next btn end*/
 
 /*counselor-list*/
-.counselor-list {
-	width: 70%;
-	margin-right: auto;
-	margin-left: auto;
-	margint-top: 50px;
-	padding-top: 100px
+
+/*상담사 리스트 스타일*/
+* {
+	box-sizing: border-box;
 }
 
-.staff .img {
-	height: 200px;
+.body-container {
+	/* background-color: #28223f; */
+	font-family: Montserrat, sans-serif;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	min-height: 100vh;
+	margin: 0;
 }
 
-.col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated {
-	border: solid 0.3px lightgray;
+h3 {
+	margin: 10px 0;
 }
 
-.btn btn-primary px-4 py-3 mt-3 {
-	heigth: 30px;
+h6 {
+	margin: 5px 0;
+	text-transform: uppercase;
 }
 
-#p_kakao_text{
-	border: 0px;
-	width:50%;
+p {
+	font-size: 14px;
+	line-height: 21px;
 }
 
-#p_zoom_text{
-	border: 0px;
-	width:50%;
+.card-container {
+	background-color: #231e39;
+	border-radius: 30px;
+	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+	color: #b3b8cd;
+	padding-top: 30px;
+	position: relative;
+	width: 350px;
+	max-width: 100%;
+	text-align: center;
+  margin: 30px;
 }
 
-#p_phone_text{
-	border:0px;
-	width:50%;
+.card-container .pro {
+	color: #231e39;
+	background-color: #febb0b;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 3px 7px;
+	position: absolute;
+	top: 30px;
+	left: 30px;
 }
 
-#check-btn{
-	width: 100px;
-    height: 50px;
-    border: 1px solid #468FB6;
-    background-color: white;
-    border-radius: 20px;
+.card-container .round {
+	border: 1px solid #8dacbd42;
+	border-radius: 50%;
+	padding: 7px;
 }
+div.buttons{
+	margin-bottom: 15px;
+    margin-top: 15px;
+    border: 1px solid #8dacbd42;
+    width: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 150px;
+    border-radius: 30px;
+}
+button.primary {
+	background-color: #8dacbd42;
+    border: 1px solid #8dacbd42;
+    border-radius: 30px;
+    color: #ffffff;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    padding: 10px 20px;
+}
+.buttons{
+	padding: 10px;
+}
+.buttons:hover{
+	cursor:pointer;
+	background-color:white;
+	color:#153e54;
+	transition:300ms ease-in-out;
+	font-weight:bold;
+}
+button.primary.ghost {
+	background-color: transparent;
+	color: #02899c;
+}
+
+.skills {
+	background-color: #1f1a36;
+	text-align: left;
+	padding: 15px;
+	margin-top: 5px;
+}
+
+.skills ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.skills ul li {
+	border: 1px solid #8dacbd42;
+	border-radius: 20px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+}
+
+.grid-container{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+input[type="checkbox"] {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  -webkit-appearance: none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  /* transition: .5%; */
+}
+
+input:checked[type="checkbox"] {
+  background: #153e54;
+}
+
+input[type="checkbox"]:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  background: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+
+input:checked[type="checkbox"]:before {
+  left: 20px;
+}
+
+
+/*상담사 리스트 스타일 end*/
 </style>
 </head>
 <body>
@@ -370,7 +489,68 @@
 			<div class="md-step-bar-right"></div>
 		</div>
 	</div>
+	
+<!-- 상담사 리스트 두번째 시도 -->
+<div class="body-container">
+    <div class="grid-container">
+    	<c:forEach items="${counselorList }" var="counselorList">
+      <div class="card-container">
+        <span class="pro" >전문의</span>
+        <img class="round" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';" style="width:150px"; alt="user"> 
+       <!--  <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" /> -->
+        <h3 style="color:white;">${counselorList.c_name}</h3>
+        <h6>${counselorList.c_grade}</h6>
+       
+        <div class="skills">
+          <h6 style="font-size:12px;">상담방식</h6>
+         
+          <ul>
+          	<input type="hidden" id="p_kakao" value="${counselorList.p_kakao }">
+            <c:if test="${counselorList.p_kakao eq 1}">
+            <li value="${counselorList.p_kakaoprice}">카카오톡 ${counselorList.p_kakaoprice} 원</li>
+            </c:if>
+     		<c:if test="${counselorList.p_kakao eq 0}">       
+           	 <input type="hidden" value="${counselorList.p_kakaoprice}"></li>
+           	 </c:if>
+           	 <input type="hidden" id="p_zoom" value="${counselorList.p_zoom }">
+							
+			<c:if test="${counselorList.p_zoom eq 1}">
+			<li value="${counselorList.p_zoomprice}">줌 ${counselorList.p_zoomprice} 원</li>
+			</c:if>
+							
+			<c:if test="${counselorList.p_zoom eq 0}">
+			<input type="hidden" value="${counselorList.p_zoomprice}"></li>
+			</c:if>
+			
+			<input type="hidden" id="p_phone" value="${counselorList.p_phone }">
+			<c:if test="${counselorList.p_phone eq 1}">
+			<li value="${counselorList.p_phoneprice}">전화 ${counselorList.p_phoneprice} 원</li>					
+						
+			</c:if>		
+			<c:if test="${counselorList.p_phone eq 0}">
+			<input type="hidden" value="${counselorList.p_phoneprice}">
+			</c:if>
+          </ul>
+        
+        </div>
+        <div class="buttons" onclick="func('${counselorList.c_email}','${type}')">자세히 보기
+        	
+        </div>
+        <input type="checkbox" id="check-btn" name="c_email" class="btn btn-primary px-4 py-3 mt-3" onclick="doOpenCheck(this);" value="${counselorList.c_email}" >
+        
+    </div>
+    </c:forEach>
+    
+ 
+</div>
 
+  </div>
+<!-- 상담사 리스트 두번째시도 end -->
+
+
+
+
+<!-- 원래리스트 -->
 <form id="step2" action="personalCounselStep3.do" method="post">
 	<div class="counselor-list">
 		<div class="row">
@@ -383,14 +563,12 @@
 						<span class="position mb-2">${counselorList.c_grade}</span>
 						
 							<input type="hidden" id="p_kakao" value="${counselorList.p_kakao }">
-						<%-- 	<input type="text" id="p_kakao_text" value="채팅">
-							<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
-							<input type="text" id="p_kakao_text" value="원"> --%>
-							
 							<c:if test="${counselorList.p_kakao eq 1}">
+							  <div class="type-container">
 								<input type="text" id="p_kakao_text" value="카카오톡">
 								<input type="text" id="p_kakao_text" value="${counselorList.p_kakaoprice}">
 								<input type="text" id="p_kakao_text" value="원">
+							  </div>
 								
 							</c:if>
 							
@@ -444,13 +622,13 @@
 		</div>
 		
 	<input type="hidden" id="c_email" name="onecheck" value="${type }"> 
-	</div>
 	<input type="button" data-page="2" name="previous"
 		class="previous action-button" value="Previous" id="previous-btn" />
 	<input type="submit" data-page="2" name="next" 
 		class="next action-button" id="next-btn" value="Next" />
+	</div>
 </form>
-
+<!-- 원래리스트 end -->
 	<script>
 	
 /* 	 	$('#detail-view').click(function(){
@@ -487,6 +665,12 @@
 			}
 		}
 		
+		
+		$(".hover").mouseleave(
+				  function () {
+				    $(this).removeClass("hover");
+				  }
+				);
 	
 		
 	</script>

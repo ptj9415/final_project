@@ -14,6 +14,7 @@
 		FROM (SELECT ROWNUM RN, A.*
 		FROM (SELECT *
 		FROM SHORT_COMMENT
+		ORDER BY SC_NO DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -37,10 +38,8 @@
 
 	<select id="TodaySelect"
 		resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
-		SELECT * FROM
-		(SELECT * FROM short_comment order by
-		dbms_random.value)
-		where rownum ='1'
+		SELECT * FROM short_comment
+		where sc_no = 14
 
 	</select>
 

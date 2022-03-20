@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -20,17 +21,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,6 +48,8 @@ import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
 import co.maeumi.prj.notice.service.NoticeService;
 import co.maeumi.prj.notice.service.NoticeVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.CoolsmsService;
 import co.maeumi.prj.service.KakaoService;
 import co.maeumi.prj.service.NaverLoginBO;
@@ -71,13 +73,14 @@ public class BadaController {
 	private KakaoService ks;
 	@Autowired
 	private NoticeService noticeDao;
-	@Resource(name = "uploadPath") // servlet-context.xml에서 정의함. 상대경로로 변경해주어야 함(현재 하드코딩 상태)
-	String uploadPath;
-
+	@Autowired
+	private PersonalcounselService personalCounselDao;
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
 
 	/* ===== 사용자 화면 ===== */
 
@@ -105,6 +108,7 @@ public class BadaController {
 
 		mvo.setM_email(request.getParameter("email"));
 		mvo.setM_password(request.getParameter("password"));
+		mvo.setM_status("가입");
 		mvo = memberDao.memberLogin(mvo);
 
 		String message = "";
@@ -123,7 +127,9 @@ public class BadaController {
 			cvo = counselorDao.counselorLogin(cvo);
 
 			if (cvo != null) { // 상담사로 로그인 성공한 경우.
-				session.setAttribute("email", request.getParameter("email"));
+				session.setAttribute("c_email", request.getParameter("email"));
+				session.setAttribute("c_name", cvo.getC_name());
+				session.setAttribute("c_admin", cvo.getC_admin());
 				System.out.println("세션에 이메일이 담겼나? " + session.getAttribute("email"));
 				message = "YES";
 			} else { // 일반회원, 상담사 둘 다 로그인 실패한 경우.
@@ -145,7 +151,7 @@ public class BadaController {
 
 		System.out.println("로그아웃 하면서 내가 지울 세션값 이름: " + session);
 		session.invalidate();
-		return "user/home/home";
+		return "redirect:home.do";
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드
@@ -189,6 +195,7 @@ public class BadaController {
 			mvo.setM_phone(realPhone);
 			mvo.setM_password("");
 			mvo.setM_type("네이버");
+			mvo.setM_status("가입");
 			int n = memberDao.memberInsert(mvo);
 			if (n != 0) {  // 네이버로 로그인 성공했다면~ 
 				message = (String) response.get("email");
@@ -196,7 +203,7 @@ public class BadaController {
 				session.setAttribute("email", message); // 세션값 설정
 				session.setAttribute("nickname", (String) response.get("nickname"));
 				session.setAttribute("type", "네이버");
-				return "user/home/home";
+				return "redirect:home.do";
 			} else {
 				message = "실패햇다.....";
 				System.out.println(message);
@@ -211,7 +218,7 @@ public class BadaController {
 		System.out.println("네이버 로그인으로 담은 세션값2 닉네임: " + (String) response.get("nickname"));
 		System.out.println("네이버 로그인으로 담은 세션값3 가입유형: " + (String)session.getAttribute("type"));
 		
-		return "user/home/home";
+		return "redirect:home.do";
 	}
 
 	// 카카오 로그인 컨트롤러. code를 받을 메서드.
@@ -230,7 +237,6 @@ public class BadaController {
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println("###email#### : " + userInfo.get("email"));
 
-		// 밑에서부터 실행이 안 됨. 따로 kakao dtd객체와 member-map.xml을 추가해야하는지 고민해보기.
 		String k_email = (String) userInfo.get("email");
 		String k_nickname = (String) userInfo.get("nickname");
 		System.out.println("mvo값에 담을 이메일 값: " + k_email);
@@ -251,34 +257,46 @@ public class BadaController {
 			mvo2.setM_type("카카오");
 			mvo2.setM_password("");
 			mvo2.setM_phone("");
+			mvo2.setM_status("가입");
 			int n = memberDao.memberInsert(mvo2);
 			if (n != 0) { // insert 결과 성공이면,
-				session.setAttribute("email", mvo2.getM_nickname()); // 세션값 담아주고 홈으로.
-				return "user/home/home";
+				session.setAttribute("email", mvo2.getM_email()); // 세션값 담아주고 홈으로.
+				session.setAttribute("nickname", mvo2.getM_nickname());
+				session.setAttribute("type", mvo2.getM_type());
+				return "redirect:home.do";
 			} else { // insert가 실패한 경우.
 				System.out.println("에러발생"); // 에러발생하면 로그인화면으로 다시.
 				return "user/login/loginForm";
 			}
 		}
 		// mvo가 null이 아닌 경우, 즉 이미 해당 아이디와 유형이 존재히면~
-		mvo2.setM_email(k_email); // 세션값을 이용하기 위함.
-		mvo2.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
-		mvo2.setM_type("카카오");
-		session.setAttribute("email", mvo2.getM_nickname());
-		session.setAttribute("nickname", mvo2.getM_nickname());
-		session.setAttribute("type", mvo2.getM_type());
-		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo2.getM_email());
-		System.out.println("카카오 로그인 성공으로 담은 세션값2 닉네임 : " + mvo2.getM_nickname());
-		System.out.println("카카오 로그인 성공으로 담은 세션값3 가입유형 : " + mvo2.getM_type());
+		mvo.setM_email(k_email); // 세션값을 이용하기 위함.
+		mvo.setM_nickname(k_nickname); // 세션값을 통해 header메뉴 동적으로 보여주기 위하여
+		mvo.setM_type("카카오");
+		session.setAttribute("email", mvo.getM_email());
+		session.setAttribute("nickname", mvo.getM_nickname());
+		session.setAttribute("type", mvo.getM_type());
+		System.out.println("카카오 로그인 성공으로 담은 세션값1 이메일 : " + mvo.getM_email());
+		System.out.println("카카오 로그인 성공으로 담은 세션값2 닉네임 : " + mvo.getM_nickname());
+		System.out.println("카카오 로그인 성공으로 담은 세션값3 가입유형 : " + mvo.getM_type());
 		
-		return "user/home/home";
+		return "redirect:home.do";
 	} // 카카오로그인
-
+	
+	// 이메일 찾기 페이지로 이동
 	@RequestMapping("/findEmailPopup.do")
 	public String findEmailPopup(Model model, HttpServletRequest request) {
 
 		return "layouts/findEmail";
 	};
+	
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/findPasswordPopup.do")
+	public String findPasswordPopup(HttpServletRequest request, Model model) {
+		
+		return "layouts/findPassword";
+	}
+	
 
 	// 이메일 인증화면으로 이동
 	@RequestMapping("/userEmailCheck.do")
@@ -325,11 +343,11 @@ public class BadaController {
 					String toMail = inputEmail;					// 수신받을 이메일. view로부터 받은 이메일 주소인 변수 email을 사용
 					String title = "회원가입 인증 이메일 입니다.";  // 자신이 보낼 이메일 제목
 					String content = 						// 자신이 보낼 이메일 내용
-							"Maeumi 에 방문해주셔서 감사ㅎㅎ" +
+							"Maeumi 에 방문해주셔서 감사합니다." +
 							"<br><br>" +
-							"인증번호는 " + checkNum + " << 이거. " +
+							"인증번호는 " + checkNum + " 입니다." +
 							"<br>" +
-							"해당 인증번호를 인증번호 확인란에 입력하슈~ ";
+							"해당 인증번호를 인증번호 확인란에 입력해주세요.";
 					
 					try  {
 						MimeMessage message = mailSender.createMimeMessage();
@@ -381,7 +399,7 @@ public class BadaController {
 		mvo.setM_password(request.getParameter("password"));
 		mvo.setM_phone(request.getParameter("phone"));
 		mvo.setM_type(request.getParameter("type"));
-		mvo.setM_status("T");
+		mvo.setM_status("가입");
 
 		String joinMessage = null;
 		int n = memberDao.memberInsert(mvo);
@@ -416,7 +434,7 @@ public class BadaController {
 		String checkPhone = request.getParameter("sendPhoneNum");
 		System.out.println("폼에서 넘어온 휴대폰 번호" + checkPhone);
 		mvo.setM_phone(checkPhone);
-		mvo.setM_type("MAEUMI");
+		mvo.setM_type("마으미");
 		mvo = memberDao.memberFindEmail(mvo);
 
 		String responseText = null;
@@ -424,7 +442,7 @@ public class BadaController {
 		if (mvo != null) {
 			String email = mvo.getM_email();
 			String type = mvo.getM_type();
-			responseText = "조회된 Email은 " + email + ", 가입경로는 " + type;
+			responseText = "조회된 Email은 " + email + " 입니다.";
 			System.out.println("멤버에 존재: " + responseText);
 		} else {
 			cvo.setC_phone(checkPhone);
@@ -438,8 +456,89 @@ public class BadaController {
 			}
 		}
 		return responseText;
-
 	}
+	
+	// 비밀번호 찾기
+	@ResponseBody
+	@RequestMapping("/ajaxFindPassword.do")
+	public String ajaxFindPassword(Model model, HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
+		
+		System.out.println("넘어온 email값: " + request.getParameter("sendEmail"));
+		System.out.println("넘어온 연락처 : " + request.getParameter("sendPhone"));
+		
+		String sendEamil = request.getParameter("sendEmail");
+		String sendPhone = request.getParameter("sendPhone");
+		mvo.setM_email(sendEamil);
+		mvo.setM_phone(sendPhone);
+		mvo.setM_type("마으미");
+		mvo = memberDao.memberFindPassword(mvo);
+		
+		String responseText = "NO";
+		if(mvo != null) { // 멤버였다면 
+			responseText = "MYES";
+		} else {  // member가 아니었다면 상담사로 조회
+			cvo.setC_email(sendEamil);
+			cvo.setC_phone(sendPhone);
+			cvo = counselorDao.counselorFindPassword(cvo);
+			if (cvo != null ) {
+				responseText = "CYES";
+			}
+		}
+		return responseText;  // "회원이라면 MYES, 상담사라면 CYES 둘 다 아니라면 NO" 
+	}
+	
+	// ajax 비밀번호 찾기 업데이트 
+	@ResponseBody
+	@RequestMapping("/passwordUpdate.do")
+	public String sendPassword(HttpServletRequest request, MemberVO mvo, CounselorVO cvo) {
+		
+		String sendEmail = request.getParameter("sendEmail");
+		String sendPhone = request.getParameter("sendPhone");
+		String sendPassword = request.getParameter("sendPassword");
+		System.out.println("넘어온 값 : " + sendEmail + "||" + sendPhone + "||" + sendPassword);
+		
+		String responseText = null;
+		
+		mvo.setM_email(sendEmail);
+		mvo.setM_phone(sendPhone);
+		mvo.setM_type("마으미");
+		mvo = memberDao.memberFindPassword(mvo);
+		if(mvo !=null) {
+			mvo.setM_password(sendPassword);
+			int n = memberDao.passwordUpdate(mvo);
+			System.out.println("업데이트 n의 값: " + n);
+			responseText = "YES";
+		} else {
+			cvo.setC_email(sendEmail);
+			cvo.setC_phone(sendPhone);
+			cvo.setC_password(sendPassword);
+			counselorDao.cPasswordUpdate(cvo);
+			responseText = "YES";
+		}
+		
+		return responseText;
+	}
+	
+	
+	// 회원탈퇴 처리 
+	@ResponseBody
+	@RequestMapping("/ajaxMemberLeave.do")
+	public String ajaxMemberLeave(HttpServletRequest request, MemberVO mvo, HttpSession session) {
+		
+		String sendEmail = request.getParameter("sendEmail");
+		String responseText = null;
+		mvo.setM_email(sendEmail);
+		mvo.setM_status("탈퇴");
+		int n = memberDao.memberLeave(mvo);
+		
+		
+		if(n != 0) {
+			responseText = "YES";
+			session.invalidate();  // 탈퇴성공하면 세션삭제하고, 상태값만 F로 변경. update처리.
+		}
+		return responseText;
+	}
+	
 
 	// 상담사 약관동의 화면
 	@RequestMapping("/counselorTermsOfService.do")
@@ -487,6 +586,7 @@ public class BadaController {
 		cvo.setC_address(request.getParameter("address"));
 		cvo.setC_phone(request.getParameter("phone"));
 		cvo.setC_grade("심리상담사");   // 기본값으로 심리상담사 줌.
+		cvo.setC_status("가입");
 		cvo.setC_admin("C");
 		
 		counselorDao.counselorInsert(cvo);
@@ -542,7 +642,7 @@ public class BadaController {
 
 		return "admin/noticemanage/adminNoticeRead";
 	}
-
+	
 	// 공지사항 삭제
 	@ResponseBody
 	@PostMapping("/noticeDelete.do")
@@ -583,7 +683,7 @@ public class BadaController {
 		String savedName = file.getOriginalFilename();
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
 		mav.setViewName("redirect:adminNoticeList.do");
@@ -625,13 +725,13 @@ public class BadaController {
 	@RequestMapping("/noticeRegister.do")
 	public ModelAndView noticeRegister(ModelAndView mav, NoticeVO vo, HttpServletRequest request,
 			HttpServletResponse response, @RequestParam("fileName") MultipartFile file) throws Exception {
-
+		
 		// 파일 업로드 처리
 		String savedName = file.getOriginalFilename();
-		System.out.println("첨부파일 한 게 없는데, 뭐지? " + savedName);
+		System.out.println("첨부파일 이름 확인: " + savedName);
 		String mSavedName = null; // 중복 가공된 파일. 실제 물리파일.
 		if( savedName != "") {    // 첨부한 게 없다면 pfilename컬럼에 값이 안 들어가도록.
-		mSavedName = uploadFile(savedName, file.getBytes());  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
+		mSavedName = uploadFile(savedName, file.getBytes(), request);  // 첨부파일명 랜덤생성하는 메소드. 밑에 정의되어 있음.
 		} 
 		
 		// 모델앤뷰의 뷰 경로지정noticeMain.do
@@ -657,12 +757,15 @@ public class BadaController {
 	}
 
 	// 위 공지사항 등록 커멘드 내부 첨부파일명 랜덤생성
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
+	private String uploadFile(String originalName, byte[] fileData, HttpServletRequest request) throws Exception {
+		
 		// uuid 생성
 		UUID uuid = UUID.randomUUID();
+		
+		String SAVE_PATH = uploadpath + "/noticeattach/"; //webapp 아래부터 경로를 작성
 		// 랜덤생성 + 파일이름 저장
 		String savedName = uuid.toString() + "_" + originalName; // 가공된 파일이름.
-		File target = new File(uploadPath, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
+		File target = new File(SAVE_PATH, savedName);   // 가공된 파일이름을 servlet-context.xml에 등록한 bean의 경로에 저장.
 		// 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사. 실제 프로젝트 시연할 때는 uploadPath 의 경로를 변경해야 함(
 		// servlet-context.xml)
 		FileCopyUtils.copy(fileData, target);
@@ -678,26 +781,24 @@ public class BadaController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		// String SAVE_PATH =
-		// "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\noticeimage\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+//		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\resources\\image\\"; // 업로드하면 파일이 저장되는 이클립스 내부경로. 하드코딩 상태. 수정해야 함.
+			//테스트용 경로1 
 		
-		
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot + "resources/image/";
-
+		String SAVE_PATH = uploadpath + "noticesummer/";  // 서버에 올렸을 때 사용할 경로
+		System.out.println("저장경로 확인: " + SAVE_PATH);
+		//String contextRoot = request.getSession().getServletContext().getRealPath("/");   // 테스트용경로2
+		//String fileRoot = contextRoot + "resources\\image\\";							// 테스트용경로3 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-
-		File targetFile = new File(fileRoot + savedFileName);
-		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		File targetFile = new File(SAVE_PATH + savedFileName);   // 원래 save_path였지만 fileRoot로 임시테스트용으로 고침
+//		File mtargetFile = new File(SAVE_PATH + savedFileName);   // 테스트용 경로4
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", "/prj/resources/image/" + savedFileName);
-			// contextroot + resources + 저장할 내부 폴더명
+//			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			jsonObject.addProperty("url", SAVE_PATH + savedFileName);   // 여기도 save_path에서 fileRoot로 수정
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {
@@ -713,6 +814,8 @@ public class BadaController {
 	// 첨부파일 다운로드 * 밑에 경로를 작성하는 부분은 모두 상대경로로 수정해야 함
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// String SAVE_PATH = request.getServletContext().getRealPath("resources/attachFile/");
+		String SAVE_PATH = uploadpath + "/noticeattach/";   
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
 		System.out.println("1. filename: " + filename);
@@ -733,7 +836,7 @@ public class BadaController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = uploadPath + filename;  
+		realFilename = SAVE_PATH + filename;  
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -804,7 +907,8 @@ public class BadaController {
 			, @RequestParam(required = false, defaultValue = "1") int page
 			, @RequestParam(required = false, defaultValue = "1") int range
 			, @RequestParam(required = false, defaultValue = "all") String n_category
-			, @RequestParam(required = false) String n_title, Search svo) throws Exception {
+			, @RequestParam(required = false) String n_title, Search svo
+			) throws Exception {
 		
 		model.addAttribute("search", svo);  // '제목'과 '말머리' 요소로 서칭하기 위함.
 		svo.setN_category(n_category);	
@@ -820,6 +924,7 @@ public class BadaController {
 		return "user/notice/userNoticeList";
 	}
 	
+
 	// 사용자단에서 공지사항 조회하기. 조회수 올라가는 작업해야 함
 	@RequestMapping("/userNoticeRead.do")
 	public String userNoticeRead(Model model, HttpServletRequest request, HttpServletResponse response, NoticeVO vo) {
@@ -835,7 +940,6 @@ public class BadaController {
 			return "user/notice/userNoticeRead";
 	}
 	
-	
 	/* =============사용자 마이페이지============ */
 	
 	
@@ -844,6 +948,9 @@ public class BadaController {
 	public String userMypage(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model) {
 		
 		// 이메일, 가입유형 세션값을 통해 해당 유저의 모든 정보를 조회해서 마이페이지로 데이터를 넘긴다.
+		System.out.println( "내가 담은 이메일 세션값 : " + (String) session.getAttribute("email") );
+		System.out.println("내가 담은 가입유형 세션값: " + (String) session.getAttribute("type"));
+		
 		mvo.setM_email( (String) session.getAttribute("email") );
 		mvo.setM_type( (String) session.getAttribute("type"));
 		
@@ -854,7 +961,11 @@ public class BadaController {
 		
 		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
 		return "user/mypage/mypageMain";
+
+	
 	}
+
+	
 
 	// 사용자 닉네임 변경
 	@ResponseBody
@@ -889,9 +1000,9 @@ public class BadaController {
 	// 비밀번호 확인 체크
 	@ResponseBody
 	@RequestMapping("/ajaxPassChk.do")
-	public String ajaxPassChk(HttpSession session, HttpServletRequest request, MemberVO mvO) {
+	public String ajaxPassChk(HttpSession session, HttpServletRequest request, MemberVO mvo) {
 		
-		mvo.setM_email( (String) session.getAttribute("email"));
+		mvo.setM_email( (String) session.getAttribute("email")); 
 		System.out.println("현재 세션 이메일 값: " + (String) session.getAttribute("email"));
 		mvo.setM_type( (String) session.getAttribute("type")); 
 		mvo.setM_password( request.getParameter("sendPwd"));
@@ -949,4 +1060,82 @@ public class BadaController {
 		}
 		return message;
 	}
+	
+	
+	// 사이트 이용 통계로 페이지 넘어가기
+	@RequestMapping("/usingSiteChart.do")
+	public String usingSiteChart(HttpServletRequest request, HttpSession session) {
+		
+		// view에 보여질 데이터를 db에서 가져와야 한다. 
+		return "admin/chart/usingSiteChart";
+	}
+	
+	// 사이트 이용 통계 페이지 => 월별 상담건수 조회 
+	@ResponseBody
+	@RequestMapping("/personalCounselData.do")
+	public List<PersonalcounselVO> personalCounselData(Model model, PersonalcounselVO vo, HttpServletRequest request) {
+		
+		//System.out.println("ajax를 통해서 넘어온 값" + request.getParameter("sendMonth"));
+		//vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth")));
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselCount(vo);
+		model.addAttribute("list", list);
+		
+		return list;
+	}
+	
+	// 매출 통계 페이지로 이동
+	@RequestMapping("/salesChart.do")
+	public String salesChart(HttpServletRequest request, PersonalcounselVO vo, Model model) {
+		
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselSales(vo);
+		
+		model.addAttribute("list", list);
+		return "admin/chart/salesChart";
+	}
+	
+	
+	// 디폴트로 보여줄 매출 통계 ajax 
+	@ResponseBody
+	@RequestMapping("/salesData.do")
+	public List<PersonalcounselVO>  salesData(Model model, PersonalcounselVO vo, HttpServletRequest request){
+		
+		//System.out.println( request.getParameter("sendMonth"));
+		//vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth"))); 
+		List<PersonalcounselVO> list = personalCounselDao.PersonalCounselSales(vo);
+		
+		model.addAttribute("list", list);
+		
+		return list;	
+	}
+	
+	// 디폴트 결과에서 select 선택 결과 ajax
+	@ResponseBody
+	@RequestMapping("/searchSalesData.do")
+	public List<PersonalcounselVO> searchSalesData(Model model, HttpServletRequest request, PersonalcounselVO vo){
+		
+		System.out.println( request.getParameter("sendMonth"));
+		vo.setSendMonth( Integer.valueOf(request.getParameter("sendMonth"))); 
+		List<PersonalcounselVO> list = personalCounselDao.searchSalesData(vo);
+		System.out.println("list넘어오는 갯수." + list);
+		return list;
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

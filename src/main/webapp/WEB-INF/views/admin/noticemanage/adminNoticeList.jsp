@@ -321,7 +321,6 @@ $(document).ready(function(){
 		function statusBtn(num, status){
 				var statusNum = num; 
 				var statusVal = status;
-				alert("글번호: " + statusNum + ", 고정상태: " + statusVal);
 				$.ajax({
 					url: "statusUpdate.do",
 					data: {
@@ -331,7 +330,7 @@ $(document).ready(function(){
 					dataType: "text",
 					success: function(responseText){
 						if(responseText == "YES"){  // 성공한 경우.
-							alert("처리완료");
+							alert("처리완료");	
 							location.reload();
 						}
 						
@@ -377,7 +376,7 @@ $(document).ready(function(){
 		};
 		
 		//선택삭제 구현
-		$("#allDelete").on("click", function() {
+		$("#deleteallbtn").on("click", function() {
 			var confirmCheck = confirm("선택하신 것을 모두 삭제하시겠습니까?");
 			
 			if(confirmCheck){

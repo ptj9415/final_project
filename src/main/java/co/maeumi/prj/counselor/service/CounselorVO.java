@@ -17,6 +17,13 @@ public class CounselorVO {
 	private String c_picturepath;
 	private String c_birthdate;
 	private String c_status;
+	private String c_category;
+	private String c_type1;
+	private String c_type2;
+	private String c_type3;
+	private String c_type4;
+	private String c_type5;
+	private String c_type6;
 	private String cc_no;
 	private String cc_status;
 	private String cc_subject;
@@ -41,5 +48,11 @@ public class CounselorVO {
 	private String cu_status;
 	private String cu_rejection;
 	private String cu_applydate;
-	
+	private String p_kakao;
+	private String p_zoom;
+	private String p_phone;
+	private String p_kakaoprice;
+	private String p_zoomprice;
+	private String p_phoneprice;
+	private String pr_count;
 }

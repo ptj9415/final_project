@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -15,9 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +33,18 @@ import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
+import co.maeumi.prj.groupcounsel.service.GroupcounselService;
+import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
 import co.maeumi.prj.member.service.MemberService;
 import co.maeumi.prj.member.service.MemberVO;
-import co.maeumi.prj.service.Pagination;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselService;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
+import co.maeumi.prj.salary.service.SalaryService;
+import co.maeumi.prj.salary.service.SalaryVO;
+import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Search;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.todaystory.service.TodaystoryService;
-import co.maeumi.prj.todaystory.service.TodaystoryVO;
 
 @Controller
 public class TaejoonController {
@@ -53,25 +61,199 @@ public class TaejoonController {
 	private TodaystoryService todayDao;
 	@Autowired
 	private TherapyService therapyDao;
+	@Autowired
+	private GroupcounselService groupCounselDao;
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+	@Autowired
+	Aes256 aes256;
+	@Autowired
+	private SalaryService salaryDao;
+	@Autowired
+	private PersonalcounselService personalCounselDao;
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
 
 	/* ===== 사용자 화면 ===== */
 
 	@RequestMapping("/home.do")
-	public String home(Model model, BannerVO bvo) {
+	public String home(Model model, BannerVO bvo, PersonalcounselVO vo, GroupcounselVO gvo) {
 		List<BannerVO> list = bannerDao.bannerList(bvo);
 		model.addAttribute("banner", list);
+
+		List<PersonalcounselVO> clist = personalCounselDao.CounselorList(vo);
+		// System.out.println(clist);
+		model.addAttribute("clist", clist);
+
+		List<GroupcounselVO> glist = groupCounselDao.groupList(gvo);
+		model.addAttribute("glist", glist);
 		return "user/home/home";
 	}
 
 	/* ===== 상담사 화면 ===== */
 
+	@RequestMapping("/counselorGroupList.do")
+	public String counselorGroupList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "") String gc_title,
+			@RequestParam(required = false, defaultValue = "all") String gc_type,
+			@RequestParam(required = false, defaultValue = "") String gc_date,
+			@RequestParam(required = false, defaultValue = "all") String gc_status, Search svo) throws Exception {
+
+		model.addAttribute("search", svo);
+		svo.setGc_title(gc_title);
+		svo.setGc_type(gc_type);
+		svo.setGc_date(gc_date);
+		svo.setGc_status(gc_status);
+
+		int listCnt = groupCounselDao.getGCListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		List<GroupcounselVO> list = groupCounselDao.gcSearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGc_date();
+			date = date.substring(0, 10);
+			list.get(i).setGc_date(date);
+			String date2 = list.get(i).getGc_startdate();
+			date2 = date2.substring(0, 10);
+			list.get(i).setGc_startdate(date2);
+			String date3 = list.get(i).getGc_finaldate();
+			date3 = date3.substring(0, 10);
+			list.get(i).setGc_finaldate(date3);
+
+		}
+		model.addAttribute("groupCounsel", list);
+
+		return "counselor/groupcounselmanage/counselorGroupList";
+	}
+
+	@RequestMapping("/counselorGroupApplyList.do")
+	public String counselorGroupApplyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			@RequestParam(required = false, defaultValue = "") String gr_reservedate,
+			@RequestParam(required = false, defaultValue = "all") String gr_status,
+			@RequestParam(required = false, defaultValue = "") String m_nickname,
+			@RequestParam(required = false, defaultValue = "") String m_email, Search svo, HttpServletRequest request)
+			throws Exception {
+
+		String gc_no = request.getParameter("gc_no");
+		model.addAttribute("search", svo);
+		svo.setGr_status(gr_status);
+		svo.setGr_reservedate(gr_reservedate);
+		svo.setM_email(m_email);
+		svo.setM_nickname(m_nickname);
+
+		int listCnt = groupCounselDao.getGCapplyListCnt(svo);
+
+		svo.pageinfo(page, range, listCnt);
+
+		model.addAttribute("pagination", svo);
+		List<GroupcounselVO> list = groupCounselDao.gcApplySearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGr_reservedate();
+			date = date.substring(0, 10);
+			list.get(i).setGr_reservedate(date);
+		}
+		model.addAttribute("apply", list);
+		model.addAttribute("gc_no", gc_no);
+
+		return "counselor/groupcounselmanage/counselorGroupApplyList";
+	}
+
+	@RequestMapping("/counselorGroupInfo.do")
+	public String counselorGroupInfo(Model model, GroupcounselVO gvo) throws ParseException {
+
+		gvo = groupCounselDao.selectGroupCounselInfo(gvo);
+
+		String date = gvo.getGc_date();
+		date = date.substring(0, 10);
+		gvo.setGc_date(date);
+
+		String startdate = gvo.getGc_startdate();
+		startdate = startdate.substring(0, 10);
+		gvo.setGc_startdate(startdate);
+
+		String finaldate = gvo.getGc_finaldate();
+		finaldate = finaldate.substring(0, 10);
+		gvo.setGc_finaldate(finaldate);
+
+		model.addAttribute("gc", gvo);
+
+		return "counselor/groupcounselmanage/counselorGroupInfo";
+	}
+
+	@RequestMapping("/groupCounselUpdate.do")
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response,
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		// 썸네일 파일업로드
+		String SAVE_PATH = uploadpath + "/counselorpicture/";
+		String originalFileName = mf.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+		String saveFile = uuid + originalFileName;
+		vo.setGc_sumnail(saveFile);
+		try {
+			mf.transferTo(new File(msaveFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// 서머노트 코드 원본
+		// 이미지 파일일 경우 코드 잘라서 쓰기.
+		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
+
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		vo.setGc_infos(result);
+
+		int update = groupCounselDao.groupCounselUpdate(vo);
+
+		// vo값에 따라 성공 실패 여부 확인
+		if (update != 1) {
+			out.println("<script>alert('상담 페이지 개설 실패'); history.back(); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 페이지 개설 성공'); location.href='counselorGroupList1.do'</script>");
+			out.flush();
+		}
+		return null;
+	}
+
+	@ResponseBody
+	@RequestMapping("/groupCounselClose.do")
+	public int groupCounselClose(GroupcounselVO gvo) {
+		int n = groupCounselDao.groupCounselClose(gvo);
+
+		return n;
+	}
+
+	@ResponseBody
+	@RequestMapping("/groupCounselDetailInsert.do")
+	public int groupCounselDetailInsert(GroupcounselVO gvo, HttpServletRequest request) throws Exception {
+		System.out.println(request.getParameter("gc_report"));
+		String gc_report = aes256.encrypt(request.getParameter("gc_report"));
+		System.out.println(gc_report);
+		System.out.println(aes256.decrypt(gc_report));
+		gvo.setGc_report(gc_report);
+		int n = groupCounselDao.groupCounselResult(gvo);
+
+		return n;
+	}
+
 	// 상담사 마이페이지 메인화면
 	@RequestMapping("/counselorMyPageMain.do")
 	public String counselorMyPageMain(Model model, CounselorVO cvo, HttpSession session) {
-//            String c_email = (String)session.getAttribute("email");
-		String c_email = "3244509@naver.com";
-		session.setAttribute("email", c_email);
-		session.setAttribute("name", "상담사");
+
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -100,7 +282,9 @@ public class TaejoonController {
 	@RequestMapping(value = "/counselorPicture.do", produces = "application/text; charset=utf8")
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\counselorpicture\\";
+
+		String c_email = (String) session.getAttribute("c_email");
+		String SAVE_PATH = uploadpath + "/counselorpicture/";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
 
@@ -113,7 +297,7 @@ public class TaejoonController {
 		System.out.println(msaveFile);
 		vo.setC_picture(originalFileName);
 		vo.setC_picturepath(saveFile);
-		vo.setC_email("3244509@naver.com");
+		vo.setC_email(c_email);
 		try {
 			mf.transferTo(new File(msaveFile));
 		} catch (IllegalStateException e) {
@@ -127,9 +311,11 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 내 정보 수정 / 상담사 등급 변경 신청 화면
 	@RequestMapping("/counselorMyPageInfo.do")
-	public String counselorMyPageInfo(Model model, CounselorVO cvo) {
+	public String counselorMyPageInfo(Model model, CounselorVO cvo, HttpSession session) {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String) session.getAttribute("c_email");
+
+		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 		List<CounselorVO> list = counselorDao.counselorGradeList(cvo);
 		for (int i = 0; i < list.size(); i++) {
@@ -138,9 +324,10 @@ public class TaejoonController {
 			list.get(i).setCu_applydate(date);
 		}
 		model.addAttribute("apply", list);
+		model.addAttribute("price", counselorDao.counselorPriceSelect(cvo));
 		return "counselor/mypage/counselorMyPageInfo";
 	}
-	
+
 	@RequestMapping("/fileDownload2.do")
 	public void fileDownload2(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
@@ -163,7 +350,7 @@ public class TaejoonController {
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\" + filename;
+		realFilename = uploadpath + "/counselorgrade/" + filename;
 		System.out.println("3. realfilename: " + realFilename);
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
@@ -193,14 +380,22 @@ public class TaejoonController {
 		}
 
 	}
-	
-	//상담사 마이페이지 - 상담사 등급 변경 신청
+
+	@RequestMapping("/catesubmit.do")
+	public String catesubmit(Model model, CounselorVO cvo) {
+		counselorDao.counselorCateUpdate(cvo);
+		counselorDao.counselorPriceUpdate(cvo);
+		return "redirect:counselorMyPageInfo.do";
+	}
+
+	// 상담사 마이페이지 - 상담사 등급 변경 신청
 	@ResponseBody
 	@RequestMapping(value = "/counselorUpgradeApply.do", produces = "application/text; charset=utf8")
-	public String counselorUpgradeApply(Model model, CounselorVO cvo, @RequestParam(value = "filename1") MultipartFile mf,
-			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String counselorUpgradeApply(Model model, CounselorVO cvo,
+			@RequestParam(value = "filename1") MultipartFile mf, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) {
 
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\counselorcert\\";
+		String SAVE_PATH = uploadpath + "/counselorgrade/";
 
 		String originalFileName = mf.getOriginalFilename();
 
@@ -221,6 +416,8 @@ public class TaejoonController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		String c_email = (String) session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselorGradeInsert(cvo);
 
 		return "img/" + saveFile;
@@ -228,8 +425,10 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 상담 경력 수정 화면
 	@RequestMapping("/counselorMyPageCareer.do")
-	public String counselorMyPageCareer(Model model, CounselorVO cvo) {
-		String c_email = "3244509@naver.com";
+	public String counselorMyPageCareer(Model model, CounselorVO cvo, HttpSession session) {
+
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
 		model.addAttribute("career", list);
@@ -240,10 +439,12 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담 경력 수정
 	@ResponseBody
 	@RequestMapping("/careerupdate.do")
-	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
-			throws Exception {
+	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String) session.getAttribute("c_email");
+
+		cvo.setC_email(c_email);
 		counselorDao.counselorCareerDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -260,8 +461,8 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 자격사항 수정 화면
 	@RequestMapping("/counselorMyPageCert.do")
-	public String counselorMyPageCert(Model model, CounselorVO cvo) {
-		String c_email = "3244509@naver.com";
+	public String counselorMyPageCert(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -279,10 +480,12 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 자격사항 수정
 	@ResponseBody
 	@RequestMapping("/certificationupdate.do")
-	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
-			throws Exception {
+	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String) session.getAttribute("c_email");
+
+		cvo.setC_email(c_email);
 		counselorDao.counselorCertificationDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -302,8 +505,9 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 내 상담시간 수정 화면
 	@RequestMapping("/counselorMyPageTime.do")
-	public String counselorMyPageTime(Model model, CounselorVO cvo) {
-		cvo.setC_email("3244509@naver.com");
+	public String counselorMyPageTime(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String) session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselortimeList(cvo);
 
 		model.addAttribute("time", list);
@@ -314,10 +518,11 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담시간 수정
 	@ResponseBody
 	@RequestMapping("/counseltimeupdate.do")
-	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
-			throws Exception {
+	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String) session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselortimeDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -334,20 +539,22 @@ public class TaejoonController {
 
 	// 상담사 마이페이지 - 상담사 소개 수정 화면
 	@RequestMapping("/counselorMyPageIntro.do")
-	public String counselorMyPageIntro(Model model, CounselorVO cvo) {
-		cvo.setC_email("3244509@naver.com");
+	public String counselorMyPageIntro(Model model, CounselorVO cvo, HttpSession session) {
+		String c_email = (String) session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		model.addAttribute("info", counselorDao.counselorinfoList(cvo));
-		
+
 		return "counselor/mypage/counselorMyPageIntro";
 	}
 
 	// 상담사 마이페이지 - 상담사 소개 수정
 	@ResponseBody
 	@RequestMapping("/infoupdate.do")
-	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo)
-			throws Exception {
+	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		cvo.setC_email("3244509@naver.com");
+		String c_email = (String) session.getAttribute("c_email");
+		cvo.setC_email(c_email);
 		counselorDao.counselorinfoDelete(cvo);
 
 		for (int i = 0; i < list.size(); i++) {
@@ -361,6 +568,35 @@ public class TaejoonController {
 		}
 
 		return "OK";
+	}
+
+	// 상담사 통계
+	@RequestMapping("/counselorStatistics.do")
+	public String counselorStatistics(Model model, HttpSession session, PersonalcounselVO pcvo) {
+
+		return "counselor/statistics/counselorStatistics";
+	}
+
+	@ResponseBody
+	@RequestMapping("/counselorStatisticData.do")
+	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo, HttpSession session) {
+		String c_email = (String) session.getAttribute("c_email");
+
+		pcvo.setC_email(c_email);
+		List<PersonalcounselVO> data = personalCounselDao.searchCounselData(pcvo);
+
+		return data;
+	}
+
+	@ResponseBody
+	@RequestMapping("/counselorDataSearch.do")
+	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo, HttpSession session) {
+		String c_email = (String) session.getAttribute("c_email");
+
+		pcvo.setC_email(c_email);
+		List<PersonalcounselVO> data = personalCounselDao.searchCounselData2(pcvo);
+
+		return data;
 	}
 
 	/* ===== 관리자 화면 ===== */
@@ -385,7 +621,16 @@ public class TaejoonController {
 		svo.pageinfo(page, range, listCnt);
 
 		model.addAttribute("pagination", svo);
-		model.addAttribute("member", memberDao.memberSearchselect(svo));
+		List<MemberVO> list = memberDao.memberSearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String phone = list.get(i).getM_phone();
+			String phone1 = phone.substring(0, 3);
+			String phone2 = phone.substring(3, 7);
+			String phone3 = phone.substring(7, 11);
+			phone = phone1 + "-" + phone2 + "-" + phone3;
+			list.get(i).setM_phone(phone);
+		}
+		model.addAttribute("member", list);
 
 		return "admin/membermanage/adminMemberList";
 	}
@@ -452,12 +697,25 @@ public class TaejoonController {
 		List<CounselorVO> list = counselorDao.counselorSearchselect(svo);
 
 		for (int i = 0; i < list.size(); i++) {
+
 			String date = list.get(i).getC_birthdate();
-			if (date != "") {
-				date = date.substring(0, 10);
-				list.get(i).setC_birthdate(date);
-			} else if (date == "") {
-				list.get(i).setC_birthdate(c_birthdate);
+			date = date.substring(0, 10);
+			list.get(i).setC_birthdate(date);
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			String phone = list.get(i).getC_phone();
+			String phone1 = phone.substring(0, 3);
+			String phone2 = phone.substring(3, 7);
+			String phone3 = phone.substring(7, 11);
+			phone = phone1 + "-" + phone2 + "-" + phone3;
+			list.get(i).setC_phone(phone);
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			String admin = list.get(i).getC_admin();
+			if (admin.equals("A")) {
+				list.remove(i);
 			}
 		}
 
@@ -485,22 +743,22 @@ public class TaejoonController {
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/adminCounselorGradeComfirm.do")
 	public String adminCounselorGradeComfirm(CounselorVO cvo) {
-		
+
 		counselorDao.counselorGradeUpdate(cvo);
 		counselorDao.counselorUpdate(cvo);
-		
+
 		return "OK";
 	}
-	
+
 	@RequestMapping("/adminCounselorGradeReject.do")
 	public String adminCounselorGradeReject(CounselorVO cvo, Model model, HttpServletRequest request) {
-		
+
 		counselorDao.counselorGradeUpdate(cvo);
-		
+
 		cvo.setC_email(request.getParameter("c_email"));
 		cvo = counselorDao.counselorSelect(cvo);
 
@@ -518,7 +776,7 @@ public class TaejoonController {
 
 		return "admin/membermanage/adminCounselorDetail";
 	}
-			
+
 	@RequestMapping("/adminBannerList.do")
 	public String adminBannerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range, Search svo, CouponVO cvo) throws Exception {
@@ -560,7 +818,8 @@ public class TaejoonController {
 	public String adminBannerInsert(Model model, BannerVO bvo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		String SAVE_PATH = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\";
+		String SAVE_PATH = uploadpath + "/bannerimg/";
+		System.out.println(SAVE_PATH);
 
 		String originalFileName = mf.getOriginalFilename();
 
@@ -597,31 +856,24 @@ public class TaejoonController {
 
 	@RequestMapping("/fileDownload1.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String filename = request.getParameter("fileName"); // noticeRead.jsp에서 get방식으로 보낸 name속성값이 filename임.
+		String filename = request.getParameter("fileName"); // get방식으로 보낸 name속성값이 filename임.
 		String encodingFilename = "";
-		System.out.println("1. filename: " + filename);
 		String realFilename = "";
-
 		String downName = request.getParameter("downName");
-		System.out.println("downName 확인 : " + downName);
-
 		try {
 			String browser = request.getHeader("User-Agent");
 			// 파일 인코딩
 			if (browser.contains("MSIE") || browser.contains("Trident") || browser.contains("Chrome")) {
 				encodingFilename = URLEncoder.encode(downName, "UTF-8").replaceAll("\\+", "%20");
-				System.out.println("2. filename: " + downName);
 			} else {
 				encodingFilename = new String(downName.getBytes("UTF-8"), "ISO-8859-1");
 			}
 		} catch (UnsupportedEncodingException ex) {
 			System.out.println("UnsupportedEncodingException");
 		}
-		realFilename = "C:\\Users\\admin\\git\\final_project\\src\\main\\webapp\\img\\bannerimg\\" + filename;
-		System.out.println("3. realfilename: " + realFilename);
+		realFilename = uploadpath + "/counselorgrade/" + filename;
 		File file1 = new File(realFilename);
 		if (!file1.exists()) {
-			System.out.println("존재유무 확인 ~=================");
 			return;
 		}
 		// 파일명 지정
@@ -661,11 +913,12 @@ public class TaejoonController {
 		model.addAttribute("adminTodayStoryList", todayDao.todaySearchselect(svo));
 		return "admin/todaystorymanage/adminTodayStoryList";
 	}
-	
+
 	@RequestMapping("/admintherapy.do")
 	public String admintherapyList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false) String t_name, @RequestParam(required = false) String t_title, Search svo) throws Exception {
+			@RequestParam(required = false) String t_name, @RequestParam(required = false) String t_title, Search svo)
+			throws Exception {
 
 		model.addAttribute("search", svo);
 
@@ -677,5 +930,55 @@ public class TaejoonController {
 		model.addAttribute("therapy", therapyDao.therapySearchselect(svo));
 
 		return "admin/therapy/therapyList";
+	}
+
+	@RequestMapping("/adminSalesChart.do")
+	public String adminSalesChart(Model model) {
+
+		return "admin/chart/adminSalesChart";
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminSalaryData.do")
+	public List<SalaryVO> adminSalaryData(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList();
+
+		return salary;
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminSalarySearch.do")
+	public List<SalaryVO> adminSalarySearch(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salarySearch(vo);
+		for (int i = 0; i < salary.size(); i++) {
+			if (salary.get(i).getS_sdate() != null) {
+				String date = salary.get(i).getS_sdate();
+				date = date.substring(0, 10);
+				salary.get(i).setS_sdate(date);
+			}
+		}
+
+		return salary;
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminHomeData1.do")
+	public List<SalaryVO> adminHomeData1(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList();
+
+		return salary;
+	}
+
+	@ResponseBody
+	@RequestMapping("/adminHomeData2.do")
+	public List<SalaryVO> adminHomeData2(Model model, SalaryVO vo) {
+		List<SalaryVO> salary = salaryDao.salaryList2();
+		for (int i = 0; i < salary.size(); i++) {
+			String date = salary.get(i).getS_sdate();
+			date = date.substring(5, 10);
+			salary.get(i).setS_sdate(date);
+		}
+
+		return salary;
 	}
 }

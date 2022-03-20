@@ -9,7 +9,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class CoolsmsService {
 	
-	public static void sendPhoneChk(String userPhoneNumber, int randomNumber) {  //왜 static이 추가됐을까... 
+	public static void sendPhoneChk(String userPhoneNumber, int randomNumber) {  
 		
 		String api_key = "NCSANTLMVVHH9QPC";
 		String api_secret = "KYCUMKUJOHURYMSCNQD3NHWQKRGVUOGF";
@@ -22,7 +22,7 @@ public class CoolsmsService {
 		params.put("type", "SMS");
 		params.put("text", "[Maeumi] 인증번호는" + "[" + randomNumber + "]" +" 입니다.");  // 문자내용
 		
-		// 밑이 실제 보내는 부분. 실제 테스트를 할 때는 주석을 지운다. 
+//		// 실제 보내는 부분
 //		try {
 //			JSONObject obj = (JSONObject) coolsms.send(params); //자바에서 제공하는 유틸. JSONObeject
 //			System.out.println(obj.toString());  // 확인

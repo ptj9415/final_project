@@ -84,7 +84,7 @@
 }
 /*step2*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 /*step3*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
@@ -92,7 +92,7 @@
 }
 /*step4*/
 .md-stepper-horizontal.orange .md-step.active .md-step-circle {
-	background-color: #468FB6;
+	background-color: #153e54;
 }
 
 .md-stepper-horizontal .md-step.active .md-step-circle {
@@ -183,7 +183,7 @@
 .card-accordion {
 	position: relative;
 	overflow: hidden;
-	border: 1px solid #468FB6;
+	border: 1px solid #153e54;
 	border-radius: 8px;
 	transition: 0.20s ease-in-out;
 	margin-right: auto;
@@ -208,7 +208,7 @@
 	content: "▲";
 	display: block;
 	padding: 20px 30px;
-	color: #468FB6;
+	color: #153e54;
 	position: relative;
 	cursor: pointer;
 	font-weight: bold;
@@ -221,7 +221,7 @@
 	position: absolute;
 	top: 28px;
 	right: 30px;
-	color: #468FB6;
+	color: #153e54;
 	transition: 0.30s ease-in-out;
 	transform-origin: center center;
 }
@@ -262,8 +262,11 @@
 }
 
 .category-detail {
-	margin-top: 60px;
-	margin-bottom: 100px;
+	width: 80%;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
 }
 /*arccordion end*/
 /*next btn*/
@@ -271,9 +274,9 @@
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	cursor: pointer;
 	position: relative;
@@ -285,8 +288,8 @@
 
 #next-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 	cursor: pointer;
 }
@@ -309,8 +312,8 @@
 .steps .action-button:hover, .steps .action-button:focus, .action-button:hover,
 	.action-button:focus {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 }
 
 .steps .explanation {
@@ -426,24 +429,21 @@
 						onclick="doOpenCheck(this);"> 우울/불안</label><br> 
 						<label><input name="onecheck" type="checkbox" value="분노"
 						onclick="doOpenCheck(this);"> 분노</label><br> <label><input
-						name="onecheck" type="checkbox" value="무기력 자존감상실"
-						onclick="doOpenCheck(this);"> 무기력 자존감상실</label><br> <label><input
-						name="onecheck" type="checkbox" value="자살"
-						onclick="doOpenCheck(this);"> 자살</label>
+						name="onecheck" type="checkbox" value="무기력"
+						onclick="doOpenCheck(this);"> 무기력</label><br> 
+						<label><input name="onecheck" type="checkbox" value="자존감 상실" onclick="doOpenCheck(this);"> 자존감 상실</label><br>
+						<label><input name="onecheck" type="checkbox" value="자살" onclick="doOpenCheck(this);"> 자살</label>
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 				</div>
 			</div>
 			<div class="card-accordion">
 				<input id="card-2" class="card-accordion-checkbox" type="checkbox">
-				<label class="card-accordion-label" for="card-2">사랑/우정</label>
+				<label class="card-accordion-label" for="card-2">연애/우정</label>
 				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="연인" onclick="doOpenCheck(this);"> 연인</label><br> 
+					<label><input name="onecheck" type="checkbox" value="이별" onclick="doOpenCheck(this);"> 이별</label><br> 
 					<label><input name="onecheck" type="checkbox" value="데이트폭력" onclick="doOpenCheck(this);"> 데이트폭력</label><br> 
+					<label><input name="onecheck" type="checkbox" value="외모" onclick="doOpenCheck(this);"> 외모</label><br> 
 					<label><input name="onecheck" type="checkbox" value="친구관계" onclick="doOpenCheck(this);"> 친구관계</label><br> 
-					<label><input name="onecheck" type="checkbox" value="부부" onclick="doOpenCheck(this);"> 이별</label><br> 
-					<label><input name="onecheck" type="checkbox" onclick="doOpenCheck(this);">부부관계</label>
-						<!-- <input name="onecheck" class="text-field" type="text"
-				placeholder="직접입력..">  -->
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 
 				</div>
@@ -452,13 +452,50 @@
 				<input id="card-3" class="card-accordion-checkbox" type="checkbox">
 				<label class="card-accordion-label" for="card-3">진로/취업</label>
 				<div class="card-accordion-content">
-					<label><input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label><br> 
+					<label><input name="onecheck" type="checkbox" value="직장" onclick="doOpenCheck(this);"> 직장</label><br>
+					<label><input name="onecheck" type="checkbox" value="사내 인간관계" onclick="doOpenCheck(this);"> 사내 인간관계</label><br> 
 					<label><input name="onecheck" type="checkbox" value="취업준비" onclick="doOpenCheck(this);"> 취업준비</label><br> 
-					<label><input name="onecheck" type="checkbox" value="동료관계" onclick="doOpenCheck(this);"> 동료관계</label><br>
+					<label><input name="onecheck" type="checkbox" value="진로" onclick="doOpenCheck(this);"> 진로</label><br>
 					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
 
 				</div>
 			</div>
+			<div class="card-accordion">
+				<input id="card-4" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-4">결혼/육아</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="부부관계" onclick="doOpenCheck(this);"> 부부관계</label><br>
+					<label><input name="onecheck" type="checkbox" value="이혼" onclick="doOpenCheck(this);"> 이혼</label><br> 
+					<label><input name="onecheck" type="checkbox" value="육아" onclick="doOpenCheck(this);"> 육아</label><br> 
+					<label><input name="onecheck" type="checkbox" value="고부갈등" onclick="doOpenCheck(this);"> 고부갈등</label><br>
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+
+				</div>
+			</div>
+			<div class="card-accordion">
+				<input id="card-5" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-5">청소년</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="진학" onclick="doOpenCheck(this);"> 진학</label><br>
+					<label><input name="onecheck" type="checkbox" value="고시" onclick="doOpenCheck(this);"> 고시</label><br> 
+					<label><input name="onecheck" type="checkbox" value="따돌림" onclick="doOpenCheck(this);"> 따돌림</label><br> 
+					<label><input name="onecheck" type="checkbox" value="학교폭력" onclick="doOpenCheck(this);"> 학교폭력</label><br>
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+
+				</div>
+			</div>
+				<div class="card-accordion">
+				<input id="card-6" class="card-accordion-checkbox" type="checkbox">
+				<label class="card-accordion-label" for="card-6">가정</label>
+				<div class="card-accordion-content">
+					<label><input name="onecheck" type="checkbox" value="부모이혼" onclick="doOpenCheck(this);"> 부모이혼</label><br>
+					<label><input name="onecheck" type="checkbox" value="아동학대" onclick="doOpenCheck(this);"> 아동학대</label><br> 
+					
+					<p class="mini-p">* 세부카테고리는 한 항목만 선택 가능합니다</p>
+
+				</div>
+			</div>
+			
 			<input type="submit" data-page="2" name="next" class="next action-button" id="next-btn" value="Next" />
 		</div>
 			

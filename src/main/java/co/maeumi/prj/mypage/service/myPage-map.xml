@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.mypage.service.myPageMapper">
+	<select id="selectOrder" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM COUNSELOR C JOIN ORDER_DETAIL O
+			ON(C.C_EMAIL = O.C_EMAIL)
+			WHERE O.M_EMAIL = #{m_email}
+	</select>
+	
+	<select id="selectBoard" parameterType="co.maeumi.prj.board.service.BoardVO" resultType="co.maeumi.prj.board.service.BoardVO">
+			SELECT * 
+			FROM BOARD
+			WHERE B_EMAIL = #{b_email}
+	</select>
+	
+	<select id="selectPersonal" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT *
+			FROM PERSONAL_RESERVE P JOIN COUNSELOR C
+			ON(P.C_EMAIL = C.C_EMAIL)
+			WHERE M_EMAIL = #{m_email}
+	</select>
+	
+	<select id="selectGroup" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT *
+			FROM GROUP_RESERVE G JOIN GROUP_COUNSEL C
+			ON(G.GC_NO = C.GC_NO)
+			WHERE M_EMAIL = #{m_email}
+			order by c.gc_no
+	</select>
+	
+	<select id="findNo" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			select pr_no, gr_no
+			from order_detail
+			where or_no = #{or_no}
+	</select>
+	
+	<update id="myPageRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+			UPDATE ORDER_DETAIL
+		    SET OR_STATUS = 1
+		    WHERE OR_NO = #{or_no}
+	</update>
+	
+	<update id="myPageGroupRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+		    UPDATE GROUP_RESERVE
+		    SET GR_STATUS = 1
+		    WHERE GR_NO = #{gr_no}
+	</update>
+	
+	<update id="myPagePersonalRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+		    UPDATE PERSONAL_RESERVE
+		    SET PR_STATUS = 2
+		    WHERE PR_NO = #{pr_no}
+	</update>
+	
+	<select id="boardDetail" parameterType="co.maeumi.prj.board.service.BoardVO" resultType="co.maeumi.prj.board.service.BoardVO">
+			SELECT *
+			FROM BOARD
+			WHERE B_NO = #{b_no}
+	</select>
+	
+	<select id="boardReplyDetail" parameterType="co.maeumi.prj.boardReply.service.BoardReplyVO" resultType="co.maeumi.prj.boardReply.service.BoardReplyVO">
+			SELECT * FROM BOARD_REPLY
+            WHERE B_NO = #{b_no}
+	</select>
+	
+	<select id="mypagePersonal" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT *
+		    FROM PERSONAL_RESERVE P JOIN COUNSELOR C
+		    ON(P.C_EMAIL = C.C_EMAIL)
+		    WHERE PR_NO = #{pr_no}
+	</select>
+	
+	<select id="mypageGroup" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM 
+		    GROUP_COUNSEL G JOIN COUNSELOR C
+		    ON(G.C_EMAIL = C.C_EMAIL)
+		    JOIN GROUP_RESERVE R
+		    ON(G.GC_NO = R.GC_NO)
+		    WHERE G.GC_NO = #{gc_no} and R.GR_NO = #{gr_no}
+	</select>
+	
+	<select id="GroupdetailRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM
+			ORDER_DETAIL O JOIN GROUP_COUNSEL G
+            ON(G.GC_NO = O.GC_NO)
+            JOIN GROUP_RESERVE R
+            ON(R.GC_NO = O.GC_NO)
+            WHERE G.GC_NO = #{gc_no} AND R.GR_NO = #{gr_no}
+	</select>
+	
+	<update id="mypageOrderDelete" parameterType="co.maeumi.prj.mypage.service.myPageVO">
+			UPDATE ORDER_DETAIL
+			SET OR_STATUS = 1	
+			WHERE OR_NO = #{or_no}
+	</update>
+	
+	<select id="mypagePersonalOrderRefund" parameterType="co.maeumi.prj.mypage.service.myPageVO" resultType="co.maeumi.prj.mypage.service.myPageVO">
+			SELECT * FROM
+		    PERSONAL_RESERVE P JOIN ORDER_DETAIL O
+		    ON(P.PR_NO = O.PR_NO)
+		    WHERE O.PR_NO = #{pr_no};
+	</select>
+</mapper>

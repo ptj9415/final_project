@@ -8,11 +8,21 @@
 <style type="text/css">
 .test {
 	display: flex;
-	justify-content: center;
-	padding-top: 80px;
+    justify-content: center;
+    animation: fadein 1s;
+    -webkit-animation: fadein 1s;
+}
+  @-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 .mainForm {
-    width: 30%;
+    width: 40%;
+    margin-top: 50px;
 }
 
 .comment {
@@ -26,23 +36,51 @@ input {
 	margin-left: 10px;
 	margin-top: 10px;
 	height: 50px;
-	width: 60%;
-	font-size: 17px;
-	text-align: center;
+	width: 65%;
+	font-size: 13px;
+	padding-left: 20px;
+	border: 1px solid #8dacbd42;
+    border-radius: 30px;
+}
+
+input:focus{
+	outline:0;
+}
+
+
+
 }
 
 #emailSendBtn {
-	width : 20%;
-	margin-left: 50px;
-	height: 40px;
-	margin-bottom: 20px;
+	width: 80px;
+    height: 50px;
+    border: 1px solid #8dacbd42;
+    margin-left: 20px;
+    margin-top: 10px;
+    color:#666666;
+    font-size:13px;
 }
 
 #nextBtn {
-	float:right;
-	width: 30%;
-	height: 40px;
-}
+    width: 100px;
+    height: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:30px;
+    margin-bottom:50px;
+    border: 1px solid #153e54;
+    background-color: #153e54;
+    color: white;
+ }
+ #nextBtn:hover{
+ 	border: 1px solid #153e54;
+ 	background-color:white;
+ 	color:#153e54;
+ 	transition:200ms ease-in-out;
+ }
+ #nextBtn:focus{
+ 	outline:0;
+ }
 .correct {   <!--correct, incorrect 모두 인증번호 일치여부에 따라 경고색깔을 달리 표시하기 위함 --> 
 	color: green;
 }
@@ -61,9 +99,31 @@ button {
     border-radius: 50px;
 }
 
-button:hover {
-	background-color: #FFD2D2;
-	border-color: white;
+.emailCheck{
+	border:1px solid #8dacbd42;
+	border-radius:20px;
+}
+.check-container{
+	display:flex;
+}
+#emailSendBtn{
+	width:20%;
+	height:50px;
+	margin-left:20px;
+	margin-top:10px;
+	border:1px solid #8dacbd42;
+}
+#emailSendBtn:hover{
+	background-color:#153e54;
+	border:1px solid #153e54;
+	color:white;
+	transition:200ms ease-in-out;
+}
+.checkNum{
+	font-size:13px;
+}
+.checkNum:focus{
+	outline:0;
 }
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
@@ -150,16 +210,18 @@ $("#nextBtn").click(function(){
                 <h4>상담사님의 본인확인을 진행해주세요.</h4>
                 <h6>Maeumi. 의 다양한 서비스 이용을 위해 본인확인이 필요합니다.</h6>
             </div>
-            <div class="emailCheck" style="border: 1px solid gray;">
+            <div class="emailCheck" >
             	<form id="frm" action="counselorJoinForm.do" method="POST">
+            		<div class="check-container">
 	                <input type="email" placeholder="이메일을 입력해주세요" id="inputEmail" name="inputEmail" class="inputEmail">
 	                <button type="button" id="emailSendBtn" >인증하기</button><br>
+            		</div>
                 </form>
                 <input type="text" placeholder="'인증하기'를 눌러주세요." id="checkNum" class="checkNum" readonly="readonly">
                 <div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span> <!-- 인증번호의 일치여부를 알려주는 경고글 역할. -->
 			<br>
-                <h5 style="margin-left: 10px">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </h5>
+                <p style="font-size:15px; margin-left: 30px;">*메일이 발송되지 않은 경우 스팸메일함 등을 확인해주세요.<br>인증가능시간은 최대 5분입니다. </p>
             </div>
             <br>
             <button type="button" id="nextBtn" name="nextBtn">다음</button>

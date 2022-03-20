@@ -43,7 +43,8 @@ table>tbody>tr>th {
 	border-bottom: 0.5px solid rgb(222, 226, 230);
 }
 
-#infotable>tbody>tr>th, #coupontable>tbody>tr>th, #counseltable>tbody>tr>th {
+#infotable>tbody>tr>th, #coupontable>tbody>tr>th, #counseltable>tbody>tr>th
+	{
 	width: 15%;
 	background-color: rgb(245, 245, 245);
 }
@@ -203,44 +204,36 @@ table>tbody>tr>th {
 					<div class="card">
 						<div class="card-body table-responsive p-00">
 							<br>
-							<table class="table text-nowrap" id="counseltable">
+							<table class="table text-nowrap" id="counseltable"
+								style="text-align: center;">
 								<tr>
 									<th>상담 유형</th>
 									<th>상담사</th>
 									<th>신청일</th>
 									<th>상담일</th>
 									<th>상담 상태</th>
-									<th>관리</th>
 								</tr>
 								<tr>
-								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+									<td>화상(Zoom)</td>
+									<td>정아람</td>
+									<td>2022-03-17</td>
+									<td>-</td>
+									<td>상담 대기</td>
 								</tr>
 								<tr>
-								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+									<td>카카오톡</td>
+									<td>정아람</td>
+									<td>2022-03-11</td>
+									<td>2022-03-15</td>
+									<td>상담 완료</td>
 								</tr>
 								<tr>
-								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
+									<td>카카오톡</td>
+									<td>박태준</td>
+									<td>2022-03-11</td>
+									<td>-</td>
+									<td>상담 취소</td>
 								</tr>
-								<tr>
-								<td colspan="6" style="text-align: center">상담 내역이 없습니다.</td>
-								</tr>
-								<%-- 								<c:choose> --%>
-								<%-- 									<c:when test="${not empty coupon}"> --%>
-								<%-- 										<c:forEach items="${coupon }" var="coupon"> --%>
-								<!-- 											<tr> -->
-								<%-- 												<td>${coupon.c_name }</td> --%>
-								<%-- 												<td>${coupon.c_price }</td> --%>
-								<%-- 												<td>${coupon.c_startdate }</td> --%>
-								<%-- 												<td>${coupon.c_finaldate }</td> --%>
-								<!-- 											</tr> -->
-								<%-- 										</c:forEach> --%>
-								<%-- 									</c:when> --%>
-								<%-- 									<c:when test="${empty coupon }"> --%>
-								<!-- 										<tr> -->
-								<!-- 											<td colspan="4">보유한 쿠폰이 없습니다.</td> -->
-								<!-- 										</tr> -->
-								<%-- 									</c:when> --%>
-								<%-- 								</c:choose> --%>
 							</table>
 							<br>
 						</div>
@@ -248,11 +241,10 @@ table>tbody>tr>th {
 				</div>
 			</div>
 			<br>
-		<button type="button" onclick="location.href='adminMemberList.do'" id="siteback">목록으로</button>
+			<button type="button" onclick="location.href='adminMemberList.do'"
+				id="siteback">목록으로</button>
 		</div>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br>
 	</section>
 </body>
 

@@ -13,69 +13,50 @@
 <!DOCTYPE html>
 <html>
 <style style="text/css">
-
-html,
-
-body {
-
-    margin:0;
-
-    padding:0;
-
-    height:100%;
-
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 #wrapper {
-
-   position:relative;
-
-    min-height:100%;
-
+	position: relative;
+	min-height: 100%;
 }
 
 #header {
-
-   height:70px;
-
-    background:#ccc;
-
+	height: 70px;
+	background: #ccc;
 }
 
 #container {
-
-    padding:20px;
-
+	padding: 20px;
 }
 
 #footer {
-
-    position:absolute;
-
-    bottom:0;
-	left:0;
-	right:0;
-	padding-top:500px;
-    width:100%;
-
-    height:70px;   
-
-    background:#ccc;
-
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding-top: 500px;
+	width: 100%;
+	height: 70px;
+	background: #ccc;
 }
-.div.wrap{
-	position:relative;
-	
+
+.div.wrap {
+	position: relative;
 }
+
 * {
-box-sizing: border-box;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
-#body{
-	height:100%;
+
+#body {
+	height: 100%;
 }
-	
 </style>
 <head>
 <meta charset="UTF-8">
@@ -109,21 +90,25 @@ box-sizing: border-box;
 
 <link rel="stylesheet" href="resources/user/css/ionicons.min.css">
 
-<link rel="stylesheet" href="resources/user/css/bootstrap-datepicker.css">
+<link rel="stylesheet"
+	href="resources/user/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="resources/user/css/jquery.timepicker.css">
 
 
 <link rel="stylesheet" href="resources/user/css/flaticon.css">
 <link rel="stylesheet" href="resources/user/css/icomoon.css">
 <link rel="stylesheet" href="resources/user/css/style.css">
-<style type="text/css">
 
+<link rel="icon" type="image/x-icon" href="img/heart-attack.png" />
+<style type="text/css">
 .scrollax-performance, .scrollax-performance *, .scrollax-performance *:before,
 	.scrollax-performance *:after {
 	pointer-events: none !important;
 	-webkit-animation-play-state: paused !important;
 	animation-play-state: paused !important;
-}; 
+}
+
+;
 </style>
 
 
@@ -137,7 +122,7 @@ box-sizing: border-box;
 <body>
 
 
-<%-- 	<div class='wrap'>
+	<%-- 	<div class='wrap'>
 		<tiles:insertAttribute name="header" />
 		<div class='content'>
 			<div class="page_content">
@@ -150,22 +135,18 @@ box-sizing: border-box;
 	<div class='wrap'>
 		<tiles:insertAttribute name="header" />
 	</div>
-		
-		<main>
-				<tiles:insertAttribute name="body" />
-		</main>
-				
-				<tiles:insertAttribute name="footer" />
-			
-		
 
+	<main>
+		<tiles:insertAttribute name="body" />
+	</main>
+		
 	
 
+	<tiles:insertAttribute name="footer" />
 
 
 
-
-<!-- 	<script src="resources/user/js/jquery.min.js"></script>
+	<!-- 	<script src="resources/user/js/jquery.min.js"></script>
 	<script src="resources/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/user/js/popper.min.js"></script>
 	<script src="resources/user/js/bootstrap.min.js"></script>
@@ -182,6 +163,8 @@ box-sizing: border-box;
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
 	<script src="resources/user/js/google-map.js"></script>
 	<script src="resources/user/js/main.js"></script> -->
+
+
 
 </body>
 

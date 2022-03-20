@@ -51,7 +51,7 @@ html {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav,
+article, aside, figcaption, footer, header, hgroup, main, nav,
 	section {
 	display: block;
 }
@@ -189,7 +189,7 @@ pre {
 }
 
 figure {
-	margin: 0 0 1rem;
+	/* margin: 0 0 1rem; */
 }
 
 img {
@@ -463,12 +463,12 @@ mark, .mark {
 }
 
 .figure {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .figure-img {
-	margin-bottom: 0.5rem;
-	line-height: 1;
+	/* margin-bottom: 0.5rem;
+	line-height: 1; */
 }
 
 .figure-caption {
@@ -8417,7 +8417,7 @@ supports ((position: -webkit-sticky) or (position: sticky)) { .sticky-top
 
 .mb-4, .my-4 {
 	margin-bottom: 1.5rem !important;
-	color:white;
+	color:#153e54;
 }
 
 .ml-4, .mx-4 {
@@ -9121,7 +9121,7 @@ supports ((position: -webkit-sticky) or (position: sticky)) { .sticky-top
 		padding-bottom: 1.5rem !important;
 	}
 	.pl-md-4, .px-md-4 {
-		padding-left: 1.5rem !important;
+		padding-left: 5rem !important;
 	}
 	.p-md-5 {
 		padding: 3rem !important;
@@ -11125,7 +11125,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .staff .text .faded {
-	opacity: 0;
+	opacity: 1;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	-webkit-transition: all 0.3s ease;
@@ -11847,6 +11847,11 @@ rgba(
 
 .testimony-section .owl-dots, .ftco-client .owl-dots {
 	text-align: center;
+	display:inline-flex;
+	margin-right:auto;
+	margin-left:auto;
+	width:50%;
+	float:right;
 }
 
 .testimony-section .owl-dots .owl-dot, .ftco-client .owl-dots .owl-dot {
@@ -11975,7 +11980,7 @@ rgba(
 }
 
 .mfp-with-zoom.mfp-ready .mfp-container {
-	opacity: 1;
+	opacity: 0;
 }
 
 .mfp-with-zoom.mfp-ready.mfp-bg {

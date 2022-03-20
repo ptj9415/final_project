@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.maeumi.prj.salary.service.SalaryMapper"> <!-- pakage명을 포함한 mapper 클래스명 -->
+
+	<select id="salaryList"
+		resultType="co.maeumi.prj.salary.service.SalaryVO">
+		SELECT * FROM MONTHSALARYS WHERE SDATE LIKE '%'||2022||'%'
+	</select>
+
+	<select id="salarySecondList"
+		parameterType="co.maeumi.prj.salary.service.SalaryVO"
+		resultType="co.maeumi.prj.salary.service.SalaryVO">
+		SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE
+		'%'||#{month}||'%'
+	</select>
+
+	<select id="salaryList2"
+		parameterType="co.maeumi.prj.salary.service.SalaryVO"
+		resultType="co.maeumi.prj.salary.service.SalaryVO">
+		SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE
+		'%'||'22/03'||'%'
+	</select>
+
+
+
+	<select id="salarySearch"
+		parameterType="co.maeumi.prj.salary.service.SalaryVO"
+		resultType="co.maeumi.prj.salary.service.SalaryVO">
+
+		<choose>
+			<when test="month == 'all'">
+				SELECT * FROM MONTHSALARYS WHERE SDATE LIKE
+				'%'||#{year}||'%'
+			</when>
+			<otherwise>
+				SELECT * FROM SALARY WHERE TO_CHAR(S_SDATE, 'YY/MM') LIKE
+				'%'||${month}||'%'
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

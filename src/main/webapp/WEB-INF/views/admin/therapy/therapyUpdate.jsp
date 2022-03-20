@@ -148,9 +148,11 @@ h3 {
 													placeholder="첨부파일"> <label for="filename">파일찾기</label> 
 													<input type="file" id="filename" name="filename" value="${therapy.t_picture}">
 													<div>${therapy.t_picture}</div>
-											</div></td>
+											</div>
+										</td>
 									</tr>
 								</table>
+								<input type="hidden" name="fileback" value="${therapy.t_picture}">
 								<div class="btndiv">
 								<input type="hidden" id="t_no" name="t_no" value="${therapy.t_no }">
 									<button type="submit" id="submitbtn">등록</button>
@@ -175,7 +177,7 @@ h3 {
 		$('.summernote').summernote(
 				{
 					// 에디터 높이
-					height : 200,
+					height : 500,
 					weight : 500,
 					// 에디터 한글 설정
 					lang : "ko-KR",

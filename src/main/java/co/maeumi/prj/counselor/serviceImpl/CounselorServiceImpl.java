@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.maeumi.prj.counselor.service.CounselorMapper;
 import co.maeumi.prj.counselor.service.CounselorService;
 import co.maeumi.prj.counselor.service.CounselorVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
 import co.maeumi.prj.service.Search;
 
 @Repository("counselorDao")
@@ -177,6 +178,55 @@ public class CounselorServiceImpl implements CounselorService {
 	public int counselorUpdate(CounselorVO cvo) {
 		// TODO Auto-generated method stub
 		return map.counselorUpdate(cvo);
+	}
+
+	@Override
+
+	public int getUserCounselorListCnt(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.getUserCounselorListCnt(svo);
+	}
+
+	@Override
+	public List<PersonalcounselVO> userCounselorSearchList(Search svo) throws Exception {
+		// TODO Auto-generated method stub
+		return map.userCounselorSearchList(svo);
+	}
+
+	public CounselorVO counselorFindPassword(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorFindPassword(cvo);
+	}
+
+	@Override
+	public int cPasswordUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.cPasswordUpdate(cvo);
+
+	}
+
+	@Override
+	public CounselorVO userCounselorSelect(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.userCounselorSelect(cvo);
+	}
+
+	@Override
+	public int counselorCateUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorCateUpdate(cvo);
+	}
+
+	@Override
+	public int counselorPriceUpdate(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorPriceUpdate(cvo);
+	}
+
+	@Override
+	public CounselorVO counselorPriceSelect(CounselorVO cvo) {
+		// TODO Auto-generated method stub
+		return map.counselorPriceSelect(cvo);
 	}
 
 

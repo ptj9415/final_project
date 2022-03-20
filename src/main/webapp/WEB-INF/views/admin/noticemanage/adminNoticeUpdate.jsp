@@ -135,7 +135,7 @@ h3 {
 						<div class="card-body table-responsive p-00">
 							<form action="noticeUpdateEnd.do" method="post" id="frm"
 								enctype="multipart/form-data">
-								<table class="table table-hover text-nowrap" id="noticetable">
+								<table class="table text-nowrap" id="noticetable">
 									<tr>
 										<th>말머리</th>
 										<td><select name="n_category" id="n_category">
@@ -161,7 +161,7 @@ h3 {
 										<th>첨부파일</th>
 										<td colspan="3"><div class="filebox">
 												<input class="uploadname" value="첨부파일" placeholder="첨부파일">
-												<label for="fileName">파일 찾기</label> <input type="file"
+												<label for="fileName">파일찾기</label> <input type="file"
 													id="fileName" name="fileName"
 													value="${notices.n_filename }">
 											</div></td>

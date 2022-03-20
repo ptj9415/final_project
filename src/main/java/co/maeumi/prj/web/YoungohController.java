@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,15 +26,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import co.maeumi.prj.board.service.BoardService;
+import co.maeumi.prj.board.service.BoardVO;
+import co.maeumi.prj.boardReply.service.BoardReplyService;
+import co.maeumi.prj.boardReply.service.BoardReplyVO;
 import co.maeumi.prj.coupon.service.CouponService;
 import co.maeumi.prj.coupon.service.CouponVO;
 import co.maeumi.prj.groupcounsel.service.GroupcounselService;
 import co.maeumi.prj.groupcounsel.service.GroupcounselVO;
+import co.maeumi.prj.member.service.MemberService;
+import co.maeumi.prj.member.service.MemberVO;
+import co.maeumi.prj.mypage.service.myPageService;
+import co.maeumi.prj.mypage.service.myPageVO;
 import co.maeumi.prj.order.service.orderService;
 import co.maeumi.prj.order.service.order_datailVO;
+import co.maeumi.prj.personalcounsel.service.PersonalcounselVO;
+import co.maeumi.prj.service.Aes256;
 import co.maeumi.prj.service.Pagination;
 import co.maeumi.prj.therapy.service.TherapyService;
 import co.maeumi.prj.therapy.service.TherapyVO;
+
 
 @Controller
 public class YoungohController {
@@ -48,8 +61,27 @@ public class YoungohController {
 	
 	@Autowired
 	private CouponService couponDao;
-
+	
+	@Autowired
+	Aes256 aes256;
+	
+	@Autowired
+	private myPageService myPageDao;
+	
+	@Autowired
+	private MemberService memberDao;
+	
+	@Autowired
+	private BoardService boardDao;
+	
+	@Autowired
+	private BoardReplyService boardreplyDao;
+	
+	@Value("#{uploadpath['upload']}")
+	private String uploadpath;
+	
 	Pagination page;
+	
 	/* ===== 상담사 화면 ===== */
 	
 	// 상담 관리 - 그룹상담 개설 화면
@@ -69,8 +101,10 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
-
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editor\\";
+		//String SAVE_PATH = request.getServletContext().getRealPath("editor/");
+		//String SAVE_PATH = "/fileupload/gceditor/";
+		String SAVE_PATH = uploadpath + "/gceditor/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -81,6 +115,7 @@ public class YoungohController {
 
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
@@ -101,14 +136,15 @@ public class YoungohController {
 
 	//상담사 개설 페이지 insert 구문
 	@RequestMapping("/summernote.do")
-	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+	public String summernote(Model model, GroupcounselVO vo, HttpServletResponse response,HttpServletRequest request,
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req, HttpSession session) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = uploadpath + "/gcsumnail/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -126,11 +162,13 @@ public class YoungohController {
 		// 서머노트 코드 원본
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-
+		System.out.println("tomcat path");
+		System.out.println(req.getContextPath());
 		String origincode = req.getParameter("summernote");
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "editor/");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/","/fileupload/gceditor/");
 		vo.setGc_infos(result);
-
+		vo.setC_email((String)session.getAttribute("c_email"));
+		vo.setGc_name((String)session.getAttribute("c_name"));
 		int insert = groupCounselDao.insertGroupCounsel(vo);
 		
 		// vo값에 따라 성공 실패 여부 확인
@@ -145,8 +183,8 @@ public class YoungohController {
 	}
 	
 	//상담사 관리 페이지 메인화면
-	@RequestMapping("/counselorGroupList.do")
-	public String counselorGroupList(Model model, HttpServletRequest request) {
+	@RequestMapping("/counselorGroupList1.do")
+	public String counselorGroupList1(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
 			page = new Pagination(groupCounselDao.countGroupCounsel(), 1, 5); // 전체 수, start, end
@@ -175,88 +213,6 @@ public class YoungohController {
 		request.setAttribute("page", page);
 		return "counselor/groupcounselmanage/counselorGroupList";
 	}
-
-	// 상담 관리 - 그룹상담 관리 화면 다중 검색 및 페이징.
-	// 페이징을 하기 위해선 pagination 이라는 VO 클래스에 담아야 하기 때문에 따로 requestparam 으로 불러와줘서 담아줘야
-	// 함.
-	// 페이징을 하려면 pagination이라는 클래스 안에 검색 조건을 걸어줄 변수들을 생성하고 넣어줘야함.
-	@RequestMapping("/groupsearchmanage.do")
-	public String groupsearchmanage(@Param("gc_title") String gc_title, @Param("gc_startdate") String gc_startdate,
-			@Param("gc_finaldate") String gc_finaldate, @Param("gc_date") String gc_date, Model model,
-			HttpServletRequest request, HttpSession session) {// @Param("gc_type") String gc_type, @Param("gc_status")
-																// String gc_status,
-		session = request.getSession();
-		String nowPage = request.getParameter("nowPage");
-		// 검색 기능에서 가지고 있는 세션값 지워주기
-		System.out.println(nowPage);
-		System.out.println(gc_title);
-		System.out.println(gc_startdate);
-		System.out.println(gc_finaldate);
-		System.out.println(gc_date);
-		// get 방식으로 가져오기 때문에 nowPage는 jsp 페이지에서 가져온다.
-		// 세션값 넣어주기.
-
-		if (gc_title != null && gc_startdate != null && gc_finaldate != null && gc_date != null) {
-			session.setAttribute("gc_title", gc_title);
-			session.setAttribute("gc_date", gc_date);
-			session.setAttribute("gc_startdate", gc_startdate);
-			session.setAttribute("gc_finaldate", gc_finaldate);
-		} else {
-			if ((String) session.getAttribute("gc_title") == null && (String) session.getAttribute("gc_date") == null
-					&& (String) session.getAttribute("gc_startdate") == null
-					&& (String) session.getAttribute("gc_finaldate") == null) {
-				session.setAttribute("gc_title", gc_title);
-				session.setAttribute("gc_date", gc_date);
-				session.setAttribute("gc_startdate", gc_startdate);
-				session.setAttribute("gc_finaldate", gc_finaldate);
-			}
-		}
-
-		// pagination 객체에 담아줄 setter 선언
-		page.setGc_title((String) session.getAttribute("gc_title"));
-		page.setGc_date((String) session.getAttribute("gc_date"));
-		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
-		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
-		page.setGc_type((String) session.getAttribute("gc_type"));
-		page.setGc_status((String) session.getAttribute("gc_type"));
-
-		if (nowPage == null) {
-			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), 1, 2); // 전체 수, start, end
-		} else {
-			page = new Pagination(groupCounselDao.searchcountGroupCounsel(page), Integer.parseInt(nowPage), 2); // 전체 수,
-																												// start,
-																												// end
-		}
-
-		page.setGc_title((String) session.getAttribute("gc_title"));
-		page.setGc_date((String) session.getAttribute("gc_date"));
-		page.setGc_startdate((String) session.getAttribute("gc_startdate"));
-		page.setGc_finaldate((String) session.getAttribute("gc_finaldate"));
-		page.setGc_type((String) session.getAttribute("gc_type"));
-		page.setGc_status((String) session.getAttribute("gc_type"));
-
-		List<GroupcounselVO> list = groupCounselDao.searchpageSelectList(page);
-
-		for (int i = 0; i < list.size(); i++) {
-			String date = list.get(i).getGc_date();
-			date = date.substring(0, 10);
-			list.get(i).setGc_date(date);
-
-			String date2 = list.get(i).getGc_startdate();
-			date2 = date.substring(0, 10);
-			list.get(i).setGc_date(date2);
-
-			String date3 = list.get(i).getGc_finaldate();
-			date = date.substring(0, 10);
-			list.get(i).setGc_date(date3);
-
-		}
-
-		request.setAttribute("groupCounsel", list);
-		request.setAttribute("page", page);
-
-		return "counselor/groupcounselmanage/counselorGroupList";
-	}
 	
 	//상담사 관리 페이지 신청자 관리 페이지
 	@RequestMapping("/counselorGroupApply.do")
@@ -271,7 +227,7 @@ public class YoungohController {
 	
 	//상담사 관리 페이지 상세 목록 페이지
 	@RequestMapping("/counselorGroupDetail.do")
-	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) {
+	public String counselorGroupDetail(Model model, HttpServletRequest request, GroupcounselVO vo) throws Exception {
 		String gc_no = request.getParameter("gc_no");
 		int gc_nos = Integer.parseInt(gc_no);
 		vo.setGc_no(gc_nos);
@@ -288,43 +244,28 @@ public class YoungohController {
 		String date3 = gvo.getGc_date();
 		date3 = date3.substring(0, 10);
 		gvo.setGc_finaldate(date3);
+		
+		System.out.println(gvo.getGc_report());
+		String result = aes256.decrypt(gvo.getGc_report());
+		gvo.setGc_report(result);
+		
 
 		model.addAttribute("detail", gvo);
 
 		return "counselor/groupcounselmanage/counselorGroupDetail";
 	}
-
-	// 그룹 상담 신청자 목록 페이지 신청 내용 조회 가져오기 아작스.
-	@RequestMapping("/selectFunc.do")
-	@ResponseBody
-	public GroupcounselVO selectFunc(Model model, HttpServletRequest request, GroupcounselVO vo) {
-		GroupcounselVO gvo = groupCounselDao.selectgroupRserve(vo);
-		return gvo;
-	}
-	// 그룹 상담 신청자 목록 페이지 삭제 모달 띄우기 아작스.
-	@RequestMapping("/deleteFuncForm.do")
-	@ResponseBody
-	public String deleteForm() {
-		return "성공";
-	}
-
-	// 그룹 상담 신청자 목록 페이지 삭제 모달창 띄우기 아작스 입니다.
-	@RequestMapping("/deleteFunc.do")
-	@ResponseBody
-	public String deleteFunc(Model model, HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo) {
-		return "모달 성공";
-	}
 	
+	//이거는 합칠 때 필요합니다.!!!!
 	//그룹 상담 신청자 목록 페이지 삭제 페이지입니다.
 	@RequestMapping("/upDateService.do")
-	public String upDateService(HttpServletRequest request, GroupcounselVO vo, GroupcounselVO jvo, Model model) {
+	@ResponseBody
+	public String upDateService(HttpServletRequest request, GroupcounselVO vo) {
+		System.out.println("왜 안오냐?");
+		String gr_no = request.getParameter("gr_no");
+		vo.setGr_no(gr_no);
+		System.out.println("여기로 오나요?");
 		groupCounselDao.GroupUserDelete(vo);
-		jvo.setC_email(vo.getC_email());
-
-		model.addAttribute("group", groupCounselDao.joinSelectList(jvo));
-		model.addAttribute("email", vo.getC_email());
-
-		return "counselor/groupcounselmanage/counselorGroupApply";
+		return null;
 	}
 
 	//그룹 상담 상세 페이지 상담 결과 등록 처리. 
@@ -342,7 +283,7 @@ public class YoungohController {
 			groupCounselDao.groupCounselResult(vo);
 		}
 
-		return "redirect:counselorGroupList.do";
+		return "redirect:counselorGroupList1.do";
 	}
 
 	/* ===== 관리자 화면 ===== */
@@ -351,15 +292,6 @@ public class YoungohController {
 	public String adminMainPage() {
 		return "admin/adminhome/adminHome";
 	}
-
-    //테라피 관리 페이지 입니다.
-//	@RequestMapping("/admintherapy.do")
-//	public String admintherapy(Model model) {
-//		List<TherapyVO> list = therapyDao.therapyList();
-//		model.addAttribute("therapy", list);
-//
-//		return "admin/therapy/therapyList";
-//	}
 	
 	// 심리 테라피 등록 이미지 처리 아작스 입니다.
 	@RequestMapping(value = "/uploadSummernoteImageFileList.do", produces = "application/json; charset=utf8")
@@ -372,8 +304,10 @@ public class YoungohController {
 
 		// 경로 할 때 마다 계속 바꿔줘야함 아니면 절대 에디터 이미지 업로드 안됨.
 		// Eclipse 파일 물리 경로 방식 (이클립스 내부에 저장)
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
-
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapyEditor\\";
+		//String SAVE_PATH = request.getServletContext().getRealPath("therapyEditor/");
+		//String SAVE_PATH = "/fileupload/therapy/";
+		String SAVE_PATH = uploadpath + "/therapy/";
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot + "resources/fileupload/";
@@ -385,6 +319,23 @@ public class YoungohController {
 
 		File targetFile = new File(fileRoot + savedFileName);
 		File mtargetFile = new File(SAVE_PATH + savedFileName);
+		// 서버의 현재 경로 upload = /home/ubuntu/apache-tomcat-9.0.59/webapps/fileupload/ 서버의 탐캣 경로
+		// 지금 로컬의 에디터로 이미지를 띄웠을 경우 탐캣 경로 prj/resources/fileupload/
+		// 실제 로컬 탐캣안에 들어가는 경로 C:\Dev\apache-tomcat-9.0.55\wtpwebapps\final_project\resources\fileupload
+		
+		// 문제 1.
+		// 얘가 로컬에서는 request.getContextPath()를 써서 prj를 찾아 줬는데 서버에서는 지금 잡아주는지 모르겟음
+		
+		// 문제 1 의문점. 
+		// 지금 로컬의 에디터로 이미지를 띄웠을 경우 탐캣 경로 prj/resources/fileupload/
+		// 젠킨스에서 이미지 뜰때는 위에 경로에서 prj 대신 maeumi라고 떳었던거 같은데 지금은 아예 안뜸....
+		// 만약에 maeumi가 맞다면 request.getContextPath() 대신 maeumi를 써 넣어야 될거 같음...
+		
+		// 문제 2.
+		// 지금 338줄 "url" 뒤에 있는 탐캣 경로는 탐캣에다가 이미지를 미리보기 형식으로 띄워줘서 얘가 뜨는 형식인데 안뜸... 얘가 뜨면 지금 경로는 제대로 해놔서 이미지는 뜨는데... 
+		// 그래서 request.getContextPath() 뒤에 /resources/fileupload 경로가 맞는지 모르겠음...
+		// 로컬에서는 /resources/fileupload 에서 fileupload가 없으면 fileupload를 만들어주고 안에 이미지를 넣어줬는데 젠킨스도 그런지 모르겠음....
+		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
@@ -392,7 +343,7 @@ public class YoungohController {
 			jsonObject.addProperty("url", request.getContextPath() + "/resources/fileupload/" + savedFileName);
 			// contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
-
+			
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
@@ -406,10 +357,12 @@ public class YoungohController {
 	// 테라피 등록 페이지 입니다.
 	@RequestMapping("/therapyInsert.do")
 	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) {
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest request) {
 
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
+		String SAVE_PATH = uploadpath + "/therapysumnail/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -426,13 +379,13 @@ public class YoungohController {
 		}
 
 		// 서머노트 코드 원본
-		String origincode = req.getParameter("summernote");
+		String origincode = request.getParameter("summernote");
 		System.out.println(origincode);
 
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
 
-		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "/fileupload/therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 		therapyDao.InsertTherapy(vo);
@@ -461,30 +414,38 @@ public class YoungohController {
 	@RequestMapping("/therapyUpdate.do")
 	public String therapyUpdate(Model model, TherapyVO vo, @RequestParam(value = "filename") MultipartFile mf,
 			HttpServletRequest request) {
-
+		String fileback = request.getParameter("fileback");
+		vo.setT_picture(fileback);
 		// 썸네일 파일업로드
-		String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
 		String originalFileName = mf.getOriginalFilename();
+		
+		System.out.println(originalFileName);	
+		if (originalFileName != "") {
+			System.out.println("일로 당연히 들어옴");
+			
+			String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+			String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+			String saveFile = uuid + originalFileName;
 
-		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
-		String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
-		String saveFile = uuid + originalFileName;
-		vo.setT_picture(saveFile);
-
-		try {
-			mf.transferTo(new File(msaveFile));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				vo.setT_picture(saveFile);
+				mf.transferTo(new File(msaveFile));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		String origincode = request.getParameter("summernote");
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "therapyEditor/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"therapy/");
+		System.out.println(result);
 		vo.setT_subject(result);
 
 		therapyDao.UpdateTherapy(vo);
-
+		
 		return "redirect:admintherapy.do";
 	}
 
@@ -504,22 +465,44 @@ public class YoungohController {
 
 	// 그룹 상담 유저 페이지 시작입니다.
 	@RequestMapping("/userGroupCounsel.do")
-	public String userGroupCounsel(Model model) {
-		List<GroupcounselVO> list = groupCounselDao.groupSelectList();
+	public String userGroupCounsel(Model model, HttpServletRequest request) {
+		String nowPage = request.getParameter("nowPage");
 		
+		if (nowPage == null) {
+			page = new Pagination(groupCounselDao.groupSelectListCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+		} else {
+			page = new Pagination(groupCounselDao.groupSelectListCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+		}
+		
+		List<GroupcounselVO> list = groupCounselDao.groupSelectList(page);
+		
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGc_date();
+			date = date.substring(0, 10);
+			list.get(i).setGc_date(date);
+			String date2 = list.get(i).getGc_startdate();
+			date = date.substring(0, 10);
+			list.get(i).setGc_startdate(date2);
+			String date3 = list.get(i).getGc_finaldate();
+			date3 = date.substring(0, 10);
+			list.get(i).setGc_finaldate(date3);
+		}
 		
 		model.addAttribute("groupCounselList", list);
+		model.addAttribute("page", page);
 		return "user/groupcounsel/groupCounselApplication";
 	}
 
 	// 그룹 상담 유저 상세 페이지입니다.
 	@RequestMapping("/userGroup.do")
-	public String userGroup(GroupcounselVO vo, Model model) {
+	public String userGroup(GroupcounselVO vo, Model model, HttpServletRequest request ) {
 		GroupcounselVO gvo = groupCounselDao.selectUserGroup(vo);
 		String date = gvo.getGc_date();
 		date = date.substring(0, 10);
 		gvo.setGc_date(date);
-		
+		String c_email = request.getParameter("c_email");
+		System.out.println(c_email);
+		model.addAttribute("c_email",c_email);
 		model.addAttribute("userGroup", gvo);
 		return "user/groupcounsel/userGroup";
 	}
@@ -528,30 +511,59 @@ public class YoungohController {
 	//유저 이메일 세션값이 들어가야 됩니다.
 	@RequestMapping("/usergroupinvoice.do")
 	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
+		String c_email = request.getParameter("c_email");
 		String gc_no = request.getParameter("gc_no");
 		System.out.println(gc_no);
 		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
 		gvo.setM_email("이메일 성공");
 		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
 		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
+		
+			String date = gvo.getGc_date();
+			date = date.substring(0, 10);
+			gvo.setGc_date(date);
+			
 		model.addAttribute("groupInvoice", gvo);
 		model.addAttribute("coupon", cplist);
+		model.addAttribute("c_email", c_email);
 		return "user/groupcounsel/groupInvoice";
 	}
 	
 	//그룹 상담 유저 결제 완료 페이지입니다.
 	@RequestMapping("/payment.do")
-	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo) {
-		groupCounselDao.groupReserveInsert(vo);
-		ovo.setGc_no(vo.getGc_no());
+	public String payment(GroupcounselVO vo, Model model, order_datailVO ovo, CouponVO cvo, HttpServletRequest request, HttpSession session) {
+		vo.setM_email((String)session.getAttribute("email"));
+		groupCounselDao.groupReserveInsert(vo);  //그룹 상담 예약 등록하기.
+		int maxnum = groupCounselDao.maxGroupGrno();
+		String c_email = request.getParameter("c_email");
+		System.out.println("이거 maxnum 들어옴?? : "+maxnum);
+		System.out.println(c_email);
+		ovo.setGr_no(maxnum);
 		ovo.setOr_price(vo.getGr_price());
-		int orderInsert = orderDao.orderInsert(ovo);
+		ovo.setC_email(c_email);
+		ovo.setM_email((String)session.getAttribute("email"));
+		ovo.setM_nickname((String)session.getAttribute("nickname"));
+		int orderInsert = orderDao.orderInsert(ovo); //주문 상세 내역 등록 메소드.
 		if (orderInsert == 1) {
-			order_datailVO gvo = orderDao.selectorderList(ovo);
-			model.addAttribute("result", gvo);
-			System.out.println(vo.getGc_no());
-			groupCounselDao.groupUpdatePerson(vo);
-			//couponDao.couponDelete(cvo);
+			int num = orderDao.MaxGroupOrder();  //insert 후 주문 상세 넘버값 찾아주기.
+			System.out.println(num);
+			ovo.setOr_no(num);
+			ovo = orderDao.selectorderList(ovo);  //그룹 상담 결과 셀렉트 메소드
+			
+			String date = ovo.getGc_date();
+			date = date.substring(0,10);
+			ovo.setGc_date(date);
+			
+			System.out.println(ovo.getOr_date());
+			groupCounselDao.groupUpdatePerson(vo); //인원수 증가 메소드
+			String c_no = request.getParameter("c_no");
+			int c_nos = Integer.parseInt(c_no);
+			System.out.println(c_nos);
+			if (c_nos != 0) {
+				//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+			}
+			
+			model.addAttribute("result", ovo);
 		}
 		return "user/groupcounsel/groupResult";
 	}
@@ -561,9 +573,9 @@ public class YoungohController {
 	public String userTerapy(Model model, HttpServletRequest request) {
 		String nowPage = request.getParameter("nowPage");
 		if (nowPage == null) {
-			page = new Pagination(therapyDao.selectTherapyCount(), 1, 6); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), 1, 8); // 전체 수, 첫 번째 페이지, 한 페이지당 개수
 		} else {
-			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 6); // 전체 수, nowPage, 한 페이지 당 개수
+			page = new Pagination(therapyDao.selectTherapyCount(), Integer.parseInt(nowPage), 8); // 전체 수, nowPage, 한 페이지 당 개수
 		}
 		List<TherapyVO> list = therapyDao.therapyLists(page);
 		model.addAttribute("therapylist", list);
@@ -585,4 +597,212 @@ public class YoungohController {
 		return "user/test/simri";
 	}
 	
+	//유저 마이페이지 관리.
+	@RequestMapping("/userMypages.do")
+	public String userMypages(HttpServletRequest request, HttpSession session ,MemberVO mvo, Model model, myPageVO vo, BoardVO bvo) {
+		
+		mvo.setM_email( (String) session.getAttribute("email") );
+		mvo.setM_type( (String) session.getAttribute("type"));
+		
+		vo.setM_email( (String) session.getAttribute("email") );
+		bvo.setB_email((String) session.getAttribute("email") );
+		List<myPageVO> list = myPageDao.selectOrder(vo);
+		System.out.println("세션값 이메일 담겼는지 확인: " + mvo.getM_email());
+		System.out.println("세션값 가입유형 담겼는지 확인: " + mvo.getM_type());
+		
+		List<BoardVO> blist = myPageDao.selectBoard(bvo);
+		for (int i = 0; i < blist.size(); i++) {
+			String date = blist.get(i).getB_wdate();
+			date = date.substring(0, 10);
+			blist.get(i).setB_wdate(date);
+		}
+		
+		List<myPageVO> plist = myPageDao.selectPersonal(vo);
+		for (int i = 0; i < plist.size(); i++) {
+			String date = plist.get(i).getPr_date();
+			date = date.substring(0, 10);
+			plist.get(i).setPr_date(date);
+		}
+		
+		List<myPageVO> glist = myPageDao.selectGroup(vo);
+		for (int i = 0; i < glist.size(); i++) {
+			String date = glist.get(i).getGr_reservedate();
+			date = date.substring(0, 10);
+			glist.get(i).setGr_reservedate(date);
+		}
+		
+		model.addAttribute("member", memberDao.mypageSelectList(mvo));
+		model.addAttribute("list",list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("plist",plist);
+		model.addAttribute("glist",glist);
+		System.out.println("전달되는 얘의 값이 뭘까? : " + memberDao.mypageSelectList(mvo));
+		return "user/mypage/mypageMain";
+	}
+	//마이페이지 유저 환불
+	@RequestMapping("/mypageRefund.do")
+	public String mypageRefund(HttpServletRequest request, myPageVO vo) {
+		String or_no = request.getParameter("or_no");
+		int num = Integer.parseInt(or_no);
+		vo.setOr_no(num);
+		vo = myPageDao.findNo(vo);
+		vo.setOr_no(num);
+		System.out.println(vo.getPr_no());
+		System.out.println(vo.getGr_no());
+		int success = myPageDao.myPageRefund(vo);
+		if (success == 1) {
+			//그룹 상담일 경우
+			if (vo.getPr_no() == 0) {
+				System.out.println("그룹 상담으로 들어옴");
+				myPageDao.myPageGroupRefund(vo);
+			}else if (vo.getGr_no() == 0) {
+				System.out.println("개인 상담으로 들어옴");
+				System.out.println(vo.getGr_no());
+				myPageDao.myPagePersonalRefund(vo);
+			}
+		}
+		return "redirect:userMypages.do";
+	}
+	//마이페이지 유저 자유게시글 디테일 페이지
+	@RequestMapping("/myPageboardDetail.do")
+	public String myPageboardDetail(HttpServletRequest request,BoardVO vo,Model model, BoardReplyVO bvo) {
+		String b_no = request.getParameter("b_no");
+		int num = Integer.parseInt(b_no);
+		vo.setB_no(num);
+		
+		vo =  myPageDao.boardDetail(vo);
+		String date = vo.getB_wdate();
+		date = date.substring(0, 10);
+		vo.setB_wdate(date);
+
+		model.addAttribute("board",vo);
+
+		List<BoardReplyVO> blist = myPageDao.boardReplyDetail(bvo);
+		for (int i = 0; i < blist.size(); i++) {
+			String brdate = blist.get(i).getBr_wdate();
+			brdate = brdate.substring(0, 10);
+			blist.get(i).setBr_wdate(brdate);
+		}
+		
+		model.addAttribute("brboard", blist);
+		
+		return "user/mypage/mypageBoard";
+	}
+	//유저 마이페이지 개인 상담 디테일 페이지
+	@RequestMapping("/userPersonalsangDam.do")
+	public String userPersonalsangDam(HttpServletRequest request, myPageVO vo, Model model ) {
+		String pr_no = request.getParameter("pr_no");
+		int num = Integer.parseInt(pr_no);
+		vo.setPr_no(num);
+		vo = myPageDao.mypagePersonal(vo);
+		model.addAttribute("personal",vo);
+		return "user/mypage/mypagePersonalDetail"; 
+	}
+	//유저 마이페이지 그룹 상담 디테일 페이지
+	@RequestMapping("/userGroupsangDam.do")
+	public String userGroupsangDam(HttpServletRequest request, myPageVO vo, Model model) {
+		String gc_no = request.getParameter("gc_no");
+		int num = Integer.parseInt(gc_no);
+		vo.setGc_no(num);
+		vo = myPageDao.mypageGroup(vo);
+		
+		String date = vo.getGc_date();
+		date = date.substring(0, 10);
+		vo.setGc_date(date);
+		String date2 = vo.getGc_startdate();
+		date2 = date2.substring(0, 10);
+		vo.setGc_startdate(date2);
+		String date3 = vo.getGc_finaldate();
+		date3 = date3.substring(0, 10);
+		vo.setGc_finaldate(date3);
+		
+		model.addAttribute("glist", vo);
+		return "user/mypage/mypageGroupDetail"; 
+	}
+	//그룹 상담 수정 필요해서 최종적으로 수정했습니다. 2022/03/16
+	@RequestMapping("/groupCounselUpdates.do")
+	public String groupCounselUpdate(Model model, GroupcounselVO vo, HttpServletResponse response, HttpServletRequest request,
+		@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		// 썸네일 파일업로드
+		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\editorsumnail\\";
+		String SAVE_PATH = request.getServletContext().getRealPath("editorsumnail/");
+		String originalFileName = mf.getOriginalFilename();
+			System.out.println(originalFileName);
+		if (originalFileName !="") {
+			System.out.println("널값 아님");
+			
+			String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
+			String msaveFile = SAVE_PATH + uuid + originalFileName; // 원본 확장자명을 찾아서 붙여준다.
+			String saveFile = uuid + originalFileName;
+			
+			vo.setGc_sumnail(saveFile);
+			
+			try {
+				mf.transferTo(new File(msaveFile));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("널 값");
+			vo.setGc_sumnail("");
+		}
+		
+		String origincode = req.getParameter("summernote");
+		String result = origincode.replaceAll(req.getContextPath() + "/resources/fileupload/", uploadpath+"gceditor/");
+		vo.setGc_infos(result);
+
+		int update = groupCounselDao.groupCounselUpdate(vo);
+
+		// vo값에 따라 성공 실패 여부 확인
+		if (update != 1) {
+			out.println("<script>alert('상담 페이지 수정 실패'); history.back(); </script>");
+			out.flush();
+		} else {
+			out.println("<script>alert('상담 페이지 수정 성공'); location.href='counselorGroupList.do'</script>");
+			out.flush();
+		}
+		System.out.println("테스트");
+		return null;
+	}
+	
+//	// 마이페이지 그룹 상담 환불 버튼
+//	@RequestMapping("/mypageGroupDetailRefund.do")
+//	public String mypageGroupDetailRefund(HttpServletRequest request, myPageVO vo, Model model, GroupcounselVO gvo) {
+//		String gc_no = request.getParameter("gc_no");
+//		int num = Integer.parseInt(gc_no);
+//		vo.setGc_no(num);
+//		vo = myPageDao.mypageGroup(vo);
+//		
+//		vo = myPageDao.GroupdetailRefund(vo);
+//		
+//		System.out.println(vo.getOr_no());
+//		System.out.println(vo.getGr_no());
+//		
+//		//일단 환불 되는지 기다려보자.
+//		myPageDao.mypageOrderDelete(vo);
+//		gvo.setGr_no(vo.getGr_no());
+//		groupCounselDao.GroupUserDelete(gvo);
+//		return "redirect:userMypages.do";
+//	}
+//	//개인 상담 환불
+//	@RequestMapping("/mypagePersonalDetailRefund.do")
+//	public String mypagePersonalDetailRefund(HttpServletRequest request, myPageVO vo, PersonalcounselVO pvo) {
+//		String pr_no = request.getParameter("pr_no");
+//		int num = Integer.parseInt(pr_no);
+//		vo.setPr_no(num);
+//		myPageDao.mypagePersonalOrderRefund(vo);
+//		
+//		System.out.println(vo.getOr_no());
+//		System.out.println(vo.getPr_no());
+//		//환불 되는지 보자.
+//		myPageDao.mypageOrderDelete(vo);
+//		myPageDao.myPagePersonalRefund(vo);
+//		
+//		return "redirect:userMypages.do";
+//	}
 }

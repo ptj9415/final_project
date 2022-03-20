@@ -21,6 +21,7 @@
 			<if test="t_name != ''">AND t_name like '%'||#{t_name}||'%'</if>
 			<if test="t_title != ''">AND t_title like '%'||#{t_title}||'%'</if>
 		</trim>
+		ORDER BY T_NO DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -43,6 +44,7 @@
 			)
 			WHERE RN BETWEEN #{start} AND #{end}		
 	</select>
+	
 	<insert id="InsertTherapy"
 		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
 		INSERT INTO THERAPY(
@@ -78,8 +80,11 @@
 	<update id="UpdateTherapy"
 		parameterType="co.maeumi.prj.therapy.service.TherapyVO">
 		UPDATE THERAPY
-		SET t_picture = #{t_picture}, t_title = #{t_title}, t_subject =
-		#{t_subject}
+		<set>
+			<if test="t_subject != null or t_subject != ''">t_subject = #{t_subject}, </if>
+			<if test="t_picture != null or t_picture != ''">t_picture = #{t_picture},</if>
+			<if test="t_title != null or t_title != ''">t_title = #{t_title},</if>
+		</set>
 		WHERE t_no = #{t_no}
 	</update>
 

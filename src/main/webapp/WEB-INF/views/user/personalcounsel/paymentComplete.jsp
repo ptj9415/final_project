@@ -182,7 +182,7 @@ ol li,ul li{
 	}
 .header{
 	padding-bottom:0;
-	border-top:solid 1.7px #696969;
+	border-top: solid 1.7px #8dacbd42;
 	}
 .header h1{
 	margin:0;
@@ -315,7 +315,7 @@ p.x-small a{
 	margin-right:auto;
 	margin-left:auto;
 	width:80%;
-	margin-bottom:100px;sss
+	margin-bottom:100px;zddddddddd
 }
 
 /*check-sign*/
@@ -324,7 +324,8 @@ p.x-small a{
  * Modified by: Istiak Tridip
  */
 .success-checkmark {
-  margin-top:100px;
+  margin-top:150px;
+  margin-bottom:40px;
   width: 80px;
   height: 115px;
   margin-right:auto;
@@ -336,7 +337,7 @@ p.x-small a{
   position: relative;
   border-radius: 50%;
   box-sizing: content-box;
-  border: 4px solid #4CAF50;
+  border: 4px solid #153e54;
 }
 .success-checkmark .check-icon::before {
   top: 3px;
@@ -362,7 +363,7 @@ p.x-small a{
 }
 .success-checkmark .check-icon .icon-line {
   height: 5px;
-  background-color: #4CAF50;
+  background-color: #153e54;
   display: block;
   border-radius: 2px;
   position: absolute;
@@ -391,7 +392,7 @@ p.x-small a{
   border-radius: 50%;
   position: absolute;
   box-sizing: content-box;
-  border: 4px solid rgba(76, 175, 80, 0.5);
+  border: 4px solid #153e54;
 }
 .success-checkmark .check-icon .icon-fix {
   top: 8px;
@@ -554,18 +555,21 @@ h1 {
   background: #fff;
   margin: 0 auto;
   padding: 10px 17px;
-  -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 2px 2px 3px 1px rgb(0 0 0 / 38%);
+  border-radius: 20px;
+  padding-top: 80px;
 }
 
 #keywords {
   margin: 0 auto;
   font-size: 1.2em;
   margin-bottom: 15px;
+  width: 90%;
 }
 
 #keywords thead {
   cursor: pointer;
-  background: #c9dff0;
+  background: #8dacbd42;
 }
 #keywords thead tr th {
 font-size: 20px;
@@ -594,11 +598,13 @@ font-size: 20px;
 
 #keywords tbody tr {
   color: #555;
+  text-align:left;
 }
 #keywords tbody tr td {
-	font-size: 18px;
-  text-align: center;
+  font-size: 14px;
+  text-align: left;
   padding: 15px 10px;
+  border-bottom: 0.6px solid #d3e0e742;
 }
 #keywords tbody tr td.lalign {
   text-align: left;
@@ -608,25 +614,8 @@ font-size: 20px;
 </style>
 </head>
 <body>
-<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">개인상담</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
-
-
+	<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
 <!-- 결제완료페이지 -->
 
@@ -637,53 +626,58 @@ font-size: 20px;
 			    <div class="icon-circle"></div>
 			    <div class="icon-fix"></div>
 		  </div>
-</div>
+	</div>
 
 	<div class="complete-body">
-	  <div class="header">
       <div class="container">
         <h1>
             <img src="resources/user/images/MaeumiLogo.png"  style="width: 120px;"></h1>
       </div>
+        <h3 style="text-align:center; margin-bottom:30px;">상담신청이 성공적으로 완료되었습니다.</h3>
+	  <div class="header">
     </div>
   
     <div class="pay-body">
       <div class="container">
-        <h1 style="text-align:center">상담신청이 성공적으로 완료되었습니다.</h1>
   
        
   	    <div class="table-body">
     <div id="wrapper">
-        <h3>상담신청 내역</h3>
+      <!--   <h6 style="padding:20px;">상담신청 내역</h6> -->
         
         <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
           <thead>
             <tr>
-              <th><span>test</span></th>
-              <th><span>test</span></th>
+              <th><span>개인상담 신청내역</span></th>
+              <th><span></span></th>
               
             </tr>
           </thead>
           <tbody>
             <tr>
               
-              <td>test</td>
-              <td>test</td>
+              <td>상담 카테고리</td>
+              <td style="text-align: right;">${result.ccg_subname }</td>
              
             </tr>
             <tr>
-              <td>test</td>
-              <td>test</td>
+              <td>상담사 명</td>
+              <td style="text-align: right;">${result.c_name }</td>
               
             </tr>
             <tr>
-              <td>test</td>
-              <td>test</td>
+              <td>상담 일시</td>
+              <td style="text-align: right;">${result.pr_date} ${result.pr_time} 시</td>
               
             </tr>
             <tr>
-              <td>test</td>
-              <td>test</td>
+              <td>상담 방식</td>
+              <td style="text-align: right;">${result.pr_type }</td>
+              
+            </tr>
+            <tr>
+              <td>상담 비용</td>
+              <td style="text-align: right;">${result.pr_price }원</td>
               
             </tr>
             
@@ -694,16 +688,25 @@ font-size: 20px;
        </div> 
     </div> 
       </div>
-        <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
+     <input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+     		<input type="hidden" name="pr_time" value="${pr_time}">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="text" id="c_value" name="c_value" value="${c_value}">
+					<input type="hidden" id="or_uid" name="or_uid">
+					<input type="hidden" id="c_no" name="c_no" value="0">
+					<input type="hidden" name="pr_type" value="${pr_type}">
+					<input type="hidden" name="pr_date" value="${pr_date}">
+       <a href="userMypages.do"> <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button></a>
     </div>
   </div>
     <div class="footer">
-      <div class="container">
+     <!--  <div class="container">
         <a href="https://niice.co/" target="_blank">
             <img src="resources/user/images/MaeumiLogo.png"  style="width: 100px;"></a>
        
         <p>Copyright © 2022 2022 All rights reserved 마으미</p>
-      </div>
+      </div> -->
     </div>
  <script>
 

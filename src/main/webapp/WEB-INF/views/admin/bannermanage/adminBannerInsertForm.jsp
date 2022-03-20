@@ -134,7 +134,7 @@ textarea {
 										<th>파일첨부</th>
 										<td>
 											<div class="filebox">
-												<img src="img/bannerimg/mainbanner.png" id="bannerimg">
+												<img src="img/bannerimg/bannerimg.png" id="bannerimg">
 												<p>※배너 크기는 1200p x 216p 로 조절하시기 바랍니다.
 												<p>
 													<input class="uploadname" value="첨부파일" placeholder="첨부파일">

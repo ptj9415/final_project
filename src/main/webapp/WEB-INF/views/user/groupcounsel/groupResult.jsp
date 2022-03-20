@@ -616,81 +616,79 @@ font-size: 20px;
 			<div
 				class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">개인상담</h1>
+					<h1 class="mb-2 bread">그룹상담</h1>
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
+						<span class="mr-2"><a href="index.html"><i class="ion-ios-arrow-forward"></i></a></span>
+						<span><i class="ion-ios-arrow-forward"></i></span>
 					</p>
 				</div>
 			</div>
 		</div>
-
-
-	</section>
+</section>
+<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/groupcounsel.png" id="bannerimg">
+</section>
 <!-- 결제완료페이지 -->
-
-	<div class="success-checkmark">
-		  <div class="check-icon">
-			    <span class="icon-line line-tip"></span>
-			    <span class="icon-line line-long"></span>
-			    <div class="icon-circle"></div>
-			    <div class="icon-fix"></div>
-		  </div>
-	</div>
+<div class="success-checkmark">
+	  <div class="check-icon">
+		    <span class="icon-line line-tip"></span>
+		    <span class="icon-line line-long"></span>
+		    <div class="icon-circle"></div>
+		    <div class="icon-fix"></div>
+	  </div>
+</div>
 	<div class="complete-body">
 	  <div class="header">
       <div class="container">
         <h1>
-            <img src="resources/user/images/MaeumiLogo.png"  style="width: 120px;"></h1>
+            <img src="resources/user/images/MaeumiLogo.png"  style="width: 120px;">
+        </h1>
       </div>
     </div>
-  
     <div class="pay-body">
       <div class="container">
         <h1 style="text-align:center">상담신청이 성공적으로 완료되었습니다.</h1>
   	    <div class="table-body">
-    <div id="wrapper">
-       <h3>상담신청 내역</h3>
-        
-        <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
-          <thead>
-            <tr>
-              <th><span>상담프로그램명</span></th>
-              <th><span>${result.gc_title}</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>상담사 이메일</td>
-              <td>${result.c_email}</td>
-            </tr>
-            <tr>
-              <td>상담 날짜</td>
-              <td>${result.gc_date}</td>
-            </tr>
-            <tr>
-              <td>상담 시간</td>
-              <td>${result.gc_time}</td>
-            </tr>
-            <tr>
-              <td>상담 방식</td>
-              <td>${result.gc_type}</td>
-            </tr>
-             <tr>
-              <td>가격</td>
-              <td>${result.gc_price}</td>
-            </tr>
-             <tr>
-              <td>상담사 이름</td>
-              <td>${result.gc_name}</td>
-            </tr>
-          </tbody>
-        </table>
-       </div> 
-    </div> 
-      </div>
-        <button type="button" class="btn btn-primary" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
+		    <div id="wrapper">
+		       <h3>상담신청 내역</h3>
+		        <table id="keywords" cellspacing="0" cellpadding="0" style="font-size:'40px'">
+		          <thead>
+		            <tr>
+		              <th><span>상담프로그램명</span></th>
+		              <th><span>${result.gc_title}</span></th>
+		            </tr>
+		          </thead>
+		          <tbody>
+		            <tr>
+		              <td>상담사 이메일</td>
+		              <td>${result.c_email}</td>
+		            </tr>
+		            <tr>
+		              <td>상담 날짜</td>
+		              <td>${result.gc_date}</td>
+		            </tr>
+		            <tr>
+		              <td>상담 시간</td>
+		              <td>${result.gc_time}</td>
+		            </tr>
+		            <tr>
+		              <td>상담 방식</td>
+		              <td>${result.gc_type}</td>
+		            </tr>
+		             <tr>
+		              <td>가격</td>
+		              <td>${result.or_price}</td>
+		            </tr>
+		             <tr>
+		              <td>상담사 이름</td>
+		              <td>${result.gc_name}</td>
+		            </tr>
+		          </tbody>
+		        </table>
+		       </div> 
+    		</div> 
+     	 </div>
+        <button type="button" class="btn btn-primary" onclick="location.href='userMypages.do'" style="float:right; height:40px; width:100px;" value="마이페이지">마이페이지</button>
     </div>
   </div>
 </body>

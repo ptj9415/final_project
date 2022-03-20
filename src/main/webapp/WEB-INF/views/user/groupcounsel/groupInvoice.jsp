@@ -57,9 +57,13 @@ p {
 }
 
 #invoiceholder {
-	width: 100%;
-	height: 100%;
-	/* padding-top: 50px; */
+	width: 80%;
+    height: 1300px;
+    padding-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    
+    
 }
 
 #headerimage {
@@ -86,12 +90,16 @@ p {
 	margin: 0 auto;
 	width: 85%;
 	background: #fff;
+	border-radius: 30px;
+	height: 750px;
 }
 
 [id*="invoice-"] {
 	/* Targets all id with 'col-' */
-	border-bottom: 1px solid #eee;
-	padding: 30px;
+	/* border-bottom: 1px solid #8dacbd42; */
+	border-bottom: 1px solid #8dacbd42;
+    padding: 40px;
+    height: 150px;
 }
 
 #invoice-top {
@@ -111,15 +119,15 @@ p {
 	float: left;
 	height: 60px;
 	width: 60px;
-	background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+	/* background: url(http://michaeltruong.ca/images/logo1.png) no-repeat; */
 	background-size: 60px 60px;
 }
 
 .clientlogo {
 	float: left;
-	height: 60px;
-	width: 60px;
-	background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+	height: 70px;
+	width: 70px;
+	/* background: url(http://michaeltruong.ca/images/client.jpg) no-repeat; */
 	background-size: 60px 60px;
 	border-radius: 50px;
 }
@@ -139,7 +147,8 @@ p {
 }
 
 #project {
-	margin-left: 52%;
+	float:right;
+	text-align: end;
 }
 
 table {
@@ -149,16 +158,16 @@ table {
 
 td {
 	padding: 5px 0 5px 15px;
-	border: 1px solid #eee;
+	/* border: 1px solid #8dacbd42; */
 }
 
 .tabletitle {
 	padding: 5px;
-	background: #eee;
+	background: #8dacbd42;
 }
 
 .service {
-	border: 1px solid #eee;
+	/* border: 1px solid #8dacbd42; */
 }
 
 .item {
@@ -167,6 +176,11 @@ td {
 
 .itemtext {
 	font-size: 0.9em;
+}
+.itemtext1 {
+	font-size: 0.9em; 
+	float:right;
+	margin-right: 15px;
 }
 
 td.subtotal {
@@ -242,16 +256,16 @@ form {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 }
 
 #pay-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 }
 
@@ -259,80 +273,72 @@ form {
 	width: 100px;
 	height: 40px;
 	border-radius: 50px;
-	background-color: #468FB6;
+	background-color: #153e54;
 	color: white;
-	border: solid 1px #468FB6;
+	border: solid 1px #153e54;
 	font-size: 14px;
 	float: left;
 }
 
 #back-btn:hover {
 	background: #fff;
-	color: #468FB6;
-	border: solid 1px #468FB6;
+	color: #153e54;
+	border: solid 1px #153e54;
 	transition: 0.3s ease-in-out;
 }
+
+
+#counselor-name{
+ 	font-weight:bold;
+}
+
+.control-btn{
+	margin-top:50px;
+}
+
+#checkbox{
+	float: right;
+    margin-right: 10px;
+    border: 1px solid #8dacbd42;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #153e54;
+    padding: 5px
+}
+#checkbox:focus{
+	 border: 1px solid #8dacbd42;
+	 outline:0;
+	 
+}
+p.itemtext1{
+	margin-top:16px;
+}
+p.itemtext{
+	margin-top:16px;
+}	
 
 /*결제버튼 end*/
 </style>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">그룹상담</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2">
-						<a href="index.html"><i class="ion-ios-arrow-forward"></i></a>
-						</span> 
-						<span><i class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
+			<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/groupcounsel.png" id="bannerimg">
 	</section>
-	
 	<div id="invoiceholder">
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2">
-
-			<div id="invoice-top">
-				<div class="logo"></div>
-				<div class="info">
-					<h2>Michael Truong</h2>
-					<p>
-						hello@michaeltruong.ca </br> 289-335-6503
-					</p>
-				</div>
-				<!--End Info-->
-				<div class="title">
-					<h1>Invoice #1069</h1>
-					<p>
-						Issued: May 27, 2015</br> Payment Due: June 27, 2015
-					</p>
-				</div>
-				<!--End Title-->
-			</div>
-			<!--End InvoiceTop-->
+			<!--End InvoiceTop-->	
 			<div id="invoice-mid">
-
-				<div class="clientlogo"></div>
-				<div class="info">
+			  <img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
+				<div id="project">
 					<h2>${groupInvoice.c_name} 상담사</h2>
 					<p>${groupInvoice.c_email }</br> ${groupInvoice.c_phone }</br></p>
 				</div>
-				<div id="project">
-					<h2>Project Description</h2>
-					<p>Proin cursus, dui non tincidunt elementum, tortor ex feugiat
-						enim, at elementum enim quam vel purus. Curabitur semper malesuada
-						urna ut suscipit.</p>
-				</div>
+
 			</div>
 			<!--End Invoice Mid-->
+	
 			<div id="invoice-bot">
+
 				<div id="table">
 					<table>
 						<tr class="tabletitle">
@@ -345,88 +351,132 @@ form {
 							<td class="tableitem"><p class="itemtext">상담방식</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_type}</td>
+							<td class="tableitem"><p class="itemtext1">${groupInvoice.gc_type}</p></td>
 						</tr>
+
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_date}</p></td>
+							<td class="tableitem"><p class="itemtext1">${groupInvoice.gc_date} ${groupInvoice.gc_time}시</p></td>
 						</tr>
+
+						<tr class="service">
+							<td class="tableitem"><p class="itemtext">상담비용</p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext"></p></td>
+							<td class="tableitem"><p class="itemtext1" id="total">${groupInvoice.gc_price}원</p></td>
+						</tr>
+						
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p> 
+							<td class="tableitem"><p class="itemtext1"></p></td>
+							<td class="tableitem">
+								<p class="itemtext"></p> 
 								<select name='checkbox' id="checkbox" onchange="change()">
-											<option value='' selected>-- 선택 --</option>
+											<option value='0' selected>-- 선택 --</option>
 										<c:forEach items="${coupon }" var="coupon">
 											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
 										</c:forEach>
+											<option value='0' selected>쿠폰선택안함</option>
 								</select>
 							</td>
 						</tr>
+						
 						<tr class="service">
-							<td class="tableitem"><p class="itemtext">상담 금액</p></td>
+							<td class="tableitem"><p class="itemtext">할인비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext">${groupInvoice.gc_price}원</p></td>
-						</tr>
-						<tr class="service">
-							<td class="tableitem"><p class="itemtext">할인 금액</p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext" id="discount" name="discount"></p></td>
+							<td class="tableitem"><p class="itemtext1" id="discount" name="discount"></p></td>
 						</tr>
 						<tr class="tabletitle">
-							<td class="Rate"><h2>총 결제 금액</h2></td>
-							<td></td>
-							<td></td>
-							<td class="payment" id="totalPrice"></td>
+							<td class="tableitem"><p class="itemtext">합계</p></td>
+							<td> </td>
+							<td> </td>
+							<%-- <td class="itemtext1" id="totalPrice" >${pr_price } 원</td> --%>
+							<td class="tableitem"><p class="itemtext1" id="totalPrice">${groupInvoice.gc_price} 원</p></td>
 						</tr>
+
 					</table>
 				</div>
+			</div>
+				<!--End Table 이메일,방식, 가격,시간(날짜도포함되어야하는데...)--> 
+<!-- 				<div class="control-btn">
+					<a href="personalCounselStep4.do"><input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
+					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+				</div> -->
 				<input type="hidden" id="g_price" name="g_price" value="${groupInvoice.gc_price}">
 				<form action="payment.do" id="frm" name="frm">
 					<input type="hidden" id="gc_no" name="gc_no" value="${groupInvoice.gc_no}">
 					<input type="hidden" id="gr_subject" name="gr_subject" value="${groupInvoice.gc_title}">
-					<input type="hidden" id="pr_price" name="pr_price" value="">
+					<input type="hidden" id="gr_price" name="gr_price" value="${groupInvoice.gc_price}">
 					<input type="hidden" id="or_uid" name="or_uid">
-					<input type="hidden" id="c_no" name="c_no" value="">
+					<input type="hidden" id="c_no" name="c_no" value="0">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 				</form>
-				<!--End Table-->
-			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick"> <input
-						type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
-					<input type="button" class="check_module" id="pay-btn" name="submit" value="아임 포트 결제">
+			<!-- <div id="legalcopy">
+					<a href="personalCounselStep4.do">
+					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
+			</div> -->
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+						<input type="hidden" name="cmd" value="_s-xclick"> 
+						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+					<div>
+						<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
+					</div>
 				</form>
-				<div id="legalcopy">
-					<a href="personalCounselStep4.do"><input type="button"
-						id="back-btn" name="submit" value="뒤로가기"></a>
-				</div>
 			</div>
 			<!--End InvoiceBot-->
+			<div id="invoice-top">
+				<div class="logo"></div>
+				<div class="info">
+				</div>
+				<!--End Info-->
+				<div class="title">
+				</div>
+				<!--End Title-->
+			</div>
 		</div>
 		<!--End Invoice-->
-	</div>
 	<script>
-	   function change(){
+	$(document).ready(function(){
+		var n1 = $("#total").html();
+		const cn1 = n1.toString()
+		  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$("#total").html(cn1);
+		$("#totalPrice").html(cn1);
+		
+		});
+	
+	
+	function change(){
 		   var price = $("#g_price").val();
 		   var priceSelect = $("#checkbox").val();
 		   var num = priceSelect.indexOf('/');
-		   var priceResult = priceSelect.substr(0,4);
-		   var couponNo = priceSelect.substr(num+1);
+		   var priceResult = priceSelect.substr(0,num);
+		   const cn1 = priceResult.toString()
+			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 		   
-		   $("#discount").text(' '+' '+'-'+priceSelect+'원');
-		   var ddd = price-priceSelect;
-		   $("#totalPrice").text(ddd+'원');
+		   var couponNo = priceSelect.substr(num+1);
+		   couponNo = Number(couponNo);
+		   if (priceResult ==' '|| priceResult == null || priceResult =='') {
+		   		$("#discount").text('');
+		   }else{
+			    $("#discount").text(' '+' '+'-'+cn1+'원');
+		   }
+		   var ddd = price-priceResult;
+		   const cn2 = ddd.toString()
+			  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		   $("#totalPrice").text(cn2+'원');
 		   $("#gr_price").val(ddd);
 		   $("#c_no").val(couponNo);
 		   
 	   }	
 	</script>
 	<script>
-		var pr_price = $("#pr_price").val();
+		var g_price = $("#g_price").val();
         $(".check_module").click(function () {
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');
@@ -483,7 +533,7 @@ form {
         $("#or_uid").val(rsp.imp_uid);
         $("#frm").submit();
          var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
+       /*  msg += '고유ID : ' + rsp.imp_uid; */
         /* msg += '상점 거래ID : ' + rsp.merchant_uid;
         msg += '결제 금액 : ' + rsp.paid_amount;
         msg += '카드 승인번호 : ' + rsp.apply_num; */
