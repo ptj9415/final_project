@@ -21,16 +21,18 @@ body {
 	margin-left: auto;
 }
 .accordion {
-	color: #153E54;
-	background-color: white;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
-	border: none;
-	text-align: left;
-	outline: none;
-	font-size: 15px;
-	transition: 0.4s;
+	    color: #153E54;
+    background-color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid #8dacbd42;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-radius: 20px;
+    margin: 10px;
 }
 
 .active2, .accordion:hover {

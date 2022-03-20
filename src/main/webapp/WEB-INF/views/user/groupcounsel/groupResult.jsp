@@ -655,33 +655,33 @@ font-size: 20px;
 		          <thead>
 		            <tr>
 		              <th><span>상담프로그램명</span></th>
-		              <th><span>${result.gc_title}</span></th>
+		              <th style="text-align:right;"><span>${result.gc_title}</span></th>
 		            </tr>
 		          </thead>
 		          <tbody>
 		            <tr>
 		              <td>상담사 이메일</td>
-		              <td>${result.c_email}</td>
+		              <td style="text-align:right;">${result.c_email}</td>
 		            </tr>
 		            <tr>
 		              <td>상담 날짜</td>
-		              <td>${result.gc_date}</td>
+		              <td style="text-align:right;">${result.gc_date}</td>
 		            </tr>
 		            <tr>
 		              <td>상담 시간</td>
-		              <td>${result.gc_time}</td>
+		              <td style="text-align:right;">${result.gc_time}</td>
 		            </tr>
 		            <tr>
 		              <td>상담 방식</td>
-		              <td>${result.gc_type}</td>
+		              <td style="text-align:right;">${result.gc_type}</td>
 		            </tr>
 		             <tr>
 		              <td>가격</td>
-		              <td>${result.or_price}</td>
+		              <td style="text-align:right;">${result.or_price}</td>
 		            </tr>
 		             <tr>
 		              <td>상담사 이름</td>
-		              <td>${result.gc_name}</td>
+		              <td style="text-align:right;">${result.gc_name}</td>
 		            </tr>
 		          </tbody>
 		        </table>

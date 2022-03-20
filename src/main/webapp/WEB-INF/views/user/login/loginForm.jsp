@@ -425,7 +425,7 @@ button:hover {
   <p class="tip" style="color:white;">login</p>
 <div class="cont">
   <div class="form sign-in">
-    <h2 style="margin-bottom:50px;">마으미 로그인하기,</h2>
+    <h2 style="margin-bottom:50px;">마으미 로그인하기</h2>
     <form id="frm" action="login.do" method="post">
 	    <label>
 	      <span>Email</span>
@@ -641,7 +641,7 @@ button:hover {
 	function  popupOpen() {
 		var url= "findEmailPopup.do";    //팝업창 페이지 URL
 		var winWidth = 500;    
-	    var winHeight = 400;
+	    var winHeight = 500;
 	    var popupX = (window.screen.width / 2) - (800 / 2);
 	    var popupY= (window.screen.height /2) - (600 / 2);
 	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
@@ -657,7 +657,7 @@ button:hover {
 	function findPasswordPopupOpen() {
 		var url= "findPasswordPopup.do";    //팝업창 페이지 URL
 		var winWidth = 550;    
-	    var winHeight = 400;
+	    var winHeight = 500;
 	    var popupX = (window.screen.width / 2) - (800 / 2);
 	    var popupY= (window.screen.height /2) - (600 / 2);
 	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+ popupX + ", top=" + popupY;    //팝업창 옵션(optoin)
@@ -666,5 +666,6 @@ button:hover {
 	
 
 </script>
+<br><br><br>
 </body>
 </html>

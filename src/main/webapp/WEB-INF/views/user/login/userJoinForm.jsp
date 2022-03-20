@@ -69,6 +69,9 @@ button:hover {
 #email {
 	font-size: 18px;
 }
+#password, #passwordChk {
+	margin-left: 40px;  
+}
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -183,8 +186,7 @@ button:hover {
 <!-- 회원가입 하는 양식 만들기-->
   <div class="mainForm" align="center">
         <div class="joinForm">
-            <h3>Maeumi.</h3>
-            <br>
+        <img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">
             <hr>
             <h5>본인확인이 완료되었습니다.<br> 회원가입을 계속 진행해주세요.</h5>
             <br>

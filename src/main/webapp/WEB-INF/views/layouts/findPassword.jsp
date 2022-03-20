@@ -18,7 +18,7 @@ input {
     text-align: center;
 }
 #email {
-	margin-left: 60px;
+ 	margin-left: 10px; 
 }
 button {
 	height: 30px;
@@ -54,14 +54,17 @@ button:hover{
 }
   
 #findEmail{
-	font-size:11px;
-	color:#8dacbd42;
+	font-size:12px;
+	color:	#cfcfcf;
+}
+#findEmail:hover {
+	color: gray;
 }
 </style>
 <body>
 <div align="center" class="mainForm">
-	<h2>Maeumi.</h2>
-	<div><h3>Maeumi. 비밀번호 찾기!</h3></div>
+	<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">
+	<div><h3 style="color: #464646 ">- 비밀번호 찾기 -</h3></div>
 	<hr>
 	<!-- 이메일이랑 연락처 동시에 넘기기. 하나의 ajax에서 데이터 2개 날려서 체크 -->
 	<form id="frm" method="post" action="ajaxFindPassword.do">
@@ -85,6 +88,9 @@ button:hover{
 	<br>
 </div>
 <div class="passwordUpdateForm" style="display:none;" align="center">
+	<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">
+	<div><h3 style="color: #464646 ">- 새로운 비밀번호를 입력해주세요 -</h3></div>
+	<hr>
 	<div class="inputForm">
         <input type="password" placeholder="영문, 숫자, 특수문자가 포함된 8~14자리를 입력하세요." id="password" name="password" class="inputPwd">
     </div>

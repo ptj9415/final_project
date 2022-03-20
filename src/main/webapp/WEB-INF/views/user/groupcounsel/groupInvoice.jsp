@@ -476,8 +476,8 @@ p.itemtext{
 	   }	
 	</script>
 	<script>
-		var g_price = $("#g_price").val();
         $(".check_module").click(function () {
+		var g_price = $("#gr_price").val();
         var IMP = window.IMP; // 생략가능
         IMP.init('imp71871883');
         // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -513,7 +513,7 @@ p.itemtext{
         */
         name: '주문명:결제테스트',
         //결제창에서 보여질 이름
-        amount: 100,
+        amount: g_price,
         //가격
         //bank_name : null,
         buyer_email: 'iamport@siot.do',
@@ -530,6 +530,7 @@ p.itemtext{
         }, function (rsp) {
         console.log(rsp);
         if (rsp.success) {
+        $("#gr_price").val(rsp.paid_amount);
         $("#or_uid").val(rsp.imp_uid);
         $("#frm").submit();
          var msg = '결제가 완료되었습니다.';

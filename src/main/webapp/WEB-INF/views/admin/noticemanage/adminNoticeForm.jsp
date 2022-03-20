@@ -185,7 +185,7 @@ h3 {
 						weight : 500,
 						// 에디터 한글 설정
 						lang : "ko-KR",
-						// 에디터에 커서 이동 (input창의 autofocus라고 생각하시면 됩니다.)
+						// 에디터에 커서 이동 (input창의 autofocus)
 						focus : true,
 						//콜백 함수
 						callbacks : {
@@ -240,7 +240,8 @@ h3 {
 			enctype : 'multipart/form-data',
 			processData : false,
 			success : function(data) {
-				$(el).summernote('editor.insertImage', data.url);
+// 				$(el).summernote('editor.insertImage', data.url, data.fileName);
+				$(el).summernote('editor.insertImage', data.url);  // 원본  
 			}
 		});
 	}
