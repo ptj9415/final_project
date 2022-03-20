@@ -556,6 +556,27 @@ input#c_name{
 	display:flex;
 }
 
+.page-item.active .page-link {
+	border: 0.5px solid rgb(235, 235, 235);
+	border-radius: 0px;
+	background-color: white;
+	color: #4b5b73;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: -1px;
+}
+
+.page-link {
+	border: 0px;
+	font-size: 14px;
+	color: #666666;
+	margin-left: 10px;
+}
+
+#pagination>li {
+	margin-right: 10px;
+}
+
 /*검색 div end*/
 
 </style>
@@ -721,7 +742,7 @@ input#c_name{
 		</div>
 		<button type="button" id="confirmbtn" >선택</button>
 	</div>
-
+	
 	<script>
 /* 		//선택버튼
 		$('#confirmbtn').on('click', function() {

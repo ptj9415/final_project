@@ -609,7 +609,7 @@ div.asdf:active, div.asdf:focus{
 			<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}">
 			<input type="hidden" id="c_value" name="c_value" value="${c_value}">
 			<input type="hidden" id="pr_date" name="pr_date" value="">
-			<input type="hidden" id="pr_time" name="pr_time" value="">
+			<input type="text" id="pr_time" name="pr_time" value="">
 			<!-- <input type="button" data-page="2" name="previous"
 				class="previous action-button" value="Previous" id="previous-btn" /> -->
 			<input type="submit" data-page="2" name="next"

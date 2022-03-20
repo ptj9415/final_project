@@ -133,7 +133,11 @@ public class TestController {
 		String c_value = request.getParameter("c_value");
 		String pr_date = request.getParameter("pr_date");
 		String pr_time = request.getParameter("pr_time");
-
+		if (pr_time.length() == 1) {
+			pr_time = "0"+pr_time;
+		}
+		pr_time = pr_time + ":00";
+		
 		model.addAttribute("pr_type", pr_type);//
 		model.addAttribute("pr_price", price);//
 		model.addAttribute("c_email", c_email);//
