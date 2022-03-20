@@ -141,7 +141,7 @@ h3 {
 				</div>
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">이번달 매출 통계</p>
+						<p id="headerp">지난달 매출 통계</p>
 					</div>
 					<div class="card" id="maindiv">
 						<div class="article" style="height: 350px;">
@@ -172,7 +172,7 @@ h3 {
 				</div>
 				<div class="col-md-6">
 					<div class="card" id="headerdiv">
-						<p id="headerp">회원 MBTI 유형 통계</p>
+						<p id="headerp">시스템 이용 통계</p>
 					</div>
 					<div class="card" id="maindiv">
 						<div class="article" style="height: 350px;">
@@ -214,14 +214,14 @@ $(document).ready(function() {
 			                	label: '올해의 매출액',
 			                    data: mydata,
 			                    backgroundColor: [
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)'
+			                    	'#FFD3B4',
+			                    	'#FFD3B4',
+			                    	'#FFD3B4'
 			                    ],
 			                    borderColor: [
-			                        'rgb(150, 178, 251)',
-			                        'rgb(150, 178, 251)',
-			                        'rgb(150, 178, 251)'
+			                    	'#FFD3B4',
+			                    	'#FFD3B4',
+			                    	'#FFD3B4'
 			                    ],
 			                    borderWidth: 2
 			                }]
@@ -267,41 +267,41 @@ $(document).ready(function() {
 			                labels: mylabel,
 			                datasets: [{
 			                	lineTension:0,
-			                	label: '이번달 매출액',
+			                	label: '지난달 매출액',
 			                    data: mydata,
 			                    backgroundColor: [
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)'
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA'
 			                    ],
 			                    borderColor: [
-			                        'rgb(150, 178, 251)',
-			                        'rgb(150, 178, 251)',
-			                        'rgb(150, 178, 251)',
-			                        'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)',
-			                    	'rgb(150, 178, 251)'
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA',
+			                    	'#B5EAEA'
 			                    ],
 			                    borderWidth: 2
 			                }]
@@ -344,20 +344,20 @@ $(document).ready(function() {
 				label: '카테고리별 개인상담 이용률',
 				data: [18.4, 21.1, 19.5, 12.4, 16.3, 12.3],
 				backgroundColor: [
-					'rgb(150, 178, 251)',
-					'rgb(153, 17, 224)',
-					'rgb(117, 121, 15)',
-					'rgb(165, 31, 31)',
-					'rgb(212, 2, 144)',
-					'rgb(153, 112, 16)'
+					'#98DDCA',
+					'#EDF6E5',
+					'#FFBCBC',
+					'#F38BA0',
+					'#FDEFEF',
+					'#F4DFD0'
 				],
 				borderColor: [
-					'rgb(150, 178, 251)',
-					'rgb(153, 17, 224)',
-					'rgb(117, 121, 15)',
-					'rgb(165, 31, 31)',
-					'rgb(212, 2, 144)',
-					'rgb(153, 112, 16)'				                    	
+					'#98DDCA',
+					'#EDF6E5',
+					'#FFBCBC',
+					'#F38BA0',
+					'#FDEFEF',
+					'#F4DFD0'				                    	
 				],
 				borderWidth: 2
 			}]
@@ -382,40 +382,46 @@ $(document).ready(function() {
 	$(document).ready(function() {		
 		const ctx = document.getElementById('myChart4').getContext('2d');
 		const myChart = new Chart(ctx, {
-			type: 'doughnut',
+			type: 'horizontalBar',
 			data: {
 			labels: [
-				'분노/우울',
-				'연애/우정',
-				'진로/취업',
-				'결혼/육아',
-				'청소년',
-				'가정'
+				'1월',
+				'2월',
+				'3월'
 			],
 			datasets: [{
-				lineTension:0,
-				label: '카테고리별 개인상담 이용률',
-				data: [18.4, 21.1, 19.5, 12.4, 16.3, 12.3],
+				data: [514, 391, 255],
+				label: '사용자',
 				backgroundColor: [
-					'rgb(150, 178, 251)',
-					'rgb(153, 17, 224)',
-					'rgb(117, 121, 15)',
-					'rgb(165, 31, 31)',
-					'rgb(212, 2, 144)',
-					'rgb(153, 112, 16)'
+					'#98DDCA',
+					'#98DDCA',
+					'#98DDCA'
 				],
 				borderColor: [
-					'rgb(150, 178, 251)',
-					'rgb(153, 17, 224)',
-					'rgb(117, 121, 15)',
-					'rgb(165, 31, 31)',
-					'rgb(212, 2, 144)',
-					'rgb(153, 112, 16)'				                    	
+					'#98DDCA',
+					'#98DDCA',
+					'#98DDCA'
+				],
+				borderWidth: 2
+			},{
+				data: [482, 530, 127],
+				label: '상담사',
+				backgroundColor: [
+					'#FFBCBC',
+					'#FFBCBC',
+					'#FFBCBC'
+					
+				],
+				borderColor: [
+					'#FFBCBC',
+					'#FFBCBC',
+					'#FFBCBC'
 				],
 				borderWidth: 2
 			}]
 			},
 				options: {
+
 					plugins:{
 						legend: {
 							display: false
@@ -424,8 +430,12 @@ $(document).ready(function() {
 				cutoutPercentage: 60,
 				            	maintainAspectRatio: false,
 				            	scales: {
+				            		x: {
+				            			stacked: true,
+				            		},
 				                    y: {
-				                        beginAtZero: true
+				                    	stacked: true,
+				                    	beginAtZero: true,
 				                    }
 				                }
 				            }

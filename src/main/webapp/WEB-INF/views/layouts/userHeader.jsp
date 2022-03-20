@@ -94,7 +94,7 @@ nav ul ul {
 nav ul ul li {
 	float: none;
 	position: relative;
-	width: 150px;
+	width: 200px;
 }
 
 nav ul ul li a {

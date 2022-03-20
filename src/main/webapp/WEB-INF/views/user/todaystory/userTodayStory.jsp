@@ -59,6 +59,7 @@ table {
 }
 .card-text{
 	float:left;
+	margin-top: -40px;
 }
 .today-container{
 	margin-top:100px;
@@ -356,7 +357,11 @@ input:checked[type="checkbox"]:before {
 								<p class="card-text"  id="sr_anony" style="text-align: right; font-weight:bold;">익명</p>
 							</c:otherwise>
 						</c:choose>
+<<<<<<< HEAD
+								<br><br><p style="padding-bottom:20px; margin-top: -50px;">${todayReplyList.sr_subject}</p>
+=======
 								<br><br><p style="padding-bottom:20px; font-size: 13px;">${todayReplyList.sr_subject}</p>
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 	                   
             <input type="hidden" id="sc_no" name="sc_no" value="${todaySelect.sc_no}" />
 	                </fieldset>          

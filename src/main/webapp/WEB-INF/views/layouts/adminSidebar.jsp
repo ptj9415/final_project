@@ -190,18 +190,12 @@
 							class="nav-link" id="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>상담사 상담 통계</p>
-						</a></li>						
-						<c:if test="${c_admin eq 'A' }">
-						<li class="nav-item"><a href="testpg.do" class="nav-link"
-							id="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>상담사 통계</p>
 						</a></li>
 						<li class="nav-item"><a href="adminSalesChart.do"
 							class="nav-link" id="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>매출 통계</p>
 						</a></li>
-						</c:if>
 					</ul></li>
 			</ul>
 

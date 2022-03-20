@@ -16,7 +16,7 @@
 /*faq*/
 
 body {
-	width: 80%;
+/* 	width: 80%; */
 	margin-right: auto;
 	margin-left: auto;
 }
