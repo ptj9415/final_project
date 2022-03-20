@@ -618,12 +618,12 @@ textarea {
 			</div>
 			<div class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>마이페이지입니다.<br>
+					   회원정보 : 비밀번호 변경, 이름 변경, 회원탈퇴가 가능합니다.<br>
+					   결제내역 : 개인상담과 그룹상담에 대한 결제 내역을 확인하고 환불 가능합니다.<br>
+					   게시글  : 자유 게시판에서 자신이 쓴 글의 내역을 볼 수 있습니다.<br>
+					   상담내역 : 진행중인 상담 내역, 상담 완료한 내역, 환불한 내역을 볼 수 있습니다.
+					</p>
 				</div>
 			</div>
 		</div>

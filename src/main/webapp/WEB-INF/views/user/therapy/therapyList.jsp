@@ -199,7 +199,7 @@ form {
 	overflow: hidden;
 	box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.5);
 	transition: transform 0.1s ease-in-out, box-shadow 0.1s;
-	height: 480px;
+	height: 530px;
 }
 
 .card:hover {
@@ -209,7 +209,10 @@ form {
 
 .card-description {
 	display: block;
-	padding: 2em 0.5em;
+	padding-bottom: 1px;
+    padding-top: 10px;
+	padding-right : 10px;
+	padding-left : 10px;
 	color: #515151;
 	text-decoration: none;
 }
@@ -270,12 +273,8 @@ form {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>삶과 미래를 긍정적으로 접근할 수 있다면 인생에 있어 더할 나위 없는 행복을 누릴 수 있고<br> 
+					   행복해지기 위한 계획을 세울 수 있습니다. 심리테라피를 보면서 마음을 치유해보세요.</p>
 				</div>
 			</div>
 		</div>
