@@ -150,7 +150,7 @@ span.top-nav-admin {
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a href="home.do"><img src="resources/user/images/MaeumiLogo.png"
+			<a href="home.do"><img src="resources/user/images/logo.png"
 				class="navbar-brand"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
