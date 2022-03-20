@@ -38,10 +38,17 @@
 
 	<select id="TodaySelect"
 		resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+<<<<<<< HEAD
+		 
+=======
 
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
         select * from short_comment
         where sc_no =11
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/ptj9415/final_project.git
 
 	</select>
 

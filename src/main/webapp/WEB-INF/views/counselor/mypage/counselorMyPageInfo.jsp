@@ -172,7 +172,8 @@ h3 {
 						<div class="card-body table-responsive p-00">
 							<form method="post" enctype="multipart/form-data" id="form">
 								<div class="headshotdiv">
-									<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
+<%-- 									<img src="../fileupload/counselorpicture/${counselor.c_picturepath }" --%>
+										<img src="img/counselorpicture/counselorimg.PNG"
 										class="preImage" id="preImage" name="preImage"
 										style="height: 228px; width: 171px;"
 										onerror="this.src='img/counselorpicture/errorprofile.jpg';">

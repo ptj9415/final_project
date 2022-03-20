@@ -128,7 +128,7 @@ h3 {
 						<div class="card-body table-responsive p-00">
 							<div class="headshotdiv">
 								<img
-									src="../fileupload/counselorpicture/${counselor.c_picturepath }"
+									src="img/counselorpicture/counselorimg.PNG"
 									class="preImage" id="preImage" name="preImage"
 									style="height: 150px; width: 112.5px;"
 									onerror="this.src='img/counselorpicture/errorprofile.jpg';">
