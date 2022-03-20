@@ -71,9 +71,7 @@
 						class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 						<div class="pl-md-4 border-line">
 							<span class="mr-2">소요시간 약 3분</span> <span style="font-weight:bold; color:black;"></span><span class="mr-2">' 입니다</span>
-							<p></p>
-							<input type="button" class="register-btn" id="submit-btn" data-toggle="modal" data-target="#modal-lg" value="글쓰기">
-	
+							
 						</div>
 					</div>
 				</div>
@@ -96,6 +94,9 @@
 					</div>
 					<span class="time_logo"></span>
 					<p>소요 시간 : 3분 내외</p>
+				</div>
+					<div class="start-wrap">
+					<button class="start">검사하기</button>
 				</div>
 				
 				
@@ -134,7 +135,7 @@
 						></script>
 					</div>
 					<!-- 이후에 추가할 것, 공유하기(혹은 복사), copyright에 대한 설명 등 -->
-					<div class="hash">#심리테스트 #연애테스트 #십이간지로 알아보는 연애 유형</div>
+					<div class="hash">#심리테스트 #자존감테스트</div>
 
 					<button class="btn Urlcopy" onclick="javascript:copy()">
 						사이트 링크 복사하기
@@ -154,9 +155,7 @@
 						<p>
 							나를 알아보는 10가지 질문 by
 							<a href="https://github.com/dev-dain/10-things-test">Dain Kim</a><br />
-							Copyright (c) 2020 by Jaewon Lee (<a
-								href="https://github.com/nani6765/ImpressionTest"
-							>https://github.com/nani6765/ImpressionTest</a>)<br />
+							Copyright (c) 2020 by maeumi<br />
 							이 사이트에 나오는 그림을 포함한 모든 컨텐츠의 상업적 이용을 금지합니다.
 						</p>
 					</div>
@@ -165,9 +164,9 @@
 				<footer id="footer">
 				<div class="foot">
 					<span class="highlight">Kusitms 22nd.</span>
-					© 2020
+					© 2022
 					<p class="author">
-						Jaewon Lee, Minkyoung An, Chaewon Seo, Sangmin Lee, Juyeon Kang
+						final project maeumi
 					</p>
 				</div>
 			</footer>
