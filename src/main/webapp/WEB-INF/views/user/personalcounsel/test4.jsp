@@ -260,6 +260,7 @@ form {
 	color: white;
 	border: solid 1px #153e54;
 	font-size: 14px;
+	margin-right:450px;
 }
 
 #pay-btn:hover {
@@ -446,14 +447,14 @@ p.itemtext{
 				</div> -->
 				<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
 				<form action="paymentComplete.do" id="frm" name="frm">
-					<input type="text" name="pr_time" value="${pr_time}">
-					<input type="text" id="c_email" name="c_email" value="${c_email}" >
-					<input type="text" id="pr_price" name="pr_price" value="${pr_price}	">
-					<input type="text" id="pr_type" name="pr_type" value="${c_value}">
+					<input type="hidden" name="pr_time" value="${pr_time}">
+					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
+					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
+					<input type="hidden" id="pr_type" name="pr_type" value="${c_value}">
 					<input type="hidden" id="or_uid" name="or_uid">
 					<input type="hidden" id="c_no" name="c_no" value="0">
-					<input type="text" name="ccg_subname" value="${pr_type}">
-					<input type="text" name="pr_date" value="${pr_date}">
+					<input type="hidden" name="ccg_subname" value="${pr_type}">
+					<input type="hidden" name="pr_date" value="${pr_date}">
 				</form>
 			<!-- <div id="legalcopy">
 					<a href="personalCounselStep4.do">
