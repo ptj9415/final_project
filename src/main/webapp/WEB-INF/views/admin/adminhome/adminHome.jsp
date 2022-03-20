@@ -71,9 +71,9 @@ h3 {
 			</h3>
 			<div class="row">
 				<div class="col-lg-3 col-xs-6">
-					<div class="small-box bg-blue">
+					<div class="small-box" style="background-color: #FFE3E3;">
 						<div class="inner">
-							<h4>회원 관리</h4>
+							<h4 style="color: #6B4F4F">회원 관리</h4>
 							<div class="icon">
 								<ion-icon name="cellular"></ion-icon>
 							</div>
@@ -83,9 +83,9 @@ h3 {
 					</div>
 				</div>
 				<div class="col-lg-3 col-xs-6">
-					<div class="small-box bg-green">
+					<div class="small-box" style="background-color: #7FC8A9;">
 						<div class="inner">
-							<h4>오늘의 한마디 관리</h4>
+							<h4 style="color: #6B4F4F">오늘의 한마디 관리</h4>
 							<div class="icon">
 								<ion-icon name="chatbubbles"></ion-icon>
 							</div>
@@ -95,9 +95,9 @@ h3 {
 					</div>
 				</div>
 				<div class="col-lg-3 col-xs-6">
-					<div class="small-box bg-purple">
+					<div class="small-box" style="background-color: #D7E9F7;">
 						<div class="inner">
-							<h4>공지사항 관리</h4>
+							<h4 style="color: #6B4F4F">공지사항 관리</h4>
 							<div class="icon">
 								<ion-icon name="library"></ion-icon>
 							</div>
@@ -107,9 +107,9 @@ h3 {
 					</div>
 				</div>
 				<div class="col-lg-3 col-xs-6">
-					<div class="small-box bg-red">
+					<div class="small-box" style="background-color: #F4D19B;">
 						<div class="inner">
-							<h4>배너 관리</h4>
+							<h4 style="color: #6B4F4F">배너 관리</h4>
 							<div class="icon">
 								<ion-icon name="desktop"></ion-icon>
 							</div>
