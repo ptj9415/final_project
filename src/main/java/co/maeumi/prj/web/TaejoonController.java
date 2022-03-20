@@ -117,10 +117,10 @@ public class TaejoonController {
 			date = date.substring(0, 10);
 			list.get(i).setGc_date(date);
 			String date2 = list.get(i).getGc_startdate();
-			date2 = date.substring(0, 10);
+			date2 = date2.substring(0, 10);
 			list.get(i).setGc_startdate(date2);
 			String date3 = list.get(i).getGc_finaldate();
-			date3 = date.substring(0, 10);
+			date3 = date3.substring(0, 10);
 			list.get(i).setGc_finaldate(date3);
 
 		}
