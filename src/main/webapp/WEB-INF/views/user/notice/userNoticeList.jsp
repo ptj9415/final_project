@@ -122,15 +122,9 @@ input::placeholder {
 <body class="hold-transition sidebar-mini">
 
 	<!-- 배너 -->
-	<section class="hero-wrap hero-wrap-2" style="background-image: url('resources/user/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-				</div>
-			</div>
-		</div>
-</section>
+				<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/notice.png" id="bannerimg">
+	</section>
 
 	<div class="topTitle">
 		<a>공지사항</a>

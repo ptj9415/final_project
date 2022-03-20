@@ -614,25 +614,8 @@ font-size: 20px;
 </style>
 </head>
 <body>
-<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">개인상담</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
-
-
+	<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/personalcounsel.png" id="bannerimg">
 	</section>
 <!-- 결제완료페이지 -->
 

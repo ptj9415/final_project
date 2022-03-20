@@ -255,23 +255,8 @@ form {
 /*심리테라피 리스트 end*/
 </style>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/bg_1.jpg');"
-		data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">심리테라피</h1>
-					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html"><i
-								class="ion-ios-arrow-forward"></i></a></span> <span><i
-							class="ion-ios-arrow-forward"></i></span>
-					</p>
-				</div>
-			</div>
-		</div>
+			<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/therapy.png" id="bannerimg">
 	</section>
 	
 	<div class="container">

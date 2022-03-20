@@ -85,9 +85,9 @@ p {
 
 </head>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
-		data-stellar-background-ratio="0.5"></section>
+					<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/faq.png" id="bannerimg">
+	</section>
 		
 	<div class="faq-container">
 		<h1 class="page-title">FAQ</h1>

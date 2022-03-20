@@ -301,9 +301,9 @@ input::placeholder {
 </svg>
 
 	<!-- 배너 -->
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
-		data-stellar-background-ratio="0.5"></section>
+	<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/board.png" id="bannerimg">
+	</section>
 
 	<div class="topTitle">
 		<a style="font-weight: bold;">당신의 이야기를 들려주세요!</a> <br> <a
