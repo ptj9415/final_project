@@ -37,16 +37,15 @@ button:hover{
 }
 #selectEmailBtn {
 	margin-top: 20px;
-	width: 80px;
+	width: 20%;
 	height: 30px;
 }
 </style>
 <body>
 	<div align="center">
-		<img src="resources/user/images/MaeumiLogo.png" style="width:100px; margin-top:50px;">
-		<div><h3 style="margin-top:20px;">Email 찾기</h3></div>
-		<hr style="margin-top:30px;">
-
+		<img src="resources/user/images/MaeumiLogo.png" style="width:200px; margin-top:10px;">
+		<h3 style="color: #464646">- Email 찾기  -</h3>
+		<hr>
 		<form id="frm" method="post" action="ajaxFindEmail.do">
 		<div class="inputForm1">
 			<input type="text" placeholder="회원님의 연락처를 '-'없이 입력해주세요." id="phone" name="phone">
@@ -58,7 +57,7 @@ button:hover{
 				disabled="disabled">
 			<button type="button" id="phoneChkBtn" onclick="chkPhoneBtn()">인증확인</button>
 		</div>
-		<hr style="margin-top:30px;">
+		<hr style="margin-top:20px;">
 		<button type="button" id="selectEmailBtn">조회</button>
 		</form><br>
 		<div id="result"></div>
@@ -120,8 +119,9 @@ $("#selectEmailBtn").on("click", function() {
 	 			alert ("해당하는 이메일이 존재하지 않습니다.");
 	 			//window.close();
 	 		} else {
-	 			alert(responseText);
+	 			//alert(responseText); 
 	 			$("#result").html(responseText);
+	 			$("#result").focus();
 	 		}
 	 	}
 		
