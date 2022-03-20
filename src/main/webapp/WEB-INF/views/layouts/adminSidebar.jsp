@@ -190,13 +190,7 @@
 							class="nav-link" id="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>상담사 상담 통계</p>
-						</a></li>
-						<c:if test="${c_admin eq 'C' }">
-							<li class="nav-item"><a href="test.do" class="nav-link"
-								id="nav-link"> <i class="far fa-circle nav-icon"></i>
-									<p>상담 통계</p>
-							</a></li>
-						</c:if>
+						</a></li>						
 						<c:if test="${c_admin eq 'A' }">
 						<li class="nav-item"><a href="testpg.do" class="nav-link"
 							id="nav-link"> <i class="far fa-circle nav-icon"></i>
@@ -208,10 +202,6 @@
 								<p>매출 통계</p>
 						</a></li>
 						</c:if>
-						<li class="nav-item"><a href="salesChart.do" class="nav-link"
-							id="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>심리검사 통계</p>
-						</a></li>
 					</ul></li>
 			</ul>
 
