@@ -5,7 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script>
+        google.load( "webfont", "1" );
+        google.setOnLoadCallback(function() {
+         WebFont.load({ custom: {
+          families: [ "NanumGothic" ],
+          urls: [ "http://fontface.kr/NanumGothic/css" ]
+         }});
+        });
+    </script>
 <style>
+body, header ul li a, header h1, header h2{
+
+font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+font-size: 16px;
+}
 .pb-2, .py-2{
 	margin-top:100px;
 	margin-right:auto;

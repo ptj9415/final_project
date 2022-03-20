@@ -6,6 +6,22 @@
 <meta charset="UTF-8">
 <title>결제완료</title>
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ <script>
+
+        google.load( "webfont", "1" );
+       
+        google.setOnLoadCallback(function() {
+       
+         WebFont.load({ custom: {
+    
+          families: [ "NanumGothic" ],
+       
+          urls: [ "http://fontface.kr/NanumGothic/css" ]
+       
+         }});
+       
+        });
+</script>
 <style>
 :root {
     /* CSS variables to change the configuration of tick and circle */
@@ -20,10 +36,6 @@
     --tick-second-color: #F4B400;   /* Selective Yellow */
     --tick-third-color: #DB4437;    /* Cinnabar */
     --tick-final-color: #4285F4;    /* Royal Blue */
-}
-
-body {
-    /* background-color: var(--background-color); */
 }
 .circle-body{
 	width:80%;

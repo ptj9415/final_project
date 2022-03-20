@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>개인상담 신청 step4</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+        google.load( "webfont", "1" );
+        google.setOnLoadCallback(function() {
+         WebFont.load({ custom: {
+          families: [ "NanumGothic" ],
+          urls: [ "http://fontface.kr/NanumGothic/css" ]
+         }});
+        });
+    </script>
 <link href='https://fonts.googleapis.com/css?family=Lato'
 	rel='stylesheet' type='text/css'>
 
@@ -509,7 +518,11 @@ div.asdf:active, div.asdf:focus{
     border-bottom: 1px solid #8dacbd42;
     padding-bottom: 30px;
 }
+body, header ul li a, header h1, header h2{
 
+font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+font-size: 16px;
+}
 </style>
 </head>
 <body>
@@ -603,13 +616,12 @@ div.asdf:active, div.asdf:focus{
 		</div>
 		<form id="timeform" action="test4pg.do" method="post">
 			<div class="timediv"></div>
-
 			<input type="hidden" id="c_email" name="c_email" value="${c_email}">
 			<input type="hidden" id="pr_type" name="pr_type" value="${c_type1}">
 			<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}">
 			<input type="hidden" id="c_value" name="c_value" value="${c_value}">
 			<input type="hidden" id="pr_date" name="pr_date" value="">
-			<input type="text" id="pr_time" name="pr_time" value="">
+			<input type="hidden" id="pr_time" name="pr_time" value="">
 			<!-- <input type="button" data-page="2" name="previous"
 				class="previous action-button" value="Previous" id="previous-btn" /> -->
 			<input type="submit" data-page="2" name="next"
