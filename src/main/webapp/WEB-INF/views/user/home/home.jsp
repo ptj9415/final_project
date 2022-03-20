@@ -259,10 +259,13 @@
 
 	<div class="banner">
 		<ul>
-			<c:forEach items="${banner }" var="banner" >
-				<li><img src="../fileupload/bannerimg/${banner.bn_pfilename }"
-					id="bannerimg"></li>
-			</c:forEach>
+		<li><img src="img/bannerimg/mainbanner1.png"></li>
+		<li><img src="img/bannerimg/couponbanner.png"></li>
+		<li><img src="img/bannerimg/mainbanner2.png"></li>
+<%-- 			<c:forEach items="${banner }" var="banner" > --%>
+<%-- 				<li><img src="../fileupload/bannerimg/${banner.bn_pfilename }" --%>
+<!-- 					id="bannerimg"></li> -->
+<%-- 			</c:forEach> --%>
 		</ul>
 	</div>
 	
@@ -621,7 +624,7 @@
 
 					rollingId = setInterval(function() {
 						rollingStart();
-					}, 5000);
+					}, 6000);
 
 					function rollingStart() {
 						$banner.css("width", $bannerWidth * $length + "px");

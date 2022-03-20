@@ -73,8 +73,6 @@ public class TaejoonController {
 	private PersonalcounselService personalCounselDao;
 	@Value("#{uploadpath['upload']}")
 	private String uploadpath;
-	
-	
 
 	/* ===== 사용자 화면 ===== */
 
@@ -191,7 +189,7 @@ public class TaejoonController {
 			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest req) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+
 		// 썸네일 파일업로드
 		String SAVE_PATH = uploadpath + "/counselorpicture/";
 		String originalFileName = mf.getOriginalFilename();
@@ -253,9 +251,9 @@ public class TaejoonController {
 	// 상담사 마이페이지 메인화면
 	@RequestMapping("/counselorMyPageMain.do")
 	public String counselorMyPageMain(Model model, CounselorVO cvo, HttpSession session) {
-		
-		String c_email = (String)session.getAttribute("c_email");
-		
+
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -285,7 +283,7 @@ public class TaejoonController {
 	public String memberPictures(CounselorVO vo, @RequestParam(value = "filename") MultipartFile mf, Model model,
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		String SAVE_PATH = uploadpath + "/counselorpicture/";
 		System.out.println(SAVE_PATH);
 		String originalFileName = mf.getOriginalFilename();
@@ -315,7 +313,7 @@ public class TaejoonController {
 	@RequestMapping("/counselorMyPageInfo.do")
 	public String counselorMyPageInfo(Model model, CounselorVO cvo, HttpSession session) {
 
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
@@ -418,7 +416,7 @@ public class TaejoonController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		counselorDao.counselorGradeInsert(cvo);
 
@@ -428,9 +426,9 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담 경력 수정 화면
 	@RequestMapping("/counselorMyPageCareer.do")
 	public String counselorMyPageCareer(Model model, CounselorVO cvo, HttpSession session) {
-		
-		String c_email = (String)session.getAttribute("c_email");
-		
+
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselorCareerList(cvo);
 		model.addAttribute("career", list);
@@ -441,11 +439,11 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담 경력 수정
 	@ResponseBody
 	@RequestMapping("/careerupdate.do")
-	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
-			throws Exception {
+	public String careerupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		String c_email = (String)session.getAttribute("c_email");
-		
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		counselorDao.counselorCareerDelete(cvo);
 
@@ -464,7 +462,7 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 자격사항 수정 화면
 	@RequestMapping("/counselorMyPageCert.do")
 	public String counselorMyPageCert(Model model, CounselorVO cvo, HttpSession session) {
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		model.addAttribute("counselor", counselorDao.counselorSelect(cvo));
 
@@ -482,11 +480,11 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 자격사항 수정
 	@ResponseBody
 	@RequestMapping("/certificationupdate.do")
-	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
-			throws Exception {
+	public String certificationupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		String c_email = (String)session.getAttribute("c_email");
-		
+		String c_email = (String) session.getAttribute("c_email");
+
 		cvo.setC_email(c_email);
 		counselorDao.counselorCertificationDelete(cvo);
 
@@ -508,7 +506,7 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 내 상담시간 수정 화면
 	@RequestMapping("/counselorMyPageTime.do")
 	public String counselorMyPageTime(Model model, CounselorVO cvo, HttpSession session) {
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		List<CounselorVO> list = counselorDao.counselortimeList(cvo);
 
@@ -520,10 +518,10 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담시간 수정
 	@ResponseBody
 	@RequestMapping("/counseltimeupdate.do")
-	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
-			throws Exception {
+	public String counseltimeupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		counselorDao.counselortimeDelete(cvo);
 
@@ -542,7 +540,7 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담사 소개 수정 화면
 	@RequestMapping("/counselorMyPageIntro.do")
 	public String counselorMyPageIntro(Model model, CounselorVO cvo, HttpSession session) {
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		model.addAttribute("info", counselorDao.counselorinfoList(cvo));
 
@@ -552,10 +550,10 @@ public class TaejoonController {
 	// 상담사 마이페이지 - 상담사 소개 수정
 	@ResponseBody
 	@RequestMapping("/infoupdate.do")
-	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo, HttpSession session)
-			throws Exception {
+	public String infoupdate(Model model, @RequestBody List<Map<String, Object>> list, CounselorVO cvo,
+			HttpSession session) throws Exception {
 
-		String c_email = (String)session.getAttribute("c_email");
+		String c_email = (String) session.getAttribute("c_email");
 		cvo.setC_email(c_email);
 		counselorDao.counselorinfoDelete(cvo);
 
@@ -582,8 +580,8 @@ public class TaejoonController {
 	@ResponseBody
 	@RequestMapping("/counselorStatisticData.do")
 	public List<PersonalcounselVO> counselorStatisticData(Model model, PersonalcounselVO pcvo, HttpSession session) {
-		String c_email = (String)session.getAttribute("c_email");
-		
+		String c_email = (String) session.getAttribute("c_email");
+
 		pcvo.setC_email(c_email);
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData(pcvo);
 
@@ -593,8 +591,8 @@ public class TaejoonController {
 	@ResponseBody
 	@RequestMapping("/counselorDataSearch.do")
 	public List<PersonalcounselVO> counselorDataSearch(Model model, PersonalcounselVO pcvo, HttpSession session) {
-		String c_email = (String)session.getAttribute("c_email");
-		
+		String c_email = (String) session.getAttribute("c_email");
+
 		pcvo.setC_email(c_email);
 		List<PersonalcounselVO> data = personalCounselDao.searchCounselData2(pcvo);
 
@@ -623,7 +621,16 @@ public class TaejoonController {
 		svo.pageinfo(page, range, listCnt);
 
 		model.addAttribute("pagination", svo);
-		model.addAttribute("member", memberDao.memberSearchselect(svo));
+		List<MemberVO> list = memberDao.memberSearchselect(svo);
+		for (int i = 0; i < list.size(); i++) {
+			String phone = list.get(i).getM_phone();
+			String phone1 = phone.substring(0, 3);
+			String phone2 = phone.substring(3, 7);
+			String phone3 = phone.substring(7, 11);
+			phone = phone1 + "-" + phone2 + "-" + phone3;
+			list.get(i).setM_phone(phone);
+		}
+		model.addAttribute("member", list);
 
 		return "admin/membermanage/adminMemberList";
 	}
@@ -690,12 +697,25 @@ public class TaejoonController {
 		List<CounselorVO> list = counselorDao.counselorSearchselect(svo);
 
 		for (int i = 0; i < list.size(); i++) {
+
 			String date = list.get(i).getC_birthdate();
-			if (date != "") {
-				date = date.substring(0, 10);
-				list.get(i).setC_birthdate(date);
-			} else if (date == "") {
-				list.get(i).setC_birthdate(c_birthdate);
+			date = date.substring(0, 10);
+			list.get(i).setC_birthdate(date);
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			String phone = list.get(i).getC_phone();
+			String phone1 = phone.substring(0, 3);
+			String phone2 = phone.substring(3, 7);
+			String phone3 = phone.substring(7, 11);
+			phone = phone1 + "-" + phone2 + "-" + phone3;
+			list.get(i).setC_phone(phone);
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			String admin = list.get(i).getC_admin();
+			if (admin.equals("A")) {
+				list.remove(i);
 			}
 		}
 
@@ -940,25 +960,25 @@ public class TaejoonController {
 
 		return salary;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/adminHomeData1.do")
 	public List<SalaryVO> adminHomeData1(Model model, SalaryVO vo) {
 		List<SalaryVO> salary = salaryDao.salaryList();
-		
+
 		return salary;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/adminHomeData2.do")
 	public List<SalaryVO> adminHomeData2(Model model, SalaryVO vo) {
 		List<SalaryVO> salary = salaryDao.salaryList2();
-		for(int i = 0; i < salary.size(); i++) {
+		for (int i = 0; i < salary.size(); i++) {
 			String date = salary.get(i).getS_sdate();
 			date = date.substring(5, 10);
 			salary.get(i).setS_sdate(date);
 		}
-		
+
 		return salary;
 	}
 }

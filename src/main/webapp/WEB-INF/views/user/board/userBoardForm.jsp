@@ -85,9 +85,9 @@ button:hover {
 </style>
 </head>
 <body>
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('img/bannerimg/faqBanner2.png'); height: 350px;"
-		data-stellar-background-ratio="0.5"></section>
+	<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/board.png" id="bannerimg">
+	</section>
 
 	<form id="frm" action="userBoardResister.do" method="post">
 		<div class="wrap2" align="center">

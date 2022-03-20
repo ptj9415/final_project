@@ -149,7 +149,8 @@ table>tbody>tr>th {
 						<form method="post" id="form">
 							<div class="card-body table-responsive p-00">
 								<div class="headshotdiv">
-									<img src="../fileupload/counselorpicture/${counselor.c_picturepath }"
+									<img
+										src="../fileupload/counselorpicture/${counselor.c_picturepath }"
 										class="preImage" id="preImage" name="preImage"
 										style="height: 197px; width: 148px;"
 										onerror="this.src='img/counselorpicture/errorprofile.jpg';">
@@ -209,32 +210,42 @@ table>tbody>tr>th {
 					<div class="card">
 						<div class="card-body table-responsive p-00">
 							<br>
-							<table class="table text-nowrap" id="counseltable">
+							<table class="table text-nowrap" id="counseltable" style="text-align: center;">
 								<tr>
 									<th>상담 유형</th>
-									<th>상담사</th>
+									<th>내담자(닉네임)</th>
 									<th>신청일</th>
 									<th>상담일</th>
 									<th>상담 상태</th>
-									<th>관리</th>
 								</tr>
-								<%-- 								<c:choose> --%>
-								<%-- 									<c:when test="${not empty coupon}"> --%>
-								<%-- 										<c:forEach items="${coupon }" var="coupon"> --%>
-								<!-- 											<tr> -->
-								<%-- 												<td>${coupon.c_name }</td> --%>
-								<%-- 												<td>${coupon.c_price }</td> --%>
-								<%-- 												<td>${coupon.c_startdate }</td> --%>
-								<%-- 												<td>${coupon.c_finaldate }</td> --%>
-								<!-- 											</tr> -->
-								<%-- 										</c:forEach> --%>
-								<%-- 									</c:when> --%>
-								<%-- 									<c:when test="${empty coupon }"> --%>
-								<!-- 										<tr> -->
-								<!-- 											<td colspan="4">보유한 쿠폰이 없습니다.</td> -->
-								<!-- 										</tr> -->
-								<%-- 									</c:when> --%>
-								<%-- 								</c:choose> --%>
+								<tr>
+									<td>카카오톡</td>
+									<td>리오</td>
+									<td>2022-03-12</td>
+									<td>-</td>
+									<td>상담 대기</td>
+								</tr>
+								<tr>
+									<td>화상(Zoom)</td>
+									<td>리오</td>
+									<td>2022-03-12</td>
+									<td>-</td>
+									<td>상담 취소</td>
+								</tr>
+								<tr>
+									<td>전화</td>
+									<td>도라에몽</td>
+									<td>2022-02-15</td>
+									<td>2022-02-17</td>
+									<td>상담 완료</td>
+								</tr>
+								<tr>
+									<td>카카오톡</td>
+									<td>도넛</td>
+									<td>2022-02-09</td>
+									<td>2022-02-10</td>
+									<td>상담 완료</td>
+								</tr>
 							</table>
 							<br>
 						</div>
@@ -286,8 +297,8 @@ table>tbody>tr>th {
 												<td>${apply.cu_currentgrade }</td>
 												<td>${apply.cu_applygrade }<input type="hidden"
 													id="c_grade" name="c_grade" value="${apply.cu_applygrade }">
-													<input type="hidden"
-													id="cu_no" name="cu_no" value="${apply.cu_no }"></td>
+													<input type="hidden" id="cu_no" name="cu_no"
+													value="${apply.cu_no }"></td>
 												<c:choose>
 													<c:when test="${empty apply.cu_filename }">
 														<td>-</td>
@@ -303,8 +314,9 @@ table>tbody>tr>th {
 												<c:choose>
 													<c:when test="${apply.cu_status eq '신청완료'}">
 														<td><button type="button" id="confirmbtn"
-																onclick="gradeconfirm('${apply.cu_applygrade}', '${apply.cu_no }', '${counselor.c_email }');">승인</button> 
-																<button type="button" id="rejectbtn" data-toggle="modal" data-target="#modal-lg" data-no="${apply.cu_no }">반려</button></td>
+																onclick="gradeconfirm('${apply.cu_applygrade}', '${apply.cu_no }', '${counselor.c_email }');">승인</button>
+															<button type="button" id="rejectbtn" data-toggle="modal"
+																data-target="#modal-lg" data-no="${apply.cu_no }">반려</button></td>
 													</c:when>
 													<c:otherwise>
 														<td>-</td>
@@ -321,7 +333,7 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</section>
-<br>
+	<br>
 	<!-- 모달시작 -->
 	<div class="modal fade" id="modal-lg">
 		<div class="modal-dialog modal-lg">
@@ -341,14 +353,15 @@ table>tbody>tr>th {
 						<form id="frm" method="post">
 							<div class="card-body">
 								<div class="form-group">
-									<input type="text"
-										style="height: 100px" class="form-control" id="cu_rejection"
-										name="cu_rejection" placeholder="반려사유를 입력하세요.">
+									<input type="text" style="height: 100px" class="form-control"
+										id="cu_rejection" name="cu_rejection"
+										placeholder="반려사유를 입력하세요.">
 								</div>
 							</div>
 							<input type="hidden" id="cu_status" name="cu_status" value="반려">
-							<input type="hidden" class="modalcuno" id="cu_no" name="cu_no" value="">
-							<input type="hidden" id="c_email" name="c_email" value="${counselor.c_email }">
+							<input type="hidden" class="modalcuno" id="cu_no" name="cu_no"
+								value=""> <input type="hidden" id="c_email"
+								name="c_email" value="${counselor.c_email }">
 						</form>
 					</div>
 				</div>
@@ -360,7 +373,7 @@ table>tbody>tr>th {
 			</div>
 		</div>
 	</div>
-<br>
+	<br>
 </body>
 
 <script>
@@ -418,31 +431,36 @@ table>tbody>tr>th {
 			}
 		});
 	}
-	
+
 	function gradeconfirm(cu_applygrade, cu_no, c_email) {
 		var url = "adminCounselorGradeComfirm.do";
 		var cu_status = "승인";
 		var c_grade = cu_applygrade;
 		var cu_no = cu_no;
 		var c_email = c_email;
- 		if(confirm('정말 승인하시겠습니까?') == true) {
+		if (confirm('정말 승인하시겠습니까?') == true) {
 			$.ajax({
 				url : url,
 				type : "post",
-				data : {cu_status : cu_status, c_grade : c_grade, cu_no : cu_no, c_email:c_email},
+				data : {
+					cu_status : cu_status,
+					c_grade : c_grade,
+					cu_no : cu_no,
+					c_email : c_email
+				},
 				success : function() {
 					alert("등급 변경 승인이 완료되었습니다.");
 					location.reload();
 				},
 				error : function() {
-					console.log("실패");	
+					console.log("실패");
 				}
 			});
- 		} else {
- 			return;
- 		}
+		} else {
+			return;
+		}
 	}
-	
+
 	$(function() {
 		$("#submit").click(function() {
 			alert('등급 변경 반려가 완료되었습니다.');

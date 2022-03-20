@@ -247,23 +247,8 @@ input:checked[type="checkbox"]:before {
 </head>
 <body>
 	<!-- 오늘의 한마디 주제 -->
-	<section class="hero-wrap hero-wrap-2"
-		style="background-image: url('resources/user/images/todayStory.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<h1 class="mb-2 bread">오늘의 한마디</h1>
-					<br>
-					<p class="breadcrumbs">
-						<span class="mr-2">지금 당신의 기분은 어떤가요? 오늘의 한마디를 남겨주세요!</span>
-				
-					</p>
-				</div>
-			</div>
-		</div>
-
+			<section class="hero-wrap hero-wrap-2">
+	<img src="img/bannerimg/todaystory.png" id="bannerimg">
 	</section>
 		<div class="today-container">
 			<div class="container">
