@@ -356,7 +356,7 @@ input:checked[type="checkbox"]:before {
 								<p class="card-text"  id="sr_anony" style="text-align: right; font-weight:bold;">익명</p>
 							</c:otherwise>
 						</c:choose>
-								<br><br><p style="padding-bottom:20px;">${todayReplyList.sr_subject}</p>
+								<br><br><p style="padding-bottom:20px; font-size: 13px;">${todayReplyList.sr_subject}</p>
 	                   
             <input type="hidden" id="sc_no" name="sc_no" value="${todaySelect.sc_no}" />
 	                </fieldset>          

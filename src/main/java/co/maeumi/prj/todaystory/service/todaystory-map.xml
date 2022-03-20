@@ -38,10 +38,9 @@
 
 	<select id="TodaySelect"
 		resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
-		SELECT * FROM
-		(SELECT * FROM short_comment order by
-		dbms_random.value)
-		where rownum ='1'
+		 
+        select * from short_comment
+        where sc_no =11
 
 	</select>
 
