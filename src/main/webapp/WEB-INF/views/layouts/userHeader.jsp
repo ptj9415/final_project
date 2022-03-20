@@ -94,7 +94,7 @@ nav ul ul {
 nav ul ul li {
 	float: none;
 	position: relative;
-	width:150px;
+	width: 150px;
 }
 
 nav ul ul li a {
@@ -118,19 +118,30 @@ span.top-nav-admin {
 
 	<nav class="navbar top" id="top-nav">
 
-		<c:if test="${email ==null }">
-			<span class="top-nav-admin"><a href="loginForm.do" style="margin-right:10px; font-size:11px; color:#153e54">로그인</a></span>
+		<c:if test="${empty c_email && empty email}">
+			<span class="top-nav-admin"><a href="loginForm.do"
+				style="margin-right: 10px; font-size: 11px; color: #153e54">로그인</a></span>
 		</c:if>
-		<c:if test="${email !=null }">
-			<span class="top-nav-admin" style="font-size:12px; color:#153e54">
-				<i class="fa fa-user">
-				</i>
-				${nickname } 님 환영합니다
-				
-				<a href="logout.do" style="margin-left:10px; font-size:11px; color:#153e54">로그아웃</a></span>
+		<c:if test="${not empty email}">
+			<span class="top-nav-admin" style="font-size: 12px; color: #153e54">
+				<i class="fa fa-user"> </i> ${nickname } 님 환영합니다 <a href="logout.do"
+				style="margin-left: 10px; font-size: 11px; color: #153e54">로그아웃</a>
+			</span>
 		</c:if>
-		<span class="top-nav-admin" style="font-size:11px;"> <a href="adminHome.do">🅰️관리자</a></span>
-
+				<c:if test="${not empty c_email}">
+			<span class="top-nav-admin" style="font-size: 12px; color: #153e54">
+				<i class="fa fa-user"> </i> ${c_name } 님 환영합니다 <a href="logout.do"
+				style="margin-left: 10px; font-size: 11px; color: #153e54">로그아웃</a>
+			</span>
+		</c:if>
+		<c:if test="${c_admin eq 'A' }">
+			<span class="top-nav-admin" style="font-size: 11px;"> <a
+				href="adminHome.do">🅰️관리자 화면 바로가기</a></span>
+		</c:if>
+				<c:if test="${c_admin eq 'C' }">
+			<span class="top-nav-admin" style="font-size: 11px;"> <a
+				href="counselorMyPageMain.do">🅰️상담사 화면 바로가기</a></span>
+		</c:if>
 		<!-- <span class="top-nav-admin"><a href="counselormypage.do">counselor
 				👨‍⚕️</a></span> <span class="top-nav-admin"><a href="adminbootstrap.do">admin
 				⚙</a></span> -->
@@ -146,7 +157,7 @@ span.top-nav-admin {
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
-			
+
 			<div class="navbar-collapse collapse show" id="ftco-nav" style="">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="#" class="nav-link">상담하기</a>
