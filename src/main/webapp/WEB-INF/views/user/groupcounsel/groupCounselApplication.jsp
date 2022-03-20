@@ -7,6 +7,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+ google.load( "webfont", "1" );
+
+ google.setOnLoadCallback(function() {
+
+  WebFont.load({ custom: {
+
+   families: [ "NanumGothic" ],
+
+   urls: [ "http://fontface.kr/NanumGothic/css" ]
+
+  }});
+
+ });
+
+</script>
 <style>
 .md-stepper-horizontal {
 	display: table;
@@ -172,6 +189,8 @@
 }
 
 body {
+	font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+	font-size : 13px;
 	font-weight: 400;
 	letter-spacing: 0;
 	text-rendering: optimizeLegibility;

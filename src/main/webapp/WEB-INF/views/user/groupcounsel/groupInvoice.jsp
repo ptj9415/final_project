@@ -8,6 +8,23 @@
 <title>invoice</title>
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
  <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+ <script>
+
+ google.load( "webfont", "1" );
+
+ google.setOnLoadCallback(function() {
+
+  WebFont.load({ custom: {
+
+   families: [ "NanumGothic" ],
+
+   urls: [ "http://fontface.kr/NanumGothic/css" ]
+
+  }});
+
+ });
+
+</script>
 </head>
 <style>
 @import
@@ -316,7 +333,10 @@ p.itemtext1{
 p.itemtext{
 	margin-top:16px;
 }	
-
+body, header ul li a, header h1, header h2{
+		font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
+        font-size: 20px;
+}	
 /*결제버튼 end*/
 </style>
 <body>
