@@ -20,6 +20,7 @@ public class PersonalcounselVO {
 	private String c_picture;
 	private String c_picturepath;
 	private String c_status;
+	private String c_comment;
 	
 	private String cc_no;
 	private String cc_email;

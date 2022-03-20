@@ -150,7 +150,7 @@ table>tbody>tr>th {
 							<div class="card-body table-responsive p-00">
 								<div class="headshotdiv">
 									<img
-										src="../fileupload/counselorpicture/${counselor.c_picturepath }"
+										src="img/counselorpicture/counselorimg.PNG"
 										class="preImage" id="preImage" name="preImage"
 										style="height: 197px; width: 148px;"
 										onerror="this.src='img/counselorpicture/errorprofile.jpg';">

@@ -437,7 +437,7 @@ div.counsel-type {
 		<div class="category-choice2">
 		<c:if test="${counselorSelect.p_kakao eq 1 }">
 			<div class="sub-category-btn" id="confirmdiv" onclick="kakaoselect('${counselorSelect.p_kakaoprice}');">
-				<img src="resources/user/images/chat.png"  class="chat-img">
+				<img src="resources/user/images/chat.PNG"  class="chat-img">
 				<h3 class="h4" style="margin-top:15px;">카카오톡</h3>
 				<input type=button class="chat-btn" value="${counselorSelect.p_kakaoprice}">원<br><br>
 				<input type="checkbox" class="chat-btn"  name="onecheck2" value="카카오톡"  onclick="doOpenCheck2(this);"><br><br>

@@ -61,9 +61,16 @@
 	<aside class="main-sidebar sidebar-dark-primary elevation-4"
 		id="sidebar">
 		<!-- Brand Logo -->
-		<a href="home.do" class="brand-link"> <span
-			class="brand-text font-weight-light">Maeumi</span>
+		<c:if test = "${c_admin eq 'A' }">
+		<a href="adminhome.do" class="brand-link" style="text-align: center;"> <span
+			class="brand-text font-weight-light" ><img src="resources/user/images/logo.png" style="width: 80px;"></span>
 		</a>
+		</c:if>
+		<c:if test = "${c_admin eq 'C' }">
+		<a href="counselorMyPageMain.do" class="brand-link" style="text-align: center;"> <span
+			class="brand-text font-weight-light" ><img src="resources/user/images/logo.png" style="width: 80px;"></span>
+		</a>
+		</c:if>
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column"

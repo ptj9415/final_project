@@ -38,9 +38,14 @@
 
 	<select id="TodaySelect"
 		resultType="co.maeumi.prj.todaystory.service.TodaystoryVO">
+
 		SELECT * FROM short_comment
 		where sc_no = 14
 		 
+        select * from short_comment
+        where sc_no =11
+
+
         select * from short_comment
         where sc_no =11
 
