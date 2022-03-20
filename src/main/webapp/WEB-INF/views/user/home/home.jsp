@@ -7,13 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+	charset="utf-8"></script>
 
 <style>
 
 /*배너*/
 #bannerimg {
-	
 	
 }
 
@@ -37,8 +38,8 @@
 .banner ul li {
 	float: left;
 	width: 100;
-	height: 346px; 
-	margin : 0;
+	height: 346px;
+	margin: 0;
 	padding: 0;
 	margin: 0;
 }
@@ -113,6 +114,10 @@
 	text-shadow: 0 0 0;
 }
 
+.owl-dots {
+	margin-right: 50px;
+}
+
 .tab:first-of-type:not(:last-of-type)+label {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
@@ -121,8 +126,6 @@
 .tab:not(:first-of-type):not(:last-of-type)+label {
 	border-radius: 0;
 }
-
-
 
 .tab:last-of-type:not(:first-of-type)+label {
 	border-top-left-radius: 0;
@@ -215,11 +218,12 @@
 	padding: 100px;
 }
 
-.glist-container{
-	display:flex;
+.glist-container {
+	display: flex;
 }
-.btn btn-primary px-4 py-3 mt-3:hover{
-	color:#153e54;
+
+.btn btn-primary px-4 py-3 mt-3:hover {
+	color: #153e54;
 }
 
 /* 퀵 메뉴 start */
@@ -252,6 +256,93 @@
 	border-bottom: 0;
 }
 /* 퀵 메뉴 end */
+#loginbtn {
+	position: absolute;
+	top: 300px;
+	left: 50%;
+	width: 200px;
+	height: 60px;
+	background-color: #FFCD4A;
+	transform: translate(-50%, -50%);
+	background-color: #FFCD4A;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.tabmenu {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	background-color: transparent;
+}
+
+.tabdiv {
+	width: 100%;
+	background-color: transparent;
+}
+
+.tabdiv ul {
+	display: flex;
+	background-color: transparent;
+	height: 56px;
+	border-bottom: 1px solid grey;
+}
+
+.tabdiv ul li {
+	width: 250px;
+	background-color: transparent;
+}
+
+.tabdiv ul li a {
+	display: block;
+	height: 55px;
+	text-align: center;
+	line-height: 55px;
+	border-left: none;
+	border-bottom: none;
+	background-color: transparent;
+}
+
+/* .tabdiv ul li:first-child a { */
+/* 	border-left: 1px solid black; */
+/* } */
+.tabdiv ul li a.on {
+	position: relative;
+	border-color: grey;
+	height: 56px;
+	background-color: rgb(238, 238, 238);
+	border-top: 1px solid grey;
+	border-right: 1px solid grey;
+}
+
+.staff{
+height: 510px;
+}
+
+.tabdiv ul li a.on:before {
+	content: "";
+	position: absolute;
+	left: -1px;
+	top: -1px;
+	width: 1px;
+	height: 100%;
+	background-color: grey;
+	border-top: 1px solid grey;
+}
+
+.tabcontent {
+	border-top: none;
+	padding: 20px;
+}
+
+#counselorimgs {
+	margin-left: 110px;
+}
+
+#counselornames {
+	margin-left: 50px;
+}
 </style>
 </head>
 <body>
@@ -261,334 +352,192 @@
 
 	<div class="banner">
 		<ul>
-		<li><img src="img/bannerimg/mainbanner1.png"></li>
-		<li><img src="img/bannerimg/couponbanner.png"></li>
-		<li><img src="img/bannerimg/mainbanner2.png"></li>
-<%-- 			<c:forEach items="${banner }" var="banner" > --%>
-<%-- 				<li><img src="../fileupload/bannerimg/${banner.bn_pfilename }" --%>
-<!-- 					id="bannerimg"></li> -->
-<%-- 			</c:forEach> --%>
+			<li><img src="img/bannerimg/mainbanner1.png"></li>
+			<li><img src="img/bannerimg/couponbanner.png"></li>
+			<li><img src="img/bannerimg/mainbanner2.png"></li>
+			<%-- 			<c:forEach items="${banner }" var="banner" > --%>
+			<%-- 				<li><img src="../fileupload/bannerimg/${banner.bn_pfilename }" --%>
+			<!-- 					id="bannerimg"></li> -->
+			<%-- 			</c:forEach> --%>
 		</ul>
 	</div>
-	
+
 
 	<!-- banner end -->
 
 	<!-- 상담 tab -->
-	<div class="container">
-		<h1 class="hide-space"></h1>
+	<div class="main2">
+		<img src="img/main/main2.png">
 	</div>
-	<div class="container">
-		<div class="row justify-content-start mb-5 pb-2">
-			<div
-				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
-				<span class="subheading subheading-with-line"><small
-					class="pr-2 bg-light">M A E U M I</small></span>
-				<h2 class="mb-4">나에게 꼭 맞는 상담찾기</h2>
-			</div>
-			<div
-				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
-				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<h1 class="counsel-title"></h1>
-	<h2 class="counsel-small-title"></h2>
-
-	<div class="container-tab">
-
-		<div class="demo-section">
-			<p class="counsel-text"></p>
-		</div>
-
-		<div class="tab-wrap">
-
-			<!-- active tab on page load gets checked attribute -->
-			<input type="radio" id="tab1" name="tabGroup1" class="tab" checked>
-			<label for="tab1">개인상담</label> <input type="radio" id="tab2"
-				name="tabGroup1" class="tab"> <label for="tab2">그룹상담</label>
-
-
-
-			<div class="tab__content">
-				<!-- <h3 class="short-section">Short Section</h3> -->
-
-				<section class="ftco-section testimony-section bg-light">
-					<div class="container">
-						<div class="row justify-content-center mb-5 pb-3">
-							<div class="col-md-7 heading-section ftco-animate">
-								<span class="subheading subheading-with-line"><small
-									class="pr-2 bg-light">MAEUMI</small></span>
-								<h2 class="mb-4">마으미 회원들이 가장 많이 찾는 상담사들을 만나보세요</h2>
-								<p>전문 인력으로 구성된 마으미의 심리상담사와 1대1 맞춤 심리상담을 진행해보세요.</p>
-							</div>
-						</div>
-						<div class="row ftco-animate">
-							<div class="col-md-12">
-								<div class="carousel-testimony owl-carousel">
-							<c:forEach items="${clist }" var="clist">
-							
-									<div class="item">
-										<div class="testimony-wrap p-4 pb-5">
-											<div class="user-img mb-5"  onerror="this.src='resources/user/images/errorprofile.jpg';"
-												style="background-image: url(resources/user/images/errorprofile.jpg)">
-												<span
-													class="quote d-flex align-items-center justify-content-center">
-													<i class="">♥</i>
-												</span>
+	<div style="background-color: white">
+		<img src="img/main/main3.png">
+		<div class="container-tab">
+			<div class="tab-wrap">
+				<div class="tabdiv">
+					<ul class="tabmenu">
+						<li><a href="#personalcounsel" class="on">개인상담</a></li>
+						<li><a href="#groupcounsel">그룹상담</a></li>
+					</ul>
+					<div class="tabcontent">
+						<div id="personalcounsel">
+							<section class="ftco-section testimony-section">
+								<div class="container">
+									<div class="row ftco-animate">
+										<div class="col-md-12">
+											<div class="carousel-testimony owl-carousel">
+												<c:forEach items="${clist }" var="clist">
+													<div class="item">
+														<div class="testimony-wrap p-4 pb-5">
+															<div class="user-img mb-5" id="counselorimgs"
+																onerror="this.src='resources/user/images/errorprofile.jpg';"
+																style="background-image: url(img/counselorpicture/${clist.c_picture})">
+																<span
+																	class="quote d-flex align-items-center justify-content-center">
+																	<i class="">♥</i>
+																</span>
+															</div>
+															<div class="text">
+																<p class="mb-5 pl-4">${clist.c_comment }</p>
+																<div class="pl-5">
+																	<p class="name" id="counselornames">${clist.c_name }<span class="position">(${clist.c_grade })</span></p>
+																</div>
+															</div>
+														</div>
+													</div>
+												</c:forEach>
 											</div>
-											<div class="text">
-												<p class="mb-5 pl-4 line">상담사 소개 멘트</p>
-												<div class="pl-5">
-													<p class="name">${clist.c_name }</p>
-													<span class="position">${clist.c_grade }</span>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+						<div id="groupcounsel">
+							<section class="ftco-section">
+								<div class="container">
+									<div class="glist-container">
+										<c:forEach items="${glist }" var="glist">
+											<div class="col-md-6 col-lg-3 ftco-animate">
+												<div class="staff">
+													<div class="img"
+														style="background-image: url(resources/user/images/selfEsteemMain.png);"></div>
+													<%-- <div class="img">
+									<img src="editorsumnail/${glist.gc_sumnail }"></div> --%>
+													<div class="text px-4 pt-4">
+														<h3>${glist.gc_title }</h3>
+														<span class="position mb-2">${glist.gc_date }
+															${glist.gc_time }</span>
+														<div class="faded">
+															<p>${glist.c_name }</p>
+															<P style="font-size: 12px">인원 ${glist.gc_min_person }명
+																- ${glist.gc_max_person }명</P>
+
+															<a onclick="func('${glist.gc_no}')" style="color: white;"
+																class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
+															<ul class="ftco-social d-flex">
+															</ul>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-							</c:forEach>	
-								
-								
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
-			</div>
-
-			<div class="tab__content">
-
-				<section class="ftco-section">
-					<div class="container">
-						<div class="row justify-content-center mb-5 pb-3">
-							<div class="col-md-7 heading-section ftco-animate">
-								<span class="subheading subheading-with-line"><small
-									class="pr-2 bg-white">MEUMI</small></span>
-								<h2 class="mb-4">마음맞는 사람들과 함께, 그룹상담</h2>
-								<p>혼자서 심리상담을 받는게 아직 어색한가요? 마음맞는 사람들과 함께, 또는 처음보는사람들과 함께
-								여러 주제로 진행되는 마으미의 그룹상담 프로그램에 참여해보세요.</p>
-							</div>
-						</div>
-					
-							<div class="glist-container">
-							<c:forEach items="${glist }" var="glist">
-							<div class="col-md-6 col-lg-3 ftco-animate">
-								<div class="staff">
-									<div class="img"
-										style="background-image: url(resources/user/images/selfEsteemMain.png);"></div>
-									<%-- <div class="img">
-									<img src="editorsumnail/${glist.gc_sumnail }"></div> --%>
-									<div class="text px-4 pt-4">
-										<h3>${glist.gc_title }</h3>
-										<span class="position mb-2">${glist.gc_date } ${glist.gc_time }</span>
-										<div class="faded">
-											<p>${glist.c_name }</p>
-											<P style="font-size: 12px">인원 ${glist.gc_min_person }명 - ${glist.gc_max_person }명</P>
-
-											<a 
-											onclick="func('${glist.gc_no}')" style="color:white;" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
-											<ul class="ftco-social d-flex">
-
-											</ul>
-										</div>
+										</c:forEach>
 									</div>
 								</div>
-							</div>
-							</c:forEach>
-							</div>
+							</section>
 						</div>
 					</div>
-				</section>
+				</div>
 			</div>
-
-
 		</div>
-
 	</div>
+	<br>
+	<br>
 	<!-- 상담 tab end -->
-
-	<!-- 마이페이지 start -->
-
-	<section class="ftco-services">
-		<div class="container">
-			<div class="row justify-content-start mb-5 pb-5"></div>
-			<div class="row"></div>
-			<div class="row justify-content-start mt-5 py-5">
-				<div class="col-md-4 heading-section ftco-animate">
-					<h2 class="mb-4">**님의 마음기록</h2>
-					<p>Even the all-powerful Pointing has no control about the
-						blind texts it is an almost unorthographic.</p>
-					<a href="#" class="btn btn-primary px-4 py-3 mt-3">자세히 보기</a>
-
-				</div>
-				<div class="col-md-8 ftco-animate">
-					<div class="row d-flex">
-						<div class="col-md-6 d-flex align-items-stretch">
-							<div
-								class="media block-6 services services-2 d-block bg-light p-4 mb-4">
-								<div
-									class="icon d-flex justify-content-center align-items-center">
-									<span class="flaticon-layers"></span>
-								</div>
-								<div class="media-body p-2 mt-3">
-									<h3 class="heading">**님의 MBTI</h3>
-									<p>INFP</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 d-flex align-items-stretch">
-							<div
-								class="media block-6 services services-2 d-block bg-light p-4 mb-4">
-								<div
-									class="icon d-flex justify-content-center align-items-center">
-									<span class="flaticon-layers"></span>
-								</div>
-								<div class="media-body p-2 mt-3">
-									<h3 class="heading">**님의 최근 상담내역</h3>
-									<p>Even the all-powerful Pointing has no control about the
-										blind texts it is an almost unorthographic.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 d-flex align-items-stretch">
-							<div
-								class="media block-6 services services-2 d-block bg-light p-4 mb-4">
-								<div
-									class="icon d-flex justify-content-center align-items-center">
-									<span class="flaticon-layers"></span>
-								</div>
-								<div class="media-body p-2 mt-3">
-									<h3 class="heading">**님의 최근 찜 상담사</h3>
-									<p>Even the all-powerful Pointing has no control about the
-										blind texts it is an almost unorthographic.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 d-flex align-items-stretch">
-							<div
-								class="media block-6 services services-2 d-block bg-light p-4 mb-4">
-								<div
-									class="icon d-flex justify-content-center align-items-center">
-									<span class="flaticon-layers"></span>
-								</div>
-								<div class="media-body p-2 mt-3">
-									<h3 class="heading">Renovation</h3>
-									<p>Even the all-powerful Pointing has no control about the
-										blind texts it is an almost unorthographic.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- 마이페이지 end -->
-
+	<div class="main4">
+		<img src="img/main/main4.png">
+	</div>
 
 	<!--  심리검사 -->
 
-	<section class="ftco-section bg-light">
-		<div class="container">
-			<div class="row justify-content-start mb-5 pb-2">
-				<div class="col-md-4 heading-section ftco-animate">
-					<span class="subheading subheading-with-line"><small
-						class="pr-2 bg-light">M A E U M I</small></span>
-					<h2 class="mb-4">심리검사</h2>
-				</div>
-				<div class="col-md-8 pl-md-5 heading-section ftco-animate">
-					<div class="pl-md-4 border-line">
-						<p>Far far away, behind the word mountains, far from the
-							countries Vokalia and Consonantia, there live the blind texts.
-							Separated they live in. A small river named Duden flows by their
-							place and supplies it with the necessary regelialia. It is a
-							paradisematic country, in which roasted parts of sentences fly
-							into your mouth.</p>
+	<div class="main5">
+		<img src="img/main/main5.png">
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="project">
+					<img src="resources/user/images/mbtiTest.jpeg" class="img-fluid"
+						alt="Colorlib Template">
+					<div class="text">
+						<span>⏱ 소요시간 약 2분</span>
+						<h3>
+							<a href="project.html">MBTI 검사</a>
+						</h3>
 					</div>
+					<a href="resources/user/images/mbtiTest.jpeg"
+						class="icon image-popup d-flex justify-content-center align-items-center">
+						<span onclick="location.href='mbti.do'">→</span>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="project">
+					<img src="resources/user/images/selfEsteem.jpg" class="img-fluid"
+						alt="Colorlib Template">
+					<div class="text">
+						<span>⏱ 소요시간 약 3분</span>
+						<h3>자존감 검사</h3>
+					</div>
+					<a href="resources/user/images/personality.jpg"
+						class="icon image-popup d-flex justify-content-center align-items-center">
+						<span onclick="location.href='selfEsteem.do'">→</span>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="project">
+					<img src="resources/user/images/personality.jpg" class="img-fluid"
+						alt="Colorlib Template">
+					<div class="text">
+						<span>⏱ 소요시간 약 5분</span>
+						<h3>우울증 검사</h3>
+					</div>
+					<a href="resources/user/images/personality.jpg"
+						class="icon image-popup d-flex justify-content-center align-items-center">
+						<span onclick="location.href='simri.do'">→</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="project">
+					<img src="resources/user/images/wowool.png" class="img-fluid"
+						alt="Colorlib Template">
+					<div class="text">
+						<span>⏱ 소요시간 약 25분</span>
+						<h3>심리검사3</h3>
+					</div>
+					<a href="resources/user/images/wowool.png"
+						class="icon image-popup d-flex justify-content-center align-items-center">
+						<span>→</span>
+					</a>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="project">
-						<img src="resources/user/images/mbtiTest.jpeg" class="img-fluid"
-							alt="Colorlib Template">
-						<div class="text">
-							<span>⏱ 소요시간 약 2분</span>
-							<h3>
-								<a href="project.html">MBTI 검사</a>
-							</h3>
-						</div>
-						<a href="resources/user/images/mbtiTest.jpeg"
-							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span onclick="location.href='mbti.do'">→</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="project">
-						<img src="resources/user/images/selfEsteem.jpg" class="img-fluid"
-							alt="Colorlib Template">
-						<div class="text">
-							<span>⏱ 소요시간 약 3분</span>
-							<h3>자존감 검사</h3>
-						</div>
-						<a href="resources/user/images/personality.jpg"
-							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span onclick="location.href='selfEsteem.do'">→</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="project">
-						<img src="resources/user/images/personality.jpg" class="img-fluid"
-							alt="Colorlib Template">
-						<div class="text">
-							<span>⏱ 소요시간 약 5분</span>
-							<h3>우울증 검사</h3>
-						</div>
-						<a href="resources/user/images/personality.jpg"
-							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span onclick="location.href='simri.do'">→</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-3 ftco-animate">
-					<div class="project">
-						<img src="resources/user/images/wowool.png" class="img-fluid"
-							alt="Colorlib Template">
-						<div class="text">
-							<span>⏱ 소요시간 약 25분</span>
-							<h3>심리검사3</h3>
-						</div>
-						<a href="resources/user/images/wowool.png"
-							class="icon image-popup d-flex justify-content-center align-items-center">
-							<span>→</span>
-						</a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
+		<br> <br>
+	</div>
+	<div style="position: relative;">
+		<img src="img/main/mainend.png">
+		<button type="button" id="loginbtn"
+			onclick="location.href='loginForm.do'">로그인</button>
+	</div>
 	<!-- 심리검사 끝 -->
-	
+
 	<!-- 퀵 메뉴 start -->
 
 	<div class="quickmenu">
 		<ul>
-			<li><a href="http://pf.kakao.com/_exlxkFb/chat" target='_blank'><img src="img/kakao/channel-chat-button.png" alt=""></a></li>
+			<li><a href="http://pf.kakao.com/_exlxkFb/chat" target='_blank'><img
+					src="img/kakao/channel-chat-button.png" alt=""></a></li>
 		</ul>
 	</div>
 
@@ -617,6 +566,9 @@
 	<script>
 		$(document).ready(
 				function() {
+					var owl = $(".owl-dots");
+					owl.attr('id','owl');
+					owl.css('margin-right', '75px');
 					var $banner = $(".banner").find("ul");
 
 					var $bannerWidth = $banner.children().outerWidth();//이미지의 폭
@@ -642,24 +594,33 @@
 						});
 					}
 				});
-		
-		function func(gc_no, c_email){
+
+		function func(gc_no, c_email) {
 			console.log(gc_no);
-			location.href = "userGroup.do?gc_no="+gc_no+"&c_email="+c_email;
+			location.href = "userGroup.do?gc_no=" + gc_no + "&c_email="
+					+ c_email;
 		}
-		
-		
-		
+
+		$(function() {
+			$('.tabcontent > div').hide();
+			$('.tabmenu a').click(function() {
+				$('.tabcontent > div').hide().filter(this.hash).fadeIn();
+				$('.tabmenu a').removeClass('on');
+				$(this).addClass('on');
+				return false;
+			}).filter(':eq(0)').click();
+		});
 		// 퀵 메뉴
 
-		$(document).ready(function(){
-	  		var currentPosition = parseInt($(".quickmenu").css("top"));
-	  		$(window).scroll(function() {
-	    	var position = $(window).scrollTop(); 
-	    $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
-	  });
-	});
-
+		$(document).ready(function() {
+			var currentPosition = parseInt($(".quickmenu").css("top"));
+			$(window).scroll(function() {
+				var position = $(window).scrollTop();
+				$(".quickmenu").stop().animate({
+					"top" : position + currentPosition + "px"
+				}, 1000);
+			});
+		});
 	</script>
 
 </body>

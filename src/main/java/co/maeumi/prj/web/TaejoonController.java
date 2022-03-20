@@ -82,10 +82,14 @@ public class TaejoonController {
 		model.addAttribute("banner", list);
 
 		List<PersonalcounselVO> clist = personalCounselDao.CounselorList(vo);
-		// System.out.println(clist);
 		model.addAttribute("clist", clist);
 
 		List<GroupcounselVO> glist = groupCounselDao.groupList(gvo);
+		for (int i = 0; i < glist.size(); i++) {
+			String gdate = glist.get(i).getGc_date();
+			gdate = gdate.substring(0, 10);
+			glist.get(i).setGc_date(gdate);
+		}
 		model.addAttribute("glist", glist);
 		return "user/home/home";
 	}
