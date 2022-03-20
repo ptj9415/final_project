@@ -233,11 +233,6 @@ img {
 	width: 30%;
 }
 
-
-
-
-
-
 /*detail start*/
 .row{
 	margin-bottom:100px;
@@ -453,32 +448,29 @@ img {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>다치기 쉬운 것이 사람의 마음이지요.오랫동안 익명의 상담을<br>
+					   통해 고통 가운데 있는 사람들이 정말 많음을 보게 됩니다.<br>
+					   마으미 그룹 상담을 통해서 여러분의 마음을 치유해 드립니다. </p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="md-stepper-horizontal orange">
-		<div class="md-step active done">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>1</span>
 			</div>
 			<div class="md-step-title">step1</div>
-			<div class="md-step-optional">그룹 상담 프로그램 선택</div>
+			<div class="md-step-optional">카테고리 및 상담사 검색</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
-		<div class="md-step active editable">
+		<div class="md-step active">
 			<div class="md-step-circle">
 				<span>2</span>
 			</div>
 			<div class="md-step-title">step2</div>
-			<div class="md-step-optional">그룹 상담 상세 목록</div>
+			<div class="md-step-optional">상담 디테일</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>
@@ -487,7 +479,16 @@ img {
 				<span>3</span>
 			</div>
 			<div class="md-step-title">step3</div>
-			<div class="md-step-optional">그룹 상담 결제</div>
+			<div class="md-step-optional">결제 정보</div>
+			<div class="md-step-bar-left"></div>
+			<div class="md-step-bar-right"></div>
+		</div>
+		<div class="md-step">
+			<div class="md-step-circle">
+				<span>4</span>
+			</div>
+			<div class="md-step-title">step4</div>
+			<div class="md-step-optional">결제 완료</div>
 			<div class="md-step-bar-left"></div>
 			<div class="md-step-bar-right"></div>
 		</div>

@@ -476,6 +476,18 @@ public class YoungohController {
 		
 		List<GroupcounselVO> list = groupCounselDao.groupSelectList(page);
 		
+		for (int i = 0; i < list.size(); i++) {
+			String date = list.get(i).getGc_date();
+			date = date.substring(0, 10);
+			list.get(i).setGc_date(date);
+			String date2 = list.get(i).getGc_startdate();
+			date = date.substring(0, 10);
+			list.get(i).setGc_startdate(date2);
+			String date3 = list.get(i).getGc_finaldate();
+			date3 = date.substring(0, 10);
+			list.get(i).setGc_finaldate(date3);
+		}
+		
 		model.addAttribute("groupCounselList", list);
 		model.addAttribute("page", page);
 		return "user/groupcounsel/groupCounselApplication";
@@ -506,6 +518,11 @@ public class YoungohController {
 		gvo.setM_email("이메일 성공");
 		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
 		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
+		
+			String date = gvo.getGc_date();
+			date = date.substring(0, 10);
+			gvo.setGc_date(date);
+			
 		model.addAttribute("groupInvoice", gvo);
 		model.addAttribute("coupon", cplist);
 		model.addAttribute("c_email", c_email);
