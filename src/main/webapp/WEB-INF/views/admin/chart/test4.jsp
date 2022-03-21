@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>invoice</title>
- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
- <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
 @import
@@ -58,12 +60,10 @@ p {
 
 #invoiceholder {
 	width: 80%;
-    height: 1300px;
-    padding-top: 50px;
-    margin-right: auto;
-    margin-left: auto;
-    
-    
+	height: 1300px;
+	padding-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #headerimage {
@@ -98,8 +98,8 @@ p {
 	/* Targets all id with 'col-' */
 	/* border-bottom: 1px solid #8dacbd42; */
 	border-bottom: 1px solid #8dacbd42;
-    padding: 40px;
-    height: 150px;
+	padding: 40px;
+	height: 150px;
 }
 
 #invoice-top {
@@ -147,7 +147,7 @@ p {
 }
 
 #project {
-	float:right;
+	float: right;
 	text-align: end;
 }
 
@@ -168,6 +168,7 @@ td {
 
 .service {
 	/* border: 1px solid #8dacbd42; */
+	
 }
 
 .item {
@@ -177,9 +178,10 @@ td {
 .itemtext {
 	font-size: 0.9em;
 }
+
 .itemtext1 {
-	font-size: 0.9em; 
-	float:right;
+	font-size: 0.9em;
+	float: right;
 	margin-right: 15px;
 }
 
@@ -287,35 +289,36 @@ form {
 	transition: 0.3s ease-in-out;
 }
 
-
-#counselor-name{
- 	font-weight:bold;
+#counselor-name {
+	font-weight: bold;
 }
 
-.control-btn{
-	margin-top:50px;
+.control-btn {
+	margin-top: 50px;
 }
 
-#checkbox{
+#checkbox {
 	float: right;
-    margin-right: 10px;
-    border: 1px solid #8dacbd42;
-    border-radius: 10px;
-    font-size: 12px;
-    color: #153e54;
-    padding: 5px
+	margin-right: 10px;
+	border: 1px solid #8dacbd42;
+	border-radius: 10px;
+	font-size: 12px;
+	color: #153e54;
+	padding: 5px
 }
-#checkbox:focus{
-	 border: 1px solid #8dacbd42;
-	 outline:0;
-	 
+
+#checkbox:focus {
+	border: 1px solid #8dacbd42;
+	outline: 0;
 }
-p.itemtext1{
-	margin-top:16px;
+
+p.itemtext1 {
+	margin-top: 16px;
 }
-p.itemtext{
-	margin-top:16px;
-}	
+
+p.itemtext {
+	margin-top: 16px;
+}
 
 /*결제버튼 end*/
 </style>
@@ -340,31 +343,24 @@ p.itemtext{
 
 
 	</section>
-	
+
 	<div id="invoiceholder">
 
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2">
-			<!--End InvoiceTop-->	
+			<!--End InvoiceTop-->
 			<div id="invoice-mid">
-				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
-				<div class="info">
-					
-					<%-- <h2>${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
-					<p>${c_email}</p>
-					<p>${counselorSelect.c_phone }</p>
-					 --%>
-				</div>
-
+				<img class="clientlogo" src="img/counselorpicture/female1.PNG">
 				<div id="project">
-					<h2 id="counselor-name">${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
+					<h2 id="counselor-name">${counselorSelect.c_name }
+						${counselorSelect.c_grade }</h2>
 					<p>${c_email}</p>
 					<p>${counselorSelect.c_phone }</p>
 				</div>
 
 			</div>
 			<!--End Invoice Mid-->
-	
+
 			<div id="invoice-bot">
 
 				<div id="table">
@@ -392,33 +388,36 @@ p.itemtext{
 							<td class="tableitem"><p class="itemtext">상담날짜</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext1">${pr_date} ${pr_time}시</p></td>
+							<td class="tableitem"><p class="itemtext1">${pr_date}
+									${pr_time}시</p></td>
 						</tr>
 
-						
+
 
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">상담비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
-							<td class="tableitem"><p class="itemtext1">${pr_price } 원</p></td>
+							<td class="tableitem"><p class="itemtext1">${pr_price }
+									원</p></td>
 						</tr>
-						
+
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인쿠폰</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
 							<td class="tableitem"><p class="itemtext1"></p></td>
 							<td class="tableitem">
-								<p class="itemtext"></p> 
-								<select name='checkbox' id="checkbox" onchange="change()">
-											<option value='0' selected>-- 선택 --</option>
-										<c:forEach items="${coupon }" var="coupon">
-											<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name} (${coupon.c_price}원)</option>									
-										</c:forEach>
-								</select>
+								<p class="itemtext"></p> <select name='checkbox' id="checkbox"
+								onchange="change()">
+									<option value='0' selected>-- 선택 --</option>
+									<c:forEach items="${coupon }" var="coupon">
+										<option value='${coupon.c_price}/${coupon.c_no}'>${coupon.c_name}
+											(${coupon.c_price}원)</option>
+									</c:forEach>
+							</select>
 							</td>
 						</tr>
-						
+
 						<tr class="service">
 							<td class="tableitem"><p class="itemtext">할인비용</p></td>
 							<td class="tableitem"><p class="itemtext"></p></td>
@@ -426,156 +425,163 @@ p.itemtext{
 							<td class="tableitem"><p class="itemtext1" id="discount"></p></td>
 						</tr>
 
-	
+
 
 						<tr class="tabletitle">
 							<td class="tableitem"><p class="itemtext">합계</p></td>
-							<td> </td>
-							<td> </td>
+							<td></td>
+							<td></td>
 							<%-- <td class="itemtext1" id="totalPrice" >${pr_price } 원</td> --%>
-							<td class="tableitem"><p class="itemtext1" id="totalPrice">${pr_price } 원</p></td>
+							<td class="tableitem"><p class="itemtext1" id="totalPrice">${pr_price }
+									원</p></td>
 						</tr>
 
 					</table>
 				</div>
 			</div>
-				<!--End Table 이메일,방식, 가격,시간(날짜도포함되어야하는데...)--> 
-<!-- 				<div class="control-btn">
+			<!--End Table 이메일,방식, 가격,시간(날짜도포함되어야하는데...)-->
+			<!-- 				<div class="control-btn">
 					<a href="personalCounselStep4.do"><input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 					<input	type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
 				</div> -->
-				<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
-				<form action="paymentComplete.do" id="frm" name="frm">
-					<input type="hidden" name="pr_time" value="${pr_time}">
-					<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<input type="hidden" id="pr_price" name="pr_price" value="${pr_price}	">
-					<input type="hidden" id="c_value" name="c_value" value="${c_value}">
-					<input type="hidden" id="or_uid" name="or_uid">
-					<input type="hidden" id="c_no" name="c_no" value="0">
-					<input type="hidden" name="pr_type" value="${pr_type}">
-					<input type="hidden" name="pr_date" value="${pr_date}">
-				</form>
+			<input type="hidden" id="g_price" name="g_price" value="${pr_price}">
+			<form action="paymentComplete.do" id="frm" name="frm">
+				<input type="hidden" name="pr_time" value="${pr_time}"> <input
+					type="hidden" id="c_email" name="c_email" value="${c_email}">
+				<input type="hidden" id="pr_price" name="pr_price"
+					value="${pr_price}	"> <input type="hidden" id="c_value"
+					name="c_value" value="${c_value}"> <input type="hidden"
+					id="or_uid" name="or_uid"> <input type="hidden" id="c_no"
+					name="c_no" value="0"> <input type="hidden" name="pr_type"
+					value="${pr_type}"> <input type="hidden" name="pr_date"
+					value="${pr_date}">
+			</form>
 			<!-- <div id="legalcopy">
 					<a href="personalCounselStep4.do">
 					<input type="button" id="back-btn" name="submit" value="뒤로가기"></a>
 			</div> -->
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-						<input type="hidden" name="cmd" value="_s-xclick"> 
-						<input type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
-						<input type="hidden" id="c_email" name="c_email" value="${c_email}" >
-					<div>
-						<input type="button" class="check_module" id="pay-btn" name="submit" value="결제하기">
-					</div>
-				</form>
-			</div>
-			<!--End InvoiceBot-->
-			<div id="invoice-top">
-				<div class="logo"></div>
-				<div class="info">
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+				target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick"> <input
+					type="hidden" name="hosted_button_id" value="QRZ7QTM9XRPJ6">
+				<input type="hidden" id="c_email" name="c_email" value="${c_email}">
+				<div>
+					<input type="button" class="check_module" id="pay-btn"
+						name="submit" value="결제하기">
 				</div>
-				<!--End Info-->
-				<div class="title">
-				</div>
-				<!--End Title-->
-			</div>
+			</form>
 		</div>
-		<!--End Invoice-->
-<script>
-function change(){
-	   var price = $("#g_price").val();
-	   var priceSelect = $("#checkbox").val();
-	   var num = priceSelect.indexOf('/');
-	   var priceResult = priceSelect.substr(0,num);
-	   var couponNo = priceSelect.substr(num+1);
-	   alert(couponNo);
-	   $("#discount").text(' '+'-'+priceResult +' 원');
-	   
-	   var ddd = price-priceResult;
-	   $("#totalPrice").text(ddd+"원");
-	   $("#pr_price").val(ddd);
-	   $("#c_no").val(couponNo);
-	   
-}
+		<!--End InvoiceBot-->
+		<div id="invoice-top">
+			<div class="logo"></div>
+			<div class="info"></div>
+			<!--End Info-->
+			<div class="title"></div>
+			<!--End Title-->
+		</div>
+	</div>
+	<!--End Invoice-->
+	<script>
+		function change() {
+			var price = $("#g_price").val();
+			var priceSelect = $("#checkbox").val();
+			var num = priceSelect.indexOf('/');
+			var priceResult = priceSelect.substr(0, num);
+			var couponNo = priceSelect.substr(num + 1);
+			alert(couponNo);
+			$("#discount").text(' ' + '-' + priceResult + ' 원');
 
+			var ddd = price - priceResult;
+			$("#totalPrice").text(ddd + "원");
+			$("#pr_price").val(ddd);
+			$("#c_no").val(couponNo);
 
-$('#previous-btn').click(function() {
-	location.href = 'personalCounselStep3.do'
-});
+		}
 
-</script>
-<script>
+		$('#previous-btn').click(function() {
+			location.href = 'personalCounselStep3.do'
+		});
+	</script>
+	<script>
 		var pr_price = $("#pr_price").val();
-        $(".check_module").click(function () {
-        var IMP = window.IMP; // 생략가능
-        IMP.init('imp71871883');
-        // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-        // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-        IMP.request_pay({
-        pg: 'inicis', // version 1.1.0부터 지원.
-        /*
-        'kakao':카카오페이,
-        html5_inicis':이니시스(웹표준결제)
-        'nice':나이스페이
-        'jtnet':제이티넷
-        'uplus':LG유플러스
-        'danal':다날
-        'payco':페이코
-        'syrup':시럽페이
-        'paypal':페이팔
-        */
-        pay_method: 'card',
-        /*
-        'samsung':삼성페이,
-        'card':신용카드,
-        'trans':실시간계좌이체,
-        'vbank':가상계좌,
-        'phone':휴대폰소액결제
-        */
-        merchant_uid: 'merchant_' + new Date().getTime(),
-        /*
-        merchant_uid에 경우
-        https://docs.iamport.kr/implementation/payment
-        위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-        참고하세요.
-        나중에 포스팅 해볼게요.
-        */
-        name: '주문명:결제테스트',
-        //결제창에서 보여질 이름
-        amount: 100,
-        //가격
-        //bank_name : null,
-        buyer_email: 'iamport@siot.do',
-        buyer_name: '구매자이름',
-        buyer_tel: '010-1234-5678',
-        buyer_addr: '서울특별시 강남구 삼성동',
-        buyer_postcode: '123-456',
-        m_redirect_url: 'https://www.yourdomain.com/payments/complete',
-        /*
-        모바일 결제시,
-        결제가 끝나고 랜딩되는 URL을 지정
-        (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
-        */
-        }, function (rsp) {
-        console.log(rsp);
-        if (rsp.success) {
-        //$("#pr_price").val(rsp.paid_amount);
-        $("#or_uid").val(rsp.imp_uid);
-        $("#frm").submit();
-         var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
-        /* msg += '상점 거래ID : ' + rsp.merchant_uid;
-        msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num; */
-        } else {
-        var msg = '결제에 실패하였습니다.';
-        /*msg += '에러내용 : ' + rsp.error_msg;
-        msg += 'ㅜㅜ' + rsp.amount;
-        msg += rsp.imp_uid; */
-        }
-        alert(msg);
-	        });
-        });
-    </script>
+		$(".check_module")
+				.click(
+						function() {
+							var IMP = window.IMP; // 생략가능
+							IMP.init('imp71871883');
+							// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+							// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+							IMP
+									.request_pay(
+											{
+												pg : 'inicis', // version 1.1.0부터 지원.
+												/*
+												'kakao':카카오페이,
+												html5_inicis':이니시스(웹표준결제)
+												'nice':나이스페이
+												'jtnet':제이티넷
+												'uplus':LG유플러스
+												'danal':다날
+												'payco':페이코
+												'syrup':시럽페이
+												'paypal':페이팔
+												 */
+												pay_method : 'card',
+												/*
+												'samsung':삼성페이,
+												'card':신용카드,
+												'trans':실시간계좌이체,
+												'vbank':가상계좌,
+												'phone':휴대폰소액결제
+												 */
+												merchant_uid : 'merchant_'
+														+ new Date().getTime(),
+												/*
+												merchant_uid에 경우
+												https://docs.iamport.kr/implementation/payment
+												위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+												참고하세요.
+												나중에 포스팅 해볼게요.
+												 */
+												name : '주문명:결제테스트',
+												//결제창에서 보여질 이름
+												amount : 100,
+												//가격
+												//bank_name : null,
+												buyer_email : 'iamport@siot.do',
+												buyer_name : '구매자이름',
+												buyer_tel : '010-1234-5678',
+												buyer_addr : '서울특별시 강남구 삼성동',
+												buyer_postcode : '123-456',
+												m_redirect_url : 'https://www.yourdomain.com/payments/complete',
+											/*
+											모바일 결제시,
+											결제가 끝나고 랜딩되는 URL을 지정
+											(카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
+											 */
+											}, function(rsp) {
+												console.log(rsp);
+												if (rsp.success) {
+													//$("#pr_price").val(rsp.paid_amount);
+													$("#or_uid").val(
+															rsp.imp_uid);
+													$("#frm").submit();
+													var msg = '결제가 완료되었습니다.';
+													msg += '고유ID : '
+															+ rsp.imp_uid;
+													/* msg += '상점 거래ID : ' + rsp.merchant_uid;
+													msg += '결제 금액 : ' + rsp.paid_amount;
+													msg += '카드 승인번호 : ' + rsp.apply_num; */
+												} else {
+													var msg = '결제에 실패하였습니다.';
+													/*msg += '에러내용 : ' + rsp.error_msg;
+													msg += 'ㅜㅜ' + rsp.amount;
+													msg += rsp.imp_uid; */
+												}
+												alert(msg);
+											});
+						});
+	</script>
 
 </body>
 </html>
