@@ -597,17 +597,12 @@ textarea {
 				class="col-md-4 heading-section ftco-animate fadeInUp ftco-animated">
 				<span class="subheading subheading-with-line"><small
 					class="pr-2 bg-white">MAEUMI</small></span>
-				<h2 class="mb-4">그룹 상담 디테일</h2>
+				<h2 class="mb-4">그룹 상담 정보 조회</h2>
 			</div>
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>그룹 상담 정보를 보여주는 페이지입니다.</p>
 			</div>
 		</div>
 	</div>
