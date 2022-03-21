@@ -25,7 +25,7 @@ public class NaverLoginBO {
 
 	private final static String CLIENT_ID = "SKAYjxZAeWYrFOHQFBGB";
 	private final static String CLIENT_SECRET = "rCK6eCZ099";
-	private final static String REDIRECT_URI = "http://3.34.230.68:8080/maeumi/callback.do";
+	private final static String REDIRECT_URI = "http://54.180.199.178:8080/maeumi/callback.do";
 	private final static String SESSION_STATE = "oauth_state";
 
 	/* 프로필 조회API URL */

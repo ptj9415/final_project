@@ -785,20 +785,20 @@ public class BadaController {
 			//테스트용 경로1 
 		String SAVE_PATH = uploadpath + "/noticesummer/";  // 실제 서버에 올렸을 때 사용할 경로
 //		System.out.println("저장경로 확인: " + SAVE_PATH);
-//		String contextRoot = request.getSession().getServletContext().getRealPath("/");   // 테스트용경로3 밑에랑 한 묶음.
-//		String SAVE_PATH = contextRoot + "resources\\attachfile\\";							// 테스트용경로3 
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");   // 테스트용경로3 밑에랑 한 묶음.
+		String fileRoot = contextRoot + "resources/fileupload/";							// 테스트용경로3 
 //		String SAVE_PATH = request.getServletContext().getRealPath("resources/attachfile/");       //  테스트용 경로5
 //		System.out.println("테스트용경로3 경로확인: " +  SAVE_PATH);
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-		File targetFile = new File(SAVE_PATH + savedFileName);   // 원래 save_path였지만 fileRoot로 임시테스트용으로 고침
-//		File mtargetFile = new File(SAVE_PATH + savedFileName);   // 테스트용 경로4
+		File targetFile = new File(fileRoot + savedFileName);   // 원래 save_path였지만 fileRoot로 임시테스트용으로 고침
+		File mtargetFile = new File(SAVE_PATH + savedFileName);   // 테스트용 경로4
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-//			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
-			jsonObject.addProperty("url", SAVE_PATH + savedFileName);   // 여기도 save_path에서 fileRoot로 수정
+			multipartFile.transferTo(mtargetFile); // 다운로드 컨트롤러 만들고 뒤에 파일명 넣어주면 해당경로 파일을 다운로드해준다.
+			jsonObject.addProperty("url", request.getContextPath() + "/resources/fileupload/" + savedFileName);   // 여기도 save_path에서 fileRoot로 수정
 			jsonObject.addProperty("responseCode", "success");
 			jsonObject.addProperty("fileName", savedFileName);   // 테스트로 넣은 코드
 
