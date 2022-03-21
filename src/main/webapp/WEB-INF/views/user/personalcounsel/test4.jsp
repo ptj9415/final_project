@@ -143,11 +143,11 @@ p {
 
 .clientlogo {
 	float: left;
-	height: 70px;
-	width: 70px;
+	height: 120px;
+	width: 120px;
 	/* background: url(http://michaeltruong.ca/images/client.jpg) no-repeat; */
 	background-size: 60px 60px;
-	border-radius: 50px;
+	border-radius: 60px;
 }
 
 .info {
@@ -346,8 +346,8 @@ p.itemtext{
 		<div id="headerimage"></div>
 		<div id="invoice" class="effect2" style="height:800px;">
 			<!--End InvoiceTop-->	
-			<div id="invoice-mid">
-				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
+			<div id="invoice-mid" style="height:180px;">
+				<img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picture}" onerror="this.src='resources/user/images/errorprofile.jpg';" width="350px;">
 				<div class="info">
 					
 					<%-- <h2>${counselorSelect.c_name } ${counselorSelect.c_grade }</h2>
@@ -363,7 +363,7 @@ p.itemtext{
 				</div>
 			</div>
 			<!--End Invoice Mid-->
-			<div id="invoice-bot" style="height:560px;">
+			<div id="invoice-bot" style="height:560px;" >
 				<div id="table">
 					<table>
 						<tr class="tabletitle">

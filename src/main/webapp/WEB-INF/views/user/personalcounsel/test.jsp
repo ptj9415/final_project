@@ -704,7 +704,7 @@ input#c_name{
 				<div class="card-container" >
 					<div class="detail-hover" onclick="func('${counselorList.c_email}','${type}')">
 					<!-- <span class="pro">전문의</span>  -->
-					<img class="round" src="img/counselorpicture/asdf.png}"
+					<img class="round" src="img/counselorpicture/${counselorList.c_picture }"
 						onerror="this.src='resources/user/images/errorprofile.jpg';"
 						style="width: 90px" alt="user">
 
