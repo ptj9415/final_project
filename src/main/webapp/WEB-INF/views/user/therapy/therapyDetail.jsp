@@ -316,12 +316,9 @@ article img {
 			<div
 				class="col-md-8 pl-md-5 heading-section ftco-animate fadeInUp ftco-animated">
 				<div class="pl-md-4 border-line">
-					<p>Far far away, behind the word mountains, far from the
-						countries Vokalia and Consonantia, there live the blind texts.
-						Separated they live in. A small river named Duden flows by their
-						place and supplies it with the necessary regelialia. It is a
-						paradisematic country, in which roasted parts of sentences fly
-						into your mouth.</p>
+					<p>삶과 미래를 긍정적으로 접근할 수 있다면 인생에 있어 더할 나위 없는 행복을 누릴 수 있고<br> 
+					   행복해지기 위한 계획을 세울 수 있습니다. 심리테라피를 보면서 마음을 치유해보세요.</p>
+				</div>
 				</div>
 			</div>
 		</div>

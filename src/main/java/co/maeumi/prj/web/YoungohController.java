@@ -362,7 +362,7 @@ public class YoungohController {
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
-		String SAVE_PATH = uploadpath + "/therapysumnail/";
+		String SAVE_PATH = uploadpath + "/therapys/";
 		String originalFileName = mf.getOriginalFilename();
 
 		String uuid = UUID.randomUUID().toString(); // UUID를 통해서 물리파일명 만들기.
@@ -384,7 +384,7 @@ public class YoungohController {
 
 		// 이미지 파일일 경우 코드 잘라서 쓰기.
 		// 홈페이지 구조상 이미지파일이 먼저 들어가야 되기 때문에 이렇게 만듬.
-
+		
 		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "/fileupload/therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
@@ -440,7 +440,7 @@ public class YoungohController {
 		}
 
 		String origincode = request.getParameter("summernote");
-		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", uploadpath+"therapy/");
+		String result = origincode.replaceAll(request.getContextPath() + "/resources/fileupload/", "/fileupload/therapy/");
 		System.out.println(result);
 		vo.setT_subject(result);
 
