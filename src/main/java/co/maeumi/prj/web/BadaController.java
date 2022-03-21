@@ -1094,7 +1094,6 @@ public class BadaController {
 		return "admin/chart/salesChart";
 	}
 	
-	
 	// 디폴트로 보여줄 매출 통계 ajax 
 	@ResponseBody
 	@RequestMapping("/salesData.do")

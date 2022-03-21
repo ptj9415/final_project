@@ -89,7 +89,7 @@ button:hover{
 					return false;
 				}
 				
-			}
+			}  
 		})
 	});	
 	
