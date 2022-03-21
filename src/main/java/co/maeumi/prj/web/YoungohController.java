@@ -418,7 +418,9 @@ public class YoungohController {
 		vo.setT_picture(fileback);
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
-		String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
+		//String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
+		String SAVE_PATH = uploadpath + "/therapys/";
+		
 		String originalFileName = mf.getOriginalFilename();
 		
 		System.out.println(originalFileName);	
@@ -510,13 +512,13 @@ public class YoungohController {
 	//그룹 상담 유저 invoice 페이지입니다.
 	//유저 이메일 세션값이 들어가야 됩니다.
 	@RequestMapping("/usergroupinvoice.do")
-	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo) {
+	public String usergroupinvoice(GroupcounselVO vo, Model model, HttpServletRequest request, CouponVO cvo,HttpSession session) {
 		String c_email = request.getParameter("c_email");
 		String gc_no = request.getParameter("gc_no");
 		System.out.println(gc_no);
 		GroupcounselVO gvo = groupCounselDao.selectInvoice(vo);
-		gvo.setM_email("이메일 성공");
-		cvo.setM_email("gnjqtpfl@naver.com");    //이메일 세션 값이 들어가야됨.
+		gvo.setM_email((String)session.getAttribute("email"));
+		cvo.setM_email((String)session.getAttribute("email"));    //이메일 세션 값이 들어가야됨.
 		List<CouponVO> cplist = couponDao.couponMemberSelectList(cvo);
 		
 			String date = gvo.getGc_date();
@@ -560,7 +562,7 @@ public class YoungohController {
 			int c_nos = Integer.parseInt(c_no);
 			System.out.println(c_nos);
 			if (c_nos != 0) {
-				//couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+				couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
 			}
 			
 			model.addAttribute("result", ovo);

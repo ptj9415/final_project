@@ -166,7 +166,7 @@ public class EjuController {
 		vo = personalCounselDao.CounselorSelect(vo);
 		
 		//쿠폰
-		cpvo.setM_email("gnjqtpfl@naver.com"); // 세션값 대신 넣어주기.
+		cpvo.setM_email((String)session.getAttribute("email")); // 세션값 대신 넣어주기.
 		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
 		
 		model.addAttribute("time", time);
@@ -206,7 +206,7 @@ public class EjuController {
 	         int c_nos = Integer.parseInt(c_no);
 	         System.out.println(c_nos);
 	         if (c_nos != 0) {
-	            //couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
+	            couponDao.couponDelete(cvo);        //쿠폰 삭제 메소드
 	         }
 		}
 		
