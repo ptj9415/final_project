@@ -177,7 +177,7 @@ th {
 									<tr>
 										<th>상담명</th>
 										<td><input class="inputname" type="text" id="gc_title"
-											name="gc_title"></td>
+											name="gc_title" value="그룹상담 개설 테스트"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
 												<option value="카카오톡">카카오톡</option>
@@ -187,22 +187,22 @@ th {
 									<tr>
 										<th>모집일</th>
 										<td><input type="date" id="gc_startdate"
-											name="gc_startdate">&nbsp;~&nbsp;<input type="date"
-											id="gc_finaldate" name="gc_finaldate"></td>
+											name="gc_startdate" value="2021-03-22">&nbsp;~&nbsp;<input type="date"
+											id="gc_finaldate" name="gc_finaldate" value="2021-03-30"></td>
 										<th>상담일</th>
-										<td><input type="date" id="gc_date" name="gc_date">&nbsp;-&nbsp;<input
+										<td><input type="date" id="gc_date" name="gc_date" value="2021-03-31">&nbsp;-&nbsp;<input
 											type="time" id="gc_time" name="gc_time" value="14:00"></td>
 									</tr>
 									<tr>
 										<th>모집 인원</th>
 										<td>최소&nbsp;&nbsp;<input class="pcount"
-											id="gc_min_person" name="gc_min_person" type="text">&nbsp;명
+											id="gc_min_person" name="gc_min_person" type="text" value="3">&nbsp;명
 											~ 최대&nbsp;&nbsp;<input class="pcount" type="text"
-											id="gc_max_person" name="gc_max_person">&nbsp;명
+											id="gc_max_person" name="gc_max_person" value="8">&nbsp;명
 										</td>
 										<th>상담 비용</th>
 										<td><input class="pcount" id="gc_price" name="gc_price"
-											type="text">&nbsp;원</td>
+											type="text" value="50000">&nbsp;원</td>
 									</tr>
 								</table>
 								<br>
@@ -227,7 +227,7 @@ th {
 								<table class="table text-nowrap" id="counseltable">
 									<tr>
 										<th>상담 소개</th>
-										<td><textarea class="summernote" name="summernote"></textarea>
+										<td><textarea class="summernote" name="summernote">그룹 상담 테스트</textarea>
 
 										</td>
 									</tr>
@@ -241,7 +241,7 @@ th {
 									<tr>
 										<th>카카오톡 오픈주소</th>
 										<td><input type="text" class="inputcacao" id="gc_kakao"
-											name="gc_kakao"></td>
+											name="gc_kakao" value="http://open.kakao.com/maeumi/group"></td>
 									</tr>
 								</table>
 								<br>
