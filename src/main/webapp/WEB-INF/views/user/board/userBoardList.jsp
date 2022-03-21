@@ -161,7 +161,6 @@ filterinput:active{
 
 .page-item.active .page-link {
 	border: 0.5px solid #8dacbd42;
-	border-radius: 0px;
 	background-color: white;
 	color: #4b5b73;
 	font-weight: bold;
@@ -192,7 +191,7 @@ filterinput:active{
 	margin-bottom: 2px;
 	padding-top: 3px;
 }
-}
+
 
 input::placeholder {
 	font-size: 15px;

@@ -81,6 +81,9 @@ h3 {
 	color: white;
 	height: 30px;
 }
+
+
+
 </style>
 </head>
 <body>
@@ -268,7 +271,7 @@ h3 {
 									</c:forEach>
 									<c:if test="${pagination.next}">
 
-										<li class="page-item"><a class="page-link" href="#"
+										<li class="page-item" style="background-color: red"><a class="page-link" href="#"
 											onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.listSize}'
 					,'${search.gc_date}', '${search.gc_type}', '${search.gc_status}', '${search.gc_title}')">다음</a></li>
 									</c:if>
