@@ -503,7 +503,7 @@ img {
               </div>
             </div>
             <div class="col-12 col-sm-4">
-              <img alt="" style="width:600px; height:200px;" src="resources/user/images/sample.jpg">
+              <img alt="" style="width:600px; height:200px;" src="img/bannerimg/그룹 상담 내용.jpg">
 		              <h3 class="my-3">그룹 상담 주제 : <span style="float:right">${userGroup.gc_title }</span></h3>
               		  <h3 class="my-3">상담사 이름 : <span style="float:right">${userGroup.gc_name}</span></h3>
               		  <h3 class="my-3">참여 인원 : <span style="float:right">최소 ${userGroup.gc_min_person}명 ~ 최대 ${userGroup.gc_max_person}명</span></h3>
