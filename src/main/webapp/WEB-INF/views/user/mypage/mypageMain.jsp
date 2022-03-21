@@ -1011,7 +1011,6 @@ textarea {
 	}
 	
 	function GroupsangDam(gc_no, gr_no){
-		alert(gc_no);
 		url = "userGroupsangDam.do";
 		url = url + "?gc_no="+gc_no;
 		url = url + "&gr_no="+gr_no;

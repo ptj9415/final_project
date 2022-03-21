@@ -357,8 +357,8 @@ public class YoungohController {
 	// 테라피 등록 페이지 입니다.
 	@RequestMapping("/therapyInsert.do")
 	public String therapy(Model model, TherapyVO vo, HttpServletResponse response,
-			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest request) {
-
+			@RequestParam(value = "filename") MultipartFile mf, HttpServletRequest request, HttpSession session) {
+		vo.setT_name((String)session.getAttribute("c_name"));
 		// 썸네일 파일업로드
 		//String SAVE_PATH = "C:\\final_project\\final_project\\src\\main\\webapp\\therapysumnail\\";
 		//String SAVE_PATH = request.getServletContext().getRealPath("therapysumnail/");
