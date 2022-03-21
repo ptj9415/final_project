@@ -938,6 +938,7 @@ article img {
 		<br><br>
 		<ul class="card-list">
 		 <c:forEach items="${groupCounselList}" var="group">
+	        <c:if test="${group.gc_status ne 2 }">
 	        <li class="card">
 	            <a href="javascript:void(0);" onclick="func('${group.gc_no}')">
 	                <img style="width:430px;height:400px;" src="../fileupload/gcsumnail/${group.gc_sumnail}" alt="Psychopomp"
@@ -964,6 +965,7 @@ article img {
 	                <p class="sub-title">${therapyList.t_name }</p> --%>
 	            </div>
 	        </li>
+	        </c:if>
         </c:forEach>
 	  </ul>
 	</div>
