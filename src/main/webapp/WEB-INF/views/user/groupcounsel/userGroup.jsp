@@ -62,11 +62,7 @@
 	font-weight: 600;
 	color: #FFFFFF;
 }
-header ul li a, header h1, header h2{
 
-            font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
-            font-size: 16px;
-}
 .md-stepper-horizontal.green .md-step.active .md-step-circle {
 	background-color: #00AE4D;
 }
@@ -175,8 +171,7 @@ header ul li a, header h1, header h2{
 }
 
 body {
-	font-family: 'Nanum Gothic', Arial, Helvetica, sans-serif !important;
-	font-size : 25px;  <!-- 페이지 이동 -->
+  <!-- 페이지 이동 -->
 	font-weight: 400;
 	letter-spacing: 0;
 	text-rendering: optimizeLegibility;
