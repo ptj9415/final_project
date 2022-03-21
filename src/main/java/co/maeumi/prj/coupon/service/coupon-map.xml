@@ -34,9 +34,7 @@
 	<delete id="couponDelete"
 		parameterType="co.maeumi.prj.coupon.service.CouponVO">
 		DELETE FROM COUPON
-		WHERE M_EMAIL = #{m_email}
-		AND C_NO =
-		#{c_no}
+		WHERE C_NO = #{c_no}
 	</delete>
 	
 	<select id="couponMemberSelectList" parameterType="co.maeumi.prj.coupon.service.CouponVO" 

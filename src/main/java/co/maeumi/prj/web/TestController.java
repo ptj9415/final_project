@@ -146,7 +146,7 @@ public class TestController {
 		model.addAttribute("pr_time", pr_time);//
 		model.addAttribute("counselorSelect", counselorDao.userCounselorSelect(cvo));
 
-		cpvo.setM_email("gnjqtpfl@naver.com");
+		cpvo.setM_email((String)session.getAttribute("email"));
 		List<CouponVO> list = couponDao.couponMemberSelectList(cpvo);
 		model.addAttribute("coupon", list);
 

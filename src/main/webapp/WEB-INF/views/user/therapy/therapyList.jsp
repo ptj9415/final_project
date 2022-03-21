@@ -283,7 +283,7 @@ form {
         <c:forEach items="${therapylist}" var="therapyList">
 	        <li class="card">
 	            <a href="therapyDetail.do?t_no=${therapyList.t_no}">
-	                <img style="width:300px;height:300px;" src="../fileupload/therapysumnail/${therapyList.t_picture}" alt="Psychopomp"
+	                <img style="width:300px;height:300px;" src="../fileupload/therapys/${therapyList.t_picture}" alt="Psychopomp"
 	                onerror="this.src='https://media.istockphoto.com/vectors/isometric-building-concept-single-on-round-base-vector-id1090958052';" />
 	            </a>
 	            <a class="card-description" target="_blank">
