@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
++<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -54,14 +54,15 @@
 }
 
 button {
-	height: 35px;
-	width: 80px;
-	padding: 5px;
-	border: 1px solid black;
-	background-color: white;
-	color: black;
-	border: 1px solid black;
-	font-size: 13px;
+	height: 40px;
+    width: 80px;
+    border: 1px solid #153e54;
+    background-color: #153e54;
+    color: white;
+    border: 1px solid black;
+    font-size: 13px;
+    border-radius: 3px 20px 20px 3px;
+    border: 1px solid #8dacbd42;
 }
 
 button:hover {
@@ -75,13 +76,13 @@ button:hover {
 }
 
 .page-item.active .page-link {
-	border: 0.5px solid rgb(235, 235, 235);
-	border-radius: 0px;
+	border: 0.5px solid #8dacbd42;
 	background-color: white;
 	color: #4b5b73;
 	font-weight: bold;
 	font-size: 14px;
 	margin-top: -1px;
+	border-radius:20px;
 }
 
 .page-link {
@@ -91,13 +92,16 @@ button:hover {
 	margin-left: 10px;
 }
 
-.searchdiv {
-	margin-left: 50px;
+.searchDiv {
+	height: 100px;
+	margin-top: 30px;
+	margin-bottom: 150px;
 }
 
 #btnSearch, #clearbtn {
 	display: inline-block;
-	margin-bottom: -2px;
+	margin-bottom: 2px;
+	padding-top: 3px;
 }
 
 td, tr {
@@ -191,11 +195,11 @@ input::placeholder {
 			<div style="width: 100%; margin-top: 90px;">
 				<div style="margin-left: 20%;">
 					<span class="form-group"> 
-						<input type="text" class="filterinput" id="n_title" placeholder="  제목을 입력하세요." style="width: 600px; height: 35px;">
+						<input type="text" class="filterinput" id="n_title" style="border-radius: 20px 3px 3px 20px; border:1px solid #8dacbd42; width: 600px; height: 40px;" placeholder=" 제목을 입력하세요.">
 					</span> 
 					<span id="right">
 						<span class="form-group"> 
-							<select id="n_category" name="n_category" style="width: 90px; height: 35px; font-size: 15px;">
+							<select id="n_category" name="n_category" style="width: 90px; height: 40px; font-size: 15px; border:1px solid #8dacbd42; ">
 									<option value="all">전체</option>
 									<option value="긴급">긴급</option>
 									<option value="이벤트">이벤트</option>
@@ -203,7 +207,7 @@ input::placeholder {
 							</select>
 						</span> 
 						<span class="searchdiv">
-							<button type="reset" id="clearbtn">초기화</button>
+							<button type="reset" id="clearbtn" style=" border: 1px solid black; border-radius:0px;">초기화</button>
 							<button type="button" id="btnSearch">검색</button>
 						</span>
 					</span>

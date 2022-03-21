@@ -850,13 +850,13 @@ article img {
 }
 
 .page-item.active .page-link {
-	border: 0.5px solid rgb(235, 235, 235);
-	border-radius: 0px;
+	border: 0.5px solid #8dacbd42;
 	background-color: white;
 	color: #4b5b73;
 	font-weight: bold;
 	font-size: 14px;
 	margin-top: -1px;
+	border-radius:20px;
 }
 
 .page-link {
