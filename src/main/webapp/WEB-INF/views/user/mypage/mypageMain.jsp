@@ -426,6 +426,7 @@ h3 {
 	top: 7px;
 	margin-left: 15px;
 	font-weight: 600;
+	margin-bottom: 30px;
 }
 
 #infotable {
