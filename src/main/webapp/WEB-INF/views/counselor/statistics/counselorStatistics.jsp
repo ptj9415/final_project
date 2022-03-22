@@ -70,6 +70,23 @@ h3 {
 #chartcard {
 	height: 500px;
 }
+
+.status {
+	display: block;
+	width: 100%;
+	height: calc(2.25rem + 1px);
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	box-shadow: inset 0 0 0 transparent;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -110,7 +127,7 @@ h3 {
 
 								<div class="col-6">
 									<div class="form-group">
-										<label>성별</label> <br> <select class="status"
+										<label>주제별</label> <br> <select class="status"
 											name="ccg_subname">
 											<option value="all">전체</option>
 											<option value="분노">분노/우울</option>
@@ -143,7 +160,7 @@ h3 {
 				<div class="col-md-12 offset-md-0">
 					<div class="card" id="headerdiv">
 						<p id="headerp">
-							매출 조회
+							상담 통계 조회
 							<button type="button" class="minusbtn" id="minusbtn2">
 								<i id="minusicon2" class="fa fa-minus"></i>
 							</button>

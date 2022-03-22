@@ -177,7 +177,7 @@ th {
 									<tr>
 										<th>상담명</th>
 										<td><input class="inputname" type="text" id="gc_title"
-											name="gc_title" value="그룹상담 개설 테스트"></td>
+											name="gc_title" value="주식 중독에 빠져버린 분들을 위한 치유 클래스"></td>
 										<th>상담방식</th>
 										<td><select id="gc_type" name="gc_type">
 												<option value="카카오톡">카카오톡</option>
@@ -227,7 +227,7 @@ th {
 								<table class="table text-nowrap" id="counseltable">
 									<tr>
 										<th>상담 소개</th>
-										<td><textarea class="summernote" name="summernote">그룹 상담 테스트</textarea>
+										<td><textarea class="summernote" name="summernote"></textarea>
 
 										</td>
 									</tr>
