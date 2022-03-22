@@ -348,7 +348,7 @@ body, header ul li a, header h1, header h2{
 		<div id="invoice" class="effect2">
 			<!--End InvoiceTop-->	
 			<div id="invoice-mid">
-			  <img class="clientlogo" src="img/counselorpicture/${counselorSelect.c_picturepath}" onerror="this.src='resources/user/images/errorprofile.jpg';">
+			  <img class="clientlogo" src="img/counselorpicture/female1.PNG" onerror="this.src='resources/user/images/errorprofile.jpg';">
 				<div id="project">
 					<h2>${groupInvoice.c_name} 상담사</h2>
 					<p>${groupInvoice.c_email }</br> ${groupInvoice.c_phone }</br></p>
